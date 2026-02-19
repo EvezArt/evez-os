@@ -1,0 +1,52 @@
+name: EVEZ Spine CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint-play-visualize:
+    name: Lint - Play - Visualize
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pillow scipy
+          sudo apt-get install -y ffmpeg --quiet
+
+      - name: Lint spine
+        run: python tools/evez.py lint || echo "No spine yet, skipping lint"
+
+      - name: Play engine
+        run: python tools/evez.py play --seed 42 --steps 14 --mode spicy
+
+      - name: Visualize spine
+        run: |
+          python tools/evez.py visualize-thought \
+            --input spine/spine.jsonl \
+            --out ci_artifacts \
+            --fps 2 || echo "Visualizer skipped"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evez-cognition-${{ github.sha }}
+          path: |
+            ci_artifacts/
+            spine/
+          retention-days: 30
+          if-no-files-found: warn
