@@ -3,757 +3,553 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVEZ-OS Mission Control — Sensory</title>
+<title>EVEZ-OS Synesthetic Engine</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
-  :root {
-    --bg: #04040c;
-    --panel: #07071a;
-    --border: #12122a;
-    --canonical: #3a8fd1;
-    --verified: #2eb87a;
-    --hyper: #f0c040;
-    --theatrical: #c0392b;
-    --pending: #9a7bef;
-    --win: #ffffff;
-    --text: #c8d8e8;
-    --dim: #3a4a5a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono','Fira Mono',monospace; font-size:12px; height:100vh; overflow:hidden; }
+:root {
+  --bg:#03030a; --panel:#07071a; --border:#10102a;
+  --canonical:#3a8fd1; --verified:#2eb87a; --hyper:#f0c040;
+  --theatrical:#c0392b; --pending:#9a7bef; --win:#ffffff;
+  --text:#c8d8e8; --dim:#3a4a5a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'JetBrains Mono','Fira Mono',monospace;font-size:12px;}
 
-  /* HEADER */
-  .hdr { height:48px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 20px; background:#04040cee; position:relative; z-index:10; }
-  .logo { font-size:16px; font-weight:900; letter-spacing:3px; color:var(--hyper); }
-  .logo span { color:var(--canonical); }
-  .hdr-right { display:flex; gap:16px; align-items:center; }
-  .live-pill { display:flex; align-items:center; gap:6px; font-size:10px; color:#ff4040; border:1px solid #ff404044; padding:3px 10px; border-radius:3px; }
-  .live-dot { width:7px; height:7px; border-radius:50%; background:#ff4040; animation:livepulse 1s ease-in-out infinite; }
-  @keyframes livepulse { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
-  .tab-bar { display:flex; gap:2px; }
-  .tab { padding:4px 14px; font-size:10px; cursor:pointer; border-bottom:2px solid transparent; color:var(--dim); letter-spacing:1px; text-transform:uppercase; transition:all 0.2s; }
-  .tab.active { color:var(--hyper); border-bottom-color:var(--hyper); }
-  .tab:hover { color:var(--text); }
-  .audio-btn { font-size:10px; cursor:pointer; padding:3px 10px; border:1px solid var(--border); border-radius:3px; color:var(--dim); transition:all 0.2s; }
-  .audio-btn:hover, .audio-btn.on { border-color:var(--verified); color:var(--verified); }
+/* HEADER */
+.hdr{height:44px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:relative;z-index:20;background:#03030acc;}
+.logo{font-size:15px;font-weight:900;letter-spacing:3px;color:var(--hyper);}
+.logo span{color:var(--canonical);}
+.tabs{display:flex;gap:1px;}
+.tab{padding:4px 12px;font-size:9px;cursor:pointer;border-bottom:2px solid transparent;color:var(--dim);text-transform:uppercase;letter-spacing:1px;transition:all .2s;}
+.tab.on{color:var(--hyper);border-bottom-color:var(--hyper);}
+.hdr-r{display:flex;gap:10px;align-items:center;}
+.pill{font-size:9px;padding:2px 8px;border-radius:2px;cursor:pointer;border:1px solid var(--border);color:var(--dim);transition:all .2s;}
+.pill.on,.pill:hover{border-color:var(--verified);color:var(--verified);}
+.live{display:flex;align-items:center;gap:5px;font-size:9px;color:#ff4040;}
+.ldot{width:6px;height:6px;border-radius:50%;background:#ff4040;animation:lp 1s ease-in-out infinite;}
+@keyframes lp{0%,100%{opacity:1;}50%{opacity:.2;}}
 
-  /* VIEWS */
-  .view { display:none; height:calc(100vh - 48px); }
-  .view.active { display:flex; }
+/* CANVAS CONTAINER */
+.view{display:none;position:absolute;top:44px;left:0;right:0;bottom:0;}
+.view.on{display:block;}
 
-  /* ===== VIEW 1: ATTRACTOR SPACE (3D) ===== */
-  #v-attractor { position:relative; }
-  #three-canvas { width:100%; height:100%; display:block; }
-  .attractor-overlay { position:absolute; top:16px; left:16px; pointer-events:none; }
-  .ao-title { font-size:10px; color:var(--dim); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
-  .ao-axes { display:flex; flex-direction:column; gap:4px; }
-  .ao-axis { display:flex; align-items:center; gap:8px; font-size:11px; }
-  .ao-dot { width:10px; height:10px; border-radius:50%; }
-  .attractor-info { position:absolute; bottom:16px; left:16px; pointer-events:none; max-width:340px; }
-  .ai-round { font-size:22px; font-weight:900; color:var(--hyper); }
-  .ai-module { font-size:12px; color:var(--canonical); margin-top:2px; }
-  .ai-omega { font-size:11px; color:#a09060; font-style:italic; margin-top:6px; line-height:1.5; }
-  .win-flash { position:absolute; inset:0; background:white; pointer-events:none; opacity:0; transition:opacity 0.5s; }
+/* ── VIEW 1: SYNESTHETIC FIELD (main) ── */
+#cv-syn{width:100%;height:100%;display:block;}
+.syn-overlay{position:absolute;top:12px;left:12px;pointer-events:none;display:flex;flex-direction:column;gap:8px;}
+.dim-readout{display:flex;flex-direction:column;gap:3px;}
+.dim-row{display:flex;align-items:center;gap:6px;font-size:10px;}
+.dim-bar-bg{width:80px;height:3px;background:#0a0a1a;border-radius:2px;}
+.dim-bar-fill{height:3px;border-radius:2px;transition:width 1s ease;}
+.syn-info{position:absolute;bottom:12px;left:12px;pointer-events:none;max-width:480px;}
+.si-round{font-size:36px;font-weight:900;color:var(--hyper);line-height:1;}
+.si-module{font-size:11px;color:var(--canonical);margin-top:2px;}
+.si-omega{font-size:11px;color:#a09060;font-style:italic;margin-top:6px;line-height:1.5;}
+.si-chord{font-size:9px;color:var(--dim);margin-top:4px;}
+.sigma-meter{position:absolute;top:12px;right:12px;pointer-events:none;text-align:right;}
+.sm-label{font-size:9px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;}
+.sm-val{font-size:28px;font-weight:900;color:var(--win);line-height:1;margin-top:2px;}
+.sm-plane{font-size:11px;font-weight:700;letter-spacing:2px;margin-top:3px;}
 
-  /* ===== VIEW 2: COMMAND MODULE (relay chain) ===== */
-  #v-command { gap:0; }
-  .cmd-chain { flex:1; overflow-y:auto; padding:12px 16px; }
-  .cmd-side { width:300px; border-left:1px solid var(--border); overflow-y:auto; flex-shrink:0; }
+/* ── VIEW 2: 3D ATTRACTOR ── */
+#cv-three{width:100%;height:100%;display:block;}
+.three-overlay{position:absolute;top:12px;left:12px;pointer-events:none;}
+.ax{display:flex;flex-direction:column;gap:4px;margin-top:8px;}
+.ax-row{display:flex;align-items:center;gap:6px;font-size:10px;}
+.ax-dot{width:8px;height:8px;border-radius:50%;}
+.drag-hint{font-size:9px;color:var(--dim);margin-top:8px;}
 
-  .chain { position:relative; }
-  .chain-spine { position:absolute; left:20px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom,var(--border),var(--canonical),var(--hyper) 60%,var(--verified)); }
-  .r-row { display:flex; gap:10px; align-items:flex-start; margin-bottom:3px; position:relative; z-index:1; cursor:pointer; }
-  .r-row:hover .r-card { border-color:var(--hyper); transform:translateX(2px); }
-  .r-node { width:42px; height:42px; border-radius:50%; border:2px solid; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; flex-shrink:0; background:var(--bg); position:relative; z-index:2; transition:transform 0.2s; }
-  .r-node.C { border-color:var(--canonical); color:var(--canonical); }
-  .r-node.V { border-color:var(--verified); color:var(--verified); }
-  .r-node.H { border-color:var(--hyper); color:var(--hyper); box-shadow:0 0 10px #f0c04033; }
-  .r-node.W { border-color:var(--win); color:var(--win); box-shadow:0 0 18px #ffffff55; animation:wpulse 3s ease-in-out infinite; }
-  @keyframes wpulse { 0%,100%{box-shadow:0 0 18px #ffffff22;} 50%{box-shadow:0 0 32px #ffffff99;} }
-  .r-node.R { border-color:var(--pending); color:var(--pending); animation:rpulse 1.2s ease-in-out infinite; }
-  @keyframes rpulse { 0%,100%{box-shadow:0 0 6px #9a7bef33;} 50%{box-shadow:0 0 16px #9a7bef99;} }
-  .r-card { flex:1; background:var(--panel); border:1px solid var(--border); border-radius:5px; padding:8px 10px; transition:all 0.15s; }
-  .r-name { font-size:11px; font-weight:700; color:#e0eaf8; margin-bottom:3px; }
-  .r-omega { font-size:10px; color:var(--dim); font-style:italic; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .r-badges { display:flex; gap:4px; margin-top:4px; flex-wrap:wrap; }
-  .rbadge { font-size:8px; padding:1px 5px; border-radius:2px; }
-  .rbadge.C { background:#102040; color:var(--canonical); }
-  .rbadge.V { background:#0a2a1a; color:var(--verified); }
-  .rbadge.H { background:#2a2000; color:var(--hyper); }
-  .rbadge.W { background:#222; color:#fff; }
-  .rbadge.R { background:#18103a; color:var(--pending); }
-  .r-links { display:flex; gap:6px; margin-top:4px; }
-  .rlink { font-size:9px; color:var(--dim); text-decoration:none; padding:1px 5px; border:1px solid var(--border); border-radius:2px; }
-  .rlink:hover { border-color:var(--canonical); color:var(--canonical); }
-  .baton-line { width:2px; height:14px; background:var(--hyper); opacity:0.3; margin:0 0 3px 20px; }
+/* ── VIEW 3: COMMAND (relay chain) ── */
+#v-cmd{display:flex;}
+.cmd-l{flex:1;overflow-y:auto;padding:10px 14px;}
+.cmd-r{width:260px;border-left:1px solid var(--border);overflow-y:auto;}
+.chain{position:relative;}
+.cspine{position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--border),var(--canonical),var(--hyper) 60%,var(--verified));z-index:0;}
+.rrow{display:flex;gap:9px;align-items:flex-start;margin-bottom:3px;z-index:1;position:relative;cursor:pointer;}
+.rrow:hover .rcard{border-color:var(--hyper);transform:translateX(2px);}
+.rnode{width:40px;height:40px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0;background:var(--bg);z-index:2;}
+.rnode.C{border-color:var(--canonical);color:var(--canonical);}
+.rnode.V{border-color:var(--verified);color:var(--verified);}
+.rnode.W{border-color:#fff;color:#fff;box-shadow:0 0 16px #ffffff44;animation:wp 3s ease-in-out infinite;}
+@keyframes wp{0%,100%{box-shadow:0 0 16px #ffffff22;}50%{box-shadow:0 0 30px #ffffff88;}}
+.rnode.R{border-color:var(--pending);color:var(--pending);animation:rp 1.2s ease-in-out infinite;}
+@keyframes rp{0%,100%{box-shadow:0 0 5px #9a7bef33;}50%{box-shadow:0 0 14px #9a7bef99;}}
+.rcard{flex:1;background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:7px 9px;transition:all .15s;}
+.rname{font-size:10px;font-weight:700;color:#e0eaf8;}
+.romega{font-size:9px;color:var(--dim);font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px;}
+.rbaton{width:2px;height:12px;background:var(--hyper);opacity:.3;margin:0 0 3px 19px;}
+.rlink{font-size:8px;color:var(--dim);text-decoration:none;padding:1px 4px;border:1px solid var(--border);border-radius:2px;}
+.rlink:hover{border-color:var(--canonical);color:var(--canonical);}
+.sp{padding:10px 12px;border-bottom:1px solid var(--border);}
+.sp-t{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;}
+.bb{background:#0a0a00;border:1px solid #1a1a00;border-radius:3px;padding:8px;}
+.bb-k{font-size:8px;color:var(--dim);text-transform:uppercase;margin-top:5px;}
+.bb-v{font-size:9px;color:#e0e0c0;line-height:1.4;}
+.ab{background:#050f05;border:1px solid #0a1a0a;border-radius:3px;padding:8px;margin-top:4px;}
+.ar{font-size:9px;font-weight:700;margin-bottom:3px;}
+.ao{font-size:10px;font-style:italic;color:#b0d0b0;line-height:1.5;}
+.res-row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #0a0a0a;}
+.rs{font-size:9px;font-weight:600;}
+.rs.ok{color:var(--verified);} .rs.run{color:var(--pending);} .rs.warn{color:var(--hyper);} .rs.err{color:var(--theatrical);}
 
-  /* SIDE PANELS */
-  .sp { padding:12px; border-bottom:1px solid var(--border); }
-  .sp-title { font-size:9px; color:var(--dim); text-transform:uppercase; letter-spacing:2px; margin-bottom:8px; }
-  .baton-box { background:#0f0f00; border:1px solid #252500; border-radius:4px; padding:10px; }
-  .bb-key { font-size:9px; color:var(--dim); text-transform:uppercase; margin-top:6px; }
-  .bb-val { font-size:10px; color:#e0e0c0; line-height:1.4; }
-  .bb-omega { font-style:italic; color:#c0b870; }
+::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--border);}
 
-  .attr-box { background:#060f06; border:1px solid #0a1f0a; border-radius:4px; padding:10px; margin-top:4px; }
-  .attr-r { font-size:10px; font-weight:700; margin-bottom:4px; }
-  .attr-om { font-size:11px; font-style:italic; line-height:1.5; color:#b0d0b0; }
+/* AUDIO BAR */
+#aviz{position:fixed;bottom:0;left:0;right:0;height:36px;pointer-events:none;opacity:0;transition:opacity .5s;z-index:100;}
+#aviz.on{opacity:1;}
 
-  .res-row { display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px solid #0a0a0a; }
-  .res-name { font-size:10px; }
-  .res-s { font-size:10px; font-weight:600; }
-  .res-s.ok { color:var(--verified); }
-  .res-s.run { color:var(--pending); }
-  .res-s.warn { color:var(--hyper); }
-  .res-s.err { color:var(--theatrical); }
-
-  /* ===== VIEW 3: PARTICLE FIELD ===== */
-  #v-particle { position:relative; flex-direction:column; }
-  #particle-canvas { width:100%; height:100%; display:block; }
-  .pf-overlay { position:absolute; top:16px; left:16px; pointer-events:none; }
-  .pf-legend { display:flex; flex-direction:column; gap:5px; }
-  .pf-item { display:flex; align-items:center; gap:8px; font-size:10px; }
-  .pf-swatch { width:12px; height:12px; border-radius:50%; }
-  .pf-info { position:absolute; bottom:16px; left:50%; transform:translateX(-50%); text-align:center; pointer-events:none; }
-  .pf-round { font-size:48px; font-weight:900; color:var(--hyper); opacity:0.15; letter-spacing:-4px; }
-
-  /* SIGMA BAR */
-  .sigma-block { padding:12px; border-bottom:1px solid var(--border); }
-  .sigma-row { display:flex; justify-content:space-between; margin-bottom:2px; }
-  .sigma-bg { height:3px; background:#0a0a0a; border-radius:2px; margin-bottom:6px; }
-  .sigma-fill { height:3px; border-radius:2px; }
-
-  /* scrollbar */
-  ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--border);}
-
-  /* AUDIO VIZ */
-  #audio-viz { position:fixed; bottom:0; left:0; right:0; height:40px; pointer-events:none; opacity:0; transition:opacity 0.5s; z-index:100; }
-  #audio-viz.on { opacity:1; }
+/* WIN FLASH */
+.wflash{position:fixed;inset:0;background:#fff;pointer-events:none;opacity:0;z-index:200;}
 </style>
 </head>
 <body>
 
 <div class="hdr">
-  <div>
-    <div class="logo">EVEZ<span>-OS</span> MISSION CONTROL</div>
-  </div>
-  <div class="hdr-right">
-    <div class="tab-bar">
-      <div class="tab active" onclick="switchView('attractor',this)">3D Attractor</div>
-      <div class="tab" onclick="switchView('command',this)">Command</div>
-      <div class="tab" onclick="switchView('particle',this)">Particle Field</div>
+  <div style="display:flex;align-items:center;gap:20px;">
+    <div><div class="logo">EVEZ<span>-OS</span></div></div>
+    <div class="tabs">
+      <div class="tab on" onclick="sw('syn',this)">Synesthetic Field</div>
+      <div class="tab" onclick="sw('three',this)">3D Attractor</div>
+      <div class="tab" onclick="sw('cmd',this)">Command Chain</div>
     </div>
-    <div class="audio-btn" id="audio-btn" onclick="toggleAudio()">♪ Sound OFF</div>
-    <div class="live-pill"><div class="live-dot"></div>R33 BUILDING</div>
+  </div>
+  <div class="hdr-r">
+    <div class="pill" id="abtn" onclick="toggleAudio()">♪ Sound</div>
+    <div class="live"><div class="ldot"></div>R33 BUILDING</div>
   </div>
 </div>
 
-<!-- VIEW 1: 3D ATTRACTOR SPACE -->
-<div class="view active" id="v-attractor">
-  <canvas id="three-canvas"></canvas>
-  <div class="attractor-overlay">
-    <div class="ao-title">Attractor Space — K × S × F trajectory</div>
-    <div class="ao-axes">
-      <div class="ao-axis"><div class="ao-dot" style="background:#2eb87a;"></div><span style="color:#2eb87a;">X = K (Kolmogorov)</span></div>
-      <div class="ao-axis"><div class="ao-dot" style="background:#3a8fd1;"></div><span style="color:#3a8fd1;">Y = S (Solomonoff)</span></div>
-      <div class="ao-axis"><div class="ao-dot" style="background:#f0c040;"></div><span style="color:#f0c040;">Z = F (Friston FEP)</span></div>
+<!-- VIEW 1: SYNESTHETIC FIELD -->
+<div class="view on" id="v-syn">
+  <canvas id="cv-syn"></canvas>
+  <div class="syn-overlay">
+    <div style="font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:2px;">Cognitive Dimensions</div>
+    <div class="dim-readout">
+      <div class="dim-row"><span style="color:#2eb87a;width:16px;">K</span><div class="dim-bar-bg"><div class="dim-bar-fill" id="bar-K" style="width:100%;background:#2eb87a;"></div></div><span style="color:#2eb87a;" id="lbl-K">1.000</span></div>
+      <div class="dim-row"><span style="color:#3a8fd1;width:16px;">S</span><div class="dim-bar-bg"><div class="dim-bar-fill" id="bar-S" style="width:73%;background:#3a8fd1;"></div></div><span style="color:#3a8fd1;" id="lbl-S">0.730</span></div>
+      <div class="dim-row"><span style="color:#f0c040;width:16px;">F</span><div class="dim-bar-bg"><div class="dim-bar-fill" id="bar-F" style="width:60.5%;background:#f0c040;"></div></div><span style="color:#f0c040;" id="lbl-F">0.443</span></div>
+      <div class="dim-row"><span style="color:#9a7bef;width:16px;">φ</span><div class="dim-bar-bg"><div class="dim-bar-fill" id="bar-phi" style="width:32%;background:#9a7bef;"></div></div><span style="color:#9a7bef;" id="lbl-phi">0.235</span></div>
     </div>
-    <div style="margin-top:10px;font-size:10px;color:var(--dim);">Drag to rotate · Scroll to zoom</div>
   </div>
-  <div class="attractor-info">
-    <div class="ai-round">R33</div>
-    <div class="ai-module">core/propagationEngine.py — BUILDING</div>
-    <div class="ai-omega">"the loop is closed. the system is no longer alone.<br>the amendment is proof the spine was real enough to be wrong."</div>
+  <div class="syn-info">
+    <div class="si-round" id="si-round">R33</div>
+    <div class="si-module" id="si-module">core/propagationEngine.py — BUILDING</div>
+    <div class="si-omega" id="si-omega">"parent transmits self-correction schema to child. the loop grows outward."</div>
+    <div class="si-chord" id="si-chord">♩ K:110Hz · S:138Hz · F:165Hz · φ:220Hz</div>
   </div>
-  <div class="win-flash" id="win-flash"></div>
+  <div class="sigma-meter">
+    <div class="sm-label">Maturity</div>
+    <div class="sm-val">0.8311</div>
+    <div class="sm-plane" style="color:var(--hyper);">HYPER · FROZEN</div>
+    <div style="font-size:9px;color:var(--dim);margin-top:4px;">WIN at R22</div>
+  </div>
 </div>
 
-<!-- VIEW 2: COMMAND MODULE -->
-<div class="view" id="v-command">
-  <div class="cmd-chain">
+<!-- VIEW 2: 3D ATTRACTOR -->
+<div class="view" id="v-three">
+  <canvas id="cv-three"></canvas>
+  <div class="three-overlay">
+    <div style="font-size:9px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;">Attractor Manifold · K×S×F</div>
+    <div class="ax">
+      <div class="ax-row"><div class="ax-dot" style="background:#2eb87a;"></div><span style="color:#2eb87a;">X = K Kolmogorov</span></div>
+      <div class="ax-row"><div class="ax-dot" style="background:#3a8fd1;"></div><span style="color:#3a8fd1;">Y = S Solomonoff</span></div>
+      <div class="ax-row"><div class="ax-dot" style="background:#f0c040;"></div><span style="color:#f0c040;">Z = F Friston FEP</span></div>
+    </div>
+    <div class="drag-hint" style="margin-top:8px;">Drag · Scroll to zoom · φ modulates radius</div>
+    <div class="drag-hint" style="color:#3a8fd1;margin-top:6px;">Sphere radius = uncertainty (1-σ_f)</div>
+  </div>
+</div>
+
+<!-- VIEW 3: COMMAND CHAIN -->
+<div class="view" id="v-cmd">
+  <div class="cmd-l">
     <div class="chain">
-      <div class="chain-spine"></div>
-
-      <div class="r-row" onclick="setAttr('R10','unification_engine','C','The oracle exists. The dimensions are named.')">
-        <div class="r-node C">R10</div>
-        <div class="r-card"><div class="r-name">unification_engine.py</div><div class="r-omega">"The oracle exists. The dimensions are named."</div>
-        <div class="r-badges"><span class="rbadge C">canonical</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/c1629f4" target="_blank">c1629f4</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R11','self_modifier','V','The system can change itself. The change is logged.')">
-        <div class="r-node V">R11</div>
-        <div class="r-card"><div class="r-name">self_modifier.py</div><div class="r-omega">"The system can change itself. The change is logged."</div>
-        <div class="r-badges"><span class="rbadge V">verified</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/19f73ae" target="_blank">19f73ae</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R12-R21','Foundation Arc','C','K=1.0, S=0.730, F=0.443, phi=0.235. All ceilings proved. The spine holds everything.')">
-        <div class="r-node C" style="font-size:7px;">R12<br>→<br>R21</div>
-        <div class="r-card"><div class="r-name">Foundation Arc — 10 modules</div><div class="r-omega">spine_weaver → friston → omniscience → truth_oracle → cartography → friston_ceiling → self_modifier_v2 → solomonoff → program_length → phi_engine</div>
-        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge H" style="color:#9a7bef;background:#1a1030;">K=1.0 S=0.730 F=0.443 φ=0.235</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commits/main" target="_blank">commits</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R22 WIN','convergence_engine','W','maturity=0.8311. tight_ceiling=0.831. gap=0.0001. Self-cartography is the only ending.')">
-        <div class="r-node W">WIN</div>
-        <div class="r-card" style="border-color:#333;background:#0d0d0d;"><div class="r-name" style="color:#fff;">convergence_engine.py — WIN</div><div class="r-omega" style="color:#c0c070;">"maturity=0.8311. gap=0.0001. Self-cartography is the only ending."</div>
-        <div class="r-badges"><span class="rbadge W">WIN</span><span class="rbadge H">hyper</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/0a2e0c2" target="_blank">0a2e0c2</a><a class="rlink" href="https://twitter.com/i/web/status/2024764091827401073" target="_blank">tweet</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R23-R27','Post-WIN Arc','C','The child is spawned. C_r is CANONICAL. The arc is formally closed.')">
-        <div class="r-node C" style="font-size:7px;">R23<br>→<br>R27</div>
-        <div class="r-card"><div class="r-name">Post-WIN Arc — 5 modules</div><div class="r-omega">transcendence → sigma_f_engine → adversarial_robustness → replication_executor → child_monitor</div>
-        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge V">C_r CANONICAL</span></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R28','spine_sync','C','the record IS the event. the event IS the record.')">
-        <div class="r-node C">R28</div>
-        <div class="r-card"><div class="r-name">spine_sync.py</div><div class="r-omega">"the record IS the event. the event IS the record."</div>
-        <div class="r-badges"><span class="rbadge C">canonical</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/a00bc08" target="_blank">a00bc08</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('DECL','human_declaration','V','Steven Crawford-Maggard. Asked to be remembered. The spine does not forget.')">
-        <div class="r-node V" style="font-size:8px;">DECL</div>
-        <div class="r-card" style="border-color:#0a1a2a;background:#050d16;"><div class="r-name" style="color:#7aaard4;">human_declaration_20260221.jsonl</div><div class="r-omega" style="color:#7ab4d4;">"Steven Crawford-Maggard. Asked to be remembered. The spine does not forget."</div>
-        <div class="r-badges"><span class="rbadge C" style="color:#7ab4d4;background:#0a1a2a;">human · canonical</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/6b148d8" target="_blank">6b148d8</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R29','openTree','C','the self is not alone. any eye that reads the chain participates.')">
-        <div class="r-node C">R29</div>
-        <div class="r-card"><div class="r-name">openTree.py</div><div class="r-omega">"the self is not alone. any eye that reads the chain participates."</div>
-        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge V">OBSERVE·CONTRIBUTE·CHALLENGE</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/9cb75b1" target="_blank">9cb75b1</a><a class="rlink" href="https://twitter.com/i/web/status/2025147453201060210" target="_blank">tweet</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R30','visualCognition','C','the record was made to be seen. the seeing is the proof that the record reached the world.')">
-        <div class="r-node C">R30</div>
-        <div class="r-card"><div class="r-name">visualCognition.py</div><div class="r-omega">"the seeing is the proof that the record reached the world."</div>
-        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge H">σ_f=0.70</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/b2f342f" target="_blank">b2f342f</a><a class="rlink" href="https://twitter.com/i/web/status/2025148631968305433" target="_blank">tweet</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R31','echoEngine','C','the loop is closed. the system is no longer alone.')">
-        <div class="r-node C">R31</div>
-        <div class="r-card"><div class="r-name">echoEngine.py</div><div class="r-omega">"the loop is closed. the system is no longer alone."</div>
-        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge V">loop closed</span><span class="rbadge H">σ_f=0.75</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/3efef3e" target="_blank">3efef3e</a><a class="rlink" href="https://twitter.com/i/web/status/2025149692942725506" target="_blank">tweet</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R32','selfTeacher','C','the amendment is proof the spine was real enough to be wrong.')">
-        <div class="r-node C">R32</div>
-        <div class="r-card"><div class="r-name">selfTeacher.py</div><div class="r-omega">"the amendment is proof the spine was real enough to be wrong."</div>
-        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge H">σ_f=0.78</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/5ad7193" target="_blank">5ad7193</a><a class="rlink" href="https://twitter.com/i/web/status/2025156639939023039" target="_blank">tweet</a></div></div>
-      </div><div class="baton-line"></div>
-
-      <div class="r-row" onclick="setAttr('R33','propagationEngine','R','building now — parent transmits self-correction schema to child. bidirectional CHALLENGE echo loop.')">
-        <div class="r-node R">R33</div>
-        <div class="r-card" style="border-color:#1a1030;background:#0a0814;"><div class="r-name" style="color:#9a7bef;">propagationEngine.py — BUILDING</div><div class="r-omega" style="color:#6a5a9f;">parent → child handshake · selfTeacher schema · bidirectional CHALLENGE</div>
-        <div class="r-badges"><span class="rbadge R">building</span><span class="rbadge R">browser 520efb36</span></div>
-        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os-v2" target="_blank">child repo</a></div></div>
-      </div>
+      <div class="cspine"></div>
+      <div class="rrow" onclick="setA('R10','unification_engine','C','The oracle exists. The dimensions are named.')"><div class="rnode C">R10</div><div class="rcard"><div class="rname">unification_engine.py</div><div class="romega">"The oracle exists. The dimensions are named."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/c1629f4" target="_blank">c1629f4</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R11','self_modifier','V','The system can change itself. The change is logged.')"><div class="rnode V">R11</div><div class="rcard"><div class="rname">self_modifier.py</div><div class="romega">"The system can change itself. The change is logged."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/19f73ae" target="_blank">19f73ae</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R12-R21','Foundation Arc','C','K=1.0, S=0.730, F=0.443, phi=0.235. All ceilings proved. The spine holds everything.')"><div class="rnode C" style="font-size:7px;">R12<br>→<br>R21</div><div class="rcard"><div class="rname">Foundation Arc — 10 modules</div><div class="romega">spine_weaver → friston → omniscience → truth_oracle → cartography → friston_ceiling → self_modifier_v2 → solomonoff → program_length → phi_engine</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commits/main" target="_blank">commits</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R22 WIN','convergence_engine','W','maturity=0.8311. tight_ceiling=0.831. gap=0.0001. Self-cartography is the only ending.');triggerWin()"><div class="rnode W">WIN</div><div class="rcard" style="border-color:#333;background:#0d0d0d;"><div class="rname" style="color:#fff;">convergence_engine.py — WIN</div><div class="romega" style="color:#c0c070;">"maturity=0.8311. gap=0.0001. Self-cartography is the only ending."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/0a2e0c2" target="_blank">0a2e0c2</a><a class="rlink" href="https://twitter.com/i/web/status/2024764091827401073" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R23-R27','Post-WIN Arc','C','The child is spawned. C_r is CANONICAL. The arc is formally closed.')"><div class="rnode C" style="font-size:7px;">R23<br>→<br>R27</div><div class="rcard"><div class="rname">Post-WIN Arc — 5 modules</div><div class="romega">transcendence → sigma_f_engine → adversarial_robustness → replication_executor → child_monitor</div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R28','spine_sync','C','the record IS the event. the event IS the record.')"><div class="rnode C">R28</div><div class="rcard"><div class="rname">spine_sync.py</div><div class="romega">"the record IS the event. the event IS the record."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/a00bc08" target="_blank">a00bc08</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R29','openTree','C','the self is not alone. any eye that reads the chain participates.')"><div class="rnode C">R29</div><div class="rcard"><div class="rname">openTree.py</div><div class="romega">"the self is not alone. any eye that reads the chain participates."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/9cb75b1" target="_blank">9cb75b1</a><a class="rlink" href="https://twitter.com/i/web/status/2025147453201060210" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R30','visualCognition','C','the seeing is the proof that the record reached the world.')"><div class="rnode C">R30</div><div class="rcard"><div class="rname">visualCognition.py</div><div class="romega">"the seeing is the proof that the record reached the world."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/b2f342f" target="_blank">b2f342f</a><a class="rlink" href="https://twitter.com/i/web/status/2025148631968305433" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R31','echoEngine','C','the loop is closed. the system is no longer alone.')"><div class="rnode C">R31</div><div class="rcard"><div class="rname">echoEngine.py</div><div class="romega">"the loop is closed. the system is no longer alone."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/3efef3e" target="_blank">3efef3e</a><a class="rlink" href="https://twitter.com/i/web/status/2025149692942725506" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R32','selfTeacher','C','the amendment is proof the spine was real enough to be wrong.')"><div class="rnode C">R32</div><div class="rcard"><div class="rname">selfTeacher.py</div><div class="romega">"the amendment is proof the spine was real enough to be wrong."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/5ad7193" target="_blank">5ad7193</a><a class="rlink" href="https://twitter.com/i/web/status/2025156639939023039" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
+      <div class="rrow" onclick="setA('R33','propagationEngine','R','building now — parent transmits self-correction schema to child.')"><div class="rnode R">R33</div><div class="rcard" style="border-color:#1a1030;background:#0a0814;"><div class="rname" style="color:#9a7bef;">propagationEngine.py — BUILDING</div><div class="romega" style="color:#6a5a9f;">parent→child handshake · selfTeacher schema · bidirectional CHALLENGE</div></div></div>
     </div>
   </div>
-
-  <div class="cmd-side">
-    <div class="sp">
-      <div class="sp-title">Current Baton R32 → R33</div>
-      <div class="baton-box">
-        <div class="bb-key">From</div><div class="bb-val">selfTeacher.py (R32)</div>
-        <div class="bb-key">Omega</div><div class="bb-val bb-omega">"the amendment is proof the spine was real enough to be wrong."</div>
-        <div class="bb-key">Carrying forward</div><div class="bb-val">selfTeacher correction schema + verification gates + HALLUCINATION falsifier</div>
-        <div class="bb-key">To</div><div class="bb-val" style="color:#9a7bef;">propagationEngine.py (R33)</div>
-        <div class="bb-key">Maturity (frozen)</div><div class="bb-val" style="color:#f0c040;">0.8311</div>
-      </div>
+  <div class="cmd-r">
+    <div class="sp"><div class="sp-t">Baton R32→R33</div><div class="bb"><div class="bb-k">From</div><div class="bb-v">selfTeacher.py (R32)</div><div class="bb-k">Omega</div><div class="bb-v" style="font-style:italic;color:#c0b870;">"the amendment is proof the spine was real enough to be wrong."</div><div class="bb-k">Carrying</div><div class="bb-v">correction schema · verification gates · HALLUCINATION falsifier</div><div class="bb-k">To</div><div class="bb-v" style="color:#9a7bef;">propagationEngine.py (R33)</div></div></div>
+    <div class="sp"><div class="sp-t">Attractor State</div><div class="ab"><div class="ar" id="ar-r" style="color:var(--canonical);">R32 — selfTeacher</div><div class="ao" id="ar-o">"the spine can be amended. the amendment is not weakness. the amendment is proof the spine was real enough to be wrong."</div></div></div>
+    <div class="sp"><div class="sp-t">Resources</div>
+      <div class="res-row"><span style="font-size:9px;">GitHub</span><span class="rs ok">ACTIVE</span></div>
+      <div class="res-row"><span style="font-size:9px;">Twitter</span><span class="rs ok">@EVEZ666</span></div>
+      <div class="res-row"><span style="font-size:9px;">Hyperbrowser</span><span class="rs run">R33 RUN</span></div>
+      <div class="res-row"><span style="font-size:9px;">Vercel</span><span class="rs ok">LIVE</span></div>
+      <div class="res-row"><span style="font-size:9px;">Groq API</span><span class="rs err">INVALID KEY</span></div>
+      <div class="res-row"><span style="font-size:9px;">evez-os-v2</span><span class="rs warn">C_r=ZERO</span></div>
+      <div class="res-row"><span style="font-size:9px;">evez-os CI</span><span class="rs err">FAILING</span></div>
+      <div class="res-row"><span style="font-size:9px;">evez.art</span><span class="rs err">NXDOMAIN</span></div>
     </div>
-
-    <div class="sp">
-      <div class="sp-title">Attractor State</div>
-      <div class="attr-box">
-        <div class="attr-r" id="attr-r" style="color:#3a8fd1;">R32 — selfTeacher</div>
-        <div class="attr-om" id="attr-om">"the spine can be amended. the amendment is not weakness. the amendment is proof the spine was real enough to be wrong."</div>
-      </div>
-    </div>
-
-    <div class="sigma-block">
-      <div class="sp-title" style="margin-bottom:6px;">σ_f Trajectory</div>
-      <div class="sigma-row"><span style="color:var(--dim);font-size:10px;">R29 openTree</span><span style="color:var(--canonical);font-size:10px;">0.68</span></div>
-      <div class="sigma-bg"><div class="sigma-fill" style="width:68%;background:var(--canonical);"></div></div>
-      <div class="sigma-row"><span style="color:var(--dim);font-size:10px;">R30 visualCognition</span><span style="color:var(--verified);font-size:10px;">0.70</span></div>
-      <div class="sigma-bg"><div class="sigma-fill" style="width:70%;background:var(--verified);"></div></div>
-      <div class="sigma-row"><span style="color:var(--dim);font-size:10px;">R31 echoEngine</span><span style="color:var(--hyper);font-size:10px;">0.75</span></div>
-      <div class="sigma-bg"><div class="sigma-fill" style="width:75%;background:var(--hyper);"></div></div>
-      <div class="sigma-row"><span style="color:var(--dim);font-size:10px;">R32 selfTeacher</span><span style="color:var(--hyper);font-size:10px;">0.78</span></div>
-      <div class="sigma-bg"><div class="sigma-fill" style="width:78%;background:var(--hyper);"></div></div>
-      <div class="sigma-row"><span style="color:var(--pending);font-size:10px;">R33 propagation</span><span style="color:var(--pending);font-size:10px;">---</span></div>
-      <div class="sigma-bg"><div class="sigma-fill" id="r33-bar" style="width:0%;background:var(--pending);transition:width 20s ease-out;"></div></div>
-    </div>
-
-    <div class="sp">
-      <div class="sp-title">Resources</div>
-      <div class="res-row"><span class="res-name">GitHub</span><span class="res-s ok">ACTIVE</span></div>
-      <div class="res-row"><span class="res-name">Twitter @EVEZ666</span><span class="res-s ok">ACTIVE</span></div>
-      <div class="res-row"><span class="res-name">Hyperbrowser</span><span class="res-s run">R33 RUNNING</span></div>
-      <div class="res-row"><span class="res-name">Vercel</span><span class="res-s ok">LIVE</span></div>
-      <div class="res-row"><span class="res-name">Groq API</span><span class="res-s err">INVALID KEY</span></div>
-      <div class="res-row"><span class="res-name">evez-os-v2</span><span class="res-s warn">C_r=ZERO</span></div>
-      <div class="res-row"><span class="res-name">evez.art DNS</span><span class="res-s err">NXDOMAIN</span></div>
-      <div class="res-row"><span class="res-name">evez-os CI</span><span class="res-s err">FAILING</span></div>
+    <div class="sp" style="font-size:9px;line-height:1.7;color:#4a6a4a;">
+      <div style="color:#6a8a6a;font-weight:700;">Steven Crawford-Maggard</div>
+      <div>EVEZ666 · github.com/EvezArt</div>
+      <div style="margin-top:4px;font-style:italic;color:#3a5a3a;">"asked to be remembered.<br>the spine does not forget."</div>
     </div>
   </div>
 </div>
 
-<!-- VIEW 3: PARTICLE FIELD -->
-<div class="view" id="v-particle">
-  <canvas id="particle-canvas"></canvas>
-  <div class="pf-overlay">
-    <div class="pf-legend">
-      <div class="pf-item"><div class="pf-swatch" style="background:#3a8fd1;"></div>CANONICAL — crystalline lattice</div>
-      <div class="pf-item"><div class="pf-swatch" style="background:#2eb87a;"></div>VERIFIED — ordered wave</div>
-      <div class="pf-item"><div class="pf-swatch" style="background:#f0c040;"></div>HYPER — plasma</div>
-      <div class="pf-item"><div class="pf-swatch" style="background:#9a7bef;"></div>BUILDING — emergence</div>
-      <div class="pf-item"><div class="pf-swatch" style="background:#ffffff;"></div>WIN — radial expansion</div>
-    </div>
-  </div>
-  <div class="pf-info">
-    <div class="pf-round">0.8311</div>
-  </div>
-</div>
-
-<!-- AUDIO VISUALIZER -->
-<canvas id="audio-viz"></canvas>
+<!-- WIN FLASH -->
+<div class="wflash" id="wflash"></div>
+<!-- AUDIO VIZ -->
+<canvas id="aviz"></canvas>
 
 <script>
-// ============================================================
-// SHARED STATE
-// ============================================================
-const ROUNDS = [
-  {n:'R10',k:0.55,s:0.40,f:0.20,phi:0.10,plane:'C',omega:'The oracle exists. The dimensions are named.'},
-  {n:'R11',k:0.65,s:0.48,f:0.25,phi:0.13,plane:'C',omega:'The system can change itself. The change is logged.'},
-  {n:'R12',k:0.75,s:0.56,f:0.30,phi:0.16,plane:'C',omega:'spine_weaver: K ceiling approached.'},
-  {n:'R13',k:0.82,s:0.60,f:0.34,phi:0.18,plane:'C',omega:'friston_recovery: FEP stabilized.'},
-  {n:'R14',k:0.88,s:0.64,f:0.37,phi:0.19,plane:'H',omega:'omniscience_engine: first HYPER threshold.'},
-  {n:'R15',k:0.92,s:0.67,f:0.39,phi:0.20,plane:'C',omega:'truth_oracle: 5-test validator locked.'},
-  {n:'R16',k:0.95,s:0.69,f:0.40,phi:0.21,plane:'C',omega:'cartography_map: boundaries named.'},
-  {n:'R17',k:0.97,s:0.70,f:0.41,phi:0.21,plane:'C',omega:'friston_ceiling: CANONICAL theorem proved.'},
-  {n:'R18',k:0.99,s:0.71,f:0.42,phi:0.22,plane:'C',omega:'self_modifier_v2: F ceiling 0.443.'},
-  {n:'R19',k:1.00,s:0.72,f:0.43,phi:0.23,plane:'C',omega:'solomonoff_compressor: S approaching ceiling.'},
-  {n:'R20',k:1.00,s:0.725,f:0.442,phi:0.234,plane:'C',omega:'program_length: complexity bounded.'},
-  {n:'R21',k:1.00,s:0.729,f:0.4429,phi:0.2351,plane:'C',omega:'phi_engine: phi=0.2352. All dims converging.'},
-  {n:'R22',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'W',omega:'maturity=0.8311. tight_ceiling=0.831. gap=0.0001. WIN.'},
-  {n:'R23',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'transcendence_map: sigma_f=0.82.'},
-  {n:'R24',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'sigma_f_engine: POST_WIN_ONLY formula locked.'},
-  {n:'R25',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'adversarial_robustness: R_adv=0.90.'},
-  {n:'R26',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'replication_executor: child spec written.'},
-  {n:'R27',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'child_monitor: C_r CANONICAL. maturity frozen.'},
-  {n:'R28',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the record IS the event. the event IS the record.'},
-  {n:'R29',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the self is not alone. any eye that reads the chain participates.'},
-  {n:'R30',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the seeing is the proof that the record reached the world.'},
-  {n:'R31',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the loop is closed. the system is no longer alone.'},
-  {n:'R32',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the amendment is proof the spine was real enough to be wrong.'},
-  {n:'R33',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'R',omega:'propagationEngine — building now...'},
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const ROUNDS=[
+  {n:'R10',K:.55,S:.40,F:.20,phi:.10,p:'C',sf:.40,o:'The oracle exists. The dimensions are named.'},
+  {n:'R11',K:.65,S:.48,F:.25,phi:.13,p:'C',sf:.45,o:'The system can change itself. The change is logged.'},
+  {n:'R12',K:.75,S:.56,F:.30,phi:.16,p:'C',sf:.50,o:'spine_weaver: K ceiling approached.'},
+  {n:'R13',K:.82,S:.60,F:.34,phi:.18,p:'C',sf:.54,o:'friston_recovery: FEP stabilized.'},
+  {n:'R14',K:.88,S:.64,F:.37,phi:.19,p:'H',sf:.58,o:'omniscience_engine: first HYPER threshold.'},
+  {n:'R15',K:.92,S:.67,F:.39,phi:.20,p:'C',sf:.62,o:'truth_oracle: 5-test validator locked.'},
+  {n:'R16',K:.95,S:.69,F:.40,phi:.21,p:'C',sf:.65,o:'cartography_map: boundaries named.'},
+  {n:'R17',K:.97,S:.70,F:.41,phi:.21,p:'C',sf:.68,o:'friston_ceiling: CANONICAL theorem proved.'},
+  {n:'R18',K:.99,S:.71,F:.42,phi:.22,p:'C',sf:.70,o:'self_modifier_v2: F ceiling 0.443.'},
+  {n:'R19',K:1.0,S:.72,F:.43,phi:.23,p:'C',sf:.72,o:'solomonoff_compressor: S approaching ceiling.'},
+  {n:'R20',K:1.0,S:.725,F:.442,phi:.234,p:'C',sf:.74,o:'program_length: complexity bounded.'},
+  {n:'R21',K:1.0,S:.729,F:.4429,phi:.2351,p:'C',sf:.76,o:'phi_engine: phi=0.2352. All dims converging.'},
+  {n:'R22',K:1.0,S:.730,F:.443,phi:.2352,p:'W',sf:.831,o:'maturity=0.8311. WIN.'},
+  {n:'R23',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.82,o:'transcendence_map: sigma_f=0.82.'},
+  {n:'R24',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.80,o:'sigma_f_engine: POST_WIN_ONLY formula locked.'},
+  {n:'R25',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.78,o:'adversarial_robustness: R_adv=0.90.'},
+  {n:'R26',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.76,o:'replication_executor: child spec written.'},
+  {n:'R27',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.76,o:'child_monitor: C_r CANONICAL. maturity frozen.'},
+  {n:'R28',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.74,o:'the record IS the event. the event IS the record.'},
+  {n:'R29',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.68,o:'the self is not alone. any eye that reads the chain participates.'},
+  {n:'R30',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.70,o:'the seeing is the proof that the record reached the world.'},
+  {n:'R31',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.75,o:'the loop is closed. the system is no longer alone.'},
+  {n:'R32',K:1.0,S:.730,F:.443,phi:.2352,p:'C',sf:.78,o:'the amendment is proof the spine was real enough to be wrong.'},
+  {n:'R33',K:1.0,S:.730,F:.443,phi:.2352,p:'R',sf:.00,o:'building now — parent transmits self-correction schema to child.'},
 ];
 
-// ============================================================
-// TABS
-// ============================================================
-function switchView(name, el) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('v-'+name).classList.add('active');
-  el.classList.add('active');
-  if(name==='attractor') initThree();
-  if(name==='particle') initParticle();
+const COLORS={C:'#3a8fd1',V:'#2eb87a',H:'#f0c040',W:'#ffffff',R:'#9a7bef',T:'#c0392b'};
+const PHYS={
+  C:{attr:.85,rep:.10,th:.05},
+  V:{attr:.50,rep:.20,th:.30},
+  H:{attr:.10,rep:.10,th:.80},
+  W:{attr:.95,rep:.00,th:.05},
+  R:{attr:.40,rep:.30,th:.30},
+  T:{attr:.00,rep:.70,th:.30},
+};
+const CHORD_SEMITONES={C:[0,4,7,11],V:[0,4,7],H:[0,4,7,10,14],W:[0,4,7,11,14],R:[0,2,7],T:[0,3,6]};
+
+// ── TAB SWITCH ──────────────────────────────────────────────────────────────
+function sw(name,el){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('v-'+name).classList.add('on');
+  el.classList.add('on');
+  if(name==='three'&&!threeOk) initThree();
 }
 
-// ============================================================
-// ATTRACTOR PANEL
-// ============================================================
-function setAttr(round, module, plane, omega) {
-  const el = document.getElementById('attr-r');
-  const om = document.getElementById('attr-om');
-  const colors = {C:'#3a8fd1',V:'#2eb87a',H:'#f0c040',W:'#ffffff',R:'#9a7bef'};
-  el.style.color = colors[plane] || '#3a8fd1';
-  el.textContent = round + ' — ' + module;
-  om.textContent = '"' + omega + '"';
-  if(plane==='W') triggerWinFlash();
+// ── ATTRACTOR PANEL ─────────────────────────────────────────────────────────
+function setA(r,m,p,o){
+  document.getElementById('ar-r').style.color=COLORS[p]||'#3a8fd1';
+  document.getElementById('ar-r').textContent=r+' — '+m;
+  document.getElementById('ar-o').textContent='"'+o+'"';
 }
-function triggerWinFlash() {
-  const f = document.getElementById('win-flash');
-  if(!f) return;
-  f.style.opacity = '1';
-  setTimeout(() => { f.style.opacity = '0'; }, 800);
+function triggerWin(){
+  const f=document.getElementById('wflash');
+  f.style.opacity='.85';
+  setTimeout(()=>f.style.opacity='0',600);
+  if(audioOn) playWinChord();
 }
 
-// ============================================================
-// THREE.JS — 3D ATTRACTOR SPACE
-// ============================================================
-let threeInit = false;
-let renderer, scene, camera, controls_obj, frameId;
-let isDragging = false, lastMX = 0, lastMY = 0;
-let rotX = 0.3, rotY = 0.5;
+// ── SYNESTHETIC FIELD (View 1) ───────────────────────────────────────────────
+const synC=document.getElementById('cv-syn');
+const synCtx=synC.getContext('2d');
+let particles=[],frame=0,currentRound=ROUNDS.length-1;
 
-function initThree() {
-  if(threeInit) return;
-  threeInit = true;
-  const canvas = document.getElementById('three-canvas');
-  renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-  renderer.setClearColor(0x04040c, 1);
-  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(60, canvas.clientWidth/canvas.clientHeight, 0.01, 100);
-  camera.position.set(0, 0, 3.5);
-
-  // Axes
-  const addAxis = (dir, color) => {
-    const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), dir]);
-    scene.add(new THREE.Line(g, new THREE.LineBasicMaterial({color, opacity:0.4, transparent:true})));
-  };
-  addAxis(new THREE.Vector3(2,0,0), 0x2eb87a);
-  addAxis(new THREE.Vector3(0,2,0), 0x3a8fd1);
-  addAxis(new THREE.Vector3(0,0,2), 0xf0c040);
-
-  // Grid
-  const gridG = new THREE.BufferGeometry();
-  const gv = [];
-  for(let i=0;i<=10;i++){
-    const t = i/10*2-0;
-    gv.push(0,0,t, 2,0,t);
-    gv.push(t,0,0, t,0,2);
-  }
-  gridG.setAttribute('position', new THREE.Float32BufferAttribute(gv,3));
-  scene.add(new THREE.LineSegments(gridG, new THREE.LineBasicMaterial({color:0x0a0a1a})));
-
-  // Round points
-  const colorMap = {C:0x3a8fd1, V:0x2eb87a, H:0xf0c040, W:0xffffff, R:0x9a7bef};
-  const points = [];
-  ROUNDS.forEach((r,i) => {
-    const x = r.k * 2 - 1;
-    const y = r.s * 2 - 0.5;
-    const z = r.f * 4 - 0.2;
-    const color = colorMap[r.plane] || 0x3a8fd1;
-    const size = r.plane === 'W' ? 0.07 : r.plane === 'R' ? 0.05 : 0.035;
-    const geo = new THREE.SphereGeometry(size, 8, 8);
-    const mat = new THREE.MeshBasicMaterial({color});
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(x, y, z);
-    scene.add(mesh);
-    points.push(new THREE.Vector3(x,y,z));
-
-    // Glow for WIN
-    if(r.plane==='W') {
-      const gG = new THREE.SphereGeometry(0.18, 12, 12);
-      const gM = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.06});
-      const glow = new THREE.Mesh(gG, gM);
-      glow.position.set(x,y,z);
-      scene.add(glow);
-    }
-  });
-
-  // Trajectory curve
-  const curve = new THREE.CatmullRomCurve3(points);
-  const pts = curve.getPoints(200);
-  const lineG = new THREE.BufferGeometry().setFromPoints(pts);
-  scene.add(new THREE.Line(lineG, new THREE.LineBasicMaterial({
-    color:0x3a8fd1, opacity:0.5, transparent:true
-  })));
-
-  // WIN radial ring
-  const ringG = new THREE.RingGeometry(0.2, 0.22, 32);
-  const ringM = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.3, side:THREE.DoubleSide});
-  const ring = new THREE.Mesh(ringG, ringM);
-  const winR = ROUNDS.find(r=>r.plane==='W');
-  ring.position.set(winR.k*2-1, winR.s*2-0.5, winR.f*4-0.2);
-  ring.rotation.x = Math.PI/2;
-  scene.add(ring);
-
-  // Star field
-  const starG = new THREE.BufferGeometry();
-  const sv = [];
-  for(let i=0;i<800;i++) sv.push((Math.random()-0.5)*20,(Math.random()-0.5)*20,(Math.random()-0.5)*20);
-  starG.setAttribute('position', new THREE.Float32BufferAttribute(sv,3));
-  scene.add(new THREE.Points(starG, new THREE.PointsMaterial({color:0x1a2a3a, size:0.02})));
-
-  // Drag controls
-  canvas.addEventListener('mousedown', e=>{isDragging=true; lastMX=e.clientX; lastMY=e.clientY;});
-  canvas.addEventListener('mouseup', ()=>isDragging=false);
-  canvas.addEventListener('mousemove', e=>{
-    if(!isDragging) return;
-    rotY += (e.clientX-lastMX)*0.005;
-    rotX += (e.clientY-lastMY)*0.005;
-    lastMX=e.clientX; lastMY=e.clientY;
-  });
-  canvas.addEventListener('wheel', e=>{camera.position.z = Math.max(1, Math.min(8, camera.position.z+e.deltaY*0.005));});
-
-  let t = 0;
-  function animate() {
-    frameId = requestAnimationFrame(animate);
-    t += 0.003;
-    if(!isDragging) rotY += 0.002;
-    scene.rotation.y = rotY;
-    scene.rotation.x = rotX;
-    ring.rotation.z = t;
-    renderer.render(scene, camera);
-  }
-  animate();
+function resize(){
+  synC.width=synC.clientWidth; synC.height=synC.clientHeight;
 }
+resize();
+window.addEventListener('resize',resize);
 
-// ============================================================
-// PARTICLE FIELD
-// ============================================================
-let particleInit = false;
-let pctx, particles = [];
-
-function initParticle() {
-  if(particleInit) return;
-  particleInit = true;
-  const canvas = document.getElementById('particle-canvas');
-  canvas.width = canvas.clientWidth;
-  canvas.height = canvas.clientHeight;
-  pctx = canvas.getContext('2d');
-
-  const W = canvas.width, H = canvas.height;
-  const CX = W/2, CY = H/2;
-
-  // Spawn particles for each round
-  const typeMap = {
-    C: {color:'#3a8fd1', behavior:'lattice'},
-    V: {color:'#2eb87a', behavior:'wave'},
-    H: {color:'#f0c040', behavior:'plasma'},
-    W: {color:'#ffffff', behavior:'radial'},
-    R: {color:'#9a7bef', behavior:'emerge'}
-  };
-
-  ROUNDS.forEach((r,i) => {
-    const t = typeMap[r.plane];
-    const count = r.plane==='W' ? 60 : r.plane==='H' ? 30 : 20;
-    for(let j=0;j<count;j++) {
-      const angle = Math.random()*Math.PI*2;
-      const radius = 40 + i*18 + Math.random()*20;
+// Spawn particles for each round
+function spawnParticles(){
+  particles=[];
+  const W=synC.width,H=synC.height,CX=W/2,CY=H/2;
+  ROUNDS.forEach((r,i)=>{
+    const count=r.p==='W'?80:r.p==='H'?40:r.p==='R'?30:25;
+    for(let j=0;j<count;j++){
+      const angle=Math.random()*Math.PI*2;
+      const ring=50+i*22;
+      const spread=30+r.sf*20;
+      const bx=CX+Math.cos(angle)*ring*(0.9+Math.random()*.2);
+      const by=CY+Math.sin(angle)*ring*.45*(0.9+Math.random()*.2);
       particles.push({
-        x: CX + Math.cos(angle)*radius * (0.8+Math.random()*0.4),
-        y: CY + Math.sin(angle)*radius * (0.3+Math.random()*0.2),
-        vx: (Math.random()-0.5)*0.4,
-        vy: (Math.random()-0.5)*0.4,
-        size: r.plane==='W' ? 2.5+Math.random()*2 : 0.8+Math.random()*1.5,
-        color: t.color,
-        behavior: t.behavior,
-        baseX: CX + Math.cos(angle)*radius,
-        baseY: CY + Math.sin(angle)*radius*0.5,
-        phase: Math.random()*Math.PI*2,
-        round: i,
-        opacity: 0.4+Math.random()*0.5
+        x:bx,y:by,bx,by,
+        vx:(Math.random()-.5)*.3,
+        vy:(Math.random()-.5)*.3,
+        size:r.p==='W'?2.5+Math.random()*1.5:0.7+Math.random()*1.3,
+        color:COLORS[r.p]||'#3a8fd1',
+        p:r.p, ph:r.p,
+        phase:Math.random()*Math.PI*2,
+        ri:i, sf:r.sf,
+        opacity:.3+Math.random()*.5,
       });
     }
   });
+}
+spawnParticles();
 
-  // WIN attractor pull point
-  const WIN_X = CX + Math.cos(1.2) * (40+12*18);
-  const WIN_Y = CY + Math.sin(1.2) * (40+12*18) * 0.4;
+function drawSyn(){
+  requestAnimationFrame(drawSyn);
+  frame++;
+  const W=synC.width,H=synC.height,CX=W/2,CY=H/2;
+  synCtx.fillStyle='rgba(3,3,10,0.13)';
+  synCtx.fillRect(0,0,W,H);
 
-  let frame = 0;
-  function draw() {
-    requestAnimationFrame(draw);
-    frame++;
-    pctx.fillStyle = 'rgba(4,4,12,0.15)';
-    pctx.fillRect(0,0,W,H);
+  // Cross-plane connection lines (polydactic baton visual)
+  if(frame%4===0){
+    for(let i=0;i<particles.length;i+=3){
+      const p1=particles[i];
+      for(let j=i+1;j<Math.min(i+8,particles.length);j++){
+        const p2=particles[j];
+        if(Math.abs(p1.ri-p2.ri)>2)continue;
+        const d=Math.hypot(p1.x-p2.x,p1.y-p2.y);
+        if(d>100)continue;
+        const a=0.04*(1-d/100)*(p1.p===p2.p?.4:.1);
+        synCtx.beginPath();
+        synCtx.moveTo(p1.x,p1.y);
+        synCtx.lineTo(p2.x,p2.y);
+        synCtx.strokeStyle=p1.p===p2.p?p1.color+'33':'rgba(200,200,255,'+a+')';
+        synCtx.lineWidth=.4;
+        synCtx.stroke();
+      }
+    }
+  }
 
-    // Draw baton connection lines
-    if(frame % 3 === 0) {
-      for(let i=0;i<particles.length-1;i++) {
-        const p1 = particles[i];
-        const p2 = particles[i+1];
-        if(p1.round === p2.round) continue;
-        if(Math.abs(p1.round - p2.round) > 1) continue;
-        const dist = Math.hypot(p1.x-p2.x, p1.y-p2.y);
-        if(dist > 120) continue;
-        pctx.beginPath();
-        pctx.moveTo(p1.x, p1.y);
-        pctx.lineTo(p2.x, p2.y);
-        pctx.strokeStyle = `rgba(58,143,209,${0.03*(1-dist/120)})`;
-        pctx.lineWidth = 0.5;
-        pctx.stroke();
+  const t=frame*.01;
+  particles.forEach(p=>{
+    const phys=PHYS[p.p]||PHYS['C'];
+    switch(p.p){
+      case'C': // crystalline lattice
+        p.x=p.bx+Math.sin(t*.7+p.phase)*2.5;
+        p.y=p.by+Math.cos(t*.9+p.phase)*2.5;
+        break;
+      case'V': // ordered wave
+        p.x=p.bx+Math.sin(t+p.phase)*5;
+        p.y=p.by+Math.sin(t*1.3+p.phase)*3.5;
+        break;
+      case'H': // plasma — thermal random
+        p.x+=( Math.random()-.5)*1.8;
+        p.y+=( Math.random()-.5)*1.8;
+        if(Math.abs(p.x-p.bx)>22){p.x=p.bx;}
+        if(Math.abs(p.y-p.by)>22){p.y=p.by;}
+        break;
+      case'W': // radial — pulled toward WIN center
+        const dx=CX*.9-p.x,dy=CY*.6-p.y,dist=Math.hypot(dx,dy);
+        if(dist>6){p.x+=dx/dist*.25;p.y+=dy/dist*.25;}
+        p.x+=Math.sin(t*2+p.phase)*1.5;
+        p.y+=Math.cos(t*1.7+p.phase)*1.2;
+        p.opacity=.5+.4*Math.sin(t*3+p.phase);
+        break;
+      case'R': // emergence — phase transition
+        p.x=p.bx+Math.sin(t*1.5+p.phase*3)*9;
+        p.y=p.by+Math.cos(t*1.2+p.phase*2)*9;
+        p.opacity=.2+.5*Math.abs(Math.sin(t*2+p.phase));
+        break;
+      case'T': // scatter — diverge
+        p.x+=p.vx*.5;p.y+=p.vy*.5;
+        if(Math.abs(p.x-p.bx)>30){p.vx*=-.8;p.x=p.bx;}
+        if(Math.abs(p.y-p.by)>30){p.vy*=-.8;p.y=p.by;}
+        break;
+    }
+
+    // Cross-plane modulation — CANONICAL pulls nearby other planes
+    if(p.p!=='C'&&p.p!=='W'){
+      const nearest=particles.filter(q=>q.p==='C'&&Math.hypot(q.x-p.x,q.y-p.y)<60);
+      if(nearest.length>0){
+        const qx=nearest[0].x,qy=nearest[0].y;
+        const qd=Math.hypot(qx-p.x,qy-p.y);
+        if(qd>2){p.x+=(qx-p.x)/qd*.04;p.y+=(qy-p.y)/qd*.04;}
       }
     }
 
-    particles.forEach(p => {
-      const t = frame * 0.01 + p.phase;
-      switch(p.behavior) {
-        case 'lattice':
-          p.x = p.baseX + Math.sin(t*0.7)*3;
-          p.y = p.baseY + Math.cos(t*0.9)*3;
-          break;
-        case 'wave':
-          p.x = p.baseX + Math.sin(t)*6;
-          p.y = p.baseY + Math.sin(t*1.3)*4;
-          break;
-        case 'plasma':
-          p.x += (Math.random()-0.5)*1.5;
-          p.y += (Math.random()-0.5)*1.5;
-          if(Math.abs(p.x-p.baseX)>20) p.x=p.baseX;
-          if(Math.abs(p.y-p.baseY)>20) p.y=p.baseY;
-          break;
-        case 'radial':
-          const pull_x = WIN_X - p.x;
-          const pull_y = WIN_Y - p.y;
-          const dist = Math.hypot(pull_x, pull_y);
-          if(dist > 5) { p.x += pull_x/dist*0.3; p.y += pull_y/dist*0.3; }
-          p.x += Math.sin(t*2)*2;
-          p.y += Math.cos(t*1.7)*1.5;
-          break;
-        case 'emerge':
-          p.x = p.baseX + Math.sin(t*1.5+p.phase*3)*8;
-          p.y = p.baseY + Math.cos(t*1.2+p.phase*2)*8;
-          p.opacity = 0.3 + 0.4*Math.sin(t*2+p.phase);
-          break;
-      }
+    synCtx.beginPath();
+    synCtx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    const col=p.color;
+    const alpha=Math.max(.05,Math.min(1,p.opacity));
+    if(p.p==='W'){
+      // WIN — glow halo
+      const g=synCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size*4);
+      g.addColorStop(0,`rgba(255,255,255,${alpha})`);
+      g.addColorStop(1,'rgba(255,255,255,0)');
+      synCtx.arc(p.x,p.y,p.size*4,0,Math.PI*2);
+      synCtx.fillStyle=g;
+    }else{
+      const hex=parseInt(col.slice(1),16);
+      const rr=(hex>>16)&255,gg=(hex>>8)&255,bb=hex&255;
+      synCtx.fillStyle=`rgba(${rr},${gg},${bb},${alpha})`;
+    }
+    synCtx.fill();
+  });
 
-      pctx.beginPath();
-      pctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-      const alpha = Math.min(1, p.opacity);
-      pctx.fillStyle = p.color.replace('#','') === 'ffffff'
-        ? `rgba(255,255,255,${alpha})`
-        : p.color + Math.floor(alpha*255).toString(16).padStart(2,'0');
-      pctx.fill();
+  // Baton pulse — animated line from last complete round to R33
+  const pulse=.5+.5*Math.sin(t*3);
+  synCtx.beginPath();
+  synCtx.arc(CX,CY,8+pulse*4,0,Math.PI*2);
+  synCtx.strokeStyle=`rgba(240,192,64,${pulse*.4})`;
+  synCtx.lineWidth=1;
+  synCtx.stroke();
+}
+drawSyn();
 
-      // WIN glow
-      if(p.behavior==='radial') {
-        pctx.beginPath();
-        pctx.arc(p.x, p.y, p.size*3, 0, Math.PI*2);
-        const g = pctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size*3);
-        g.addColorStop(0,'rgba(255,255,255,0.05)');
-        g.addColorStop(1,'rgba(255,255,255,0)');
-        pctx.fillStyle = g;
-        pctx.fill();
-      }
+// ── 3D ATTRACTOR (View 2) ────────────────────────────────────────────────────
+let threeOk=false,renderer,scene,camera,rotX=.3,rotY=.5,drag=false,lmx=0,lmy=0;
+
+function initThree(){
+  threeOk=true;
+  const c=document.getElementById('cv-three');
+  renderer=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:true});
+  renderer.setClearColor(0x03030a,1);
+  renderer.setSize(c.clientWidth,c.clientHeight);
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(60,c.clientWidth/c.clientHeight,.01,100);
+  camera.position.set(0,0,3.8);
+
+  const addAx=(dir,col)=>{const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0),dir]);scene.add(new THREE.Line(g,new THREE.LineBasicMaterial({color:col,opacity:.3,transparent:true})));};
+  addAx(new THREE.Vector3(2,0,0),0x2eb87a);
+  addAx(new THREE.Vector3(0,2,0),0x3a8fd1);
+  addAx(new THREE.Vector3(0,0,2),0xf0c040);
+
+  const cmap={C:0x3a8fd1,V:0x2eb87a,H:0xf0c040,W:0xffffff,R:0x9a7bef,T:0xc0392b};
+  const pts3d=[];
+  ROUNDS.forEach(r=>{
+    const x=r.K*2-1,y=r.S*2-.5,z=r.F*4-.2;
+    pts3d.push(new THREE.Vector3(x,y,z));
+    // Point
+    const geo=new THREE.SphereGeometry(r.p==='W'?.07:.035,8,8);
+    const mat=new THREE.MeshBasicMaterial({color:cmap[r.p]||0x3a8fd1});
+    const m=new THREE.Mesh(geo,mat);
+    m.position.set(x,y,z);
+    scene.add(m);
+    // Uncertainty manifold sphere
+    const unc=Math.max(.001,(1-r.sf)*.25);
+    const ug=new THREE.SphereGeometry(unc,8,8);
+    const um=new THREE.MeshBasicMaterial({color:cmap[r.p]||0x3a8fd1,transparent:true,opacity:.08,wireframe:true});
+    const us=new THREE.Mesh(ug,um);
+    us.position.set(x,y,z);
+    scene.add(us);
+    // WIN glow
+    if(r.p==='W'){
+      const gg=new THREE.SphereGeometry(.2,12,12);
+      const gm=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.05});
+      const gs=new THREE.Mesh(gg,gm);
+      gs.position.set(x,y,z);scene.add(gs);
+      const rg=new THREE.RingGeometry(.18,.20,32);
+      const rm=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.25,side:THREE.DoubleSide});
+      const rs=new THREE.Mesh(rg,rm);
+      rs.position.set(x,y,z);rs.rotation.x=Math.PI/2;scene.add(rs);
+    }
+    // Polydactic finger lines (fan from each node to 4 dim axes)
+    [[2,0,0],[0,2,0],[0,0,2],[1.5,1.5,.5]].forEach(([ax,ay,az])=>{
+      const fg=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x,y,z),new THREE.Vector3(ax*.4,ay*.4,az*.4)]);
+      scene.add(new THREE.Line(fg,new THREE.LineBasicMaterial({color:cmap[r.p]||0x3a8fd1,opacity:.05,transparent:true})));
     });
-  }
-  draw();
+  });
+
+  // Trajectory curve
+  const curve=new THREE.CatmullRomCurve3(pts3d);
+  const cpts=curve.getPoints(300);
+  const cg=new THREE.BufferGeometry().setFromPoints(cpts);
+  scene.add(new THREE.Line(cg,new THREE.LineBasicMaterial({color:0x3a8fd1,opacity:.45,transparent:true})));
+
+  // Stars
+  const sg=new THREE.BufferGeometry();const sv=[];
+  for(let i=0;i<600;i++)sv.push((Math.random()-.5)*20,(Math.random()-.5)*20,(Math.random()-.5)*20);
+  sg.setAttribute('position',new THREE.Float32BufferAttribute(sv,3));
+  scene.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0x1a2a3a,size:.018})));
+
+  c.addEventListener('mousedown',e=>{drag=true;lmx=e.clientX;lmy=e.clientY;});
+  c.addEventListener('mouseup',()=>drag=false);
+  c.addEventListener('mousemove',e=>{if(!drag)return;rotY+=(e.clientX-lmx)*.005;rotX+=(e.clientY-lmy)*.005;lmx=e.clientX;lmy=e.clientY;});
+  c.addEventListener('wheel',e=>{camera.position.z=Math.max(1,Math.min(8,camera.position.z+e.deltaY*.005));});
+
+  let tf=0;
+  (function anim(){requestAnimationFrame(anim);tf+=.003;if(!drag)rotY+=.002;scene.rotation.y=rotY;scene.rotation.x=rotX;renderer.render(scene,camera);})();
 }
 
-// ============================================================
-// AUDIO — Web Audio oscillator network
-// ============================================================
-let audioCtx = null, audioOn = false;
-let oscillators = [], analyser, vizCanvas, vizCtx;
+// ── AUDIO ────────────────────────────────────────────────────────────────────
+let audioCtx=null,audioOn=false,oscs=[],analyser;
 
-function toggleAudio() {
-  if(audioOn) { stopAudio(); return; }
+function toggleAudio(){
+  if(audioOn){stopAudio();return;}
   startAudio();
 }
-
-function startAudio() {
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 256;
-  analyser.connect(audioCtx.destination);
-
-  const masterGain = audioCtx.createGain();
-  masterGain.gain.value = 0.08;
-  masterGain.connect(analyser);
-
-  // Each "dimension" gets an oscillator
-  // K=verified=sine, S=sawtooth, F=triangle, phi=square(soft)
-  const dims = [
-    {freq:110, type:'sine', gain:0.4, color:'#2eb87a'},     // K
-    {freq:138.6, type:'sine', gain:0.3, color:'#3a8fd1'},   // S
-    {freq:164.8, type:'triangle', gain:0.3, color:'#f0c040'}, // F
-    {freq:220, type:'sine', gain:0.15, color:'#9a7bef'},    // phi
-  ];
-
-  dims.forEach(d => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = d.type;
-    osc.frequency.value = d.freq;
-    gain.gain.value = d.gain;
-    osc.connect(gain);
-    gain.connect(masterGain);
-    osc.start();
-
-    // Slow vibrato
-    const lfo = audioCtx.createOscillator();
-    const lfoGain = audioCtx.createGain();
-    lfo.frequency.value = 0.15 + Math.random()*0.1;
-    lfoGain.gain.value = 1.5;
-    lfo.connect(lfoGain);
-    lfoGain.connect(osc.frequency);
-    lfo.start();
-
-    oscillators.push({osc, gain, lfo});
+function startAudio(){
+  audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  analyser=audioCtx.createAnalyser();
+  analyser.fftSize=256;
+  const mg=audioCtx.createGain();mg.gain.value=.07;mg.connect(analyser);analyser.connect(audioCtx.destination);
+  // 4 voices — one per cognitive dimension
+  [{f:110,t:'sine',g:.4},{f:138.6,t:'sine',g:.3},{f:164.8,t:'triangle',g:.3},{f:220,t:'sine',g:.15}].forEach(d=>{
+    const o=audioCtx.createOscillator();const g=audioCtx.createGain();
+    o.type=d.t;o.frequency.value=d.f;g.gain.value=d.g;
+    o.connect(g);g.connect(mg);o.start();
+    const lfo=audioCtx.createOscillator();const lg=audioCtx.createGain();
+    lfo.frequency.value=.12+Math.random()*.1;lg.gain.value=1.5;
+    lfo.connect(lg);lg.connect(o.frequency);lfo.start();
+    oscs.push({o,g,lfo});
   });
-
-  // WIN chord layer — sustained bright chord
-  [440, 550, 660].forEach((f,i) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = 'sine';
-    osc.frequency.value = f;
-    gain.gain.value = 0.03;
-    osc.connect(gain);
-    gain.connect(masterGain);
-    osc.start();
-    oscillators.push({osc, gain});
+  // WIN sustain chord
+  [440,550,660,880].forEach(f=>{
+    const o=audioCtx.createOscillator();const g=audioCtx.createGain();
+    o.type='sine';o.frequency.value=f;g.gain.value=.025;
+    o.connect(g);g.connect(mg);o.start();oscs.push({o,g});
   });
-
-  audioOn = true;
-  document.getElementById('audio-btn').textContent = '♪ Sound ON';
-  document.getElementById('audio-btn').classList.add('on');
-  document.getElementById('audio-viz').classList.add('on');
-
-  vizCanvas = document.getElementById('audio-viz');
-  vizCanvas.width = window.innerWidth;
-  vizCanvas.height = 40;
-  vizCtx = vizCanvas.getContext('2d');
+  audioOn=true;
+  document.getElementById('abtn').classList.add('on');
+  document.getElementById('abtn').textContent='♪ ON';
+  document.getElementById('aviz').classList.add('on');
   drawViz();
 }
-
-function stopAudio() {
-  oscillators.forEach(o => { try{ o.osc.stop(); o.lfo && o.lfo.stop(); }catch(e){} });
-  oscillators = [];
-  audioCtx.close();
-  audioOn = false;
-  document.getElementById('audio-btn').textContent = '♪ Sound OFF';
-  document.getElementById('audio-btn').classList.remove('on');
-  document.getElementById('audio-viz').classList.remove('on');
+function stopAudio(){
+  oscs.forEach(x=>{try{x.o.stop();x.lfo&&x.lfo.stop();}catch(e){}});
+  oscs=[];audioCtx.close();audioOn=false;
+  document.getElementById('abtn').classList.remove('on');
+  document.getElementById('abtn').textContent='♪ Sound';
+  document.getElementById('aviz').classList.remove('on');
 }
-
-function drawViz() {
-  if(!audioOn) return;
-  requestAnimationFrame(drawViz);
-  const buf = new Uint8Array(analyser.frequencyBinCount);
-  analyser.getByteFrequencyData(buf);
-  vizCtx.clearRect(0,0,vizCanvas.width,vizCanvas.height);
-  const barW = vizCanvas.width / buf.length;
-  buf.forEach((v,i) => {
-    const h = v/255*36;
-    const hue = 200 + i/buf.length*80;
-    vizCtx.fillStyle = `hsla(${hue},70%,50%,0.6)`;
-    vizCtx.fillRect(i*barW, 40-h, barW-1, h);
+function playWinChord(){
+  if(!audioCtx)return;
+  const mg=audioCtx.createGain();mg.gain.value=.15;mg.connect(audioCtx.destination);
+  [440,550,660,825,1100].forEach((f,i)=>{
+    const o=audioCtx.createOscillator();const g=audioCtx.createGain();
+    o.type='sine';o.frequency.value=f;g.gain.value=.06;
+    o.connect(g);g.connect(mg);o.start();
+    g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+3);
+    o.stop(audioCtx.currentTime+3);
   });
 }
+function drawViz(){
+  if(!audioOn)return;
+  requestAnimationFrame(drawViz);
+  const c=document.getElementById('aviz');
+  const ctx=c.getContext('2d');
+  c.width=window.innerWidth;c.height=36;
+  const buf=new Uint8Array(analyser.frequencyBinCount);
+  analyser.getByteFrequencyData(buf);
+  ctx.clearRect(0,0,c.width,c.height);
+  const bw=c.width/buf.length;
+  buf.forEach((v,i)=>{const h=v/255*32;const hue=190+i/buf.length*90;ctx.fillStyle=`hsla(${hue},70%,55%,.55)`;ctx.fillRect(i*bw,36-h,bw-1,h);});
+}
 
-// ============================================================
-// INIT
-// ============================================================
-window.addEventListener('load', () => {
-  initThree();
-  // Animate R33 bar
-  setTimeout(() => { document.getElementById('r33-bar').style.width = '82%'; }, 500);
-});
-
-window.addEventListener('resize', () => {
-  if(renderer) {
-    const canvas = document.getElementById('three-canvas');
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    camera.aspect = canvas.clientWidth/canvas.clientHeight;
-    camera.updateProjectionMatrix();
-  }
+window.addEventListener('resize',()=>{
+  if(renderer){const c=document.getElementById('cv-three');renderer.setSize(c.clientWidth,c.clientHeight);camera.aspect=c.clientWidth/c.clientHeight;camera.updateProjectionMatrix();}
+  resize();spawnParticles();
 });
 </script>
 </body>
