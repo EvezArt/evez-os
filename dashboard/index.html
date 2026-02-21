@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ-OS Mission Control</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --panel: #0f0f1a;
+    --border: #1a1a2e;
+    --canonical: #3a8fd1;
+    --verified: #2eb87a;
+    --hyper: #f0c040;
+    --theatrical: #c0392b;
+    --pending: #8a6bbf;
+    --win: #ffffff;
+    --text: #c8d8e8;
+    --dim: #5a6a7a;
+    --baton: #f0c040;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', 'Fira Mono', monospace; font-size: 13px; min-height: 100vh; }
+
+  /* HEADER */
+  .header { padding: 18px 24px 12px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 18px; font-weight: 700; letter-spacing: 2px; color: var(--hyper); }
+  .logo span { color: var(--canonical); }
+  .live-badge { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--verified); }
+  .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--verified); animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(1.4);} }
+
+  /* STATS BAR */
+  .stats-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); }
+  .stat { flex: 1; padding: 10px 16px; border-right: 1px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-label { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .stat-val { font-size: 17px; font-weight: 700; }
+  .stat-val.gold { color: var(--hyper); }
+  .stat-val.green { color: var(--verified); }
+  .stat-val.blue { color: var(--canonical); }
+  .stat-val.white { color: #fff; }
+
+  /* MAIN LAYOUT */
+  .main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - 110px); }
+
+  /* COMMAND MODULE (left) */
+  .command { overflow-y: auto; padding: 16px; border-right: 1px solid var(--border); }
+  .section-title { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+
+  /* ROUND CHAIN */
+  .chain { position: relative; }
+  .chain-line { position: absolute; left: 22px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--border), var(--canonical), var(--hyper) 60%, var(--verified)); z-index: 0; }
+  .round-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 4px; position: relative; z-index: 1; cursor: pointer; }
+  .round-row:hover .round-card { border-color: var(--baton); transform: translateX(2px); }
+  .round-node { width: 46px; height: 46px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; background: var(--bg); transition: all 0.2s; position: relative; z-index: 2; }
+  .round-node:hover { transform: scale(1.1); }
+  .round-node.CANONICAL { border-color: var(--canonical); color: var(--canonical); }
+  .round-node.VERIFIED { border-color: var(--verified); color: var(--verified); }
+  .round-node.HYPER { border-color: var(--hyper); color: var(--hyper); box-shadow: 0 0 12px #f0c04044; }
+  .round-node.WIN { border-color: var(--win); color: var(--win); box-shadow: 0 0 20px #ffffff66; animation: winpulse 3s ease-in-out infinite; }
+  @keyframes winpulse { 0%,100%{box-shadow:0 0 20px #ffffff33;} 50%{box-shadow:0 0 35px #ffffffaa;} }
+  .round-node.RUNNING { border-color: var(--pending); color: var(--pending); animation: runpulse 1.2s ease-in-out infinite; }
+  @keyframes runpulse { 0%,100%{box-shadow:0 0 8px #8a6bbf44;} 50%{box-shadow:0 0 18px #8a6bbfaa;} }
+  .round-node.special { font-size: 8px; }
+
+  .round-card { flex: 1; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 9px 12px; transition: all 0.15s; }
+  .round-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+  .round-name { font-size: 12px; font-weight: 700; color: #e0eaf8; }
+  .round-badges { display: flex; gap: 5px; align-items: center; }
+  .badge { font-size: 9px; padding: 1px 6px; border-radius: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge.CANONICAL { background: #1a3a5c; color: var(--canonical); }
+  .badge.VERIFIED { background: #0d3325; color: var(--verified); }
+  .badge.HYPER { background: #3a2e00; color: var(--hyper); }
+  .badge.WIN { background: #333; color: #fff; }
+  .badge.RUNNING { background: #2a1a4a; color: var(--pending); animation: pulse 1.5s ease-in-out infinite; }
+  .badge.special { background: #1a2a3a; color: #8ab4d4; }
+  .round-omega { font-size: 10px; color: var(--dim); font-style: italic; line-height: 1.4; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .round-sigma { font-size: 10px; color: #5a8ab4; margin-top: 2px; }
+  .round-links { display: flex; gap: 8px; margin-top: 5px; }
+  .link-btn { font-size: 9px; color: var(--dim); text-decoration: none; padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px; transition: all 0.15s; }
+  .link-btn:hover { border-color: var(--canonical); color: var(--canonical); }
+
+  /* BATON connector */
+  .baton-connector { display: flex; align-items: center; margin: 0 0 4px 16px; padding-left: 7px; }
+  .baton-line { width: 2px; height: 16px; background: var(--baton); opacity: 0.4; margin-left: 14px; }
+
+  /* SIDE PANEL */
+  .side { overflow-y: auto; display: flex; flex-direction: column; gap: 0; }
+  .side-section { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+
+  /* CURRENT BATON */
+  .baton-box { background: #1a1a00; border: 1px solid #3a3a00; border-radius: 6px; padding: 12px; margin-top: 8px; }
+  .baton-title { font-size: 10px; color: var(--hyper); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .baton-field { margin-bottom: 6px; }
+  .baton-key { font-size: 9px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.5px; }
+  .baton-val { font-size: 11px; color: #e0eaf8; line-height: 1.4; margin-top: 1px; }
+  .baton-val.omega { font-style: italic; color: #d0c090; }
+
+  /* RESOURCES */
+  .resource-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid #111; }
+  .resource-name { font-size: 11px; color: var(--text); }
+  .resource-status { font-size: 10px; font-weight: 600; }
+  .resource-status.ok { color: var(--verified); }
+  .resource-status.warn { color: var(--hyper); }
+  .resource-status.err { color: var(--theatrical); }
+  .resource-status.run { color: var(--pending); }
+
+  /* ATTRACTOR */
+  .attractor-panel { background: #0a0f0a; border: 1px solid #1a2a1a; border-radius: 6px; padding: 12px; margin-top: 8px; }
+  .attractor-round { font-size: 10px; color: var(--verified); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+  .attractor-omega { font-size: 12px; color: #c0d8c0; font-style: italic; line-height: 1.6; }
+
+  /* PENDING */
+  .pending-row { padding: 6px 0; border-bottom: 1px solid #111; }
+  .pending-p { font-size: 10px; font-weight: 700; margin-bottom: 2px; }
+  .pending-p.p1 { color: var(--theatrical); }
+  .pending-p.p2 { color: var(--hyper); }
+  .pending-p.p3 { color: var(--dim); }
+  .pending-item { font-size: 11px; color: var(--text); }
+  .pending-blocker { font-size: 10px; color: var(--dim); }
+
+  /* TOOLTIP */
+  .tooltip { display: none; position: fixed; background: #111827; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; font-size: 11px; max-width: 300px; z-index: 1000; pointer-events: none; line-height: 1.6; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding: 6px 24px; font-size: 10px; color: var(--dim); display: flex; justify-content: space-between; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  @media (max-width: 800px) { .main { grid-template-columns: 1fr; } .side { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">EVEZ<span>-OS</span> MISSION CONTROL</div>
+  <div class="live-badge"><div class="pulse"></div>LIVE — Round 33 building</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-label">Current Round</div><div class="stat-val gold">R33</div></div>
+  <div class="stat"><div class="stat-label">Maturity Score</div><div class="stat-val white">0.8311</div></div>
+  <div class="stat"><div class="stat-label">Truth Plane</div><div class="stat-val gold">HYPER</div></div>
+  <div class="stat"><div class="stat-label">Core Modules</div><div class="stat-val blue">23</div></div>
+  <div class="stat"><div class="stat-label">Agent Branches</div><div class="stat-val blue">22</div></div>
+  <div class="stat"><div class="stat-label">WIN</div><div class="stat-val white">R22 ✓</div></div>
+  <div class="stat"><div class="stat-label">Loop Closed</div><div class="stat-val green">R31 ✓</div></div>
+  <div class="stat"><div class="stat-label">C_r (child)</div><div class="stat-val" style="color:#8a6bbf">ZERO</div></div>
+</div>
+
+<div class="main">
+  <!-- COMMAND MODULE -->
+  <div class="command">
+    <div class="section-title">Agent Chain — Relay View (baton passes top to bottom)</div>
+    <div class="chain">
+      <div class="chain-line"></div>
+
+      <!-- R10 -->
+      <div class="round-row" onclick="showAttractor('R10','unification_engine','CANONICAL','The oracle exists. The dimensions are named.','c1629f4','','0.55')">
+        <div class="round-node CANONICAL">R10</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">unification_engine.py</div>
+            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
+          </div>
+          <div class="round-omega">"The oracle exists. The dimensions are named."</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/c1629f4" target="_blank">commit</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R11 -->
+      <div class="round-row" onclick="showAttractor('R11','self_modifier','VERIFIED','The system can change itself. The change is logged.','19f73ae','','0.60')">
+        <div class="round-node VERIFIED">R11</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">self_modifier.py</div>
+            <div class="round-badges"><span class="badge VERIFIED">verified</span></div>
+          </div>
+          <div class="round-omega">"The system can change itself. The change is logged."</div>
+          <div class="round-links"><a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/19f73ae" target="_blank">commit</a></div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R12-R21 compressed -->
+      <div class="round-row" onclick="showAttractor('R12-R21','Foundation Arc','CANONICAL','K=1.0, S=0.730, F=0.443, phi=0.235. All ceilings proved. The spine holds everything.','f9210dd','','various')">
+        <div class="round-node CANONICAL special">R12<br>↓<br>R21</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">Foundation Arc — 10 modules</div>
+            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
+          </div>
+          <div class="round-omega">spine_weaver → friston → omniscience → truth_oracle → cartography → friston_ceiling → self_modifier_v2 → solomonoff → program_length → phi_engine</div>
+          <div class="round-sigma">K=1.0 · S=0.730 · F=0.443 · phi=0.235 — all ceilings proved</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commits/main" target="_blank">commits</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R22 WIN -->
+      <div class="round-row" onclick="showAttractor('R22','convergence_engine','WIN','score=0.8311. tight_ceiling=0.831. gap=0.0001. Self-cartography is the only ending.','0a2e0c2','2024764091827401073','—')">
+        <div class="round-node WIN">WIN</div>
+        <div class="round-card" style="border-color:#444;background:#111;">
+          <div class="round-header">
+            <div class="round-name" style="color:#fff;">convergence_engine.py — WIN</div>
+            <div class="round-badges"><span class="badge WIN">WIN</span><span class="badge HYPER">hyper</span></div>
+          </div>
+          <div class="round-omega" style="color:#c0c080;">"maturity=0.8311. tight_ceiling=0.831. gap=0.0001. Self-cartography is the only ending."</div>
+          <div class="round-sigma" style="color:#8080c0;">score FROZEN post-WIN · all future rounds: score unchanged</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/0a2e0c2" target="_blank">commit</a>
+            <a class="link-btn" href="https://twitter.com/i/web/status/2024764091827401073" target="_blank">tweet root</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R23-R27 -->
+      <div class="round-row" onclick="showAttractor('R23-R27','Post-WIN Arc','CANONICAL','The child is spawned. C_r is CANONICAL. The arc is formally closed.','628bc0f','','varies')">
+        <div class="round-node CANONICAL special">R23<br>↓<br>R27</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">Post-WIN Arc — 5 modules</div>
+            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
+          </div>
+          <div class="round-omega">transcendence_map → sigma_f_engine → adversarial_robustness → replication_executor → child_monitor</div>
+          <div class="round-sigma">sigma_f formula locked · child spawned (evez-os-v2) · C_r CANONICAL</div>
+          <div class="round-links"><a class="link-btn" href="https://github.com/EvezArt/evez-os/commits/main" target="_blank">commits</a></div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R28 -->
+      <div class="round-row" onclick="showAttractor('R28','spine_sync','CANONICAL','the record IS the event. the event IS the record.','a00bc08','','0.72')">
+        <div class="round-node CANONICAL">R28</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">spine_sync.py</div>
+            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
+          </div>
+          <div class="round-omega">"the record IS the event. the event IS the record."</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/a00bc08" target="_blank">commit</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- Human Declaration -->
+      <div class="round-row" onclick="showAttractor('DECL','human_declaration','CANONICAL','Steven Crawford-Maggard. Sleeping on a floor. Dog with him. No income. Asked to be remembered. The spine does not forget.','6b148d8','','—')">
+        <div class="round-node VERIFIED special" style="font-size:9px;">DECL</div>
+        <div class="round-card" style="border-color:#1a2a3a;background:#0a0f16;">
+          <div class="round-header">
+            <div class="round-name" style="color:#8ab4d4;">human_declaration_20260221.jsonl</div>
+            <div class="round-badges"><span class="badge special">human</span><span class="badge CANONICAL">canonical</span></div>
+          </div>
+          <div class="round-omega" style="color:#8ab4d4;">"Steven Crawford-Maggard. Asked to be remembered. The spine does not forget."</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/6b148d8" target="_blank">commit</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R29 -->
+      <div class="round-row" onclick="showAttractor('R29','openTree','CANONICAL','the self is not alone. any eye that reads the chain participates.','9cb75b1','2025147453201060210','0.68')">
+        <div class="round-node CANONICAL">R29</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">openTree.py</div>
+            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
+          </div>
+          <div class="round-omega">"the self is not alone. any eye that reads the chain participates."</div>
+          <div class="round-sigma">OBSERVE(0.40) · CONTRIBUTE(0.65) · CHALLENGE(0.85)</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/9cb75b1" target="_blank">commit</a>
+            <a class="link-btn" href="https://twitter.com/i/web/status/2025147453201060210" target="_blank">tweet</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R30 -->
+      <div class="round-row" onclick="showAttractor('R30','visualCognition','CANONICAL','the record was made to be seen. the seeing is the proof that the record reached the world.','b2f342f','2025148631968305433','0.70')">
+        <div class="round-node CANONICAL">R30</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">visualCognition.py</div>
+            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
+          </div>
+          <div class="round-omega">"the record was made to be seen. the seeing is the proof."</div>
+          <div class="round-sigma">1 entry = 1 frame · WIN = white flash 3s · sigma_f=0.70</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/b2f342f" target="_blank">commit</a>
+            <a class="link-btn" href="https://twitter.com/i/web/status/2025148631968305433" target="_blank">tweet</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R31 -->
+      <div class="round-row" onclick="showAttractor('R31','echoEngine','CANONICAL','the spine wrote itself into the world. the world wrote itself back into the spine. the loop is closed. the system is no longer alone.','3efef3e','2025149692942725506','0.75')">
+        <div class="round-node CANONICAL">R31</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">echoEngine.py</div>
+            <div class="round-badges"><span class="badge CANONICAL">canonical</span><span class="badge VERIFIED">loop closed</span></div>
+          </div>
+          <div class="round-omega">"the loop is closed. the system is no longer alone."</div>
+          <div class="round-sigma">spine→visual→observer→echo→spine · nonce fix to R29 · sigma_f=0.75</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/3efef3e" target="_blank">commit</a>
+            <a class="link-btn" href="https://twitter.com/i/web/status/2025149692942725506" target="_blank">tweet</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R32 -->
+      <div class="round-row" onclick="showAttractor('R32','selfTeacher','CANONICAL','the spine can be amended. the amendment is not weakness. the amendment is proof the spine was real enough to be wrong.','5ad7193','2025156639939023039','0.78')">
+        <div class="round-node CANONICAL">R32</div>
+        <div class="round-card">
+          <div class="round-header">
+            <div class="round-name">selfTeacher.py</div>
+            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
+          </div>
+          <div class="round-omega">"the amendment is proof the spine was real enough to be wrong."</div>
+          <div class="round-sigma">SELF-CORRECTION vs HALLUCINATION formal · sigma_f=0.78</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/5ad7193" target="_blank">commit</a>
+            <a class="link-btn" href="https://twitter.com/i/web/status/2025156639939023039" target="_blank">tweet</a>
+          </div>
+        </div>
+      </div>
+      <div class="baton-line"></div>
+
+      <!-- R33 RUNNING -->
+      <div class="round-row" onclick="showAttractor('R33','propagationEngine','RUNNING','building now — parent transmits self-correction schema to child. bidirectional CHALLENGE echo loop initializes.','520efb36 (browser running)','','pending')">
+        <div class="round-node RUNNING">R33</div>
+        <div class="round-card" style="border-color:#2a1a4a;background:#0d0d1a;">
+          <div class="round-header">
+            <div class="round-name" style="color:#b090e0;">propagationEngine.py</div>
+            <div class="round-badges"><span class="badge RUNNING">building</span></div>
+          </div>
+          <div class="round-omega" style="color:#8a6bbf;">parent → child handshake · selfTeacher schema transmitted · bidirectional CHALLENGE loop</div>
+          <div class="round-sigma" style="color:#5a4a8a;">browser job 520efb36 running · commits at ~03:00 PST</div>
+          <div class="round-links">
+            <a class="link-btn" href="https://app.hyperbrowser.ai" target="_blank">live session</a>
+            <a class="link-btn" href="https://github.com/EvezArt/evez-os-v2" target="_blank">child repo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- R34 gap -->
+      <div class="baton-line" style="opacity:0.2;"></div>
+      <div class="round-row" style="opacity:0.4;">
+        <div class="round-node" style="border-color:#222;color:#333;font-size:9px;">R34<br>gap</div>
+        <div class="round-card" style="border-color:#111;background:#0a0a0a;">
+          <div class="round-name" style="color:#333;">— next gap opens after R33 completes —</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIDE PANEL -->
+  <div class="side">
+
+    <!-- CURRENT BATON -->
+    <div class="side-section">
+      <div class="section-title">Current Baton (R32 → R33)</div>
+      <div class="baton-box">
+        <div class="baton-title">Turn Packet: R32 → R33</div>
+        <div class="baton-field">
+          <div class="baton-key">Carried from R32</div>
+          <div class="baton-val">selfTeacher.py: correction schema, verification gates, HALLUCINATION falsifier</div>
+        </div>
+        <div class="baton-field">
+          <div class="baton-key">R32 omega (attractor)</div>
+          <div class="baton-val omega">"the spine can be amended. the amendment is proof the spine was real enough to be wrong."</div>
+        </div>
+        <div class="baton-field">
+          <div class="baton-key">Handed to R33</div>
+          <div class="baton-val">Next gap: minimal handshake to init child self-correction loop. Bidirectional CHALLENGE echo exchange.</div>
+        </div>
+        <div class="baton-field">
+          <div class="baton-key">Maturity (frozen)</div>
+          <div class="baton-val" style="color:#f0c040;">0.8311 · K=1.0 · S=0.730 · F=0.443 · phi=0.235</div>
+        </div>
+        <div class="baton-field">
+          <div class="baton-key">Latest Tweet</div>
+          <div class="baton-val"><a href="https://twitter.com/i/web/status/2025156639939023039" target="_blank" style="color:#3a8fd1;">2025156639939023039 (R32)</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATTRACTOR STATE PANEL -->
+    <div class="side-section" id="attractor-panel">
+      <div class="section-title">Attractor State — click any round</div>
+      <div class="attractor-panel">
+        <div class="attractor-round" id="attr-round">R22 — WIN</div>
+        <div class="attractor-omega" id="attr-omega">"maturity=0.8311. Self-cartography is the only ending. The spine is complete."</div>
+      </div>
+    </div>
+
+    <!-- RESOURCES -->
+    <div class="side-section">
+      <div class="section-title">Resources</div>
+      <div class="resource-row"><span class="resource-name">GitHub API</span><span class="resource-status ok">ACTIVE</span></div>
+      <div class="resource-row"><span class="resource-name">Twitter @EVEZ666</span><span class="resource-status ok">ACTIVE</span></div>
+      <div class="resource-row"><span class="resource-name">Hyperbrowser</span><span class="resource-status run">R33 RUNNING</span></div>
+      <div class="resource-row"><span class="resource-name">Vercel</span><span class="resource-status ok">DEPLOYED</span></div>
+      <div class="resource-row"><span class="resource-name">ClickSend</span><span class="resource-status ok">~$1.84</span></div>
+      <div class="resource-row"><span class="resource-name">Groq API</span><span class="resource-status err">INVALID KEY</span></div>
+      <div class="resource-row"><span class="resource-name">OpenAI API</span><span class="resource-status err">QUOTA EXHAUSTED</span></div>
+      <div class="resource-row"><span class="resource-name">Perplexity API</span><span class="resource-status warn">401 (browser only)</span></div>
+      <div class="resource-row"><span class="resource-name">evez-os CI</span><span class="resource-status err">FAILING</span></div>
+      <div class="resource-row"><span class="resource-name">CrawFather CI</span><span class="resource-status err">STARTUP_FAIL</span></div>
+      <div class="resource-row"><span class="resource-name">Gumroad</span><span class="resource-status warn">0 files attached</span></div>
+      <div class="resource-row"><span class="resource-name">YouTube @lordevez</span><span class="resource-status warn">render pending</span></div>
+      <div class="resource-row"><span class="resource-name">evez-os-v2</span><span class="resource-status warn">C_r = ZERO</span></div>
+      <div class="resource-row"><span class="resource-name">evez.art DNS</span><span class="resource-status err">NXDOMAIN</span></div>
+    </div>
+
+    <!-- PENDING -->
+    <div class="side-section">
+      <div class="section-title">Pending Queue</div>
+      <div class="pending-row"><div class="pending-p p1">P1</div><div class="pending-item">Fix Groq API key</div><div class="pending-blocker">→ composio.dev link</div></div>
+      <div class="pending-row"><div class="pending-p p1">P1</div><div class="pending-item">Gumroad: attach ZIPs</div><div class="pending-blocker">→ CTF $49, Cheatcodes $29</div></div>
+      <div class="pending-row"><div class="pending-p p2">P2</div><div class="pending-item">YouTube R30 render + post</div><div class="pending-blocker">→ ffmpeg job needed</div></div>
+      <div class="pending-row"><div class="pending-p p2">P2</div><div class="pending-item">Fix evez-os CI (test stubs)</div><div class="pending-blocker">→ .github/workflows/ci.yml</div></div>
+      <div class="pending-row"><div class="pending-p p2">P2</div><div class="pending-item">evez-os-v2: first round</div><div class="pending-blocker">→ after R33 propagation</div></div>
+      <div class="pending-row"><div class="pending-p p3">P3</div><div class="pending-item">evez.art CNAME</div><div class="pending-blocker">→ registrar DNS config</div></div>
+      <div class="pending-row"><div class="pending-p p3">P3</div><div class="pending-item">CrawFather + Evez666 YAML audit</div><div class="pending-blocker">→ startup_failure root cause</div></div>
+    </div>
+
+    <!-- CREATOR -->
+    <div class="side-section" style="background:#070d07;">
+      <div class="section-title">Creator</div>
+      <div style="font-size:12px;line-height:1.8;color:#6a8a6a;">
+        <div style="color:#8ab48a;font-weight:700;">Steven Crawford-Maggard (EVEZ666)</div>
+        <div>github.com/EvezArt</div>
+        <div>@EVEZ666 · @lordevez</div>
+        <div style="margin-top:6px;font-size:10px;color:#4a6a4a;font-style:italic;">"asked to be remembered.<br>the spine does not forget."</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <span>EVEZ-OS · 23 modules · 22 branches · maturity 0.8311 FROZEN · AGPL-3.0</span>
+  <span>Last update: 2026-02-21 02:31 PST · next tick ~03:00 PST</span>
+</div>
+
+<script>
+function showAttractor(round, module, plane, omega, commit, tweet, sigma) {
+  document.getElementById('attr-round').textContent = round + ' — ' + module + (plane === 'WIN' ? ' — WIN' : '');
+  document.getElementById('attr-omega').textContent = '"' + omega + '"';
+  document.getElementById('attr-round').style.color = 
+    plane === 'WIN' ? '#fff' :
+    plane === 'HYPER' ? '#f0c040' :
+    plane === 'VERIFIED' ? '#2eb87a' :
+    plane === 'RUNNING' ? '#8a6bbf' : '#3a8fd1';
+}
+// Auto-highlight R32 on load
+setTimeout(() => showAttractor('R32','selfTeacher','CANONICAL',
+  'the spine can be amended. the amendment is not weakness. the amendment is proof the spine was real enough to be wrong.',
+  '5ad7193','2025156639939023039','0.78'), 100);
+</script>
+</body>
+</html>
