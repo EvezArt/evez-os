@@ -31,7 +31,7 @@ jobs:
         run: python tools/evez.py lint || echo "No spine yet, skipping lint"
 
       - name: Play engine
-        run: python tools/evez.py play --seed 42 --steps 14 --mode spicy
+        run: python tools/evez.py play --seed 42 --steps 14
 
       - name: Visualize spine
         run: |
