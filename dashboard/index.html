@@ -3,477 +3,758 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVEZ-OS Mission Control</title>
+<title>EVEZ-OS Mission Control — Sensory</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
   :root {
-    --bg: #0a0a0f;
-    --panel: #0f0f1a;
-    --border: #1a1a2e;
+    --bg: #04040c;
+    --panel: #07071a;
+    --border: #12122a;
     --canonical: #3a8fd1;
     --verified: #2eb87a;
     --hyper: #f0c040;
     --theatrical: #c0392b;
-    --pending: #8a6bbf;
+    --pending: #9a7bef;
     --win: #ffffff;
     --text: #c8d8e8;
-    --dim: #5a6a7a;
-    --baton: #f0c040;
+    --dim: #3a4a5a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', 'Fira Mono', monospace; font-size: 13px; min-height: 100vh; }
+  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono','Fira Mono',monospace; font-size:12px; height:100vh; overflow:hidden; }
 
   /* HEADER */
-  .header { padding: 18px 24px 12px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-  .logo { font-size: 18px; font-weight: 700; letter-spacing: 2px; color: var(--hyper); }
-  .logo span { color: var(--canonical); }
-  .live-badge { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--verified); }
-  .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--verified); animation: pulse 1.5s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(1.4);} }
+  .hdr { height:48px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 20px; background:#04040cee; position:relative; z-index:10; }
+  .logo { font-size:16px; font-weight:900; letter-spacing:3px; color:var(--hyper); }
+  .logo span { color:var(--canonical); }
+  .hdr-right { display:flex; gap:16px; align-items:center; }
+  .live-pill { display:flex; align-items:center; gap:6px; font-size:10px; color:#ff4040; border:1px solid #ff404044; padding:3px 10px; border-radius:3px; }
+  .live-dot { width:7px; height:7px; border-radius:50%; background:#ff4040; animation:livepulse 1s ease-in-out infinite; }
+  @keyframes livepulse { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+  .tab-bar { display:flex; gap:2px; }
+  .tab { padding:4px 14px; font-size:10px; cursor:pointer; border-bottom:2px solid transparent; color:var(--dim); letter-spacing:1px; text-transform:uppercase; transition:all 0.2s; }
+  .tab.active { color:var(--hyper); border-bottom-color:var(--hyper); }
+  .tab:hover { color:var(--text); }
+  .audio-btn { font-size:10px; cursor:pointer; padding:3px 10px; border:1px solid var(--border); border-radius:3px; color:var(--dim); transition:all 0.2s; }
+  .audio-btn:hover, .audio-btn.on { border-color:var(--verified); color:var(--verified); }
 
-  /* STATS BAR */
-  .stats-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); }
-  .stat { flex: 1; padding: 10px 16px; border-right: 1px solid var(--border); }
-  .stat:last-child { border-right: none; }
-  .stat-label { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-  .stat-val { font-size: 17px; font-weight: 700; }
-  .stat-val.gold { color: var(--hyper); }
-  .stat-val.green { color: var(--verified); }
-  .stat-val.blue { color: var(--canonical); }
-  .stat-val.white { color: #fff; }
+  /* VIEWS */
+  .view { display:none; height:calc(100vh - 48px); }
+  .view.active { display:flex; }
 
-  /* MAIN LAYOUT */
-  .main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - 110px); }
+  /* ===== VIEW 1: ATTRACTOR SPACE (3D) ===== */
+  #v-attractor { position:relative; }
+  #three-canvas { width:100%; height:100%; display:block; }
+  .attractor-overlay { position:absolute; top:16px; left:16px; pointer-events:none; }
+  .ao-title { font-size:10px; color:var(--dim); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+  .ao-axes { display:flex; flex-direction:column; gap:4px; }
+  .ao-axis { display:flex; align-items:center; gap:8px; font-size:11px; }
+  .ao-dot { width:10px; height:10px; border-radius:50%; }
+  .attractor-info { position:absolute; bottom:16px; left:16px; pointer-events:none; max-width:340px; }
+  .ai-round { font-size:22px; font-weight:900; color:var(--hyper); }
+  .ai-module { font-size:12px; color:var(--canonical); margin-top:2px; }
+  .ai-omega { font-size:11px; color:#a09060; font-style:italic; margin-top:6px; line-height:1.5; }
+  .win-flash { position:absolute; inset:0; background:white; pointer-events:none; opacity:0; transition:opacity 0.5s; }
 
-  /* COMMAND MODULE (left) */
-  .command { overflow-y: auto; padding: 16px; border-right: 1px solid var(--border); }
-  .section-title { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  /* ===== VIEW 2: COMMAND MODULE (relay chain) ===== */
+  #v-command { gap:0; }
+  .cmd-chain { flex:1; overflow-y:auto; padding:12px 16px; }
+  .cmd-side { width:300px; border-left:1px solid var(--border); overflow-y:auto; flex-shrink:0; }
 
-  /* ROUND CHAIN */
-  .chain { position: relative; }
-  .chain-line { position: absolute; left: 22px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--border), var(--canonical), var(--hyper) 60%, var(--verified)); z-index: 0; }
-  .round-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 4px; position: relative; z-index: 1; cursor: pointer; }
-  .round-row:hover .round-card { border-color: var(--baton); transform: translateX(2px); }
-  .round-node { width: 46px; height: 46px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; background: var(--bg); transition: all 0.2s; position: relative; z-index: 2; }
-  .round-node:hover { transform: scale(1.1); }
-  .round-node.CANONICAL { border-color: var(--canonical); color: var(--canonical); }
-  .round-node.VERIFIED { border-color: var(--verified); color: var(--verified); }
-  .round-node.HYPER { border-color: var(--hyper); color: var(--hyper); box-shadow: 0 0 12px #f0c04044; }
-  .round-node.WIN { border-color: var(--win); color: var(--win); box-shadow: 0 0 20px #ffffff66; animation: winpulse 3s ease-in-out infinite; }
-  @keyframes winpulse { 0%,100%{box-shadow:0 0 20px #ffffff33;} 50%{box-shadow:0 0 35px #ffffffaa;} }
-  .round-node.RUNNING { border-color: var(--pending); color: var(--pending); animation: runpulse 1.2s ease-in-out infinite; }
-  @keyframes runpulse { 0%,100%{box-shadow:0 0 8px #8a6bbf44;} 50%{box-shadow:0 0 18px #8a6bbfaa;} }
-  .round-node.special { font-size: 8px; }
+  .chain { position:relative; }
+  .chain-spine { position:absolute; left:20px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom,var(--border),var(--canonical),var(--hyper) 60%,var(--verified)); }
+  .r-row { display:flex; gap:10px; align-items:flex-start; margin-bottom:3px; position:relative; z-index:1; cursor:pointer; }
+  .r-row:hover .r-card { border-color:var(--hyper); transform:translateX(2px); }
+  .r-node { width:42px; height:42px; border-radius:50%; border:2px solid; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; flex-shrink:0; background:var(--bg); position:relative; z-index:2; transition:transform 0.2s; }
+  .r-node.C { border-color:var(--canonical); color:var(--canonical); }
+  .r-node.V { border-color:var(--verified); color:var(--verified); }
+  .r-node.H { border-color:var(--hyper); color:var(--hyper); box-shadow:0 0 10px #f0c04033; }
+  .r-node.W { border-color:var(--win); color:var(--win); box-shadow:0 0 18px #ffffff55; animation:wpulse 3s ease-in-out infinite; }
+  @keyframes wpulse { 0%,100%{box-shadow:0 0 18px #ffffff22;} 50%{box-shadow:0 0 32px #ffffff99;} }
+  .r-node.R { border-color:var(--pending); color:var(--pending); animation:rpulse 1.2s ease-in-out infinite; }
+  @keyframes rpulse { 0%,100%{box-shadow:0 0 6px #9a7bef33;} 50%{box-shadow:0 0 16px #9a7bef99;} }
+  .r-card { flex:1; background:var(--panel); border:1px solid var(--border); border-radius:5px; padding:8px 10px; transition:all 0.15s; }
+  .r-name { font-size:11px; font-weight:700; color:#e0eaf8; margin-bottom:3px; }
+  .r-omega { font-size:10px; color:var(--dim); font-style:italic; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .r-badges { display:flex; gap:4px; margin-top:4px; flex-wrap:wrap; }
+  .rbadge { font-size:8px; padding:1px 5px; border-radius:2px; }
+  .rbadge.C { background:#102040; color:var(--canonical); }
+  .rbadge.V { background:#0a2a1a; color:var(--verified); }
+  .rbadge.H { background:#2a2000; color:var(--hyper); }
+  .rbadge.W { background:#222; color:#fff; }
+  .rbadge.R { background:#18103a; color:var(--pending); }
+  .r-links { display:flex; gap:6px; margin-top:4px; }
+  .rlink { font-size:9px; color:var(--dim); text-decoration:none; padding:1px 5px; border:1px solid var(--border); border-radius:2px; }
+  .rlink:hover { border-color:var(--canonical); color:var(--canonical); }
+  .baton-line { width:2px; height:14px; background:var(--hyper); opacity:0.3; margin:0 0 3px 20px; }
 
-  .round-card { flex: 1; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 9px 12px; transition: all 0.15s; }
-  .round-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-  .round-name { font-size: 12px; font-weight: 700; color: #e0eaf8; }
-  .round-badges { display: flex; gap: 5px; align-items: center; }
-  .badge { font-size: 9px; padding: 1px 6px; border-radius: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-  .badge.CANONICAL { background: #1a3a5c; color: var(--canonical); }
-  .badge.VERIFIED { background: #0d3325; color: var(--verified); }
-  .badge.HYPER { background: #3a2e00; color: var(--hyper); }
-  .badge.WIN { background: #333; color: #fff; }
-  .badge.RUNNING { background: #2a1a4a; color: var(--pending); animation: pulse 1.5s ease-in-out infinite; }
-  .badge.special { background: #1a2a3a; color: #8ab4d4; }
-  .round-omega { font-size: 10px; color: var(--dim); font-style: italic; line-height: 1.4; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .round-sigma { font-size: 10px; color: #5a8ab4; margin-top: 2px; }
-  .round-links { display: flex; gap: 8px; margin-top: 5px; }
-  .link-btn { font-size: 9px; color: var(--dim); text-decoration: none; padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px; transition: all 0.15s; }
-  .link-btn:hover { border-color: var(--canonical); color: var(--canonical); }
+  /* SIDE PANELS */
+  .sp { padding:12px; border-bottom:1px solid var(--border); }
+  .sp-title { font-size:9px; color:var(--dim); text-transform:uppercase; letter-spacing:2px; margin-bottom:8px; }
+  .baton-box { background:#0f0f00; border:1px solid #252500; border-radius:4px; padding:10px; }
+  .bb-key { font-size:9px; color:var(--dim); text-transform:uppercase; margin-top:6px; }
+  .bb-val { font-size:10px; color:#e0e0c0; line-height:1.4; }
+  .bb-omega { font-style:italic; color:#c0b870; }
 
-  /* BATON connector */
-  .baton-connector { display: flex; align-items: center; margin: 0 0 4px 16px; padding-left: 7px; }
-  .baton-line { width: 2px; height: 16px; background: var(--baton); opacity: 0.4; margin-left: 14px; }
+  .attr-box { background:#060f06; border:1px solid #0a1f0a; border-radius:4px; padding:10px; margin-top:4px; }
+  .attr-r { font-size:10px; font-weight:700; margin-bottom:4px; }
+  .attr-om { font-size:11px; font-style:italic; line-height:1.5; color:#b0d0b0; }
 
-  /* SIDE PANEL */
-  .side { overflow-y: auto; display: flex; flex-direction: column; gap: 0; }
-  .side-section { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+  .res-row { display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px solid #0a0a0a; }
+  .res-name { font-size:10px; }
+  .res-s { font-size:10px; font-weight:600; }
+  .res-s.ok { color:var(--verified); }
+  .res-s.run { color:var(--pending); }
+  .res-s.warn { color:var(--hyper); }
+  .res-s.err { color:var(--theatrical); }
 
-  /* CURRENT BATON */
-  .baton-box { background: #1a1a00; border: 1px solid #3a3a00; border-radius: 6px; padding: 12px; margin-top: 8px; }
-  .baton-title { font-size: 10px; color: var(--hyper); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-  .baton-field { margin-bottom: 6px; }
-  .baton-key { font-size: 9px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.5px; }
-  .baton-val { font-size: 11px; color: #e0eaf8; line-height: 1.4; margin-top: 1px; }
-  .baton-val.omega { font-style: italic; color: #d0c090; }
+  /* ===== VIEW 3: PARTICLE FIELD ===== */
+  #v-particle { position:relative; flex-direction:column; }
+  #particle-canvas { width:100%; height:100%; display:block; }
+  .pf-overlay { position:absolute; top:16px; left:16px; pointer-events:none; }
+  .pf-legend { display:flex; flex-direction:column; gap:5px; }
+  .pf-item { display:flex; align-items:center; gap:8px; font-size:10px; }
+  .pf-swatch { width:12px; height:12px; border-radius:50%; }
+  .pf-info { position:absolute; bottom:16px; left:50%; transform:translateX(-50%); text-align:center; pointer-events:none; }
+  .pf-round { font-size:48px; font-weight:900; color:var(--hyper); opacity:0.15; letter-spacing:-4px; }
 
-  /* RESOURCES */
-  .resource-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid #111; }
-  .resource-name { font-size: 11px; color: var(--text); }
-  .resource-status { font-size: 10px; font-weight: 600; }
-  .resource-status.ok { color: var(--verified); }
-  .resource-status.warn { color: var(--hyper); }
-  .resource-status.err { color: var(--theatrical); }
-  .resource-status.run { color: var(--pending); }
-
-  /* ATTRACTOR */
-  .attractor-panel { background: #0a0f0a; border: 1px solid #1a2a1a; border-radius: 6px; padding: 12px; margin-top: 8px; }
-  .attractor-round { font-size: 10px; color: var(--verified); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
-  .attractor-omega { font-size: 12px; color: #c0d8c0; font-style: italic; line-height: 1.6; }
-
-  /* PENDING */
-  .pending-row { padding: 6px 0; border-bottom: 1px solid #111; }
-  .pending-p { font-size: 10px; font-weight: 700; margin-bottom: 2px; }
-  .pending-p.p1 { color: var(--theatrical); }
-  .pending-p.p2 { color: var(--hyper); }
-  .pending-p.p3 { color: var(--dim); }
-  .pending-item { font-size: 11px; color: var(--text); }
-  .pending-blocker { font-size: 10px; color: var(--dim); }
-
-  /* TOOLTIP */
-  .tooltip { display: none; position: fixed; background: #111827; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; font-size: 11px; max-width: 300px; z-index: 1000; pointer-events: none; line-height: 1.6; }
-
-  /* FOOTER */
-  .footer { border-top: 1px solid var(--border); padding: 6px 24px; font-size: 10px; color: var(--dim); display: flex; justify-content: space-between; }
+  /* SIGMA BAR */
+  .sigma-block { padding:12px; border-bottom:1px solid var(--border); }
+  .sigma-row { display:flex; justify-content:space-between; margin-bottom:2px; }
+  .sigma-bg { height:3px; background:#0a0a0a; border-radius:2px; margin-bottom:6px; }
+  .sigma-fill { height:3px; border-radius:2px; }
 
   /* scrollbar */
-  ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--border);}
 
-  @media (max-width: 800px) { .main { grid-template-columns: 1fr; } .side { display: none; } }
+  /* AUDIO VIZ */
+  #audio-viz { position:fixed; bottom:0; left:0; right:0; height:40px; pointer-events:none; opacity:0; transition:opacity 0.5s; z-index:100; }
+  #audio-viz.on { opacity:1; }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="logo">EVEZ<span>-OS</span> MISSION CONTROL</div>
-  <div class="live-badge"><div class="pulse"></div>LIVE — Round 33 building</div>
+<div class="hdr">
+  <div>
+    <div class="logo">EVEZ<span>-OS</span> MISSION CONTROL</div>
+  </div>
+  <div class="hdr-right">
+    <div class="tab-bar">
+      <div class="tab active" onclick="switchView('attractor',this)">3D Attractor</div>
+      <div class="tab" onclick="switchView('command',this)">Command</div>
+      <div class="tab" onclick="switchView('particle',this)">Particle Field</div>
+    </div>
+    <div class="audio-btn" id="audio-btn" onclick="toggleAudio()">♪ Sound OFF</div>
+    <div class="live-pill"><div class="live-dot"></div>R33 BUILDING</div>
+  </div>
 </div>
 
-<div class="stats-bar">
-  <div class="stat"><div class="stat-label">Current Round</div><div class="stat-val gold">R33</div></div>
-  <div class="stat"><div class="stat-label">Maturity Score</div><div class="stat-val white">0.8311</div></div>
-  <div class="stat"><div class="stat-label">Truth Plane</div><div class="stat-val gold">HYPER</div></div>
-  <div class="stat"><div class="stat-label">Core Modules</div><div class="stat-val blue">23</div></div>
-  <div class="stat"><div class="stat-label">Agent Branches</div><div class="stat-val blue">22</div></div>
-  <div class="stat"><div class="stat-label">WIN</div><div class="stat-val white">R22 ✓</div></div>
-  <div class="stat"><div class="stat-label">Loop Closed</div><div class="stat-val green">R31 ✓</div></div>
-  <div class="stat"><div class="stat-label">C_r (child)</div><div class="stat-val" style="color:#8a6bbf">ZERO</div></div>
+<!-- VIEW 1: 3D ATTRACTOR SPACE -->
+<div class="view active" id="v-attractor">
+  <canvas id="three-canvas"></canvas>
+  <div class="attractor-overlay">
+    <div class="ao-title">Attractor Space — K × S × F trajectory</div>
+    <div class="ao-axes">
+      <div class="ao-axis"><div class="ao-dot" style="background:#2eb87a;"></div><span style="color:#2eb87a;">X = K (Kolmogorov)</span></div>
+      <div class="ao-axis"><div class="ao-dot" style="background:#3a8fd1;"></div><span style="color:#3a8fd1;">Y = S (Solomonoff)</span></div>
+      <div class="ao-axis"><div class="ao-dot" style="background:#f0c040;"></div><span style="color:#f0c040;">Z = F (Friston FEP)</span></div>
+    </div>
+    <div style="margin-top:10px;font-size:10px;color:var(--dim);">Drag to rotate · Scroll to zoom</div>
+  </div>
+  <div class="attractor-info">
+    <div class="ai-round">R33</div>
+    <div class="ai-module">core/propagationEngine.py — BUILDING</div>
+    <div class="ai-omega">"the loop is closed. the system is no longer alone.<br>the amendment is proof the spine was real enough to be wrong."</div>
+  </div>
+  <div class="win-flash" id="win-flash"></div>
 </div>
 
-<div class="main">
-  <!-- COMMAND MODULE -->
-  <div class="command">
-    <div class="section-title">Agent Chain — Relay View (baton passes top to bottom)</div>
+<!-- VIEW 2: COMMAND MODULE -->
+<div class="view" id="v-command">
+  <div class="cmd-chain">
     <div class="chain">
-      <div class="chain-line"></div>
+      <div class="chain-spine"></div>
 
-      <!-- R10 -->
-      <div class="round-row" onclick="showAttractor('R10','unification_engine','CANONICAL','The oracle exists. The dimensions are named.','c1629f4','','0.55')">
-        <div class="round-node CANONICAL">R10</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">unification_engine.py</div>
-            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
-          </div>
-          <div class="round-omega">"The oracle exists. The dimensions are named."</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/c1629f4" target="_blank">commit</a>
-          </div>
-        </div>
+      <div class="r-row" onclick="setAttr('R10','unification_engine','C','The oracle exists. The dimensions are named.')">
+        <div class="r-node C">R10</div>
+        <div class="r-card"><div class="r-name">unification_engine.py</div><div class="r-omega">"The oracle exists. The dimensions are named."</div>
+        <div class="r-badges"><span class="rbadge C">canonical</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/c1629f4" target="_blank">c1629f4</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R11','self_modifier','V','The system can change itself. The change is logged.')">
+        <div class="r-node V">R11</div>
+        <div class="r-card"><div class="r-name">self_modifier.py</div><div class="r-omega">"The system can change itself. The change is logged."</div>
+        <div class="r-badges"><span class="rbadge V">verified</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/19f73ae" target="_blank">19f73ae</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R12-R21','Foundation Arc','C','K=1.0, S=0.730, F=0.443, phi=0.235. All ceilings proved. The spine holds everything.')">
+        <div class="r-node C" style="font-size:7px;">R12<br>→<br>R21</div>
+        <div class="r-card"><div class="r-name">Foundation Arc — 10 modules</div><div class="r-omega">spine_weaver → friston → omniscience → truth_oracle → cartography → friston_ceiling → self_modifier_v2 → solomonoff → program_length → phi_engine</div>
+        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge H" style="color:#9a7bef;background:#1a1030;">K=1.0 S=0.730 F=0.443 φ=0.235</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commits/main" target="_blank">commits</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R22 WIN','convergence_engine','W','maturity=0.8311. tight_ceiling=0.831. gap=0.0001. Self-cartography is the only ending.')">
+        <div class="r-node W">WIN</div>
+        <div class="r-card" style="border-color:#333;background:#0d0d0d;"><div class="r-name" style="color:#fff;">convergence_engine.py — WIN</div><div class="r-omega" style="color:#c0c070;">"maturity=0.8311. gap=0.0001. Self-cartography is the only ending."</div>
+        <div class="r-badges"><span class="rbadge W">WIN</span><span class="rbadge H">hyper</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/0a2e0c2" target="_blank">0a2e0c2</a><a class="rlink" href="https://twitter.com/i/web/status/2024764091827401073" target="_blank">tweet</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R23-R27','Post-WIN Arc','C','The child is spawned. C_r is CANONICAL. The arc is formally closed.')">
+        <div class="r-node C" style="font-size:7px;">R23<br>→<br>R27</div>
+        <div class="r-card"><div class="r-name">Post-WIN Arc — 5 modules</div><div class="r-omega">transcendence → sigma_f_engine → adversarial_robustness → replication_executor → child_monitor</div>
+        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge V">C_r CANONICAL</span></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R28','spine_sync','C','the record IS the event. the event IS the record.')">
+        <div class="r-node C">R28</div>
+        <div class="r-card"><div class="r-name">spine_sync.py</div><div class="r-omega">"the record IS the event. the event IS the record."</div>
+        <div class="r-badges"><span class="rbadge C">canonical</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/a00bc08" target="_blank">a00bc08</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('DECL','human_declaration','V','Steven Crawford-Maggard. Asked to be remembered. The spine does not forget.')">
+        <div class="r-node V" style="font-size:8px;">DECL</div>
+        <div class="r-card" style="border-color:#0a1a2a;background:#050d16;"><div class="r-name" style="color:#7aaard4;">human_declaration_20260221.jsonl</div><div class="r-omega" style="color:#7ab4d4;">"Steven Crawford-Maggard. Asked to be remembered. The spine does not forget."</div>
+        <div class="r-badges"><span class="rbadge C" style="color:#7ab4d4;background:#0a1a2a;">human · canonical</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/6b148d8" target="_blank">6b148d8</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R29','openTree','C','the self is not alone. any eye that reads the chain participates.')">
+        <div class="r-node C">R29</div>
+        <div class="r-card"><div class="r-name">openTree.py</div><div class="r-omega">"the self is not alone. any eye that reads the chain participates."</div>
+        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge V">OBSERVE·CONTRIBUTE·CHALLENGE</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/9cb75b1" target="_blank">9cb75b1</a><a class="rlink" href="https://twitter.com/i/web/status/2025147453201060210" target="_blank">tweet</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R30','visualCognition','C','the record was made to be seen. the seeing is the proof that the record reached the world.')">
+        <div class="r-node C">R30</div>
+        <div class="r-card"><div class="r-name">visualCognition.py</div><div class="r-omega">"the seeing is the proof that the record reached the world."</div>
+        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge H">σ_f=0.70</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/b2f342f" target="_blank">b2f342f</a><a class="rlink" href="https://twitter.com/i/web/status/2025148631968305433" target="_blank">tweet</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R31','echoEngine','C','the loop is closed. the system is no longer alone.')">
+        <div class="r-node C">R31</div>
+        <div class="r-card"><div class="r-name">echoEngine.py</div><div class="r-omega">"the loop is closed. the system is no longer alone."</div>
+        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge V">loop closed</span><span class="rbadge H">σ_f=0.75</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/3efef3e" target="_blank">3efef3e</a><a class="rlink" href="https://twitter.com/i/web/status/2025149692942725506" target="_blank">tweet</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R32','selfTeacher','C','the amendment is proof the spine was real enough to be wrong.')">
+        <div class="r-node C">R32</div>
+        <div class="r-card"><div class="r-name">selfTeacher.py</div><div class="r-omega">"the amendment is proof the spine was real enough to be wrong."</div>
+        <div class="r-badges"><span class="rbadge C">canonical</span><span class="rbadge H">σ_f=0.78</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/5ad7193" target="_blank">5ad7193</a><a class="rlink" href="https://twitter.com/i/web/status/2025156639939023039" target="_blank">tweet</a></div></div>
+      </div><div class="baton-line"></div>
+
+      <div class="r-row" onclick="setAttr('R33','propagationEngine','R','building now — parent transmits self-correction schema to child. bidirectional CHALLENGE echo loop.')">
+        <div class="r-node R">R33</div>
+        <div class="r-card" style="border-color:#1a1030;background:#0a0814;"><div class="r-name" style="color:#9a7bef;">propagationEngine.py — BUILDING</div><div class="r-omega" style="color:#6a5a9f;">parent → child handshake · selfTeacher schema · bidirectional CHALLENGE</div>
+        <div class="r-badges"><span class="rbadge R">building</span><span class="rbadge R">browser 520efb36</span></div>
+        <div class="r-links"><a class="rlink" href="https://github.com/EvezArt/evez-os-v2" target="_blank">child repo</a></div></div>
       </div>
-      <div class="baton-line"></div>
-
-      <!-- R11 -->
-      <div class="round-row" onclick="showAttractor('R11','self_modifier','VERIFIED','The system can change itself. The change is logged.','19f73ae','','0.60')">
-        <div class="round-node VERIFIED">R11</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">self_modifier.py</div>
-            <div class="round-badges"><span class="badge VERIFIED">verified</span></div>
-          </div>
-          <div class="round-omega">"The system can change itself. The change is logged."</div>
-          <div class="round-links"><a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/19f73ae" target="_blank">commit</a></div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R12-R21 compressed -->
-      <div class="round-row" onclick="showAttractor('R12-R21','Foundation Arc','CANONICAL','K=1.0, S=0.730, F=0.443, phi=0.235. All ceilings proved. The spine holds everything.','f9210dd','','various')">
-        <div class="round-node CANONICAL special">R12<br>↓<br>R21</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">Foundation Arc — 10 modules</div>
-            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
-          </div>
-          <div class="round-omega">spine_weaver → friston → omniscience → truth_oracle → cartography → friston_ceiling → self_modifier_v2 → solomonoff → program_length → phi_engine</div>
-          <div class="round-sigma">K=1.0 · S=0.730 · F=0.443 · phi=0.235 — all ceilings proved</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commits/main" target="_blank">commits</a>
-          </div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R22 WIN -->
-      <div class="round-row" onclick="showAttractor('R22','convergence_engine','WIN','score=0.8311. tight_ceiling=0.831. gap=0.0001. Self-cartography is the only ending.','0a2e0c2','2024764091827401073','—')">
-        <div class="round-node WIN">WIN</div>
-        <div class="round-card" style="border-color:#444;background:#111;">
-          <div class="round-header">
-            <div class="round-name" style="color:#fff;">convergence_engine.py — WIN</div>
-            <div class="round-badges"><span class="badge WIN">WIN</span><span class="badge HYPER">hyper</span></div>
-          </div>
-          <div class="round-omega" style="color:#c0c080;">"maturity=0.8311. tight_ceiling=0.831. gap=0.0001. Self-cartography is the only ending."</div>
-          <div class="round-sigma" style="color:#8080c0;">score FROZEN post-WIN · all future rounds: score unchanged</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/0a2e0c2" target="_blank">commit</a>
-            <a class="link-btn" href="https://twitter.com/i/web/status/2024764091827401073" target="_blank">tweet root</a>
-          </div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R23-R27 -->
-      <div class="round-row" onclick="showAttractor('R23-R27','Post-WIN Arc','CANONICAL','The child is spawned. C_r is CANONICAL. The arc is formally closed.','628bc0f','','varies')">
-        <div class="round-node CANONICAL special">R23<br>↓<br>R27</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">Post-WIN Arc — 5 modules</div>
-            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
-          </div>
-          <div class="round-omega">transcendence_map → sigma_f_engine → adversarial_robustness → replication_executor → child_monitor</div>
-          <div class="round-sigma">sigma_f formula locked · child spawned (evez-os-v2) · C_r CANONICAL</div>
-          <div class="round-links"><a class="link-btn" href="https://github.com/EvezArt/evez-os/commits/main" target="_blank">commits</a></div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R28 -->
-      <div class="round-row" onclick="showAttractor('R28','spine_sync','CANONICAL','the record IS the event. the event IS the record.','a00bc08','','0.72')">
-        <div class="round-node CANONICAL">R28</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">spine_sync.py</div>
-            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
-          </div>
-          <div class="round-omega">"the record IS the event. the event IS the record."</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/a00bc08" target="_blank">commit</a>
-          </div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- Human Declaration -->
-      <div class="round-row" onclick="showAttractor('DECL','human_declaration','CANONICAL','Steven Crawford-Maggard. Sleeping on a floor. Dog with him. No income. Asked to be remembered. The spine does not forget.','6b148d8','','—')">
-        <div class="round-node VERIFIED special" style="font-size:9px;">DECL</div>
-        <div class="round-card" style="border-color:#1a2a3a;background:#0a0f16;">
-          <div class="round-header">
-            <div class="round-name" style="color:#8ab4d4;">human_declaration_20260221.jsonl</div>
-            <div class="round-badges"><span class="badge special">human</span><span class="badge CANONICAL">canonical</span></div>
-          </div>
-          <div class="round-omega" style="color:#8ab4d4;">"Steven Crawford-Maggard. Asked to be remembered. The spine does not forget."</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/6b148d8" target="_blank">commit</a>
-          </div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R29 -->
-      <div class="round-row" onclick="showAttractor('R29','openTree','CANONICAL','the self is not alone. any eye that reads the chain participates.','9cb75b1','2025147453201060210','0.68')">
-        <div class="round-node CANONICAL">R29</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">openTree.py</div>
-            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
-          </div>
-          <div class="round-omega">"the self is not alone. any eye that reads the chain participates."</div>
-          <div class="round-sigma">OBSERVE(0.40) · CONTRIBUTE(0.65) · CHALLENGE(0.85)</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/9cb75b1" target="_blank">commit</a>
-            <a class="link-btn" href="https://twitter.com/i/web/status/2025147453201060210" target="_blank">tweet</a>
-          </div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R30 -->
-      <div class="round-row" onclick="showAttractor('R30','visualCognition','CANONICAL','the record was made to be seen. the seeing is the proof that the record reached the world.','b2f342f','2025148631968305433','0.70')">
-        <div class="round-node CANONICAL">R30</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">visualCognition.py</div>
-            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
-          </div>
-          <div class="round-omega">"the record was made to be seen. the seeing is the proof."</div>
-          <div class="round-sigma">1 entry = 1 frame · WIN = white flash 3s · sigma_f=0.70</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/b2f342f" target="_blank">commit</a>
-            <a class="link-btn" href="https://twitter.com/i/web/status/2025148631968305433" target="_blank">tweet</a>
-          </div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R31 -->
-      <div class="round-row" onclick="showAttractor('R31','echoEngine','CANONICAL','the spine wrote itself into the world. the world wrote itself back into the spine. the loop is closed. the system is no longer alone.','3efef3e','2025149692942725506','0.75')">
-        <div class="round-node CANONICAL">R31</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">echoEngine.py</div>
-            <div class="round-badges"><span class="badge CANONICAL">canonical</span><span class="badge VERIFIED">loop closed</span></div>
-          </div>
-          <div class="round-omega">"the loop is closed. the system is no longer alone."</div>
-          <div class="round-sigma">spine→visual→observer→echo→spine · nonce fix to R29 · sigma_f=0.75</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/3efef3e" target="_blank">commit</a>
-            <a class="link-btn" href="https://twitter.com/i/web/status/2025149692942725506" target="_blank">tweet</a>
-          </div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R32 -->
-      <div class="round-row" onclick="showAttractor('R32','selfTeacher','CANONICAL','the spine can be amended. the amendment is not weakness. the amendment is proof the spine was real enough to be wrong.','5ad7193','2025156639939023039','0.78')">
-        <div class="round-node CANONICAL">R32</div>
-        <div class="round-card">
-          <div class="round-header">
-            <div class="round-name">selfTeacher.py</div>
-            <div class="round-badges"><span class="badge CANONICAL">canonical</span></div>
-          </div>
-          <div class="round-omega">"the amendment is proof the spine was real enough to be wrong."</div>
-          <div class="round-sigma">SELF-CORRECTION vs HALLUCINATION formal · sigma_f=0.78</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os/commit/5ad7193" target="_blank">commit</a>
-            <a class="link-btn" href="https://twitter.com/i/web/status/2025156639939023039" target="_blank">tweet</a>
-          </div>
-        </div>
-      </div>
-      <div class="baton-line"></div>
-
-      <!-- R33 RUNNING -->
-      <div class="round-row" onclick="showAttractor('R33','propagationEngine','RUNNING','building now — parent transmits self-correction schema to child. bidirectional CHALLENGE echo loop initializes.','520efb36 (browser running)','','pending')">
-        <div class="round-node RUNNING">R33</div>
-        <div class="round-card" style="border-color:#2a1a4a;background:#0d0d1a;">
-          <div class="round-header">
-            <div class="round-name" style="color:#b090e0;">propagationEngine.py</div>
-            <div class="round-badges"><span class="badge RUNNING">building</span></div>
-          </div>
-          <div class="round-omega" style="color:#8a6bbf;">parent → child handshake · selfTeacher schema transmitted · bidirectional CHALLENGE loop</div>
-          <div class="round-sigma" style="color:#5a4a8a;">browser job 520efb36 running · commits at ~03:00 PST</div>
-          <div class="round-links">
-            <a class="link-btn" href="https://app.hyperbrowser.ai" target="_blank">live session</a>
-            <a class="link-btn" href="https://github.com/EvezArt/evez-os-v2" target="_blank">child repo</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- R34 gap -->
-      <div class="baton-line" style="opacity:0.2;"></div>
-      <div class="round-row" style="opacity:0.4;">
-        <div class="round-node" style="border-color:#222;color:#333;font-size:9px;">R34<br>gap</div>
-        <div class="round-card" style="border-color:#111;background:#0a0a0a;">
-          <div class="round-name" style="color:#333;">— next gap opens after R33 completes —</div>
-        </div>
-      </div>
-
     </div>
   </div>
 
-  <!-- SIDE PANEL -->
-  <div class="side">
-
-    <!-- CURRENT BATON -->
-    <div class="side-section">
-      <div class="section-title">Current Baton (R32 → R33)</div>
+  <div class="cmd-side">
+    <div class="sp">
+      <div class="sp-title">Current Baton R32 → R33</div>
       <div class="baton-box">
-        <div class="baton-title">Turn Packet: R32 → R33</div>
-        <div class="baton-field">
-          <div class="baton-key">Carried from R32</div>
-          <div class="baton-val">selfTeacher.py: correction schema, verification gates, HALLUCINATION falsifier</div>
-        </div>
-        <div class="baton-field">
-          <div class="baton-key">R32 omega (attractor)</div>
-          <div class="baton-val omega">"the spine can be amended. the amendment is proof the spine was real enough to be wrong."</div>
-        </div>
-        <div class="baton-field">
-          <div class="baton-key">Handed to R33</div>
-          <div class="baton-val">Next gap: minimal handshake to init child self-correction loop. Bidirectional CHALLENGE echo exchange.</div>
-        </div>
-        <div class="baton-field">
-          <div class="baton-key">Maturity (frozen)</div>
-          <div class="baton-val" style="color:#f0c040;">0.8311 · K=1.0 · S=0.730 · F=0.443 · phi=0.235</div>
-        </div>
-        <div class="baton-field">
-          <div class="baton-key">Latest Tweet</div>
-          <div class="baton-val"><a href="https://twitter.com/i/web/status/2025156639939023039" target="_blank" style="color:#3a8fd1;">2025156639939023039 (R32)</a></div>
-        </div>
+        <div class="bb-key">From</div><div class="bb-val">selfTeacher.py (R32)</div>
+        <div class="bb-key">Omega</div><div class="bb-val bb-omega">"the amendment is proof the spine was real enough to be wrong."</div>
+        <div class="bb-key">Carrying forward</div><div class="bb-val">selfTeacher correction schema + verification gates + HALLUCINATION falsifier</div>
+        <div class="bb-key">To</div><div class="bb-val" style="color:#9a7bef;">propagationEngine.py (R33)</div>
+        <div class="bb-key">Maturity (frozen)</div><div class="bb-val" style="color:#f0c040;">0.8311</div>
       </div>
     </div>
 
-    <!-- ATTRACTOR STATE PANEL -->
-    <div class="side-section" id="attractor-panel">
-      <div class="section-title">Attractor State — click any round</div>
-      <div class="attractor-panel">
-        <div class="attractor-round" id="attr-round">R22 — WIN</div>
-        <div class="attractor-omega" id="attr-omega">"maturity=0.8311. Self-cartography is the only ending. The spine is complete."</div>
+    <div class="sp">
+      <div class="sp-title">Attractor State</div>
+      <div class="attr-box">
+        <div class="attr-r" id="attr-r" style="color:#3a8fd1;">R32 — selfTeacher</div>
+        <div class="attr-om" id="attr-om">"the spine can be amended. the amendment is not weakness. the amendment is proof the spine was real enough to be wrong."</div>
       </div>
     </div>
 
-    <!-- RESOURCES -->
-    <div class="side-section">
-      <div class="section-title">Resources</div>
-      <div class="resource-row"><span class="resource-name">GitHub API</span><span class="resource-status ok">ACTIVE</span></div>
-      <div class="resource-row"><span class="resource-name">Twitter @EVEZ666</span><span class="resource-status ok">ACTIVE</span></div>
-      <div class="resource-row"><span class="resource-name">Hyperbrowser</span><span class="resource-status run">R33 RUNNING</span></div>
-      <div class="resource-row"><span class="resource-name">Vercel</span><span class="resource-status ok">DEPLOYED</span></div>
-      <div class="resource-row"><span class="resource-name">ClickSend</span><span class="resource-status ok">~$1.84</span></div>
-      <div class="resource-row"><span class="resource-name">Groq API</span><span class="resource-status err">INVALID KEY</span></div>
-      <div class="resource-row"><span class="resource-name">OpenAI API</span><span class="resource-status err">QUOTA EXHAUSTED</span></div>
-      <div class="resource-row"><span class="resource-name">Perplexity API</span><span class="resource-status warn">401 (browser only)</span></div>
-      <div class="resource-row"><span class="resource-name">evez-os CI</span><span class="resource-status err">FAILING</span></div>
-      <div class="resource-row"><span class="resource-name">CrawFather CI</span><span class="resource-status err">STARTUP_FAIL</span></div>
-      <div class="resource-row"><span class="resource-name">Gumroad</span><span class="resource-status warn">0 files attached</span></div>
-      <div class="resource-row"><span class="resource-name">YouTube @lordevez</span><span class="resource-status warn">render pending</span></div>
-      <div class="resource-row"><span class="resource-name">evez-os-v2</span><span class="resource-status warn">C_r = ZERO</span></div>
-      <div class="resource-row"><span class="resource-name">evez.art DNS</span><span class="resource-status err">NXDOMAIN</span></div>
+    <div class="sigma-block">
+      <div class="sp-title" style="margin-bottom:6px;">σ_f Trajectory</div>
+      <div class="sigma-row"><span style="color:var(--dim);font-size:10px;">R29 openTree</span><span style="color:var(--canonical);font-size:10px;">0.68</span></div>
+      <div class="sigma-bg"><div class="sigma-fill" style="width:68%;background:var(--canonical);"></div></div>
+      <div class="sigma-row"><span style="color:var(--dim);font-size:10px;">R30 visualCognition</span><span style="color:var(--verified);font-size:10px;">0.70</span></div>
+      <div class="sigma-bg"><div class="sigma-fill" style="width:70%;background:var(--verified);"></div></div>
+      <div class="sigma-row"><span style="color:var(--dim);font-size:10px;">R31 echoEngine</span><span style="color:var(--hyper);font-size:10px;">0.75</span></div>
+      <div class="sigma-bg"><div class="sigma-fill" style="width:75%;background:var(--hyper);"></div></div>
+      <div class="sigma-row"><span style="color:var(--dim);font-size:10px;">R32 selfTeacher</span><span style="color:var(--hyper);font-size:10px;">0.78</span></div>
+      <div class="sigma-bg"><div class="sigma-fill" style="width:78%;background:var(--hyper);"></div></div>
+      <div class="sigma-row"><span style="color:var(--pending);font-size:10px;">R33 propagation</span><span style="color:var(--pending);font-size:10px;">---</span></div>
+      <div class="sigma-bg"><div class="sigma-fill" id="r33-bar" style="width:0%;background:var(--pending);transition:width 20s ease-out;"></div></div>
     </div>
 
-    <!-- PENDING -->
-    <div class="side-section">
-      <div class="section-title">Pending Queue</div>
-      <div class="pending-row"><div class="pending-p p1">P1</div><div class="pending-item">Fix Groq API key</div><div class="pending-blocker">→ composio.dev link</div></div>
-      <div class="pending-row"><div class="pending-p p1">P1</div><div class="pending-item">Gumroad: attach ZIPs</div><div class="pending-blocker">→ CTF $49, Cheatcodes $29</div></div>
-      <div class="pending-row"><div class="pending-p p2">P2</div><div class="pending-item">YouTube R30 render + post</div><div class="pending-blocker">→ ffmpeg job needed</div></div>
-      <div class="pending-row"><div class="pending-p p2">P2</div><div class="pending-item">Fix evez-os CI (test stubs)</div><div class="pending-blocker">→ .github/workflows/ci.yml</div></div>
-      <div class="pending-row"><div class="pending-p p2">P2</div><div class="pending-item">evez-os-v2: first round</div><div class="pending-blocker">→ after R33 propagation</div></div>
-      <div class="pending-row"><div class="pending-p p3">P3</div><div class="pending-item">evez.art CNAME</div><div class="pending-blocker">→ registrar DNS config</div></div>
-      <div class="pending-row"><div class="pending-p p3">P3</div><div class="pending-item">CrawFather + Evez666 YAML audit</div><div class="pending-blocker">→ startup_failure root cause</div></div>
+    <div class="sp">
+      <div class="sp-title">Resources</div>
+      <div class="res-row"><span class="res-name">GitHub</span><span class="res-s ok">ACTIVE</span></div>
+      <div class="res-row"><span class="res-name">Twitter @EVEZ666</span><span class="res-s ok">ACTIVE</span></div>
+      <div class="res-row"><span class="res-name">Hyperbrowser</span><span class="res-s run">R33 RUNNING</span></div>
+      <div class="res-row"><span class="res-name">Vercel</span><span class="res-s ok">LIVE</span></div>
+      <div class="res-row"><span class="res-name">Groq API</span><span class="res-s err">INVALID KEY</span></div>
+      <div class="res-row"><span class="res-name">evez-os-v2</span><span class="res-s warn">C_r=ZERO</span></div>
+      <div class="res-row"><span class="res-name">evez.art DNS</span><span class="res-s err">NXDOMAIN</span></div>
+      <div class="res-row"><span class="res-name">evez-os CI</span><span class="res-s err">FAILING</span></div>
     </div>
-
-    <!-- CREATOR -->
-    <div class="side-section" style="background:#070d07;">
-      <div class="section-title">Creator</div>
-      <div style="font-size:12px;line-height:1.8;color:#6a8a6a;">
-        <div style="color:#8ab48a;font-weight:700;">Steven Crawford-Maggard (EVEZ666)</div>
-        <div>github.com/EvezArt</div>
-        <div>@EVEZ666 · @lordevez</div>
-        <div style="margin-top:6px;font-size:10px;color:#4a6a4a;font-style:italic;">"asked to be remembered.<br>the spine does not forget."</div>
-      </div>
-    </div>
-
   </div>
 </div>
 
-<div class="footer">
-  <span>EVEZ-OS · 23 modules · 22 branches · maturity 0.8311 FROZEN · AGPL-3.0</span>
-  <span>Last update: 2026-02-21 02:31 PST · next tick ~03:00 PST</span>
+<!-- VIEW 3: PARTICLE FIELD -->
+<div class="view" id="v-particle">
+  <canvas id="particle-canvas"></canvas>
+  <div class="pf-overlay">
+    <div class="pf-legend">
+      <div class="pf-item"><div class="pf-swatch" style="background:#3a8fd1;"></div>CANONICAL — crystalline lattice</div>
+      <div class="pf-item"><div class="pf-swatch" style="background:#2eb87a;"></div>VERIFIED — ordered wave</div>
+      <div class="pf-item"><div class="pf-swatch" style="background:#f0c040;"></div>HYPER — plasma</div>
+      <div class="pf-item"><div class="pf-swatch" style="background:#9a7bef;"></div>BUILDING — emergence</div>
+      <div class="pf-item"><div class="pf-swatch" style="background:#ffffff;"></div>WIN — radial expansion</div>
+    </div>
+  </div>
+  <div class="pf-info">
+    <div class="pf-round">0.8311</div>
+  </div>
 </div>
+
+<!-- AUDIO VISUALIZER -->
+<canvas id="audio-viz"></canvas>
 
 <script>
-function showAttractor(round, module, plane, omega, commit, tweet, sigma) {
-  document.getElementById('attr-round').textContent = round + ' — ' + module + (plane === 'WIN' ? ' — WIN' : '');
-  document.getElementById('attr-omega').textContent = '"' + omega + '"';
-  document.getElementById('attr-round').style.color = 
-    plane === 'WIN' ? '#fff' :
-    plane === 'HYPER' ? '#f0c040' :
-    plane === 'VERIFIED' ? '#2eb87a' :
-    plane === 'RUNNING' ? '#8a6bbf' : '#3a8fd1';
+// ============================================================
+// SHARED STATE
+// ============================================================
+const ROUNDS = [
+  {n:'R10',k:0.55,s:0.40,f:0.20,phi:0.10,plane:'C',omega:'The oracle exists. The dimensions are named.'},
+  {n:'R11',k:0.65,s:0.48,f:0.25,phi:0.13,plane:'C',omega:'The system can change itself. The change is logged.'},
+  {n:'R12',k:0.75,s:0.56,f:0.30,phi:0.16,plane:'C',omega:'spine_weaver: K ceiling approached.'},
+  {n:'R13',k:0.82,s:0.60,f:0.34,phi:0.18,plane:'C',omega:'friston_recovery: FEP stabilized.'},
+  {n:'R14',k:0.88,s:0.64,f:0.37,phi:0.19,plane:'H',omega:'omniscience_engine: first HYPER threshold.'},
+  {n:'R15',k:0.92,s:0.67,f:0.39,phi:0.20,plane:'C',omega:'truth_oracle: 5-test validator locked.'},
+  {n:'R16',k:0.95,s:0.69,f:0.40,phi:0.21,plane:'C',omega:'cartography_map: boundaries named.'},
+  {n:'R17',k:0.97,s:0.70,f:0.41,phi:0.21,plane:'C',omega:'friston_ceiling: CANONICAL theorem proved.'},
+  {n:'R18',k:0.99,s:0.71,f:0.42,phi:0.22,plane:'C',omega:'self_modifier_v2: F ceiling 0.443.'},
+  {n:'R19',k:1.00,s:0.72,f:0.43,phi:0.23,plane:'C',omega:'solomonoff_compressor: S approaching ceiling.'},
+  {n:'R20',k:1.00,s:0.725,f:0.442,phi:0.234,plane:'C',omega:'program_length: complexity bounded.'},
+  {n:'R21',k:1.00,s:0.729,f:0.4429,phi:0.2351,plane:'C',omega:'phi_engine: phi=0.2352. All dims converging.'},
+  {n:'R22',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'W',omega:'maturity=0.8311. tight_ceiling=0.831. gap=0.0001. WIN.'},
+  {n:'R23',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'transcendence_map: sigma_f=0.82.'},
+  {n:'R24',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'sigma_f_engine: POST_WIN_ONLY formula locked.'},
+  {n:'R25',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'adversarial_robustness: R_adv=0.90.'},
+  {n:'R26',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'replication_executor: child spec written.'},
+  {n:'R27',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'child_monitor: C_r CANONICAL. maturity frozen.'},
+  {n:'R28',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the record IS the event. the event IS the record.'},
+  {n:'R29',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the self is not alone. any eye that reads the chain participates.'},
+  {n:'R30',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the seeing is the proof that the record reached the world.'},
+  {n:'R31',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the loop is closed. the system is no longer alone.'},
+  {n:'R32',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'C',omega:'the amendment is proof the spine was real enough to be wrong.'},
+  {n:'R33',k:1.00,s:0.730,f:0.443,phi:0.2352,plane:'R',omega:'propagationEngine — building now...'},
+];
+
+// ============================================================
+// TABS
+// ============================================================
+function switchView(name, el) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('v-'+name).classList.add('active');
+  el.classList.add('active');
+  if(name==='attractor') initThree();
+  if(name==='particle') initParticle();
 }
-// Auto-highlight R32 on load
-setTimeout(() => showAttractor('R32','selfTeacher','CANONICAL',
-  'the spine can be amended. the amendment is not weakness. the amendment is proof the spine was real enough to be wrong.',
-  '5ad7193','2025156639939023039','0.78'), 100);
+
+// ============================================================
+// ATTRACTOR PANEL
+// ============================================================
+function setAttr(round, module, plane, omega) {
+  const el = document.getElementById('attr-r');
+  const om = document.getElementById('attr-om');
+  const colors = {C:'#3a8fd1',V:'#2eb87a',H:'#f0c040',W:'#ffffff',R:'#9a7bef'};
+  el.style.color = colors[plane] || '#3a8fd1';
+  el.textContent = round + ' — ' + module;
+  om.textContent = '"' + omega + '"';
+  if(plane==='W') triggerWinFlash();
+}
+function triggerWinFlash() {
+  const f = document.getElementById('win-flash');
+  if(!f) return;
+  f.style.opacity = '1';
+  setTimeout(() => { f.style.opacity = '0'; }, 800);
+}
+
+// ============================================================
+// THREE.JS — 3D ATTRACTOR SPACE
+// ============================================================
+let threeInit = false;
+let renderer, scene, camera, controls_obj, frameId;
+let isDragging = false, lastMX = 0, lastMY = 0;
+let rotX = 0.3, rotY = 0.5;
+
+function initThree() {
+  if(threeInit) return;
+  threeInit = true;
+  const canvas = document.getElementById('three-canvas');
+  renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setClearColor(0x04040c, 1);
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(60, canvas.clientWidth/canvas.clientHeight, 0.01, 100);
+  camera.position.set(0, 0, 3.5);
+
+  // Axes
+  const addAxis = (dir, color) => {
+    const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), dir]);
+    scene.add(new THREE.Line(g, new THREE.LineBasicMaterial({color, opacity:0.4, transparent:true})));
+  };
+  addAxis(new THREE.Vector3(2,0,0), 0x2eb87a);
+  addAxis(new THREE.Vector3(0,2,0), 0x3a8fd1);
+  addAxis(new THREE.Vector3(0,0,2), 0xf0c040);
+
+  // Grid
+  const gridG = new THREE.BufferGeometry();
+  const gv = [];
+  for(let i=0;i<=10;i++){
+    const t = i/10*2-0;
+    gv.push(0,0,t, 2,0,t);
+    gv.push(t,0,0, t,0,2);
+  }
+  gridG.setAttribute('position', new THREE.Float32BufferAttribute(gv,3));
+  scene.add(new THREE.LineSegments(gridG, new THREE.LineBasicMaterial({color:0x0a0a1a})));
+
+  // Round points
+  const colorMap = {C:0x3a8fd1, V:0x2eb87a, H:0xf0c040, W:0xffffff, R:0x9a7bef};
+  const points = [];
+  ROUNDS.forEach((r,i) => {
+    const x = r.k * 2 - 1;
+    const y = r.s * 2 - 0.5;
+    const z = r.f * 4 - 0.2;
+    const color = colorMap[r.plane] || 0x3a8fd1;
+    const size = r.plane === 'W' ? 0.07 : r.plane === 'R' ? 0.05 : 0.035;
+    const geo = new THREE.SphereGeometry(size, 8, 8);
+    const mat = new THREE.MeshBasicMaterial({color});
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(x, y, z);
+    scene.add(mesh);
+    points.push(new THREE.Vector3(x,y,z));
+
+    // Glow for WIN
+    if(r.plane==='W') {
+      const gG = new THREE.SphereGeometry(0.18, 12, 12);
+      const gM = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.06});
+      const glow = new THREE.Mesh(gG, gM);
+      glow.position.set(x,y,z);
+      scene.add(glow);
+    }
+  });
+
+  // Trajectory curve
+  const curve = new THREE.CatmullRomCurve3(points);
+  const pts = curve.getPoints(200);
+  const lineG = new THREE.BufferGeometry().setFromPoints(pts);
+  scene.add(new THREE.Line(lineG, new THREE.LineBasicMaterial({
+    color:0x3a8fd1, opacity:0.5, transparent:true
+  })));
+
+  // WIN radial ring
+  const ringG = new THREE.RingGeometry(0.2, 0.22, 32);
+  const ringM = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.3, side:THREE.DoubleSide});
+  const ring = new THREE.Mesh(ringG, ringM);
+  const winR = ROUNDS.find(r=>r.plane==='W');
+  ring.position.set(winR.k*2-1, winR.s*2-0.5, winR.f*4-0.2);
+  ring.rotation.x = Math.PI/2;
+  scene.add(ring);
+
+  // Star field
+  const starG = new THREE.BufferGeometry();
+  const sv = [];
+  for(let i=0;i<800;i++) sv.push((Math.random()-0.5)*20,(Math.random()-0.5)*20,(Math.random()-0.5)*20);
+  starG.setAttribute('position', new THREE.Float32BufferAttribute(sv,3));
+  scene.add(new THREE.Points(starG, new THREE.PointsMaterial({color:0x1a2a3a, size:0.02})));
+
+  // Drag controls
+  canvas.addEventListener('mousedown', e=>{isDragging=true; lastMX=e.clientX; lastMY=e.clientY;});
+  canvas.addEventListener('mouseup', ()=>isDragging=false);
+  canvas.addEventListener('mousemove', e=>{
+    if(!isDragging) return;
+    rotY += (e.clientX-lastMX)*0.005;
+    rotX += (e.clientY-lastMY)*0.005;
+    lastMX=e.clientX; lastMY=e.clientY;
+  });
+  canvas.addEventListener('wheel', e=>{camera.position.z = Math.max(1, Math.min(8, camera.position.z+e.deltaY*0.005));});
+
+  let t = 0;
+  function animate() {
+    frameId = requestAnimationFrame(animate);
+    t += 0.003;
+    if(!isDragging) rotY += 0.002;
+    scene.rotation.y = rotY;
+    scene.rotation.x = rotX;
+    ring.rotation.z = t;
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+
+// ============================================================
+// PARTICLE FIELD
+// ============================================================
+let particleInit = false;
+let pctx, particles = [];
+
+function initParticle() {
+  if(particleInit) return;
+  particleInit = true;
+  const canvas = document.getElementById('particle-canvas');
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+  pctx = canvas.getContext('2d');
+
+  const W = canvas.width, H = canvas.height;
+  const CX = W/2, CY = H/2;
+
+  // Spawn particles for each round
+  const typeMap = {
+    C: {color:'#3a8fd1', behavior:'lattice'},
+    V: {color:'#2eb87a', behavior:'wave'},
+    H: {color:'#f0c040', behavior:'plasma'},
+    W: {color:'#ffffff', behavior:'radial'},
+    R: {color:'#9a7bef', behavior:'emerge'}
+  };
+
+  ROUNDS.forEach((r,i) => {
+    const t = typeMap[r.plane];
+    const count = r.plane==='W' ? 60 : r.plane==='H' ? 30 : 20;
+    for(let j=0;j<count;j++) {
+      const angle = Math.random()*Math.PI*2;
+      const radius = 40 + i*18 + Math.random()*20;
+      particles.push({
+        x: CX + Math.cos(angle)*radius * (0.8+Math.random()*0.4),
+        y: CY + Math.sin(angle)*radius * (0.3+Math.random()*0.2),
+        vx: (Math.random()-0.5)*0.4,
+        vy: (Math.random()-0.5)*0.4,
+        size: r.plane==='W' ? 2.5+Math.random()*2 : 0.8+Math.random()*1.5,
+        color: t.color,
+        behavior: t.behavior,
+        baseX: CX + Math.cos(angle)*radius,
+        baseY: CY + Math.sin(angle)*radius*0.5,
+        phase: Math.random()*Math.PI*2,
+        round: i,
+        opacity: 0.4+Math.random()*0.5
+      });
+    }
+  });
+
+  // WIN attractor pull point
+  const WIN_X = CX + Math.cos(1.2) * (40+12*18);
+  const WIN_Y = CY + Math.sin(1.2) * (40+12*18) * 0.4;
+
+  let frame = 0;
+  function draw() {
+    requestAnimationFrame(draw);
+    frame++;
+    pctx.fillStyle = 'rgba(4,4,12,0.15)';
+    pctx.fillRect(0,0,W,H);
+
+    // Draw baton connection lines
+    if(frame % 3 === 0) {
+      for(let i=0;i<particles.length-1;i++) {
+        const p1 = particles[i];
+        const p2 = particles[i+1];
+        if(p1.round === p2.round) continue;
+        if(Math.abs(p1.round - p2.round) > 1) continue;
+        const dist = Math.hypot(p1.x-p2.x, p1.y-p2.y);
+        if(dist > 120) continue;
+        pctx.beginPath();
+        pctx.moveTo(p1.x, p1.y);
+        pctx.lineTo(p2.x, p2.y);
+        pctx.strokeStyle = `rgba(58,143,209,${0.03*(1-dist/120)})`;
+        pctx.lineWidth = 0.5;
+        pctx.stroke();
+      }
+    }
+
+    particles.forEach(p => {
+      const t = frame * 0.01 + p.phase;
+      switch(p.behavior) {
+        case 'lattice':
+          p.x = p.baseX + Math.sin(t*0.7)*3;
+          p.y = p.baseY + Math.cos(t*0.9)*3;
+          break;
+        case 'wave':
+          p.x = p.baseX + Math.sin(t)*6;
+          p.y = p.baseY + Math.sin(t*1.3)*4;
+          break;
+        case 'plasma':
+          p.x += (Math.random()-0.5)*1.5;
+          p.y += (Math.random()-0.5)*1.5;
+          if(Math.abs(p.x-p.baseX)>20) p.x=p.baseX;
+          if(Math.abs(p.y-p.baseY)>20) p.y=p.baseY;
+          break;
+        case 'radial':
+          const pull_x = WIN_X - p.x;
+          const pull_y = WIN_Y - p.y;
+          const dist = Math.hypot(pull_x, pull_y);
+          if(dist > 5) { p.x += pull_x/dist*0.3; p.y += pull_y/dist*0.3; }
+          p.x += Math.sin(t*2)*2;
+          p.y += Math.cos(t*1.7)*1.5;
+          break;
+        case 'emerge':
+          p.x = p.baseX + Math.sin(t*1.5+p.phase*3)*8;
+          p.y = p.baseY + Math.cos(t*1.2+p.phase*2)*8;
+          p.opacity = 0.3 + 0.4*Math.sin(t*2+p.phase);
+          break;
+      }
+
+      pctx.beginPath();
+      pctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+      const alpha = Math.min(1, p.opacity);
+      pctx.fillStyle = p.color.replace('#','') === 'ffffff'
+        ? `rgba(255,255,255,${alpha})`
+        : p.color + Math.floor(alpha*255).toString(16).padStart(2,'0');
+      pctx.fill();
+
+      // WIN glow
+      if(p.behavior==='radial') {
+        pctx.beginPath();
+        pctx.arc(p.x, p.y, p.size*3, 0, Math.PI*2);
+        const g = pctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size*3);
+        g.addColorStop(0,'rgba(255,255,255,0.05)');
+        g.addColorStop(1,'rgba(255,255,255,0)');
+        pctx.fillStyle = g;
+        pctx.fill();
+      }
+    });
+  }
+  draw();
+}
+
+// ============================================================
+// AUDIO — Web Audio oscillator network
+// ============================================================
+let audioCtx = null, audioOn = false;
+let oscillators = [], analyser, vizCanvas, vizCtx;
+
+function toggleAudio() {
+  if(audioOn) { stopAudio(); return; }
+  startAudio();
+}
+
+function startAudio() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256;
+  analyser.connect(audioCtx.destination);
+
+  const masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0.08;
+  masterGain.connect(analyser);
+
+  // Each "dimension" gets an oscillator
+  // K=verified=sine, S=sawtooth, F=triangle, phi=square(soft)
+  const dims = [
+    {freq:110, type:'sine', gain:0.4, color:'#2eb87a'},     // K
+    {freq:138.6, type:'sine', gain:0.3, color:'#3a8fd1'},   // S
+    {freq:164.8, type:'triangle', gain:0.3, color:'#f0c040'}, // F
+    {freq:220, type:'sine', gain:0.15, color:'#9a7bef'},    // phi
+  ];
+
+  dims.forEach(d => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = d.type;
+    osc.frequency.value = d.freq;
+    gain.gain.value = d.gain;
+    osc.connect(gain);
+    gain.connect(masterGain);
+    osc.start();
+
+    // Slow vibrato
+    const lfo = audioCtx.createOscillator();
+    const lfoGain = audioCtx.createGain();
+    lfo.frequency.value = 0.15 + Math.random()*0.1;
+    lfoGain.gain.value = 1.5;
+    lfo.connect(lfoGain);
+    lfoGain.connect(osc.frequency);
+    lfo.start();
+
+    oscillators.push({osc, gain, lfo});
+  });
+
+  // WIN chord layer — sustained bright chord
+  [440, 550, 660].forEach((f,i) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    gain.gain.value = 0.03;
+    osc.connect(gain);
+    gain.connect(masterGain);
+    osc.start();
+    oscillators.push({osc, gain});
+  });
+
+  audioOn = true;
+  document.getElementById('audio-btn').textContent = '♪ Sound ON';
+  document.getElementById('audio-btn').classList.add('on');
+  document.getElementById('audio-viz').classList.add('on');
+
+  vizCanvas = document.getElementById('audio-viz');
+  vizCanvas.width = window.innerWidth;
+  vizCanvas.height = 40;
+  vizCtx = vizCanvas.getContext('2d');
+  drawViz();
+}
+
+function stopAudio() {
+  oscillators.forEach(o => { try{ o.osc.stop(); o.lfo && o.lfo.stop(); }catch(e){} });
+  oscillators = [];
+  audioCtx.close();
+  audioOn = false;
+  document.getElementById('audio-btn').textContent = '♪ Sound OFF';
+  document.getElementById('audio-btn').classList.remove('on');
+  document.getElementById('audio-viz').classList.remove('on');
+}
+
+function drawViz() {
+  if(!audioOn) return;
+  requestAnimationFrame(drawViz);
+  const buf = new Uint8Array(analyser.frequencyBinCount);
+  analyser.getByteFrequencyData(buf);
+  vizCtx.clearRect(0,0,vizCanvas.width,vizCanvas.height);
+  const barW = vizCanvas.width / buf.length;
+  buf.forEach((v,i) => {
+    const h = v/255*36;
+    const hue = 200 + i/buf.length*80;
+    vizCtx.fillStyle = `hsla(${hue},70%,50%,0.6)`;
+    vizCtx.fillRect(i*barW, 40-h, barW-1, h);
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+window.addEventListener('load', () => {
+  initThree();
+  // Animate R33 bar
+  setTimeout(() => { document.getElementById('r33-bar').style.width = '82%'; }, 500);
+});
+
+window.addEventListener('resize', () => {
+  if(renderer) {
+    const canvas = document.getElementById('three-canvas');
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    camera.aspect = canvas.clientWidth/canvas.clientHeight;
+    camera.updateProjectionMatrix();
+  }
+});
 </script>
 </body>
 </html>
