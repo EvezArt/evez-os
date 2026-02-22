@@ -2,13 +2,13 @@
   "current_round": 85,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025542571892646086",
+  "latest_tweet_id": "2025545407795737022",
   "tweet_thread_root": "2024764091827401073",
   "steven_phone": "+13076775504",
   "cron_content_loop": {
-    "last_run": "2026-02-22T03:15:00-08:00",
-    "last_thread_t1": "2025530078050828474",
-    "last_thread_t5": "2025530239812538840",
+    "last_run": "2026-02-22T04:15:00-08:00",
+    "last_thread_t1": "2025545315193860374",
+    "last_thread_t5": "2025545407795737022",
     "rounds_covered": [
       63,
       64,
@@ -30,7 +30,9 @@
       80,
       81,
       82,
-      83
+      83,
+      84,
+      85
     ],
     "groq_model": "llama-3.3-70b-versatile"
   },
