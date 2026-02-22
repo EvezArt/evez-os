@@ -1,14 +1,14 @@
 {
-  "current_round": 87,
+  "current_round": 90,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025560337571774716",
+  "latest_tweet_id": "2025575404061208886",
   "tweet_thread_root": "2024764091827401073",
   "steven_phone": "+13076775504",
   "cron_content_loop": {
-    "last_run": "2026-02-22T05:15:00-08:00",
-    "last_thread_t1": "2025560236837232888",
-    "last_thread_t5": "2025560337571774716",
+    "last_run": "2026-02-22T06:15:00-08:00",
+    "last_thread_t1": "2025575297408528542",
+    "last_thread_t5": "2025575404061208886",
     "rounds_covered": [
       63,
       64,
@@ -34,181 +34,125 @@
       84,
       85,
       86,
-      87
+      87,
+      88,
+      89
     ],
     "groq_model": "llama-3.3-70b-versatile"
+  },
+  "r89_result": {
+    "module": "fire_border.py",
+    "commit": "c237f4edd2584c51d04266483efc193819a5e517",
+    "agent_branch": "refs/heads/agent/fire_border/round-89/truth-CANONICAL",
+    "status": "CANONICAL",
+    "milestone": "PRIME_FORCED_SILENT+D33_QUATTUORVIGINTI+D37_TREVIGINTI+D38_VIGINTI+D39_x9+D40_ACCEL_x7+D41_0.700+CEILING_x7+FIRE_BORDER_MAPPED+N41_PRIME_NO_FIRE",
+    "V_v2": 1.911309,
+    "V_global": 1.657871,
+    "N_new": 41,
+    "tau_N": 1,
+    "cohere": 0.1613,
+    "poly_c": 0.0,
+    "attractor_lock": 0.0,
+    "lock_status": "PRIME_FORCED_SILENT",
+    "narr_c": 0.867401,
+    "D33_status": "QUATTUORVIGINTI",
+    "prox_gate": 0.557871,
+    "D37_status": "TREVIGINTI",
+    "cd_depth": 0.086947,
+    "D38_status": "VIGINTI",
+    "fire_res": 0.0,
+    "D39_status": "POST_FIRE_SILENT_x9",
+    "drift_vel": 0.026189,
+    "D40_status": "ACCELERATION_x7",
+    "D41_floor_prox": 0.700127,
+    "D41_status": "ADVANCING_x20",
+    "ceiling_zone": true,
+    "ceiling_depth": 0.157871,
+    "ceiling_tick": 7,
+    "omega": "FIRE BORDER MAPPED. N=41=PRIME tau=1. poly_c=0 FORCED SILENT (ninth consecutive). fire_res=0.0. narr_c=0.867 QUATTUORVIGINTI (24 decreases). prox_gate=0.558 D37 TREVIGINTI (23). V_global=1.658 CEILING_ZONE depth=0.158 SEVENTH tick. D40 ACCELERATION_x7 drift_vel=0.026. D38 VIGINTI (20 deepen). D41 floor_prox=0.700. cohere=0.161 rising. Next structural fire: N=48 tau=5 (~R96). Creator: Steven Crawford-Maggard EVEZ666."
+  },
+  "r88_result": {
+    "module": "fifth_fire.py",
+    "commit": "76a0e5e162545f9dedb1aafcec909c8f25231567",
+    "agent_branch": "refs/heads/agent/fifth_fire/round-88/truth-CANONICAL",
+    "status": "CANONICAL",
+    "V_v2": 1.879049,
+    "V_global": 1.635327,
+    "N_new": 40,
+    "tau_N": 3,
+    "cohere": 0.1583,
+    "poly_c": 0.43339,
+    "fire_res": 0.0,
+    "D33_status": "TREVIGINTI",
+    "D37_status": "DUOVIGINTI",
+    "ceiling_tick": 6
   },
   "r87_result": {
     "module": "silent_coast.py",
     "commit": "22155878eb30f41500a7b0254b682b54272b7bdc",
-    "agent_branch": "refs/heads/agent/silent_coast/round-87/truth-CANONICAL",
     "status": "CANONICAL",
-    "milestone": "FINAL_SILENT+D33_DUOVIGINTI+D37_UNVIGINTI+D39_POST_FIRE_SILENT_x7+D40_ACCELERATION_x5+D38_x18+D41_0.661+CEILING_ZONE_x5+N40_FIFTH_FIRE_NEXT",
     "V_v2": 1.846789,
     "V_global": 1.612783,
     "N_new": 39,
     "tau_N": 1,
-    "cohere": 0.1553,
-    "poly_c": 0.0,
-    "attractor_lock": 0.0,
-    "lock_status": "FINAL_SILENT",
-    "narr_c": 0.87329,
-    "D33_status": "DUOVIGINTI",
-    "prox_gate": 0.512783,
-    "D37_status": "UNVIGINTI",
-    "cd_depth": 0.080747,
-    "D38_status": "PROVED_DEEPENING_x18",
-    "fire_res": 0.0,
-    "D39_status": "POST_FIRE_SILENT_x7",
-    "drift_vel": 0.0203,
-    "D40_status": "ACCELERATION_x5",
-    "D40_history": [
-      0.00542,
-      0.00517,
-      0.00493,
-      0.00473,
-      0.00452,
-      0.00434,
-      0.00416,
-      0.00399,
-      0.00384,
-      0.003695,
-      0.007254,
-      0.010687,
-      0.014002,
-      0.017204,
-      0.0203
-    ],
-    "D41_floor_prox": 0.661229,
-    "D41_status": "ADVANCING_x18",
-    "ceiling_zone": true,
-    "ceiling_depth": 0.112783,
-    "fifth_fire_next": {
-      "N": 40,
-      "tau": 3,
-      "poly_c_est": 0.4244,
-      "attractor_est": 0.0,
-      "note": "borderline -- fire depends on exact cohere at cv42"
-    },
-    "omega": "SILENT_COAST. N=39=3x13 tau=1. FINAL SILENT. fire_res=0.0 seventh consecutive. narr_c DUOVIGINTI (22). D37 UNVIGINTI (21). V_global=1.613 CEILING_ZONE depth=0.113 FIFTH tick. D40 ACCELERATION_x5=0.020. N=40 FIFTH_FIRE IS NEXT ROUND. FINAL APPROACH COMPLETE."
-  },
-  "r86_result": {
-    "module": "silent_approach.py",
-    "commit": "90225714fd4626148ccb700323160e3339e6c8c2",
-    "status": "CANONICAL",
-    "narr_c": 0.876386,
-    "fire_res": 0.0,
-    "V_global": 1.590224,
-    "ceiling_zone": true,
-    "ceiling_depth": 0.090224,
-    "milestone": "SILENT+D37_VIGINTI+D33_UNVIGINTI"
-  },
-  "r85_result": {
-    "module": "prime_silence.py",
-    "commit": "00e4ca0bbcffefdfd46464bd6dea6d88aad69c32",
-    "status": "CANONICAL",
-    "narr_c": 0.879588,
-    "fire_res": 0.0,
-    "V_global": 1.56765,
-    "ceiling_zone": true,
-    "ceiling_depth": 0.06765
-  },
-  "r84_result": {
-    "module": "ceiling_zone.py",
-    "commit": "0d54be5956d819278f4177d2a00a80f90e724d58",
-    "status": "CANONICAL",
-    "narr_c": 0.882903,
-    "fire_res": 0.0,
-    "V_global": 1.545061
-  },
-  "r83_result": {
-    "module": "post_settling.py",
-    "commit": "3ed81565bd978ffe757ac66c62d2453bbf80c999",
-    "status": "CANONICAL",
-    "narr_c": 0.886336,
-    "fire_res": 0.0,
-    "V_global": 1.522457
-  },
-  "r82_result": {
-    "module": "fire_settling.py",
-    "commit": "0b5d4f13f6a15c5405fa23d855fc0a2c19e2ba46",
-    "status": "CANONICAL",
-    "narr_c": 0.889895,
-    "fire_res": 0.0,
-    "V_global": 1.499838
-  },
-  "r81_result": {
-    "module": "post_fourth_fire_2.py",
-    "commit": "63f5c8a02f25b8d002483759b9eea898949a4348",
-    "status": "CANONICAL",
-    "narr_c": 0.89359,
     "fire_res": 0.0
   },
-  "r80_result": {
-    "module": "fourth_fire_trigger.py",
-    "commit": "3c1608ecd99b3ff8acc13cb9e9a7dff0da8c5541",
-    "status": "CANONICAL",
-    "fire_res": 0.20047
+  "r90_browser_jobs": {
+    "perplexity": "5824a256-b16c-465c-8242-d113814d9bc8",
+    "status": "running"
+  },
+  "r89_browser_jobs": {
+    "perplexity": "e754aeb1-ce12-4caf-b08d-ad8b748e894d",
+    "status": "completed",
+    "result": "Perplexity returned IDLE/DISPATCH/RUN state machine table. Module built from spec."
   },
   "r88_browser_jobs": {
     "perplexity": "b6d17cdd-418e-4f97-87fd-e45ce448146f",
-    "status": "running"
-  },
-  "r87_browser_jobs": {
-    "perplexity": "9d3698ee-4c3c-47f3-a98f-d9eae4a49f24",
     "status": "completed",
-    "result": "Perplexity no-context. Module from spec."
-  },
-  "r86_browser_jobs": {
-    "perplexity": "ec24c7f4-c56a-4007-bfe6-ecd696e83cd4",
-    "status": "completed",
-    "result": "Perplexity no-context. Module from spec."
-  },
-  "r85_browser_jobs": {
-    "perplexity": "20a05b5b-5238-4e4d-89dd-2c112b4a5457",
-    "status": "completed"
-  },
-  "r84_browser_jobs": {
-    "perplexity": "9a8ca000-9b2d-4b39-a04d-558560de5581",
-    "status": "completed"
+    "result": "Perplexity returned S0-S9 table. Module built from spec."
   },
   "maturity": {
-    "N_agents": 39,
-    "V_v2": 1.846789,
-    "V_global": 1.612783,
+    "N_agents": 41,
+    "V_v2": 1.911309,
+    "V_global": 1.657871,
     "adm": 1.0,
     "gamma": 0.08,
     "truth_plane": "CANONICAL",
     "ceiling_crossed": true,
     "ceiling_zone": true,
-    "D33": "DUOVIGINTI",
+    "D33": "QUATTUORVIGINTI",
     "D34": "DIRECTION_PROVED",
-    "D37": "UNVIGINTI",
-    "D38": "PROVED_DEEPENING_x18",
-    "D39": "POST_FIRE_SILENT_x7",
-    "D40": "ACCELERATION_x5",
-    "D41": "ADVANCING_x18_floor_prox=0.661",
-    "fifth_fire_horizon": "N=40 IS NEXT (R88)"
+    "D37": "TREVIGINTI",
+    "D38": "VIGINTI",
+    "D39": "POST_FIRE_SILENT_x9",
+    "D40": "ACCELERATION_x7",
+    "D41": "ADVANCING_x20_floor_prox=0.700",
+    "fifth_fire_horizon": "MISSED at N=40. Border mapped: PRIMEs cannot fire.",
+    "sixth_fire_horizon": "N=48=2^4x3 tau=5. cohere needs ~0.183. current=0.161. ~5-6 rounds away."
   },
   "latest_commits": {
-    "R80": "3c1608ecd99b3ff8acc13cb9e9a7dff0da8c5541",
-    "R81": "63f5c8a02f25b8d002483759b9eea898949a4348",
+    "R80": "3c1608ecd99b3ff8acc13db9e9a7dff0da8c5541",
     "R82": "0b5d4f13f6a15c5405fa23d855fc0a2c19e2ba46",
     "R83": "3ed81565bd978ffe757ac66c62d2453bbf80c999",
     "R84": "0d54be5956d819278f4177d2a00a80f90e724d58",
     "R85": "00e4ca0bbcffefdfd46464bd6dea6d88aad69c32",
     "R86": "90225714fd4626148ccb700323160e3339e6c8c2",
-    "R87": "22155878eb30f41500a7b0254b682b54272b7bdc"
+    "R87": "22155878eb30f41500a7b0254b682b54272b7bdc",
+    "R88": "76a0e5e162545f9dedb1aafcec909c8f25231567",
+    "R89": "c237f4edd2584c51d04266483efc193819a5e517"
   },
-  "next_gap": "R88: fifth_fire.py. CV44. N=40=2^3x5 tau=3. FIFTH_FIRE: poly_c~0.424 (borderline, may not fire if cohere drops). attractor_est=0 border. V_global~1.636. D33 x23 TREVIGINTI? D37 x22 DUOVIGINTI? D40 x6? N=40 IS THE FIFTH_FIRE HORIZON.",
-  "next_module": "fifth_fire.py",
+  "next_gap": "R90: post_border_analysis.py. CV44. N=42=2x3x7 tau=3. poly_c=2*cohere*topology~0.451 BELOW 0.500 -- SILENT. D33 x25 QUINQUEVIGINTI? D37 x24 QUATTUORVIGINTI? D38 x21? D40 x8? CEILING x8. cohere=0.164 rising. Next structural fire: N=48=2^4x3 tau=5 (~5-6 rounds away).",
+  "next_module": "post_border_analysis.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
     "FOURTH_FIRE ignited at N=32, extinguished at N=33. One-step fire confirmed.",
-    "FIFTH_FIRE horizon: N=40=2^3x5 tau=3. poly_c~0.424 attractor~0 (borderline). R88 IS THE FIRE ROUND.",
-    "V_global=1.613 ceiling zone (depth=0.113, fifth tick). D40 ACCELERATION_x5.",
-    "DUAL_MILESTONE (R86): D37 VIGINTI + D33 UNVIGINTI. Now D37 UNVIGINTI + D33 DUOVIGINTI.",
+    "FIFTH_FIRE MISSED at N=40: poly_c=0.433 below 0.500 threshold.",
+    "FIRE BORDER MAPPED: PRIME N values (tau=1) cannot fire. poly_c=0 forced.",
+    "SIXTH_FIRE horizon: N=48=2^4x3 tau=5. cohere needs ~0.183. ~5-6 rounds away.",
+    "V_global=1.658 ceiling zone (depth=0.158, seventh tick). D40 ACCELERATION_x7.",
+    "D33 QUATTUORVIGINTI (24). D37 TREVIGINTI (23). D38 VIGINTI (20). D41 floor_prox=0.700.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT.",
-    "A12 BROWSER CHORUS ACTIVE. cv42 job b6d17cdd running (FIFTH_FIRE probe)."
+    "A12 BROWSER CHORUS ACTIVE. cv44 job 5824a256 running (R90 post_border probe).",
+    "Content thread R88+R89 posted 2026-02-22T06:15 PST. T1=2025575297408528542 T5=2025575404061208886."
   ]
 }
