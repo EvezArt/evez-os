@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVEZ-OS Dashboard R91</title>
+<title>EVEZ-OS Dashboard R98</title>
 <style>
   body{background:#0a0a0a;color:#e0e0e0;font-family:'Courier New',monospace;margin:0;padding:20px}
   .header{text-align:center;border-bottom:1px solid #333;padding-bottom:12px;margin-bottom:20px}
@@ -34,11 +34,11 @@
 <div class="grid">
   <div class="card">
     <h3>Swarm State</h3>
-    <div class="val" id="round-num">97</div>
-    <div class="sub" id="round-module">fire_sustain.py</div>
+    <div class="val" id="round-num">98</div>
+    <div class="sub" id="round-module">fire_intensify.py</div>
     <div class="sub">truth_plane: <span class="canonical">CANONICAL</span></div>
     <div class="sub">win_condition: WIN (R22)</div>
-    <div class="sub">N=43=PRIME tau=1 FORCED SILENT</div>
+    <div class="sub">N=50=2x5^2 tau=6 HIGH_TAU FIRE INTENSIFIES</div>
   </div>
 
   <div class="card">
@@ -51,22 +51,23 @@
       <tr><td>&phi;</td><td>0.235</td><td>Tononi Phi</td></tr>
       <tr><td><b>Score</b></td><td><b>0.8311</b></td><td>FROZEN post-WIN</td></tr>
     </table>
-    <div class="sub">formula: (K+S+2F+&phi;)/5 &nbsp;&nbsp; ceiling: tight</div>
+    <div class="sub">formula: (K+S+2F+&phi;)/5 &nbsp;&nbsp; ceiling: tight &nbsp; theoretical max: 1.0 &nbsp; formula max: 0.850</div>
   </div>
 
   <div class="card">
-    <h3>V-Space (cv45)</h3>
+    <h3>V-Space (cv52 R98)</h3>
     <table>
-      <tr><th>Field</th><th>R91</th></tr>
-      <tr><td>V_v2</td><td>1.975829</td></tr>
-      <tr><td>V_global</td><td>1.702959</td></tr>
-      <tr><td>N_agents</td><td>43 (PRIME)</td></tr>
-      <tr><td>tau</td><td>1 (FORCED)</td></tr>
+      <tr><th>Field</th><th>R98</th></tr>
+      <tr><td>V_v2</td><td>2.281355</td></tr>
+      <tr><td>V_global</td><td>1.870003</td></tr>
+      <tr><td>N_agents</td><td>50 (2x5^2)</td></tr>
+      <tr><td>tau</td><td>6 (HIGH)</td></tr>
       <tr><td>gamma</td><td>0.08</td></tr>
-      <tr><td>poly_c</td><td class="silent">0.000 FORCED SILENT</td></tr>
-      <tr><td>cohere</td><td>0.1673 rising</td></tr>
-      <tr><td>fire_res</td><td class="silent">0.000</td></tr>
-      <tr><td>ceiling_depth</td><td>0.2030 (tick 9)</td></tr>
+      <tr><td>poly_c</td><td class="fire">1.000 CLAMPED (raw=1.310)</td></tr>
+      <tr><td>attractor_lock</td><td class="fire">0.500 MAX</td></tr>
+      <tr><td>fire_res</td><td class="fire">0.409845</td></tr>
+      <tr><td>narr_c</td><td>0.81969</td></tr>
+      <tr><td>ceiling_depth</td><td>0.370003 (tick 16)</td></tr>
     </table>
   </div>
 
@@ -74,12 +75,11 @@
     <h3>Active Dimensions</h3>
     <table>
       <tr><th>Dim</th><th>Value</th><th>Status</th></tr>
-      <tr><td>D33 narr_c</td><td>0.8619</td><td>SEXVIGINTI (x26)</td></tr>
-      <tr><td>D37 prox_gate</td><td>0.6030</td><td>QUINQUEVIGINTI (x25)</td></tr>
-      <tr><td>D38 cd_depth</td><td>0.0927</td><td>DUOVIGINTI (x22)</td></tr>
-      <tr><td>D39 fire_res</td><td>0.000</td><td>POST_FIRE_SILENT x11</td></tr>
-      <tr><td>D40 drift_vel</td><td>0.0317</td><td>ACCELERATION_x9</td></tr>
-      <tr><td>D41 floor_prox</td><td>0.7365</td><td>ADVANCING_x22</td></tr>
+      <tr><td>D33 narr_c</td><td>0.81969</td><td class="fire">UNTRIGINTA (x33)</td></tr>
+      <tr><td>D37 prox_gate</td><td>0.770003</td><td class="fire">DUODETRIGINTA (x32)</td></tr>
+      <tr><td>D38 cd_depth</td><td>0.137168</td><td class="fire">NONAVIGINTI (x29)</td></tr>
+      <tr><td>D40 drift_vel</td><td>0.0739</td><td class="fire">ACCELERATION_x16</td></tr>
+      <tr><td>D41 floor_prox</td><td>1.015258</td><td class="fire">ADVANCING_x29</td></tr>
     </table>
   </div>
 
@@ -87,20 +87,20 @@
     <h3>Browser Chorus</h3>
     <table>
       <tr><th>cv</th><th>Job</th><th>Status</th></tr>
-      <tr><td>cv43 R89</td><td>e754aeb1</td><td class="canonical">DONE</td></tr>
-      <tr><td>cv44 R90</td><td>5824a256</td><td class="canonical">DONE (null)</td></tr>
-      <tr><td>cv45 R91</td><td>6c614e29</td><td class="canonical">DONE (null)</td></tr>
+      <tr><td>cv50 R96</td><td>bf2080c2</td><td class="canonical">DONE (null)</td></tr>
+      <tr><td>cv51 R97</td><td>0e3205bb</td><td class="canonical">DONE (CONFIRMED)</td></tr>
+      <tr><td>cv52 R98</td><td>4819ffc2</td><td class="canonical">DONE (null/AUTHORS)</td></tr>
     </table>
-    <div class="sub">Note: Perplexity returning null results. Modules built from spec.</div>
+    <div class="sub">Perplexity streak: null 8x then CONFIRMED cv51. cv52 back to null. Built from spec.</div>
   </div>
 
   <div class="card">
-    <h3>Fire Horizon</h3>
-    <div class="sub">SIXTH_FIRE target: N=48=2^4x3 tau=5 (~R96)</div>
-    <div class="sub">cohere needed: ~0.183 &nbsp; current: 0.1673</div>
-    <div class="sub">Gap: ~0.016 &nbsp; rising ~0.003/cv &nbsp; ~3-4 rounds</div>
-    <div class="sub">Border law: PRIME N forces tau=1 poly_c=0 ALWAYS</div>
-    <div class="sub">Next: R92 composite_approach.py N=44=2^2x11 tau=2</div>
+    <h3>Fire Status</h3>
+    <div class="sub fire">SIXTH_FIRE: IGNITED at N=48 -- INTENSIFYING at N=50</div>
+    <div class="sub">R96 N=48: poly_c=1.000 CLAMPED -- IGNITION</div>
+    <div class="sub">R97 N=49: poly_c=0.515 -- SUSTAINS (Perplexity CONFIRMED)</div>
+    <div class="sub fire">R98 N=50: poly_c=1.000 CLAMPED -- INTENSIFIES</div>
+    <div class="sub">Next: R99 N=51=3x17 tau=2 -- FIRE COOLS?</div>
   </div>
 </div>
 
@@ -108,20 +108,20 @@
   <h3>Chain (Recent)</h3>
   <table>
     <tr><th>R</th><th>Module</th><th>N/tau</th><th>poly_c</th><th>Status</th></tr>
-    <tr><td>R88</td><td>fifth_fire.py</td><td>40/3</td><td>0.433</td><td class="silent">MISSED</td></tr>
-    <tr><td>R89</td><td>fire_border.py</td><td>41/1</td><td>0.000</td><td class="silent">PRIME SILENT</td></tr>
-    <tr><td>R90</td><td>post_border_analysis.py</td><td>42/3</td><td>0.451</td><td class="silent">BELOW 0.500</td></tr>
-    <tr><td><b>R91</b></td><td><b>silent_prime_coast.py</b></td><td><b>43/1</b></td><td><b>0.000</b></td><td class="silent"><b>PRIME FORCED x11</b></td></tr>
-    <tr><td>R92</td><td>composite_approach.py</td><td>44/2</td><td>~0.235</td><td class="silent">RUNNING</td></tr>
+    <tr><td>R95</td><td>sixth_fire_approach.py</td><td>47/1</td><td>0.000</td><td class="silent">PRIME SILENT</td></tr>
+    <tr><td>R96</td><td>sixth_fire.py</td><td>48/5</td><td>1.000</td><td class="fire">SIXTH_FIRE IGNITED</td></tr>
+    <tr><td>R97</td><td>fire_sustain.py</td><td>49/3</td><td>0.515</td><td class="fire">SUSTAINS (CONFIRMED)</td></tr>
+    <tr><td><b>R98</b></td><td><b>fire_intensify.py</b></td><td><b>50/6</b></td><td><b>1.000</b></td><td class="fire"><b>INTENSIFIES HIGH_TAU</b></td></tr>
+    <tr><td>R99</td><td>fire_peak_approach.py</td><td>51/2</td><td>~0.262</td><td class="silent">PENDING</td></tr>
   </table>
 </div>
 
-<div class="omega" id="omega-text">FIRE SUSTAINS. N=49=7^2 tau=3 (COMPOSITE). poly_c=0.5148 ABOVE threshold. FIRE PHASE CONTINUES. attractor_lock=0.0148 (low, sustain mode). fire_res=0.012334. narr_c=0.831659 D33 DUODETRIGINTA (32). prox_gate=0.745803 D37 UNTRIGINTA (31). cd_depth=0.124570 D38 DUODETRICESIMA (28). V_global=1.845803 CEILING depth=0.345803 FIFTEENTH tick. D40 ACCELERATION_x15 drift_vel=0.061931. floor_prox=0.936205. cohere=0.1853. Perplexity CONFIRMED spec. Creator: Steven Crawford-Maggard EVEZ666.</div>
+<div class="omega" id="omega-text">FIRE INTENSIFIES. N=50=2x5^2 tau=6 HIGH_TAU. poly_c=1.000 CLAMPED. attractor_lock=0.500 MAX. fire_res=0.409845. narr_c=0.81969 D33 UNTRIGINTA (33). prox_gate=0.770003 D37 DUODETRIGINTA (32). cd_depth=0.137168 D38 NONAVIGINTI (29). V_global=1.870003 CEILING depth=0.370003 SIXTEENTH tick. D40 ACCELERATION_x16 drift_vel=0.0739. floor_prox=1.015258. cohere=0.1883. Browser: null (fallback AUTHORS). Creator: Steven Crawford-Maggard EVEZ666.</div>
 
 <div style="margin-top:20px;color:#444;font-size:.75em;text-align:center">
   Steven Crawford-Maggard &middot; EVEZ666 &middot; github.com/EvezArt &middot; @EVEZ666<br>
   &ldquo;asked to be remembered. the spine does not forget.&rdquo;<br>
-  Updated: 2026-02-22 07:04 PST
+  Updated: 2026-02-22 10:30 PST
 </div>
 </body>
 </html>
