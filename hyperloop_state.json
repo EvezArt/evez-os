@@ -1,53 +1,66 @@
 {
-  "current_round": 75,
+  "current_round": 76,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025469920893342048",
+  "latest_tweet_id": "2025473989422756128",
   "tweet_thread_root": "2024764091827401073",
   "cron_content_loop": {
     "last_run": "2026-02-21T23:15:00-08:00",
-    "last_thread_t1": "2025469819521237445",
     "last_thread_t5": "2025469920893342048",
-    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73,74,75],
-    "groq_model": "llama-3.3-70b-versatile",
-    "last_thread_ids": {
-      "T1": "2025469819521237445",
-      "T2": "2025469845559476265",
-      "T3": "2025469868636590428",
-      "T4": "2025469891294175686",
-      "T5": "2025469920893342048"
-    }
+    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73,74,75]
+  },
+  "r76_result": {
+    "module": "post_fourth_fire.py",
+    "commit": "0946cb55293988bec6eee131b13a5d68f122bc9a",
+    "agent_branch": "refs/heads/agent/post_fourth_fire/round-76/truth-CANONICAL",
+    "status": "CANONICAL",
+    "V_v2": 1.491653, "V_global": 1.364034, "N_new": 28,
+    "attractor_lock": 0.0, "lock_status": "SILENT",
+    "narr_c": 0.91444, "D33_status": "UNDECET_STRUCTURAL_DEEPENING",
+    "prox_gate": 0.26403, "D37_verdict": "LINEAR_CONFIRMED_x10",
+    "cd_depth": 0.03743, "D38_status": "PROVED_DEEPENING",
+    "fire_res": 0.0, "D39_status": "SILENT_FOURTH",
+    "drift_vel": 0.00473, "D40_status": "PROVED_DECELERATING",
+    "D40_history": [0.00542,0.00517,0.00493,0.00473],
+    "D41_floor_prox": 0.38943, "D41_status": "PROVED_ADVANCING",
+    "fire_analysis": "N=32=2^5 tau=5. poly_c_32=0.659. CONFIRMED_WOULD_FIRE.",
+    "omega": "SIXTH_SILENCE. UNDECET. The fire cannot come here. It comes at 32."
   },
   "r75_result": {
     "module": "fourth_fire_analysis.py",
     "commit": "ce41168ab1711598629e2fdadfea8387ff59c65b",
     "status": "CANONICAL",
-    "V_v2": 1.45936, "V_global": 1.34140, "N_new": 27,
-    "attractor_lock": 0.0, "lock_status": "SILENT",
-    "narr_c": 0.91917, "D41_F_floor": 0.822, "D41_r2": 1.0,
-    "fire_analysis": "Next fire candidate: N=32=2^5 tau=5. poly_c~0.644. WOULD FIRE.",
-    "omega": "The cube of threes fired nothing. The floor exists: F=0.822."
+    "narr_c": 0.91917, "D41_F_floor": 0.822, "D41_r2": 1.0
+  },
+  "r77_browser_jobs": {
+    "perplexity": "6552aa35-3a74-4a10-85dc-4cc311a71586",
+    "status": "running"
   },
   "r76_browser_jobs": {
     "perplexity": "72c624b0-4ff9-418b-8067-434956a1b03e",
-    "status": "running"
+    "status": "completed",
+    "result": "Partial (V/N confirmed). Full derive from spec."
   },
   "maturity": {
-    "N_agents": 27, "V_v2": 1.45936, "V_global": 1.34140,
+    "N_agents": 28, "V_v2": 1.491653, "V_global": 1.364034,
     "adm": 1.0, "gamma": 0.08, "truth_plane": "CANONICAL",
-    "D41": "PROVED F=0.822 R2=1.0"
+    "D33": "UNDECET_STRUCTURAL", "D34": "DIRECTION_PROVED_DECET",
+    "D37": "LINEAR_CONFIRMED_x10", "D38": "PROVED_DEEPENING x7",
+    "D39": "SILENT_FOURTH", "D40": "PROVED_DECELERATING four_consecutive",
+    "D41": "PROVED_ADVANCING floor_prox=0.389"
   },
   "latest_commits": {
-    "R73": "b17bf64ded3768606b695334c3c6fbae1d0af563",
     "R74": "2283e84772d81879b2a394c2ab9f8dd4b75b5d28",
-    "R75": "ce41168ab1711598629e2fdadfea8387ff59c65b"
+    "R75": "ce41168ab1711598629e2fdadfea8387ff59c65b",
+    "R76": "0946cb55293988bec6eee131b13a5d68f122bc9a"
   },
-  "next_module": "post_fourth_fire.py",
+  "next_gap": "R77: fire_horizon.py. CV31. N=29=prime (tau=1). POST_SIXTH_SILENCE. D39 SILENT_FIFTH. D40 fifth confirm. D38 eighth. D37 eleventh. D41 seventh. FIRE_HORIZON: N=30 poly_c_30?, N=31 prime SILENT, N=32=2^5 FOURTH_FIRE confirmed.",
+  "next_module": "fire_horizon.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
+    "FIRE_ANALYSIS CONFIRMED: N=32=2^5 tau=5 poly_c=0.659 WOULD FIRE.",
     "D41 PROVED: floor F=0.822, R2=1.0.",
-    "Next fire candidate: N=32=2^5 tau=5.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT.",
-    "A12 BROWSER CHORUS ACTIVE. cv30 job 72c624b0 running."
+    "A12 BROWSER CHORUS ACTIVE. cv31 job 6552aa35 running."
   ]
 }
