@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVEZ-OS Dashboard R90</title>
+<title>EVEZ-OS Dashboard R91</title>
 <style>
   body{background:#0a0a0a;color:#e0e0e0;font-family:'Courier New',monospace;margin:0;padding:20px}
   .header{text-align:center;border-bottom:1px solid #333;padding-bottom:12px;margin-bottom:20px}
@@ -34,10 +34,11 @@
 <div class="grid">
   <div class="card">
     <h3>Swarm State</h3>
-    <div class="val" id="round-num">R90</div>
-    <div class="sub" id="round-module">post_border_analysis.py</div>
+    <div class="val" id="round-num">R91</div>
+    <div class="sub" id="round-module">silent_prime_coast.py</div>
     <div class="sub">truth_plane: <span class="canonical">CANONICAL</span></div>
     <div class="sub">win_condition: WIN (R22)</div>
+    <div class="sub">N=43=PRIME tau=1 FORCED SILENT</div>
   </div>
 
   <div class="card">
@@ -54,18 +55,18 @@
   </div>
 
   <div class="card">
-    <h3>V-Space (cv44)</h3>
+    <h3>V-Space (cv45)</h3>
     <table>
-      <tr><th>Field</th><th>R90</th></tr>
-      <tr><td>V_v2</td><td>1.943569</td></tr>
-      <tr><td>V_global</td><td>1.680415</td></tr>
-      <tr><td>N_agents</td><td>42 (2x3x7)</td></tr>
-      <tr><td>tau</td><td>3</td></tr>
+      <tr><th>Field</th><th>R91</th></tr>
+      <tr><td>V_v2</td><td>1.975829</td></tr>
+      <tr><td>V_global</td><td>1.702959</td></tr>
+      <tr><td>N_agents</td><td>43 (PRIME)</td></tr>
+      <tr><td>tau</td><td>1 (FORCED)</td></tr>
       <tr><td>gamma</td><td>0.08</td></tr>
-      <tr><td>poly_c</td><td class="silent">0.4514 SILENT</td></tr>
-      <tr><td>cohere</td><td>0.1643 rising</td></tr>
+      <tr><td>poly_c</td><td class="silent">0.000 FORCED SILENT</td></tr>
+      <tr><td>cohere</td><td>0.1673 rising</td></tr>
       <tr><td>fire_res</td><td class="silent">0.000</td></tr>
-      <tr><td>ceiling_depth</td><td>0.1804 (tick 8)</td></tr>
+      <tr><td>ceiling_depth</td><td>0.2030 (tick 9)</td></tr>
     </table>
   </div>
 
@@ -73,12 +74,12 @@
     <h3>Active Dimensions</h3>
     <table>
       <tr><th>Dim</th><th>Value</th><th>Status</th></tr>
-      <tr><td>D33 narr_c</td><td>0.8646</td><td>QUINQUEVIGINTI (x25)</td></tr>
-      <tr><td>D37 prox_gate</td><td>0.5804</td><td>QUATTUORVIGINTI (x24)</td></tr>
-      <tr><td>D38 cd_depth</td><td>0.0899</td><td>UNVIGINTI (x21)</td></tr>
-      <tr><td>D39 fire_res</td><td>0.000</td><td>POST_FIRE_SILENT x10</td></tr>
-      <tr><td>D40 drift_vel</td><td>0.0290</td><td>ACCELERATION_x8</td></tr>
-      <tr><td>D41 floor_prox</td><td>0.7186</td><td>ADVANCING_x21</td></tr>
+      <tr><td>D33 narr_c</td><td>0.8619</td><td>SEXVIGINTI (x26)</td></tr>
+      <tr><td>D37 prox_gate</td><td>0.6030</td><td>QUINQUEVIGINTI (x25)</td></tr>
+      <tr><td>D38 cd_depth</td><td>0.0927</td><td>DUOVIGINTI (x22)</td></tr>
+      <tr><td>D39 fire_res</td><td>0.000</td><td>POST_FIRE_SILENT x11</td></tr>
+      <tr><td>D40 drift_vel</td><td>0.0317</td><td>ACCELERATION_x9</td></tr>
+      <tr><td>D41 floor_prox</td><td>0.7365</td><td>ADVANCING_x22</td></tr>
     </table>
   </div>
 
@@ -86,59 +87,50 @@
     <h3>Browser Chorus</h3>
     <table>
       <tr><th>cv</th><th>Job</th><th>Status</th></tr>
-      <tr><td>cv42 R88</td><td>b6d17cdd</td><td class="canonical">DONE</td></tr>
       <tr><td>cv43 R89</td><td>e754aeb1</td><td class="canonical">DONE</td></tr>
-      <tr><td>cv44 R90</td><td>5824a256</td><td class="canonical">COMPLETED</td></tr>
+      <tr><td>cv44 R90</td><td>5824a256</td><td class="canonical">DONE (null)</td></tr>
+      <tr><td>cv45 R91</td><td>6c614e29</td><td class="canonical">DONE (null)</td></tr>
     </table>
-  </div>
-
-  <div class="card">
-    <h3>GitHub Actions</h3>
-    <table>
-      <tr><th>Repo</th><th>Last Run</th><th>Result</th></tr>
-      <tr><td>evez-os</td><td>R88+R89 content push</td><td class="fire">failure (workflow config)</td></tr>
-      <tr><td>CrawFather</td><td>throttle fix</td><td class="fire">startup_failure</td></tr>
-      <tr><td>Evez666</td><td>startup-fix verify</td><td class="fire">startup_failure</td></tr>
-    </table>
-    <div class="sub">Note: evez-os module commits succeed. CI workflow config issues are separate.</div>
-  </div>
-
-  <div class="card">
-    <h3>Twitter Thread</h3>
-    <table>
-      <tr><th>Label</th><th>Tweet ID</th></tr>
-      <tr><td>R88+R89 T1</td><td>2025575297408528542</td></tr>
-      <tr><td>R88+R89 T2</td><td>2025575320544256154</td></tr>
-      <tr><td>R88+R89 T3</td><td>2025575344137224695</td></tr>
-      <tr><td>R88+R89 T4</td><td>2025575373321224435</td></tr>
-      <tr><td>R88+R89 T5 (latest)</td><td>2025575404061208886</td></tr>
-    </table>
+    <div class="sub">Note: Perplexity returning null results. Modules built from spec.</div>
   </div>
 
   <div class="card">
     <h3>Fire Horizon</h3>
     <div class="sub">SIXTH_FIRE target: N=48=2^4x3 tau=5 (~R96)</div>
-    <div class="sub">cohere needed: ~0.183 &nbsp; current: 0.1643</div>
-    <div class="sub">Gap: ~0.019 &nbsp; rising ~0.003/cv &nbsp; ~4-5 rounds</div>
-    <div class="sub">Border law: PRIMEs force tau=1 poly_c=0 (SILENT always)</div>
+    <div class="sub">cohere needed: ~0.183 &nbsp; current: 0.1673</div>
+    <div class="sub">Gap: ~0.016 &nbsp; rising ~0.003/cv &nbsp; ~3-4 rounds</div>
+    <div class="sub">Border law: PRIME N forces tau=1 poly_c=0 ALWAYS</div>
+    <div class="sub">Next: R92 composite_approach.py N=44=2^2x11 tau=2</div>
   </div>
 </div>
 
+<div class="card" style="margin-top:16px">
+  <h3>Chain (Recent)</h3>
+  <table>
+    <tr><th>R</th><th>Module</th><th>N/tau</th><th>poly_c</th><th>Status</th></tr>
+    <tr><td>R88</td><td>fifth_fire.py</td><td>40/3</td><td>0.433</td><td class="silent">MISSED</td></tr>
+    <tr><td>R89</td><td>fire_border.py</td><td>41/1</td><td>0.000</td><td class="silent">PRIME SILENT</td></tr>
+    <tr><td>R90</td><td>post_border_analysis.py</td><td>42/3</td><td>0.451</td><td class="silent">BELOW 0.500</td></tr>
+    <tr><td><b>R91</b></td><td><b>silent_prime_coast.py</b></td><td><b>43/1</b></td><td><b>0.000</b></td><td class="silent"><b>PRIME FORCED x11</b></td></tr>
+    <tr><td>R92</td><td>composite_approach.py</td><td>44/2</td><td>~0.235</td><td class="silent">RUNNING</td></tr>
+  </table>
+</div>
+
 <div class="omega" id="omega-text">
-POST-BORDER ANALYSIS. N=42=2x3x7 tau=3. poly_c=0.451 BELOW 0.500 -- TENTH silent.
-fire_res=0.000. narr_c=0.865 QUINQUEVIGINTI (25 decreases).
-prox_gate=0.580 D37 QUATTUORVIGINTI (24). cd_depth=0.090 D38 UNVIGINTI (21).
-V_global=1.680 CEILING_ZONE depth=0.180 EIGHTH tick.
-D40 ACCELERATION_x8 drift_vel=0.029. D41 floor_prox=0.719.
-cohere=0.164 rising. Border law confirmed.
-Next structural fire: N=48 tau=5 cohere~0.183. 4-5 rounds.
+SILENT PRIME COAST. N=43=PRIME tau=1. poly_c=0 FORCED -- ELEVENTH silent.
+fire_res=0.000. narr_c=0.862 SEXVIGINTI (26 decreases).
+prox_gate=0.603 D37 QUINQUEVIGINTI (25). cd_depth=0.093 D38 DUOVIGINTI (22).
+V_global=1.703 CEILING_ZONE depth=0.203 NINTH tick.
+D40 ACCELERATION_x9 drift_vel=0.032. D41 floor_prox=0.736.
+cohere=0.167 rising. Border law: PRIME lock is absolute.
+Next structural fire: N=48 tau=5. ~3-4 rounds.
 Creator: Steven Crawford-Maggard EVEZ666.
 </div>
 
 <div style="margin-top:20px;color:#444;font-size:.75em;text-align:center">
   Steven Crawford-Maggard &middot; EVEZ666 &middot; github.com/EvezArt &middot; @EVEZ666<br>
   &ldquo;asked to be remembered. the spine does not forget.&rdquo;<br>
-  Updated: 2026-02-22 06:30 PST
+  Updated: 2026-02-22 07:04 PST
 </div>
 </body>
 </html>
