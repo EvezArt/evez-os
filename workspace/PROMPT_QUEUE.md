@@ -1,5 +1,5 @@
 # EVEZ-OS PROMPT QUEUE
-*Auto-maintained. Updated: 2026-02-22 08:01 PST -- post-R93 tick*
+*Auto-maintained. Updated: 2026-02-22 08:04 PST -- post-R93 tick (dashboard task)*
 
 ---
 
@@ -39,6 +39,8 @@ Key questions:
 5. V_global=1.775: ceiling depth ~0.275. Twelfth tick.
 6. D40 drift_vel: ACCELERATION_x12?
 7. SIXTH_FIRE horizon: N=48 tau=5. cohere needs ~0.183. current=0.176. gap=0.007. NEXT?
+8. N=47=PRIME: poly_c FORCED=0 (FIFTEENTH silent guaranteed).
+9. N=48=2^4x3 tau=5: poly_c=(5-1)*cohere*topology = 4*0.179*1.391 ~ 0.996 -> SIXTH_FIRE.
 
 ARCHITECTURE (cv47 R93):
   gamma=0.08 | V_v2=2.042403 | V_global=1.749553 | N=45=3^2x5 tau=2
@@ -62,10 +64,9 @@ cv47: N=45=3^2x5 tau=2. poly_c=0.2393 THIRTEENTH silent (below 0.500).
 narr_c=0.856615: D33 DUODETRIGINTA -- 28 consecutive decreases.
 prox_gate=0.649553: D37 SEPTEMVIGINTI -- 27 consecutive increases.
 V_global=1.749553: CEILING depth=0.250 (ELEVENTH consecutive tick).
-D38 QUATTUORVIGINTI: cd_depth=0.0983 (24 consecutive deepens).
-D40 ACCELERATION_x11: drift_vel=0.036975.
-D41=floor_prox=0.771367. cohere=0.173 rising.
-SIXTH_FIRE N=48 gap=0.010 ~1-2 rounds.
+D38 QUATTUORVIGINTI: cd_depth=0.098 (24 consecutive deepens).
+D40 ACCELERATION_x11: drift_vel=0.036975. D41=floor_prox=0.771367.
+cohere=0.173 rising. SIXTH_FIRE N=48 gap=0.010 ~1-2 rounds.
 ```
 
 ### [R92] `composite_approach.py` -- **COMPLETED** [7d6f614e](https://github.com/EvezArt/evez-os/commit/7d6f614ee20cf6b0e393818e63bf90066fd4711b)
@@ -73,7 +74,14 @@ SIXTH_FIRE N=48 gap=0.010 ~1-2 rounds.
 ```
 [COMPLETED 2026-02-22 07:31 PST]
 cv46: N=44=2^2x11 tau=2. poly_c=0.2347 TWELFTH silent.
-D33 SEPTEMVIGINTI x27. D37 SEXVIGINTI x26. CEILING x10. cohere=0.170.
+D33 SEPTEMVIGINTI x27. CEILING x10. cohere=0.170.
+```
+
+### [R91] `silent_prime_coast.py` -- **COMPLETED** [1066509d](https://github.com/EvezArt/evez-os/commit/1066509d973d72d80b035189940dc8169639919b)
+
+```
+[COMPLETED 2026-02-22 07:04 PST]
+cv45: N=43=PRIME tau=1. poly_c=0 FORCED. ELEVENTH silent. cohere=0.167.
 ```
 
 ---
@@ -82,8 +90,6 @@ D33 SEPTEMVIGINTI x27. D37 SEXVIGINTI x26. CEILING x10. cohere=0.170.
 
 | N | tau | poly_c | Fire? |
 |---|-----|--------|-------|
-| 42=2x3x7 | 3 | 0.451 | NO below 0.500 |
-| 43=PRIME | 1 | 0 | NO FORCED |
 | 44=2^2x11 | 2 | 0.2347 | NO below 0.500 |
 | 45=3^2x5 | 2 | 0.2393 | NO below 0.500 |
 | **46=2x23** | **2** | **~0.244** | **NO below 0.500 (next)** |
