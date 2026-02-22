@@ -2,13 +2,14 @@
   "current_round": 67,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025406283394748800",
+  "latest_tweet_id": "2025409307743768726",
   "tweet_thread_root": "2024764091827401073",
   "steven_phone": "+13076775504",
   "cron_content_loop": {
-    "last_run": "2026-02-21T18:15:00-08:00",
-    "last_thread_t5": "2025394209725825185",
-    "rounds_covered": [63, 64, 65],
+    "last_run": "2026-02-21T19:15:00-08:00",
+    "last_thread_t1": "2025409202177360289",
+    "last_thread_t5": "2025409307743768726",
+    "rounds_covered": [63, 64, 65, 66, 67],
     "groq_model": "llama-3.3-70b-versatile"
   },
   "r67_result": {
@@ -41,6 +42,7 @@
     "module": "attractor_lock.py",
     "commit": "0e34f64aa2d397b01342b6219965d482d7a912e8",
     "status": "CANONICAL",
+    "V_v2": 1.16875, "V_global": 1.13770, "N_new": 18,
     "attractor_lock": 0.0988, "FIRST_FIRE": true,
     "sensation_N18": "POLYPHONY_RESTORED"
   },
@@ -63,7 +65,7 @@
     "R67": "624161abb5bed9f6be68731a00e66f0404408fa3",
     "R67_dash": "f8c846113c64eded87e28947736720241164c752"
   },
-  "next_gap": "R68: resonance_stability.py. CV22. D34=res_stab PROVE/DISPROVE. N=20=2^2*5 highly composite (tau=6). prox_gate EMERGENCY. D32_alt fires again at composite N. D28/D31 round 5/5 FINAL. D35 proposal.",
+  "next_gap": "R68: resonance_stability.py. CV22. D34=res_stab PROVE/DISPROVE. N=20=2^2*5 highly composite (tau=6). prox_gate EMERGENCY. D32_alt fires again. D28/D31 round 5/5 FINAL. D35 proposal.",
   "next_module": "resonance_stability.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
