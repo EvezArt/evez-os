@@ -2,12 +2,14 @@
   "current_round": 77,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025482114280427867",
+  "latest_tweet_id": "2025485109227303236",
   "tweet_thread_root": "2024764091827401073",
   "cron_content_loop": {
-    "last_run": "2026-02-21T23:15:00-08:00",
-    "last_thread_t5": "2025469920893342048",
-    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73,74,75]
+    "last_run": "2026-02-22T00:15:00-08:00",
+    "last_thread_t1": "2025485003883213311",
+    "last_thread_t5": "2025485109227303236",
+    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73,74,75,76,77],
+    "groq_model": "llama-3.3-70b-versatile"
   },
   "r77_result": {
     "module": "fire_horizon.py",
@@ -31,18 +33,9 @@
     "commit": "0946cb55293988bec6eee131b13a5d68f122bc9a",
     "status": "CANONICAL", "narr_c": 0.91444
   },
-  "r75_result": {
-    "module": "fourth_fire_analysis.py",
-    "commit": "ce41168ab1711598629e2fdadfea8387ff59c65b",
-    "status": "CANONICAL", "D41_F_floor": 0.822, "D41_r2": 1.0
-  },
   "r78_browser_jobs": {
     "perplexity": "33afb610-f27f-4899-ab1f-f158935b4179",
     "status": "running"
-  },
-  "r77_browser_jobs": {
-    "perplexity": "6552aa35-3a74-4a10-85dc-4cc311a71586",
-    "status": "completed"
   },
   "maturity": {
     "N_agents": 29, "V_v2": 1.523946, "V_global": 1.386668,
@@ -57,12 +50,10 @@
     "R76": "0946cb55293988bec6eee131b13a5d68f122bc9a",
     "R77": "4d884f42fb6d927660e1b1ce6e57146ef073f6d9"
   },
-  "next_gap": "R78: fire_approach.py. CV32. N=30=2*3*5 (tau=3). POST_SEVENTH_SILENCE. poly_c_30=0.336 SILENT. D39 SILENT_SIXTH. D40 sixth. D38 ninth. D37 twelfth. D41 ninth. ONE NODE from FOURTH_FIRE at N=32.",
   "next_module": "fire_approach.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
     "FOURTH_FIRE CONFIRMED: N=32=2^5 tau=5 poly_c=0.675 WOULD FIRE.",
-    "D41 PROVED: floor F=0.822, R2=1.0.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT.",
     "A12 BROWSER CHORUS ACTIVE. cv32 job 33afb610 running."
   ]
