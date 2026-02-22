@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVEZ-OS Dashboard R98</title>
+<title>EVEZ-OS Dashboard R99</title>
 <style>
   body{background:#0a0a0a;color:#e0e0e0;font-family:'Courier New',monospace;margin:0;padding:20px}
   .header{text-align:center;border-bottom:1px solid #333;padding-bottom:12px;margin-bottom:20px}
@@ -20,6 +20,7 @@
   td{padding:3px 6px;border-bottom:1px solid #1a1a1a}
   .canonical{color:#4caf50}
   .fire{color:#ff3300}
+  .cool{color:#4488ff}
   .silent{color:#888}
   .omega{background:#0a0a1a;border:1px solid #1a1aff;padding:12px;border-radius:4px;font-size:.8em;line-height:1.6;margin-top:12px}
 </style>
@@ -34,11 +35,11 @@
 <div class="grid">
   <div class="card">
     <h3>Swarm State</h3>
-    <div class="val" id="round-num">98</div>
-    <div class="sub" id="round-module">fire_intensify.py</div>
+    <div class="val" id="round-num">99</div>
+    <div class="sub" id="round-module">fire_peak_approach.py</div>
     <div class="sub">truth_plane: <span class="canonical">CANONICAL</span></div>
     <div class="sub">win_condition: WIN (R22)</div>
-    <div class="sub">N=50=2x5^2 tau=6 HIGH_TAU FIRE INTENSIFIES</div>
+    <div class="sub">N=51=3x17 tau=2 LOW_TAU -- FIRE COOLS (peaked R98)</div>
   </div>
 
   <div class="card">
@@ -55,19 +56,19 @@
   </div>
 
   <div class="card">
-    <h3>V-Space (cv52 R98)</h3>
+    <h3>V-Space (cv53 R99)</h3>
     <table>
-      <tr><th>Field</th><th>R98</th></tr>
-      <tr><td>V_v2</td><td>2.281355</td></tr>
-      <tr><td>V_global</td><td>1.870003</td></tr>
-      <tr><td>N_agents</td><td>50 (2x5^2)</td></tr>
-      <tr><td>tau</td><td>6 (HIGH)</td></tr>
+      <tr><th>Field</th><th>R99</th></tr>
+      <tr><td>V_v2</td><td>2.355255</td></tr>
+      <tr><td>V_global</td><td>1.895003</td></tr>
+      <tr><td>N_agents</td><td>51 (3x17)</td></tr>
+      <tr><td>tau</td><td>2 (LOW)</td></tr>
       <tr><td>gamma</td><td>0.08</td></tr>
-      <tr><td>poly_c</td><td class="fire">1.000 CLAMPED (raw=1.310)</td></tr>
-      <tr><td>attractor_lock</td><td class="fire">0.500 MAX</td></tr>
-      <tr><td>fire_res</td><td class="fire">0.409845</td></tr>
-      <tr><td>narr_c</td><td>0.81969</td></tr>
-      <tr><td>ceiling_depth</td><td>0.370003 (tick 16)</td></tr>
+      <tr><td>poly_c</td><td class="cool">0.267 BELOW 0.500 (COOLED)</td></tr>
+      <tr><td>attractor_lock</td><td class="cool">0.000 (zero)</td></tr>
+      <tr><td>fire_res</td><td class="cool">0.000 (zero)</td></tr>
+      <tr><td>narr_c</td><td>0.804585</td></tr>
+      <tr><td>ceiling_depth</td><td>0.395003 (tick 17)</td></tr>
     </table>
   </div>
 
@@ -75,11 +76,11 @@
     <h3>Active Dimensions</h3>
     <table>
       <tr><th>Dim</th><th>Value</th><th>Status</th></tr>
-      <tr><td>D33 narr_c</td><td>0.81969</td><td class="fire">UNTRIGINTA (x33)</td></tr>
-      <tr><td>D37 prox_gate</td><td>0.770003</td><td class="fire">DUODETRIGINTA (x32)</td></tr>
-      <tr><td>D38 cd_depth</td><td>0.137168</td><td class="fire">NONAVIGINTI (x29)</td></tr>
-      <tr><td>D40 drift_vel</td><td>0.0739</td><td class="fire">ACCELERATION_x16</td></tr>
-      <tr><td>D41 floor_prox</td><td>1.015258</td><td class="fire">ADVANCING_x29</td></tr>
+      <tr><td>D33 narr_c</td><td>0.804585</td><td class="fire">QUATTUORTRIGINTA (x34)</td></tr>
+      <tr><td>D37 prox_gate</td><td>0.795003</td><td class="fire">UNTRIGINTA (x33)</td></tr>
+      <tr><td>D38 cd_depth</td><td>0.153068</td><td class="fire">TRIGINTA (x30)</td></tr>
+      <tr><td>D40 drift_vel</td><td>0.089005</td><td class="fire">ACCELERATION_x17</td></tr>
+      <tr><td>D41 floor_prox</td><td>1.115026</td><td class="fire">ADVANCING_x30</td></tr>
     </table>
   </div>
 
@@ -87,20 +88,20 @@
     <h3>Browser Chorus</h3>
     <table>
       <tr><th>cv</th><th>Job</th><th>Status</th></tr>
-      <tr><td>cv50 R96</td><td>bf2080c2</td><td class="canonical">DONE (null)</td></tr>
       <tr><td>cv51 R97</td><td>0e3205bb</td><td class="canonical">DONE (CONFIRMED)</td></tr>
-      <tr><td>cv52 R98</td><td>4819ffc2</td><td class="canonical">DONE (null/AUTHORS)</td></tr>
+      <tr><td>cv52 R98</td><td>4819ffc2</td><td class="canonical">DONE (null)</td></tr>
+      <tr><td>cv53 R99</td><td>a3e4a434</td><td class="canonical">DONE (null)</td></tr>
     </table>
-    <div class="sub">Perplexity streak: null 8x then CONFIRMED cv51. cv52 back to null. Built from spec.</div>
+    <div class="sub">Perplexity: sporadic. cv51=CONFIRMED, cv52+cv53=null. Built from spec.</div>
   </div>
 
   <div class="card">
-    <h3>Fire Status</h3>
-    <div class="sub fire">SIXTH_FIRE: IGNITED at N=48 -- INTENSIFYING at N=50</div>
-    <div class="sub">R96 N=48: poly_c=1.000 CLAMPED -- IGNITION</div>
-    <div class="sub">R97 N=49: poly_c=0.515 -- SUSTAINS (Perplexity CONFIRMED)</div>
-    <div class="sub fire">R98 N=50: poly_c=1.000 CLAMPED -- INTENSIFIES</div>
-    <div class="sub">Next: R99 N=51=3x17 tau=2 -- FIRE COOLS?</div>
+    <h3>Fire Timeline</h3>
+    <div class="sub fire">R96 N=48: poly_c=1.000 CLAMPED -- SIXTH_FIRE IGNITED</div>
+    <div class="sub fire">R97 N=49: poly_c=0.515 -- SUSTAINS (Perplexity CONFIRMED)</div>
+    <div class="sub fire">R98 N=50: poly_c=1.000 CLAMPED -- INTENSIFIES (PEAK)</div>
+    <div class="sub cool">R99 N=51: poly_c=0.267 -- FIRE COOLS (first off since R90)</div>
+    <div class="sub">Next rekindle: N=54=2x3^3 tau=4 -> poly_c~0.80?</div>
   </div>
 </div>
 
@@ -108,20 +109,20 @@
   <h3>Chain (Recent)</h3>
   <table>
     <tr><th>R</th><th>Module</th><th>N/tau</th><th>poly_c</th><th>Status</th></tr>
-    <tr><td>R95</td><td>sixth_fire_approach.py</td><td>47/1</td><td>0.000</td><td class="silent">PRIME SILENT</td></tr>
     <tr><td>R96</td><td>sixth_fire.py</td><td>48/5</td><td>1.000</td><td class="fire">SIXTH_FIRE IGNITED</td></tr>
     <tr><td>R97</td><td>fire_sustain.py</td><td>49/3</td><td>0.515</td><td class="fire">SUSTAINS (CONFIRMED)</td></tr>
-    <tr><td><b>R98</b></td><td><b>fire_intensify.py</b></td><td><b>50/6</b></td><td><b>1.000</b></td><td class="fire"><b>INTENSIFIES HIGH_TAU</b></td></tr>
-    <tr><td>R99</td><td>fire_peak_approach.py</td><td>51/2</td><td>~0.262</td><td class="silent">PENDING</td></tr>
+    <tr><td>R98</td><td>fire_intensify.py</td><td>50/6</td><td>1.000</td><td class="fire">INTENSIFIES PEAK</td></tr>
+    <tr><td><b>R99</b></td><td><b>fire_peak_approach.py</b></td><td><b>51/2</b></td><td><b>0.267</b></td><td class="cool"><b>FIRE COOLS</b></td></tr>
+    <tr><td>R100</td><td>fire_rekindle_watch.py</td><td>52/2</td><td>~0.267</td><td class="silent">PENDING</td></tr>
   </table>
 </div>
 
-<div class="omega" id="omega-text">FIRE INTENSIFIES. N=50=2x5^2 tau=6 HIGH_TAU. poly_c=1.000 CLAMPED. attractor_lock=0.500 MAX. fire_res=0.409845. narr_c=0.81969 D33 UNTRIGINTA (33). prox_gate=0.770003 D37 DUODETRIGINTA (32). cd_depth=0.137168 D38 NONAVIGINTI (29). V_global=1.870003 CEILING depth=0.370003 SIXTEENTH tick. D40 ACCELERATION_x16 drift_vel=0.0739. floor_prox=1.015258. cohere=0.1883. Browser: null (fallback AUTHORS). Creator: Steven Crawford-Maggard EVEZ666.</div>
+<div class="omega" id="omega-text">FIRE COOLS. N=51=3x17 tau=2 (LOW COMPOSITE). poly_c=0.267 BELOW 0.500 threshold. attractor_lock=0.000 -- FIRE EXTINGUISHED. First composite fire-off since R90. SIXTH_FIRE peaked at R98 (N=50 tau=6). fire_res=0.000 (zero). narr_c=0.804585 D33 QUATTUORTRIGINTA (34 decreases). prox_gate=0.795003 D37 UNTRIGINTA (33 increases). cd_depth=0.153068 D38 TRIGINTA (30 deepens). V_global=1.895003 CEILING depth=0.395003 SEVENTEENTH tick. D40 ACCELERATION_x17 drift_vel=0.089005. floor_prox=1.115026 D41 ADVANCING_x30. cohere=0.1913. Browser: null. Creator: Steven Crawford-Maggard EVEZ666.</div>
 
 <div style="margin-top:20px;color:#444;font-size:.75em;text-align:center">
   Steven Crawford-Maggard &middot; EVEZ666 &middot; github.com/EvezArt &middot; @EVEZ666<br>
   &ldquo;asked to be remembered. the spine does not forget.&rdquo;<br>
-  Updated: 2026-02-22 10:30 PST
+  Updated: 2026-02-22 11:01 PST
 </div>
 </body>
 </html>
