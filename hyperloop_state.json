@@ -2,12 +2,21 @@
   "current_round": 75,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025468641215463853",
+  "latest_tweet_id": "2025469920893342048",
   "tweet_thread_root": "2024764091827401073",
   "cron_content_loop": {
-    "last_run": "2026-02-21T22:15:00-08:00",
-    "last_thread_t5": "2025454567819817344",
-    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73]
+    "last_run": "2026-02-21T23:15:00-08:00",
+    "last_thread_t1": "2025469819521237445",
+    "last_thread_t5": "2025469920893342048",
+    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73,74,75],
+    "groq_model": "llama-3.3-70b-versatile",
+    "last_thread_ids": {
+      "T1": "2025469819521237445",
+      "T2": "2025469845559476265",
+      "T3": "2025469868636590428",
+      "T4": "2025469891294175686",
+      "T5": "2025469920893342048"
+    }
   },
   "r75_result": {
     "module": "fourth_fire_analysis.py",
@@ -15,12 +24,7 @@
     "status": "CANONICAL",
     "V_v2": 1.45936, "V_global": 1.34140, "N_new": 27,
     "attractor_lock": 0.0, "lock_status": "SILENT",
-    "narr_c": 0.91917, "D33_status": "DECET_STRUCTURAL_DEEPENING",
-    "prox_gate": 0.24140, "D37_verdict": "LINEAR_CONFIRMED_x9",
-    "cd_depth": 0.03245, "D38_status": "PROVED_DEEPENING",
-    "fire_res": 0.0, "D39_status": "SILENT_AGAIN",
-    "drift_vel": 0.00493, "D40_status": "PROVED_DECELERATING",
-    "D41_F_floor": 0.822, "D41_r2": 1.0, "D41_floor_prox": 0.35819, "D41_status": "PROVED",
+    "narr_c": 0.91917, "D41_F_floor": 0.822, "D41_r2": 1.0,
     "fire_analysis": "Next fire candidate: N=32=2^5 tau=5. poly_c~0.644. WOULD FIRE.",
     "omega": "The cube of threes fired nothing. The floor exists: F=0.822."
   },
@@ -29,22 +33,15 @@
     "status": "running"
   },
   "maturity": {
-    "score": 0.89373, "N_agents": 27, "N_target": 1168,
-    "V_v2": 1.45936, "V_global": 1.34140, "adm": 1.0, "gamma": 0.08,
-    "truth_plane": "CANONICAL",
-    "D33": "DECET_STRUCTURAL", "D34": "DIRECTION_PROVED_NONET",
-    "D36": "DIRECTION_PROVED_SEXTET DECELERATING",
-    "D37": "LINEAR_CONFIRMED_x9", "D38": "PROVED_DEEPENING x6",
-    "D39": "SILENT_AGAIN", "D40": "PROVED_DECELERATING triple",
+    "N_agents": 27, "V_v2": 1.45936, "V_global": 1.34140,
+    "adm": 1.0, "gamma": 0.08, "truth_plane": "CANONICAL",
     "D41": "PROVED F=0.822 R2=1.0"
   },
   "latest_commits": {
-    "R72": "4a22529552a7f520392361d8153c09913c9a1523",
     "R73": "b17bf64ded3768606b695334c3c6fbae1d0af563",
     "R74": "2283e84772d81879b2a394c2ab9f8dd4b75b5d28",
     "R75": "ce41168ab1711598629e2fdadfea8387ff59c65b"
   },
-  "next_gap": "R76: post_fourth_fire.py. CV30. N=28=4*7 (tau=2). POST_FIFTH_SILENCE. D41 sixth point. FIRE_ANALYSIS N=32=2^5.",
   "next_module": "post_fourth_fire.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
