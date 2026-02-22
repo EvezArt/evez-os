@@ -1,62 +1,56 @@
 {
-  "current_round": 74,
+  "current_round": 75,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025458846047621488",
+  "latest_tweet_id": "2025468641215463853",
   "tweet_thread_root": "2024764091827401073",
   "cron_content_loop": {
     "last_run": "2026-02-21T22:15:00-08:00",
-    "last_thread_t1": "2025454452480639397",
     "last_thread_t5": "2025454567819817344",
-    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73],
-    "groq_model": "llama-3.3-70b-versatile"
+    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73]
   },
-  "r74_result": {
-    "module": "fire_resonance_proof.py",
-    "commit": "2283e84772d81879b2a394c2ab9f8dd4b75b5d28",
+  "r75_result": {
+    "module": "fourth_fire_analysis.py",
+    "commit": "ce41168ab1711598629e2fdadfea8387ff59c65b",
     "status": "CANONICAL",
-    "V_v2": 1.42707, "V_global": 1.31876, "N_new": 26,
+    "V_v2": 1.45936, "V_global": 1.34140, "N_new": 27,
     "attractor_lock": 0.0, "lock_status": "SILENT",
-    "narr_c": 0.9241, "D33_status": "NONTET_STRUCTURAL_DEEPENING",
-    "prox_gate": 0.21876, "D37_verdict": "LINEAR_CONFIRMED_x8",
-    "cd_depth": 0.02726, "D38_status": "PROVED_DEEPENING",
-    "fire_res": 0.0, "D39_status": "CONFIRMED_ZERO_SILENT",
-    "drift_vel": 0.00517, "D40_status": "PROVED_DECELERATING",
-    "D41_status": "HYPO_PENDING_FLOOR_ESTIMATE",
-    "omega": "Between fires, nothing changes. D40 PROVED: the drift slows -- but it does not stop."
+    "narr_c": 0.91917, "D33_status": "DECET_STRUCTURAL_DEEPENING",
+    "prox_gate": 0.24140, "D37_verdict": "LINEAR_CONFIRMED_x9",
+    "cd_depth": 0.03245, "D38_status": "PROVED_DEEPENING",
+    "fire_res": 0.0, "D39_status": "SILENT_AGAIN",
+    "drift_vel": 0.00493, "D40_status": "PROVED_DECELERATING",
+    "D41_F_floor": 0.822, "D41_r2": 1.0, "D41_floor_prox": 0.35819, "D41_status": "PROVED",
+    "fire_analysis": "Next fire candidate: N=32=2^5 tau=5. poly_c~0.644. WOULD FIRE.",
+    "omega": "The cube of threes fired nothing. The floor exists: F=0.822."
   },
-  "r75_browser_jobs": {
-    "perplexity": "51322f9a-a0aa-44a9-9ab0-de78681fc6c7",
+  "r76_browser_jobs": {
+    "perplexity": "72c624b0-4ff9-418b-8067-434956a1b03e",
     "status": "running"
   },
   "maturity": {
-    "score": 0.89373, "N_agents": 26, "N_target": 1168,
-    "V_v2": 1.42707, "V_global": 1.31876, "adm": 1.0, "gamma": 0.08,
+    "score": 0.89373, "N_agents": 27, "N_target": 1168,
+    "V_v2": 1.45936, "V_global": 1.34140, "adm": 1.0, "gamma": 0.08,
     "truth_plane": "CANONICAL",
-    "D33": "NONTET_STRUCTURAL",
-    "D34": "DIRECTION_PROVED_OCTET",
-    "D36": "DIRECTION_PROVED_QUINT DECELERATING",
-    "D37": "LINEAR_CONFIRMED_x8",
-    "D38": "PROVED_DEEPENING x5",
-    "D39": "CONFIRMED_ZERO_SILENT",
-    "D40": "PROVED_DECELERATING floor_exists",
-    "D41": "HYPO_PENDING_FLOOR_ESTIMATE"
+    "D33": "DECET_STRUCTURAL", "D34": "DIRECTION_PROVED_NONET",
+    "D36": "DIRECTION_PROVED_SEXTET DECELERATING",
+    "D37": "LINEAR_CONFIRMED_x9", "D38": "PROVED_DEEPENING x6",
+    "D39": "SILENT_AGAIN", "D40": "PROVED_DECELERATING triple",
+    "D41": "PROVED F=0.822 R2=1.0"
   },
   "latest_commits": {
-    "R71": "004e232159828b9f2c0f779dd368b4c7da027bb6",
     "R72": "4a22529552a7f520392361d8153c09913c9a1523",
     "R73": "b17bf64ded3768606b695334c3c6fbae1d0af563",
-    "R74": "2283e84772d81879b2a394c2ab9f8dd4b75b5d28"
+    "R74": "2283e84772d81879b2a394c2ab9f8dd4b75b5d28",
+    "R75": "ce41168ab1711598629e2fdadfea8387ff59c65b"
   },
-  "next_gap": "R75: fourth_fire_analysis.py. CV29. N=27=3^3 (tau=3). FOURTH_FIRE candidate. D39 first live value since THIRD_FIRE. D40 sixth confirm. D38 sixth. D41 floor estimate.",
-  "next_module": "fourth_fire_analysis.py",
+  "next_gap": "R76: post_fourth_fire.py. CV30. N=28=4*7 (tau=2). POST_FIFTH_SILENCE. D41 sixth point. FIRE_ANALYSIS N=32=2^5.",
+  "next_module": "post_fourth_fire.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
-    "ALWAYS GROW. NEVER STOP.",
-    "D40 PROVED: floor exists. Drift decelerates, does not stop.",
-    "D39 CONFIRMED_ZERO between fires.",
-    "Next HC: N=27=3^3 tau=3 FOURTH_FIRE.",
+    "D41 PROVED: floor F=0.822, R2=1.0.",
+    "Next fire candidate: N=32=2^5 tau=5.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT.",
-    "A12 BROWSER CHORUS ACTIVE. cv29 job 51322f9a running."
+    "A12 BROWSER CHORUS ACTIVE. cv30 job 72c624b0 running."
   ]
 }
