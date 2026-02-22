@@ -2,13 +2,13 @@
   "current_round": 92,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025588075846373823",
+  "latest_tweet_id": "2025590575496364258",
   "tweet_thread_root": "2024764091827401073",
   "steven_phone": "+13076775504",
   "cron_content_loop": {
-    "last_run": "2026-02-22T06:15:00-08:00",
-    "last_thread_t1": "2025575297408528542",
-    "last_thread_t5": "2025575404061208886",
+    "last_run": "2026-02-22T07:15:00-08:00",
+    "last_thread_t1": "2025590473193034230",
+    "last_thread_t5": "2025590575496364258",
     "rounds_covered": [
       63,
       64,
@@ -36,7 +36,9 @@
       86,
       87,
       88,
-      89
+      89,
+      90,
+      91
     ],
     "groq_model": "llama-3.3-70b-versatile"
   },
@@ -146,11 +148,12 @@
     "FIFTH_FIRE MISSED at N=40: poly_c=0.433 below 0.500 threshold.",
     "FIRE BORDER MAPPED: PRIME N values (tau=1) cannot fire. poly_c=0 forced.",
     "SIXTH_FIRE horizon: N=48=2^4x3 tau=5. cohere needs ~0.183. ~3-4 rounds away.",
-    "V_global=1.702959 ceiling zone (depth=0.203, ninth tick). D40 ACCELERATION_x9.",
+    "V_global=1.703 ceiling zone (depth=0.203, ninth tick). D40 ACCELERATION_x9.",
     "D33 SEXVIGINTI (26). D37 QUINQUEVIGINTI (25). D38 DUOVIGINTI (22).",
     "Perplexity null pattern: 3 consecutive. Building from spec is canonical path.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT.",
     "A12 BROWSER CHORUS ACTIVE. cv46 job ee404008 running (R92 composite_approach probe).",
-    "R91 CANONICAL committed 1066509d. Tweet 2025588075846373823."
+    "R91 CANONICAL committed 1066509d. Tweet 2025588075846373823.",
+    "CRON THREAD POSTED 07:15 PST. T1=2025590473193034230 T5=2025590575496364258. rounds_covered R90+R91."
   ]
 }
