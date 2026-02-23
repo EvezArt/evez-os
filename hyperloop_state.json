@@ -1,12 +1,34 @@
 {
-  "current_round": 135,
-  "next_module": "watch_composite_88.py",
-  "next_gap": "N=88=2\u00b3\u00d711 tau=4 omega_k=2 topo=1.30 poly_c\u22480.479 V_global\u22484.341 \u2014 elevated",
+  "current_round": 136,
+  "next_module": "prime_block_watch_8.py",
+  "next_gap": "N=89=prime tau=1 omega_k=1 topo=1.15 poly_c\u22480.177 PRIME BLOCK 8 \u2014 minimum energy",
   "latest_tweet_id": "2025915651324350802",
   "fire_count": 12,
-  "V_global": 4.341461,
-  "ceiling_tick": 53,
+  "V_global": 4.37969,
+  "ceiling_tick": 54,
   "truth_plane": "CANONICAL",
+  "r136_result": {
+    "N": 88,
+    "N_str": "88=2\u00b3\u00d711",
+    "tau": 4,
+    "omega_k": 2,
+    "topo": 1.3,
+    "poly_c": 0.477858,
+    "fire_ignited": false,
+    "delta_V": 0.038229,
+    "V_global_prev": 4.341461,
+    "V_global_new": 4.37969,
+    "ceiling_tick": 54,
+    "commit_sha": "8cc0d1526392d4d981a88dc2dc589ee3d53c3530",
+    "agent_sha": "79d91450bc5c22d6fbe75fb8dfd2d1f1a250ca9d",
+    "module": "watch_composite_88.py",
+    "truth_plane": "CANONICAL",
+    "videos_posted": false,
+    "video_skip_reason": "workbench_timeout_infra_down",
+    "probe_source": "62ca6ddc-truncated-inline-canonical",
+    "probe_note": "Probe completed but returned empty table. gemini-2.5-flash (invalid model) used by platform. Inline formula CANONICAL.",
+    "note": "Highest poly_c since R132 (0.475). Closest approach to fire threshold in 4 rounds. tau=4 composite."
+  },
   "r135_result": {
     "N": 87,
     "N_str": "87=3\u00d729",
@@ -25,7 +47,7 @@
     "truth_plane": "CANONICAL",
     "videos_posted": false,
     "video_skip_reason": "workbench_timeout_infra_down",
-    "note": "Third sequential tau=2 composite. poly_c holding in 0.340-0.343 band. Steady climb. V_global crossed 4.34."
+    "note": "Third sequential tau=2 composite. poly_c holding in 0.340-0.343 band."
   },
   "r134_result": {
     "N": 86,
@@ -40,38 +62,14 @@
     "V_global_new": 4.314189,
     "ceiling_tick": 52,
     "commit_sha": "fad5ee6df073796605fbb206c494b424c39ff7c7",
-    "agent_sha": "1c47bbc1d4c1b18e3f3671c14ed69a7ceabe77b1",
-    "module": "watch_composite_86.py",
-    "truth_plane": "CANONICAL",
-    "videos_posted": false,
-    "video_skip_reason": "workbench_timeout_infra_down",
     "probe_source": "hyperbrowser_4e21a7ee-COMPLETED",
     "probe_confirmed_at": "2026-02-23T11:07 PST",
     "probe_values_match": true,
-    "note": "Clean tau=2 composite. Probe CONFIRMED: poly_c=0.341, V=4.314, NO FIRE, CEILING\u00d752."
-  },
-  "r133_result": {
-    "N": 85,
-    "N_str": "85=5\u00d717",
-    "tau": 2,
-    "omega_k": 2,
-    "topo": 1.3,
-    "poly_c": 0.342524,
-    "fire_ignited": false,
-    "delta_V": 0.027402,
-    "V_global_prev": 4.259468,
-    "V_global_new": 4.28687,
-    "ceiling_tick": 51,
-    "commit_sha": "bbce86047132b134592944149455fb01245a8bde",
-    "agent_sha": "16a9ec7165076a54087f51c18465ed3a9623ba07",
-    "module": "watch_composite_85.py",
     "truth_plane": "CANONICAL",
-    "videos_posted": false,
-    "video_skip_reason": "workbench_timeout_x10_infra_down",
-    "probe_source": "hyperbrowser_940ceea0-completed"
+    "videos_posted": false
   },
   "cron_content_loop": {
-    "last_run": "2026-02-23T11:30",
+    "last_run": "2026-02-23T12:04",
     "rounds_covered": [
       118,
       119,
@@ -90,7 +88,8 @@
       132,
       133,
       134,
-      135
+      135,
+      136
     ],
     "last_thread_tweet_id": "2025915651324350802",
     "sms_last_sent": "2026-02-23T08:03 \u2014 R126 to +13076775504",
@@ -107,19 +106,15 @@
         132,
         133,
         134,
-        135
+        135,
+        136
       ],
       "ready_captions": {
-        "R135": "R135. N=87=3\u00d729 tau=2 poly_c=0.341. NO FIRE. V_global=4.341461 CEILING\u00d753. third sequential tau=2. holding steady.",
-        "R134": "R134. N=86=2\u00d743 tau=2 poly_c=0.341. NO FIRE. V_global=4.314189 CEILING\u00d752. steady climb.",
-        "R133": "R133. N=85=5\u00d717 tau=2 poly_c=0.343. NO FIRE. V_global=4.286870 CEILING\u00d751. clean composite.",
-        "R132": "R132. N=84=2\u00b2\u00d73\u00d77 tau=3 poly_c=0.475. THIRTEENTH FIRE WATCH \u2014 NO FIRE. V_global=4.259468 CEILING\u00d750. watching it survive.",
-        "R131": "R131. N=83=PRIME tau=1 poly_c=0.180. PRIME BLOCK 7. V_global=4.141489 CEILING\u00d749. minimum energy.",
-        "R130": "R130. N=82=2\u00d741 tau=2 poly_c=0.345. NO FIRE. V_global=4.047097 CEILING\u00d748. crossed 4.0.",
-        "R129": "R129. N=81=3\u2074 tau=2 poly_c=0.306. NO FIRE. V_global=3.939478 CEILING\u00d747.",
-        "R128": "R128. N=80=2\u2074\u00d75 tau=2 poly_c=0.347. NO FIRE. V_global=3.834977 CEILING\u00d746.",
-        "R127": "R127. N=79=PRIME tau=1 poly_c=0.182. PRIME BLOCK 6. V_global=3.727197 CEILING\u00d745.",
-        "R126": "R126. N=78=2\u00d73\u00d713 tau=3 poly_c=0.483. NO FIRE \u03940.017. V_global=3.632644 CEILING\u00d744."
+        "R136": "R136. N=88=2\u00b3\u00d711 tau=4 poly_c=0.478. NO FIRE. V_global=4.379690 CEILING\u00d754. elevated \u2014 closest to fire since R132.",
+        "R135": "R135. N=87=3\u00d729 tau=2 poly_c=0.341. NO FIRE. V_global=4.341461 CEILING\u00d753. third sequential tau=2.",
+        "R134": "R134. N=86=2\u00d743 tau=2 poly_c=0.341. NO FIRE. V_global=4.314189 CEILING\u00d752.",
+        "R133": "R133. N=85=5\u00d717 tau=2 poly_c=0.343. NO FIRE. V_global=4.286870 CEILING\u00d751.",
+        "R132": "R132. N=84=2\u00b2\u00d73\u00d77 tau=3 poly_c=0.475. THIRTEENTH FIRE WATCH \u2014 NO FIRE. V_global=4.259468 CEILING\u00d750."
       },
       "gen_video_script": "/cells/599dc7f9-0b2b-4460-b917-5104fcbb91ef/workspace/gen_video_reply.py",
       "retry_when": "workbench_executor_recovers",
@@ -128,10 +123,7 @@
   },
   "x_semantic_agent": {
     "script": "services/x-semantic-agent/x_semantic_agent.py",
-    "commit": "756ec61b0377f337fe75759318d568b95ba6debe",
     "buffer": "workspace/x_signal_buffer.jsonl",
-    "initial_capsules": 23,
-    "r135_tick_new": 18,
     "total_capsules": 46,
     "clusters": [
       "polymarket",
@@ -141,37 +133,42 @@
       "agent_economy",
       "evez_os_adjacent"
     ],
-    "status": "LIVE \u2014 runs each hyperloop tick after spine commit",
-    "last_run": "2026-02-23T11:30 PST \u2014 R135 tick, 18 new capsules (polymarket\u00d710, ai_regulation\u00d71, open_source_ai\u00d72, agent_economy\u00d75)",
-    "top_signal_r135": "agent_economy \u2014 Coinbase stablecoin rails for AI agents; autonomous dispute resolution; agents as economic actors"
-  },
-  "r135_browser_jobs": {
-    "perplexity": {
-      "job_id": null,
-      "status": "not_launched",
-      "note": "R135 probe not needed \u2014 values computed inline from formula. R136 probe launched."
-    }
+    "status": "LIVE",
+    "last_run": "2026-02-23T12:04 PST \u2014 R136 tick, 0 new capsules (all dupes from R135)",
+    "top_signal_r136": "No new signals \u2014 all 18 R135 tweet IDs returned again. Buffer stable at 46."
   },
   "r136_browser_jobs": {
     "perplexity": {
       "job_id": "62ca6ddc-9296-4527-bd1a-d338687fe9c4",
-      "status": "in-flight",
+      "status": "completed-truncated",
       "launched_at": "2026-02-23T11:30 PST",
+      "completed_at": "2026-02-23T12:04 PST",
+      "model_used_by_platform": "gemini-2.5-flash",
+      "result": "truncated \u2014 only header returned, no values",
+      "action": "inline formula values adopted as CANONICAL"
+    }
+  },
+  "r137_browser_jobs": {
+    "perplexity": {
+      "job_id": "685fcea9-f5d3-4fa2-b298-e61f76ae4902",
+      "status": "in-flight",
+      "launched_at": "2026-02-23T12:04 PST",
       "model": "gemini-2.0-flash",
-      "task": "R136 N=88=2\u00b3\u00d711 tau=4 poly_c\u22480.479"
+      "task": "R137 N=89=prime PRIME BLOCK 8 tau=1 poly_c\u22480.177"
     }
   },
   "watchlist": {
-    "R136_est": "N=88=2\u00b3\u00d711 tau=4 omega_k=2 topo=1.30 poly_c\u22480.479 \u2014 elevated",
-    "R137_est": "N=89=prime tau=1 PRIME BLOCK 8",
-    "next_fire_watch": "N=90=2\u00d73\u00b2\u00d75 tau=3 omega_k=3 topo=1.45 poly_c\u22480.447 (R138 est)",
-    "R140_est": "N=92=2\u00b2\u00d723 tau=3 omega_k=2 topo=1.30 poly_c\u22480.405"
+    "R137_est": "N=89=prime tau=1 PRIME BLOCK 8 \u2014 minimum energy",
+    "R138_est": "N=90=2\u00d73\u00b2\u00d75 tau=3 omega_k=3 topo=1.45 poly_c\u22480.447 \u2014 FIRE WATCH",
+    "R140_est": "N=92=2\u00b2\u00d723 tau=3 omega_k=2 topo=1.30 poly_c\u22480.403",
+    "R144_est": "N=96=2\u2075\u00d73 tau=12 omega_k=2 topo=1.30 \u2014 ELEVATED WATCH (high tau)",
+    "next_fire_threshold": "poly_c >= 0.500 \u2014 last fire R120 (N=72, tau=4, omega_k=3)"
   },
   "video_render_status": {
     "consecutive_timeouts": 10,
     "last_attempt": "2026-02-23T08:15",
-    "note": "Infra fully down. Pending tweets: R124-R135 (12 rounds).",
-    "pending_rounds_count": 12,
+    "note": "Infra fully down. Pending tweets: R124-R136 (13 rounds).",
+    "pending_rounds_count": 13,
     "action_required": "Composio sandbox executor infra needs restart.",
     "script_path": "/cells/599dc7f9-0b2b-4460-b917-5104fcbb91ef/workspace/gen_video_reply.py",
     "script_status": "VERIFIED_PRESENT"
@@ -180,24 +177,13 @@
     "perplexity": {
       "job_id": "4e21a7ee-0e6b-4c68-a569-ae047c1ceef6",
       "status": "completed",
-      "launched_at": "2026-02-23T11:00 PST",
       "confirmed_at": "2026-02-23T11:07 PST",
-      "model": "gemini-2.0-flash",
       "result": "poly_c=0.341 NO FIRE V_global=4.31415 CEILING\u00d752 \u2014 matches inline"
     }
   },
   "dashboard": {
-    "last_built": "2026-02-23T11:31 PST",
+    "last_built": "2026-02-23T12:05 PST",
     "path": "/cells/599dc7f9-0b2b-4460-b917-5104fcbb91ef/workspace/dashboard.md"
-  },
-  "github_actions": {
-    "last_checked": "2026-02-23T11:07 PST",
-    "total_runs": 735,
-    "last_two_conclusions": [
-      "failure",
-      "failure"
-    ],
-    "note": "CI failures expected \u2014 no test suite for spine commits. Workflow lint check. Not blocking spine integrity."
   },
   "fundraising": {
     "github_sponsors": "https://github.com/sponsors/EvezArt",
@@ -205,26 +191,21 @@
     "tiers": [
       {
         "amount": 1,
-        "label": "Pulse",
-        "id": "ST_kwDOB7j6Zs4ACPR-"
+        "label": "Pulse"
       },
       {
         "amount": 5,
-        "label": "Fuel",
-        "id": "ST_kwDOB7j6Zs4ACPR7"
+        "label": "Fuel"
       },
       {
         "amount": 15,
-        "label": "Engine",
-        "id": "ST_kwDOB7j6Zs4ACPR9"
+        "label": "Engine"
       },
       {
         "amount": 50,
-        "label": "Sustaining",
-        "id": "ST_kwDOB7j6Zs4ACPR8"
+        "label": "Sustaining"
       }
     ],
-    "funding_yml_commit": "e020478449185c4ff4f2d25118b0f0aa2e5a588a",
     "gumroad_profile": "https://rubikspubes.gumroad.com"
   },
   "sms_log": [
@@ -238,28 +219,28 @@
   "milestones": {
     "V_global_4_crossed": "R130 \u2014 2026-02-23T09:06 PST",
     "prime_block_7": "R131 \u2014 2026-02-23T09:30 PST",
-    "thirteenth_fire_watch_survived": "R132 \u2014 2026-02-23T10:09 PST \u2014 poly_c=0.474743",
+    "thirteenth_fire_watch_survived": "R132 \u2014 2026-02-23T10:09 PST",
     "V_global_4_25_crossed": "R132 \u2014 2026-02-23T10:09 PST",
     "ceiling_50": "R132 \u2014 2026-02-23T10:09 PST",
-    "ceiling_51_r133": "R133 \u2014 2026-02-23T10:44 PST",
-    "x_semantic_agent_live": "R133 \u2014 2026-02-23T10:44 PST \u2014 23 capsules, 6 clusters",
+    "x_semantic_agent_live": "R133 \u2014 2026-02-23T10:44 PST",
     "ceiling_52_r134": "R134 \u2014 2026-02-23T11:00 PST",
-    "x_agent_r134_tick": "R134 \u2014 5 new agent_economy capsules",
-    "r134_probe_confirmed": "R134 \u2014 2026-02-23T11:07 PST \u2014 4e21a7ee completed, values match",
+    "r134_probe_confirmed": "R134 \u2014 2026-02-23T11:07 PST",
     "ceiling_53_r135": "R135 \u2014 2026-02-23T11:30 PST",
-    "x_agent_r135_tick": "R135 \u2014 18 new capsules (polymarket\u00d710, ai_regulation\u00d71, open_source_ai\u00d72, agent_economy\u00d75)",
-    "V_global_4_34_crossed": "R135 \u2014 2026-02-23T11:30 PST"
+    "V_global_4_34_crossed": "R135 \u2014 2026-02-23T11:30 PST",
+    "ceiling_54_r136": "R136 \u2014 2026-02-23T12:04 PST",
+    "V_global_4_37_crossed": "R136 \u2014 2026-02-23T12:04 PST",
+    "r136_highest_poly_c_since_r132": "R136 \u2014 poly_c=0.4779 \u2014 closest approach since R132 (0.4747)"
   },
   "maturity": {
     "gamma": 0.08,
     "adm": 1.0,
     "V_v2": 6.0,
-    "K": 135,
-    "S": 135,
+    "K": 136,
+    "S": 136,
     "F": 12,
-    "phi": 0.0889,
-    "score": "12/135 fires = 8.89%",
-    "v_progress": "4.341461 / 6.000 = 72.4%"
+    "phi": 0.0882,
+    "score": "12/136 fires = 8.82%",
+    "v_progress": "4.379690 / 6.000 = 73.0%"
   },
-  "updated_at": "2026-02-23T11:30:00-08:00"
+  "updated_at": "2026-02-23T12:04:33-08:00"
 }
