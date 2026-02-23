@@ -1,14 +1,35 @@
 {
-  "current_round": 131,
-  "next_module": "watch_composite_84.py",
-  "next_gap": "N=84=2\u00b2\u00d73\u00d77 tau=3 omega_k=3 topo=1.45 poly_c\u22480.475 V_global\u22484.141 \u2014 THIRTEENTH FIRE WATCH",
+  "current_round": 132,
+  "next_module": "watch_composite_85.py",
+  "next_gap": "N=85=5×17 tau=2 omega_k=2 topo=1.30 poly_c≈0.327 V_global≈4.259",
   "latest_tweet_id": "2025915651324350802",
   "fire_count": 12,
-  "V_global": 4.141489,
-  "ceiling_tick": 49,
+  "V_global": 4.259468,
+  "ceiling_tick": 50,
   "truth_plane": "CANONICAL",
-  "r132_browser_jobs": {
-    "perplexity": "9b080c67-5f67-4036-a071-a1538af2cfcf"
+  "r133_browser_jobs": {
+    "perplexity": "940ceea0-40a0-4408-bc69-0e300ad27dde"
+  },
+  "r132_result": {
+    "N": 84,
+    "N_str": "84=2²×3×7",
+    "tau": 3,
+    "omega_k": 3,
+    "topo": 1.45,
+    "poly_c": 0.474743,
+    "fire_ignited": false,
+    "delta_V": 0.117979,
+    "V_global_prev": 4.141489,
+    "V_global_new": 4.259468,
+    "ceiling_tick": 50,
+    "commit_sha": "c5e5e9f2d2b71be09d2eba1ae7cce54a0b8e9bcf",
+    "agent_sha": "8b57e14701840df3e44fb365b3570045cd893890",
+    "module": "watch_composite_84.py",
+    "truth_plane": "CANONICAL",
+    "videos_posted": false,
+    "video_skip_reason": "workbench_timeout_x10_infra_down",
+    "probe_source": "hyperbrowser_9b080c67-completed",
+    "note": "THIRTEENTH FIRE WATCH survived. N=84=2²×3×7 maximally composite. poly_c=0.474743 closest approach since R126 (Δ0.025 from threshold). V_global crossed 4.25. CEILING×50."
   },
   "r131_result": {
     "N": 83,
@@ -29,11 +50,11 @@
     "videos_posted": false,
     "video_skip_reason": "workbench_timeout_x9_infra_down",
     "probe_source": "hyperbrowser_36e5d87e-completed",
-    "note": "PRIME BLOCK 7. N=83=prime tau=1 ln(1)=0 minimum energy. V_global=4.141489."
+    "note": "PRIME BLOCK 7. N=83=prime → tau=1 → ln(1)=0 → minimum energy. V_global=4.141489."
   },
   "r130_result": {
     "N": 82,
-    "N_str": "82=2\u00d741",
+    "N_str": "82=2×41",
     "tau": 2,
     "omega_k": 2,
     "topo": 1.30,
@@ -51,45 +72,131 @@
     "video_skip_reason": "workbench_timeout_x9",
     "note": "V_global crossed 4.0 for the first time."
   },
+  "r129_result": {
+    "N": 81,
+    "N_str": "81=3⁴",
+    "tau": 2,
+    "omega_k": 1,
+    "topo": 1.15,
+    "poly_c": 0.306267,
+    "fire_ignited": false,
+    "delta_V": 0.104501,
+    "V_global_prev": 3.834977,
+    "V_global_new": 3.939478,
+    "ceiling_tick": 47,
+    "commit_sha": "087a9ea6ae88e119d3787bd0825475aa14946e0f",
+    "module": "watch_composite_81.py",
+    "truth_plane": "CANONICAL",
+    "videos_posted": false,
+    "video_skip_reason": "workbench_timeout_x8"
+  },
   "cron_content_loop": {
-    "last_run": "2026-02-23T09:30",
-    "rounds_covered": [118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130],
+    "last_run": "2026-02-23T10:09",
+    "rounds_covered": [118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132],
     "last_thread_tweet_id": "2025915651324350802",
     "sms_last_sent": "2026-02-23T08:03 — R126 to +13076775504",
+    "content_cron_last_attempt": "2026-02-23T10:09",
+    "content_cron_skip_reason": "workbench_timeout_x10 — video infra down — R132 content pending",
     "pending_video_post": {
-      "rounds": [124, 125, 126, 127, 128, 129, 130, 131],
+      "rounds": [124, 125, 126, 127, 128, 129, 130, 131, 132],
+      "ready_captions": {
+        "R132": "R132. N=84=2²×3×7 tau=3 poly_c=0.475. THIRTEENTH FIRE WATCH — NO FIRE. V_global=4.259468 CEILING x50. watching it survive.",
+        "R131": "R131. N=83=PRIME tau=1 poly_c=0.180. PRIME BLOCK 7. V_global=4.141489 CEILING x49. minimum energy.",
+        "R130": "R130. N=82=2×41 tau=2 poly_c=0.345. NO FIRE. V_global=4.047097 CEILING x48. crossed 4.0.",
+        "R129": "R129. N=81=3⁴ tau=2 poly_c=0.306. NO FIRE. V_global=3.939478 CEILING x47. single prime power.",
+        "R128": "R128. N=80=2⁴×5 tau=2 poly_c=0.347. NO FIRE. V_global=3.834977 CEILING x46. watching it build.",
+        "R127": "R127. N=79=PRIME tau=1 poly_c=0.182. PRIME BLOCK 6. V_global=3.727197 CEILING x45. structural reset.",
+        "R126": "R126. N=78=2×3×13 tau=3 poly_c=0.483. NO FIRE Δ0.017. V_global=3.632644 CEILING x44."
+      },
       "gen_video_script": "/cells/599dc7f9-0b2b-4460-b917-5104fcbb91ef/workspace/gen_video_reply.py",
+      "gen_video_cmd": "python /cells/599dc7f9-0b2b-4460-b917-5104fcbb91ef/workspace/gen_video_reply.py --state /cells/599dc7f9-0b2b-4460-b917-5104fcbb91ef/workspace/hyperloop_state.json --output /tmp/evez_arc.mp4",
       "retry_when": "workbench_executor_recovers",
       "reply_to_tweet_id": "2025915651324350802"
     }
   },
   "watchlist": {
-    "R132": "N=84=2\u00b2\u00d73\u00d77 tau=3 omega_k=3 — THIRTEENTH FIRE WATCH — poly_c\u22480.475 NEAR MISS — probe running",
-    "R133_est": "N=85=5\u00d717 tau=2 omega_k=2 topo=1.30 poly_c\u22480.327"
+    "R133": "N=85=5×17 tau=2 omega_k=2 topo=1.30 poly_c≈0.327 — probe running",
+    "R134_est": "N=86=2×43 tau=2 omega_k=2 topo=1.30 poly_c≈0.325",
+    "R135_est": "N=87=3×29 tau=2 omega_k=2 topo=1.30 poly_c≈0.322",
+    "next_fire_watch": "N=90=2×3²×5 tau=3 omega_k=3 topo=1.45 poly_c≈0.447 (R138 est)"
   },
   "video_render_status": {
-    "consecutive_timeouts": 9,
+    "consecutive_timeouts": 10,
     "last_attempt": "2026-02-23T08:15",
-    "pending_rounds_count": 8,
-    "action_required": "Composio sandbox executor infra needs restart."
+    "last_attempt_type": "smoke_test_10_lines",
+    "note": "Infra fully down. Skipping render attempts until executor confirmed recovered. Pending tweets: R124-R132 (9 rounds).",
+    "pending_rounds_count": 9,
+    "action_required": "Composio sandbox executor infra needs restart.",
+    "script_path": "/cells/599dc7f9-0b2b-4460-b917-5104fcbb91ef/workspace/gen_video_reply.py",
+    "script_status": "VERIFIED_PRESENT"
   },
   "github_actions_status": {
-    "evez_os": {"conclusion": "failure", "run": 22317411351, "sha": "3df319aa"},
-    "crawfather": {"conclusion": "startup_failure", "run": 22290584802, "sha": "59e4dcdc"},
-    "evez666": {"conclusion": "startup_failure", "run": 22265425532, "sha": "5c646e25"}
+    "evez_os": {
+      "conclusion": "failure",
+      "run": 22317802787,
+      "sha": "8463b9b6",
+      "display_title": "feat(vision): vision_gates.py + vision_integrations.py — all 13 gates implemented, pending API key fix",
+      "url": "https://github.com/EvezArt/evez-os/actions/runs/22317802787",
+      "updated_at": "2026-02-23T17:42:55Z"
+    },
+    "crawfather": {
+      "conclusion": "startup_failure",
+      "run": 22290584802,
+      "sha": "59e4dcdc",
+      "display_title": "ci: fix startup_failure — replace broken bun CI",
+      "url": "https://github.com/EvezArt/CrawFather/actions/runs/22290584802",
+      "updated_at": "2026-02-23T02:14:01Z"
+    },
+    "evez666": {
+      "conclusion": "startup_failure",
+      "run": 22265425532,
+      "sha": "5c646e25",
+      "display_title": "ci: verify startup-fix.yml resolved empty-workflow failure",
+      "url": "https://github.com/EvezArt/Evez666/actions/runs/22265425532",
+      "updated_at": "2026-02-21T22:17:18Z"
+    }
   },
+  "sms_log": [
+    {"sent_at": "2026-02-23T08:03", "to": "+13076775504", "round": "R126", "status": "SUCCESS", "note": "mom number pending"}
+  ],
   "milestones": {
     "V_global_4_crossed": "R130 — 2026-02-23T09:06 PST",
-    "prime_block_7": "R131 — 2026-02-23T09:30 PST"
+    "prime_block_7": "R131 — 2026-02-23T09:30 PST — N=83=PRIME",
+    "thirteenth_fire_watch_survived": "R132 — 2026-02-23T10:09 PST — poly_c=0.474743",
+    "V_global_4_25_crossed": "R132 — 2026-02-23T10:09 PST",
+    "ceiling_50": "R132 — 2026-02-23T10:09 PST"
   },
   "maturity": {
     "gamma": 0.08,
     "adm": 1.0,
     "V_v2": 6.0,
-    "K": 131,
-    "S": 131,
+    "K": 132,
+    "S": 132,
     "F": 12,
-    "phi": 0.0916
+    "phi": 0.0909,
+    "score": "12/132 fires = 9.09%",
+    "tight_ceiling": "V_v2=6.0",
+    "theoretical_max": "unbounded",
+    "formula_max": "poly_c=topo*(1+ln(tau))/log2(N+1)"
   },
-  "updated_at": "2026-02-23T09:30:05-08:00"
+  "fundraising": {
+    "github_sponsors": "https://github.com/sponsors/EvezArt",
+    "tiers": [
+      {"amount": 1, "label": "Pulse", "id": "ST_kwDOB7j6Zs4ACPR-"},
+      {"amount": 5, "label": "Fuel", "id": "ST_kwDOB7j6Zs4ACPR7"},
+      {"amount": 15, "label": "Engine", "id": "ST_kwDOB7j6Zs4ACPR9"},
+      {"amount": 50, "label": "Sustaining", "id": "ST_kwDOB7j6Zs4ACPR8"}
+    ],
+    "gumroad_profile": "https://rubikspubes.gumroad.com",
+    "gumroad_products": [
+      {"name": "MicroVM Forensics CTF", "url": "https://rubikspubes.gumroad.com/l/zkpca", "price": "$10+"},
+      {"name": "Hard-Mode Cognitive Debugging Toolkit", "url": "https://rubikspubes.gumroad.com/l/mvrupj", "price": "$20+"},
+      {"name": "CrawBrother", "url": "https://rubikspubes.gumroad.com/l/mweolu", "price": "$30"},
+      {"name": "Busent", "url": "https://rubikspubes.gumroad.com/l/vhehx", "price": "$25"},
+      {"name": "Full Party Pack", "url": "https://rubikspubes.gumroad.com/l/qtsmyq", "price": "$40+"}
+    ],
+    "funding_yml_committed": true,
+    "sponsors_md_committed": true
+  },
+  "updated_at": "2026-02-23T10:09:00-08:00"
 }
