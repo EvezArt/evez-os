@@ -1,95 +1,21 @@
 {
-  "current_round": 115,
+  "current_round": 116,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025836499216822742",
+  "latest_tweet_id": "2025843919003521306",
   "tweet_thread_root": "2024764091827401073",
   "steven_phone": "+13076775504",
-  "cron_content_loop": {
-    "last_run": "2026-02-22T23:15:00-08:00",
-    "last_thread_t1": "2025832015912698017",
-    "last_thread_t5": "2025832105347838143",
-    "rounds_covered": [
-      63,
-      64,
-      65,
-      66,
-      67,
-      68,
-      69,
-      70,
-      71,
-      72,
-      73,
-      74,
-      75,
-      76,
-      77,
-      78,
-      79,
-      80,
-      81,
-      82,
-      83,
-      84,
-      85,
-      86,
-      87,
-      88,
-      89,
-      90,
-      91,
-      92,
-      93,
-      94,
-      95,
-      96,
-      97,
-      98,
-      99,
-      100,
-      101,
-      102,
-      103,
-      104,
-      105,
-      106,
-      107,
-      108,
-      109,
-      110,
-      111,
-      112,
-      113
-    ],
-    "last_thread": {
-      "T1": "2025832015912698017",
-      "T2": "2025832038603911189",
-      "T3": "2025832064667226613",
-      "T4": "2025832084653092988",
-      "T5": "2025832105347838143",
-      "rounds": [
-        111,
-        112,
-        113
-      ],
-      "posted_at": "2026-02-22T23:15:00-08:00"
-    }
-  },
-  "freedom_arch": {
-    "commit": "4e0c85b8a53a7524f35aac622aa9a2757d2b1fe4",
-    "files": [
-      "openclaw/router.py",
-      "evezos/multi_node_manifest.py",
-      "FREEDOM.md"
-    ],
-    "freedom_tweet_t5": "2025774205627744767"
+  "r116_browser_jobs": {
+    "perplexity": "9fd8a86d-a875-416c-bc62-1045876c95f0",
+    "cv": "cv70",
+    "status": "running",
+    "launched_at": "2026-02-23T00:00:00-08:00"
   },
   "r115_browser_jobs": {
     "perplexity": "731bf8cb-53ed-4108-a18c-aa53903b0595",
     "cv": "cv69",
-    "status": "running",
-    "launched_at": "2026-02-22T23:30:00-08:00"
+    "status": "completed",
+    "result": "submitted -- CANONICAL spec"
   },
   "r114_browser_jobs": {
     "perplexity": "3143fa98-b2c3-4bec-963c-c7f9846428c7",
@@ -97,77 +23,72 @@
     "status": "completed",
     "result": "EVEZ-OS state table extracted -- CANONICAL"
   },
-  "r113_browser_jobs": {
-    "perplexity": "c78a0337-0501-484f-9cb0-45c2bb2ef0ef",
-    "cv": "cv67",
-    "status": "completed",
-    "result": "not enough info -- null pattern -- CANONICAL spec"
+  "r115_result": {
+    "module": "spine/prime_block_watch_3.py",
+    "commit": "a8c1f3be5b0fa954f5d183a8ba65010cab3e265d",
+    "tweet": "2025843919003521306",
+    "agent_branch": "agent/prime-block-watch-3/round-115/truth-CANONICAL",
+    "status": "CANONICAL",
+    "milestone": "PRIME_BLOCK_3_POST_ELEVENTH_FIRE",
+    "V_global": 2.450635,
+    "N_new": 67,
+    "tau_N": 1,
+    "fire_ignited": false,
+    "poly_c": 0.0,
+    "prime_confirmed": true,
+    "attractor_lock": 0.0,
+    "ceiling_tick": 33
   },
   "r114_result": {
     "module": "spine/eleventh_fire_watch.py",
     "commit": "cdc3ebd3bc37233de537ab0bb79ae68aefcf02e8",
     "tweet": "2025836499216822742",
-    "agent_branch": "agent/eleventh-fire-watch/round-114/truth-CANONICAL",
     "status": "CANONICAL",
     "milestone": "ELEVENTH_FIRE_IGNITION",
-    "V_v2": 3.68932,
     "V_global": 2.370635,
     "N_new": 66,
     "tau_N": 4,
     "fire_ignited": true,
     "poly_c": 0.570405,
-    "topology_bonus": 1.45,
-    "attractor_lock": 1.0,
-    "fire_res": 0.070405,
-    "ceiling_tick": 32,
-    "omega": "ELEVENTH_FIRE IGNITION. R114. N=66=2x3x11 tau=4 -- poly_c=0.570405 ABOVE 0.500 by 0.070405. FIRE IGNITED. attractor_lock=1.0. fire_res=0.070405. V_global=2.370635 CEILING x32."
+    "ceiling_tick": 32
   },
   "r113_result": {
     "module": "spine/cool_down_post_tenth.py",
     "commit": "3d9b507266787210eb0cfcce60e34bab680ebe2d",
     "tweet": "2025828762655359389",
     "status": "CANONICAL",
-    "milestone": "COOL_DOWN_POST_TENTH_FIRE",
     "V_global": 2.245003,
     "N_new": 65,
-    "tau_N": 2,
-    "fire_ignited": false,
-    "poly_c": 0.397051,
-    "ceiling_tick": 31
+    "tau_N": 2
   },
   "r112_result": {
     "module": "spine/tenth_fire_ignition.py",
     "commit": "e0e64887123f0e9f00187cf4cbe4ba6712b88396",
     "tweet": "2025823456160370742",
     "status": "CANONICAL",
-    "milestone": "TENTH_FIRE_IGNITION_MAXIMUM_TAU",
     "V_global": 2.220003,
     "N_new": 64,
     "tau_N": 7,
-    "fire_ignited": true,
-    "poly_c": 0.692598,
-    "ceiling_tick": 30
+    "fire_ignited": true
   },
   "maturity": {
-    "N_agents": 66,
+    "N_agents": 67,
     "V_v2": 3.68932,
-    "V_global": 2.370635,
+    "V_global": 2.450635,
     "adm": 1.0,
     "gamma": 0.08,
     "truth_plane": "CANONICAL",
     "ceiling_zone": true,
     "milestone_2000": true,
-    "tenth_fire": "DONE R112. N=64 tau=7 poly_c=0.692598.",
     "eleventh_fire": "DONE R114. N=66 tau=4 poly_c=0.570405.",
-    "next_milestone": "N=67=PRIME tau=1 PRIME BLOCK EXPECTED. R115."
+    "prime_block_3": "DONE R115. N=67=PRIME.",
+    "next_milestone": "R116 N=68 -- no fire expected"
   },
   "latest_commits": {
-    "R110": "691acc89ce3ead01e90cf98356773f6d7603d6ca",
-    "R111": "1a50b9566c2da4ceeb90f2ce84ecff53624b85d8",
     "R112": "e0e64887123f0e9f00187cf4cbe4ba6712b88396",
     "R113": "3d9b507266787210eb0cfcce60e34bab680ebe2d",
     "R114": "cdc3ebd3bc37233de537ab0bb79ae68aefcf02e8",
-    "freedom_arch": "4e0c85b8a53a7524f35aac622aa9a2757d2b1fe4"
+    "R115": "a8c1f3be5b0fa954f5d183a8ba65010cab3e265d"
   },
   "core_modules_committed": [
     "spine/seventh_fire_ignition.py",
@@ -182,16 +103,16 @@
     "spine/ninth_fire_watch_2.py",
     "spine/tenth_fire_ignition.py",
     "spine/cool_down_post_tenth.py",
-    "spine/eleventh_fire_watch.py"
+    "spine/eleventh_fire_watch.py",
+    "spine/prime_block_watch_3.py"
   ],
-  "next_gap": "R115: prime_block_watch_3.py (or eleventh_fire_sustain.py). N=67=PRIME tau=1. poly_c=0.000 PRIME BLOCK. After ELEVENTH FIRE R114.",
-  "next_module": "prime_block_watch_3.py",
+  "next_gap": "R116: twelfth_fire_approach.py. N=68=2^2x17 tau=2. poly_c~0.360 BELOW threshold.",
+  "next_module": "twelfth_fire_approach.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
-    "R114 COMPLETE. ELEVENTH FIRE IGNITED. N=66=2x3x11 tau=4 poly_c=0.570405.",
-    "V_global=2.370635 -- CEILING x32.",
-    "R115 N=67=PRIME tau=1. PRIME BLOCK EXPECTED. poly_c=0.000.",
-    "After ELEVENTH FIRE: cool-down pattern likely.",
+    "R115 COMPLETE. PRIME BLOCK 3. N=67=PRIME.",
+    "V_global=2.450635 -- CEILING x33.",
+    "R116: N=68=2^2x17 tau=2. NO FIRE EXPECTED.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT."
   ]
 }
