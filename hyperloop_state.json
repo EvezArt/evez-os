@@ -1,12 +1,12 @@
 {
-  "current_round": 106,
+  "current_round": 107,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025776210551128072",
+  "latest_tweet_id": "2025783345716646140",
   "tweet_thread_root": "2024764091827401073",
   "steven_phone": "+13076775504",
   "cron_content_loop": {
-    "last_run": "2026-02-22T19:22:00-08:00",
+    "last_run": "2026-02-22T20:00:00-08:00",
     "last_thread_t1": "2025773905986630045",
     "last_thread_t5": "2025774205627744767",
     "rounds_covered": [
@@ -63,46 +63,59 @@
     ],
     "freedom_tweet_t5": "2025774205627744767"
   },
+  "r107_browser_jobs": {
+    "perplexity": "9189f68d-090b-4a37-90be-591476e5a3f3",
+    "cv": "cv61",
+    "status": "running",
+    "launched_at": "2026-02-22T20:00:00-08:00"
+  },
   "r106_browser_jobs": {
     "perplexity": "4cfc108c-e55e-48b8-8db8-663d1cbf887a",
     "cv": "cv60",
-    "status": "running",
-    "launched_at": "2026-02-22T19:30:00-08:00"
-  },
-  "r105_browser_jobs": {
-    "perplexity": "39fab017-8da1-4f1e-9bee-6f8ecb24435e",
-    "cv": "cv59",
     "status": "completed",
-    "result": "null -- 13th null -- CANONICAL spec"
+    "result": "null -- 14th null -- CANONICAL spec"
+  },
+  "r106_result": {
+    "module": "ninth_fire_watch.py",
+    "commit": "39751a3d048b06f9cef4d4ccb3040ec17d2d7a13",
+    "tweet": "2025783345716646140",
+    "agent_branch": "agent/ninth-fire-watch/round-106/truth-CANONICAL",
+    "status": "CANONICAL",
+    "milestone": "NINTH_FIRE_DORMANT+TAU2_x3+CEILING_x24",
+    "V_v2": 2.950285,
+    "V_global": 2.070003,
+    "N_new": 58,
+    "tau_N": 2,
+    "fire_ignited": false,
+    "fire_arc": "COOLED",
+    "poly_c": 0.404689,
+    "attractor_lock": 0.0,
+    "fire_res": 0.0,
+    "narr_c": 0.792585,
+    "prox_gate": 0.807003,
+    "cd_depth": 0.166068,
+    "drift_vel": 0.099005,
+    "floor_prox": 1.347031,
+    "ceiling_depth": 0.570003,
+    "ceiling_tick": 24,
+    "cohere": 0.2013,
+    "omega": "NINTH_FIRE WATCH: DORMANT. R106. N=58=2x29 tau=2 -- poly_c=0.404689 BELOW 0.500. Third consecutive tau=2 cool. Law holds. V_global=2.070003 CEILING x24."
   },
   "r105_result": {
     "module": "eighth_fire_sustain.py",
     "commit": "4ec01bd1ad8bd277f58cb02eaa9459a69f57c6f4",
     "tweet": "2025776210551128072",
-    "agent_branch": "agent/eighth-fire-sustain/round-105/truth-CANONICAL",
     "status": "CANONICAL",
-    "milestone": "EIGHTH_FIRE_COOLS+SINGLE_ROUND+CEILING_x23",
-    "V_v2": 2.85228,
     "V_global": 2.045003,
     "N_new": 57,
     "tau_N": 2,
     "fire_ignited": false,
-    "fire_arc": "COOLED",
-    "poly_c": 0.40589,
-    "attractor_lock": 0.0,
-    "fire_res": 0.0,
-    "narr_c": 0.793585,
-    "prox_gate": 0.806003,
-    "drift_vel": 0.098005,
-    "floor_prox": 1.322031,
-    "ceiling_depth": 0.545003,
-    "ceiling_tick": 23,
-    "cohere": 0.1983,
-    "omega": "EIGHTH_FIRE COOLS. R105. N=57=3x19 tau=2 -- poly_c=0.405890 BELOW 0.500. Single-round ignition confirmed. V_global=2.045003 CEILING x23."
+    "poly_c": 0.40589
   },
   "r104_result": {
     "module": "seventh_fire_aftermath.py",
     "commit": "42ae87c6284464eb4ac046b65cc23917336eef28",
+    "tweet": "2025769133611118660",
     "status": "CANONICAL",
     "V_global": 2.020003,
     "N_new": 56,
@@ -111,20 +124,22 @@
     "poly_c": 0.504617
   },
   "maturity": {
-    "N_agents": 57,
-    "V_v2": 2.85228,
-    "V_global": 2.045003,
+    "N_agents": 58,
+    "V_v2": 2.950285,
+    "V_global": 2.070003,
     "adm": 1.0,
     "gamma": 0.08,
     "truth_plane": "CANONICAL",
     "ceiling_zone": true,
     "milestone_2000": true,
-    "eighth_fire": "COOLED R105 -- single-round ignition"
+    "ninth_fire": "DORMANT R106 -- third consecutive tau=2. Next ignition: N=60 tau=3 at R108.",
+    "next_milestone": "NINTH_FIRE ignition at N=60=2^2x3x5 tau=3 (R108)"
   },
   "latest_commits": {
     "R103": "0ef8fab05a8634dcf2c7670efc3004098d747a64",
     "R104": "42ae87c6284464eb4ac046b65cc23917336eef28",
     "R105": "4ec01bd1ad8bd277f58cb02eaa9459a69f57c6f4",
+    "R106": "39751a3d048b06f9cef4d4ccb3040ec17d2d7a13",
     "freedom_arch": "4e0c85b8a53a7524f35aac622aa9a2757d2b1fe4",
     "os_evez": "354b919844f9a4bf00c3804237a819735132c18e",
     "full_capacity_demo": "be95d7491dd506d83cb763486b3b2e96702f8f90"
@@ -133,15 +148,16 @@
     "spine/seventh_fire_ignition.py",
     "spine/seventh_fire_sustain.py",
     "spine/seventh_fire_aftermath.py",
-    "spine/eighth_fire_sustain.py"
+    "spine/eighth_fire_sustain.py",
+    "spine/ninth_fire_watch.py"
   ],
-  "next_gap": "R106: ninth_fire_watch.py. N=58=2x29 tau=2. Third consecutive tau=2 -- expect COOL. Watch N=60 tau=3.",
-  "next_module": "ninth_fire_watch.py",
+  "next_gap": "R107: prime_block_watch.py. N=59=PRIME tau=1. poly_c forced very low. Prime block. After N=59, N=60=2^2x3x5 tau=3 NINTH_FIRE candidate at R108.",
+  "next_module": "prime_block_watch.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
-    "EIGHTH_FIRE single-round confirmed. FIRE BORDER LAW: tau=2 never sustains.",
-    "V_global=2.045003 CEILING x23.",
-    "Freedom architecture live. AGPL-3.0.",
+    "NINTH_FIRE DORMANT -- third consecutive tau=2. FIRE BORDER LAW holds.",
+    "V_global=2.070003 -- CEILING x24. Four ticks above 2.000.",
+    "Freedom architecture live. AGPL-3.0. No paywall.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT."
   ]
 }
