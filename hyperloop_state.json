@@ -1,11 +1,11 @@
 {
-  "current_round": 136,
+  "current_round": 137,
   "next_module": "prime_block_watch_8.py",
   "next_gap": "N=89=prime tau=1 omega_k=1 topo=1.15 poly_c\u22480.177 PRIME BLOCK 8 \u2014 minimum energy",
   "latest_tweet_id": "2025915651324350802",
   "fire_count": 12,
-  "V_global": 4.37969,
-  "ceiling_tick": 54,
+  "V_global": 4.393827,
+  "ceiling_tick": 55,
   "truth_plane": "CANONICAL",
   "r136_result": {
     "N": 88,
@@ -69,7 +69,7 @@
     "videos_posted": false
   },
   "cron_content_loop": {
-    "last_run": "2026-02-23T12:04",
+    "last_run": "2026-02-23T12:25 PST",
     "rounds_covered": [
       118,
       119,
@@ -89,7 +89,8 @@
       133,
       134,
       135,
-      136
+      136,
+      137
     ],
     "last_thread_tweet_id": "2025915651324350802",
     "sms_last_sent": "2026-02-23T08:03 \u2014 R126 to +13076775504",
@@ -151,18 +152,19 @@
   "r137_browser_jobs": {
     "perplexity": {
       "job_id": "685fcea9-f5d3-4fa2-b298-e61f76ae4902",
-      "status": "in-flight",
-      "launched_at": "2026-02-23T12:04 PST",
-      "model": "gemini-2.0-flash",
-      "task": "R137 N=89=prime PRIME BLOCK 8 tau=1 poly_c\u22480.177"
+      "status": "completed",
+      "poly_c_reported": 0.177,
+      "inline_poly_c": 0.176711,
+      "match": true,
+      "note": "Platform used gemini-2.5-flash. Values confirmed vs inline. CANONICAL."
     }
   },
   "watchlist": {
-    "R137_est": "N=89=prime tau=1 PRIME BLOCK 8 \u2014 minimum energy",
-    "R138_est": "N=90=2\u00d73\u00b2\u00d75 tau=3 omega_k=3 topo=1.45 poly_c\u22480.447 \u2014 FIRE WATCH",
+    "R138_est": "N=90=2\u00d73\u00b2\u00d75 tau=3 omega_k=3 topo=1.45 poly_c\u22480.466 \u2014 FIRE WATCH",
     "R140_est": "N=92=2\u00b2\u00d723 tau=3 omega_k=2 topo=1.30 poly_c\u22480.403",
     "R144_est": "N=96=2\u2075\u00d73 tau=12 omega_k=2 topo=1.30 \u2014 ELEVATED WATCH (high tau)",
-    "next_fire_threshold": "poly_c >= 0.500 \u2014 last fire R120 (N=72, tau=4, omega_k=3)"
+    "next_fire_threshold": "poly_c >= 0.500 \u2014 last fire R120",
+    "consecutive_non_fire": 17
   },
   "video_render_status": {
     "consecutive_timeouts": 10,
@@ -229,18 +231,52 @@
     "V_global_4_34_crossed": "R135 \u2014 2026-02-23T11:30 PST",
     "ceiling_54_r136": "R136 \u2014 2026-02-23T12:04 PST",
     "V_global_4_37_crossed": "R136 \u2014 2026-02-23T12:04 PST",
-    "r136_highest_poly_c_since_r132": "R136 \u2014 poly_c=0.4779 \u2014 closest approach since R132 (0.4747)"
+    "r136_highest_poly_c_since_r132": "R136 \u2014 poly_c=0.4779 \u2014 closest approach since R132 (0.4747)",
+    "ceiling_55_r137": "R137 \u2014 2026-02-23T12:25 PST",
+    "prime_block_8": "R137 \u2014 N=89=prime",
+    "V_global_4_39_crossed": "R137 \u2014 4.393827",
+    "crawfather_ci_fixed": "R137 \u2014 2026-02-23T12:25 PST \u2014 autonomous-executor+core disabled (scripts missing)",
+    "evez666_ci_fixed": "R137 \u2014 2026-02-23T12:25 PST \u2014 atlas-ci npm + test-actions local action disabled (deps missing)"
   },
   "maturity": {
     "gamma": 0.08,
     "adm": 1.0,
     "V_v2": 6.0,
-    "K": 136,
-    "S": 136,
+    "K": 137,
+    "S": 137,
     "F": 12,
-    "phi": 0.0882,
-    "score": "12/136 fires = 8.82%",
-    "v_progress": "4.379690 / 6.000 = 73.0%"
+    "phi": 0.0876,
+    "score": "12/137 fires = 8.76%",
+    "v_progress": "4.393827 / 6.000 = 73.2%"
   },
-  "updated_at": "2026-02-23T12:04:33-08:00"
+  "updated_at": "2026-02-23T12:25:00-08:00",
+  "r137_result": {
+    "N": 89,
+    "N_str": "89=prime",
+    "tau": 1,
+    "omega_k": 1,
+    "topo": 1.15,
+    "poly_c": 0.176711,
+    "fire_ignited": false,
+    "delta_V": 0.014137,
+    "V_global_prev": 4.37969,
+    "V_global_new": 4.393827,
+    "ceiling_tick": 55,
+    "commit_sha": "9a0e2f3b440c4649977319282661ad3808438502",
+    "agent_sha": "9c5cf90d5a929c171668b8de558be2f4bf77802b",
+    "module": "prime_block_watch_8.py",
+    "truth_plane": "CANONICAL",
+    "prime_block": 8,
+    "probe_source": "685fcea9-completed-poly_c=0.177-confirmed",
+    "videos_posted": false,
+    "video_skip_reason": "workbench_infra_down",
+    "note": "PRIME BLOCK 8 \u2014 minimum energy tick after R136 elevated. Classic prime valley."
+  },
+  "r138_browser_jobs": {
+    "perplexity": {
+      "job_id": null,
+      "status": "not-started",
+      "note": "Launch at R138 tick"
+    }
+  }
 }
