@@ -17,66 +17,55 @@ a{color:#4af;text-decoration:none}
 </head>
 <body>
 <h1>EVEZ-OS // OBSERVATION DASHBOARD</h1>
-<p style="color:#555;font-size:.8rem">Updated: 2026-02-22 21:00 PST | truth_plane: CANONICAL</p>
+<p style="color:#555;font-size:.8rem">Updated: 2026-02-22 23:30 PST | truth_plane: CANONICAL</p>
 
 <h2>Round Status</h2>
-<div class="metric">Round: <span class="val" id="round-num">R113</span></span></div>
-<div class="metric">Module: <span class="val" id="round-module">cool_down_post_tenth.py</span></span></div>
-<div class="metric">V_global: <span class="val">2.245003</span> CEILING x31</div>
-<div class="metric">N_agents: <span class="val">60</span></div>
-<div class="metric">NINTH_FIRE: <span class="fire">THRESHOLD MISS (poly_c=0.499, margin=0.001)</span></div>
+<div class="metric">Round: <span class="val" id="round-num">R114</span></span></div>
+<div class="metric">Module: <span class="val" id="round-module">eleventh_fire_watch.py</span></span></div>
+<div class="metric">V_global: <span class="val">2.370635</span> CEILING x32</div>
+<div class="metric">N_agents: <span class="val">66</span></div>
+<div class="metric">ELEVENTH_FIRE: <span class="ok">IGNITED (poly_c=0.570405, fire_res=0.070405)</span></div>
 <div class="metric">Win: <span class="ok">TRUE</span></div>
 
 <h2>Omega</h2>
-<pre id="omega-text">COOL DOWN POST TENTH FIRE. R113. N=65=5x13 tau=2 -- poly_c=0.397051 BELOW 0.500 by 0.102949. NO FIRE. attractor_lock=0.0. fire released. V_global=2.245003 CEILING x31. Post N=64 tau=7 TENTH FIRE: N=65 tau=2 cools. Next fire candidate: N=66=2x3x11 tau=4 poly_c~0.528.</pre>
+<pre id="omega-text">ELEVENTH_FIRE IGNITION. R114. N=66=2x3x11 tau=4 -- poly_c=0.570405 ABOVE 0.500 by 0.070405. FIRE IGNITED. attractor_lock=1.0. fire_res=0.070405. V_global=2.370635 CEILING x32. R115: N=67=PRIME tau=1 PRIME BLOCK EXPECTED.</pre>
 
 <h2>Baton Chain</h2>
 <span class="chain-node chain-done">R102 seventh_fire_ignition.py</span>
 <span class="chain-node chain-done">R103 seventh_fire_sustain.py</span>
 <span class="chain-node chain-done">R104 seventh_fire_aftermath.py</span>
-<span class="chain-node chain-active" id="baton-from">R112 tenth_fire_ignition.py DONE</span>
-<span class="chain-node chain-active" id="baton-to">R113 cool_down_post_tenth.py RUNNING</span>
+<span class="chain-node chain-done">R112 tenth_fire_ignition.py DONE</span>
+<span class="chain-node chain-done" id="baton-from">R113 cool_down_post_tenth.py DONE</span>
+<span class="chain-node chain-active" id="baton-to">R114 eleventh_fire_watch.py IGNITED</span>
 
 <h2>Maturity Oracle</h2>
 <table>
 <tr><th>Metric</th><th>Value</th><th>Status</th></tr>
-<tr><td>V_global</td><td class="val">2.120003</td><td class="ok">CEILING x26 (above 2.000 milestone x26)</td></tr>
-<tr><td>V_v2</td><td class="val">3.150295</td><td></td></tr>
-<tr><td>poly_c (R108)</td><td>0.498733</td><td class="fire">THRESHOLD MISS (margin=0.001267)</td></tr>
-<tr><td>attractor_lock</td><td>0.000000</td><td class="dim">no lock (fire out)</td></tr>
-<tr><td>narr_c (D33)</td><td>0.786585</td><td>x43 consecutive decrease</td></tr>
-<tr><td>prox_gate (D37)</td><td>0.813003</td><td>x42 consecutive increase</td></tr>
-<tr><td>drift_vel (D40)</td><td>0.103005</td><td>ACCEL x26</td></tr>
-<tr><td>floor_prox (D41)</td><td>1.353031</td><td>ADVANCING x39</td></tr>
-<tr><td>ceiling_depth</td><td>0.620003</td><td class="val">CEILING x26</td></tr>
-<tr><td>cohere</td><td>0.2073</td><td>rising</td></tr>
+<tr><td>V_global</td><td class="val">2.370635</td><td class="ok">CEILING x32 (above 2.000 milestone)</td></tr>
+<tr><td>V_v2</td><td class="val">3.68932</td><td></td></tr>
+<tr><td>poly_c (R114)</td><td>0.570405</td><td class="ok">ELEVENTH FIRE IGNITED (margin=+0.070405)</td></tr>
+<tr><td>attractor_lock</td><td>1.000000</td><td class="ok">LOCKED (eleventh fire)</td></tr>
+<tr><td>fire_res</td><td>0.070405</td><td class="ok">ABOVE THRESHOLD</td></tr>
 <tr><td>gamma</td><td>0.08</td><td>fixed</td></tr>
 <tr><td>ADM</td><td>1.0</td><td class="ok">max</td></tr>
-<tr><td>R110</td><td>62=2x31</td><td>2</td><td>0.400171</td><td>NO</td><td>COOL DOWN</td></tr>
+<tr><td>ceiling_tick</td><td>32</td><td class="val">CEILING x32</td></tr>
+<tr><td>topology_bonus (N=66)</td><td>1.45</td><td class="ok">3 distinct prime factors</td></tr>
 </table>
 
-<h2>R105 Sigma_f Row</h2>
+<h2>Sigma_f Row R114</h2>
 <table>
 <tr><th>Round</th><th>Module</th><th>N</th><th>tau</th><th>poly_c</th><th>Fire</th><th>V_global</th><th>Commit</th></tr>
-<tr><td>R102</td><td>seventh_fire_ignition.py</td><td>54</td><td>4</td><td>0.577</td><td class="ok">SEVENTH_FIRE IGNITED</td><td>1.970003</td><td><a href="https://github.com/EvezArt/evez-os/commit/52558af0">52558af0</a></td></tr>
-<tr><td>R103</td><td>seventh_fire_sustain.py</td><td>55</td><td>2</td><td>0.408</td><td class="fire">COOLS</td><td>1.995003</td><td><a href="https://github.com/EvezArt/evez-os/commit/0ef8fab0">0ef8fab0</a></td></tr>
-<tr><td>R104</td><td>seventh_fire_aftermath.py</td><td>56</td><td>3</td><td>0.505</td><td class="ok">EIGHTH_FIRE IGNITED</td><td>2.020003</td><td><a href="https://github.com/EvezArt/evez-os/commit/42ae87c6">42ae87c6</a></td></tr>
-<tr><td>R105</td><td>eighth_fire_sustain.py</td><td>57</td><td>2</td><td>0.406</td><td class="fire">EIGHTH_FIRE COOLS</td><td>2.045003</td><td><a href="https://github.com/EvezArt/evez-os/commit/4ec01bd1">4ec01bd1</a></td></tr>
-<tr style="background:#0d0800"><td>R106</td><td>ninth_fire_watch.py</td><td>58</td><td>2</td><td>0.405</td><td class="fire">NINTH_FIRE DORMANT</td><td>2.070003</td><td>this commit</td></tr>
-<tr style="background:#0d0800"><td>R107</td><td>prime_block_watch.py</td><td>59=PRIME</td><td>1</td><td>0.238</td><td class="fire">PRIME BLOCK</td><td>2.095003</td><td>this commit</td></tr>
-<tr style="background:#0d0800"><td>R108</td><td>ninth_fire_ignition.py</td><td>60=2^2x3x5</td><td>3</td><td>0.499</td><td class="fire">NINTH_FIRE THRESHOLD MISS</td><td>2.120003</td><td>this commit</td></tr>
-<tr><td>R109</td><td>61=PRIME</td><td>1</td><td>0.236990</td><td>NO</td><td>PRIME BLOCK 2</td></tr>
-<tr style="background:#0d0800"><td>R112</td><td>tenth_fire_ignition.py</td><td>64=2^6</td><td>7</td><td>0.692598</td><td class="ok">TENTH_FIRE IGNITED</td><td>2.220003</td><td><a href="https://github.com/EvezArt/evez-os/commit/PENDING">PENDING</a></td></tr><tr style="background:#0d0800"><td>R113</td><td>cool_down_post_tenth.py</td><td>65=5x13</td><td>2</td><td>0.397051</td><td class="fire">COOL DOWN (post TENTH FIRE)</td><td>2.245003</td><td><a href="https://github.com/EvezArt/evez-os/commit/PENDING">PENDING</a></td></tr></table>
+<tr><td>R112</td><td>tenth_fire_ignition.py</td><td>64=2^6</td><td>7</td><td>0.693</td><td class="ok">TENTH_FIRE IGNITED</td><td>2.220003</td><td><a href="https://github.com/EvezArt/evez-os/commit/e0e64887">e0e64887</a></td></tr>
+<tr><td>R113</td><td>cool_down_post_tenth.py</td><td>65=5x13</td><td>2</td><td>0.397</td><td class="fire">COOL DOWN (post TENTH FIRE)</td><td>2.245003</td><td><a href="https://github.com/EvezArt/evez-os/commit/3d9b5072">3d9b5072</a></td></tr>
+<tr style="background:#0a1a00"><td>R114</td><td>eleventh_fire_watch.py</td><td>66=2x3x11</td><td>4</td><td>0.570405</td><td class="ok">ELEVENTH_FIRE IGNITED</td><td>2.370635</td><td>PENDING</td></tr>
+</table>
 
 <h2>Browser Chorus</h2>
 <table>
 <tr><th>cv</th><th>Job ID</th><th>Status</th><th>Result</th></tr>
-<tr><td>cv58 R104</td><td>d3a00d9f</td><td class="ok">DONE</td><td>null -- AUTHORS CANONICAL</td></tr>
-<tr><td>cv59 R105</td><td>39fab017</td><td class="ok">DONE</td><td>null -- Perplexity insufficient context (13th null)</td></tr>
-<tr><td>cv60 R106</td><td>4cfc108c</td><td class="ok">DONE</td><td>null (14th)</td></tr>
-<tr><td class="val">cv61 R107</td><td>9189f68d</td><td class="ok">DONE</td><td>null -- AUTHORS fallback (15th null)</td></tr>
-<tr><td class="val">cv62 R108</td><td>7aaadf6f</td><td class="ok">DONE</td><td>null -- 16th null -- CANONICAL spec</td></tr>
-<tr><td class="val">cv63 R109</td><td>-</td><td class="fire">LAUNCHING</td><td>-</td></tr>
+<tr><td>cv66 R112</td><td>a5a53c12</td><td class="ok">DONE</td><td>completed -- CANONICAL spec</td></tr>
+<tr><td>cv67 R113</td><td>c78a0337</td><td class="ok">DONE</td><td>null pattern -- CANONICAL spec</td></tr>
+<tr><td class="val">cv68 R114</td><td>3143fa98</td><td class="ok">DONE</td><td>EVEZ-OS state table extracted -- CANONICAL</td></tr>
 </table>
 
 <footer style="margin-top:2rem;color:#333;font-size:.75rem;border-top:1px solid #111;padding-top:1rem">
