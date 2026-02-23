@@ -1,0 +1,34 @@
+name: Render Arc Video
+on:
+  push:
+    paths:
+      - 'spine/*.py'
+      - 'hyperloop_state.json'
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          sudo apt-get install -y ffmpeg
+          pip install matplotlib numpy requests pillow
+
+      - name: Render cinematic arc video
+        run: python scripts/gen_cinematic.py --output /tmp/evez_arc.mp4 --fps 30 --speed 2 --hold 3.0
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: evez-arc-video
+          path: /tmp/evez_arc.mp4
+          retention-days: 3
