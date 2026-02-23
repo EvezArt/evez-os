@@ -2,55 +2,51 @@
 
 ## QUEUE
 
-### [R123] watch_composite_75.py asks:
+### [R124] watch_composite_76.py asks:
 
 ```
 EVEZ-OS COMPUTE. Return state table only. No prose.
-R123 COMPOSITE WATCH.
-N=75=3x5² tau=3.
-V_global_prev=3.176001 CEILING x40.
+R124 COMPOSITE WATCH.
+N=76=2²x19 tau=2.
+V_global_prev=3.290933 CEILING x41.
 gamma=0.08 ADM=1.0.
-After R122 N=74=2x37 tau=2 poly_c=0.353372 NO FIRE.
+After R123 N=75=3x5^2 tau=3 poly_c=0.436656 NO FIRE.
 
-omega_k(75): factors {3,5} -> omega_k=2
+omega_k(76): factors {2,19} -> omega_k=2
 topo_bonus = 1 + 0.15*2 = 1.30
 
-poly_c(75) = 1.30 * (1+ln(3)) / log2(76)
-           = 1.30 * 2.098612 / 6.247928
-           = 0.436656
+poly_c(76) = 1.30 * (1+ln(2)) / log2(77)
+           = 1.30 * 1.693147 / 6.266787
+           = 0.351231
 
-FIRE CHECK: poly_c=0.436656 < 0.500 -- NO FIRE.
-delta_V = 0.08 * 1.0 * (1+0.436656) = 0.114932
-V_global_new = 3.176001 + 0.114932 = 3.290933
-ceiling_tick = 41.
-attractor_lock = 0.0.
+FIRE CHECK: poly_c=0.351231 < 0.500 -- NO FIRE.
+delta_V = 0.08 * 1.0 * (1+0.351231) = 0.108098
+V_global_new = 3.290933 + 0.108098 = 3.399031
+ceiling_tick = 42.
 
+Next watch: N=78=2x3x13 tau=3 topo=1.45 poly_c~0.464.
+Watch: N=84=2^2x3x7 tau=12 -- THIRTEENTH FIRE candidate.
 truth_plane: CANONICAL.
 ```
 
 ---
 
-### [R122] watch_composite_74.py asks: RUNNING
-**Job:** 42ed60d4-f4e3-482a-b6d5-2d51eaafb710
+### [R123] watch_composite_75.py asks: RUNNING
+**Job:** 7a837be1-7416-4b0c-a24c-0e8f78f61de7
 
 ---
 
-### [R121] prime_block_watch_5.py asks: COMPLETED
+### [R122] watch_composite_74.py asks: COMPLETED ✅
+**Commit:** [fc5fa169](https://github.com/EvezArt/evez-os/commit/fc5fa169f77f63f41c7a048af18de76b82d7590d)
+**Tweets:** [speedrun](https://twitter.com/EVEZ666/status/2025912703273816337) | [eq crystal](https://twitter.com/EVEZ666/status/2025912734538199538)
+**Result:** N=74=2x37 tau=2 poly_c=0.353372. NO FIRE. V_global=3.176001 CEILING x40.
+
+---
+
+### [R121] prime_block_watch_5.py asks: COMPLETED ✅
 **Commit:** [255f39e1](https://github.com/EvezArt/evez-os/commit/255f39e10ae3f0adea911e7d475c1aec5122db82)
-**Tweets:** [speedrun](https://twitter.com/EVEZ666/status/2025907275601244585) | [eq crystal](https://twitter.com/EVEZ666/status/2025907325421162828)
 **Result:** PRIME BLOCK 5. poly_c=0.000. V_global=3.067731 CEILING x39.
 
----
-
-### [R120] composite_watch_72.py asks: COMPLETED
+### [R120] composite_watch_72.py asks: COMPLETED ✅
 **Commit:** [a572d1aa](https://github.com/EvezArt/evez-os/commit/a572d1aa1e6a4605be27da9d92704331b77661b0)
-**Tweet:** [2025900006054494559](https://twitter.com/EVEZ666/status/2025900006054494559)
 **Result:** TWELFTH FIRE. poly_c=0.501175. V_global=2.987731 CEILING x38.
-
----
-
-### [R119] prime_block_watch_4.py asks: COMPLETED
-**Commit:** [d832fe5f](https://github.com/EvezArt/evez-os/commit/d832fe5fd47c6607f4e020e5b87dd4f262a8880d)
-
-### [R118] watch_composite_70.py asks: COMPLETED
-**Commit:** [0be48b2c](https://github.com/EvezArt/evez-os/commit/0be48b2c52d89a802daded90b68048f76cfe9717)

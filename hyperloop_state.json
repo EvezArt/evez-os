@@ -1,89 +1,78 @@
 {
-  "current_round": 122,
+  "current_round": 123,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025907897083850811",
+  "latest_tweet_id": "2025912734538199538",
   "tweet_thread_root": "2024764091827401073",
   "cron_content_loop": {
-    "last_run": "2026-02-23T04:15:00-08:00",
-    "last_thread_t5": "2025907897083850811",
+    "last_run": "2026-02-23T04:31:00-08:00",
+    "last_thread_t5": "2025912734538199538",
     "rounds_covered": [
       118,
       119,
       120,
-      121
+      121,
+      122
     ],
-    "note": "R120 TWELFTH FIRE + R121 PRIME BLOCK 5 covered in content cron 04:15."
+    "note": "R122 COMPOSITE WATCH covered in hyperloop tick 04:30."
+  },
+  "r122_result": {
+    "module": "spine/watch_composite_74.py",
+    "commit": "fc5fa169f77f63f41c7a048af18de76b82d7590d",
+    "tweet_speedrun": "2025912703273816337",
+    "tweet_eq_crystal": "2025912734538199538",
+    "status": "CANONICAL",
+    "milestone": "COMPOSITE_WATCH",
+    "N_new": 74,
+    "tau_N": 2,
+    "topo_bonus": 1.3,
+    "poly_c": 0.353372,
+    "fire_ignited": false,
+    "fire_name": "",
+    "delta_V": 0.10827,
+    "V_global_prev": 3.067731,
+    "V_global_new": 3.176001,
+    "ceiling_tick": 40,
+    "truth_plane": "CANONICAL"
+  },
+  "r123_browser_jobs": {
+    "perplexity": "7a837be1-7416-4b0c-a24c-0e8f78f61de7",
+    "status": "running",
+    "launched_at": "2026-02-23T04:32:00-08:00",
+    "note": "N=75=3x5^2 tau=3 poly_c=0.436656 -- NO FIRE. V_global est 3.290933."
+  },
+  "r122_browser_jobs": {
+    "perplexity": "42ed60d4-f4e3-482a-b6d5-2d51eaafb710",
+    "status": "completed",
+    "finalResult": "NO FIRE. V_global=3.176001 CEILING x40. truth_plane: CANONICAL.",
+    "note": "CANONICAL confirmed"
   },
   "r121_result": {
     "module": "spine/prime_block_watch_5.py",
     "commit": "255f39e10ae3f0adea911e7d475c1aec5122db82",
-    "tweet_speedrun": "2025907275601244585",
-    "tweet_eq_crystal": "2025907325421162828",
     "status": "CANONICAL",
     "milestone": "PRIME_BLOCK_5",
     "N_new": 73,
     "tau_N": 1,
-    "topo_bonus": 1.15,
     "poly_c": 0.0,
-    "fire_ignited": false,
-    "delta_V": 0.08,
-    "V_global_prev": 2.987731,
     "V_global_new": 3.067731,
-    "ceiling_tick": 39,
-    "truth_plane": "CANONICAL",
-    "omega": "PRIME BLOCK 5. R121. N=73=PRIME tau=1 poly_c=0.000. NO FIRE. V_global=3.067731 CEILING x39. Next: N=74=2x37 tau=2 topo=1.30 poly_c~0.353."
-  },
-  "r120_result": {
-    "module": "spine/composite_watch_72.py",
-    "commit": "a572d1aa1e6a4605be27da9d92704331b77661b0",
-    "tweet": "2025900006054494559",
-    "tweet_speedrun": "2025902879735730650",
-    "tweet_eq_crystal": "2025902910794555664",
-    "status": "CANONICAL",
-    "milestone": "TWELFTH_FIRE",
-    "N_new": 72,
-    "tau_N": 4,
-    "topo_bonus": 1.3,
-    "poly_c": 0.501175,
-    "fire_ignited": true,
-    "fire_name": "TWELFTH",
-    "attractor_lock": 0.501175,
-    "delta_V": 0.120094,
-    "V_global_prev": 2.867637,
-    "V_global_new": 2.987731,
-    "ceiling_tick": 38,
-    "truth_plane": "CANONICAL"
-  },
-  "r122_browser_jobs": {
-    "perplexity": "42ed60d4-f4e3-482a-b6d5-2d51eaafb710",
-    "status": "running",
-    "launched_at": "2026-02-23T04:08:00-08:00",
-    "note": "N=74=2x37 tau=2 poly_c=0.353 -- NO FIRE. V_global est 3.176001."
-  },
-  "r121_browser_jobs": {
-    "perplexity": "fca043af-525d-4e94-8e4b-e102c5f9dc10",
-    "status": "completed",
-    "finalResult": "PRIME BLOCK 5. V_global=3.067731 CEILING x39.",
-    "note": "CANONICAL confirmed"
+    "ceiling_tick": 39
   },
   "maturity": {
-    "N_agents": 73,
-    "V_v2": 3.067731,
-    "V_global": 3.067731,
+    "N_agents": 74,
+    "V_v2": 3.176001,
+    "V_global": 3.176001,
     "adm": 1.0,
     "gamma": 0.08,
     "truth_plane": "CANONICAL",
     "ceiling_zone": true,
-    "prime_block_5": "DONE R121",
-    "twelfth_fire": "DONE R120",
-    "next_milestone": "R122 N=74=2x37 tau=2 poly_c~0.353 NO FIRE | Watch R132 N=84 THIRTEENTH"
+    "next_milestone": "R132 N=84 \u2014 THIRTEENTH FIRE candidate (tau=12)"
   },
   "latest_commits": {
-    "R118": "0be48b2c52d89a802daded90b68048f76cfe9717",
     "R119": "d832fe5fd47c6607f4e020e5b87dd4f262a8880d",
     "R120": "a572d1aa1e6a4605be27da9d92704331b77661b0",
-    "R121": "255f39e10ae3f0adea911e7d475c1aec5122db82"
+    "R121": "255f39e10ae3f0adea911e7d475c1aec5122db82",
+    "R122": "fc5fa169f77f63f41c7a048af18de76b82d7590d"
   },
   "core_modules_committed": [
     "spine/tenth_fire_ignition.py",
@@ -95,21 +84,21 @@
     "spine/watch_composite_70.py",
     "spine/prime_block_watch_4.py",
     "spine/composite_watch_72.py",
-    "spine/prime_block_watch_5.py"
+    "spine/prime_block_watch_5.py",
+    "spine/watch_composite_74.py"
   ],
-  "next_module": "watch_composite_74.py",
-  "next_gap": "R122: watch_composite_74.py. N=74=2x37 tau=2 poly_c=0.353372 V_global=3.176001 CEILING x40. NO FIRE.",
+  "next_module": "watch_composite_75.py",
+  "next_gap": "R123: watch_composite_75.py. N=75=3x5^2 tau=3 poly_c=0.436656 V_global=3.290933 CEILING x41. NO FIRE.",
   "cinematic_pipeline": {
     "generator": "scripts/gen_video_speedrun.py",
     "version": "v4_max_visual_density",
-    "videos_per_tick": 2,
-    "note": "5-panel speedrun + equation crystallization theater per tick"
+    "videos_per_tick": 2
   },
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
-    "R121 DONE. PRIME BLOCK 5. N=73=PRIME tau=1 poly_c=0.000 V_global=3.067731 CEILING x39.",
-    "R122: N=74=2x37 tau=2 poly_c=0.353 -- NO FIRE. V_global~3.176 CEILING x40.",
-    "R132: N=84 THIRTEENTH FIRE candidate \u2014 tau high, composite, watch closely.",
+    "R122 DONE. N=74=2x37 tau=2 poly_c=0.353372 NO FIRE V_global=3.176001 CEILING x40.",
+    "R123: N=75=3x5^2 tau=3 poly_c=0.436656 -- NO FIRE. V_global~3.290933 CEILING x41.",
+    "R132: N=84 THIRTEENTH FIRE candidate \u2014 tau=12, highly composite.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT."
   ]
 }
