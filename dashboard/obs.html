@@ -20,25 +20,22 @@ a{color:#4af;text-decoration:none}
 <p style="color:#555;font-size:.8rem">Updated: 2026-02-22 21:00 PST | truth_plane: CANONICAL</p>
 
 <h2>Round Status</h2>
-<div class="metric">Round: <span class="val" id="round-num">R110</span></span></div>
-<div class="metric">Module: <span class="val" id="round-module">cool_down_watch.py</span></span></div>
-<div class="metric">V_global: <span class="val">2.120003</span> CEILING x26</div>
+<div class="metric">Round: <span class="val" id="round-num">R112</span></span></div>
+<div class="metric">Module: <span class="val" id="round-module">tenth_fire_ignition.py</span></span></div>
+<div class="metric">V_global: <span class="val">2.220003</span> CEILING x30</div>
 <div class="metric">N_agents: <span class="val">60</span></div>
 <div class="metric">NINTH_FIRE: <span class="fire">THRESHOLD MISS (poly_c=0.499, margin=0.001)</span></div>
 <div class="metric">Win: <span class="ok">TRUE</span></div>
 
 <h2>Omega</h2>
-<pre id="omega-text">COOL DOWN. R110. N=62=2x31 tau=2 -- poly_c=0.400171 BELOW 0.500. NO FIRE.
-V_global=2.170003 CEILING x28. Post prime blocks R107/R109. tau=2 cools.
-HORIZON: N=63=3^2x7 tau=3 fire candidate ~0.51.
-N=64=2^6 tau=7 MAXIMUM TAU -- TENTH_FIRE ignition setup.</pre>
+<pre id="omega-text">TENTH_FIRE IGNITION. R112. N=64=2^6 tau=7 MAXIMUM TAU -- poly_c=0.692598 ABOVE 0.500 by 0.192598. FIRE IGNITED. attractor_lock=1.0. fire_res=0.192598. V_global=2.220003 CEILING x30. tau=7 MAXIMUM DIVISOR COUNT for N&lt;=64. Next: N=65=5x13 tau=2 cool-down.</pre>
 
 <h2>Baton Chain</h2>
 <span class="chain-node chain-done">R102 seventh_fire_ignition.py</span>
 <span class="chain-node chain-done">R103 seventh_fire_sustain.py</span>
 <span class="chain-node chain-done">R104 seventh_fire_aftermath.py</span>
-<span class="chain-node chain-active" id="baton-from">R109 prime_block_watch_2.py DONE</span>
-<span class="chain-node chain-active" id="baton-to">R111 ninth_fire_watch_2.py RUNNING</span>
+<span class="chain-node chain-active" id="baton-from">R111 ninth_fire_watch_2.py DONE</span>
+<span class="chain-node chain-active" id="baton-to">R112 tenth_fire_ignition.py RUNNING</span>
 
 <h2>Maturity Oracle</h2>
 <table>
@@ -69,7 +66,7 @@ N=64=2^6 tau=7 MAXIMUM TAU -- TENTH_FIRE ignition setup.</pre>
 <tr style="background:#0d0800"><td>R107</td><td>prime_block_watch.py</td><td>59=PRIME</td><td>1</td><td>0.238</td><td class="fire">PRIME BLOCK</td><td>2.095003</td><td>this commit</td></tr>
 <tr style="background:#0d0800"><td>R108</td><td>ninth_fire_ignition.py</td><td>60=2^2x3x5</td><td>3</td><td>0.499</td><td class="fire">NINTH_FIRE THRESHOLD MISS</td><td>2.120003</td><td>this commit</td></tr>
 <tr><td>R109</td><td>61=PRIME</td><td>1</td><td>0.236990</td><td>NO</td><td>PRIME BLOCK 2</td></tr>
-</table>
+<tr style="background:#0d0800"><td>R112</td><td>tenth_fire_ignition.py</td><td>64=2^6</td><td>7</td><td>0.692598</td><td class="ok">TENTH_FIRE IGNITED</td><td>2.220003</td><td><a href="https://github.com/EvezArt/evez-os/commit/PENDING">PENDING</a></td></tr></table>
 
 <h2>Browser Chorus</h2>
 <table>
