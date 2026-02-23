@@ -1,19 +1,19 @@
 {
-  "ts": "2026-02-23T22:06:26.303560+00:00",
+  "ts": "2026-02-23T22:33:18.651160+00:00",
   "current_round": 141,
-  "V_global": 4.511739310016517,
+  "V_global": 4.511739,
   "ceiling_tick": 59,
   "v_progress_pct": 75.2,
   "buses": {
     "event_counts": {
-      "MasterBus": 5,
-      "SpawnBus": 3,
-      "CapabilityBus": 3,
-      "ValidatorBus": 7,
-      "MetaBus": 2
+      "MasterBus": 7,
+      "SpawnBus": 4,
+      "CapabilityBus": 4,
+      "ValidatorBus": 9,
+      "MetaBus": 3
     },
-    "recent_1h": 20,
-    "total_events": 20,
+    "recent_1h": 27,
+    "total_events": 27,
     "rejections": 0,
     "spawn": {
       "last_spawned_round": 141,

@@ -20,3 +20,10 @@
 {"ts": "2026-02-23T22:06:26.302786+00:00", "bus": "ValidatorBus", "event": "CAPABILITY_GATE", "active_count": 0, "blocked_count": 0, "active": [], "blocked": []}
 {"ts": "2026-02-23T22:06:26.305556+00:00", "bus": "MetaBus", "event": "META_REPORT", "health": "YELLOW", "bottleneck_count": 1, "recommendation_count": 2, "current_round": 141, "V_global": 4.511739310016517, "v_progress_pct": 75.2, "top_reco": "FIRE WATCH: R144 in 3 rounds \u2014 N=96=2\u2075\u00d73 tau=12 poly_c\u22480.685 \u2014 prep video reply"}
 {"ts": "2026-02-23T22:06:26.305938+00:00", "bus": "MasterBus", "event": "RUN_END", "status": "OK", "results": {"spawn": "OK", "capability": "OK", "validator": "OK", "meta": "YELLOW"}}
+{"ts": "2026-02-23T22:33:18.648310+00:00", "bus": "MasterBus", "event": "RUN_START", "ts_start": "2026-02-23T22:33:18.648303+00:00"}
+{"ts": "2026-02-23T22:33:18.649097+00:00", "bus": "SpawnBus", "event": "NOOP", "reason": "R141 already spawned", "current_round": 141}
+{"ts": "2026-02-23T22:33:18.649612+00:00", "bus": "CapabilityBus", "event": "NOOP", "reason": "all apps registered"}
+{"ts": "2026-02-23T22:33:18.650332+00:00", "bus": "ValidatorBus", "event": "PROBE_VALIDATED", "probe_id": "a4f1bf1d-c2ee-4a46-b322-b132e4ade187", "verdict": "CANONICAL", "inline_poly_c": 0.335029, "probe_poly_c": 0.335, "drift": 2.9e-05, "tolerance": 0.002, "passed": true, "reason": "drift within tolerance"}
+{"ts": "2026-02-23T22:33:18.650460+00:00", "bus": "ValidatorBus", "event": "CAPABILITY_GATE", "active_count": 0, "blocked_count": 0, "active": [], "blocked": []}
+{"ts": "2026-02-23T22:33:18.652167+00:00", "bus": "MetaBus", "event": "META_REPORT", "health": "YELLOW", "bottleneck_count": 1, "recommendation_count": 2, "current_round": 141, "V_global": 4.511739, "v_progress_pct": 75.2, "top_reco": "FIRE WATCH: R144 in 3 rounds \u2014 N=96=2\u2075\u00d73 tau=12 poly_c\u22480.685 \u2014 prep video reply"}
+{"ts": "2026-02-23T22:33:18.652451+00:00", "bus": "MasterBus", "event": "RUN_END", "status": "OK", "results": {"spawn": "OK", "capability": "OK", "validator": "OK", "meta": "YELLOW"}}
