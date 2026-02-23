@@ -2,8 +2,14 @@
   "current_round": 120,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025889564645036140",
+  "latest_tweet_id": "2025892293320777806",
   "tweet_thread_root": "2024764091827401073",
+  "cron_content_loop": {
+    "last_run": "2026-02-23T03:15:00-08:00",
+    "last_thread_t5": "2025892293320777806",
+    "rounds_covered": [118, 119],
+    "note": "First run -- covers R118 NEAR MISS + R119 PRIME BLOCK 4. R120 pending."
+  },
   "r119_result": {
     "module": "spine/prime_block_watch_4.py",
     "commit": "d832fe5fd47c6607f4e020e5b87dd4f262a8880d",
