@@ -108,6 +108,30 @@ def run():
     # ── Revenue gap ────────────────────────────────────────────────────────
     report["revenue"] = {"status": "$0", "blocker": "GitHub Sponsors SSN enrollment (Steven action required)"}
     report["bottlenecks"].append("Revenue: $0 — GitHub Sponsors enrollment gate (SSN + banking, Steven action)")
+
+    # ── x402 wallet health ─────────────────────────────────────────────────
+    try:
+        import sys; sys.path.insert(0, CELL)
+        from http_client import x402_status
+        x402 = x402_status()
+        report["buses"]["x402"] = {
+            "wallet": x402.get("wallet", "unknown"),
+            "funded": x402.get("funded", False),
+            "balance_usd": x402.get("balance_usd", 0),
+            "active": x402.get("active", False),
+        }
+        if not x402.get("funded"):
+            report["bottlenecks"].append("x402 wallet unfunded — USDC on Base needed for autonomous API payments")
+            report["recommendations"].append(
+                "Fund x402 wallet: send USDC on Base to 0xFb756fc5Fe01FB982E5d63Db3A8b787B6fDE8692 ($5 minimum)"
+            )
+        elif (x402.get("balance_usd") or 0) < 1.0:
+            report["recommendations"].append(
+                f"x402 wallet low (${x402.get('balance_usd', 0):.4f}) — refill USDC on Base soon"
+            )
+    except Exception as _e:
+        report["buses"]["x402"] = {"error": str(_e)}
+
     report["recommendations"].append("PRIORITY: Complete github.com/sponsors/accounts enrollment to unblock revenue")
 
     # ── Fire watch ────────────────────────────────────────────────────────

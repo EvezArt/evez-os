@@ -14,7 +14,8 @@ KNOWN_APPS = [
     "astica_ai", "backendless", "agent_mail", "apiverve", "cloudconvert",
     "api_labz", "ai_ml_api", "aivoov", "_2chat", "agenty", "groqcloud",
     "clicksend", "vercel", "openai", "github", "perplexityai", "twitter",
-    "youtube", "hyperbrowser", "google_maps"
+    "youtube", "hyperbrowser", "google_maps",
+    "x402"
 ]
 
 CAP_PROFILES = {
@@ -23,6 +24,7 @@ CAP_PROFILES = {
     "backendless":  {"role": "backend_db",         "status": "BLOCKED_CONFIG",        "priority": "MED",      "blocker": "backendless_config.json missing"},
     "openai":       {"role": "llm_fallback",       "status": "AVAILABLE",             "priority": "LOW"},
     "groqcloud":    {"role": "llm_fast",           "status": "AVAILABLE_NO_TWEET_GEN","priority": "MED"},
+    "x402":          {"role": "payment_intercept", "status": "ACTIVE",             "priority": "CRITICAL",   "wallet": "0xFb756fc5Fe01FB982E5d63Db3A8b787B6fDE8692", "network": "base-mainnet", "module": "http_client.py"},
     "hyperbrowser": {"role": "probe_engine",       "status": "ACTIVE",                "priority": "CRITICAL"},
     "github":       {"role": "spine_commits",      "status": "ACTIVE",                "priority": "CRITICAL"},
     "twitter":      {"role": "content_publish",    "status": "ACTIVE",                "priority": "CRITICAL"},
