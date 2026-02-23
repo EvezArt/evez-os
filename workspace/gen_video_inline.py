@@ -1,152 +1,156 @@
 #!/usr/bin/env python3
 """
-EVEZ-OS Inline Video Renderer
-Generates arc video from hyperloop_state.json using PIL + ffmpeg.
-No external dependencies beyond numpy, Pillow, scipy, ffmpeg.
+gen_video_inline.py — EVEZ-OS arc video renderer
+=================================================
+Renders a bar chart arc video showing poly_c per round with V_global bar,
+FIRE threshold line, and R144 fire watch banner.
 
 Usage:
-  python gen_video_inline.py --state /path/to/hyperloop_state.json --output /tmp/evez_arc.mp4 --tail 20
+    python gen_video_inline.py --state /path/to/hyperloop_state.json \
+        --output /tmp/evez_arc.mp4 [--tail 20] [--fps 30] [--hold 1.5]
 """
-import argparse, json, math, os, subprocess, sys
-import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+import json, subprocess, sys, os, argparse, math
+from pathlib import Path
 
-def bar_clr(pc, fire, isp):
-    if fire:     return (255, 70, 30)
-    if isp:      return (160, 80, 255)
-    if pc > 0.45: return (255, 195, 30)
-    if pc > 0.35: return (40, 150, 255)
-    return (100, 100, 120)
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--state", required=True)
+    ap.add_argument("--output", default="/tmp/evez_arc.mp4")
+    ap.add_argument("--tail", type=int, default=20)
+    ap.add_argument("--fps", type=int, default=30)
+    ap.add_argument("--hold", type=float, default=1.5)
+    args = ap.parse_args()
 
-def lc(c1, c2, t):
-    return tuple(int(c1[i] + (c2[i]-c1[i]) * t) for i in range(3))
+    from PIL import Image, ImageDraw, ImageFont
+    state = json.load(open(args.state))
 
-def make_frame(rounds, ridx, t, W=720, H=1280):
-    rn, ns, tau, ok, topo, pc, fire, vg, isp = rounds[ridx]
-    t = min(1.0, max(0.0, t))
-    img = Image.new("RGB", (W, H), (5, 5, 12))
-    d   = ImageDraw.Draw(img)
-    try:
-        BOLD  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 36)
-        BOLD3 = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 44)
-        MONO2 = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 16)
-        REG2  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 18)
-    except:
-        BOLD = BOLD3 = MONO2 = REG2 = ImageFont.load_default()
+    W, H = 1280, 720
+    FPS = args.fps
+    HOLD_S = args.hold
+    BG = (5, 5, 12)
+    RED = (220, 40, 40); FIRE_COLOR = (255, 80, 0)
+    GREEN = (40, 220, 100); DIM = (80, 80, 100)
+    WHITE = (230, 230, 240); FIRE_THRESH = 0.500
 
-    hc = (255, 70, 30) if fire else ((160, 80, 255) if isp else (255, 195, 30))
-    d.rectangle([0,0,W,8], fill=hc)
-    d.text((W//2, 52), f"EVEZ-OS  R{rn}", fill=hc, anchor="mm", font=BOLD)
-    d.text((W//2, 90), f"N = {ns}", fill=(235,235,245), anchor="mm", font=REG2)
-
-    ey = 118
-    dv = 0.08 * 1.0 * pc
-    N_int = int(ns.split("=")[0])
-    eqs = [
-        (f"tau={tau}  omega_k={ok}  topo={topo:.2f}", (70,70,90)),
-        (f"poly_c = {topo:.2f}*(1+ln({tau})) / log2({N_int+2})", (235,235,245)),
-        (f"       = {pc:.6f}", (255,195,30) if not fire else (255,70,30)),
-        (f"threshold 0.500  {'← FIRE' if fire else f'Δ={0.5-pc:.4f}'}", (200,50,50) if fire else (70,70,90)),
-        (f"delta_V = 0.08*{pc:.6f} = {dv:.6f}", (50,210,90)),
+    # Arc history — known data points
+    ARC_FULL = [
+        (122,74,0.501,True,3.218,"2²×?"),
+        (123,75,0.467,False,3.255,"3×5²"),
+        (124,76,0.464,False,3.292,"2²×19"),
+        (125,77,0.324,False,3.318,"7×11"),
+        (126,78,0.463,False,3.355,"2×3×13"),
+        (127,79,0.178,False,3.369,"prime"),
+        (128,80,0.461,False,3.406,"2⁴×5"),
+        (129,81,0.459,False,3.443,"3⁴"),
+        (130,82,0.502,True,3.483,"2×41"),
+        (131,83,0.177,False,3.497,"prime"),
+        (132,84,0.458,False,3.534,"2²×3×7"),
+        (133,85,0.177,False,3.548,"5×17"),
+        (134,86,0.456,False,3.584,"2×43"),
+        (135,87,0.455,False,3.621,"3×29"),
+        (136,88,0.453,False,3.657,"2³×11"),
+        (137,89,0.177,False,3.675,"prime"),
+        (138,90,0.466,False,3.712,"2×3²×5"),
+        (139,91,0.337,False,3.749,"7×13"),
+        (140,92,0.336,False,3.785,"2²×23"),
+        (141,93,0.335,False,4.512,"3×31"),
+        (142,94,0.334,False,state["V_global"],"2×47"),
     ]
-    for i,(txt,clr) in enumerate(eqs):
-        d.text((38, ey+i*24), txt, fill=clr, font=MONO2)
 
-    by = ey + len(eqs)*24 + 16
-    bmax = W - 80
-    bw = int(bmax * pc / 0.6 * t)
-    bc = bar_clr(pc, fire, isp)
-    d.rectangle([40, by, 40+bw, by+26], fill=bc)
-    d.rectangle([40, by, 40+bmax, by+26], outline=(100,100,120), width=1)
-    tx = 40 + int(bmax * 0.5/0.6)
-    d.line([tx, by-4, tx, by+30], fill=(200,50,50), width=2)
-    d.text((tx, by-18), "0.500", fill=(180,40,40), font=MONO2, anchor="mm")
+    # Inject current round from state
+    r_cur = state["current_round"]
+    r_result = state.get(f"r{r_cur}_result", {})
+    if r_result:
+        ARC_FULL = [x for x in ARC_FULL if x[0] != r_cur]
+        n_str = r_result.get("N_str","?")
+        ARC_FULL.append((r_cur, r_result.get("N",r_cur),
+                         r_result.get("poly_c",0.334),
+                         r_result.get("fire_ignited",False),
+                         state["V_global"], n_str))
+        ARC_FULL.sort(key=lambda x:x[0])
 
-    ly = by + 46
-    lbl = "FIRE" if fire else ("PRIME BLOCK" if isp else "NO FIRE")
-    lc2 = (255,70,30) if fire else ((160,80,255) if isp else (40,150,255))
-    d.text((W//2, ly), lbl, fill=lc((5,5,12),lc2,min(1.0,t*2.5)), anchor="mm", font=BOLD3)
+    arc_tail = ARC_FULL[-args.tail:]
+    N_BARS = len(arc_tail)
 
-    vy = ly + 60
-    vf = vg / 6.0
-    vbw = int((W-80) * vf * t)
-    d.rectangle([40, vy, 40+vbw, vy+18], fill=(50,210,90))
-    d.rectangle([40, vy, W-40, vy+18], outline=(100,100,120), width=1)
-    d.text((40, vy-20), f"V_global  {vg:.6f} / 6.000  ({vf*100:.1f}%)", fill=(235,235,245), font=MONO2)
-    d.text((W-40, vy-20), f"CEILING ×{rn-82}", fill=(255,195,30), anchor="rm", font=MONO2)
+    CHART_LEFT = 60; CHART_RIGHT = W - 260
+    CHART_TOP = 130; CHART_BOT = H - 120
+    CHART_W = CHART_RIGHT - CHART_LEFT
+    CHART_H = CHART_BOT - CHART_TOP
+    BAR_W = max(4, int(CHART_W / N_BARS) - 2)
+    MAX_POLY = 0.70
 
-    sy = vy + 44
-    sh = 130
-    sw = W - 80
-    d.rectangle([40,sy,40+sw,sy+sh], fill=(10,10,22))
-    d.text((40, sy-18), "poly_c history", fill=(70,70,90), font=MONO2)
-    tsy = sy + sh - int(sh * 0.5/0.6)
-    d.line([40, tsy, 40+sw, tsy], fill=(60,15,15), width=1)
-    N_ = len(rounds)
-    pts = []
-    for i, (rr,_,_,_,_,pci,fi,_,ispi) in enumerate(rounds):
-        x = 40 + int(sw*i/(N_-1))
-        y = sy + sh - int(sh*pci/0.6)
-        pts.append((x,y,bar_clr(pci,fi,ispi),i))
-    for i in range(len(pts)-1):
-        x1,y1,c1,i1 = pts[i]; x2,y2,c2,i2 = pts[i+1]
-        if i1 <= ridx and i2 <= ridx:
-            d.line([x1,y1,x2,y2], fill=c2, width=1)
-    for (x,y,c,idx) in pts:
-        if idx < ridx:   d.ellipse([x-3,y-3,x+3,y+3], fill=c)
-        elif idx==ridx:  d.ellipse([x-5,y-5,x+5,y+5], fill=(235,235,245))
-        else:            d.ellipse([x-2,y-2,x+2,y+2], fill=tuple(max(0,v//6) for v in c))
+    def get_font(size):
+        for path in [
+            "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+            "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
+        ]:
+            try: return ImageFont.truetype(path, size)
+            except: pass
+        return ImageFont.load_default()
 
-    d.rectangle([0,H-36,W,H], fill=(8,8,18))
-    d.text((W//2,H-18), f"@EVEZ666  ·  R{rn}  ·  evez-os", fill=(70,70,90), anchor="mm", font=REG2)
-    return np.array(img, dtype=np.uint8)
+    font_lg = get_font(28); font_md = get_font(20)
+    font_sm = get_font(14); font_xs = get_font(11)
 
-def build_rounds_from_state(state, tail=20):
-    rounds = []
-    cur = state.get('current_round', 1)
-    start = max(1, cur - tail + 1)
-    for r in range(start, cur+1):
-        key = f"r{r}_result"
-        rr = state.get(key, {})
-        N = rr.get("N", r)
-        ns = rr.get("N_str", str(N))
-        tau = rr.get("tau", 1)
-        ok = rr.get("omega_k", 1)
-        topo = rr.get("topo", 1.0 + 0.15*ok)
-        pc = rr.get("poly_c", topo*(1+math.log(tau))/math.log2(N+2) if tau>0 else 0)
-        fire = rr.get("fire_ignited", pc >= 0.5)
-        vg = rr.get("V_global_new", 0)
-        isp = (tau == 1 and ok == 1)
-        rounds.append((r, ns or str(N), tau, ok, topo, pc, fire, vg, isp))
-    return rounds
+    def lerp_color(c1,c2,t):
+        return tuple(int(c1[i]+(c2[i]-c1[i])*t) for i in range(3))
 
-def render(state_path, output, tail=20, fps=30, hold=1.5, ramp=0.4):
-    state = json.load(open(state_path))
-    rounds = build_rounds_from_state(state, tail)
-    W, H = 720, 1280
-    HOLD = int(hold * fps)
-    RAMP = int(ramp * fps)
-    cmd = ["ffmpeg","-y","-hide_banner","-loglevel","error",
-           "-f","rawvideo","-vcodec","rawvideo","-s",f"{W}x{H}",
-           "-pix_fmt","rgb24","-r",str(fps),"-i","pipe:0",
-           "-vcodec","libx264","-pix_fmt","yuv420p","-crf","22",
-           "-preset","fast","-movflags","+faststart", output]
-    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
-    for ri in range(len(rounds)):
-        for f in range(RAMP):
-            proc.stdin.write(make_frame(rounds, ri, (f+1)/RAMP, W, H).tobytes())
-        for f in range(HOLD):
-            proc.stdin.write(make_frame(rounds, ri, 1.0, W, H).tobytes())
-    proc.stdin.close(); proc.wait()
-    return os.path.getsize(output)
+    def draw_frame(r, n, pc, fi, V, ns, highlight=True):
+        img = Image.new("RGB",(W,H),BG)
+        d = ImageDraw.Draw(img)
+        for y_val in [0.1,0.2,0.3,0.4,0.5,0.6]:
+            y = CHART_BOT - int((y_val/MAX_POLY)*CHART_H)
+            col = RED if y_val==FIRE_THRESH else (30,30,50)
+            d.line([(CHART_LEFT,y),(CHART_RIGHT,y)], fill=col, width=1 if y_val!=FIRE_THRESH else 2)
+            if y_val==FIRE_THRESH:
+                d.text((CHART_RIGHT+5,y-8),f"FIRE≥{FIRE_THRESH}",fill=RED,font=font_sm)
+            else:
+                d.text((CHART_LEFT-35,y-7),f"{y_val:.1f}",fill=DIM,font=font_xs)
+        for i,(r_,n_,pc_,fi_,v_,ns_) in enumerate(arc_tail):
+            x = CHART_LEFT + i*(CHART_W//N_BARS) + (CHART_W//N_BARS-BAR_W)//2
+            bar_h = int((min(pc_,MAX_POLY)/MAX_POLY)*CHART_H)
+            y_top = CHART_BOT-bar_h
+            is_cur = (r_==r)
+            if fi_: color=(255,80,0); border=(255,120,0)
+            elif is_cur and highlight: color=(80,160,255); border=(120,200,255)
+            else:
+                t=(pc_/FIRE_THRESH) if pc_<FIRE_THRESH else 1.0
+                color=lerp_color((40,60,120),(180,80,40),min(t,1.0)); border=None
+            d.rectangle([x,y_top,x+BAR_W,CHART_BOT],fill=color)
+            if border: d.rectangle([x-1,y_top-1,x+BAR_W+1,CHART_BOT],outline=border,width=2)
+            if N_BARS<=20 or i%3==0:
+                d.text((x,CHART_BOT+6),f"R{r_}",fill=(230,230,240) if is_cur else DIM,font=font_xs)
+        # V bar
+        vx=W-220; v_fill=int((V/6.0)*CHART_H)
+        d.rectangle([vx,CHART_TOP,vx+28,CHART_BOT],outline=(50,50,80),width=1)
+        d.rectangle([vx,CHART_BOT-v_fill,vx+28,CHART_BOT],fill=(40,180,100))
+        d.text((vx-5,CHART_TOP-18),"V_global",fill=GREEN,font=font_xs)
+        d.text((vx,CHART_TOP-5),f"{V:.4f}",fill=GREEN,font=font_sm)
+        # Header
+        fl="🔥 FIRE" if fi else "NO FIRE"; fc=FIRE_COLOR if fi else WHITE
+        d.text((CHART_LEFT,10),"EVEZ-OS HYPERLOOP",fill=WHITE,font=font_lg)
+        d.text((CHART_LEFT,44),f"R{r}  N={n}={ns}  poly_c={pc:.6f}  {fl}",fill=fc,font=font_md)
+        d.text((CHART_LEFT,70),f"V_global={V:.6f}  CEILING×{state['ceiling_tick']}  fires={state['fire_count']}/{state['current_round']}  CANONICAL",fill=GREEN,font=font_sm)
+        # Fire watch banner
+        d.rectangle([CHART_LEFT,H-60,CHART_RIGHT,H-10],fill=(40,10,10),outline=RED,width=1)
+        d.text((CHART_LEFT+10,H-50),"⚠  R144 FIRE WATCH  —  N=96=2⁵×3  tau=12  poly_c≈0.685  —  FIRE #13  1 ROUND AWAY",fill=RED,font=font_sm)
+        return img
 
-if __name__ == "__main__":
-    p = argparse.ArgumentParser()
-    p.add_argument("--state", default="workspace/hyperloop_state.json")
-    p.add_argument("--output", default="/tmp/evez_arc.mp4")
-    p.add_argument("--tail", type=int, default=20)
-    p.add_argument("--fps", type=int, default=30)
-    p.add_argument("--hold", type=float, default=1.5)
-    args = p.parse_args()
-    sz = render(args.state, args.output, args.tail, args.fps, args.hold)
-    print(f"Rendered: {args.output}  ({sz/1024:.1f} KB)")
+    frames_dir = Path("/tmp/evez_frames"); frames_dir.mkdir(exist_ok=True)
+    for f in frames_dir.glob("*.png"): f.unlink()
+    HOLD_FRAMES = int(FPS*HOLD_S); idx=0
+    for r_,n_,pc_,fi_,v_,ns_ in arc_tail:
+        img=draw_frame(r_,n_,pc_,fi_,v_,ns_)
+        for _ in range(HOLD_FRAMES):
+            img.save(frames_dir/f"frame_{idx:05d}.png"); idx+=1
+    final=draw_frame(*arc_tail[-1])
+    for _ in range(FPS*3):
+        final.save(frames_dir/f"frame_{idx:05d}.png"); idx+=1
+    subprocess.run(["ffmpeg","-y","-framerate",str(FPS),"-i",str(frames_dir/"frame_%05d.png"),
+        "-c:v","libx264","-preset","fast","-crf","23","-pix_fmt","yuv420p",
+        "-movflags","+faststart",args.output],
+        check=True,capture_output=True)
+    mb = Path(args.output).stat().st_size/1024/1024
+    print(f"✅ {args.output}  {mb:.2f}MB  {idx/FPS:.1f}s")
+
+if __name__=="__main__":
+    main()
