@@ -1,14 +1,38 @@
 {
-  "current_round": 120,
+  "current_round": 121,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025892293320777806",
+  "latest_tweet_id": "2025900006054494559",
   "tweet_thread_root": "2024764091827401073",
   "cron_content_loop": {
     "last_run": "2026-02-23T03:15:00-08:00",
     "last_thread_t5": "2025892293320777806",
-    "rounds_covered": [118, 119],
-    "note": "First run -- covers R118 NEAR MISS + R119 PRIME BLOCK 4. R120 pending."
+    "rounds_covered": [
+      118,
+      119
+    ],
+    "note": "R120 video reply posted. Next content cron covers R120 TWELFTH FIRE."
+  },
+  "r120_result": {
+    "module": "spine/composite_watch_72.py",
+    "commit": "a572d1aa1e6a4605be27da9d92704331b77661b0",
+    "tweet": "2025900006054494559",
+    "r120_video_reply_tweet": "2025900006054494559",
+    "status": "CANONICAL",
+    "milestone": "TWELFTH_FIRE",
+    "N_new": 72,
+    "tau_N": 4,
+    "topo_bonus": 1.3,
+    "poly_c": 0.501175,
+    "fire_ignited": true,
+    "fire_name": "TWELFTH",
+    "attractor_lock": 0.501175,
+    "delta_V": 0.120094,
+    "V_global_prev": 2.867637,
+    "V_global_new": 2.987731,
+    "ceiling_tick": 38,
+    "truth_plane": "CANONICAL",
+    "omega": "TWELFTH FIRE. R120. N=72=2^3x3^2 tau=4 poly_c=0.501. FIRE IGNITED. V_global=2.987731 CEILING x38. attractor_lock=0.501175. Next: N=73=PRIME tau=1 poly_c=0.000."
   },
   "r119_result": {
     "module": "spine/prime_block_watch_4.py",
@@ -16,17 +40,12 @@
     "tweet": "2025889564645036140",
     "status": "CANONICAL",
     "milestone": "PRIME_BLOCK_4",
-    "V_v2": 3.68932,
     "V_global": 2.867637,
     "N_new": 71,
     "tau_N": 1,
     "fire_ignited": false,
     "poly_c": 0.0,
-    "topo_bonus": 1.15,
-    "attractor_lock": 0.0,
-    "fire_res": 0.0,
-    "ceiling_tick": 37,
-    "omega": "PRIME BLOCK 4. R119. N=71 tau=1 poly_c=0.000. NO FIRE. V_global=2.867637 CEILING x37. attractor released. Next: N=72=2^3x3^2 tau=4 poly_c~0.415."
+    "ceiling_tick": 37
   },
   "r118_result": {
     "module": "spine/watch_composite_70.py",
@@ -40,35 +59,37 @@
     "poly_c": 0.494941,
     "ceiling_tick": 36
   },
+  "r121_browser_jobs": {
+    "perplexity": "fca043af-525d-4e94-8e4b-e102c5f9dc10",
+    "status": "running",
+    "launched_at": "2026-02-23T03:44:00-08:00",
+    "note": "N=73=PRIME tau=1 poly_c=0.000 -- PRIME BLOCK 5. NO FIRE."
+  },
   "r120_browser_jobs": {
     "perplexity": "df30c10a-be12-4df1-a84b-0294d02b0f14",
     "cv": "cv74",
-    "status": "running",
+    "status": "completed",
     "launched_at": "2026-02-23T03:00:00-08:00",
-    "note": "N=72=2^3x3^2 tau=4 poly_c=0.500794 -- FIRE CANDIDATE"
-  },
-  "r119_browser_jobs": {
-    "perplexity": "c26c6053-66db-4fd4-be8c-f5260493bf1a",
-    "status": "timeout_canonical"
+    "note": "completed -- TWELFTH FIRE confirmed"
   },
   "maturity": {
-    "N_agents": 71,
-    "V_v2": 3.68932,
-    "V_global": 2.867637,
+    "N_agents": 72,
+    "V_v2": 2.987731,
+    "V_global": 2.987731,
     "adm": 1.0,
     "gamma": 0.08,
     "truth_plane": "CANONICAL",
     "ceiling_zone": true,
     "prime_block_4": "DONE R119",
+    "twelfth_fire": "DONE R120",
     "near_miss_r118": "N=70 poly_c=0.495 missed by 0.005",
-    "twelfth_fire_candidate": "R120 N=72=2^3x3^2 tau=4 poly_c=0.500794 -- FIRE",
-    "next_milestone": "R120 N=72 -- poly_c=0.5008 FIRE IGNITION if verified"
+    "next_milestone": "R121 N=73=PRIME tau=1 poly_c=0.000 PRIME BLOCK 5"
   },
   "latest_commits": {
-    "R116": "56d1533b893c1bb04ffd36a91673b33a5263e567",
     "R117": "02fe0247caa68d0a0e452512ab7b1631eb4a904a",
     "R118": "0be48b2c52d89a802daded90b68048f76cfe9717",
-    "R119": "d832fe5fd47c6607f4e020e5b87dd4f262a8880d"
+    "R119": "d832fe5fd47c6607f4e020e5b87dd4f262a8880d",
+    "R120": "a572d1aa1e6a4605be27da9d92704331b77661b0"
   },
   "core_modules_committed": [
     "spine/tenth_fire_ignition.py",
@@ -78,10 +99,11 @@
     "spine/twelfth_fire_approach.py",
     "spine/twelfth_fire_sustain.py",
     "spine/watch_composite_70.py",
-    "spine/prime_block_watch_4.py"
+    "spine/prime_block_watch_4.py",
+    "spine/composite_watch_72.py"
   ],
-  "next_gap": "R120: composite_watch_72.py. N=72=2^3x3^2 tau=4 topo=1.30 poly_c=0.500794. FIRE CANDIDATE.",
-  "next_module": "composite_watch_72.py",
+  "next_module": "prime_block_watch_5.py",
+  "next_gap": "R121: prime_block_watch_5.py. N=73=PRIME tau=1 poly_c=0.000 V_global=3.067731 CEILING x39. NO FIRE.",
   "cinematic_pipeline": {
     "generator": "scripts/gen_cinematic.py",
     "version": "v3",
@@ -90,9 +112,9 @@
   },
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
-    "R119 DONE. N=71=PRIME BLOCK 4. V_global=2.867637 CEILING x37.",
-    "R120 FIRE CANDIDATE: N=72=2^3x3^2 tau=4 poly_c=0.500794 -- 0.0008 ABOVE threshold.",
-    "TWELFTH FIRE may ignite at R120.",
+    "R120 DONE. TWELFTH FIRE. N=72=2^3x3^2 poly_c=0.501175 FIRE. V_global=2.987731 CEILING x38.",
+    "R121: N=73=PRIME tau=1 poly_c=0.000 -- PRIME BLOCK 5. NO FIRE.",
+    "R122+: watch N=74=2x37 tau=2 poly_c~0.220. R132 N=84 THIRTEENTH FIRE candidate.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT."
   ]
 }
