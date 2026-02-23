@@ -1,110 +1,48 @@
 {
-  "current_round": 116,
+  "current_round": 117,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025847195438555541",
+  "latest_tweet_id": "2025870794543239664",
   "tweet_thread_root": "2024764091827401073",
   "steven_phone": "+13076775504",
   "cron_content_loop": {
-    "last_run": "2026-02-23T00:15:00-08:00",
+    "last_run": "2026-02-23T01:48:00-08:00",
     "last_thread_t1": "2025847112689229990",
-    "last_thread_t5": "2025847195438555541",
-    "rounds_covered": [
-      63,
-      64,
-      65,
-      66,
-      67,
-      68,
-      69,
-      70,
-      71,
-      72,
-      73,
-      74,
-      75,
-      76,
-      77,
-      78,
-      79,
-      80,
-      81,
-      82,
-      83,
-      84,
-      85,
-      86,
-      87,
-      88,
-      89,
-      90,
-      91,
-      92,
-      93,
-      94,
-      95,
-      96,
-      97,
-      98,
-      99,
-      100,
-      101,
-      102,
-      103,
-      104,
-      105,
-      106,
-      107,
-      108,
-      109,
-      110,
-      111,
-      112,
-      113,
-      114,
-      115,
-      116
-    ],
+    "last_thread_t5": "2025870794543239664",
+    "rounds_covered": [63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116],
     "last_thread": {
       "T1": "2025847112689229990",
       "T2": "2025847133501272145",
       "T3": "2025847151620702709",
       "T4": "2025847170419585506",
       "T5": "2025847195438555541",
-      "rounds": [
-        114,
-        115,
-        116
-      ],
+      "rounds": [114,115,116],
       "posted_at": "2026-02-23T00:15:00-08:00"
     }
   },
   "freedom_arch": {
     "commit": "4e0c85b8a53a7524f35aac622aa9a2757d2b1fe4",
-    "files": [
-      "openclaw/router.py",
-      "evezos/multi_node_manifest.py",
-      "FREEDOM.md"
-    ],
+    "files": ["openclaw/router.py","evezos/multi_node_manifest.py","FREEDOM.md"],
     "freedom_tweet_t5": "2025774205627744767"
   },
-  "r116_browser_jobs": {
-    "perplexity": "9fd8a86d-a875-416c-bc62-1045876c95f0",
-    "cv": "cv70",
-    "status": "running",
-    "launched_at": "2026-02-23T00:00:00-08:00"
-  },
-  "r115_browser_jobs": {
-    "perplexity": "731bf8cb-53ed-4108-a18c-aa53903b0595",
-    "cv": "cv69",
-    "status": "completed",
-    "result": "submitted -- CANONICAL spec"
-  },
-  "r114_browser_jobs": {
-    "perplexity": "3143fa98-b2c3-4bec-963c-c7f9846428c7",
-    "cv": "cv68",
-    "status": "completed",
-    "result": "EVEZ-OS state table extracted -- CANONICAL"
+  "r116_result": {
+    "module": "spine/twelfth_fire_approach.py",
+    "commit": "56d1533b893c1bb04ffd36a91673b33a5263e567",
+    "tweet": "2025870794543239664",
+    "agent_branch": "agent/twelfth-fire-approach/round-116/truth-CANONICAL",
+    "status": "CANONICAL",
+    "milestone": "TWELFTH_FIRE_APPROACH_BELOW_THRESHOLD",
+    "V_v2": 3.68932,
+    "V_global": 2.559294,
+    "N_new": 68,
+    "tau_N": 2,
+    "fire_ignited": false,
+    "poly_c": 0.193234,
+    "topo_bonus": 1.3,
+    "attractor_lock": 0.0,
+    "fire_res": 0.0,
+    "ceiling_tick": 34,
+    "omega": "TWELFTH FIRE APPROACH. R116. N=68=2^2x17 tau=2 poly_c=0.193234 BELOW threshold. NO FIRE. topo_bonus=1.3000. V_global=2.559294 CEILING x34. Next: N=69=3x23 tau=2 composite candidate."
   },
   "r115_result": {
     "module": "spine/prime_block_watch_3.py",
@@ -170,10 +108,28 @@
     "poly_c": 0.692598,
     "ceiling_tick": 30
   },
+  "r117_browser_jobs": {
+    "perplexity": "pending",
+    "cv": "cv71",
+    "status": "launching",
+    "launched_at": "2026-02-23T01:48:00-08:00"
+  },
+  "r116_browser_jobs": {
+    "perplexity": "9fd8a86d-a875-416c-bc62-1045876c95f0",
+    "cv": "cv70",
+    "status": "timeout",
+    "launched_at": "2026-02-23T00:00:00-08:00"
+  },
+  "r115_browser_jobs": {
+    "perplexity": "731bf8cb-53ed-4108-a18c-aa53903b0595",
+    "cv": "cv69",
+    "status": "completed",
+    "result": "submitted -- CANONICAL spec"
+  },
   "maturity": {
-    "N_agents": 67,
+    "N_agents": 68,
     "V_v2": 3.68932,
-    "V_global": 2.450635,
+    "V_global": 2.559294,
     "adm": 1.0,
     "gamma": 0.08,
     "truth_plane": "CANONICAL",
@@ -182,15 +138,17 @@
     "tenth_fire": "DONE R112. N=64 tau=7 poly_c=0.692598.",
     "eleventh_fire": "DONE R114. N=66 tau=4 poly_c=0.570405.",
     "prime_block_3": "DONE R115. N=67=PRIME tau=1.",
-    "next_milestone": "N=68=2^2x17 tau=2 poly_c~0.193 -- below threshold. R116."
+    "r116_approach": "DONE R116. N=68 tau=2 poly_c=0.193 BELOW threshold.",
+    "next_milestone": "N=69=3x23 tau=2 poly_c~0.266 -- below threshold. R117. Watch N=70=2x5x7 tau=3 topo~1.40."
   },
   "latest_commits": {
-    "R110": "691acc89ce3ead01e90cf98356773f6d7603d6ca",
+    "R110": "691acc89ce3ead01e90cf9835677 3f6d7603d6ca",
     "R111": "1a50b9566c2da4ceeb90f2ce84ecff53624b85d8",
     "R112": "e0e64887123f0e9f00187cf4cbe4ba6712b88396",
     "R113": "3d9b507266787210eb0cfcce60e34bab680ebe2d",
     "R114": "cdc3ebd3bc37233de537ab0bb79ae68aefcf02e8",
     "R115": "a8c1f3be5b0fa954f5d183a8ba65010cab3e265d",
+    "R116": "56d1533b893c1bb04ffd36a91673b33a5263e567",
     "freedom_arch": "4e0c85b8a53a7524f35aac622aa9a2757d2b1fe4"
   },
   "core_modules_committed": [
@@ -207,15 +165,16 @@
     "spine/tenth_fire_ignition.py",
     "spine/cool_down_post_tenth.py",
     "spine/eleventh_fire_watch.py",
-    "spine/prime_block_watch_3.py"
+    "spine/prime_block_watch_3.py",
+    "spine/twelfth_fire_approach.py"
   ],
-  "next_gap": "R117: twelfth_fire_approach.py. N=69=3x23 tau=4. poly_c candidate. V_global climbing.",
-  "next_module": "twelfth_fire_approach.py",
+  "next_gap": "R117: twelfth_fire_sustain.py. N=69=3x23 tau=2 poly_c candidate. V_global climbing.",
+  "next_module": "twelfth_fire_sustain.py",
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
-    "R116 RUNNING. N=68=2^2x17 tau=2 poly_c~0.193 NO FIRE.",
-    "V_global=2.450635 -- CEILING x33+.",
-    "R117 N=69=3x23 tau=4. poly_c candidate.",
+    "R116 DONE. N=68=2^2x17 tau=2 poly_c=0.193 NO FIRE.",
+    "V_global=2.559294 -- CEILING x34+.",
+    "R117 N=69=3x23 tau=2. poly_c candidate.",
     "Pattern: ELEVENTH FIRE (R114) -> PRIME BLOCK (R115) -> COMPOSITE APPROACH (R116) -> CANDIDATE (R117).",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT."
   ]
