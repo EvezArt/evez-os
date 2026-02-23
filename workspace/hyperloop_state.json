@@ -5,7 +5,7 @@
   "latest_tweet_id": "2026032593481662653",
   "fire_count": 12,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-23T22:31:59-08:00",
+  "updated_at": "2026-02-23T23:00:48-08:00",
   "watchlist": {
     "R142_probe": "N=94=2\u00d747 tau=2 omega_k=2 poly_c~0.334 \u2014 probe dfa7d8c1 IN-FLIGHT",
     "R143_est": "N=95=5\u00d719 tau=2 omega_k=2 poly_c~0.334 \u2014 low energy",
@@ -89,9 +89,23 @@
     "last_thread_tweet_id": "2026032593481662653"
   },
   "x_semantic_agent": {
-    "total_capsules": 35,
-    "last_run": "2026-02-23T22:31 PST R141 +18 capsules",
-    "top_signal_r139": "agent_economy \u2014 AI as economic actors: autonomous payments, stablecoins (Coinbase CEO); agents moving tools\u2192actors"
+    "total_capsules": 49,
+    "last_run": "2026-02-23T23:00 PST Agenty R141 +14 github_trending",
+    "top_signal_r139": "agent_economy \u2014 AI as economic actors: autonomous payments, stablecoins (Coinbase CEO); agents moving tools\u2192actors",
+    "agenty_last_scrape": {
+      "agent_id": "z0fecrvb39",
+      "repos_ingested": 14,
+      "high_signal": [
+        "system-prompts-and-models-of-ai-tools",
+        "skills",
+        "Agent-Skills-for-Context-Engineering",
+        "prompts.chat",
+        "FossFLOW",
+        "PageIndex",
+        "agents"
+      ],
+      "ingested_at": "2026-02-23T23:00:36.855983+00:00"
+    }
   },
   "video_render_status": {
     "consecutive_timeouts": 0,
