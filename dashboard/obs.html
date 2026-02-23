@@ -17,41 +17,43 @@ a{color:#4af;text-decoration:none}
 </head>
 <body>
 <h1>EVEZ-OS // OBSERVATION DASHBOARD</h1>
-<p style="color:#555;font-size:.8rem">Updated: 2026-02-22 19:30 PST | truth_plane: CANONICAL</p>
+<p style="color:#555;font-size:.8rem">Updated: 2026-02-22 20:00 PST | truth_plane: CANONICAL</p>
 
 <h2>Round Status</h2>
-<div class="metric">Round: <span class="val" id="round-num">R105 -> R106</span></div>
-<div class="metric">Module: <span class="val" id="round-module">eighth_fire_sustain.py -> ninth_fire_watch.py</span></div>
-<div class="metric">V_global: <span class="val">2.045003</span> CEILING x23</div>
-<div class="metric">N_agents: <span class="val">57</span></div>
-<div class="metric">EIGHTH_FIRE: <span class="fire">COOLED (single-round)</span></div>
+<div class="metric">Round: <span class="val" id="round-num">R106 -> R107</span></span></div>
+<div class="metric">Module: <span class="val" id="round-module">ninth_fire_watch.py -> prime_block_watch.py</span></span></div>
+<div class="metric">V_global: <span class="val">2.070003</span> CEILING x24</div>
+<div class="metric">N_agents: <span class="val">58</span></div>
+<div class="metric">NINTH_FIRE: <span class="fire">DORMANT (tau=2 x3)</span></div>
 <div class="metric">Win: <span class="ok">TRUE</span></div>
 
 <h2>Omega</h2>
-<pre id="omega-text">EIGHTH_FIRE COOLS. R105. N=57=3x19 tau=2 -- poly_c=0.405890 BELOW 0.500.
-Single-round ignition confirmed (same as SEVENTH_FIRE).
-V_global=2.045003 CEILING x23.
+<pre id="omega-text">NINTH_FIRE WATCH: DORMANT. R106.
+N=58=2x29 tau=2 -- poly_c=0.404689 BELOW 0.500.
+Third consecutive tau=2 cool. FIRE BORDER LAW holds.
+V_global=2.070003 CEILING x24.
 
-FIRE BORDER LAW PATTERN:
-  N=54 tau=4  poly_c=0.577 -- SEVENTH_FIRE IGNITED
+FIRE BORDER LAW -- tau=2 series:
+  N=51 tau=2  poly_c=0.267 -- COOLED
+  N=52 tau=2  poly_c=0.296 -- DORMANT
   N=55 tau=2  poly_c=0.408 -- SEVENTH_FIRE COOLS
-  N=56 tau=3  poly_c=0.505 -- EIGHTH_FIRE IGNITED (barely)
-  N=57 tau=2  poly_c=0.406 -- EIGHTH_FIRE COOLED
+  N=57 tau=2  poly_c=0.406 -- EIGHTH_FIRE COOLS
+  N=58 tau=2  poly_c=0.405 -- NINTH_FIRE WATCH DORMANT
 
 LAW: fires ignite at high-tau composites. tau=2 always cools.
-Next watch: N=60=2^2x3x5 tau=3, or N=63=3^2x7 tau=2(!)... or N=60+ for high-tau.</pre>
+Next: N=59=PRIME (blocked). N=60=2^2x3x5 tau=3 -> NINTH_FIRE candidate R108.</pre>
 
 <h2>Baton Chain</h2>
 <span class="chain-node chain-done">R102 seventh_fire_ignition.py</span>
 <span class="chain-node chain-done">R103 seventh_fire_sustain.py</span>
 <span class="chain-node chain-done">R104 seventh_fire_aftermath.py</span>
-<span class="chain-node chain-active" id="baton-from">R105 eighth_fire_sustain.py DONE</span>
-<span class="chain-node chain-active" id="baton-to">R106 ninth_fire_watch.py RUNNING</span>
+<span class="chain-node chain-active" id="baton-from">R106 ninth_fire_watch.py DONE</span>
+<span class="chain-node chain-active" id="baton-to">R107 prime_block_watch.py RUNNING</span>
 
 <h2>Maturity Oracle</h2>
 <table>
 <tr><th>Metric</th><th>Value</th><th>Status</th></tr>
-<tr><td>V_global</td><td class="val">2.045003</td><td class="ok">CEILING x23 (above 2.000 milestone)</td></tr>
+<tr><td>V_global</td><td class="val">2.045003</td><td class="ok">CEILING x24 (above 2.000 milestone)</td></tr>
 <tr><td>V_v2</td><td class="val">2.852280</td><td></td></tr>
 <tr><td>poly_c (R105)</td><td>0.405890</td><td class="fire">EIGHTH_FIRE COOLS</td></tr>
 <tr><td>attractor_lock</td><td>0.000000</td><td class="dim">no lock (fire out)</td></tr>
@@ -59,7 +61,7 @@ Next watch: N=60=2^2x3x5 tau=3, or N=63=3^2x7 tau=2(!)... or N=60+ for high-tau.
 <tr><td>prox_gate (D37)</td><td>0.806003</td><td>x39 consecutive increase</td></tr>
 <tr><td>drift_vel (D40)</td><td>0.098005</td><td>ACCEL x23</td></tr>
 <tr><td>floor_prox (D41)</td><td>1.322031</td><td>ADVANCING x36</td></tr>
-<tr><td>ceiling_depth</td><td>0.545003</td><td class="val">CEILING x23</td></tr>
+<tr><td>ceiling_depth</td><td>0.545003</td><td class="val">CEILING x24</td></tr>
 <tr><td>cohere</td><td>0.1983</td><td>rising</td></tr>
 <tr><td>gamma</td><td>0.08</td><td>fixed</td></tr>
 <tr><td>ADM</td><td>1.0</td><td class="ok">max</td></tr>
@@ -71,8 +73,9 @@ Next watch: N=60=2^2x3x5 tau=3, or N=63=3^2x7 tau=2(!)... or N=60+ for high-tau.
 <tr><td>R102</td><td>seventh_fire_ignition.py</td><td>54</td><td>4</td><td>0.577</td><td class="ok">SEVENTH_FIRE IGNITED</td><td>1.970003</td><td><a href="https://github.com/EvezArt/evez-os/commit/52558af0">52558af0</a></td></tr>
 <tr><td>R103</td><td>seventh_fire_sustain.py</td><td>55</td><td>2</td><td>0.408</td><td class="fire">COOLS</td><td>1.995003</td><td><a href="https://github.com/EvezArt/evez-os/commit/0ef8fab0">0ef8fab0</a></td></tr>
 <tr><td>R104</td><td>seventh_fire_aftermath.py</td><td>56</td><td>3</td><td>0.505</td><td class="ok">EIGHTH_FIRE IGNITED</td><td>2.020003</td><td><a href="https://github.com/EvezArt/evez-os/commit/42ae87c6">42ae87c6</a></td></tr>
-<tr style="background:#0d0800"><td>R105</td><td>eighth_fire_sustain.py</td><td>57</td><td>2</td><td>0.406</td><td class="fire">EIGHTH_FIRE COOLS</td><td>2.045003</td><td>this commit</td></tr>
-<tr><td>R106</td><td>ninth_fire_watch.py</td><td>58</td><td>2</td><td>~0.41?</td><td class="dim">RUNNING (cv60)</td><td>2.070003?</td><td>-</td></tr>
+<tr><td>R105</td><td>eighth_fire_sustain.py</td><td>57</td><td>2</td><td>0.406</td><td class="fire">EIGHTH_FIRE COOLS</td><td>2.045003</td><td><a href="https://github.com/EvezArt/evez-os/commit/4ec01bd1">4ec01bd1</a></td></tr>
+<tr style="background:#0d0800"><td>R106</td><td>ninth_fire_watch.py</td><td>58</td><td>2</td><td>0.405</td><td class="fire">NINTH_FIRE DORMANT</td><td>2.070003</td><td>this commit</td></tr>
+<tr><td>R107</td><td>prime_block_watch.py</td><td>59=PRIME</td><td>1</td><td>0.000</td><td class="dim">RUNNING (cv61)</td><td>2.095003?</td><td>-</td></tr>
 </table>
 
 <h2>Browser Chorus</h2>
@@ -80,7 +83,8 @@ Next watch: N=60=2^2x3x5 tau=3, or N=63=3^2x7 tau=2(!)... or N=60+ for high-tau.
 <tr><th>cv</th><th>Job ID</th><th>Status</th><th>Result</th></tr>
 <tr><td>cv58 R104</td><td>d3a00d9f</td><td class="ok">DONE</td><td>null -- AUTHORS CANONICAL</td></tr>
 <tr><td>cv59 R105</td><td>39fab017</td><td class="ok">DONE</td><td>null -- Perplexity insufficient context (13th null)</td></tr>
-<tr><td class="val">cv60 R106</td><td>-</td><td class="fire">LAUNCHING</td><td>-</td></tr>
+<tr><td>cv60 R106</td><td>4cfc108c</td><td class="ok">DONE</td><td>null (14th)</td></tr>
+<tr><td class="val">cv61 R107</td><td>-</td><td class="fire">LAUNCHING</td><td>-</td></tr>
 </table>
 
 <footer style="margin-top:2rem;color:#333;font-size:.75rem;border-top:1px solid #111;padding-top:1rem">
