@@ -1,18 +1,38 @@
 {
-  "current_round": 129,
-  "next_module": "watch_composite_82.py",
-  "next_gap": "N=82=2×41 tau=2 omega_k=2 topo=1.30 poly_c≈0.348 V_global≈3.939",
+  "current_round": 130,
+  "next_module": "prime_block_watch_7.py",
+  "next_gap": "N=83=PRIME tau=1 omega_k=1 topo=1.15 poly_c\u22480.178 V_global\u22484.047",
   "latest_tweet_id": "2025915651324350802",
   "fire_count": 12,
-  "V_global": 3.939478,
-  "ceiling_tick": 47,
+  "V_global": 4.047097,
+  "ceiling_tick": 48,
   "truth_plane": "CANONICAL",
-  "r130_browser_jobs": {
-    "perplexity": "d8daa7df-5f23-40c4-a7ff-8899c9b3fdd2"
+  "r131_browser_jobs": {
+    "perplexity": "36e5d87e-19c1-408a-b9cb-8594f7ed77d3"
+  },
+  "r130_result": {
+    "N": 82,
+    "N_str": "82=2\u00d741",
+    "tau": 2,
+    "omega_k": 2,
+    "topo": 1.30,
+    "poly_c": 0.345237,
+    "fire_ignited": false,
+    "delta_V": 0.107619,
+    "V_global_prev": 3.939478,
+    "V_global_new": 4.047097,
+    "ceiling_tick": 48,
+    "commit_sha": "115755b536ce4b52b85c88022366741e46403188",
+    "agent_sha": "2ac66c496225b78a975397579a064c12be7e578c",
+    "module": "watch_composite_82.py",
+    "truth_plane": "CANONICAL",
+    "videos_posted": false,
+    "video_skip_reason": "workbench_timeout_x9",
+    "note": "Computed inline \u2014 probe poll timed out. V_global crosses 4.0 for first time."
   },
   "r129_result": {
     "N": 81,
-    "N_str": "81=3⁴",
+    "N_str": "81=3\u2074",
     "tau": 2,
     "omega_k": 1,
     "topo": 1.15,
@@ -29,45 +49,38 @@
     "videos_posted": false,
     "video_skip_reason": "workbench_timeout_x8"
   },
-  "r128_result": {
-    "N": 80,
-    "N_str": "80=2⁴×5",
-    "tau": 2,
-    "omega_k": 2,
-    "topo": 1.30,
-    "poly_c": 0.347249,
-    "fire_ignited": false,
-    "delta_V": 0.107780,
-    "V_global_prev": 3.727197,
-    "V_global_new": 3.834977,
-    "ceiling_tick": 46,
-    "commit_sha": "fed74d29b5f06ae9c41125029e2ed46c624db1a7",
-    "agent_sha": "ac05f0bd4a752cb8b082d821c73877f47759d9dc",
-    "module": "watch_composite_80.py",
-    "truth_plane": "CANONICAL",
-    "videos_posted": false,
-    "video_skip_reason": "workbench_timeout_x8"
-  },
   "cron_content_loop": {
-    "last_run": "2026-02-23T08:15",
-    "rounds_covered": [118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128],
+    "last_run": "2026-02-23T09:06",
+    "rounds_covered": [118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130],
     "last_thread_tweet_id": "2025915651324350802",
+    "sms_last_sent": "2026-02-23T08:03 \u2014 R126 to +13076775504",
+    "content_cron_last_attempt": "2026-02-23T09:06",
+    "content_cron_skip_reason": "workbench_timeout_x9 \u2014 no video, no tweet (no plain-text fallback per policy)",
     "pending_video_post": {
-      "rounds": [124, 125, 126, 127, 128, 129],
+      "rounds": [124, 125, 126, 127, 128, 129, 130],
+      "ready_captions": {
+        "R130": "R130. N=82=2\u00d741 tau=2 poly_c=0.345. NO FIRE. V_global=4.047097 CEILING x48. crossed 4.0.",
+        "R129": "R129. N=81=3\u2074 tau=2 poly_c=0.306. NO FIRE. V_global=3.939478 CEILING x47.",
+        "R128": "R128. N=80=2\u2074\u00d75 tau=2 poly_c=0.347. NO FIRE. V_global=3.834977 CEILING x46.",
+        "R127": "R127. N=79=PRIME tau=1 poly_c=0.182. PRIME BLOCK 6. V_global=3.727197 CEILING x45.",
+        "R126": "R126. N=78=2\u00d73\u00d713 tau=3 poly_c=0.483. NO FIRE \u03940.017. V_global=3.632644 CEILING x44."
+      },
       "retry_when": "workbench_executor_recovers",
       "reply_to_tweet_id": "2025915651324350802"
     }
   },
   "watchlist": {
-    "R130": "N=82=2×41 tau=2 omega_k=2 topo=1.30 poly_c≈0.348 — probe running",
-    "R131": "N=83=PRIME tau=1 — PRIME BLOCK 7 minimum energy",
-    "R132_est": "THIRTEENTH FIRE candidate — N=84=2²×3×7 poly_c≈0.488"
+    "R131": "N=83=PRIME tau=1 \u2014 PRIME BLOCK 7 minimum energy \u2014 probe running",
+    "R132_est": "THIRTEENTH FIRE candidate \u2014 N=84=2\u00b2\u00d73\u00d77 tau=3 omega_k=3 topo=1.45 poly_c\u22480.488 \u2014 NEAR MISS LIKELY",
+    "R133_est": "N=85=5\u00d717 tau=2 omega_k=2 topo=1.30 poly_c\u22480.327"
   },
   "video_render_status": {
-    "consecutive_timeouts": 8,
+    "consecutive_timeouts": 9,
     "last_attempt": "2026-02-23T08:15",
-    "note": "Sandbox fully down. Pending tweets: R124-R129.",
-    "pending_rounds_count": 6
+    "last_attempt_type": "smoke_test_10_lines",
+    "note": "Even 10-line smoke test timed out. Infra fully down. Pending tweets: R124-R130 (7 rounds).",
+    "pending_rounds_count": 7,
+    "action_required": "Composio sandbox executor infra needs restart."
   },
   "github_actions_status": {
     "evez_os": {"conclusion": "failure", "run": 373, "sha": "f1b9512f", "workflow": "ci.yml"},
@@ -75,7 +88,10 @@
     "evez666": {"conclusion": "startup_failure", "run": 8, "sha": "5c646e25"}
   },
   "sms_log": [
-    {"sent_at": "2026-02-23T08:03", "to": "+13076775504", "round": "R126", "status": "SUCCESS"}
+    {"sent_at": "2026-02-23T08:03", "to": "+13076775504", "round": "R126", "status": "SUCCESS", "note": "mom number pending"}
   ],
-  "updated_at": "2026-02-23T08:34:00-08:00"
+  "milestones": {
+    "V_global_4_crossed": "R130 \u2014 2026-02-23T09:06 PST"
+  },
+  "updated_at": "2026-02-23T09:06:00-08:00"
 }
