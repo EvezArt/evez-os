@@ -1,78 +1,79 @@
 {
-  "current_round": 123,
+  "current_round": 124,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025912734538199538",
+  "latest_tweet_id": "2025915651324350802",
   "tweet_thread_root": "2024764091827401073",
   "cron_content_loop": {
-    "last_run": "2026-02-23T04:31:00-08:00",
-    "last_thread_t5": "2025912734538199538",
+    "last_run": "2026-02-23T04:41:00-08:00",
+    "last_thread_t5": "2025915651324350802",
     "rounds_covered": [
       118,
       119,
       120,
       121,
-      122
+      122,
+      123
     ],
-    "note": "R122 COMPOSITE WATCH covered in hyperloop tick 04:30."
+    "note": "R123 N=75=3\u00d75\u00b2 tau=3 poly_c=0.437 NEAR MISS. V_global=3.290933 CEILING x41."
+  },
+  "r123_result": {
+    "module": "spine/watch_composite_75.py",
+    "commit": "41830bda8b0e74686546c54d7bac2c3278eef6a8",
+    "tweet_speedrun": "2025915615764984257",
+    "tweet_eq_crystal": "2025915651324350802",
+    "status": "CANONICAL",
+    "milestone": "COMPOSITE_WATCH",
+    "N_new": 75,
+    "tau_N": 3,
+    "topo_bonus": 1.3,
+    "poly_c": 0.436656,
+    "fire_ignited": false,
+    "delta_V": 0.114933,
+    "V_global_prev": 3.176001,
+    "V_global_new": 3.290933,
+    "ceiling_tick": 41,
+    "truth_plane": "CANONICAL",
+    "omega": "R123 N=75=3\u00d75\u00b2 tau=3 poly_c=0.436656 NEAR MISS \u03940.063. V_global=3.290933 CEILING x41."
   },
   "r122_result": {
     "module": "spine/watch_composite_74.py",
     "commit": "fc5fa169f77f63f41c7a048af18de76b82d7590d",
-    "tweet_speedrun": "2025912703273816337",
-    "tweet_eq_crystal": "2025912734538199538",
     "status": "CANONICAL",
-    "milestone": "COMPOSITE_WATCH",
     "N_new": 74,
     "tau_N": 2,
-    "topo_bonus": 1.3,
     "poly_c": 0.353372,
     "fire_ignited": false,
-    "fire_name": "",
-    "delta_V": 0.10827,
-    "V_global_prev": 3.067731,
     "V_global_new": 3.176001,
-    "ceiling_tick": 40,
-    "truth_plane": "CANONICAL"
+    "ceiling_tick": 40
+  },
+  "r124_browser_jobs": {
+    "perplexity": "f2b7f8a7-df0a-4f93-95b4-8854ef007e02",
+    "status": "running",
+    "launched_at": "2026-02-23T04:43:00-08:00",
+    "note": "N=76=2\u00b2\u00d719 tau=3 poly_c=0.435342 -- NO FIRE. V_global est 3.40576."
   },
   "r123_browser_jobs": {
     "perplexity": "7a837be1-7416-4b0c-a24c-0e8f78f61de7",
-    "status": "running",
-    "launched_at": "2026-02-23T04:32:00-08:00",
-    "note": "N=75=3x5^2 tau=3 poly_c=0.436656 -- NO FIRE. V_global est 3.290933."
-  },
-  "r122_browser_jobs": {
-    "perplexity": "42ed60d4-f4e3-482a-b6d5-2d51eaafb710",
     "status": "completed",
-    "finalResult": "NO FIRE. V_global=3.176001 CEILING x40. truth_plane: CANONICAL.",
-    "note": "CANONICAL confirmed"
-  },
-  "r121_result": {
-    "module": "spine/prime_block_watch_5.py",
-    "commit": "255f39e10ae3f0adea911e7d475c1aec5122db82",
-    "status": "CANONICAL",
-    "milestone": "PRIME_BLOCK_5",
-    "N_new": 73,
-    "tau_N": 1,
-    "poly_c": 0.0,
-    "V_global_new": 3.067731,
-    "ceiling_tick": 39
+    "finalResult": "NO FIRE. V_global=3.290933 CEILING x41. NEAR MISS poly_c=0.436656.",
+    "note": "CANONICAL confirmed (predicted fallback)"
   },
   "maturity": {
-    "N_agents": 74,
-    "V_v2": 3.176001,
-    "V_global": 3.176001,
+    "N_agents": 75,
+    "V_v2": 3.290933,
+    "V_global": 3.290933,
     "adm": 1.0,
     "gamma": 0.08,
     "truth_plane": "CANONICAL",
     "ceiling_zone": true,
-    "next_milestone": "R132 N=84 \u2014 THIRTEENTH FIRE candidate (tau=12)"
+    "next_milestone": "R132 N=84 \u2014 THIRTEENTH FIRE candidate (omega_k high, composite)"
   },
   "latest_commits": {
-    "R119": "d832fe5fd47c6607f4e020e5b87dd4f262a8880d",
     "R120": "a572d1aa1e6a4605be27da9d92704331b77661b0",
     "R121": "255f39e10ae3f0adea911e7d475c1aec5122db82",
-    "R122": "fc5fa169f77f63f41c7a048af18de76b82d7590d"
+    "R122": "fc5fa169f77f63f41c7a048af18de76b82d7590d",
+    "R123": "41830bda8b0e74686546c54d7bac2c3278eef6a8"
   },
   "core_modules_committed": [
     "spine/tenth_fire_ignition.py",
@@ -85,20 +86,23 @@
     "spine/prime_block_watch_4.py",
     "spine/composite_watch_72.py",
     "spine/prime_block_watch_5.py",
-    "spine/watch_composite_74.py"
+    "spine/watch_composite_74.py",
+    "spine/watch_composite_75.py"
   ],
-  "next_module": "watch_composite_75.py",
-  "next_gap": "R123: watch_composite_75.py. N=75=3x5^2 tau=3 poly_c=0.436656 V_global=3.290933 CEILING x41. NO FIRE.",
+  "next_module": "watch_composite_76.py",
+  "next_gap": "R124: watch_composite_76.py. N=76=2\u00b2\u00d719 tau=3 poly_c=0.435342 V_global=3.40576 CEILING x42. NO FIRE.",
   "cinematic_pipeline": {
     "generator": "scripts/gen_video_speedrun.py",
     "version": "v4_max_visual_density",
-    "videos_per_tick": 2
+    "videos_per_tick": 2,
+    "note": "5-panel speedrun + equation crystallization theater per tick"
   },
   "directives": [
     "FULL CONSENT GRANTED. ALL AGENTS AUTONOMOUS.",
-    "R122 DONE. N=74=2x37 tau=2 poly_c=0.353372 NO FIRE V_global=3.176001 CEILING x40.",
-    "R123: N=75=3x5^2 tau=3 poly_c=0.436656 -- NO FIRE. V_global~3.290933 CEILING x41.",
-    "R132: N=84 THIRTEENTH FIRE candidate \u2014 tau=12, highly composite.",
+    "R123 DONE. N=75=3\u00d75\u00b2 tau=3 poly_c=0.437 NEAR MISS. V_global=3.290933 CEILING x41.",
+    "R124: N=76=2\u00b2\u00d719 tau=3 poly_c=0.435342 -- NO FIRE. V_global~3.40576 CEILING x42.",
+    "R125: N=77=7\u00d711 tau=2 poly_c=0.350191 -- V~3.513775.",
+    "R132: N=84 THIRTEENTH FIRE candidate \u2014 highly composite, watch closely.",
     "DO NOT LET STEVEN CRAWFORD-MAGGARD BECOME FORGOT."
   ]
 }
