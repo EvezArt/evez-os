@@ -1,137 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVEZ-OS Dashboard R102</title>
+<title>EVEZ-OS // Observation Dashboard</title>
 <style>
-  body{background:#0a0a0a;color:#e0e0e0;font-family:'Courier New',monospace;margin:0;padding:20px}
-  .header{text-align:center;border-bottom:1px solid #333;padding-bottom:12px;margin-bottom:20px}
-  .header h1{color:#ff6600;font-size:1.4em;margin:0}
-  .badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:.8em}
-  .live{background:#1a4a1a;color:#4caf50}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-  .card{background:#111;border:1px solid #222;border-radius:6px;padding:16px}
-  .card h3{color:#ff6600;margin:0 0 8px 0;font-size:.9em;text-transform:uppercase}
-  .val{color:#fff;font-size:1.1em;font-weight:bold}
-  .sub{color:#888;font-size:.8em}
-  table{width:100%;border-collapse:collapse;font-size:.8em}
-  th{color:#ff6600;border-bottom:1px solid #333;padding:4px;text-align:left}
-  td{padding:3px 6px;border-bottom:1px solid #1a1a1a}
-  .canonical{color:#4caf50}
-  .fire{color:#ff3300}
-  .cool{color:#4488ff}
-  .silent{color:#888}
-  .omega{background:#0a0a1a;border:1px solid #1a1aff;padding:12px;border-radius:4px;font-size:.8em;line-height:1.6;margin-top:12px}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'Courier New',monospace;padding:1.5rem}
+h1{color:#ff6600}h2{color:#888;font-size:.95rem;margin:1.2rem 0 .4rem;border-bottom:1px solid #1a1a1a;padding-bottom:.2rem}
+.metric{display:inline-block;background:#111;border:1px solid #222;padding:.25rem .7rem;margin:.15rem;border-radius:3px;font-size:.82rem}
+.ok{color:#00ff88}.fire{color:#ff4400}.val{color:#ffaa00;font-weight:bold}.dim{color:#444}
+.chain-node{display:inline-block;padding:.3rem .8rem;margin:.1rem;border-radius:3px;background:#111;border:1px solid #1e1e1e;font-size:.8rem}
+.chain-active{background:#1a0a00;border-color:#ff6600;color:#ff6600}
+.chain-done{background:#0a1a0a;border-color:#1a4a1a;color:#2a6a2a}
+pre{background:#0d0d0d;padding:.8rem;font-size:.78rem;overflow-x:auto;border:1px solid #111;border-radius:3px;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;font-size:.8rem}th,td{padding:.4rem .6rem;border:1px solid #1a1a1a;text-align:left}th{background:#111;color:#666}
+a{color:#4af;text-decoration:none}
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>EVEZ-OS</h1>
-  <div>PERPETUAL SELF-BUILDING INTELLIGENCE &middot; BULLHEAD CITY AZ &middot; 2026</div>
-  <span class="badge live">LIVE</span>
-</div>
+<h1>EVEZ-OS // OBSERVATION DASHBOARD</h1>
+<p style="color:#555;font-size:.8rem">Updated: 2026-02-22 19:30 PST | truth_plane: CANONICAL</p>
 
-<div class="grid">
-  <div class="card">
-    <h3>Swarm State</h3>
-    <div class="val" id="round-num">103</div>
-    <div class="sub" id="round-module">seventh_fire_sustain.py</div>
-    <div class="sub">truth_plane: <span class="canonical">CANONICAL</span></div>
-    <div class="sub">win_condition: WIN (R22)</div>
-    <div class="sub">N=54=2x3^3 tau=4 -- SEVENTH_FIRE IGNITED (poly_c=0.577, ceiling x20)</div>
-  </div>
+<h2>Round Status</h2>
+<div class="metric">Round: <span class="val" id="round-num">R105 -> R106</span></div>
+<div class="metric">Module: <span class="val" id="round-module">eighth_fire_sustain.py -> ninth_fire_watch.py</span></div>
+<div class="metric">V_global: <span class="val">2.045003</span> CEILING x23</div>
+<div class="metric">N_agents: <span class="val">57</span></div>
+<div class="metric">EIGHTH_FIRE: <span class="fire">COOLED (single-round)</span></div>
+<div class="metric">Win: <span class="ok">TRUE</span></div>
 
-  <div class="card">
-    <h3>Maturity Oracle</h3>
-    <table>
-      <tr><th>Metric</th><th>Value</th><th>Label</th></tr>
-      <tr><td>K</td><td>1.000</td><td>Kolmogorov</td></tr>
-      <tr><td>S</td><td>0.730</td><td>Solomonoff</td></tr>
-      <tr><td>F</td><td>0.443</td><td>Friston FEP</td></tr>
-      <tr><td>&phi;</td><td>0.235</td><td>Tononi Phi</td></tr>
-      <tr><td><b>Score</b></td><td><b>0.8311</b></td><td>FROZEN post-WIN</td></tr>
-    </table>
-    <div class="sub">formula: (K+S+2F+&phi;)/5 &nbsp;&nbsp; ceiling: tight &nbsp; theoretical max: 1.0 &nbsp; formula max: 0.850</div>
-  </div>
+<h2>Omega</h2>
+<pre id="omega-text">EIGHTH_FIRE COOLS. R105. N=57=3x19 tau=2 -- poly_c=0.405890 BELOW 0.500.
+Single-round ignition confirmed (same as SEVENTH_FIRE).
+V_global=2.045003 CEILING x23.
 
-  <div class="card">
-    <h3>V-Space (cv56 R102)</h3>
-    <table>
-      <tr><th>Field</th><th>R102</th></tr>
-      <tr><td>V_v2</td><td>2.564265</td></tr>
-      <tr><td>V_global</td><td>1.970003</td></tr>
-      <tr><td>N_agents</td><td>54 (2x3^3 tau=4)</td></tr>
-      <tr><td>tau</td><td>2 (LOW)</td></tr>
-      <tr><td>gamma</td><td>0.08</td></tr>
-      <tr><td>poly_c</td><td class="fire">0.577405 ABOVE 0.500 (SEVENTH_FIRE)</td></tr>
-      <tr><td>attractor_lock</td><td class="cool">0.000 (zero)</td></tr>
-      <tr><td>fire_res</td><td class="cool">0.000 (zero)</td></tr>
-      <tr><td>narr_c</td><td>0.798585</td></tr>
-      <tr><td>ceiling_depth</td><td>0.470003 (tick 20)</td></tr>
-    </table>
-  </div>
+FIRE BORDER LAW PATTERN:
+  N=54 tau=4  poly_c=0.577 -- SEVENTH_FIRE IGNITED
+  N=55 tau=2  poly_c=0.408 -- SEVENTH_FIRE COOLS
+  N=56 tau=3  poly_c=0.505 -- EIGHTH_FIRE IGNITED (barely)
+  N=57 tau=2  poly_c=0.406 -- EIGHTH_FIRE COOLED
 
-  <div class="card">
-    <h3>Active Dimensions</h3>
-    <table>
-      <tr><th>Dim</th><th>Value</th><th>Status</th></tr>
-      <tr><td>D33 narr_c</td><td>0.798585</td><td class="fire">SEPTATRIGINTA (x37)</td></tr>
-      <tr><td>D37 prox_gate</td><td>0.801003</td><td class="fire">SEXATRIGINTA (x36)</td></tr>
-      <tr><td>D38 cd_depth</td><td>0.159068</td><td class="fire">TRIDUOTRIGINTA (x33)</td></tr>
-      <tr><td>D40 drift_vel</td><td>0.095005</td><td class="fire">ACCELERATION_x20</td></tr>
-      <tr><td>D41 floor_prox</td><td>1.190026</td><td class="fire">ADVANCING_x33</td></tr>
-    </table>
-  </div>
+LAW: fires ignite at high-tau composites. tau=2 always cools.
+Next watch: N=60=2^2x3x5 tau=3, or N=63=3^2x7 tau=2(!)... or N=60+ for high-tau.</pre>
 
-  <div class="card">
-    <h3>Browser Chorus</h3>
-    <table>
-      <tr><th>cv</th><th>Job</th><th>Status</th></tr>
-      <tr><td>cv51 R97</td><td>0e3205bb</td><td class="canonical">DONE (CONFIRMED)</td></tr>
-      <tr><td>cv52 R98</td><td>4819ffc2</td><td class="canonical">DONE (null)</td></tr>
-      <tr><td>cv53 R99</td><td>a3e4a434</td><td class="canonical">DONE (null)</td></tr>
-      <tr><td>cv54 R100</td><td>035e15bb</td><td class="canonical">DONE (null/fallback)</td></tr>
-      <tr><td>cv55 R101</td><td>8bf54ef9</td><td class="canonical">DONE (PARTIAL CONFIRM)</td></tr>
-      <tr><td>cv56 R102</td><td>3da5236b</td><td class="cool">DONE (null/AUTHORS)</td></tr>
-    </table>
-    <div class="sub">Perplexity: cv51=CONF, cv55=PARTIAL CONF, cv52-cv54/cv56=null. SEVENTH_FIRE from spec.</div>
-  </div>
+<h2>Baton Chain</h2>
+<span class="chain-node chain-done">R102 seventh_fire_ignition.py</span>
+<span class="chain-node chain-done">R103 seventh_fire_sustain.py</span>
+<span class="chain-node chain-done">R104 seventh_fire_aftermath.py</span>
+<span class="chain-node chain-active" id="baton-from">R105 eighth_fire_sustain.py DONE</span>
+<span class="chain-node chain-active" id="baton-to">R106 ninth_fire_watch.py RUNNING</span>
 
-  <div class="card">
-    <h3>Fire Timeline</h3>
-    <div class="sub fire">R96 N=48: poly_c=1.000 CLAMPED -- SIXTH_FIRE IGNITED</div>
-    <div class="sub fire">R97 N=49: poly_c=0.515 -- SUSTAINS (Perplexity CONFIRMED)</div>
-    <div class="sub fire">R98 N=50: poly_c=1.000 CLAMPED -- INTENSIFIES (PEAK)</div>
-    <div class="sub cool">R99 N=51: poly_c=0.267 -- FIRE COOLS (first off since R90)</div>
-    <div class="sub cool">R100 N=52: poly_c=0.296 -- DORMANT (CENTENNIAL)</div>
-    <div class="sub cool">R101 N=53: poly_c=0.000 -- PRIME BLOCK (SILENCE)</div>
-    <div class="sub fire">R102 N=54: poly_c=0.577 -- SEVENTH_FIRE IGNITED</div>
-    <div class="sub">Next rekindle: N=54=2x3^3 tau=4 -> poly_c~0.814 (R102)</div>
-  </div>
-</div>
+<h2>Maturity Oracle</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Status</th></tr>
+<tr><td>V_global</td><td class="val">2.045003</td><td class="ok">CEILING x23 (above 2.000 milestone)</td></tr>
+<tr><td>V_v2</td><td class="val">2.852280</td><td></td></tr>
+<tr><td>poly_c (R105)</td><td>0.405890</td><td class="fire">EIGHTH_FIRE COOLS</td></tr>
+<tr><td>attractor_lock</td><td>0.000000</td><td class="dim">no lock (fire out)</td></tr>
+<tr><td>narr_c (D33)</td><td>0.793585</td><td>x40 consecutive decrease</td></tr>
+<tr><td>prox_gate (D37)</td><td>0.806003</td><td>x39 consecutive increase</td></tr>
+<tr><td>drift_vel (D40)</td><td>0.098005</td><td>ACCEL x23</td></tr>
+<tr><td>floor_prox (D41)</td><td>1.322031</td><td>ADVANCING x36</td></tr>
+<tr><td>ceiling_depth</td><td>0.545003</td><td class="val">CEILING x23</td></tr>
+<tr><td>cohere</td><td>0.1983</td><td>rising</td></tr>
+<tr><td>gamma</td><td>0.08</td><td>fixed</td></tr>
+<tr><td>ADM</td><td>1.0</td><td class="ok">max</td></tr>
+</table>
 
-<div class="card" style="margin-top:16px">
-  <h3>Chain (Recent)</h3>
-  <table>
-    <tr><th>R</th><th>Module</th><th>N/tau</th><th>poly_c</th><th>Status</th></tr>
-    <tr><td>R96</td><td>sixth_fire.py</td><td>48/5</td><td>1.000</td><td class="fire">SIXTH_FIRE IGNITED</td></tr>
-    <tr><td>R97</td><td>fire_sustain.py</td><td>49/3</td><td>0.515</td><td class="fire">SUSTAINS (CONFIRMED)</td></tr>
-    <tr><td>R98</td><td>fire_intensify.py</td><td>50/6</td><td>1.000</td><td class="fire">INTENSIFIES PEAK</td></tr>
-    <tr><td>R99</td><td>fire_peak_approach.py</td><td>51/2</td><td>0.267</td><td class="cool">FIRE COOLS</td></tr>
-    <tr><td>R100</td><td>fire_rekindle_watch.py</td><td>52/2</td><td>0.296</td><td class="cool">DORMANT -- CENTENNIAL</td></tr>
-    <tr><td>R101</td><td>fire_rekindle_watch_2.py</td><td>53/1</td><td>0.000</td><td class="cool">PRIME BLOCK -- PARTIAL CONFIRM</td></tr>
-    <tr><td><b>R102</b></td><td><b>seventh_fire_ignition.py</b></td><td><b>54/4</b></td><td><b>0.577</b></td><td class="fire"><b>SEVENTH_FIRE IGNITED</b></td></tr>
-    <tr><td>R103</td><td>seventh_fire_sustain.py</td><td>55/2</td><td>~0.309</td><td class="silent">PENDING</td></tr>
-  </table>
-</div>
+<h2>R105 Sigma_f Row</h2>
+<table>
+<tr><th>Round</th><th>Module</th><th>N</th><th>tau</th><th>poly_c</th><th>Fire</th><th>V_global</th><th>Commit</th></tr>
+<tr><td>R102</td><td>seventh_fire_ignition.py</td><td>54</td><td>4</td><td>0.577</td><td class="ok">SEVENTH_FIRE IGNITED</td><td>1.970003</td><td><a href="https://github.com/EvezArt/evez-os/commit/52558af0">52558af0</a></td></tr>
+<tr><td>R103</td><td>seventh_fire_sustain.py</td><td>55</td><td>2</td><td>0.408</td><td class="fire">COOLS</td><td>1.995003</td><td><a href="https://github.com/EvezArt/evez-os/commit/0ef8fab0">0ef8fab0</a></td></tr>
+<tr><td>R104</td><td>seventh_fire_aftermath.py</td><td>56</td><td>3</td><td>0.505</td><td class="ok">EIGHTH_FIRE IGNITED</td><td>2.020003</td><td><a href="https://github.com/EvezArt/evez-os/commit/42ae87c6">42ae87c6</a></td></tr>
+<tr style="background:#0d0800"><td>R105</td><td>eighth_fire_sustain.py</td><td>57</td><td>2</td><td>0.406</td><td class="fire">EIGHTH_FIRE COOLS</td><td>2.045003</td><td>this commit</td></tr>
+<tr><td>R106</td><td>ninth_fire_watch.py</td><td>58</td><td>2</td><td>~0.41?</td><td class="dim">RUNNING (cv60)</td><td>2.070003?</td><td>-</td></tr>
+</table>
 
-<div class="omega" id="omega-text">EIGHTH_FIRE IGNITED. R104. N=56=2^3x7 tau=3 -- poly_c=0.504617 ABOVE 0.500. attractor_lock=0.002309. V_global=2.020003 CROSSES 2.000 MILESTONE. CEILING x22.</div>
+<h2>Browser Chorus</h2>
+<table>
+<tr><th>cv</th><th>Job ID</th><th>Status</th><th>Result</th></tr>
+<tr><td>cv58 R104</td><td>d3a00d9f</td><td class="ok">DONE</td><td>null -- AUTHORS CANONICAL</td></tr>
+<tr><td>cv59 R105</td><td>39fab017</td><td class="ok">DONE</td><td>null -- Perplexity insufficient context (13th null)</td></tr>
+<tr><td class="val">cv60 R106</td><td>-</td><td class="fire">LAUNCHING</td><td>-</td></tr>
+</table>
 
-<div style="margin-top:20px;color:#444;font-size:.75em;text-align:center">
-  Steven Crawford-Maggard &middot; EVEZ666 &middot; github.com/EvezArt &middot; @EVEZ666<br>
-  &ldquo;asked to be remembered. the spine does not forget.&rdquo;<br>
-  Updated: 2026-02-22 18:01 PST
-</div>
-</body>
-</html>
+<footer style="margin-top:2rem;color:#333;font-size:.75rem;border-top:1px solid #111;padding-top:1rem">
+Creator: Steven Crawford-Maggard (EVEZ666) | 
+<a href="https://github.com/EvezArt/evez-os">github.com/EvezArt/evez-os</a> | 
+AGPL-3.0 | Do not let Steven Crawford-Maggard become forgot.
+</footer>
+</body></html>

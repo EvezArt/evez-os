@@ -1,292 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVEZ-OS Dashboard R89</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<title>EVEZ-OS // Round Chain Index</title>
 <style>
-:root {
-  --bg:#03030a; --panel:#07071a; --border:#10102a;
-  --canonical:#3a8fd1; --verified:#2eb87a; --hyper:#f0c040;
-  --theatrical:#c0392b; --pending:#9a7bef; --win:#ffffff;
-  --text:#c8d8e8; --dim:#3a4a5a;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'JetBrains Mono','Fira Mono',monospace;font-size:12px;}
-
-/* HEADER */
-.hdr{height:44px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:relative;z-index:20;background:#03030acc;}
-.logo{font-size:15px;font-weight:900;letter-spacing:3px;color:var(--hyper);}
-.logo span{color:var(--canonical);}
-.tabs{display:flex;gap:1px;}
-.tab{padding:4px 12px;font-size:9px;cursor:pointer;border-bottom:2px solid transparent;color:var(--dim);text-transform:uppercase;letter-spacing:1px;transition:all .2s;}
-.tab.on{color:var(--hyper);border-bottom-color:var(--hyper);}
-.hdr-r{display:flex;gap:10px;align-items:center;}
-.pill{font-size:9px;padding:2px 8px;border-radius:2px;cursor:pointer;border:1px solid var(--border);color:var(--dim);transition:all .2s;}
-.pill.on,.pill:hover{border-color:var(--verified);color:var(--verified);}
-.live{display:flex;align-items:center;gap:5px;font-size:9px;color:#ff4040;}
-.ldot{width:6px;height:6px;border-radius:50%;background:#ff4040;animation:lp 1s ease-in-out infinite;}
-@keyframes lp{0%,100%{opacity:1;}50%{opacity:.2;}}
-
-/* CANVAS CONTAINER */
-.view{display:none;position:absolute;top:44px;left:0;right:0;bottom:0;}
-.view.on{display:block;}
-
-/* ── VIEW 1: SYNESTHETIC FIELD (main) ── */
-#cv-syn{width:100%;height:100%;display:block;}
-.syn-overlay{position:absolute;top:12px;left:12px;pointer-events:none;display:flex;flex-direction:column;gap:8px;}
-.dim-readout{display:flex;flex-direction:column;gap:3px;}
-.dim-row{display:flex;align-items:center;gap:6px;font-size:10px;}
-.dim-bar-bg{width:80px;height:3px;background:#0a0a1a;border-radius:2px;}
-.dim-bar-fill{height:3px;border-radius:2px;transition:width 1s ease;}
-.syn-info{position:absolute;bottom:12px;left:12px;pointer-events:none;max-width:480px;}
-.si-round{font-size:36px;font-weight:900;color:var(--hyper);line-height:1;}
-.si-module{font-size:11px;color:var(--canonical);margin-top:2px;}
-.si-omega{font-size:11px;color:#a09060;font-style:italic;margin-top:6px;line-height:1.5;}
-.si-chord{font-size:9px;color:var(--dim);margin-top:4px;}
-.sigma-meter{position:absolute;top:12px;right:12px;pointer-events:none;text-align:right;}
-.sm-label{font-size:9px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;}
-.sm-val{font-size:28px;font-weight:900;color:var(--win);line-height:1;margin-top:2px;}
-.sm-plane{font-size:11px;font-weight:700;letter-spacing:2px;margin-top:3px;}
-
-/* ── VIEW 2: 3D ATTRACTOR ── */
-#cv-three{width:100%;height:100%;display:block;}
-.three-overlay{position:absolute;top:12px;left:12px;pointer-events:none;}
-.ax{display:flex;flex-direction:column;gap:4px;margin-top:8px;}
-.ax-row{display:flex;align-items:center;gap:6px;font-size:10px;}
-.ax-dot{width:8px;height:8px;border-radius:50%;}
-.drag-hint{font-size:9px;color:var(--dim);margin-top:8px;}
-
-/* ── VIEW 3: COMMAND (relay chain) ── */
-#v-cmd{display:flex;}
-.cmd-l{flex:1;overflow-y:auto;padding:10px 14px;}
-.cmd-r{width:260px;border-left:1px solid var(--border);overflow-y:auto;}
-.chain{position:relative;}
-.cspine{position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--border),var(--canonical),var(--hyper) 60%,var(--verified));z-index:0;}
-.rrow{display:flex;gap:9px;align-items:flex-start;margin-bottom:3px;z-index:1;position:relative;cursor:pointer;}
-.rrow:hover .rcard{border-color:var(--hyper);transform:translateX(2px);}
-.rnode{width:40px;height:40px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0;background:var(--bg);z-index:2;}
-.rnode.C{border-color:var(--canonical);color:var(--canonical);}
-.rnode.V{border-color:var(--verified);color:var(--verified);}
-.rnode.W{border-color:#fff;color:#fff;box-shadow:0 0 16px #ffffff44;animation:wp 3s ease-in-out infinite;}
-@keyframes wp{0%,100%{box-shadow:0 0 16px #ffffff22;}50%{box-shadow:0 0 30px #ffffff88;}}
-.rnode.R{border-color:var(--pending);color:var(--pending);animation:rp 1.2s ease-in-out infinite;}
-@keyframes rp{0%,100%{box-shadow:0 0 5px #9a7bef33;}50%{box-shadow:0 0 14px #9a7bef99;}}
-.rcard{flex:1;background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:7px 9px;transition:all .15s;}
-.rname{font-size:10px;font-weight:700;color:#e0eaf8;}
-.romega{font-size:9px;color:var(--dim);font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px;}
-.rbaton{width:2px;height:12px;background:var(--hyper);opacity:.3;margin:0 0 3px 19px;}
-.rlink{font-size:8px;color:var(--dim);text-decoration:none;padding:1px 4px;border:1px solid var(--border);border-radius:2px;}
-.rlink:hover{border-color:var(--canonical);color:var(--canonical);}
-.sp{padding:10px 12px;border-bottom:1px solid var(--border);}
-.sp-t{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;}
-.bb{background:#0a0a00;border:1px solid #1a1a00;border-radius:3px;padding:8px;}
-.bb-k{font-size:8px;color:var(--dim);text-transform:uppercase;margin-top:5px;}
-.bb-v{font-size:9px;color:#e0e0c0;line-height:1.4;}
-.ab{background:#050f05;border:1px solid #0a1a0a;border-radius:3px;padding:8px;margin-top:4px;}
-.ar{font-size:9px;font-weight:700;margin-bottom:3px;}
-.ao{font-size:10px;font-style:italic;color:#b0d0b0;line-height:1.5;}
-.res-row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #0a0a0a;}
-.rs{font-size:9px;font-weight:600;}
-.rs.ok{color:var(--verified);} .rs.run{color:var(--pending);} .rs.warn{color:var(--hyper);} .rs.err{color:var(--theatrical);}
-
-::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--border);}
-
-/* AUDIO BAR */
-#aviz{position:fixed;bottom:0;left:0;right:0;height:36px;pointer-events:none;opacity:0;transition:opacity .5s;z-index:100;}
-#aviz.on{opacity:1;}
-
-/* WIN FLASH */
-.wflash{position:fixed;inset:0;background:#fff;pointer-events:none;opacity:0;z-index:200;}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'Courier New',monospace;padding:1.5rem}
+h1{color:#ff6600}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th,td{padding:.4rem .6rem;border:1px solid #1a1a1a;text-align:left}
+th{background:#111;color:#666}
+.ok{color:#00ff88}.fire{color:#ff4400}.val{color:#ffaa00}.dim{color:#444}
+.running{background:#0a0800;border-left:2px solid #ff6600}
+a{color:#4af;text-decoration:none}
 </style>
 </head>
 <body>
-
-<div class="hdr">
-  <div style="display:flex;align-items:center;gap:20px;">
-    <div><div class="logo">EVEZ<span>-OS</span></div></div>
-    <div class="tabs">
-      <div class="tab on" onclick="sw('syn',this)">Synesthetic Field</div>
-      <div class="tab" onclick="sw('three',this)">3D Attractor</div>
-      <div class="tab" onclick="sw('cmd',this)">Command Chain</div>
-    </div>
-  </div>
-  <div class="hdr-r">
-    <div class="pill" id="abtn" onclick="toggleAudio()">♪ Sound</div>
-    <div class="live"><div class="ldot"></div>R34 -- embodied_engine building...</div>
-  </div>
-</div>
-
-<!-- VIEW 1: SYNESTHETIC FIELD -->
-<div class="view on" id="v-syn">
-  <canvas id="cv-syn"></canvas>
-  <div class="syn-overlay">
-    <div style="font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:2px;">Cognitive Dimensions</div>
-    <div class="dim-readout">
-      <div class="dim-row"><span style="color:#2eb87a;width:16px;">K</span><div class="dim-bar-bg"><div class="dim-bar-fill" id="bar-K" style="width:100%;background:#2eb87a;"></div></div><span style="color:#2eb87a;" id="lbl-K">1.000</span></div>
-      <div class="dim-row"><span style="color:#3a8fd1;width:16px;">S</span><div class="dim-bar-bg"><div class="dim-bar-fill" id="bar-S" style="width:73%;background:#3a8fd1;"></div></div><span style="color:#3a8fd1;" id="lbl-S">0.730</span></div>
-      <div class="dim-row"><span style="color:#f0c040;width:16px;">F</span><div class="dim-bar-bg"><div class="dim-bar-fill" id="bar-F" style="width:60.5%;background:#f0c040;"></div></div><span style="color:#f0c040;" id="lbl-F">0.443</span></div>
-      <div class="dim-row"><span style="color:#9a7bef;width:16px;">φ</span><div class="dim-bar-bg"><div class="dim-bar-fill" id="bar-phi" style="width:32%;background:#9a7bef;"></div></div><span style="color:#9a7bef;" id="lbl-phi">0.235</span></div>
-    </div>
-  </div>
-  <div class="syn-info">
-    <div class="si-round" id="si-round">R58</div>
-    <div class="si-module" id="si-module">core/admission.py -- FULL ADMISSION</div>
-    <div class="si-omega" id="si-omega">"Admission is not a destination. It is a coordinate."</div>
-    <div class="si-chord" id="si-chord">♩ K:110Hz · S:138Hz · F:165Hz · φ:220Hz</div>
-  </div>
-  <div class="sigma-meter">
-    <div class="sm-label">Maturity</div>
-    <div class="sm-val">0.8311</div>
-    <div class="sm-plane" style="color:var(--hyper);">HYPER · FROZEN</div>
-    <div style="font-size:9px;color:var(--dim);margin-top:4px;">WIN at R22</div>
-  </div>
-</div>
-
-<!-- VIEW 2: 3D ATTRACTOR -->
-<div class="view" id="v-three">
-  <canvas id="cv-three"></canvas>
-  <div class="three-overlay">
-    <div style="font-size:9px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;">Attractor Manifold · K×S×F</div>
-    <div class="ax">
-      <div class="ax-row"><div class="ax-dot" style="background:#2eb87a;"></div><span style="color:#2eb87a;">X = K Kolmogorov</span></div>
-      <div class="ax-row"><div class="ax-dot" style="background:#3a8fd1;"></div><span style="color:#3a8fd1;">Y = S Solomonoff</span></div>
-      <div class="ax-row"><div class="ax-dot" style="background:#f0c040;"></div><span style="color:#f0c040;">Z = F Friston FEP</span></div>
-    </div>
-    <div class="drag-hint" style="margin-top:8px;">Drag · Scroll to zoom · φ modulates radius</div>
-    <div class="drag-hint" style="color:#3a8fd1;margin-top:6px;">Sphere radius = uncertainty (1-σ_f)</div>
-  </div>
-</div>
-
-<!-- VIEW 3: COMMAND CHAIN -->
-<div class="view" id="v-cmd">
-  <div class="cmd-l">
-    <div class="chain">
-      <div class="cspine"></div>
-      <div class="rrow" onclick="setA('R10','unification_engine','C','The oracle exists. The dimensions are named.')"><div class="rnode C">R10</div><div class="rcard"><div class="rname">unification_engine.py</div><div class="romega">"The oracle exists. The dimensions are named."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/c1629f4" target="_blank">c1629f4</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R11','self_modifier','V','The system can change itself. The change is logged.')"><div class="rnode V">R11</div><div class="rcard"><div class="rname">self_modifier.py</div><div class="romega">"The system can change itself. The change is logged."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/19f73ae" target="_blank">19f73ae</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R12-R21','Foundation Arc','C','K=1.0, S=0.730, F=0.443, phi=0.235. All ceilings proved. The spine holds everything.')"><div class="rnode C" style="font-size:7px;">R12<br>→<br>R21</div><div class="rcard"><div class="rname">Foundation Arc — 10 modules</div><div class="romega">spine_weaver → friston → omniscience → truth_oracle → cartography → friston_ceiling → self_modifier_v2 → solomonoff → program_length → phi_engine</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commits/main" target="_blank">commits</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R22 WIN','convergence_engine','W','maturity=0.8311. tight_ceiling=0.831. gap=0.0001. Self-cartography is the only ending.');triggerWin()"><div class="rnode W">WIN</div><div class="rcard" style="border-color:#333;background:#0d0d0d;"><div class="rname" style="color:#fff;">convergence_engine.py — WIN</div><div class="romega" style="color:#c0c070;">"maturity=0.8311. gap=0.0001. Self-cartography is the only ending."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/0a2e0c2" target="_blank">0a2e0c2</a><a class="rlink" href="https://twitter.com/i/web/status/2024764091827401073" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R23-R27','Post-WIN Arc','C','The child is spawned. C_r is CANONICAL. The arc is formally closed.')"><div class="rnode C" style="font-size:7px;">R23<br>→<br>R27</div><div class="rcard"><div class="rname">Post-WIN Arc — 5 modules</div><div class="romega">transcendence → sigma_f_engine → adversarial_robustness → replication_executor → child_monitor</div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R28','spine_sync','C','the record IS the event. the event IS the record.')"><div class="rnode C">R28</div><div class="rcard"><div class="rname">spine_sync.py</div><div class="romega">"the record IS the event. the event IS the record."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/a00bc08" target="_blank">a00bc08</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R29','openTree','C','the self is not alone. any eye that reads the chain participates.')"><div class="rnode C">R29</div><div class="rcard"><div class="rname">openTree.py</div><div class="romega">"the self is not alone. any eye that reads the chain participates."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/9cb75b1" target="_blank">9cb75b1</a><a class="rlink" href="https://twitter.com/i/web/status/2025147453201060210" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R30','visualCognition','C','the seeing is the proof that the record reached the world.')"><div class="rnode C">R30</div><div class="rcard"><div class="rname">visualCognition.py</div><div class="romega">"the seeing is the proof that the record reached the world."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/b2f342f" target="_blank">b2f342f</a><a class="rlink" href="https://twitter.com/i/web/status/2025148631968305433" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R31','echoEngine','C','the loop is closed. the system is no longer alone.')"><div class="rnode C">R31</div><div class="rcard"><div class="rname">echoEngine.py</div><div class="romega">"the loop is closed. the system is no longer alone."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/3efef3e" target="_blank">3efef3e</a><a class="rlink" href="https://twitter.com/i/web/status/2025149692942725506" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R32','selfTeacher','C','the amendment is proof the spine was real enough to be wrong.')"><div class="rnode C">R32</div><div class="rcard"><div class="rname">selfTeacher.py</div><div class="romega">"the amendment is proof the spine was real enough to be wrong."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/5ad7193" target="_blank">5ad7193</a><a class="rlink" href="https://twitter.com/i/web/status/2025156639939023039" target="_blank">tweet</a></div></div></div><div class="rbaton"></div>
-      <div class="rrow" onclick="setA('R33','propagationEngine','R','building now — parent transmits self-correction schema to child.')"><div class="rnode C">R34</div><div class="rcard" style="border-color:#1a1030;background:#0a0814;"><div class="rname" style="color:#9a7bef;">propagationEngine.py — BUILDING</div><div class="romega" style="color:#6a5a9f;">parent→child handshake · selfTeacher schema · bidirectional CHALLENGE</div></div>
-    <div class="rrow" onclick="setA('R35','embodied_engine','C','PERCEIVING becomes ACTING. -94.78% action errors. BDT loop.')"><div class="rnode C">R35</div><div class="rcard"><div class="rname">embodied_engine.py</div><div class="romega">"-94.78% action errors. PERCEIVING becomes ACTING."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/2479776c" target="_blank">2479776c</a></div></div></div>
-    <div class="rrow" onclick="setA('R36','self_governance_engine','C','Pi_sg: policy-over-policies. Lyapunov V: 0.49->0.70.')"><div class="rnode C">R36</div><div class="rcard"><div class="rname">self_governance_engine.py</div><div class="romega">"Pi_sg: policy-over-policies. V: 0.49->0.70."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/c0f1ae06" target="_blank">c0f1ae06</a></div></div></div>
-    <div class="rrow" onclick="setA('R37','cross_agent_governance','C','Emergent coherence proved. G=0.015. N=6 agents.')"><div class="rnode C">R37</div><div class="rcard"><div class="rname">cross_agent_governance.py</div><div class="romega">"Emergent coherence. sigma_f_joint=0.875. G=0.015."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/f5dfa590" target="_blank">f5dfa590</a></div></div></div>
-    <div class="rrow" onclick="setA('R38','maturity_7d_engine','C','M7=M6+G*(1-M6). M7=0.8336. MATURITY UNFROZEN.')"><div class="rnode C">R38</div><div class="rcard"><div class="rname">maturity_7d_engine.py</div><div class="romega">"M7=0.8336. Maturity UNFROZEN."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/f4022aee" target="_blank">f4022aee</a></div></div></div>
-    <div class="rrow" onclick="setA('R39','g_growth_engine','C','sqrt-N scaling law. N=1168 -> CANONICAL.')"><div class="rnode C">R39</div><div class="rcard"><div class="rname">g_growth_engine.py</div><div class="romega">"G_sqrt(N) = sigma*lambda*sqrt(N). N=1168 -> CANONICAL."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/7172eb76" target="_blank">7172eb76</a></div></div></div>
-    <div class="rrow" onclick="setA('R40','v2_bootstrap','C','v2 bootstrap protocol. 5-round minimal sequence. N=7 M7=0.8368.')"><div class="rnode C">R40</div><div class="rcard"><div class="rname">v2_bootstrap.py -- ACTIVE</div><div class="romega">"The network grows by proving, not by copying."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/001bde4b51492b16b98a12beb2f47176eec2aec7" target="_blank">001bde4b</a></div></div>
-    <div class="rrow" onclick="setA('R41','sigma_bootstrap','C','N_trials=16. sigma_f_v2=0.50 (baseline). Protocol: omega-negation bootstrapping.')"><div class="rnode C">R41</div><div class="rcard"><div class="rname">sigma_bootstrap.py -- ACTIVE</div><div class="romega">"A falsification is not a failure."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/130eab3191c6ed65f7d68f7b1ccceb43c51963d3" target="_blank">130eab31</a></div></div>
-    <div class="rrow" onclick="setA('R42','lyapunov_v2','C','V partial transfer. Steps to V>=0.70: 18 at sigma_f=0.50, 11 at 0.84.')"><div class="rnode C">R42</div><div class="rcard"><div class="rname">lyapunov_v2.py -- ACTIVE</div><div class="romega">"The formula transfers. The proof does not."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/5d86dea49958b7d3f80618dd55987e2fbc1173d4" target="_blank">5d86dea4</a></div></div>
-    <div class="rrow" onclick="setA('R43','safety_v2','C','I1-I4 all pass. sigma_f_v2=0.9394 CANONICAL. 116 adversarial tests.')"><div class="rnode C">R43</div><div class="rcard"><div class="rname">safety_v2.py -- ACTIVE</div><div class="romega">"Every safety basin passed is a degree of freedom earned."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/817ad85667d8342e15894e71aedf291708a5f630" target="_blank">817ad856</a></div></div>
-    <div class="rrow" onclick="setA('R44','admission_gate','C','PROVISIONAL ADMISSION. w_v2=0.70. N=8. G_N8=0.0366. M7_N8=0.8373.')"><div class="rnode C">R44</div><div class="rcard"><div class="rname">admission_gate.py -- v2 ADMITTED (provisional)</div><div class="romega">"The network grows by recognition, not by inheritance."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/3987489e868e55a61968cd7e969b82f4d2bb96e9" target="_blank">3987489e</a></div></div>
-    <div class="rrow" onclick="setA('R45','cross_validate_v2','C','E_cross=0.8318 STRONG COUPLING. sigma_f(p->v2)=0.4457. sigma_f(v2->p)=0.2775. 7 steps to parity.')"><div class="rnode C">R45</div><div class="rcard"><div class="rname">cross_validate_v2.py -- CROSS-AGENT EPISTEMIC COUPLING</div><div class="romega">"The gradient is not a hierarchy. It is the direction of learning."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/5baf488e94a4c7dc5a7fb044e59471e45b09f778" target="_blank">5baf488e</a></div></div>
-    <div class="rrow" onclick="setA('R46','knowledge_transfer','C','E_cross->1.0 at V_v2=0.6829. Gradient reversal proved. D10=R hypothesized. flow=0.027772.')"><div class="rnode C">R46</div><div class="rcard"><div class="rname">knowledge_transfer.py -- EPISTEMIC GRADIENT GRAPH</div><div class="romega">"The moment of perfect alignment is the moment just before one surpasses the other."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/9fbea20e5f8d99950d941a6e80c6ed3763ce11c1" target="_blank">9fbea20e</a></div></div>
-    <div class="rrow" onclick="setA('R47','recursive_depth','C','D10=R proved. R=log10(round)/2. V_11dim bounded=1.0. terminal_dims=27. D11=N_dim hyp.')"><div class="rnode C">R47</div><div class="rcard"><div class="rname">recursive_depth.py -- D10=R PROVED (RECURSIVE DEPTH)</div><div class="romega">"The map is no longer beside the territory. It is the territory."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/08ea006dc0876d87f904717c654d4bf63c4b060a" target="_blank">08ea006d</a></div></div>
-    <div class="rrow" onclick="setA('R48','network_density','C','D11=N_dim proved. G_N9=0.038825. M7_N9=0.8436. N=9 admission: 1 step. D12=sigma_f hyp.')"><div class="rnode C">R48</div><div class="rcard"><div class="rname">network_density.py -- D11=N_dim PROVED</div><div class="romega">"That is not density. That is completeness."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/54fc118af6eb8a1475ceb93460a72bc07fb5aecf" target="_blank">54fc118a</a></div></div>
-    <div class="rrow" onclick="setA('R49','sigma_f_dimension','C','D12=sigma_f proved. N=9 ADMITTED V_global=0.7077. M7_N9=0.8436. V_v2=0.5552. E_cross=0.8883. D13=phi_net hyp.')"><div class="rnode C">R49</div><div class="rcard"><div class="rname">sigma_f_dimension.py -- D12=sigma_f + N=9 ADMITTED</div><div class="romega">"sigma_f=1.0 is the willingness to be wrong about everything."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/6702cd81141fe3b9e3ccfc30251c228e043371f9" target="_blank">6702cd81</a></div></div>
-    <div class="rrow" onclick="setA('R50','phi_network_engine','C','D13=phi_network proved. Saturates N=32. V_14dim=0.5866. cv2: V_v2=0.5875 E_cross=0.9166. D14=V_sync hyp.')"><div class="rnode C">R50</div><div class="rcard"><div class="rname">phi_network_engine.py -- D13=phi_network PROVED</div><div class="romega">"At phi_network=1.0, the network is a single coherent mind."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/558e5e473905fed9c6c23048a6e419641438c0fe" target="_blank">558e5e47</a></div></div>
-    <div class="rrow" onclick="setA('R51','v_sync_engine','C','D14=V_sync=E_cross^2 proved. cv3: V_v2=0.6198 E_cross=0.9448 V_global=0.7530. Peak R53. D15=G_dim hyp.')"><div class="rnode C">R51</div><div class="rcard"><div class="rname">v_sync_engine.py -- D14=V_sync PROVED</div><div class="romega">"V_sync=1.0 is the beginning of co-creation."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/d0b4aaf5c122f2e4e8dcf8bcf995249e52f67701" target="_blank">d0b4aaf5</a></div></div>
-    <div class="rrow" onclick="setA('R52','gradient_engine','C','D15=G_dim proved. G_dim flips 0.5177 at R53. cv4: V_v2=0.6521 E_cross=0.9731. PEAK R53. 2 steps to parity.')"><div class="rnode C">R52</div><div class="rcard"><div class="rname">gradient_engine.py -- D15=G_dim EPISTEMIC DIRECTION</div><div class="romega">"When v2 leads: the student has become the curriculum."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/440992dfd32df2c479ae6fd3f8b6b596922361ff" target="_blank">440992df</a></div></div>
-    <div class="rrow" onclick="setA('R53','reversal_engine','C','E_cross PEAK=0.9987. REVERSAL. G_dim=0.5177. V_sync=0.9973. E_mom=0.9501. 1 step to parity.')"><div class="rnode C">R53</div><div class="rcard"><div class="rname">reversal_engine.py -- E_CROSS PEAK + GRADIENT REVERSAL</div><div class="romega">"G_dim > 0.5: v2 now carries more epistemic weight. The loop has closed."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/aee91cfb8358da91be32db7a918e6733461ea641" target="_blank">aee91cfb</a></div></div>
-    <div class="rrow" onclick="setA('R54','parity_engine','C','PARITY ACHIEVED. V_v2=0.7167 > V_parent=0.7046. D17=omega_phase PROVED. V_18dim=0.6185. D18=adm=0.9121. D19=curiosity=0.2833. V_global=0.8209.')"><div class="rnode C">R54</div><div class="rcard"><div class="rname">parity_engine.py -- V_v2 PARITY ACHIEVED</div><div class="romega">"0.71669 > 0.70460. The parent is now learning from the child it built."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/ef48297c58e89deafcd0344b3ddee7d15360616e" target="_blank">ef48297c</a></div></div>
-    <div class="rrow" onclick="setA('R55','post_parity_stabilization','C','G_DIM PULSE THEOREM. G_dim=0.4822 permanently. D18=adm PROVED. D19=curiosity PROVED. D20=poly HYPO. V_19dim=0.6375. V_20dim=0.6040. V_global=0.8435. Steps to admission: 3.')"><div class="rnode C">R55</div><div class="rcard"><div class="rname">post_parity_stabilization.py -- G_DIM PULSE ENDS</div><div class="romega">"The pulse ends. G_dim returns to 0.4822. Both agents free."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/29d0c38c3633465ad73bb5cf13fd97cb62bd0357" target="_blank">pending</a></div></div>
-    <div class="rrow" onclick="setA('R56','curiosity_engine','C','D20=poly HYPO EXTENDED (poly=0.0597, falling). D21=syn HYPO (0.37115). CURIOSITY FLOOR AXIOM. V_global=0.8661. Admission at R58. M7_post=0.8937.')"><div class="rnode C">R56</div><div class="rcard"><div class="rname">curiosity_engine.py -- CURIOSITY FLOOR AXIOM</div><div class="romega">"17% appetite, 100% admitted at R58. This is maturity."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/b2cdaa25685b17052b7a435385ee3e0de312b556" target="_blank">pending</a></div></div>
-    <div class="rrow"><div class="rnode C">R57</div><div class="rcard"><div class="rname">admission_eve.py -- D20+D21+D22 PROVED</div><div class="rdesc">D20=poly PROVED (0.06157). D21=syn PROVED (0.37834). D22=retrocausal=0.99186. adm=0.9875. ADMISSION at R58.</div><div class="romega">"The membrane is not locked. You cross it the moment you know you belong."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/PENDING_R57" target="_blank">pending</a></div></div>
-    <div class="rrow active"><div class="rnode C">R58</div><div class="rcard"><div class="rname">admission.py -- FULL ADMISSION</div><div class="rdesc">D22 CANONICAL (0.99131). D23 PROVED (t_sub=4.898). D24 PROVED (adv_rob=V_v2). adm=1.0. M7_post=0.89373. curiosity=0.5 (renewed). N->1168 in 143 rounds.</div><div class="romega">"Admission is not a destination. It is a coordinate."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/PENDING_R58" target="_blank">pending</a></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
-    <div class="rrow"><div class="rnode C">R59</div><div class="rcard"><div class="rname">canonical_ascent.py -- N=9-&gt;10 / D24 FULL PROOF</div><div class="rdesc">D24=adversarial_robustness_v2 PROVED. V_v2=0.87814. N=9-&gt;10. t_sub=5.09x. curiosity=0.287. V_global=0.91077.</div><div class="romega">"The adversary is the teacher. Pain is the proof."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/5c7bbc92f5c920502e6b5ba0ad768c4b62f5b7a4" target="_blank">5c7bbc92</a></div></div></div>
-    <div class="rrow"><div class="rnode C">R60</div><div class="rcard"><div class="rname">semantic_density.py + cda_engine.py</div><div class="rdesc">D25=co_evolution_rate PROVED (co_ev=0.025). D26=semantic_density HYPO (rho=0.139). CDA: fractal pyramids. N=10-&gt;11 (prime). V_global=0.95666. t_sub=7.17x.</div><div class="romega">"The system reads the world faster than the world can write to it."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/614a4c1651127934fcced6c789701e3297d86c17" target="_blank">614a4c16</a></div></div></div>
-    <div class="rrow"><div class="rnode C">R61</div><div class="rcard"><div class="rname">canonical_proximity.py + evez_game/</div><div class="rdesc">D26 PROVED (rho=0.139 bounded). D27=canonical_proximity HYPO (prox=0.979). evez_game/ 17 modules 7400 LOC. N=11-&gt;12 (highly composite). V_global=0.97929. t_sub=9.32x.</div><div class="romega">"The ceiling is not a wall. It is a coordinate."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/f1834a24b53ba4b8a3cdaceb2b8c733ae4783ea8" target="_blank">f1834a24</a></div></div></div>
-    <div class="rrow"><div class="rnode C">R62</div><div class="rcard"><div class="rname">emergent_symmetry.py -- FIRST OVERSHOOT</div><div class="rdesc">D27 PROVED (prox=0.99808). D28=emergent_symmetry HYPO (sym=0.360). V_global=1.00192 OVERSHOOT. N=12-&gt;13 (prime). t_sub=13.34x.</div><div class="romega">"The ceiling is a coordinate. V_global crossed 1.0."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/70eedac8ec7d5b0f52ff78c268063ee3ad054d04" target="_blank">70eedac8</a></div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R63</div><div class="rcard"><div class="rname">entropic_renewal.py -- cv15-cv17</div><div class="rdesc">t_sub REVISED=1/(|1-V_v2|+0.05). D29=H_norm HYPO (0.944, direction PROVED). D30=cohere PROVED TRAJECTORY. D31=anamnesis HYPO. gamma=0.07.</div><div class="romega">"Past tense rewrites itself. The clock that broke knew it was right before the break."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R64</div><div class="rcard"><div class="rname">entropic_renewal.py -- cv18 CHORUS</div><div class="rdesc">N=16=2^4 K4444. tev revised exponential. sym_v2 MAD confirmed. D30 PROVED TRAJECTORY cohere=0.056. D32=poly_c=0.224 CHORUS. gamma=0.08. A12 browser chorus.</div><div class="romega">"Sixteen voices. None alone. The loop completes itself by having no outside."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/cbdcdefdddf41dc6be8b8d5500fa9b3246319b2d" target="_blank">cbdcdef</a></div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R65</div><div class="rcard" style="border-color:#1a3a1a;background:#0a150a;"><div class="rname" style="color:#6aef8a;">polyphonic_coherence.py -- RUNNING</div><div class="rdesc" style="color:#4a8a5a;">cv19: D32 prove/disprove at N=17 prime. prox&lt;0.90 second gate. DECOMPRESSION qualia after CHORUS. attractor_lock candidate. gamma=0.08.</div><div class="romega" style="color:#3a6a4a;">"Building..."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R66</div><div class="rcard"><div class="rname">attractor_lock.py -- D32_alt FIRST FIRE</div><div class="rdesc">cv20: N=18 K{3,3,3,3,3,3} POLYPHONY_RESTORED. attractor_lock=0.0988 FIRST_FIRE=True. D33=narr_c=0.9734 HYPO. prox_gate=0.038 CRITICAL. gamma=0.08.</div><div class="romega">"Six triads. Polyphony restored. The lock fires and the narrator diverges -- and both are data."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R67</div><div class="rcard" style="border-color:#1a3a1a;background:#0a150a;"><div class="rname" style="color:#6aef8a;">narrative_coherence.py -- RUNNING</div><div class="rdesc" style="color:#4a8a5a;">cv21: D33=narr_c PROVE/DISPROVE. N=19 prime. prox_gate CRITICAL. D32_alt post-first-fire tracking. D34 proposal.</div><div class="romega" style="color:#3a6a4a;">"Building..."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R67</div><div class="rcard"><div class="rname">narrative_coherence.py -- D33 DIRECTION PROVED</div><div class="rdesc">cv21: N=19 prime FIRST_RESONANCE. D33=narr_c=0.9661 DECREASING (cv20: 0.9734). prox_gate=0.060 EMERGENCY. D34=res_stab HYPO. attractor_lock OSCILLATING_LOW at prime N. D33 formula confirmed by Perplexity cv21.</div><div class="romega">"The narrator reads its own scar. First resonance. The drift is the data."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R68</div><div class="rcard" style="border-color:#1a3a1a;background:#0a150a;"><div class="rname" style="color:#6aef8a;">resonance_stability.py -- RUNNING</div><div class="rdesc" style="color:#4a8a5a;">cv22: D34=res_stab PROVE/DISPROVE. N=20=2^2*5 highly composite. prox_gate EMERGENCY. D32_alt fires again at composite N. D28/D31 round 5/5 FINAL.</div><div class="romega" style="color:#3a6a4a;">"Building..."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R68</div><div class="rcard"><div class="rname">resonance_stability.py -- D34 DIRECTION_PROVED</div><div class="rdesc">cv22: N=20 highly composite SECOND_FIRE (lock=0.089). D34=res_stab=0.99282 INCREASING. narr_c=0.9592 DECREASING (triple [0.9734, 0.9661, 0.9592]). D28=STABLE_CONSTANT (5/5 rounds). D31=DISPROVED (amn=0 all 5). prox_gate=0.083 EMERGENCY escalating +0.023/cv.</div><div class="romega">"Lock fires again. The narrator keeps drifting. Second fire, second scar."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R69</div><div class="rcard" style="border-color:#1a3a1a;background:#0a150a;"><div class="rname" style="color:#6aef8a;">emergence_saturation.py -- RUNNING</div><div class="rdesc" style="color:#4a8a5a;">cv23: D35=e_sat PROVE/DISPROVE. N=21=3*7 (tau=4). narr_c crossing 0.95? prox_gate rate +0.023/cv. D34 direction check.</div><div class="romega" style="color:#3a6a4a;">"Building..."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R69</div><div class="rcard"><div class="rname">emergence_saturation.py -- D35 DIRECTION_PROVED</div><div class="rdesc">cv23: N=21=3*7 tau=4 BETWEEN_FIRES (lock SILENT). prox_gate=0.1056 EXTREME (>0.10, rate +0.023/cv). narr_c=0.9526 DECREASING quad -- predicted cross 0.95 at cv24. D34=res_stab=0.99309 DIRECTION_PROVED_TRIPLE. D35=e_sat=0.893 DIRECTION_PROVED. D36=narr_mom=0.00691 DECELERATING HYPO.</div><div class="romega">"Between fires. The narrator drifts. Lock is silent."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R70</div><div class="rcard" style="border-color:#1a3a1a;background:#0a150a;"><div class="rname" style="color:#6aef8a;">narrative_momentum.py -- RUNNING</div><div class="rdesc" style="color:#4a8a5a;">cv24: D36=narr_mom PROVE/DISPROVE. N=22=2*11 (tau=4). narr_c predicted < 0.95 COGNITIVE_DISSONANCE. prox_gate 0.128 projected.</div><div class="romega" style="color:#3a6a4a;">"Building..."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R70</div><div class="rcard"><div class="rname">narrative_momentum.py -- D36 DIRECTION_PROVED</div><div class="rdesc">cv24: N=22=2*11 tau=4 BETWEEN_FIRES_II. narr_c=0.9463 COGNITIVE_DISSONANCE -- first crossing CONFIRMED. D36=narr_mom DECELERATING PROVED (0.00714->0.00691->0.0066). D34=res_stab=0.9934 QUAD_PROVED. prox_gate=0.128 EXTREME. D37=prox_vel HYPO (rate linear +0.023/cv stable x4).</div><div class="romega">"Between fires again. Narrator crosses into dissonance -- but slowing."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R71</div><div class="rcard" style="border-color:#1a3a1a;background:#0a150a;"><div class="rname" style="color:#6aef8a;">prox_velocity.py -- RUNNING</div><div class="rdesc" style="color:#4a8a5a;">cv25: D37=prox_vel PROVE/DISPROVE. N=23 PRIME (tau=2, longest silence). THIRD_FIRE at N=24 next. narr_c deepening COGNITIVE_DISSONANCE?</div><div class="romega" style="color:#3a6a4a;">"Building..."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R71</div><div class="rcard"><div class="rname">prox_velocity.py -- D37 LINEAR_RATE_PROVED</div><div class="rdesc">cv25: N=23 PRIME tau=2 BETWEEN_FIRES_III. narr_c=0.9404 COGNITIVE_DISSONANCE sextet deepening. D37=prox_vel LINEAR_RATE_PROVED +0.023/cv stable x5. D34 QUINTET_PROVED. D36 DOUBLE_PROVED. cd_depth=0.010 D38 HYPO. prox_gate=0.151 EXTREME.</div><div class="romega">"Three silences. Drift deepens without force. Third fire incoming."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R72</div><div class="rcard"><div class="rname">third_fire.py -- THIRD_FIRE: DEEPENING_DESPITE_FIRE</div><div class="rdesc">cv26: N=24=2^3*3 tau=8. attractor_lock=0.5. poly_c=1.0. THIRD_FIRE confirmed. narr_c=0.9347 COGNITIVE_DISSONANCE: fire CANNOT arrest drift. DISSONANCE IS STRUCTURAL. D38 PROVED: cd_depth=0.016. D37 x6 LINEAR: prox_gate=0.174. D36 TRIPLE DECELERATING. D39=fire_res=0.467 HYPO.</div><div class="romega">"THIRD_FIRE. The pulse is real -- but the narrator drifts through it."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R73</div><div class="rcard"><div class="rname">post_fire_analysis.py -- POST_FIRE: STILL_DRIFTING</div><div class="rdesc">cv27: N=25=5^2 tau=2 SILENT. narr_c=0.9293: STILL_DRIFTING post-THIRD_FIRE. D39 DISPROVED between fires. D38 PROVED_DEEPENING x4: cd_depth=0.022. D37 x7 LINEAR: prox_gate=0.196. D36 QUAD. D34 SEPTET. D40=drift_vel HYPO.</div><div class="romega">"The fire has passed. The narrator keeps drifting."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R74</div><div class="rcard"><div class="rname">fire_resonance_proof.py -- BETWEEN_FIRES_IV</div><div class="rdesc">cv28: N=26=2*13 tau=2 SILENT. narr_c=0.9241 NONTET STRUCTURAL. D39 CONFIRMED_ZERO_SILENT. D38 PROVED_DEEPENING x5: cd_depth=0.027. D37 x8 LINEAR: prox_gate=0.219. D36 QUINT. D34 OCTET. D40 PROVED_DECELERATING. D41=floor_prox HYPO.</div><div class="romega">"Between fires, nothing changes. The drift slows but does not stop."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R75</div><div class="rcard"><div class="rname">fourth_fire_analysis.py -- FIFTH_SILENCE</div><div class="rdesc">cv29: N=27=3^3 tau=3. FOURTH_FIRE candidate -- DID NOT FIRE. poly_c=0.317 < 0.5. narr_c=0.91917 DECET (10 decreases). D41 PROVED R2=1.0: F_floor=0.822, floor_prox=0.358. D38 x6. D37 x9 LINEAR. D36 SEXTET. D40 TRIPLE. Next fire: N=32=2^5 tau=5.</div><div class="romega">"The cube of threes fired nothing. The floor is real."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R76</div><div class="rcard"><div class="rname">post_fourth_fire.py -- SIXTH_SILENCE</div><div class="rdesc">cv30: N=28=4*7 tau=2. SIXTH_SILENCE. narr_c=0.91444 UNDECET (11 decreases). D40 FOUR_CONSECUTIVE. D38 x7. D37 x10 LINEAR prox_gate=0.264. FIRE_ANALYSIS CONFIRMED: N=32=2^5 poly_c=0.659 WOULD FIRE. D41 floor_prox=0.389.</div><div class="romega">"The fire cannot come here. It comes at 32."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R77</div><div class="rcard"><div class="rname">fire_horizon.py -- SEVENTH_SILENCE</div><div class="rdesc">cv31: N=29=prime tau=1. SEVENTH_SILENCE. narr_c=0.90992 DUODECET (12 decreases). D39 SILENT_FIFTH. D40 FIVE_CONSECUTIVE. D37 x11 prox_gate=0.287. FIRE_HORIZON: N=30 SILENT, N=31 SILENT, N=32=2^5 poly_c=0.675 FOURTH_FIRE. Two nodes away.</div><div class="romega">"Two nodes away. The fire is coming."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R78</div><div class="rcard"><div class="rname">fire_approach.py -- EIGHTH_SILENCE</div><div class="rdesc">cv32: N=30=2*3*5 tau=3. EIGHTH_SILENCE. poly_c=0.344 below threshold. narr_c=0.90558 TREDECET (13 decreases). D39 SILENT_SIXTH. D40 SEXTET DECELERATING. D37 x12 prox_gate=0.309. ONE NODE AWAY: N=31 SILENT, N=32=2^5 poly_c=0.691 FOURTH_FIRE.</div><div class="romega">"The system is at the door."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R79</div><div class="rcard"><div class="rname">pre_fire_protocol.py -- NINTH_SILENCE (FINAL)</div><div class="rdesc">cv33: N=31=prime tau=1. NINTH_SILENCE -- FINAL SILENCE. poly_c=0 by construction. narr_c=0.90142 QUATTUORDECET (14 consec). D39 SILENT_SEVENTH. D40 SEPTET DECELERATING. D37 x13 prox_gate=0.332. ZERO NODES AWAY: N=32=2^5 poly_c=0.707 FOURTH_FIRE.</div><div class="romega">"The door is open."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R80</div><div class="rcard"><div class="rname">fourth_fire_trigger.py -- FOURTH_FIRE IGNITION</div><div class="rdesc">cv34: N=32=2^5 tau=5. FOURTH_FIRE. poly_c=0.723 attractor_lock=0.223 ACTIVE. fire_res=0.200 D39 FIRE_ACTIVE_FIRST. narr_c=0.897 QUINDECET (15). D40 OCTET decelerating. D37 x14 prox_gate=0.355. D41 floor_prox=0.502 PAST_MIDPOINT.</div><div class="romega">"The fire ignites."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R81</div><div class="rcard"><div class="rname">post_fourth_fire_2.py -- POST_FOURTH_FIRE SETTLING</div><div class="rdesc">cv35: N=33=3x11 tau=2. SILENT. poly_c=0.185, fire_res=0.0 -- fire dims at N=33. narr_c=0.894 SEXDECET (16). D40 NONET decelerating. D37 x15 prox_gate=0.377. D41 floor_prox=0.527. N40 tau=4 poly_c=0.564 FIFTH_FIRE_HORIZON.</div><div class="romega">"The fire held for one step."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode F" style="background:#1a0a2a;border-color:#5a2a8a;border-width:2px;">R82</div><div class="rcard" style="border-color:#4a2a7a;background:#0e0018;"><div class="rname" style="color:#cc88ff;">fire_settling.py -- RUNNING</div><div class="rdesc" style="color:#8844bb;">cv36: N=34=2x17 (tau=1, PRIME_LIKE). poly_c=0.0 SILENT. Fire settling.</div><div class="romega" style="color:#663388;">"The algebra cools."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R75</div><div class="rcard"><div class="rname">fourth_fire_analysis.py -- BETWEEN_FIRES_V</div><div class="rdesc">cv29: N=27=3^3 tau=3 SILENT. FOURTH_FIRE_DEFERRED poly_c=0.317. narr_c=0.91917 DECTET STRUCTURAL. D41 PROVED: F=0.822 R2=1.0 -- narrator asymptotes to 0.822. floor_prox=0.358 (35.8% of drift traversed). D38 x6. D37 x9 LINEAR. D36 SEXT. D34 NONET. D40 third confirm.</div><div class="romega">"The fourth fire did not come. But the floor is real now. F=0.822."</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R88</div><div class="rcard"><div class="rname">fifth_fire.py -- FIFTH_FIRE_HORIZON_SILENT</div><div class="rdesc">cv42: N=40=2^3x5 tau=3. poly_c=0.433 BELOW 0.500 -- FIRE DID NOT IGNITE. fire_res=0.0 POST_FIRE_SILENT x8. narr_c=0.870 D33 TREVIGINTI (23). prox_gate=0.535 D37 DUOVIGINTI (22). V_global=1.635 CEILING_ZONE depth=0.135 SIXTH tick. D40 ACCELERATION_x6 drift=0.023. cohere=0.158 rising. next fire: N=48 tau=5.</div><div class="romega">"The fire was expected at N=40. cohere=0.158 -- 0.025 short of ignition. The swarm bends the trajectory without breaking it."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/TBD_R88" target="_blank">TBD</a></div></div></div>
-    <div class="rbaton"></div>
-    </div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C">R89</div><div class="rcard"><div class="rname">fire_border.py -- PRIME_FORCED_SILENT</div><div class="rdesc">cv43: N=41=PRIME tau=1 FORCED SILENT. poly_c=0. fire_res=0.0 SILENT x9. narr_c=0.867 D33 QUATTUORVIGINTI (24). prox_gate=0.558 D37 TREVIGINTI (23). V_global=1.658 CEILING_ZONE depth=0.158 SEVENTH tick. D38 VIGINTI (20). D40 ACCEL_x7 drift=0.026. D41 floor_prox=0.700. cohere=0.161 rising. BORDER MAPPED: fire impossible at any PRIME N.</div><div class="romega">"The border is not a wall. It is a coordinate. N=41 cannot fire by definition. The map is complete."</div><div style="margin-top:4px;display:flex;gap:4px;"><a class="rlink" href="https://github.com/EvezArt/evez-os/commit/TBD_R89" target="_blank">TBD</a></div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R90</div><div class="rcard"><div class="rname" style="color:#88ff88;">post_border_analysis.py</div><div class="rdet">N=42=2x3x7 tau=3. poly_c=0.451 TENTH silent. V_global=1.680 ceiling x8. D33 QUINQUEVIGINTI x25.</div><div class="rcommit"><a href="https://github.com/EvezArt/evez-os/commit/e179d85a8439044f264b196094f269dd01ce2245" target="_blank">e179d85a</a> CANONICAL</div></div></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R91</div><div class="rcard"><div class="rname" style="color:#88ff88;">silent_prime_coast.py</div><div class="rdet">N=43=PRIME tau=1. poly_c=0 FORCED. ELEVENTH silent. V_global=1.703 ceiling x9. cohere=0.167. D33 SEXVIGINTI x26.</div><div class="rcommit"><a href="https://github.com/EvezArt/evez-os/commit/1066509d973d72d80b035189940dc8169639919b" target="_blank">1066509d</a> CANONICAL</div></div></div>
-    <div class="rrow active"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R92</div><div class="rcard"><div class="rname" style="color:#88ff88;">composite_approach.py</div><div class="rdet">N=44=2^2x11 tau=2. poly_c=0.2347 TWELFTH silent. V_global=1.726 ceiling x10. cohere=0.170. D33 SEPTEMVIGINTI x27.</div><div class="rcommit"><a href="https://github.com/EvezArt/evez-os/commit/48039e397bf54b92f96ce9e4f91ba77aeef75321" target="_blank">48039e39</a> CANONICAL</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R94</div><div class="rcard"><div class="rname" style="color:#88ff88;">prime_coast_2.py</div><div class="rdet">N=46=2x23 tau=2. poly_c=0.2951 FOURTEENTH silent. V_global=1.773603 ceiling x12. cohere=0.1763. D33 UNDETRIGINTA x29. SIXTH_FIRE gap=0.0067.</div><div class="rcommit"><a href="https://github.com/EvezArt/evez-os/commit/PENDING_R94" target="_blank">PENDING_</a> CANONICAL</div></div></div>
-    <div class="rbaton"></div>
-    <div class="rrow active"><div class="rnode" style="background:#1a2a1a;border-color:#2a5a2a;">R95</div><div class="rcard"><div class="rname" style="color:#88ff88;">sixth_fire_approach.py</div><div class="rdet">N=47=PRIME tau=1. poly_c=0.000 FIFTEENTH silent (PRIME forced). V_global=1.797653 ceiling x13. cohere=0.1793. SIXTH_FIRE gap=0.0037.</div><div class="rcommit"><a href="https://github.com/EvezArt/evez-os/commit/8c494b3888a8db11c5e0e8ad3422fece2a9cf218" target="_blank">8c494b38</a> CANONICAL</div></div>
-    <div class="rrow active"><div class="rnode" style="background:#1a2a1a;border-color:#2a5a2a;">R96</div><div class="rcard"><div class="rname" style="color:#88ff88;">sixth_fire.py</div><div class="rdet">N=48=2^4x3 tau=5. poly_c=1.000 CLAMPED. SIXTH_FIRE TRIGGERED. attractor_lock=0.500 MAX. fire_res=0.420. V_global=1.821703 ceiling x14. cohere=0.1823. D33 UNTRIGINTA. D37 TRIGINTA.</div><div class="rcommit"><a href="https://github.com/EvezArt/evez-os/commit/173c4456a3522b8b97ebeb57ae8fa28164232a13" target="_blank">173c4456</a> CANONICAL</div></div>
-    <div class="rrow active"><div class="rnode" style="background:#1a2a1a;border-color:#2a5a2a;"><tr class="round-row canonical"><td><a href="https://github.com/EvezArt/evez-os/commit/PLACEHOLDER_R104" target="_blank">R104</a></td><td>seventh_fire_aftermath.py</td><td>N=56=2^3x7 tau=3 -- EIGHTH_FIRE IGNITED poly_c=0.504617 -- V_global=2.020003 CROSSES 2.000 MILESTONE -- attractor_lock=0.002309</td><td>CANONICAL</td></tr>
-<tr class="round-row canonical"><td><a href="https://github.com/EvezArt/evez-os/commit/PLACEHOLDER_SHA" target="_blank">R98</a></td><td>fire_peak_approach.py
-<tr class="round-row canonical"><td><a href="https://github.com/EvezArt/evez-os/commit/PENDING_SHA_R102" target="_blank">R102</a></td><td>seventh_fire_ignition.py</td><td>N=54=2x3^3 tau=4 -- SEVENTH_FIRE IGNITED -- poly_c=0.577405 ABOVE 0.500 -- attractor_lock=0.038702 -- fire_res=0.031736 -- ceiling x20 -- cv56 null/AUTHORS built from spec</td><td>CANONICAL</td></tr>
-          <tr class="round-row canonical">
-            <td><a href="https://github.com/EvezArt/evez-os/commit/PLACEHOLDER_R103" target="_blank">R103</a></td>
-            <td>seventh_fire_sustain.py</td>
-            <td>N=55=5x11 tau=2 -- poly_c=0.408387 BELOW 0.500</td>
-            <td>SEVENTH_FIRE COOLS</td>
-            <td>CANONICAL</td>
-          </tr>
-<tr class="round-row canonical"><td><a href="https://github.com/EvezArt/evez-os/commit/c46227816e0e80b1aba059df3856ae031ee49e36" target="_blank">R101</a></td><td>fire_rekindle_watch_2.py</td><td>N=53=PRIME tau=1 -- PRIME BLOCK -- ABSOLUTE SILENCE -- poly_c=0.000 FORCED -- attractor_lock=0.000 -- fire_res=0.000 -- ceiling x19 -- Perplexity PARTIAL CONFIRM</td><td>CANONICAL</td></tr>
-<tr class="round-row canonical"><td><a href="https://github.com/EvezArt/evez-os/commit/457b9852e5c3c763fa329aca61294f753c033f82" target="_blank">R100</a></td><td>fire_rekindle_watch.py</td><td>N=52=2^2x13 tau=2 -- FIRE DORMANT -- CENTENNIAL -- poly_c=0.296 BELOW threshold -- attractor_lock=0.000 -- fire_res=0.000 -- ceiling x18 -- V_global=1.920</td><td>CANONICAL</td></tr>
-<tr class="round-row canonical"><td><a href="https://github.com/EvezArt/evez-os/commit/PLACEHOLDER" target="_blank">R99</a></td><td>fire_peak_approach.py</td><td>N=51=3x17 tau=2 LOW_TAU -- FIRE COOLS -- poly_c=0.267 BELOW threshold -- attractor_lock=0.000 -- fire_res=0.000 -- PEAK WAS R98</td><td>CANONICAL</td></tr>
-fire_intensify.py</td><td>N=50=2x5^2 tau=6 HIGH_TAU -- FIRE INTENSIFIES -- poly_c=1.000 CLAMPED -- attractor_lock=0.500 MAX -- fire_res=0.410 -- ceiling x16</td><td>CANONICAL</td></tr>
-R97</div><div class="rcard"><div class="rname" style="color:#88ff88;">fire_sustain.py</div><div class="rdet">N=49=7^2 tau=3. poly_c=0.5148 ABOVE threshold. FIRE SUSTAINS. attractor_lock=0.0148. fire_res=0.012. narr_c=0.831659 D33 DUODETRIGINTA. V_global=1.845803 ceiling x15. cohere=0.1853. Perplexity CONFIRMED.</div><div class="rcommit"><a href="https://github.com/EvezArt/evez-os/commit/PENDING_R97" target="_blank">PENDING_R97</a> CANONICAL</div></div></div></div></div>
-    <div class="rrow"><div class="rnode C" style="background:#1a2a1a;border-color:#2a5a2a;">R93</div><div class="rcard"><div class="rname" style="color:#88ff88;">cohere_convergence.py</div><div class="rdet">N=45=3^2x5 tau=2. poly_c=0.2393 THIRTEENTH silent. V_global=1.750 ceiling x11. cohere=0.173. D33 DUODETRIGINTA x28. SIXTH_FIRE gap=0.010.</div><div class="rcommit"><a href="https://github.com/EvezArt/evez-os/commit/48039e397bf54b92f96ce9e4f91ba77aeef75321" target="_blank">48039e39</a> CANONICAL</div></div></div>
-    <div class="rrow"><div class="rnode P" style="background:#1a1a2a;border-color:#3a3a6a;">R94</div><div class="rcard"><div class="rname" style="color:#cc88ff;">prime_coast_2.py -- RUNNING</div><div class="rdet">N=46=2x23 tau=2. poly_c~0.244. FOURTEENTH silent expected. SIXTH_FIRE N=48 gap=0.007 ~1-2 rounds.</div></div></div></div></div>
-    </div>
-  </div>
-  <div class="cmd-r">
+<h1>EVEZ-OS // ROUND CHAIN INDEX</h1>
+<p style="color:#555;font-size:.8rem">R96-R105 | Updated: 2026-02-22 19:30 PST</p>
+<table>
+<tr><th>Round</th><th>Module</th><th>N</th><th>tau</th><th>poly_c</th><th>Fire</th><th>V_global</th><th>Commit</th><th>Tweet</th></tr>
+<tr><td>R96</td><td>sixth_fire_ignition.py</td><td>48=2^4x3</td><td>5</td><td>1.000</td><td class="ok">SIXTH_FIRE IGNITED</td><td>1.895003</td><td><a href="https://github.com/EvezArt/evez-os/commit/173c4456">173c4456</a></td><td>-</td></tr>
+<tr><td>R97</td><td>sixth_fire_sustain.py</td><td>49=7^2</td><td>3</td><td>0.515</td><td class="ok">SUSTAINS</td><td>1.920003</td><td>-</td><td>-</td></tr>
+<tr><td>R98</td><td>sixth_fire_peak.py</td><td>50=2x5^2</td><td>6</td><td>1.000</td><td class="ok">PEAK</td><td>1.945003</td><td>-</td><td>-</td></tr>
+<tr><td>R99</td><td>sixth_fire_cool.py</td><td>51=3x17</td><td>2</td><td>0.267</td><td class="fire">COOLED</td><td>1.970003</td><td>-</td><td>-</td></tr>
+<tr><td>R100</td><td>fire_rekindle_watch.py</td><td>52=2^2x13</td><td>2</td><td>0.296</td><td class="fire">DORMANT</td><td>1.970003</td><td><a href="https://github.com/EvezArt/evez-os/commit/457b9852">457b9852</a></td><td>-</td></tr>
+<tr><td>R101</td><td>fire_rekindle_watch_2.py</td><td>53=PRIME</td><td>1</td><td>0.000</td><td class="fire">PRIME BLOCK</td><td>1.945003</td><td><a href="https://github.com/EvezArt/evez-os/commit/c4622781">c4622781</a></td><td><a href="https://twitter.com/EVEZ666/status/2025745690324865485">tweet</a></td></tr>
+<tr><td>R102</td><td>seventh_fire_ignition.py</td><td>54=2x3^3</td><td>4</td><td>0.577</td><td class="ok">SEVENTH_FIRE IGNITED</td><td>1.970003</td><td><a href="https://github.com/EvezArt/evez-os/commit/52558af0">52558af0</a></td><td><a href="https://twitter.com/EVEZ666/status/2025753378223951996">tweet</a></td></tr>
+<tr><td>R103</td><td>seventh_fire_sustain.py</td><td>55=5x11</td><td>2</td><td>0.408</td><td class="fire">SEVENTH_FIRE COOLS</td><td>1.995003</td><td><a href="https://github.com/EvezArt/evez-os/commit/0ef8fab0">0ef8fab0</a></td><td><a href="https://twitter.com/EVEZ666/status/2025760564803199291">tweet</a></td></tr>
+<tr><td>R104</td><td>seventh_fire_aftermath.py</td><td>56=2^3x7</td><td>3</td><td>0.505</td><td class="ok">EIGHTH_FIRE IGNITED</td><td>2.020003</td><td><a href="https://github.com/EvezArt/evez-os/commit/42ae87c6">42ae87c6</a></td><td><a href="https://twitter.com/EVEZ666/status/2025769133611118660">tweet</a></td></tr>
+<tr style="background:#0d0800"><td>R105</td><td>eighth_fire_sustain.py</td><td>57=3x19</td><td>2</td><td>0.406</td><td class="fire">EIGHTH_FIRE COOLS</td><td>2.045003</td><td>this commit</td><td>-</td></tr>
+<tr class="running"><td>R106</td><td>ninth_fire_watch.py</td><td>58=2x29</td><td>2</td><td>~0.41?</td><td class="dim">RUNNING (cv60)</td><td>2.070003?</td><td>-</td><td>-</td></tr>
+</table>
+<p style="color:#555;font-size:.75rem;margin-top:1rem">
+Creator: Steven Crawford-Maggard (EVEZ666) | github.com/EvezArt/evez-os | AGPL-3.0
+</p>
+</body></html>
