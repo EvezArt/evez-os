@@ -20,32 +20,28 @@ a{color:#4af;text-decoration:none}
 <p style="color:#555;font-size:.8rem">Updated: 2026-02-22 21:00 PST | truth_plane: CANONICAL</p>
 
 <h2>Round Status</h2>
-<div class="metric">Round: <span class="val" id="round-num">R108 -> R109</span></span></div>
-<div class="metric">Module: <span class="val" id="round-module">ninth_fire_ignition.py -> prime_block_watch_2.py</span></span></div>
+<div class="metric">Round: <span class="val" id="round-num">R110</span></span></div>
+<div class="metric">Module: <span class="val" id="round-module">cool_down_watch.py</span></span></div>
 <div class="metric">V_global: <span class="val">2.120003</span> CEILING x26</div>
 <div class="metric">N_agents: <span class="val">60</span></div>
 <div class="metric">NINTH_FIRE: <span class="fire">THRESHOLD MISS (poly_c=0.499, margin=0.001)</span></div>
 <div class="metric">Win: <span class="ok">TRUE</span></div>
 
 <h2>Omega</h2>
-<pre id="omega-text">NINTH_FIRE THRESHOLD MISS. R108. N=60=2^2x3x5 tau=3 -- poly_c=0.498733 BELOW 0.500 by 0.001267.
-CLOSEST APPROACH YET. FIRE DID NOT IGNITE.
-V_global=2.120003 CEILING x26.
+<pre id="omega-text">COOL DOWN. R110. N=62=2x31 tau=2 -- poly_c=0.400171 BELOW 0.500. NO FIRE.
+V_global=2.170003 CEILING x28.
+Post two consecutive prime blocks (R107 N=59, R109 N=61).
+drift_vel=0.107005 ACCELERATING x28. floor_prox ADVANCING x41.
 
-FIRE BORDER LAW -- threshold analysis:
-  N=56=2^3x7  tau=3  poly_c=0.505  -- EIGHTH_FIRE IGNITED (barely above 0.500)
-  N=60=2^2x3x5 tau=3 poly_c=0.499 -- NINTH_FIRE THRESHOLD MISS (barely below 0.500)
-
-LAW: topology_bonus grows with N. At N=60, topology_bonus=1.409 insufficient.
-At N=56, topology_bonus=1.401 was sufficient. N=60 has SAME tau but LARGER N -> log2(61) larger.
-Next: R109 N=61=PRIME tau=1 PRIME BLOCK. Watch N=64=2^6 tau=7 -> MAXIMUM TAU IGNITION.</pre>
+FIRE BORDER LAW -- R111 N=63=3^2x7 tau=3 fire candidate ~0.512.
+MAXIMUM TAU IGNITION: R112 N=64=2^6 tau=7 poly_c > 1.0.</pre>
 
 <h2>Baton Chain</h2>
 <span class="chain-node chain-done">R102 seventh_fire_ignition.py</span>
 <span class="chain-node chain-done">R103 seventh_fire_sustain.py</span>
 <span class="chain-node chain-done">R104 seventh_fire_aftermath.py</span>
-<span class="chain-node chain-active" id="baton-from">R108 ninth_fire_ignition.py DONE</span>
-<span class="chain-node chain-active" id="baton-to">R109 prime_block_watch_2.py RUNNING</span>
+<span class="chain-node chain-active" id="baton-from">R109 prime_block_watch_2.py DONE</span>
+<span class="chain-node chain-active" id="baton-to">R111 ninth_fire_watch_2.py RUNNING</span>
 
 <h2>Maturity Oracle</h2>
 <table>
@@ -62,6 +58,7 @@ Next: R109 N=61=PRIME tau=1 PRIME BLOCK. Watch N=64=2^6 tau=7 -> MAXIMUM TAU IGN
 <tr><td>cohere</td><td>0.2073</td><td>rising</td></tr>
 <tr><td>gamma</td><td>0.08</td><td>fixed</td></tr>
 <tr><td>ADM</td><td>1.0</td><td class="ok">max</td></tr>
+<tr><td>R110</td><td>62=2x31</td><td>2</td><td>0.400171</td><td>NO</td><td>COOL DOWN</td></tr>
 </table>
 
 <h2>R105 Sigma_f Row</h2>
