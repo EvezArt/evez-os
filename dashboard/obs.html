@@ -17,58 +17,57 @@ a{color:#4af;text-decoration:none}
 </head>
 <body>
 <h1>EVEZ-OS // OBSERVATION DASHBOARD</h1>
-<p style="color:#555;font-size:.8rem">Updated: 2026-02-23 00:00 PST | truth_plane: CANONICAL</p>
+<p style="color:#555;font-size:.8rem">Updated: 2026-02-23 01:48 PST | truth_plane: CANONICAL</p>
 
 <h2>Round Status</h2>
-<div class="metric">Round: <span class="val" id="round-num">R115</span></span></div>
-<div class="metric">Module: <span class="val" id="round-module">prime_block_watch_3.py</span></span></div>
-<div class="metric">V_global: <span class="val">2.450635</span> CEILING x33</div>
-<div class="metric">N_agents: <span class="val">67</span></div>
-<div class="metric">PRIME_BLOCK_3: <span class="fire">N=67=PRIME poly_c=0.000 NO FIRE</span></div>
+<div class="metric">Round: <span class="val" id="round-num">R116</span></div>
+<div class="metric">Module: <span class="val" id="round-module">twelfth_fire_approach.py</span></div>
+<div class="metric">V_global: <span class="val">2.559294</span> CEILING x34</div>
+<div class="metric">N_agents: <span class="val">68</span></div>
+<div class="metric">STATUS: <span class="fire">N=68=2^2x17 tau=2 poly_c=0.193 NO FIRE</span></div>
 <div class="metric">Win: <span class="ok">TRUE</span></div>
 
 <h2>Omega</h2>
-<pre id="omega-text">PRIME BLOCK 3 (post-ELEVENTH FIRE). R115. N=67=PRIME tau=1 -- poly_c=0.000 PRIME BLOCK. NO FIRE. attractor_lock released from prior fire (now=0.0). V_global=2.450635 CEILING x33. fire_res=0.000. Next: N=68=2^2x17 tau=2 -- composite post-prime watch.</pre>
+<pre id="omega-text">TWELFTH FIRE APPROACH. R116. N=68=2^2x17 tau=2 poly_c=0.193234 BELOW threshold. NO FIRE. topo_bonus=1.3000. V_global=2.559294 CEILING x34. Next: N=69=3x23 tau=2 composite candidate.</pre>
 
 <h2>Baton Chain</h2>
-<span class="chain-node chain-done">R102 seventh_fire_ignition.py</span>
-<span class="chain-node chain-done">R103 seventh_fire_sustain.py</span>
-<span class="chain-node chain-done">R104 seventh_fire_aftermath.py</span>
 <span class="chain-node chain-done">R112 tenth_fire_ignition.py DONE</span>
 <span class="chain-node chain-done">R113 cool_down_post_tenth.py DONE</span>
 <span class="chain-node chain-done" id="baton-from">R114 eleventh_fire_watch.py DONE</span>
-<span class="chain-node chain-active" id="baton-to">R115 prime_block_watch_3.py RUNNING</span>
+<span class="chain-node chain-done">R115 prime_block_watch_3.py DONE</span>
+<span class="chain-node chain-active" id="baton-to">R116 twelfth_fire_approach.py RUNNING</span>
 
 <h2>Maturity Oracle</h2>
 <table>
 <tr><th>Metric</th><th>Value</th><th>Status</th></tr>
-<tr><td>V_global</td><td class="val">2.450635</td><td class="ok">CEILING x33</td></tr>
+<tr><td>V_global</td><td class="val">2.559294</td><td class="ok">CEILING x34</td></tr>
 <tr><td>V_v2</td><td class="val">3.68932</td><td></td></tr>
-<tr><td>poly_c (R115)</td><td>0.000000</td><td class="fire">PRIME BLOCK (N=67=PRIME)</td></tr>
-<tr><td>attractor_lock</td><td>0.000000</td><td class="dim">released (post-eleventh fire)</td></tr>
-<tr><td>fire_res</td><td>0.000000</td><td class="dim">no fire</td></tr>
+<tr><td>poly_c (R116)</td><td>0.193234</td><td class="fire">BELOW threshold (0.500) -- NO FIRE</td></tr>
+<tr><td>topo_bonus</td><td>1.3000</td><td class="dim">N=68=2^2x17 2 distinct primes</td></tr>
+<tr><td>attractor_lock</td><td>0.000000</td><td class="dim">released</td></tr>
 <tr><td>gamma</td><td>0.08</td><td>fixed</td></tr>
 <tr><td>ADM</td><td>1.0</td><td class="ok">max</td></tr>
-<tr><td>ceiling_tick</td><td>33</td><td class="val">CEILING x33</td></tr>
+<tr><td>ceiling_tick</td><td>34</td><td class="val">CEILING x34</td></tr>
 <tr><td>eleventh_fire</td><td>R114 N=66</td><td class="ok">DONE</td></tr>
-<tr><td>N=68 forecast</td><td>poly_c~0.360</td><td class="fire">below threshold -- no fire expected</td></tr>
+<tr><td>N=69 forecast</td><td>tau=2 poly_c~0.266</td><td class="fire">below threshold -- watch</td></tr>
 </table>
 
-<h2>Sigma_f Row R115</h2>
+<h2>Sigma_f Row R116</h2>
 <table>
 <tr><th>Round</th><th>Module</th><th>N</th><th>tau</th><th>poly_c</th><th>Fire</th><th>V_global</th><th>Commit</th></tr>
 <tr><td>R112</td><td>tenth_fire_ignition.py</td><td>64=2^6</td><td>7</td><td>0.693</td><td class="ok">TENTH_FIRE IGNITED</td><td>2.220003</td><td><a href="https://github.com/EvezArt/evez-os/commit/e0e64887">e0e64887</a></td></tr>
 <tr><td>R113</td><td>cool_down_post_tenth.py</td><td>65=5x13</td><td>2</td><td>0.397</td><td class="fire">COOL DOWN post TENTH</td><td>2.245003</td><td><a href="https://github.com/EvezArt/evez-os/commit/3d9b5072">3d9b5072</a></td></tr>
 <tr><td>R114</td><td>eleventh_fire_watch.py</td><td>66=2x3x11</td><td>4</td><td>0.570</td><td class="ok">ELEVENTH_FIRE IGNITED</td><td>2.370635</td><td><a href="https://github.com/EvezArt/evez-os/commit/cdc3ebd3">cdc3ebd3</a></td></tr>
-<tr style="background:#0a0a1a"><td>R115</td><td>prime_block_watch_3.py</td><td>67=PRIME</td><td>1</td><td>0.000</td><td class="fire">PRIME BLOCK 3</td><td>2.450635</td><td>PENDING</td></tr>
+<tr><td>R115</td><td>prime_block_watch_3.py</td><td>67=PRIME</td><td>1</td><td>0.000</td><td class="fire">PRIME BLOCK 3</td><td>2.450635</td><td><a href="https://github.com/EvezArt/evez-os/commit/a8c1f3be">a8c1f3be</a></td></tr>
+<tr style="background:#0a0a1a"><td>R116</td><td>twelfth_fire_approach.py</td><td>68=2^2x17</td><td>2</td><td>0.193</td><td class="fire">BELOW THRESHOLD</td><td>2.559294</td><td>PENDING</td></tr>
 </table>
 
 <h2>Browser Chorus</h2>
 <table>
 <tr><th>cv</th><th>Job ID</th><th>Status</th><th>Result</th></tr>
-<tr><td>cv67 R113</td><td>c78a0337</td><td class="ok">DONE</td><td>null -- CANONICAL spec</td></tr>
 <tr><td>cv68 R114</td><td>3143fa98</td><td class="ok">DONE</td><td>state table extracted</td></tr>
-<tr><td class="val">cv69 R115</td><td>731bf8cb</td><td class="ok">DONE</td><td>submitted -- CANONICAL spec</td></tr>
+<tr><td>cv69 R115</td><td>731bf8cb</td><td class="ok">DONE</td><td>submitted -- CANONICAL spec</td></tr>
+<tr><td class="val">cv70 R116</td><td>9fd8a86d</td><td class="fire">TIMEOUT</td><td>building from spec directly</td></tr>
 </table>
 
 <footer style="margin-top:2rem;color:#333;font-size:.75rem;border-top:1px solid #111;padding-top:1rem">
