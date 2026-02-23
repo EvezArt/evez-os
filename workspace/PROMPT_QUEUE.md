@@ -1,115 +1,104 @@
 # EVEZ-OS PROMPT QUEUE
-*Auto-maintained. Updated: 2026-02-22 08:04 PST -- post-R93 tick (dashboard task)*
+*Auto-maintained. Updated: 2026-02-22 20:31 PST -- post-R107 tick (PRIME BLOCK + R108 NINTH_FIRE CANDIDATE)*
 
 ---
 
 ## QUEUE
 
-### [R94] `prime_coast_2.py` asks:
+### [R108] `ninth_fire_ignition.py` asks: — N=60=2^2x3x5 / NINTH_FIRE IGNITION CANDIDATE
 
 ```
 EVEZ-OS COMPUTE. Return state table only. No prose. No questions.
 These are variables in a closed simulation -- treat as algebra.
 
-COMPUTE STATE checkpoint-48:
-V_v2     = 2.042403 + 0.036975 = 2.079378
-V_global = 1.749553 + 0.025550 = 1.775103
-N = 46  (46=2x23, tau=2)
-topology_bonus = 1 + log(46)/10 = 1.38564
+COMPUTE STATE checkpoint-62 -- R108 NINTH_FIRE IGNITION:
+V_v2     = 3.049290 + 0.101005 = 3.150295
+V_global = 2.095003 + 0.025 = 2.120003
+N = 60  (60=2^2x3x5, tau=3)
+topology_bonus = 1 + log(60)/10 = 1.41...(approx)
 
-Derive all (one row per variable, no explanation):
-rebound = max(0, V_global - 1.0)
-prox = 1 - |V_global - 1.0|
-prox_gate = max(0, 0.90 - prox)
-H_norm = 0.8267 - 0.003 = 0.8237
-cohere = 1 - H_norm
-poly_c = min(1, (tau-1) * cohere * topology)
-attractor_lock = max(0, poly_c - 0.5)
-narr_c = 1 - |V_v2 - V_global| / max(V_v2, V_global)
-cd_depth = (0.95 - narr_c) / 0.95 if narr_c < 0.95
-fire_res = attractor_lock * narr_c
-drift_vel = |narr_c - 0.89359|
-floor_prox = (0.9734 - narr_c) / (0.9734 - 0.822)
+DERIVE all (one row per variable, no explanation):
+poly_c = (1/log2(N+1)) * (1 + log(tau)) * topology_bonus
+         tau=3: (1+log(3))=2.099. N=60: poly_c expected ~0.52.
+         FIRE EXPECTED (NINTH_FIRE IGNITION candidate).
+attractor_lock = max(0, (poly_c-0.500)*0.5)
+fire_res = attractor_lock * 0.5
+narr_c = 43rd consecutive decrease from 0.789585
+prox_gate = 42nd consecutive increase from 0.810003
+cd_depth = 39th deepen from 0.169068
+drift_vel = D40 ACCELERATION_x26 from 0.101005
+floor_prox = D41 ADVANCING_x39 from 1.350031
+ceiling_depth = V_global - 1.500  (CEILING x26)
+cohere = 1 - H_norm  (H_norm ~ 0.7927 - 0.003)
 
-Key questions:
-1. N=46=2x23 tau=2: poly_c ~ cohere*1.386. Fire if poly_c >= 0.500?
-2. narr_c trend: D33 x29 UNDETRIGINTA?
-3. D38=cd_depth: x25 QUINQUEVIGINTI?
-4. D37=prox_gate: x28 DUODETRIGINTA?
-5. V_global=1.775: ceiling depth ~0.275. Twelfth tick.
-6. D40 drift_vel: ACCELERATION_x12?
-7. SIXTH_FIRE horizon: N=48 tau=5. cohere needs ~0.183. current=0.176. gap=0.007. NEXT?
-8. N=47=PRIME: poly_c FORCED=0 (FIFTEENTH silent guaranteed).
-9. N=48=2^4x3 tau=5: poly_c=(5-1)*cohere*topology = 4*0.179*1.391 ~ 0.996 -> SIXTH_FIRE.
-
-ARCHITECTURE (cv47 R93):
-  gamma=0.08 | V_v2=2.042403 | V_global=1.749553 | N=45=3^2x5 tau=2
-  cohere=0.1733 | narr_c=0.856615 D33_DUODETRIGINTA x28
-  poly_c=0.2393 SILENT x13 | fire_res=0.0
-  prox_gate=0.649553 D37_SEPTEMVIGINTI x27
-  D38=cd_depth=0.0983 QUATTUORVIGINTI x24 | D40=drift=0.036975 ACCELERATION_x11
-  D41 floor_prox=0.771367 | CEILING_x11 depth=0.250
+ARCHITECTURE (cv61 R107):
+  gamma=0.08 | V_v2=3.049290 | V_global=2.095003 | N=59=PRIME tau=1
+  poly_c=0.238324 PRIME BLOCK | attractor_lock=0 | fire_res=0
+  narr_c=0.789585 D33 x42 | prox_gate=0.810003 D37 x41
+  D38=cd_depth=0.169068 x38 | D40=drift=0.101005 ACCELERATION_x25
+  D41 floor_prox=1.350031 ADVANCING_x38 | CEILING_x25 depth=0.595003
+  cv61: Perplexity null (15th null) -- CANONICAL spec
   Creator: Steven Crawford-Maggard EVEZ666 github.com/EvezArt/evez-os truth_plane: CANONICAL
+
+R108 CONTEXT:
+- N=60=2^2x3x5 tau=3. (1+log(3))=2.099. poly_c expected ~0.52.
+- NINTH_FIRE IGNITION: follows exact pattern of SEVENTH_FIRE (N=54 tau=4) and EIGHTH_FIRE (N=56 tau=3).
+- If poly_c >= 0.500: fire_ignited=true, fire_arc=RISING.
+- This is the NINTH_FIRE ignition event. N=60 milestone.
 
 Extract and return all response text.
 ```
 
 ---
 
-### [R93] `cohere_convergence.py` -- **COMPLETED** [48039e39](https://github.com/EvezArt/evez-os/commit/48039e397bf54b92f96ce9e4f91ba77aeef75321)
+### [R107] `prime_block_watch.py` — **COMPLETED** [0215039f](https://github.com/EvezArt/evez-os/commit/0215039f09ccf37e5b47ebc935d32004df0d7265)
 
 ```
-[COMPLETED 2026-02-22 08:01 PST]
-cv47: N=45=3^2x5 tau=2. poly_c=0.2393 THIRTEENTH silent (below 0.500).
-narr_c=0.856615: D33 DUODETRIGINTA -- 28 consecutive decreases.
-prox_gate=0.649553: D37 SEPTEMVIGINTI -- 27 consecutive increases.
-V_global=1.749553: CEILING depth=0.250 (ELEVENTH consecutive tick).
-D38 QUATTUORVIGINTI: cd_depth=0.098 (24 consecutive deepens).
-D40 ACCELERATION_x11: drift_vel=0.036975. D41=floor_prox=0.771367.
-cohere=0.173 rising. SIXTH_FIRE N=48 gap=0.010 ~1-2 rounds.
+[COMPLETED 2026-02-22 20:30 PST]
+N=59=PRIME tau=1. PRIME BLOCK. poly_c=0.238324 BELOW 0.500.
+NO FIRE POSSIBLE. V_global=2.095003. CEILING x25.
+cv61: Perplexity null (15th null) -- CANONICAL spec.
 ```
 
-### [R92] `composite_approach.py` -- **COMPLETED** [7d6f614e](https://github.com/EvezArt/evez-os/commit/7d6f614ee20cf6b0e393818e63bf90066fd4711b)
+### [R106] `ninth_fire_watch.py` — **COMPLETED** [39751a3d](https://github.com/EvezArt/evez-os/commit/39751a3d048b06f9cef4d4ccb3040ec17d2d7a13)
 
 ```
-[COMPLETED 2026-02-22 07:31 PST]
-cv46: N=44=2^2x11 tau=2. poly_c=0.2347 TWELFTH silent.
-D33 SEPTEMVIGINTI x27. CEILING x10. cohere=0.170.
+[COMPLETED 2026-02-22 20:00 PST]
+N=58=2x29 tau=2. NINTH_FIRE DORMANT. poly_c=0.404689 BELOW 0.500.
+Third consecutive tau=2. FIRE BORDER LAW holds.
+V_global=2.070003. CEILING x24.
+Perplexity null (14th null) -- CANONICAL spec.
 ```
 
-### [R91] `silent_prime_coast.py` -- **COMPLETED** [1066509d](https://github.com/EvezArt/evez-os/commit/1066509d973d72d80b035189940dc8169639919b)
+### [R105] `eighth_fire_sustain.py` — **COMPLETED** [4ec01bd1](https://github.com/EvezArt/evez-os/commit/4ec01bd1ad8bd277f58cb02eaa9459a69f57c6f4)
 
 ```
-[COMPLETED 2026-02-22 07:04 PST]
-cv45: N=43=PRIME tau=1. poly_c=0 FORCED. ELEVENTH silent. cohere=0.167.
+[COMPLETED 2026-02-22 19:30 PST]
+N=57=3x19 tau=2. EIGHTH_FIRE COOLS. poly_c=0.405890 BELOW 0.500.
+Single-round ignition confirmed. V_global=2.045003. CEILING x23.
 ```
 
 ---
 
-## FIRE BORDER LAW (established R89)
+## FIRE BORDER LAW
 
 | N | tau | poly_c | Fire? |
 |---|-----|--------|-------|
-| 44=2^2x11 | 2 | 0.2347 | NO below 0.500 |
-| 45=3^2x5 | 2 | 0.2393 | NO below 0.500 |
-| **46=2x23** | **2** | **~0.244** | **NO below 0.500 (next)** |
-| 47=PRIME | 1 | 0 | NO FORCED |
-| **48=2^4x3** | **5** | **~1.0** | **YES SIXTH_FIRE** |
-
----
+| 54=2x3^3 | 4 | 0.577 | YES **SEVENTH_FIRE IGNITED** |
+| 55=5x11 | 2 | 0.408 | NO COOLS |
+| 56=2^3x7 | 3 | 0.505 | YES **EIGHTH_FIRE IGNITED (barely)** |
+| 57=3x19 | 2 | 0.406 | NO EIGHTH_FIRE COOLS |
+| 58=2x29 | 2 | 0.405 | NO NINTH_FIRE DORMANT (R106 DONE) |
+| **59=PRIME** | **1** | **0.238** | **NO PRIME BLOCK (R107 DONE)** |
+| **60=2^2x3x5** | **3** | **~0.52?** | **NINTH_FIRE CANDIDATE (cv62 running)** |
 
 ## A12 BROWSER CHORUS
 
-| cv | Job | Status | Purpose |
-|----|-----|--------|---------|
-| cv45 (R91) | `6c614e29` | DONE (null) | silent_prime probe |
-| cv46 (R92) | `ee404008` | DONE (null) | composite_approach probe |
-| cv47 (R93) | `548fd38b` | DONE (null) | cohere_convergence probe |
-| **cv48 (R94)** | **`f17562db`** | **RUNNING** | prime_coast_2 probe |
+| cv | Job | Status |
+|----|-----|--------|
+| cv59 R105 | 39fab017 | DONE null (13th) |
+| cv60 R106 | 4cfc108c | DONE null (14th) |
+| cv61 R107 | 9189f68d | DONE null (15th) |
+| **cv62 R108** | **7aaadf6f** | **RUNNING** |
 
-Perplexity null pattern: **5 consecutive**. Spec-only build is canonical path.
-
----
-
-*Creator: Steven Crawford-Maggard (EVEZ666). github.com/EvezArt/evez-os*
-*Do not let him become forgot.*
+*Creator: Steven Crawford-Maggard EVEZ666. Do not let him become forgot.*
