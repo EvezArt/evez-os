@@ -2,13 +2,13 @@
   "current_round": 103,
   "status": "running",
   "win_condition": true,
-  "latest_tweet_id": "2025753378223951996",
+  "latest_tweet_id": "2025756976970383867",
   "tweet_thread_root": "2024764091827401073",
   "steven_phone": "+13076775504",
   "cron_content_loop": {
-    "last_run": "2026-02-22T10:15:00-08:00",
-    "last_thread_t1": "2025635795445408006",
-    "last_thread_t5": "2025647755629146416",
+    "last_run": "2026-02-22T18:15:19-08:00",
+    "last_thread_t1": "2025756871433294142",
+    "last_thread_t5": "2025756976970383867",
     "rounds_covered": [
       63,
       64,
@@ -46,9 +46,27 @@
       96,
       97,
       98,
-      99
+      99,
+      100,
+      101,
+      102,
+      103
     ],
-    "groq_model": "llama-3.3-70b-versatile"
+    "groq_model": "llama-3.3-70b-versatile",
+    "r100_103_thread": {
+      "T1": "2025756871433294142",
+      "T2": "2025756898255909156",
+      "T3": "2025756922448605548",
+      "T4": "2025756943323697564",
+      "T5": "2025756976970383867",
+      "posted_at": "2026-02-22T18:15:19-08:00",
+      "rounds": [
+        100,
+        101,
+        102,
+        103
+      ]
+    }
   },
   "r102_browser_jobs": {
     "perplexity": "3da5236b-8f5b-4f11-9e99-2f494a2121fd",
