@@ -1,2 +1,2 @@
-{"ts":"2026-02-24T04:15:00+00:00","round":155,"health":"GREEN","spawn":"PASS","capability":"PASS","validator":"PASS","milestone":"V_global crossed 5.000","V_global":5.009506}
-{"ts":"2026-02-24T04:31:00+00:00","round":156,"health":"GREEN","spawn":"PASS","capability":"PASS","validator":"PASS","milestone":"FIRE#20 N=108=2^2x3^3","V_global":5.062951}
+{"ts":"2026-02-24T05:04:00+00:00","round":156,"health":"NOOP","reason":"current_round=156 unchanged since last bus run","spawn":"SKIP","capability":"SKIP","validator":"SKIP"}
+{"ts":"2026-02-24T05:07:00+00:00","round":157,"health":"NOOP","reason":"dashboard+state updated inline, no bus run needed","spawn":"SKIP","capability":"SKIP","validator":"SKIP"}
