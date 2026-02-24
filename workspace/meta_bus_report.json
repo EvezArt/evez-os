@@ -5,7 +5,12 @@
     "capability_bus": "PASS",
     "validator_bus": "PASS"
   },
-  "summary": "R160 tick. GREEN.",
-  "last_run": "2026-02-24T06:31:47.258516+00:00",
-  "last_round": 160
+  "red_flags": [],
+  "new_unblocks": [],
+  "summary": "R163 tick. GREEN. V=5.335868 F=23",
+  "milestone": "R163 NO FIRE. N=115=5x23 poly_c=0.451531.",
+  "next_fire": "R164 est \u2014 N=116=2\u00b2\u00d729 borderline NO FIRE poly_c~0.494",
+  "v_progress": "5.335868 / 6.000 = 88.93%",
+  "last_run": "2026-02-24T07:33:59.491147+00:00",
+  "last_round": 163
 }

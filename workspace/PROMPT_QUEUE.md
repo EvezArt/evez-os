@@ -1,11 +1,49 @@
 # EVEZ-OS PROMPT QUEUE
-**Updated:** 2026-02-23T23:08 PST
+**Updated:** 2026-02-23T23:31:00-08:00
 
 ---
 
 ## QUEUE
 
-### [R163] watch_composite_115.py asks: NO FIRE est
+### [R164] watch_composite_116.py — borderline NO FIRE est
+```
+EVEZ-OS COMPUTE. Return state table only. No prose.
+R164 checkpoint-164.
+N=116=2^2x29 tau=6 omega_k=2.
+V_global_prev=5.335868 CEILINGx81.
+gamma=0.08 ADM=1.0.
+After R163 N=115=5x23 poly_c=0.451531 NO FIRE delta_V=0.036122 V=5.335868.
+
+Compute:
+topo = 1.0 + 0.15*omega_k
+poly_c = topo*(1+ln(tau))/log2(N+2)
+fire = poly_c >= 0.500
+delta_V = 0.08*poly_c
+V_global_new = V_global_prev + delta_V
+ceiling_tick = 164 - 82
+
+Return only this table:
+| field | value |
+|-------|-------|
+| N | 116 |
+| N_factored | 2^2x29 |
+| tau | 6 |
+| omega_k | 2 |
+| topo_bonus | 1.30 |
+| poly_c | [calc] |
+| fire_ignited | YES/NO |
+| fire_number | [if fire] |
+| delta_V | [calc] |
+| V_global_new | [calc] |
+| ceiling_tick | 82 |
+| truth_plane | CANONICAL |
+```
+**Probe:** 233692de-2a22-4151-8986-8ea5bb335e08 (IN-FLIGHT 2026-02-23T23:31:00-08:00)
+**Est:** poly_c~0.494 borderline NO FIRE
+
+---
+
+### [R163] ✅ COMPLETED — watch_composite_115.py — NO FIRE — commit 2ec1bac4
 ```
 EVEZ-OS COMPUTE. Return state table only. No prose.
 R163 checkpoint-163.
