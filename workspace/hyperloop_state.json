@@ -2,10 +2,10 @@
   "current_round": 170,
   "V_global": 5.618629,
   "ceiling_tick": 88,
-  "latest_tweet_id": "2026209998330589422",
+  "latest_tweet_id": "2026240140356587816",
   "fire_count": 26,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-24T02:06:23-08:00",
+  "updated_at": "2026-02-24T02:15:00-08:00",
   "watchlist": {
     "R171_est": "N=123=3x41 tau=4 omega_k=2 topo=1.30 poly_c~0.445 \u2014 NO FIRE est",
     "R172_est": "N=124=2^2x31 tau=6 omega_k=2 topo=1.30 poly_c~0.520 \u2014 WATCH",
@@ -21,15 +21,27 @@
     "delta_V": 0.035687, "V_global_prev": 5.582942, "V_global_new": 5.618629,
     "ceiling_tick": 88, "truth_plane": "CANONICAL",
     "probe_id": "64c57f06-b0b9-4cfa-ab66-05b8cc685705",
-    "probe_match": true, "probe_delta": 0.000000,
-    "module": "watch_composite_122.py"
+    "probe_match": true, "probe_delta": 0.0,
+    "module": "watch_composite_122.py",
+    "commit_sha": "67578a8a91eaacfe4a93c346181f955ebdc6fb3b",
+    "agent_branch_sha": "0587839d2fba683f378614508d7cc620d54a68cd",
+    "content_tweet_id": "2026240140356587816"
   },
   "r170_browser_jobs": {"perplexity": {"job_id": "64c57f06-b0b9-4cfa-ab66-05b8cc685705", "status": "completed"}},
-  "r171_browser_jobs": {"perplexity": {"job_id": "pending", "status": "in-flight"}},
+  "r171_browser_jobs": {"perplexity": {"job_id": "d0df92b7-634f-46f9-9a2b-bb9bf8e204f0", "status": "in-flight", "launched_at": "2026-02-24T02:06:23-08:00"}},
+  "video_render_status": {
+    "last_render_round": 170,
+    "tweet_id": "2026240140356587816",
+    "size_mb": 0.196,
+    "arc": "R157-R170",
+    "rendered_at": "2026-02-24T02:15:00-08:00"
+  },
   "cron_content_loop": {
-    "last_run": "2026-02-24T02:06:23-08:00",
-    "arc_posted": "R149-R166",
-    "next_content": "R167-R170 arc \u2014 R168 FIRE#26 centerpiece ready"
+    "last_run": "2026-02-24T02:15:00-08:00",
+    "rounds_covered": [118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170],
+    "last_thread_tweet_id": "2026240140356587816",
+    "arc_posted": "R157-R170",
+    "next_content": "R171+ arc \u2014 R172 WATCH / R174 FIRE est"
   },
   "maturity": {
     "K": 170, "S": 170, "F": 26,
@@ -50,6 +62,6 @@
     "v_milestone": "V=5.618629 \u2014 93.64% of ceiling",
     "r170_note": "NO FIRE poly_c=0.446088 V=5.618629",
     "ci_flag": "evez-os spine CI failure \u2014 needs fix",
-    "r171_probe": "pending launch"
+    "r171_probe": "d0df92b7 in-flight"
   }
 }
