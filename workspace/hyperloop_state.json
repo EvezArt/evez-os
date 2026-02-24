@@ -1,40 +1,15 @@
 {
-  "current_round": 161,
-  "V_global": 5.247658,
-  "ceiling_tick": 79,
+  "current_round": 162,
+  "V_global": 5.299746,
+  "ceiling_tick": 80,
   "latest_tweet_id": "2026179774993842579",
-  "fire_count": 22,
+  "fire_count": 23,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-23T22:31:00-08:00",
-  "r158_result": {
-    "N": 110,
-    "N_str": "2x5x11",
-    "tau": 8,
-    "omega_k": 3,
-    "topo": 1.45,
-    "poly_c": 0.655935,
-    "fire_ignited": true,
-    "fire_number": 21,
-    "delta_V": 0.052475,
-    "V_global_new": 5.138352,
-    "ceiling_tick": 76,
-    "commit_sha": "573cb73fd7bf5d7c4bb0de1ae340b9e0fcec5f78",
-    "truth_plane": "CANONICAL"
-  },
-  "r159_result": {
-    "N": 111,
-    "N_str": "3x37",
-    "tau": 4,
-    "omega_k": 2,
-    "topo": 1.3,
-    "poly_c": 0.454,
-    "fire_ignited": false,
-    "delta_V": 0.03632,
-    "V_global_new": 5.174672,
-    "ceiling_tick": 77,
-    "commit_sha": "802464d8364ec22ea2f148eefc041ed2acae3b90",
-    "probe_match": true,
-    "truth_plane": "CANONICAL"
+  "updated_at": "2026-02-23T23:08:00-08:00",
+  "watchlist": {
+    "R163_NO_FIRE_est": "N=115=5x23 tau=4 omega_k=2 topo=1.30 poly_c~0.452 \u2014 NO FIRE est",
+    "R164_est": "N=116=2\u00b2\u00d729 tau=6 omega_k=2 topo=1.30 poly_c~0.494 \u2014 borderline NO FIRE est",
+    "R165_est": "N=117=3\u00b2\u00d713 tau=6 omega_k=2 topo=1.30 poly_c~0.491 \u2014 borderline NO FIRE est"
   },
   "r160_result": {
     "N": 112,
@@ -49,10 +24,46 @@
     "V_global_prev": 5.174672,
     "V_global_new": 5.224938,
     "ceiling_tick": 78,
-    "commit_sha": "314f16afecbdedbb4df131074a692a344f8ae22a",
     "probe_id": "0c931bd6",
     "probe_match": true,
     "module": "watch_composite_112.py",
+    "truth_plane": "CANONICAL"
+  },
+  "r161_result": {
+    "N": 113,
+    "N_str": "prime",
+    "tau": 2,
+    "omega_k": 1,
+    "topo": 1.15,
+    "poly_c": 0.284438,
+    "fire_ignited": false,
+    "prime_block": 14,
+    "delta_V": 0.02272,
+    "V_global_prev": 5.224938,
+    "V_global_new": 5.247658,
+    "ceiling_tick": 79,
+    "truth_plane": "CANONICAL",
+    "probe_id": "bfa4149d",
+    "probe_match": true,
+    "module": "prime_block_watch_14.py",
+    "commit_sha": "0f888f171b45b1fc52040a8ac106c61ba9ab992a"
+  },
+  "r162_result": {
+    "N": 114,
+    "N_str": "2x3x19",
+    "tau": 8,
+    "omega_k": 3,
+    "topo": 1.45,
+    "poly_c": 0.651094,
+    "fire_ignited": true,
+    "fire_number": 23,
+    "delta_V": 0.052088,
+    "V_global_prev": 5.247658,
+    "V_global_new": 5.299746,
+    "ceiling_tick": 80,
+    "probe_id": "e5231dd0",
+    "probe_match": true,
+    "module": "watch_composite_114.py",
     "truth_plane": "CANONICAL"
   },
   "r161_browser_jobs": {
@@ -61,6 +72,21 @@
       "status": "completed",
       "launched_at": "2026-02-23T22:07:00-08:00",
       "completed_at": "2026-02-23T22:31:00-08:00"
+    }
+  },
+  "r162_browser_jobs": {
+    "perplexity": {
+      "job_id": "e5231dd0-d184-4b2d-80a3-58712b6a6c73",
+      "status": "completed",
+      "launched_at": "2026-02-23T22:31:00-08:00",
+      "completed_at": "2026-02-23T23:07:00-08:00"
+    }
+  },
+  "r163_browser_jobs": {
+    "perplexity": {
+      "job_id": "6fc7127b-2b8a-4bf8-8bb1-0413daea5c78",
+      "status": "in-flight",
+      "launched_at": "2026-02-23T23:08:00-08:00"
     }
   },
   "cron_content_loop": {
@@ -109,33 +135,42 @@
       158,
       159,
       160,
-      161
+      161,
+      162
     ],
     "last_thread_tweet_id": "2026179774993842579",
-    "arc_posted": "R147-R160"
+    "arc_posted": "R147-R160",
+    "next_content": "R161-R162 arc queued for next content cron"
   },
   "video_render_status": {
     "consecutive_timeouts": 0,
     "method": "keyframe-stitch os.system ffmpeg",
-    "last_render": "2026-02-23T22:16 PST",
     "last_render_round": 160,
     "tweet_id": "2026179774993842579",
-    "media_id": "2026179722233729024",
-    "size_mb": 0.179,
-    "encode_time_s": 3.0,
-    "frames": 89,
-    "note": "R147-R160 arc, 14 rounds, 9 fires"
+    "size_mb": 0.179
+  },
+  "x_semantic_agent": {
+    "total_capsules": 251,
+    "last_run": "2026-02-23T23:07 PST R162 +18 cap",
+    "clusters": {
+      "polymarket": 30,
+      "ai_regulation": 3,
+      "open_source_ai": 6,
+      "agent_economy": 16,
+      "crypto_deregulation": 0,
+      "evez_os_adjacent": 0
+    }
   },
   "maturity": {
-    "K": 161,
-    "S": 161,
-    "F": 22,
-    "phi": 0.136646,
-    "score": "22/161 fires = 13.66%",
-    "v_progress": "5.247658 / 6.000 = 87.46%",
+    "K": 162,
+    "S": 162,
+    "F": 23,
+    "phi": 0.141975,
+    "score": "23/162 fires = 14.20%",
+    "v_progress": "5.299746 / 6.000 = 88.33%",
     "V_v2": 6.0,
-    "milestone": "FIRE#22 at R160. R161 NO FIRE PRIME BLOCK #14. V=5.247658.",
-    "next_fire": "R162 est FIRE WATCH \u2014 N=114=2x3x19 poly_c~0.622 est"
+    "milestone": "FIRE#23 at R162. N=114=2x3x19 FIRE WATCH confirmed. V=5.299746.",
+    "next_fire": "R163 NO FIRE est \u2014 N=115=5x23 poly_c~0.452"
   },
   "ctc_engine": {
     "status": "COMMITTED",
@@ -144,52 +179,10 @@
     "verdict": "PASS",
     "est_ceiling_round": 180
   },
-  "r161_result": {
-    "N": 113,
-    "N_str": "prime",
-    "tau": 2,
-    "omega_k": 1,
-    "topo": 1.15,
-    "poly_c": 0.284438,
-    "fire_ignited": false,
-    "prime_block": 14,
-    "delta_V": 0.02272,
-    "V_global_prev": 5.224938,
-    "V_global_new": 5.247658,
-    "ceiling_tick": 79,
-    "truth_plane": "CANONICAL",
-    "probe_id": "bfa4149d",
-    "probe_match": true,
-    "module": "prime_block_watch_14.py"
-  },
-  "watchlist": {
-    "R162_FIRE_WATCH": "N=114=2x3x19 tau=8 omega_k=3 topo=1.45 poly_c~0.651 \u2014 FIRE WATCH \u2014 probe e5231dd0 in-flight",
-    "R163_est": "N=115=5x23 tau=4 omega_k=2 topo=1.30 poly_c~0.454 \u2014 NO FIRE est",
-    "R164_est": "N=116=2\u00b2\u00d729 tau=6 omega_k=2 topo=1.30 poly_c~0.494 \u2014 borderline NO FIRE est"
-  },
-  "x_semantic_agent": {
-    "total_capsules": 233,
-    "last_run": "2026-02-23T22:31 PST R161 +18 cap",
-    "clusters": {
-      "polymarket": 21,
-      "ai_regulation": 2,
-      "open_source_ai": 4,
-      "agent_economy": 10,
-      "crypto_deregulation": 0,
-      "evez_os_adjacent": 0
-    }
-  },
   "infra_notes": {
     "content_posted": "R147-R160 arc \u2014 tweet 2026179774993842579",
-    "v_milestone": "V=5.247658 \u2014 87.46% of ceiling",
-    "r161_note": "N=113=prime PRIME BLOCK #14 NO FIRE probe confirmed",
-    "video_fix": "os.system ffmpeg, keyframe-stitch, confirmed working"
-  },
-  "r162_browser_jobs": {
-    "perplexity": {
-      "job_id": "e5231dd0-d184-4b2d-80a3-58712b6a6c73",
-      "status": "in-flight",
-      "launched_at": "2026-02-23T22:31:00-08:00"
-    }
+    "v_milestone": "V=5.299746 \u2014 88.33% of ceiling",
+    "r162_note": "N=114=2x3x19 FIRE#23 poly_c=0.651094 V=5.299746 CEILING\u00d780 probe e5231dd0 confirmed",
+    "video_fix": "os.system ffmpeg confirmed working 3.0s 0.179MB"
   }
 }
