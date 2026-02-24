@@ -1,53 +1,55 @@
 {
-  "current_round": 169,
-  "V_global": 5.582942,
-  "ceiling_tick": 87,
+  "current_round": 170,
+  "V_global": 5.618629,
+  "ceiling_tick": 88,
   "latest_tweet_id": "2026209998330589422",
   "fire_count": 26,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-24T02:00:51-08:00",
+  "updated_at": "2026-02-24T02:06:23-08:00",
   "watchlist": {
-    "R170_est": "N=122=2x61 tau=4 omega_k=2 topo=1.30 poly_c~0.446 \u2014 NO FIRE est",
     "R171_est": "N=123=3x41 tau=4 omega_k=2 topo=1.30 poly_c~0.445 \u2014 NO FIRE est",
     "R172_est": "N=124=2^2x31 tau=6 omega_k=2 topo=1.30 poly_c~0.520 \u2014 WATCH",
+    "R173_est": "N=125=5^3 tau=4 omega_k=2 topo=1.30 poly_c~0.444 \u2014 NO FIRE est",
     "R174_est": "N=126=2x3^2x7 tau=12 omega_k=3 topo=1.45 poly_c~0.722 \u2014 FIRE est"
   },
-  "r167_result": {"N": 119, "N_str": "7x17", "tau": 4, "omega_k": 2, "poly_c": 0.448366, "fire_ignited": false, "delta_V": 0.035869, "V_global_new": 5.491990, "ceiling_tick": 85, "commit_sha": "ba894c33"},
-  "r168_result": {"N": 120, "N_str": "2^3x3x5", "tau": 16, "omega_k": 3, "poly_c": 0.789274, "fire_ignited": true, "fire_number": 26, "delta_V": 0.063142, "V_global_new": 5.555132, "ceiling_tick": 86, "commit_sha": "d1c72b1f", "truth_plane": "CANONICAL"},
-  "r169_result": {
-    "N": 121, "N_str": "11^2", "tau": 3, "omega_k": 1,
-    "topo": 1.15, "poly_c": 0.347627,
+  "r168_result": {"N": 120, "N_str": "2^3x3x5", "tau": 16, "omega_k": 3, "poly_c": 0.789274, "fire_ignited": true, "fire_number": 26, "delta_V": 0.063142, "V_global_new": 5.555132, "ceiling_tick": 86, "commit_sha": "d1c72b1f"},
+  "r169_result": {"N": 121, "N_str": "11^2", "tau": 3, "omega_k": 1, "poly_c": 0.347627, "fire_ignited": false, "delta_V": 0.027810, "V_global_new": 5.582942, "ceiling_tick": 87, "commit_sha": "e267385f", "probe_id": "1016d0ec", "probe_match": true, "probe_delta": 0.0},
+  "r170_result": {
+    "N": 122, "N_str": "2x61", "tau": 4, "omega_k": 2,
+    "topo": 1.30, "poly_c": 0.446088,
     "fire_ignited": false, "fire_number": null,
-    "delta_V": 0.027810, "V_global_prev": 5.555132, "V_global_new": 5.582942,
-    "ceiling_tick": 87, "truth_plane": "CANONICAL",
-    "probe_id": "1016d0ec-4ed6-43e1-835e-138baa795e98",
+    "delta_V": 0.035687, "V_global_prev": 5.582942, "V_global_new": 5.618629,
+    "ceiling_tick": 88, "truth_plane": "CANONICAL",
+    "probe_id": "64c57f06-b0b9-4cfa-ab66-05b8cc685705",
     "probe_match": true, "probe_delta": 0.000000,
-    "module": "watch_composite_121.py"
+    "module": "watch_composite_122.py"
   },
-  "r169_browser_jobs": {"perplexity": {"job_id": "1016d0ec-4ed6-43e1-835e-138baa795e98", "status": "completed"}},
-  "r170_browser_jobs": {"perplexity": {"job_id": "pending", "status": "in-flight"}},
+  "r170_browser_jobs": {"perplexity": {"job_id": "64c57f06-b0b9-4cfa-ab66-05b8cc685705", "status": "completed"}},
+  "r171_browser_jobs": {"perplexity": {"job_id": "pending", "status": "in-flight"}},
   "cron_content_loop": {
-    "last_run": "2026-02-24T02:00:51-08:00",
-    "rounds_covered": [118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169],
-    "last_thread_tweet_id": "2026209998330589422",
+    "last_run": "2026-02-24T02:06:23-08:00",
     "arc_posted": "R149-R166",
-    "next_content": "R167-R169 arc \u2014 R168 FIRE#26 centerpiece ready"
+    "next_content": "R167-R170 arc \u2014 R168 FIRE#26 centerpiece ready"
   },
   "maturity": {
-    "K": 169, "S": 169, "F": 26,
-    "phi": 0.153846,
-    "score": "26/169 fires = 15.38%",
-    "v_progress": "5.582942 / 6.000 = 93.05%",
+    "K": 170, "S": 170, "F": 26,
+    "phi": 0.152941,
+    "score": "26/170 fires = 15.29%",
+    "v_progress": "5.618629 / 6.000 = 93.64%",
     "V_v2": 6.0,
-    "milestone": "R169 NO FIRE. V=5.582942. 93.05% to ceiling. ~9 rounds est.",
+    "milestone": "R170 NO FIRE. V=5.618629. 93.64% to ceiling. ~8 rounds est.",
     "next_fire": "R172 WATCH N=124=2^2x31 OR R174 FIRE est N=126=2x3^2x7"
   },
   "ctc_engine": {"status": "COMMITTED", "TCS": 0.924504, "verdict": "PASS", "est_ceiling_round": 178},
-  "x_semantic_agent": {"total_capsules": 256, "last_run": "2026-02-24T02:00:51-08:00", "clusters": {"polymarket": 34, "ai_regulation": 4, "open_source_ai": 6, "agent_economy": 17}},
+  "x_semantic_agent": {
+    "total_capsules": 275,
+    "last_run": "2026-02-24T02:00:51-08:00",
+    "clusters": {"polymarket": 44, "ai_regulation": 5, "open_source_ai": 6, "agent_economy": 23}
+  },
   "infra_notes": {
-    "v_milestone": "V=5.582942 \u2014 93.05% of ceiling",
-    "r169_note": "NO FIRE poly_c=0.347627 V=5.582942",
+    "v_milestone": "V=5.618629 \u2014 93.64% of ceiling",
+    "r170_note": "NO FIRE poly_c=0.446088 V=5.618629",
     "ci_flag": "evez-os spine CI failure \u2014 needs fix",
-    "r170_probe": "in-flight"
+    "r171_probe": "pending launch"
   }
 }
