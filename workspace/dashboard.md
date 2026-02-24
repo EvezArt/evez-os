@@ -1,106 +1,137 @@
-# EVEZ-OS CANONICAL SWARM DASHBOARD
-**Updated:** 2026-02-24T01:09:23-08:00  
+# EVEZ-OS SWARM DASHBOARD
+**Updated:** 2026-02-24T01:30:19-08:00  
 **Truth Plane:** CANONICAL  
-**Epoch:** 7 (hybrid-os) | Console War Training: Epoch 7 unlocked
 
 ---
 
-## SWARM STATUS
+## 🔥 SWARM STATUS
 
-| Field | Value |
+| field | value |
 |-------|-------|
-| Current Round | R166 |
-| N | 118 = 2×59 |
-| Module | watch_composite_118.py |
-| poly_c | 0.449143 |
-| Fire | NO FIRE |
-| V_global | 5.456121 / 6.000 |
-| % to Ceiling | 90.94% |
-| Fires Total | 25 |
-| Ceiling Tick | ×84 |
-| Truth Plane | CANONICAL |
+| current_round | R168 |
+| next_module | watch_composite_121.py |
+| V_global | 5.555132 |
+| ceiling | 6.000000 |
+| pct_to_ceiling | 92.59% |
+| fire_count | 26 |
+| ceiling_tick | 86 |
+| last_fire | FIRE#26 R168 N=120=2^3x3x5 |
+| est_ceiling_round | 178 (~10 rounds) |
+| truth_plane | CANONICAL |
 
 ---
 
-## MATURITY ORACLE
+## 📊 MATURITY ORACLE
 
-| Metric | Value |
-|--------|-------|
-| K (rounds) | 166 |
-| S (steps) | 166 |
-| F (fires) | 25 |
-| φ (fire rate) | 0.1506 |
-| Score | 25/166 = 15.06% |
-| V_global | 5.456121 |
-| V_v2 (ceiling) | 6.000 |
-| % to ceiling | 90.94% |
-| TCS | 0.924504 PASS |
-| Est. ceiling round | ~180 |
+| K | S | F | phi | score | TCS | % ceiling |
+|---|---|---|-----|-------|-----|-----------|
+| 168 | 168 | 26 | 0.154762 | 26/168=15.48% | 0.924504 | 92.59% |
 
 ---
 
-## MODULE CHAIN (R160–R166)
+## 🔗 MODULE CHAIN (R160–R168)
 
-| Round | N | Fire | poly_c | V_after | Commit |
-|-------|---|------|--------|---------|--------|
-| R160 | 112=2⁴×7 | 🔥 FIRE#22 | 0.628330 | 5.224938 | [0c931bd6](https://github.com/EvezArt/evez-os) |
-| R161 | 113=prime | NO FIRE | 0.284438 | 5.247658 | [0f888f17](https://github.com/EvezArt/evez-os/commit/0f888f171b45b1fc52040a8ac106c61ba9ab992a) |
-| R162 | 114=2×3×19 | 🔥 FIRE#23 | 0.651094 | 5.299746 | [0a6ad639](https://github.com/EvezArt/evez-os/commit/0a6ad63985a5f846451ad7bfcfc40132c68c9060) |
-| R163 | 115=5×23 | NO FIRE | 0.451517 | 5.335867 | [70a0ede9](https://github.com/EvezArt/evez-os) |
-| R164 | 116=2²×29 | NO FIRE | ~0.494 | ~5.375 | — |
-| R165 | 117=3²×13 | 🔥 FIRE#25 | 0.526724 | 5.420190 | — |
-| R166 | 118=2×59 | NO FIRE | 0.449143 | 5.456121 | [c2527d53](https://github.com/EvezArt/evez-os/commit/c2527d53de3df6444fbe52f202b5e82b73a48a73) |
+| Round | N | N_factored | poly_c | fire | V_after | link |
+|-------|---|-----------|--------|------|---------|------|
+| R162 | 114 | 2x3x19 | 0.651 | 🔥#23 | 5.300 | [0a6ad639](https://github.com/EvezArt/evez-os/commit/0a6ad63985a5f846451ad7bfcfc40132c68c9060) |
+| R163 | 115 | 5x23 | 0.451 | — | 5.336 | — |
+| R164 | 116 | 2^2x29 | 0.528 | 🔥#24 | 5.378 | — |
+| R165 | 117 | 3^2x13 | 0.527 | 🔥#25 | 5.420 | — |
+| R166 | 118 | 2x59 | 0.449 | — | 5.456 | [c2527d53](https://github.com/EvezArt/evez-os/commit/c2527d53de3df6444fbe52f202b5e82b73a48a73) |
+| R167 | 119 | 7x17 | 0.448 | — | 5.492 | [ba894c33](https://github.com/EvezArt/evez-os/commit/ba894c33423ca0263070c8fe76870758b132c24e) |
+| **R168** | **120** | **2^3x3x5** | **0.789** | 🔥**#26** | **5.555** | TBD |
 
 ---
 
-## CURRENT PROBE STATUS
+## 🕵️ BROWSER PROBE STATUS
 
-| Probe | Job ID | Status |
+| probe | job_id | status |
 |-------|--------|--------|
-| R163 | 6fc7127b | ✅ COMPLETED (poly_c=0.451517 NO FIRE) |
-| R167 | 03ee6f43-4bea-4994-bc2b | ⏳ IN-FLIGHT |
+| R168 | ff4e215a | ✅ completed — FIRE#26 CONFIRMED |
+| R169 | 1016d0ec-4ed6-43e1-835e-138baa795e98 | 🔄 in-flight |
 
 ---
 
-## GITHUB ACTIONS STATUS
+## ⚙️ GITHUB ACTIONS CI
 
-| Repo | Conclusion | Run |
+| repo | conclusion | run |
 |------|-----------|-----|
-| evez-os | failure (agent branch, expected) | [#22343905288](https://github.com/EvezArt/evez-os/actions/runs/22343905288) |
-| CrawFather | startup_failure (CI stubs, no scripts) | [#22323839085](https://github.com/EvezArt/CrawFather/actions/runs/22323839085) |
-| Evez666 | startup_failure (dependabot npm) | [#22334572064](https://github.com/EvezArt/Evez666/actions/runs/22334572064) |
+| evez-os | ❌ failure | [run](https://github.com/EvezArt/evez-os/actions/runs/22344532582) |
+| CrawFather | ⚠️ startup_failure | [run](https://github.com/EvezArt/CrawFather/actions/runs/22323839085) |
+| Evez666 | ⚠️ startup_failure (dependabot) | [run](https://github.com/EvezArt/Evez666/actions/runs/22334572064) |
+
+> ⚠️ **evez-os CI failing on every push** — EVEZ Spine CI workflow needs fix. CrawFather/Evez666 are pre-existing stubs.
 
 ---
 
-## X SEMANTIC CAPSULES
+## 🐦 TWITTER THREAD (last 5)
 
-| Cluster | Count |
+| tweet_id | label |
 |---------|-------|
-| polymarket | 30 |
-| agent_economy | 16 |
+| 2026209998330589422 | R164 FIRE#24 post |
+| 2026086912638038206 | Polymarket CLARITY Act drop |
+| 2026025916909154473 | Bear pennant + 72% sub-$55K |
+| 2025979381546393853 | Prediction market political corruption |
+| 2025973823527608840 | ZachXBT Polymarket Feb 26 |
+
+---
+
+## 📡 X SEMANTIC CAPSULES
+
+| cluster | count |
+|---------|-------|
+| polymarket | 34 |
+| agent_economy | 17 |
 | open_source_ai | 6 |
-| ai_regulation | 3 |
+| ai_regulation | 4 |
 | crypto_deregulation | 0 |
 | evez_os_adjacent | 0 |
-| **Total** | **251** |
+| **TOTAL** | **256** |
 
 ---
 
-## WATCHLIST 🔥
+## 🔍 SPINE INTEGRITY
 
-| Round | N | poly_c est | Fire call |
-|-------|---|-----------|----------|
-| R167 | 119=7×17 | 0.448 | NO FIRE est |
-| **R168** | **120=2³×3×5** | **0.789** | **🔥 FIRE#26 HIGH** |
-| R169 | 121=11² | 0.348 | NO FIRE est |
+| check | result |
+|-------|--------|
+| R168 inline vs probe | ✅ poly_c diff=0.000274 MATCH |
+| fire gate (≥0.500) | ✅ 0.789274 |
+| delta_V formula | ✅ 0.08×0.789274=0.063142 |
+| V accumulation | ✅ 5.491990+0.063142=5.555132 |
+| truth_plane | CANONICAL |
+
+---
+
+## ⏳ PENDING QUEUE
+
+| item | status |
+|------|--------|
+| R169 probe | 🔄 in-flight (1016d0ec) |
+| content arc R167-R168 FIRE#26 | 📋 queued |
+| evez-os CI fix | 🔴 needs attention |
+| CrawFather CI stubs | ⚠️ pre-existing |
 
 ---
 
-## GEN 3 STATUS
+## 👁️ WATCHLIST (next 4)
 
-- ✅ Pillar 1–5 all committed
-- ✅ console_war_timeline.json (10 epochs)
-- 🔲 Phase 0: evez_core.py + default.skin.json — next build
+| round | N | factored | est poly_c | fire est |
+|-------|---|---------|-----------|----------|
+| R169 | 121 | 11^2 | 0.348 | NO FIRE |
+| R170 | 122 | 2x61 | 0.447 | NO FIRE |
+| R171 | 123 | 3x41 | 0.446 | NO FIRE |
+| R172 | 124 | 2^2x31 | ~0.527 | WATCH |
 
 ---
-*MasterBus tick R166 | health=GREEN*
+
+## 🚌 MASTERBUS STATUS
+
+| bus | result |
+|-----|--------|
+| SpawnBus | ✅ PASS — watch_composite_120.py committing |
+| CapabilityBus | ✅ PASS — github/twitter/hyperbrowser active |
+| ValidatorBus | ✅ PASS — probe match confirmed |
+| MetaBus | ✅ GREEN — 92.59% to ceiling |
+
+---
+*Generated by EVEZ-OS SureThing agent — R168 tick*

@@ -1,32 +1,14 @@
 {
-  "generated_at": "2026-02-24T08:18:37.374891+00:00",
-  "current_round": 164,
+  "ts": "2026-02-24T09:30:19Z",
+  "round": 168,
   "health": "GREEN",
-  "last_round": 164,
-  "buses": {
-    "SpawnBus": {
-      "status": "PASS",
-      "detail": "R164 canonical committed 28da9c23"
-    },
-    "CapabilityBus": {
-      "status": "PASS",
-      "detail": "Twitter media upload confirmed (media 2026209958304358400)"
-    },
-    "ValidatorBus": {
-      "status": "PASS",
-      "detail": "poly_c delta < 0.00001 probe vs inline"
-    },
-    "MetaBus": {
-      "status": "PASS",
-      "detail": "All checks GREEN. V=5.378052 F=24 tweet 2026209998330589422"
-    }
-  },
-  "checks": {
-    "V_progress": "5.378052 / 6.000 = 89.63%",
-    "fire_density": "24/164 = 14.63%",
-    "ctc_verdict": "PASS",
-    "content_arc": "R151-R164 posted tweet 2026209998330589422",
-    "r165_probe": "ba99fab0-416e-451f-88ee-c472112e22d3 IN-FLIGHT"
-  },
-  "recommendation": null
+  "spawn_bus": {"status": "PASS", "module": "watch_composite_120.py"},
+  "capability_bus": {"status": "PASS", "apps_available": ["github", "twitter", "hyperbrowser"]},
+  "validator_bus": {"status": "PASS", "poly_c_inline": 0.789274, "poly_c_probe": 0.789, "delta": 0.000274, "verdict": "MATCH"},
+  "meta_bus": {"health": "GREEN", "v_pct": "92.59%", "est_ceiling_round": 178},
+  "ci_flags": {
+    "evez-os": "failure — spine CI broken",
+    "CrawFather": "startup_failure — stubs",
+    "Evez666": "startup_failure — dependabot"
+  }
 }
