@@ -2,10 +2,19 @@
   "overall_health": "GREEN",
   "buses": {
     "spawn_bus": "PASS",
-    "capability_bus": "PASS",
+    "capability_bus": "WARN",
     "validator_bus": "PASS"
   },
-  "summary": "R170 tick. GREEN.",
-  "last_run": "2026-02-24T10:31:02.584112+00:00",
-  "last_round": 170
+  "red_flags": [
+    "CI WARN: evez-os spine CI failure \u2014 needs fix"
+  ],
+  "new_unblocks": [],
+  "summary": "R171 tick. GREEN. V=5.654257 F=26",
+  "milestone": "FIRE #26 \u2014 N=120=2^3x3x5 at R168. Last: R171 NO FIRE poly_c=0.445346. V=5.654257",
+  "next_fire": "R172 WATCH N=124=2^2x31 OR R174 FIRE est N=126=2x3^2x7",
+  "v_progress": "5.654257 / 6.000 = 94.24%",
+  "ctc": {"status": "COMMITTED", "TCS": 0.924504, "verdict": "PASS", "est_ceiling_round": 178},
+  "ci_flag": "evez-os spine CI failure \u2014 needs fix",
+  "last_run": "2026-02-24T11:35:43+00:00",
+  "last_round": 171
 }

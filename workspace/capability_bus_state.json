@@ -1,6 +1,13 @@
 {
-  "health": "PASS",
-  "note": "twitter/github/hyperbrowser ACTIVE (last tick)",
-  "last_run": "2026-02-24T10:31:02.584112+00:00",
-  "last_round": 170
+  "health": "WARN",
+  "note": "twitter/github/x_semantic ACTIVE. CI: evez-os spine CI failure \u2014 needs fix",
+  "checks": {
+    "twitter": "ACTIVE",
+    "github": "ACTIVE",
+    "x_semantic_agent": "ACTIVE",
+    "evez_os_ci": "WARN: evez-os spine CI failure \u2014 needs fix"
+  },
+  "ci_flag": "evez-os spine CI failure \u2014 needs fix",
+  "last_run": "2026-02-24T11:35:43+00:00",
+  "last_round": 171
 }
