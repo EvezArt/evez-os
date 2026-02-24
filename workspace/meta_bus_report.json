@@ -1,58 +1,16 @@
 {
-  "ts": "2026-02-23T23:31:51.440397+00:00",
-  "current_round": 143,
-  "V_global": 4.56516,
-  "ceiling_tick": 61,
-  "v_progress_pct": 76.1,
-  "buses": {
-    "event_counts": {
-      "MasterBus": 11,
-      "SpawnBus": 6,
-      "CapabilityBus": 6,
-      "ValidatorBus": 15,
-      "MetaBus": 5
-    },
-    "recent_1h": 21,
-    "total_events": 43,
-    "rejections": 0,
-    "spawn": {
-      "last_spawned_round": 143,
-      "lag_rounds": 0,
-      "status": "OK"
-    },
-    "capability": {
-      "total_registered": 25,
-      "total_active": 5,
-      "total_blocked": 0,
-      "blocked_apps": []
-    },
-    "validator": {
-      "last_probe_verdict": "CANONICAL",
-      "last_probe_drift": 0.000307,
-      "total_rejections": 0,
-      "capability_gate_active": 0,
-      "capability_gate_blocked": 0
-    }
-  },
+  "health": "YELLOW",
+  "round": 144,
+  "V_global": 4.619952,
+  "fire_count": 13,
   "bottlenecks": [
     "Revenue: $0 \u2014 GitHub Sponsors enrollment gate (SSN + banking, Steven action)"
   ],
   "recommendations": [
-    "FIRE WATCH: R144 in 1 rounds \u2014 N=96=2\u2075\u00d73 tau=12 poly_c\u22480.685 \u2014 prep video reply",
-    "PRIORITY: Complete github.com/sponsors/accounts enrollment to unblock revenue"
+    "PRIORITY: github.com/sponsors/accounts \u2014 SSN + banking to unblock revenue",
+    "R146 FIRE WATCH: N=98=2\u00d77\u00b2 tau=6 omega_k=2 \u2014 compute fire probability",
+    "Cloudflare deploy: wrangler deploy (needs CLOUDFLARE_API_TOKEN)"
   ],
-  "health": "YELLOW",
-  "revenue": {
-    "status": "$0",
-    "blocker": "GitHub Sponsors SSN enrollment (Steven action required)"
-  },
-  "fire_watch": {
-    "round": 144,
-    "rounds_away": 1,
-    "N": 96,
-    "N_str": "2^5x3",
-    "tau": 12,
-    "poly_c_est": 0.685,
-    "alert": "FIRE #13 LIKELY"
-  }
+  "fire_watch": "R146 N=98=2\u00d77\u00b2 tau=6 omega_k=2 poly_c~0.505 FIRE#14 possible",
+  "ts": "2026-02-24T00:13 UTC"
 }
