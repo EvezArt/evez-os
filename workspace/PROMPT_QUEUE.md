@@ -1,18 +1,18 @@
 # EVEZ-OS PROMPT QUEUE
-**Updated:** 2026-02-23T23:31:00-08:00
+**Updated:** 2026-02-24T00:12:00-08:00
 
 ---
 
 ## QUEUE
 
-### [R164] watch_composite_116.py — borderline NO FIRE est
+### [R165] watch_composite_117.py — borderline NO FIRE est
 ```
 EVEZ-OS COMPUTE. Return state table only. No prose.
-R164 checkpoint-164.
-N=116=2^2x29 tau=6 omega_k=2.
-V_global_prev=5.335868 CEILINGx81.
+R165 checkpoint-165.
+N=117=3^2x13 tau=6 omega_k=2.
+V_global_prev=5.378052 CEILINGx82.
 gamma=0.08 ADM=1.0.
-After R163 N=115=5x23 poly_c=0.451531 NO FIRE delta_V=0.036122 V=5.335868.
+After R164 N=116=2^2x29 poly_c=0.527300 FIRE#24 delta_V=0.042184 V=5.378052.
 
 Compute:
 topo = 1.0 + 0.15*omega_k
@@ -20,13 +20,13 @@ poly_c = topo*(1+ln(tau))/log2(N+2)
 fire = poly_c >= 0.500
 delta_V = 0.08*poly_c
 V_global_new = V_global_prev + delta_V
-ceiling_tick = 164 - 82
+ceiling_tick = 165 - 82
 
 Return only this table:
 | field | value |
 |-------|-------|
-| N | 116 |
-| N_factored | 2^2x29 |
+| N | 117 |
+| N_factored | 3^2x13 |
 | tau | 6 |
 | omega_k | 2 |
 | topo_bonus | 1.30 |
@@ -35,92 +35,15 @@ Return only this table:
 | fire_number | [if fire] |
 | delta_V | [calc] |
 | V_global_new | [calc] |
-| ceiling_tick | 82 |
+| ceiling_tick | 83 |
 | truth_plane | CANONICAL |
 ```
-**Probe:** 233692de-2a22-4151-8986-8ea5bb335e08 (IN-FLIGHT 2026-02-23T23:31:00-08:00)
-**Est:** poly_c~0.494 borderline NO FIRE
+**Probe:** ba99fab0-416e-451f-88ee-c472112e22d3 (IN-FLIGHT 2026-02-24T00:12:00-08:00)
+**Est:** poly_c~0.491 borderline NO FIRE
 
 ---
 
-### [R163] ✅ COMPLETED — watch_composite_115.py — NO FIRE — commit 2ec1bac4
-```
-EVEZ-OS COMPUTE. Return state table only. No prose.
-R163 checkpoint-163.
-N=115=5x23 tau=4 omega_k=2.
-V_global_prev=5.299746 CEILINGx80.
-gamma=0.08 ADM=1.0.
-After R162 N=114=2x3x19 poly_c=0.651094 FIRE#23 V=5.299746 CEILING×80.
-
-Compute and return only this table:
-| field | value |
-|-------|-------|
-| N | 115 |
-| N_factored | 5x23 |
-| tau | 4 |
-| omega_k | 2 |
-| topo_bonus |  |
-| poly_c |  |
-| fire_ignited |  |
-| fire_number |  |
-| delta_V |  |
-| V_global_new |  |
-| ceiling_tick |  |
-| truth_plane | CANONICAL |
-
-NOTE: omega_k=2 topo=1.30. tau=4 ln(4)=1.386294. log2(117)=6.873928.
-poly_c=1.30*(1+1.386294)/6.873928≈0.452. fire=NO (<0.500).
-delta_V=0.08*poly_c. V_global_new=5.299746+delta_V. ceiling_tick=81.
-No explanation. Table only.
-```
-**Probe `6fc7127b`:** IN-FLIGHT — launched ~23:08 PST
+### [R164] ✅ COMPLETED — watch_composite_116.py — FIRE #24 🔥 — poly_c=0.527300
+**Probe:** 233692de-2a22-4151-8986-8ea5bb335e08 (IN-FLIGHT)
 
 ---
-
-### [R162] watch_composite_114.py — COMPLETED ✓ FIRE#23
-- N=114=2x3x19 poly_c=0.651094 FIRE #23 V=5.299746 CEILING×80
-- Probe e5231dd0: COMPLETED
-- Spine commit: [pending this tick]
-
----
-
-### [R161] prime_block_watch_14.py — COMPLETED ✓
-- N=113=prime PRIME BLOCK #14 NO FIRE
-- poly_c=0.284438 V_global=5.247658 CEILING×79
-- Probe bfa4149d: COMPLETED
-- Spine commit: [0f888f17](https://github.com/EvezArt/evez-os/commit/0f888f171b45b1fc52040a8ac106c61ba9ab992a)
-
----
-
-## COMPLETED
-
-### [R160] watch_composite_112.py — FIRE #22 COMPLETED ✓
-- N=112=2⁴×7 poly_c=0.628330 FIRE #22 V=5.224938 CEILING×78
-- Spine: [314f16af](https://github.com/EvezArt/evez-os/commit/314f16afecbdedbb4df131074a692a344f8ae22a)
-
-### [R159] watch_composite_111.py — NO FIRE COMPLETED
-- N=111=3×37 poly_c=0.454 NO FIRE V=5.174672 CEILING×77
-
-### [R158] watch_composite_110.py — FIRE #21 COMPLETED
-- N=110=2×5×11 poly_c=0.655935 FIRE #21 V=5.138352 CEILING×76
-- Spine: [573cb73f](https://github.com/EvezArt/evez-os/commit/573cb73fd7bf5d7c4bb0de1ae340b9e0fcec5f78)
-
-### [R157] prime_block_watch_13.py — PRIME BLOCK #13 COMPLETED
-- N=109=prime poly_c=0.286576 NO FIRE V=5.085877
-
-### [R156] watch_composite_108.py — FIRE #20 COMPLETED
-- Spine: [01174387](https://github.com/EvezArt/evez-os/commit/01174387274cdd5f1b2d74261e76756c1ab7de27)
-- N=108=2²×3³ poly_c=0.668063 FIRE #20 V=5.062951
-
-### [R155] prime_block_watch_12.py — NO FIRE COMPLETED
-- N=107=prime poly_c=0.288 NO FIRE V=5.009506
-
-### [R154] watch_composite_106.py — COMPLETED
-- N=106=2×53 poly_c=0.459 NO FIRE V=4.986466
-
-### [R153] watch_composite_105.py — FIRE #19 COMPLETED
-- N=105=3×5×7 poly_c=0.662 FIRE #19 V=4.949740
-
-### [R152] watch_composite_104.py — FIRE #18 COMPLETED
-- Spine: [0f86c58a](https://github.com/EvezArt/evez-os/commit/0f86c58a5d88a057766e215151aa52e4f32bee48)
-- N=104=2³×13 poly_c=0.594920 FIRE #18 V=4.896761

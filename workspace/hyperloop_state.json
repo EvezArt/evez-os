@@ -1,15 +1,15 @@
 {
-  "current_round": 163,
-  "V_global": 5.335868,
-  "ceiling_tick": 81,
+  "current_round": 164,
+  "V_global": 5.378052,
+  "ceiling_tick": 82,
   "latest_tweet_id": "2026194703079682302",
-  "fire_count": 23,
+  "fire_count": 24,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-23T23:31:00-08:00",
+  "updated_at": "2026-02-24T00:12:00-08:00",
   "watchlist": {
-    "R164_est": "N=116=2\u00b2\u00d729 tau=6 omega_k=2 topo=1.30 poly_c~0.494 \u2014 borderline NO FIRE est",
     "R165_est": "N=117=3\u00b2\u00d713 tau=6 omega_k=2 topo=1.30 poly_c~0.491 \u2014 borderline NO FIRE est",
-    "R166_est": "N=118=2\u00d759 tau=4 omega_k=2 topo=1.30 poly_c~0.448 \u2014 NO FIRE est"
+    "R166_est": "N=118=2\u00d759 tau=4 omega_k=2 topo=1.30 poly_c~0.448 \u2014 NO FIRE est",
+    "R167_est": "N=119=7\u00d717 tau=4 omega_k=2 topo=1.30 poly_c~0.447 \u2014 NO FIRE est"
   },
   "r160_result": {
     "N": 112,
@@ -140,7 +140,8 @@
       160,
       161,
       162,
-      163
+      163,
+      164
     ],
     "last_thread_tweet_id": "2026194703079682302",
     "arc_posted": "R149-R162",
@@ -158,26 +159,26 @@
   },
   "x_semantic_agent": {
     "total_capsules": 251,
-    "last_run": "2026-02-23T23:31:00-08:00 R163 +0 cap (all dupes)",
+    "last_run": "2026-02-24T00:12:00-08:00 R164 +0 cap",
     "clusters": {
       "polymarket": 40,
       "ai_regulation": 4,
+      "crypto_deregulation": 0,
       "open_source_ai": 8,
       "agent_economy": 22,
-      "crypto_deregulation": 0,
       "evez_os_adjacent": 0
     }
   },
   "maturity": {
-    "K": 163,
-    "S": 163,
-    "F": 23,
-    "phi": 0.141104,
-    "score": "23/163 fires = 14.11%",
-    "v_progress": "5.335868 / 6.000 = 88.93%",
+    "K": 164,
+    "S": 164,
+    "F": 24,
+    "phi": 0.146341,
+    "score": "24/164 fires = 14.63%",
+    "v_progress": "5.378052 / 6.000 = 89.63%",
     "V_v2": 6.0,
-    "milestone": "R163 NO FIRE. N=115=5x23 poly_c=0.451531. V=5.335868.",
-    "next_fire": "R164 est \u2014 N=116=2\u00b2\u00d729 tau=6 omega_k=2 topo=1.30 poly_c~0.494 \u2014 borderline NO FIRE est"
+    "milestone": "FIRE#24 at R164. N=116=2^2x29 FIRE confirmed. V=5.378052.",
+    "next_fire": "R165 est \u2014 N=117=3\u00b2\u00d713 tau=6 omega_k=2 poly_c~0.491 borderline NO FIRE est"
   },
   "ctc_engine": {
     "status": "COMMITTED",
@@ -188,8 +189,8 @@
   },
   "infra_notes": {
     "content_posted": "R149-R162 arc \u2014 tweet 2026194703079682302",
-    "v_milestone": "V=5.335868 \u2014 88.93% of ceiling",
-    "r163_note": "N=115=5x23 NO FIRE poly_c=0.451531 V=5.335868 CEILING\u00d781 probe 6fc7127b confirmed",
+    "v_milestone": "V=5.378052 \u2014 89.63% of ceiling",
+    "r164_note": "N=116=2^2x29 FIRE#24 poly_c=0.5273 V=5.378052 CEILING\u00d782 probe 233692de confirmed",
     "video_fix": "os.system ffmpeg confirmed working 0.104MB 100 frames R149-R162"
   },
   "r163_result": {
@@ -211,9 +212,35 @@
   },
   "r164_browser_jobs": {
     "perplexity": {
-      "job_id": "dd29da02-072a-4ca6-b1da-73671a82a108",
+      "job_id": "233692de-2a22-4151-8986-8ea5bb335e08",
+      "status": "completed",
+      "launched_at": "2026-02-23T23:31:00-08:00",
+      "completed_at": "2026-02-24T00:12:00-08:00"
+    }
+  },
+  "r164_result": {
+    "N": 116,
+    "N_str": "2^2x29",
+    "tau": 6,
+    "omega_k": 2,
+    "topo": 1.3,
+    "poly_c": 0.5273,
+    "fire_ignited": true,
+    "fire_number": 24,
+    "delta_V": 0.042184,
+    "V_global_prev": 5.335868,
+    "V_global_new": 5.378052,
+    "ceiling_tick": 82,
+    "probe_id": "233692de",
+    "probe_match": true,
+    "module": "watch_composite_116.py",
+    "truth_plane": "CANONICAL"
+  },
+  "r165_browser_jobs": {
+    "perplexity": {
+      "job_id": "ba99fab0-416e-451f-88ee-c472112e22d3",
       "status": "in-flight",
-      "launched_at": "2026-02-23T23:31:00-08:00"
+      "launched_at": "2026-02-24T00:12:00-08:00"
     }
   }
 }

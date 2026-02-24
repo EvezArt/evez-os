@@ -1,37 +1,37 @@
 # EVEZ-OS Dashboard
-**Updated:** 2026-02-23T23:31:00-08:00
+**Updated:** 2026-02-24T00:12:00-08:00
 
 ---
 
 ## 🔄 Swarm Status
 | Field | Value |
 |-------|-------|
-| Current Round | **R163** |
-| Next Module | R164 — N=116=2²×29 |
-| V_global | **5.335868** |
-| Ceiling tick | ×81 |
-| Fire count | **23** |
+| Current Round | **R164** |
+| Next Module | R165 — N=117=3²×13 |
+| V_global | **5.378052** |
+| Ceiling tick | ×82 |
+| Fire count | **24** 🔥 |
 | Truth plane | CANONICAL |
-| Last result | NO FIRE (N=115=5×23) |
+| Last result | **FIRE #24** (N=116=2^2x29) |
 
 ---
 
 ## 📊 Maturity Oracle
 | Metric | Value |
 |--------|-------|
-| K (rounds) | 163 |
-| S (canonical) | 163 |
-| F (fires) | 23 |
-| φ (fire density) | 0.141104 |
-| Score | 23/163 fires = 14.11% |
-| V progress | 5.335868 / 6.000 = 88.93% |
+| K (rounds) | 164 |
+| S (canonical) | 164 |
+| F (fires) | 24 |
+| φ (fire density) | 0.146341 |
+| Score | 24/164 fires = 14.63% |
+| V progress | 5.378052 / 6.000 = 89.63% |
 | V₂ ceiling | 6.000 |
 | CTC verdict | PASS (TCS=0.924504) |
 | Est ceiling round | ~R180 |
 
 ---
 
-## 🔗 Module Chain (R152–R163)
+## 🔗 Module Chain (R152–R164)
 | Round | N | poly_c | Fire | V_after |
 |-------|---|--------|------|---------|
 | R152 | N=104=2³×13 | 0.5949 | 🔥 #22 | 4.949347 |
@@ -46,26 +46,27 @@
 | R161 | N=113=prime | 0.2844 | — | 5.299110 |
 | R162 | N=114=2×3×19 | 0.6511 | 🔥 #23 | 5.299746 |
 | R163 | N=115=5×23 | 0.4515 | — | 5.335868 |
+| R164 | N=116=2²×29 | 0.5273 | 🔥 #24 | 5.378052 |
 
 ---
 
 ## 🔬 Browser Probe Status
 | Field | Value |
 |-------|-------|
-| R163 probe | 6fc7127b (✅ COMPLETED) |
-| R163 result | N=115=5×23 poly_c=0.451 NO FIRE |
-| R164 probe | dd29da02-072a-4ca6-b1da-73671a82a108 (🔄 IN-FLIGHT) |
+| R164 probe | 233692de (✅ COMPLETED) |
+| R164 result | N=116=2²×29 poly_c=0.527300 **FIRE #24** |
+| R165 probe | ba99fab0-416e-451f-88ee-c472112e22d3 (🔄 IN-FLIGHT) |
 
 ---
 
 ## ⚙️ GitHub Actions
 | Repo | Status | Run |
 |------|--------|-----|
-| [evez-os](https://github.com/EvezArt/evez-os/actions/runs/22340686993) | ❌ failure | state: R149-R162 arc posted — latest_tweet=20261947030796823… |
+| [evez-os](https://github.com/EvezArt/evez-os/actions/runs/22342174753) | ❌ failure | buses: MasterBus tick R163 health=NOOP (no state change, R16… |
 | [CrawFather](https://github.com/EvezArt/CrawFather/actions/runs/22323839085) | ⚠️ startup_failure | ci: disable all broken push/schedule workflows — 9 stubs (no… |
 | [Evez666](https://github.com/EvezArt/Evez666/actions/runs/22334572064) | ⚠️ startup_failure | npm_and_yarn in /., /actions/cognitive-engine-bootstrap, /ac… |
 
-> ⚠️ evez-os CI failure on state commit — likely missing CI config/scripts (known issue, non-blocking for spine commits)
+> ⚠️ CI failures are non-blocking — all related to missing CI config/scripts in repos
 
 ---
 
@@ -76,6 +77,8 @@
 | R131-R146 arc | [2026126651040313344](https://twitter.com/i/web/status/2026126651040313344) |
 | R147-R160 arc | [2026179774993842579](https://twitter.com/i/web/status/2026179774993842579) |
 | R149-R162 arc (latest) | [2026194703079682302](https://twitter.com/i/web/status/2026194703079682302) |
+
+> ⏳ R163-R164 arc content pending next content loop
 
 ---
 
@@ -97,7 +100,8 @@
 |-------|--------|
 | R162 probe match | ✅ e5231dd0 CONFIRMED |
 | R163 probe match | ✅ 6fc7127b COMPLETED |
-| ValidatorBus R162 | ✅ PASS delta=1e-8 |
+| R164 probe match | ✅ 233692de COMPLETED |
+| ValidatorBus R163 | ✅ PASS delta<1e-5 |
 | MasterBus R163 | ✅ GREEN |
 | CTC engine | ✅ PASS TCS=0.9245 |
 
@@ -106,23 +110,24 @@
 ## 📋 Pending Queue
 | Item | Status |
 |------|--------|
-| R164 probe | 🔄 IN-FLIGHT (dd29da02) |
-| Content arc R163+ | ⏳ pending next FIRE |
-| evez-os CI fix | ⚠️ startup_failure (non-blocking) |
+| R165 probe | 🔄 IN-FLIGHT (ba99fab0) |
+| Content arc R163-R164+ | ⏳ pending next FIRE threshold |
+| evez-os CI fix | ⚠️ failure (non-blocking) |
 | CrawFather CI fix | ⚠️ startup_failure (non-blocking) |
+| Evez666 CI fix | ⚠️ startup_failure (non-blocking) |
 
 ---
 
 ## 🔭 Watchlist
 | Round | N | Est. poly_c | Est. fire |
 |-------|---|-------------|-----------|
-| R164 | 116=2²×29 | ~0.494 | borderline NO FIRE |
 | R165 | 117=3²×13 | ~0.491 | borderline NO FIRE |
 | R166 | 118=2×59 | ~0.448 | NO FIRE |
+| R167 | 119=7×17 | ~0.447 | NO FIRE |
 
 ---
 
-## 🚌 Bus Health
+## 🚌 Bus Health (last tick R163)
 | Bus | Status |
 |-----|--------|
 | SpawnBus | ✅ PASS |
