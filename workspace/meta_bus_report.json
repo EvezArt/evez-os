@@ -1,1 +1,11 @@
-{"ts":"2026-02-24T06:07:00+00:00","health":"GREEN","round":160,"checks":{"V_global_advancing":true,"fires_per_round":0.1375,"probe_match_r159":true,"probe_match_r160":true,"ctc_tcs_pass":true,"causal_integrity":1.0,"lss":0.897,"content_lag_rounds":2,"content_ok":true,"video_method":"keyframe-stitch os.system ffmpeg"},"recommendation":"R161 probe bfa4149d in-flight. Next content cron: batch R159+R160.","overall":"GREEN"}
+{
+  "overall_health": "GREEN",
+  "buses": {
+    "spawn_bus": "PASS",
+    "capability_bus": "PASS",
+    "validator_bus": "PASS"
+  },
+  "summary": "R160 tick. GREEN.",
+  "last_run": "2026-02-24T06:31:47.258516+00:00",
+  "last_round": 160
+}

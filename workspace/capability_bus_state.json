@@ -1,1 +1,6 @@
-{"ts":"2026-02-24T06:07:00+00:00","round":160,"capabilities":{"twitter_post":"ACTIVE","twitter_upload":"ACTIVE","github_commit":"ACTIVE","hyperbrowser":"ACTIVE","ffmpeg_sandbox":"ACTIVE"},"blocked":[],"notes":"All capabilities green. ffmpeg fixed via os.system."}
+{
+  "health": "PASS",
+  "note": "twitter/github/hyperbrowser ACTIVE (last tick)",
+  "last_run": "2026-02-24T06:31:47.258516+00:00",
+  "last_round": 160
+}

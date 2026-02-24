@@ -1,1 +1,6 @@
-{"ts":"2026-02-24T06:07:00+00:00","round":160,"spawn_checks":{"hyperloop_tick":"PASS","content_cron":"PASS","masterbus":"PASS","dashboard":"PASS","semantic_agent":"PASS"},"spawn_health":"PASS"}
+{
+  "health": "PASS",
+  "note": "R161 probe bfa4149d-01d1-48d7-b6bb-3d99c77f055b IN-FLIGHT",
+  "last_run": "2026-02-24T06:31:47.258516+00:00",
+  "last_round": 160
+}

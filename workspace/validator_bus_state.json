@@ -1,1 +1,11 @@
-{"ts":"2026-02-24T06:07:00+00:00","round":160,"validator_checks":{"probe_match_r159":true,"probe_match_r160":true,"V_monotonic":true,"fire_rate_in_range":true,"ceiling_tick_formula":true,"ctc_tcs":0.924504,"ctc_verdict":"PASS"},"validator_health":"PASS"}
+{
+  "health": "PASS",
+  "N_int": 112,
+  "round": 160,
+  "poly_c_stored": 0.62833,
+  "poly_c_recalc": 0.628337,
+  "delta": 7.44e-06,
+  "probe_match": true,
+  "last_run": "2026-02-24T06:31:47.258516+00:00",
+  "last_round": 160
+}
