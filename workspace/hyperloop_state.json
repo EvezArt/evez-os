@@ -1,95 +1,55 @@
 {
-  "current_round": 144,
-  "V_global": 4.619952,
-  "ceiling_tick": 62,
+  "current_round": 145,
+  "V_global": 4.63383,
+  "ceiling_tick": 63,
   "latest_tweet_id": "2026087567829962966",
   "fire_count": 13,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-23T16:09:00-08:00",
+  "updated_at": "2026-02-23T16:30:00-08:00",
   "watchlist": {
-    "R145_PRIME": "N=97=prime tau=1 omega_k=1 poly_c=0.173471 \u2014 PRIME BLOCK \u2014 post-fire cooldown \u2014 probe a459d35f IN-FLIGHT",
-    "R146_est": "N=98=2\u00d77\u00b2 tau=6 omega_k=2 poly_c~0.505 \u2014 FIRE WATCH #14"
+    "R146_FIRE_WATCH": "N=98=2×7² tau=6 omega_k=2 poly_c~0.547 — FIRE WATCH #14 — probe fd98d595 IN-FLIGHT",
+    "R147_est": "N=99=3²×11 tau=6 omega_k=2 poly_c~0.536 — ELEVATED"
   },
   "r143_result": {
-    "N": 95,
-    "N_str": "5\u00d719",
-    "tau": 2,
-    "omega_k": 2,
-    "topo": 1.3,
-    "poly_c": 0.333503,
-    "fire_ignited": false,
-    "delta_V": 0.02668,
-    "V_global_prev": 4.53848,
-    "V_global_new": 4.56516,
-    "ceiling_tick": 61,
+    "N": 95, "N_str": "5×19", "tau": 2, "omega_k": 2, "topo": 1.3,
+    "poly_c": 0.333503, "fire_ignited": false, "delta_V": 0.02668,
+    "V_global_prev": 4.53848, "V_global_new": 4.56516, "ceiling_tick": 61,
     "commit_sha": "1b1b6d7760e13574fce6ac37a2a6ef390b3c047b",
     "agent_sha": "bf4b9fcea4af57c92e46d6f70b6d543dfe98dc22",
     "probe_id": "876ab0ab-0a0a-4f94-8001-75df02abdd93",
-    "probe_poly_c": 0.3331956,
-    "probe_match": true,
-    "module": "watch_composite_95.py",
-    "truth_plane": "CANONICAL"
+    "probe_poly_c": 0.3331956, "probe_match": true,
+    "module": "watch_composite_95.py", "truth_plane": "CANONICAL"
   },
   "r144_result": {
-    "N": 96,
-    "N_str": "2\u2075\u00d73",
-    "tau": 12,
-    "omega_k": 2,
-    "topo": 1.3,
-    "poly_c": 0.684895,
-    "fire_ignited": true,
-    "delta_V": 0.054792,
-    "V_global_prev": 4.56516,
-    "V_global_new": 4.619952,
-    "ceiling_tick": 62,
+    "N": 96, "N_str": "2⁵×3", "tau": 12, "omega_k": 2, "topo": 1.3,
+    "poly_c": 0.684895, "fire_ignited": true, "delta_V": 0.054792,
+    "V_global_prev": 4.56516, "V_global_new": 4.619952, "ceiling_tick": 62,
     "commit_sha": "dfe74e7f4fcc0b991fd3b56878392c8e5c792b57",
     "agent_sha": "d3a428eb5ec82d7e5be94dfaea278f164ff0ba02",
     "probe_id": "f4f15ab4-b1fc-4682-a883-070932acb20f",
-    "probe_poly_c": 0.685,
-    "probe_match": true,
-    "module": "watch_composite_96.py",
-    "truth_plane": "CANONICAL",
-    "tweet_id": "2026087567829962966",
-    "video_size_mb": 0.04,
-    "fire_number": 13
+    "probe_poly_c": 0.685, "probe_match": true,
+    "module": "watch_composite_96.py", "truth_plane": "CANONICAL",
+    "tweet_id": "2026087567829962966", "video_size_mb": 0.04, "fire_number": 13
   },
-  "r145_browser_jobs": {
+  "r145_result": {
+    "N": 97, "N_str": "prime", "tau": 1, "omega_k": 1, "topo": 1.15,
+    "poly_c": 0.173471, "fire_ignited": false, "delta_V": 0.013878,
+    "V_global_prev": 4.619952, "V_global_new": 4.63383, "ceiling_tick": 63,
+    "commit_sha": "a14da7eb049bbc837b2c54c29ad70b4e557a725a",
+    "agent_sha": "33cb0931db984b275751482f771b5bee25e8430f",
+    "probe_id": "a459d35f-22b5-46e6-9ced-3555839b9b7f",
+    "probe_poly_c": 0.173, "probe_match": true,
+    "module": "prime_block_watch_9.py", "truth_plane": "CANONICAL"
+  },
+  "r146_browser_jobs": {
     "perplexity": {
-      "job_id": "a459d35f-22b5-46e6-9ced-3555839b9b7f",
+      "job_id": "fd98d595-5bbc-4193-970e-5af04b46897c",
       "status": "in-flight"
     }
   },
   "cron_content_loop": {
-    "last_run": "2026-02-23T16:09 PST",
-    "rounds_covered": [
-      118,
-      119,
-      120,
-      121,
-      122,
-      123,
-      124,
-      125,
-      126,
-      127,
-      128,
-      129,
-      130,
-      131,
-      132,
-      133,
-      134,
-      135,
-      136,
-      137,
-      138,
-      139,
-      140,
-      141,
-      142,
-      143,
-      144
-    ],
+    "last_run": "2026-02-23T16:30 PST",
+    "rounds_covered": [118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145],
     "last_thread_tweet_id": "2026087567829962966"
   },
   "video_render_status": {
@@ -103,8 +63,8 @@
     "duration_s": 5.5
   },
   "x_semantic_agent": {
-    "total_capsules": 67,
-    "last_run": "2026-02-23T16:09 PST R144 +18 caps"
+    "total_capsules": 85,
+    "last_run": "2026-02-23T16:30 PST R145 +18 caps"
   },
   "cloudflare_agent": {
     "status": "committed",
@@ -114,11 +74,8 @@
     "note": "Requires CLOUDFLARE_API_TOKEN. Steven runs wrangler deploy once."
   },
   "maturity": {
-    "K": 144,
-    "S": 144,
-    "F": 13,
-    "phi": 0.0903,
-    "score": "13/144 fires = 9.03%",
-    "v_progress": "4.619952 / 6.000 = 77.0%"
+    "K": 145, "S": 145, "F": 13, "phi": 0.0897,
+    "score": "13/145 fires = 8.97%",
+    "v_progress": "4.633830 / 6.000 = 77.2%"
   }
 }
