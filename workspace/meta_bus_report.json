@@ -1,14 +1,10 @@
 {
-  "ts": "2026-02-24T09:30:19Z",
-  "round": 168,
+  "ts": "2026-02-24T10:00:51Z",
+  "round": 169,
   "health": "GREEN",
-  "spawn_bus": {"status": "PASS", "module": "watch_composite_120.py"},
-  "capability_bus": {"status": "PASS", "apps_available": ["github", "twitter", "hyperbrowser"]},
-  "validator_bus": {"status": "PASS", "poly_c_inline": 0.789274, "poly_c_probe": 0.789, "delta": 0.000274, "verdict": "MATCH"},
-  "meta_bus": {"health": "GREEN", "v_pct": "92.59%", "est_ceiling_round": 178},
-  "ci_flags": {
-    "evez-os": "failure — spine CI broken",
-    "CrawFather": "startup_failure — stubs",
-    "Evez666": "startup_failure — dependabot"
-  }
+  "spawn_bus": {"status": "PASS", "module": "watch_composite_121.py"},
+  "capability_bus": {"status": "PASS", "apps_available": ["github", "twitter", "hyperbrowser"], "new_unblocks": []},
+  "validator_bus": {"status": "PASS", "poly_c_inline": 0.347627, "poly_c_probe": 0.347627, "delta": 0.0, "verdict": "MATCH"},
+  "meta_bus": {"health": "GREEN", "v_pct": "93.05%", "est_ceiling_round": 178, "rounds_to_ceiling": 9},
+  "ci_flags": {"evez-os": "failure \u2014 spine CI broken", "CrawFather": "startup_failure \u2014 stubs", "Evez666": "startup_failure \u2014 dependabot"}
 }
