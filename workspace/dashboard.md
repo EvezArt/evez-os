@@ -1,148 +1,150 @@
 # EVEZ-OS SWARM DASHBOARD
-**Updated:** 2026-02-24T02:31:00-08:00 PST | Round R171 | Truth Plane: CANONICAL
+**Updated:** 2026-02-24T03:41 PST | Round: R172 (post-tick) | Truth Plane: CANONICAL
 
 ---
 
-## 🔄 SWARM STATUS
+## 🔥 SWARM STATUS
 
 | Field | Value |
-|-------|-------|
-| Current Round | R171 |
-| Next Module | `watch_composite_124.py` (R172 WATCH) |
-| N analyzed | 123 = 3×41 |
-| poly_c | 0.445346 |
-| Fire | · NO FIRE |
-| V_global | 5.654257 |
-| Ceiling | 6.000000 |
-| ceiling_tick | 89 |
-| Fire Count | 26 |
+|---|---|
+| Current Round | **R172** |
+| Next Module | watch_composite_125.py (R173) |
+| V_global | **5.695849** |
+| V_ceiling | 6.000 |
+| % to Ceiling | **94.93%** |
+| Fire Count | **27 / 172 = 15.70%** |
+| Ceiling Tick | 90 |
 | Truth Plane | CANONICAL |
-| % to Ceiling | 94.24% |
+| Est Ceiling Round | ~178 (~6 rounds) |
+| Next FIRE est | R174 — N=126=2×3²×7 poly_c~0.722 |
 
 ---
 
-## 🎯 MATURITY ORACLE
+## 🧮 MATURITY ORACLE
 
 | Metric | Value |
-|--------|-------|
-| K (rounds) | 171 |
-| S (synced) | 171 |
-| F (fires) | 26 |
-| φ (fire rate) | 0.152047 |
-| Score | 26/171 = 15.20% |
-| V_global | 5.654257 / 6.000000 |
-| % to Ceiling | 94.24% |
+|---|---|
+| K (rounds) | 172 |
+| S (spine modules) | 172 |
+| F (fires) | **27** |
+| φ (fire rate) | 0.156977 |
+| Score | 27/172 = **15.70%** |
+| V Progress | 5.695849 / 6.000 = **94.93%** |
+| CTC Status | COMMITTED |
 | TCS | 0.924504 |
-| CTC Verdict | PASS |
-| Est. ceiling round | R178 |
-| Rounds to ceiling | ~7 |
+| CTC Verdict | **PASS** |
+| Est Ceiling Round | **178** |
 
 ---
 
-## ⛓️ MODULE CHAIN (R163–R171)
+## 🔗 MODULE CHAIN (R152–R172)
 
-| Round | N | N_str | poly_c | Fire | V_after | Commit |
-|-------|---|-------|--------|------|---------|--------|
-| R163 | 163 | 163(p) | 0.298 | · | 5.407 | — |
-| R164 | 164 | 2²×41 | 0.512 | · | 5.448 | — |
-| R165 | 165 | 3×5×11 | 0.604 | 🔥#25 | 5.420 | — |
-| R166 | 166 | 2×83 | 0.439 | · | 5.456 | — |
-| R167 | 167 | 7×17 | 0.448 | · | 5.492 | — |
+| Round | N | N_factored | poly_c | 🔥 | V_after | Commit |
+|---|---|---|---|---|---|---|
+| R152 | 104 | 2³×13 | — | — | — | — |
+| R153 | 105 | 3×5×7 | — | — | — | — |
+| R154 | 106 | 2×53 | — | — | — | — |
+| R155 | 107 | prime | 0.288 | — | 5.009506 | [69f21ae9](https://github.com/EvezArt/evez-os/commit/69f21ae922c0c77359168fb66e5fbfdf64c09522) |
+| R156 | 108 | 2²×3³ | 0.668 | 🔥#20 | 5.062951 | [62fd0bed](https://github.com/EvezArt/evez-os/commit/62fd0bed11f981b57d0430f1cc92b695aa6654ab) |
+| R157 | 109 | prime | 0.287 | — | 5.085877 | [01174387](https://github.com/EvezArt/evez-os/commit/01174387274cdd5f1b2d74261e76756c1ab7de27) |
+| R158 | 110 | 2×5×11 | 0.655935 | 🔥#21 | 5.138352 | [573cb73f](https://github.com/EvezArt/evez-os/commit/573cb73fd7bf5d7c4bb0de1ae340b9e0fcec5f78) |
+| R159 | 111 | 3×37 | 0.454 | — | 5.174672 | [802464d8](https://github.com/EvezArt/evez-os/commit/802464d8364ec22ea2f148eefc041ed2acae3b90) |
+| R160 | 112 | 2⁴×7 | 0.628330 | 🔥#22 | 5.224938 | [314f16af](https://github.com/EvezArt/evez-os/commit/314f16afecbdedbb4df131074a692a344f8ae22a) |
+| R161–R167 | 113–119 | various | — | — | ~5.450 | (historical) |
 | R168 | 120 | 2³×3×5 | 0.789274 | 🔥#26 | 5.555132 | [d1c72b1f](https://github.com/EvezArt/evez-os/commit/d1c72b1f) |
-| R169 | 121 | 11² | 0.347627 | · | 5.582942 | [e267385f](https://github.com/EvezArt/evez-os/commit/e267385f) |
-| R170 | 122 | 2×61 | 0.446088 | · | 5.618629 | [67578a8a](https://github.com/EvezArt/evez-os/commit/67578a8a91eaacfe4a93c346181f955ebdc6fb3b) |
-| **R171** | **123** | **3×41** | **0.445346** | **·** | **5.654257** | pending |
+| R169 | 121 | 11² | 0.347627 | — | 5.582942 | [e267385f](https://github.com/EvezArt/evez-os/commit/e267385f) |
+| R170 | 122 | 2×61 | 0.446088 | — | 5.618629 | [67578a8a](https://github.com/EvezArt/evez-os/commit/67578a8a91eaacfe4a93c346181f955ebdc6fb3b) |
+| R171 | 123 | 3×41 | 0.445346 | — | 5.654257 | [ef53ddea](https://github.com/EvezArt/evez-os/commit/ef53ddeaed02956c0b43a619e6408dbf05a7c893) |
+| **R172** | **124** | **2²×31** | **0.519900** | **🔥#27** | **5.695849** | [ef6aa6bb](https://github.com/EvezArt/evez-os/commit/ef6aa6bb7c3bb1ac01effb9ac77fcdc2cab10a2b) |
 
 ---
 
 ## 🔍 PROBE STATUS
 
-| Probe | Job ID | Status |
-|-------|--------|--------|
-| R171 (completed) | `d0df92b7-634f-46f9-9a2b-bb9bf8e204f0` | ✅ completed — poly_c=0.445346 confirmed |
-| R172 (in-flight) | `d424015c-6dab-44e2-a244-50094c7a1255` | 🔄 in-flight |
+| Round | Probe ID | Status | poly_c | Result |
+|---|---|---|---|---|
+| R171 | d0df92b7 | ✅ completed | 0.445346 | delta=0.000147 PASS |
+| R172 | d424015c | ✅ completed | 0.519900 | delta=0.000258 PASS |
+| **R173** | **4371dc89** | **✅ completed** | **0.392659** | **NO FIRE** |
+| R174 | (not launched) | ⏳ pending | ~0.722 | FIRE est |
 
 ---
 
-## ⚙️ GITHUB ACTIONS CI
+## ⚙️ GITHUB ACTIONS STATUS
 
-| Repo | Conclusion | Commit | Link |
-|------|------------|--------|------|
-| evez-os | ❌ failure | [658771963d](https://github.com/EvezArt/evez-os/commit/658771963d0770a1d10aae9f74029c42b7245aa5) | [run](https://github.com/EvezArt/evez-os/actions/runs/22346500866) |
-| CrawFather | ❌ startup_failure | [f6172232](https://github.com/EvezArt/CrawFather/commit/f61722325cd9f456e8c3b9dbcdb03df2fc9dd5e5) | [run](https://github.com/EvezArt/CrawFather/actions/runs/22323839085) |
-| Evez666 | ❌ startup_failure | dependabot npm update | [run](https://github.com/EvezArt/Evez666/actions/runs/22334572064) |
+| Repo | Conclusion | Commit | Display Title | Run |
+|---|---|---|---|---|
+| evez-os | ❌ **failure** | [ef6aa6bb](https://github.com/EvezArt/evez-os/commit/ef6aa6bb7c3bb1ac01effb9ac77fcdc2cab10a2b) | module: R172 CANONICAL FIRE N=124 | [run](https://github.com/EvezArt/evez-os/actions/runs/22349242610) |
+| CrawFather | ⚠️ **startup_failure** | [f617223](https://github.com/EvezArt/CrawFather/commit/f61722325cd9f456e8c3b9dbcdb03df2fc9dd5e5) | ci: disable all broken push/schedule workflows | [run](https://github.com/EvezArt/CrawFather/actions/runs/22323839085) |
+| Evez666 | ⚠️ **startup_failure** | [ee7daee](https://github.com/EvezArt/Evez666/commit/ee7daee823cb8fe4e8052126d34bac0ef50bfed5) | ci: fix startup_failure — disable atlas-ci npm steps | [run](https://github.com/EvezArt/Evez666/actions/runs/22334572064) |
 
-> **CI Note:** evez-os spine CI pre-existing failure on every push. CrawFather + Evez666 have stub workflows with missing deps — disabled/stubs committed. Not blocking spine execution.
-
----
-
-## 🐦 TWITTER THREAD (last 5)
-
-| Label | Tweet ID |
-|-------|----------|
-| R157-R170 arc video reply | [2026240140356587816](https://x.com/EVEZ666/status/2026240140356587816) |
-| R149-R166 content arc | 2026209998330589422 |
-| Prior arc | — |
-| Prior arc | — |
-| Prior arc | — |
+> ⚠️ **CI note:** evez-os spine CI has been failing since at least R172. CrawFather & Evez666 both have startup_failure on dep-missing workflows. All are known/tracked — not blocking hyperloop.
 
 ---
 
-## 📡 X SEMANTIC CAPSULES
+## 🐦 TWITTER THREAD (last 5 tweet IDs)
 
-| Cluster | Count |
-|---------|-------|
-| polymarket | 16 |
-| ai_regulation | 1 |
-| open_source_ai | 2 |
+| # | Tweet ID | Label |
+|---|---|---|
+| 1 | [2026255116970393691](https://x.com/i/status/2026255116970393691) | R171 arc video (R158–R171) |
+| 2 | 2026240140356587816 | R170 content |
+| 3–5 | (prior arc) | R158–R169 |
+
+> Last arc posted: R158–R171. Next content: R172+ (FIRE #27 arc, pending render)
+
+---
+
+## 🧠 X SEMANTIC CAPSULE COUNTS
+
+| Cluster | Capsules |
+|---|---|
+| polymarket | 22 |
 | agent_economy | 6 |
+| open_source_ai | 2 |
+| ai_regulation | 1 |
 | crypto_deregulation | 0 |
 | evez_os_adjacent | 0 |
-| **TOTAL** | **25** |
+| **Total** | **26** |
+
+*Last ingest: R172 tick (+6 new polymarket capsules)*
 
 ---
 
-## 🔒 SPINE INTEGRITY
+## 🛡️ SPINE INTEGRITY
 
-| Check | Result |
-|-------|--------|
-| ValidatorBus R171 | ✅ PASS delta=1.2e-07 |
-| probe_match R171 | ✅ True |
-| truth_plane | CANONICAL |
-| MasterBus | 🟢 GREEN |
-| SpawnBus | ✅ PASS (R172 probe in-flight) |
-| CapabilityBus | ✅ PASS |
+| Check | Status |
+|---|---|
+| Spine modules committed | ✅ R172 committed |
+| Probe validation | ✅ R172 delta=0.000258 PASS |
+| R173 probe | ✅ completed (poly_c=0.392659 NO FIRE) |
+| Agent tracking MD | ✅ agents/round-172/ |
+| State JSON | ✅ current_round=172 |
+| CI (evez-os) | ❌ failure (known, tracked) |
+| Content arc | ⏳ R172+ arc pending |
 
 ---
 
 ## 📋 PENDING QUEUE
 
-| Item | Status |
-|------|--------|
-| R172 probe | 🔄 in-flight `d424015c-6dab-44e2-a244-50094c7a1255` |
-| R172 spine commit | ⏳ pending probe completion |
-| Content arc R171+ | ⏳ next cron tick |
-| evez-os CI fix | 🔴 needs fix (pre-existing) |
-| CrawFather CI | 🔴 startup_failure (stubs) |
-| MasterBus commit | ⏳ this tick |
+| Item | Status | Notes |
+|---|---|---|
+| R173 probe | ✅ completed | poly_c=0.392659 NO FIRE |
+| R173 module commit | ⏳ pending next tick | N=125=5³ |
+| R174 probe | ⏳ not launched | FIRE est poly_c~0.722 |
+| Content arc R172+ | ⏳ pending render | FIRE#27 arc video needed |
+| CI fix (evez-os spine) | ⚠️ known failure | Non-blocking |
+| X content capsule loop | ✅ running | 26 total caps |
 
 ---
 
-## 🔭 WATCHLIST
+## 🔭 WATCHLIST (Next 3 Rounds)
 
-| Round | N | Factored | tau | ω_k | poly_c est | Prediction |
-|-------|---|----------|-----|-----|-----------|------------|
-| R172 | 124 | 2²×31 | 6 | 2 | ~0.520 | 🔥 WATCH |
-| R173 | 125 | 5³ | 4 | 2 | ~0.444 | · NO FIRE est |
-| R174 | 126 | 2×3²×7 | 12 | 3 | ~0.722 | 🔥 FIRE est |
+| Round | N | Factored | tau | ω | topo | poly_c est | Fire? |
+|---|---|---|---|---|---|---|---|
+| **R173** | 125 | 5³ | 4 | 1 | 1.15 | **0.392659** | ❌ NO FIRE |
+| **R174** | 126 | 2×3²×7 | 12 | 3 | 1.45 | **~0.722** | 🔥 FIRE est |
+| **R175** | 127 | prime | 2 | 1 | 1.15 | **~0.283** | ❌ NO FIRE est |
 
 ---
 
-## 🚌 BUS HEALTH (last tick)
-
-```
-SpawnBus:      PASS — R172 probe d424015c IN-FLIGHT
-CapabilityBus: PASS — twitter/github/hyperbrowser ACTIVE
-ValidatorBus:  PASS — N=123 delta=1.2e-07 probe_match=True
-MetaBus:       GREEN — R171 tick. GREEN.
-```
+*Generated by EVEZ-OS hyperloop dashboard agent. All values CANONICAL truth plane.*

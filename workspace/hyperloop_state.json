@@ -5,9 +5,9 @@
   "latest_tweet_id": "2026255116970393691",
   "fire_count": 27,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-24T11:38:41+00:00",
+  "updated_at": "2026-02-24T11:41:49+00:00",
   "watchlist": {
-    "R173_est": "N=125=5^3 tau=4 omega_k=1 topo=1.15 poly_c~0.3927 \u2014 NO FIRE est",
+    "R173_est": "N=125=5^3 tau=4 omega_k=1 topo=1.15 poly_c=0.392659 \u2014 NO FIRE CONFIRMED",
     "R174_est": "N=126=2x3^2x7 tau=12 omega_k=3 topo=1.45 poly_c~0.722 \u2014 FIRE est",
     "R175_est": "N=127=prime tau=2 omega_k=1 topo=1.15 poly_c~0.283 \u2014 NO FIRE est"
   },
@@ -109,7 +109,7 @@
   "r173_browser_jobs": {
     "perplexity": {
       "job_id": "4371dc89-5106-4e1f-92e7-47618eef7a7a",
-      "status": "in-flight",
+      "status": "completed",
       "launched_at": "2026-02-24T11:38:41+00:00"
     }
   },
@@ -217,5 +217,23 @@
     "ci_flag": "evez-os spine CI failure \u2014 needs fix",
     "r173_probe": "4371dc89 in-flight",
     "content_r172": "pending \u2014 arc video needed for R172+ block"
+  },
+  "r173_result": {
+    "N": 125,
+    "N_str": "5^3",
+    "tau": 4,
+    "omega_k": 1,
+    "topo": 1.15,
+    "poly_c": 0.392659,
+    "fire_ignited": false,
+    "fire_number": null,
+    "delta_V": 0.031413,
+    "V_global_prev": 5.695849,
+    "V_global_new": 5.727262,
+    "ceiling_tick": 91,
+    "truth_plane": "CANONICAL",
+    "probe_id": "4371dc89-5106-4e1f-92e7-47618eef7a7a",
+    "probe_match": true,
+    "probe_delta": 0.0
   }
 }
