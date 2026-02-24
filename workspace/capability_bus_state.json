@@ -1,13 +1,13 @@
 {
-  "health": "WARN",
-  "note": "twitter/github/x_semantic ACTIVE. CI: evez-os spine CI failure \u2014 needs fix",
-  "checks": {
-    "twitter": "ACTIVE",
-    "github": "ACTIVE",
-    "x_semantic_agent": "ACTIVE",
-    "evez_os_ci": "WARN: evez-os spine CI failure \u2014 needs fix"
+  "health": "PASS",
+  "connections": {
+    "twitter": {"status": "ACTIVE", "evidence": "tweet 2026255116970393691 posted R171"},
+    "github": {"status": "ACTIVE", "evidence": "commit ef6aa6bb R172"},
+    "hyperbrowser": {"status": "ACTIVE", "evidence": "R173 probe 4371dc89 completed, R174 probe da681d91 completed"},
+    "youtube": {"status": "UNKNOWN", "evidence": "no upload attempted this cycle"}
   },
-  "ci_flag": "evez-os spine CI failure \u2014 needs fix",
-  "last_run": "2026-02-24T11:35:43+00:00",
-  "last_round": 171
+  "note": "twitter/github/hyperbrowser ACTIVE. youtube UNKNOWN.",
+  "blocked_apps": [],
+  "last_run": "2026-02-24T12:35:00+00:00",
+  "last_round": 173
 }

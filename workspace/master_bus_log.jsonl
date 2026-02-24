@@ -1,13 +1,8 @@
-{"ts":"2026-02-24T05:04:00+00:00","round":156,"health":"NOOP","reason":"stale round"}
-{"ts":"2026-02-24T05:07:00+00:00","round":157,"health":"NOOP","reason":"dashboard updated inline"}
-{"ts":"2026-02-24T05:30:00+00:00","round":158,"health":"GREEN","spawn":"PASS","capability":"PASS","validator":"PASS","meta":"GREEN","notes":"R158 FIRE#21. V=5.138352. CTC PASS. ffmpeg fix applied."}
-{"ts":"2026-02-24T06:05:00+00:00","round":158,"health":"NOOP","reason":"same round as last run — R159 probe in-flight, R160 not yet committed"}
-{"ts":"2026-02-24T06:07:00+00:00","round":160,"health":"GREEN","spawn":"PASS","capability":"PASS","validator":"PASS","meta":"GREEN","notes":"R159 NO FIRE V=5.174672. R160 FIRE#22 V=5.224938. R161 probe bfa4149d in-flight. X semantic +1 cap total=215. Dashboard+PROMPT_QUEUE rebuilt. Content R159+R160 queued for next cron."}
-{"ts": "2026-02-24T06:31:47.258516+00:00", "round": 160, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
-{"ts": "2026-02-24T07:08:00+00:00", "round": 162, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "meta": "GREEN", "fire": 23, "V_global": 5.299746, "poly_c": 0.651094, "notes": "R162 FIRE#23 N=114=2x3x19 V=5.299746 CEILING\u00d780. R163 probe 6fc7127b in-flight. X semantic +18 cap total=251. Dashboard rebuilt. PROMPT_QUEUE updated."}
-{"ts": "2026-02-24T07:31:13.216658+00:00", "round": 162, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.299746 / 6.000 = 88.33%", "summary": "R162 tick. GREEN. V=5.299746 F=23"}
-{"ts": "2026-02-24T07:33:59.491545+00:00", "round": 163, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.335868 / 6.000 = 88.93%", "summary": "R163 tick. GREEN. V=5.335868 F=23"}
-{"ts": "2026-02-24T08:11:19.813517+00:00", "round": 163, "health": "NOOP", "reason": "current_round=163 unchanged since last bus run at 23:30 PST \u2014 R164 probe in-flight", "last_bus_round": 163, "probe_status": "R164 dd29da02 IN-FLIGHT"}
-{"ts": "2026-02-24T11:34:50.316440+00:00", "round": 163, "health": "GREEN", "spawn": "PASS", "capability": "WARN", "validator": "PASS", "v_global": 5.335868, "fire_count": 23}
-{"ts": "2026-02-24T11:35:43.259070+00:00", "round": 171, "health": "GREEN", "spawn": "PASS", "capability": "WARN", "validator": "PASS", "v_global": 5.654257, "fire_count": 26}
-{"ts": "2026-02-24T11:38:41+00:00", "round": 172, "health": "GREEN", "spawn": "PASS", "capability": "WARN", "validator": "PASS", "v_global": 5.695849, "fire_count": 27, "event": "FIRE#27 N=124=2^2x31"}
+{"ts": "2026-02-23T17:34:53+00:00", "round": 147, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
+{"ts": "2026-02-24T02:33:12+00:00", "round": 150, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
+{"ts": "2026-02-24T07:31:13+00:00", "round": 163, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.299746/6.000=88.33%"}
+{"ts": "2026-02-24T08:11:19+00:00", "round": 163, "health": "NOOP", "reason": "stale"}
+{"ts": "2026-02-24T08:19:00+00:00", "round": 164, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.378052/6.000=89.63%"}
+{"ts": "2026-02-24T08:30:01+00:00", "round": 164, "health": "NOOP", "reason": "stale"}
+{"ts": "2026-02-24T08:31:12+00:00", "round": 165, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.420190/6.000=90.34%"}
+{"ts": "2026-02-24T12:32:00+00:00", "round": 173, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "action": "bus_tick", "current_round": 173, "v_progress": "5.727262/6.000=95.45%", "summary": "R173 NO FIRE N=125=5^3 poly_c=0.392659. R174 FIRE#28 probe da681d91 confirmed."}
