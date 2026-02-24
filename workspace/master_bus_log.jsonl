@@ -2,4 +2,5 @@
 {"ts": "2026-02-24T02:33:12+00:00", "round": 150, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
 {"ts": "2026-02-24T07:31:13+00:00", "round": 163, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.299746/6.000=88.33%"}
 {"ts": "2026-02-24T08:11:19+00:00", "round": 163, "health": "NOOP", "reason": "stale — R164 probe in-flight"}
-{"ts": "2026-02-24T08:18:37.374891+00:00", "round": 164, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.378052/6.000=89.63%", "summary": "R164 tick. GREEN. V=5.378052 F=24 FIRE#24 tweet 2026209998330589422"}
+{"ts": "2026-02-24T08:19:00+00:00", "round": 164, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.378052/6.000=89.63%", "summary": "R164 tick. GREEN. V=5.378052 F=24 FIRE#24 tweet 2026209998330589422"}
+{"ts": "2026-02-24T08:30:01+00:00", "round": 164, "health": "NOOP", "reason": "current_round=164 unchanged since last bus run — R165 probe ba99fab0 in-flight (18min elapsed)"}
