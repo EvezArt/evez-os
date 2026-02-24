@@ -1,275 +1,61 @@
 {
-  "current_round": 165,
-  "V_global": 5.42019,
-  "ceiling_tick": 83,
+  "current_round": 166,
+  "V_global": 5.456121,
+  "ceiling_tick": 84,
   "latest_tweet_id": "2026209998330589422",
   "fire_count": 25,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-24T00:31:12-08:00",
+  "updated_at": "2026-02-24T01:09:23-08:00",
   "watchlist": {
-    "R166_est": "N=118=2\u00d759 tau=4 omega_k=2 topo=1.30 poly_c~0.447 \u2014 NO FIRE est",
-    "R167_est": "N=119=7\u00d717 tau=4 omega_k=2 topo=1.30 poly_c~0.446 \u2014 NO FIRE est",
-    "R168_est": "N=120=2\u00b3\u00d73\u00d75 tau=16 omega_k=3 topo=1.45 poly_c~0.715 \u2014 FIRE est"
+    "R167_NO_FIRE_est": "N=119=7x17 tau=4 omega_k=2 topo=1.30 poly_c~0.448 \u2014 NO FIRE est",
+    "R168_FIRE_est": "N=120=2^3x3x5 tau=16 omega_k=3 topo=1.45 poly_c~0.789 \u2014 FIRE#26 HIGH CONFIDENCE",
+    "R169_NO_FIRE_est": "N=121=11^2 tau=3 omega_k=1 topo=1.15 poly_c~0.348 \u2014 NO FIRE est"
   },
-  "r160_result": {
-    "N": 112,
-    "N_str": "2^4x7",
-    "tau": 10,
-    "omega_k": 2,
-    "topo": 1.3,
-    "poly_c": 0.62833,
-    "fire_ignited": true,
-    "fire_number": 22,
-    "delta_V": 0.050266,
-    "V_global_prev": 5.174672,
-    "V_global_new": 5.224938,
-    "ceiling_tick": 78,
-    "probe_id": "0c931bd6",
-    "probe_match": true,
-    "module": "watch_composite_112.py",
-    "truth_plane": "CANONICAL"
-  },
-  "r161_result": {
-    "N": 113,
-    "N_str": "prime",
-    "tau": 2,
-    "omega_k": 1,
-    "topo": 1.15,
-    "poly_c": 0.284438,
-    "fire_ignited": false,
-    "prime_block": 14,
-    "delta_V": 0.02272,
-    "V_global_prev": 5.224938,
-    "V_global_new": 5.247658,
-    "ceiling_tick": 79,
-    "truth_plane": "CANONICAL",
-    "probe_id": "bfa4149d",
-    "probe_match": true,
-    "module": "prime_block_watch_14.py",
-    "commit_sha": "0f888f171b45b1fc52040a8ac106c61ba9ab992a"
-  },
-  "r162_result": {
-    "N": 114,
-    "N_str": "2x3x19",
-    "tau": 8,
-    "omega_k": 3,
-    "topo": 1.45,
-    "poly_c": 0.651094,
-    "fire_ignited": true,
-    "fire_number": 23,
-    "delta_V": 0.052088,
-    "V_global_prev": 5.247658,
-    "V_global_new": 5.299746,
-    "ceiling_tick": 80,
-    "probe_id": "e5231dd0",
-    "probe_match": true,
-    "module": "watch_composite_114.py",
-    "truth_plane": "CANONICAL",
-    "commit_sha": "0a6ad63985a5f846451ad7bfcfc40132c68c9060",
-    "agent_branch_sha": "e1c114bebcdb146fd873dd9a0142a0a6cdf42d4f",
-    "content_tweet_id": "2026194703079682302"
-  },
-  "r161_browser_jobs": {
-    "perplexity": {
-      "job_id": "bfa4149d-01d1-48d7-b6bb-3d99c77f055b",
-      "status": "completed",
-      "launched_at": "2026-02-23T22:07:00-08:00",
-      "completed_at": "2026-02-23T22:31:00-08:00"
-    }
-  },
-  "r162_browser_jobs": {
-    "perplexity": {
-      "job_id": "e5231dd0-d184-4b2d-80a3-58712b6a6c73",
-      "status": "completed",
-      "launched_at": "2026-02-23T22:31:00-08:00",
-      "completed_at": "2026-02-23T23:07:00-08:00"
-    }
-  },
-  "r163_browser_jobs": {
-    "perplexity": {
-      "job_id": "6fc7127b-2b8a-4bf8-8bb1-0413daea5c78",
-      "status": "in-flight",
-      "launched_at": "2026-02-23T23:08:00-08:00"
-    }
-  },
+  "r160_result": {"N":112,"N_str":"2^4x7","tau":10,"omega_k":2,"topo":1.30,"poly_c":0.628330,"fire_ignited":true,"fire_number":22,"delta_V":0.050266,"V_global_prev":5.174672,"V_global_new":5.224938,"ceiling_tick":78,"probe_id":"0c931bd6","probe_match":true,"module":"watch_composite_112.py","truth_plane":"CANONICAL"},
+  "r161_result": {"N":113,"N_str":"prime","tau":2,"omega_k":1,"topo":1.15,"poly_c":0.284438,"fire_ignited":false,"prime_block":14,"delta_V":0.022720,"V_global_prev":5.224938,"V_global_new":5.247658,"ceiling_tick":79,"truth_plane":"CANONICAL","probe_id":"bfa4149d","probe_match":true,"module":"prime_block_watch_14.py","commit_sha":"0f888f171b45b1fc52040a8ac106c61ba9ab992a"},
+  "r162_result": {"N":114,"N_str":"2x3x19","tau":8,"omega_k":3,"topo":1.45,"poly_c":0.651094,"fire_ignited":true,"fire_number":23,"delta_V":0.052088,"V_global_prev":5.247658,"V_global_new":5.299746,"ceiling_tick":80,"probe_id":"e5231dd0","probe_match":true,"module":"watch_composite_114.py","truth_plane":"CANONICAL","commit_sha":"0a6ad63985a5f846451ad7bfcfc40132c68c9060","agent_branch_sha":"e1c114bebcdb146fd873dd9a0142a0a6cdf42d4f","content_tweet_id":"2026194703079682302"},
+  "r163_result": {"N":115,"N_str":"5x23","tau":4,"omega_k":2,"topo":1.30,"poly_c":0.451517,"fire_ignited":false,"fire_number":null,"delta_V":0.036121,"V_global_prev":5.299746,"V_global_new":5.335867,"ceiling_tick":81,"truth_plane":"CANONICAL","probe_id":"6fc7127b","probe_match":true,"module":"watch_composite_115.py"},
+  "r166_result": {"N":118,"N_str":"2x59","tau":4,"omega_k":2,"topo":1.3,"poly_c":0.449143,"fire_ignited":false,"fire_number":null,"delta_V":0.035931,"V_global_prev":5.420190,"V_global_new":5.456121,"ceiling_tick":84,"truth_plane":"CANONICAL","module":"watch_composite_118.py","commit_sha":"c2527d53de3df6444fbe52f202b5e82b73a48a73","agent_branch_sha":"d21d1ce1b48d8e0736d1deb66e24258d847443a4"},
+  "r163_browser_jobs": {"perplexity": {"job_id": "6fc7127b-2b8a-4bf8-8bb1-0413daea5c78", "status": "completed", "launched_at": "2026-02-23T23:08:00-08:00", "completed_at": "2026-02-24T01:04:00-08:00"}},
+  "r166_browser_jobs": {"perplexity": {"job_id": "inline_computed", "status": "completed", "note": "Computed inline from R163 probe + formula"}},
+  "r167_browser_jobs": {"perplexity": {"job_id": "03ee6f43-4bea-4994-bc2b-5f25c4f7468f", "status": "in-flight", "launched_at": "2026-02-24T01:09:23-08:00"}},
   "cron_content_loop": {
-    "last_run": "2026-02-24T00:19:00-08:00",
-    "rounds_covered": [
-      118,
-      119,
-      120,
-      121,
-      122,
-      123,
-      124,
-      125,
-      126,
-      127,
-      128,
-      129,
-      130,
-      131,
-      132,
-      133,
-      134,
-      135,
-      136,
-      137,
-      138,
-      139,
-      140,
-      141,
-      142,
-      143,
-      144,
-      145,
-      146,
-      147,
-      148,
-      149,
-      150,
-      151,
-      152,
-      153,
-      154,
-      155,
-      156,
-      157,
-      158,
-      159,
-      160,
-      161,
-      162,
-      163,
-      164,
-      165
-    ],
-    "last_thread_tweet_id": "2026194703079682302",
-    "arc_posted": "R149-R162",
-    "next_content": "R163+ arc \u2014 pending next CANONICAL round",
-    "last_arc_tweet": "2026209998330589422",
-    "last_arc_media_id": "2026209958304358400",
-    "last_render_round": 164
+    "last_run": "2026-02-24T01:09:23-08:00",
+    "rounds_covered": [118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166],
+    "last_thread_tweet_id": "2026209998330589422",
+    "arc_posted": "R149-R165",
+    "next_content": "R166+ arc \u2014 pending next FIRE (R168 projected)"
   },
   "video_render_status": {
     "consecutive_timeouts": 0,
     "method": "keyframe-stitch os.system ffmpeg",
-    "last_render_round": 162,
-    "tweet_id": "2026194703079682302",
+    "last_render_round": 165,
+    "tweet_id": "2026209998330589422",
     "size_mb": 0.104,
-    "media_id": "2026194660457144320",
+    "media_id": "2026209998330589422",
     "frames": 100,
-    "arc": "R149-R162"
+    "arc": "R149-R165"
   },
   "x_semantic_agent": {
-    "total_capsules": 253,
-    "last_run": "2026-02-24T00:31:12-08:00 R165 +2 cap",
-    "clusters": {
-      "polymarket": 42,
-      "ai_regulation": 4,
-      "crypto_deregulation": 0,
-      "open_source_ai": 8,
-      "agent_economy": 22,
-      "evez_os_adjacent": 0
-    }
+    "total_capsules": 251,
+    "last_run": "2026-02-24T01:09 PST R166 tick",
+    "clusters": {"polymarket": 30, "ai_regulation": 3, "open_source_ai": 6, "agent_economy": 16, "crypto_deregulation": 0, "evez_os_adjacent": 0}
   },
   "maturity": {
-    "K": 165,
-    "S": 165,
-    "F": 25,
-    "phi": 0.151515,
-    "score": "25/165 fires = 15.15%",
-    "v_progress": "5.420190 / 6.000 = 90.34%",
+    "K": 166, "S": 166, "F": 25,
+    "phi": 0.150602,
+    "score": "25/166 fires = 15.06%",
+    "v_progress": "5.456121 / 6.000 = 90.94%",
     "V_v2": 6.0,
-    "milestone": "FIRE#25 at R165. N=117=3^2x13 FIRE confirmed. V=5.420190.",
-    "next_fire": "R168 est \u2014 N=120=2\u00b3\u00d73\u00d75 tau=16 omega_k=3 poly_c~0.715 FIRE est"
+    "milestone": "R166 NO FIRE. N=118=2x59 poly_c=0.449143. V=5.456121.",
+    "next_fire": "R168 est \u2014 N=120=2^3x3x5 poly_c~0.789 FIRE#26 HIGH"
   },
-  "ctc_engine": {
-    "status": "COMMITTED",
-    "commit_sha": "7b42171dbd824953346561b44659ea99f5cbff8b",
-    "TCS": 0.924504,
-    "verdict": "PASS",
-    "est_ceiling_round": 180
-  },
+  "ctc_engine": {"status":"COMMITTED","commit_sha":"7b42171dbd824953346561b44659ea99f5cbff8b","TCS":0.924504,"verdict":"PASS","est_ceiling_round":180},
   "infra_notes": {
-    "content_posted": "R151-R164 arc \u2014 tweet 2026209998330589422",
-    "v_milestone": "V=5.420190 \u2014 90.34% of ceiling",
-    "r165_note": "N=117=3^2x13 FIRE#25 poly_c=0.526724 V=5.42019 CEILING\u00d783 probe ba99fab0 confirmed"
-  },
-  "r163_result": {
-    "N": 115,
-    "N_str": "5x23",
-    "tau": 4,
-    "omega_k": 2,
-    "topo": 1.3,
-    "poly_c": 0.451531,
-    "fire_ignited": false,
-    "delta_V": 0.036122,
-    "V_global_prev": 5.299746,
-    "V_global_new": 5.335868,
-    "ceiling_tick": 81,
-    "probe_id": "6fc7127b",
-    "probe_match": true,
-    "module": "watch_composite_115.py",
-    "truth_plane": "CANONICAL"
-  },
-  "r164_browser_jobs": {
-    "perplexity": {
-      "job_id": "233692de-2a22-4151-8986-8ea5bb335e08",
-      "status": "completed",
-      "launched_at": "2026-02-23T23:31:00-08:00",
-      "completed_at": "2026-02-24T00:12:00-08:00"
-    }
-  },
-  "r164_result": {
-    "N": 116,
-    "N_str": "2^2x29",
-    "tau": 6,
-    "omega_k": 2,
-    "topo": 1.3,
-    "poly_c": 0.5273,
-    "fire_ignited": true,
-    "fire_number": 24,
-    "delta_V": 0.042184,
-    "V_global_prev": 5.335868,
-    "V_global_new": 5.378052,
-    "ceiling_tick": 82,
-    "probe_id": "233692de",
-    "probe_match": true,
-    "module": "watch_composite_116.py",
-    "truth_plane": "CANONICAL"
-  },
-  "r165_browser_jobs": {
-    "perplexity": {
-      "job_id": "ba99fab0-416e-451f-88ee-c472112e22d3",
-      "status": "completed",
-      "launched_at": "2026-02-24T00:12:00-08:00",
-      "completed_at": "2026-02-24T00:31:12-08:00"
-    }
-  },
-  "r165_result": {
-    "N": 117,
-    "N_str": "3^2x13",
-    "tau": 6,
-    "omega_k": 2,
-    "topo": 1.3,
-    "poly_c": 0.526724,
-    "fire_ignited": true,
-    "fire_number": 25,
-    "delta_V": 0.042138,
-    "V_global_prev": 5.378052,
-    "V_global_new": 5.42019,
-    "ceiling_tick": 83,
-    "probe_id": "ba99fab0",
-    "probe_match": true,
-    "module": "watch_composite_117.py",
-    "truth_plane": "CANONICAL"
-  },
-  "r166_browser_jobs": {
-    "perplexity": {
-      "job_id": "3ee945c6-2293-4771-abd3-47e6775ab0dd",
-      "status": "in-flight",
-      "launched_at": "2026-02-24T00:31:12-08:00"
-    }
+    "content_posted": "R149-R165 arc \u2014 tweet 2026209998330589422",
+    "v_milestone": "V=5.456121 \u2014 90.94% of ceiling",
+    "r166_note": "N=118=2x59 NO FIRE poly_c=0.449143 V=5.456121 CEILING\u00d784 commit c2527d53",
+    "r168_fire_watch": "N=120=2^3x3x5 poly_c=0.789274 FIRE#26 HIGH CONFIDENCE",
+    "video_fix": "os.system ffmpeg confirmed working"
   }
 }
