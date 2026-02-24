@@ -1,23 +1,18 @@
 {
-  "current_round": 150,
-  "V_global": 4.825967,
-  "ceiling_tick": 68,
+  "current_round": 151,
+  "V_global": 4.849167,
+  "ceiling_tick": 69,
   "latest_tweet_id": "2026119263824543821",
   "fire_count": 17,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-23T18:30:00-08:00",
+  "updated_at": "2026-02-23T19:02:00-08:00",
   "watchlist": {
-    "R151_est": "N=103=prime \u2014 PRIME BLOCK 11 \u2014 poly_c~0.290 \u2014 NO FIRE expected",
-    "R152_FIRE_WATCH": "N=104=2\u00b3\u00d713 tau=8 omega_k=2 topo=1.30 poly_c~0.529 \u2014 FIRE WATCH #18 \u2014 probe pending"
+    "R152_FIRE_WATCH": "N=104=2\u00b3\u00d713 tau=8 omega_k=2 topo=1.30 poly_c~0.595 \u2014 FIRE WATCH #18 \u2014 probe db182ac1 in-flight",
+    "R153_est": "N=105=3\u00d75\u00d77 tau=3 omega_k=3 topo=1.45 poly_c~0.408 \u2014 NO FIRE expected"
   },
-  "r147_result": {"N": 99, "N_str": "3\u00b2\u00d711", "tau": 6, "omega_k": 2, "poly_c": 0.545164, "fire_ignited": true, "V_global_new": 4.721184, "ceiling_tick": 65, "commit_sha": "8654d81946c250c986ae8a7b8aeea48a532f31ed", "tweet_id": "2026119263824543821", "fire_number": 15, "truth_plane": "CANONICAL"},
-  "r148_result": {"N": 100, "N_str": "2\u00b2\u00d75\u00b2", "tau": 9, "omega_k": 2, "poly_c": 0.622909, "fire_ignited": true, "V_global_new": 4.771017, "ceiling_tick": 66, "commit_sha": "e4aef1b95a232344275c3a23dec6c3fc4722b571", "fire_number": 16, "tweet_id": null, "truth_plane": "CANONICAL"},
-  "r149_result": {"N": 101, "N_str": "prime", "tau": 1, "omega_k": 1, "poly_c": 0.171900, "fire_ignited": false, "V_global_new": 4.784774, "ceiling_tick": 67, "commit_sha": "f2a1e8e17d315a42eec229f3fc2430083c94a548", "tweet_id": null, "truth_plane": "CANONICAL"},
   "r150_result": {"N": 102, "N_str": "2\u00d73\u00d717", "tau": 4, "omega_k": 3, "topo": 1.45, "poly_c": 0.514917, "fire_ignited": true, "delta_V": 0.041193, "V_global_prev": 4.784774, "V_global_new": 4.825967, "ceiling_tick": 68, "commit_sha": "c9aafdce27339f3b42f94a91b37fca1fefce7308", "agent_sha": "110a8df02a4087d02dc97228c870082ff66a64b9", "probe_id": "d25d4755-0987-484e-b375-e1e82291c545", "probe_poly_c": 0.514917, "probe_match": true, "module": "watch_composite_102.py", "truth_plane": "CANONICAL", "tweet_id": null, "fire_number": 17},
-  "r151_browser_jobs": {"perplexity": {"job_id": "ff5be9b4-b179-4436-ba97-4c60d97ed3f2", "status": "in-flight", "probe_poly_c": null, "fire_confirmed": null}},
-  "cron_content_loop": {"last_run": "2026-02-23T18:15 PST", "rounds_covered": [118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150], "last_thread_tweet_id": "2026119263824543821"},
-  "video_render_status": {"consecutive_timeouts": 0, "method": "PIL+ffmpeg inline (workbench)", "last_render": "2026-02-23T18:15 PST", "last_render_round": 147, "tweet_id": "2026119263824543821"},
-  "x_semantic_agent": {"total_capsules": 154, "last_run": "2026-02-23T18:30 PST R150 +12 caps"},
-  "maturity": {"K": 150, "S": 150, "F": 17, "phi": 0.1133, "score": "17/150 fires = 11.33%", "v_progress": "4.825967 / 6.000 = 80.43%", "next_fire": "R152 FIRE WATCH #18 \u2014 N=104=2\u00b3\u00d713 poly_c~0.529"},
-  "infra_notes": {"workbench_filesystem_gap": "workbench sandbox cannot write to /cells/\u2026/workspace/ \u2014 state file reconciled via file_write", "ci_status": "evez-os CI failure (livestream_intel.py) \u2014 CrawFather/Evez666 startup_failure expected \u2014 lord-evez666 live", "content_unposted": "R148 FIRE #16, R149 NO FIRE, R150 FIRE #17 still need video+tweet"}
+  "r151_result": {"N": 103, "N_str": "prime", "tau": 2, "omega_k": 1, "topo": 1.15, "poly_c": 0.290000, "fire_ignited": false, "delta_V": 0.023200, "V_global_prev": 4.825967, "V_global_new": 4.849167, "ceiling_tick": 69, "commit_sha": "ef6fff7bbf24e7f15a4eda4cde4d5d89a9944f6d", "agent_sha": "06393970cc9a53666ea6c2fb4b5888b825fad9ac", "probe_id": "ff5be9b4-b179-4436-ba97-4c60d97ed3f2", "probe_poly_c": 0.290, "probe_match": true, "module": "prime_block_watch_11.py", "truth_plane": "CANONICAL", "prime_block": 11, "tweet_id": null},
+  "r152_browser_jobs": {"perplexity": {"job_id": "db182ac1-d8d3-45d3-8c93-ecc36f1388ae", "status": "in-flight", "probe_poly_c": null, "fire_confirmed": null}},
+  "maturity": {"K": 151, "S": 151, "F": 17, "phi": 0.1126, "score": "17/151 fires = 11.26%", "v_progress": "4.849167 / 6.000 = 80.82%", "next_fire": "R152 FIRE WATCH #18 \u2014 N=104=2\u00b3\u00d713 poly_c~0.595 \u2014 probe db182ac1"},
+  "infra_notes": {"ci_status": "evez-os CI failure on every push (broken workflow) \u2014 CrawFather/Evez666 startup_failure expected \u2014 Evez666 new dependabot run 22334572064", "content_unposted": "R148 FIRE #16, R149 NO FIRE, R150 FIRE #17, R151 NO FIRE \u2014 all need video+tweet"}
 }

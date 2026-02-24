@@ -1,7 +1,7 @@
 {
   "overall_health": "GREEN",
   "buses": {"spawn_bus": "PASS", "capability_bus": "PASS", "validator_bus": "PASS"},
-  "summary": "R150 tick. GREEN. FIRE #17 N=102=2\u00d73\u00d717 confirmed. R151 probe ff5be9b4 in-flight.",
-  "last_run": "2026-02-24T02:33:12+00:00",
-  "last_round": 150
+  "summary": "R151 tick. GREEN. PRIME BLOCK #11 N=103=prime NO FIRE. R152 probe db182ac1 in-flight. FIRE WATCH #18.",
+  "last_run": "2026-02-24T03:02:00+00:00",
+  "last_round": 151
 }
