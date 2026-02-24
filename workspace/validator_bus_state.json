@@ -1,19 +1,12 @@
 {
-  "last_run": "2026-02-23T16:31:00-08:00",
-  "last_round": 145,
-  "status": "GREEN",
-  "validation": {
-    "N": 97,
-    "poly_c_stored": 0.173471,
-    "poly_c_recalc": 0.173471,
-    "delta": 1.7e-07,
-    "match": true,
-    "probe_match": true,
-    "fire_stored": false,
-    "fire_recalc": false,
-    "fire_match": true,
-    "truth_plane": "CANONICAL",
-    "verdict": "PASS"
-  },
-  "health": "PASS"
+  "health": "PASS",
+  "N_int": 99,
+  "round": 147,
+  "poly_c_stored": 0.545164,
+  "poly_c_recalc": 0.545084,
+  "delta": 7.959e-05,
+  "probe_match": true,
+  "note": "Uses N_int (integer N=99) not round number (147)",
+  "last_run": "2026-02-23T17:31:00-08:00",
+  "last_round": 147
 }

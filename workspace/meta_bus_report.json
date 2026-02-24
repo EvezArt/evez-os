@@ -1,13 +1,11 @@
 {
-  "last_run": "2026-02-23T16:31:00-08:00",
-  "last_round": 145,
   "overall_health": "GREEN",
   "buses": {
     "spawn_bus": "PASS",
     "capability_bus": "PASS",
     "validator_bus": "PASS"
   },
-  "alerts": [],
-  "unblocks": [],
-  "summary": "R145 tick complete. All buses GREEN. FIRE WATCH #14 pending R146 (probe fd98d595 in-flight)."
+  "summary": "R147 tick. GREEN. R148 probe c6f022de in-flight. FIRE #15 N=99 confirmed.",
+  "last_run": "2026-02-23T17:31:00-08:00",
+  "last_round": 147
 }
