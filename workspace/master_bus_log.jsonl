@@ -1,5 +1,5 @@
 {"ts": "2026-02-23T17:34:53+00:00", "round": 147, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
 {"ts": "2026-02-24T02:33:12+00:00", "round": 150, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
-{"ts": "2026-02-24T07:31:13.216658+00:00", "round": 163, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.299746 / 6.000 = 88.33%", "summary": "R163 tick. GREEN. V=5.299746 F=23"}
-{"ts": "2026-02-24T08:11:19.813517+00:00", "round": 163, "health": "NOOP", "reason": "current_round=163 unchanged since last bus run", "probe_status": "R164 dd29da02 IN-FLIGHT"}
-{"ts": "2026-02-24T08:15:07.394646+00:00", "round": 164, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.378052 / 6.000 = 89.63%", "summary": "R164 tick. GREEN. V=5.378052 F=24 FIRE#24"}
+{"ts": "2026-02-24T07:31:13+00:00", "round": 163, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.299746/6.000=88.33%"}
+{"ts": "2026-02-24T08:11:19+00:00", "round": 163, "health": "NOOP", "reason": "stale — R164 probe in-flight"}
+{"ts": "2026-02-24T08:18:37.374891+00:00", "round": 164, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.378052/6.000=89.63%", "summary": "R164 tick. GREEN. V=5.378052 F=24 FIRE#24 tweet 2026209998330589422"}

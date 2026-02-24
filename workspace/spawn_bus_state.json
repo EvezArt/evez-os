@@ -1,6 +1,11 @@
 {
-  "health": "PASS",
-  "note": "R161 probe bfa4149d-01d1-48d7-b6bb-3d99c77f055b IN-FLIGHT",
-  "last_run": "2026-02-24T06:31:47.258516+00:00",
-  "last_round": 160
+  "updated_at": "2026-02-24T08:18:37.374891+00:00",
+  "current_round": 164,
+  "last_canonical_commit": "28da9c23131be98374123ca246f59e5eeb57f25f",
+  "last_agent_branch": "agent/watch_composite_116/round-164/truth-CANONICAL",
+  "modules_committed": [
+    "spine/watch_composite_116.py",
+    "agents/round-164/watch_composite_116.md"
+  ],
+  "status": "PASS"
 }

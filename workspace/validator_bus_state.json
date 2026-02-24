@@ -1,11 +1,12 @@
 {
-  "health": "PASS",
-  "N_int": 112,
-  "round": 160,
-  "poly_c_stored": 0.62833,
-  "poly_c_recalc": 0.628337,
-  "delta": 7.44e-06,
-  "probe_match": true,
-  "last_run": "2026-02-24T06:31:47.258516+00:00",
-  "last_round": 160
+  "updated_at": "2026-02-24T08:18:37.374891+00:00",
+  "current_round": 164,
+  "poly_c_inline": 0.52731,
+  "poly_c_probe": 0.5273,
+  "delta": 1e-05,
+  "gate": "PASS (delta < 1e-3)",
+  "V_global_after": 5.378052,
+  "fire_confirmed": true,
+  "fire_number": 24,
+  "truth_plane": "CANONICAL"
 }

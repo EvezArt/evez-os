@@ -2,10 +2,10 @@
   "current_round": 164,
   "V_global": 5.378052,
   "ceiling_tick": 82,
-  "latest_tweet_id": "2026194703079682302",
+  "latest_tweet_id": "2026209998330589422",
   "fire_count": 24,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-24T00:12:00-08:00",
+  "updated_at": "2026-02-24T00:19:00-08:00",
   "watchlist": {
     "R165_est": "N=117=3\u00b2\u00d713 tau=6 omega_k=2 topo=1.30 poly_c~0.491 \u2014 borderline NO FIRE est",
     "R166_est": "N=118=2\u00d759 tau=4 omega_k=2 topo=1.30 poly_c~0.448 \u2014 NO FIRE est",
@@ -93,7 +93,7 @@
     }
   },
   "cron_content_loop": {
-    "last_run": "2026-02-23T23:15 PST",
+    "last_run": "2026-02-24T00:19:00-08:00",
     "rounds_covered": [
       118,
       119,
@@ -145,7 +145,10 @@
     ],
     "last_thread_tweet_id": "2026194703079682302",
     "arc_posted": "R149-R162",
-    "next_content": "R163+ arc \u2014 pending next CANONICAL round"
+    "next_content": "R163+ arc \u2014 pending next CANONICAL round",
+    "last_arc_tweet": "2026209998330589422",
+    "last_arc_media_id": "2026209958304358400",
+    "last_render_round": 164
   },
   "video_render_status": {
     "consecutive_timeouts": 0,
