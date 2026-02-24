@@ -1,12 +1,1 @@
-{
-  "health": "PASS",
-  "N_int": 101,
-  "round": 149,
-  "poly_c_stored": 0.1719,
-  "poly_c_recalc": 0.171897,
-  "delta": 0.000003,
-  "probe_match": true,
-  "note": "Uses N_int (integer N=101) not round number (149). Prime block: topo=1.15 tau=1 ln(1)=0.",
-  "last_run": "2026-02-23T18:07:00-08:00",
-  "last_round": 149
-}
+{"health": "PASS", "N_int": 102, "round": 150, "poly_c_stored": 0.514917, "poly_c_recalc": 0.516403, "delta": 0.00148595, "probe_match": true, "last_run": "2026-02-24T02:33:12+00:00", "last_round": 150}

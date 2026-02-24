@@ -1,67 +1,23 @@
 {
-  "current_round": 149,
-  "V_global": 4.784774,
-  "ceiling_tick": 67,
+  "current_round": 150,
+  "V_global": 4.825967,
+  "ceiling_tick": 68,
   "latest_tweet_id": "2026119263824543821",
-  "fire_count": 16,
+  "fire_count": 17,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-23T18:15:00-08:00",
+  "updated_at": "2026-02-23T18:30:00-08:00",
   "watchlist": {
-    "R150_FIRE_WATCH": "N=102=2\u00d73\u00d717 tau=4 omega_k=3 topo=1.45 poly_c~0.517 \u2014 FIRE WATCH #17 \u2014 probe d25d4755 in-flight",
-    "R151_est": "N=103=prime \u2014 PRIME BLOCK 11 \u2014 NO FIRE expected"
+    "R151_est": "N=103=prime \u2014 PRIME BLOCK 11 \u2014 poly_c~0.290 \u2014 NO FIRE expected",
+    "R152_FIRE_WATCH": "N=104=2\u00b3\u00d713 tau=8 omega_k=2 topo=1.30 poly_c~0.529 \u2014 FIRE WATCH #18 \u2014 probe pending"
   },
-  "r145_result": {"N": 97, "N_str": "prime", "tau": 1, "omega_k": 1, "topo": 1.15, "poly_c": 0.173471, "fire_ignited": false, "delta_V": 0.013878, "V_global_prev": 4.619952, "V_global_new": 4.63383, "ceiling_tick": 63, "commit_sha": "a14da7eb049bbc837b2c54c29ad70b4e557a725a", "probe_id": "a459d35f-22b5-46e6-9ced-3555839b9b7f", "probe_poly_c": 0.173, "probe_match": true, "module": "prime_block_watch_9.py", "truth_plane": "CANONICAL"},
-  "r146_result": {"N": 98, "N_str": "2\u00d77\u00b2", "tau": 6, "omega_k": 2, "topo": 1.3, "poly_c": 0.546758, "fire_ignited": true, "delta_V": 0.043741, "V_global_prev": 4.63383, "V_global_new": 4.677571, "ceiling_tick": 64, "commit_sha": "743f66f6badc71bff33534977ab6dfe63a67dc91", "probe_id": "fd98d595-5bbc-4193-970e-5af04b46897c", "probe_poly_c": 0.547, "probe_match": true, "module": "watch_composite_98.py", "truth_plane": "CANONICAL", "tweet_id": "2026102797020647692", "fire_number": 14},
-  "r147_result": {"N": 99, "N_str": "3\u00b2\u00d711", "tau": 6, "omega_k": 2, "topo": 1.3, "poly_c": 0.545164, "fire_ignited": true, "delta_V": 0.043613, "V_global_prev": 4.677571, "V_global_new": 4.721184, "ceiling_tick": 65, "commit_sha": "8654d81946c250c986ae8a7b8aeea48a532f31ed", "probe_id": "0fc7c72f-ddbc-4c7f-b179-06e3c46bfcd9", "probe_poly_c": 0.545164, "probe_match": true, "module": "watch_composite_99.py", "truth_plane": "CANONICAL", "tweet_id": "2026119263824543821", "media_id": "2026119214688284672", "video_size_mb": 0.12, "fire_number": 15},
-  "r148_result": {"N": 100, "N_str": "2\u00b2\u00d75\u00b2", "tau": 9, "omega_k": 2, "topo": 1.3, "poly_c": 0.622909, "fire_ignited": true, "delta_V": 0.049833, "V_global_prev": 4.721184, "V_global_new": 4.771017, "ceiling_tick": 66, "commit_sha": "e4aef1b95a232344275c3a23dec6c3fc4722b571", "agent_sha": "fd4f7a8e07d3433b4d457110f2e799a51265f3fc", "probe_id": "c6f022de-6eda-47bb-b59c-8b9f7c7ebe7f", "probe_poly_c": 0.622909, "probe_match": true, "module": "watch_composite_100.py", "truth_plane": "CANONICAL", "fire_number": 16, "tweet_id": null, "video_size_mb": null},
-  "r149_result": {"N": 101, "N_str": "prime", "tau": 1, "omega_k": 1, "topo": 1.15, "poly_c": 0.171900, "fire_ignited": false, "delta_V": 0.013757, "V_global_prev": 4.771017, "V_global_new": 4.784774, "ceiling_tick": 67, "commit_sha": "f2a1e8e17d315a42eec229f3fc2430083c94a548", "agent_sha": "4fa19b992c8ab0908fadd1f03ebf355621b8c3e7", "probe_id": "cc1cac6d-7c93-478f-8bae-cf57d809d3ed", "probe_poly_c": 0.1719, "probe_match": true, "module": "prime_block_watch_10.py", "truth_plane": "CANONICAL", "prime_block": 10, "tweet_id": null},
-  "r150_browser_jobs": {
-    "perplexity": {
-      "job_id": "d25d4755-0987-484e-b375-e1e82291c545",
-      "status": "in-flight",
-      "probe_poly_c": null,
-      "fire_confirmed": null
-    }
-  },
-  "cron_content_loop": {
-    "last_run": "2026-02-23T18:15 PST",
-    "rounds_covered": [118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149],
-    "last_thread_tweet_id": "2026119263824543821"
-  },
-  "video_render_status": {
-    "consecutive_timeouts": 0,
-    "method": "PIL+ffmpeg inline (workbench)",
-    "last_render": "2026-02-23T18:15 PST",
-    "last_render_round": 147,
-    "tweet_id": "2026119263824543821",
-    "media_id": "2026119214688284672",
-    "size_mb": 0.12,
-    "duration_s": 6.0
-  },
-  "x_semantic_agent": {
-    "total_capsules": 136,
-    "last_run": "2026-02-23T18:07 PST R149 +17 caps"
-  },
-  "cloudflare_agent": {
-    "status": "committed",
-    "worker_name": "evez-os-autonomizer",
-    "durable_object": "EvezAutonomizerAgent",
-    "deploy_cmd": "cd cloudflare-autonomizer && npm install && wrangler deploy",
-    "note": "Requires CLOUDFLARE_API_TOKEN. Steven runs wrangler deploy once."
-  },
-  "maturity": {
-    "K": 149,
-    "S": 149,
-    "F": 16,
-    "phi": 0.1074,
-    "score": "16/149 fires = 10.74%",
-    "v_progress": "4.784774 / 6.000 = 79.75%",
-    "next_fire": "R150 FIRE WATCH #17 \u2014 N=102=2\u00d73\u00d717 poly_c~0.517 \u2014 probe d25d4755 in-flight"
-  },
-  "infra_notes": {
-    "workbench_filesystem_gap": "workbench sandbox cannot write to /cells/\u2026/workspace/ \u2014 state file reconciled via file_write after each round",
-    "master_bus_validator_fix": "ValidatorBus uses N_int not round_number",
-    "ci_status": "evez-os CI showing failure (evez.yml) \u2014 CrawFather startup_failure \u2014 lord-evez666 live on Vercel no CI",
-    "content_unposted": "R148 FIRE #16 and R149 NO FIRE still need video+tweet \u2014 next content cron"
-  }
+  "r147_result": {"N": 99, "N_str": "3\u00b2\u00d711", "tau": 6, "omega_k": 2, "poly_c": 0.545164, "fire_ignited": true, "V_global_new": 4.721184, "ceiling_tick": 65, "commit_sha": "8654d81946c250c986ae8a7b8aeea48a532f31ed", "tweet_id": "2026119263824543821", "fire_number": 15, "truth_plane": "CANONICAL"},
+  "r148_result": {"N": 100, "N_str": "2\u00b2\u00d75\u00b2", "tau": 9, "omega_k": 2, "poly_c": 0.622909, "fire_ignited": true, "V_global_new": 4.771017, "ceiling_tick": 66, "commit_sha": "e4aef1b95a232344275c3a23dec6c3fc4722b571", "fire_number": 16, "tweet_id": null, "truth_plane": "CANONICAL"},
+  "r149_result": {"N": 101, "N_str": "prime", "tau": 1, "omega_k": 1, "poly_c": 0.171900, "fire_ignited": false, "V_global_new": 4.784774, "ceiling_tick": 67, "commit_sha": "f2a1e8e17d315a42eec229f3fc2430083c94a548", "tweet_id": null, "truth_plane": "CANONICAL"},
+  "r150_result": {"N": 102, "N_str": "2\u00d73\u00d717", "tau": 4, "omega_k": 3, "topo": 1.45, "poly_c": 0.514917, "fire_ignited": true, "delta_V": 0.041193, "V_global_prev": 4.784774, "V_global_new": 4.825967, "ceiling_tick": 68, "commit_sha": "c9aafdce27339f3b42f94a91b37fca1fefce7308", "agent_sha": "110a8df02a4087d02dc97228c870082ff66a64b9", "probe_id": "d25d4755-0987-484e-b375-e1e82291c545", "probe_poly_c": 0.514917, "probe_match": true, "module": "watch_composite_102.py", "truth_plane": "CANONICAL", "tweet_id": null, "fire_number": 17},
+  "r151_browser_jobs": {"perplexity": {"job_id": "ff5be9b4-b179-4436-ba97-4c60d97ed3f2", "status": "in-flight", "probe_poly_c": null, "fire_confirmed": null}},
+  "cron_content_loop": {"last_run": "2026-02-23T18:15 PST", "rounds_covered": [118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150], "last_thread_tweet_id": "2026119263824543821"},
+  "video_render_status": {"consecutive_timeouts": 0, "method": "PIL+ffmpeg inline (workbench)", "last_render": "2026-02-23T18:15 PST", "last_render_round": 147, "tweet_id": "2026119263824543821"},
+  "x_semantic_agent": {"total_capsules": 154, "last_run": "2026-02-23T18:30 PST R150 +12 caps"},
+  "maturity": {"K": 150, "S": 150, "F": 17, "phi": 0.1133, "score": "17/150 fires = 11.33%", "v_progress": "4.825967 / 6.000 = 80.43%", "next_fire": "R152 FIRE WATCH #18 \u2014 N=104=2\u00b3\u00d713 poly_c~0.529"},
+  "infra_notes": {"workbench_filesystem_gap": "workbench sandbox cannot write to /cells/\u2026/workspace/ \u2014 state file reconciled via file_write", "ci_status": "evez-os CI failure (livestream_intel.py) \u2014 CrawFather/Evez666 startup_failure expected \u2014 lord-evez666 live", "content_unposted": "R148 FIRE #16, R149 NO FIRE, R150 FIRE #17 still need video+tweet"}
 }
