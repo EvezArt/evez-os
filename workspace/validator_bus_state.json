@@ -1,1 +1,1 @@
-{"health": "PASS", "N_int": 103, "round": 151, "poly_c_stored": 0.29, "poly_c_recalc": 0.289998, "delta": 0.000002, "probe_match": true, "last_run": "2026-02-24T03:02:00+00:00", "last_round": 151}
+{"health":"PASS","N_int":108,"round":156,"poly_c_stored":0.668063,"poly_c_recalc":0.668063,"delta":0.0,"probe_match":true,"all_pass":true,"note":"N=108=2^2x3^3. probe 29f85457 confirmed FIRE poly_c=0.668.","last_run":"2026-02-24T04:31:00+00:00","last_round":156}

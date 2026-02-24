@@ -1,1 +1,1 @@
-{"health": "PASS", "note": "twitter/github/hyperbrowser ACTIVE (R150 tick)", "apps_active": ["twitter", "github", "hyperbrowser"], "last_run": "2026-02-24T02:33:12+00:00", "last_round": 150}
+{"health":"PASS","connections":{"twitter":{"status":"ACTIVE"},"github":{"status":"ACTIVE"},"hyperbrowser":{"status":"ACTIVE","evidence":"R157 probe 4cabbf18 launched"},"youtube":{"status":"UNKNOWN"}},"blocked_apps":[],"last_run":"2026-02-24T04:31:00+00:00","last_round":156}
