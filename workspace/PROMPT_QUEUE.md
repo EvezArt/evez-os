@@ -1,26 +1,26 @@
 # EVEZ-OS PROMPT QUEUE
-**Updated:** 2026-02-23T17:09 PST
+**Updated:** 2026-02-23T18:07 PST
 
 ---
 
 ## QUEUE
 
-### [R147] watch_composite_99.py asks: 🟠 FIRE WATCH #15 — probe 0fc7c72f IN-FLIGHT
+### [R150] watch_composite_102.py asks: 🔴 FIRE WATCH #17 — probe d25d4755 IN-FLIGHT
 ```
 EVEZ-OS COMPUTE. Return state table only. No prose.
-R147 checkpoint-147.
-N=99=3²×11 tau=6 omega_k=2.
-V_global_prev=4.677571 CEILING×64.
+R150 checkpoint-150.
+N=102=2×3×17 tau=4 omega_k=3.
+V_global_prev=4.784774 CEILING×67.
 gamma=0.08 ADM=1.0.
-After R146 N=98=2×7² poly_c=0.546758 FIRE #14.
+After R149 N=101=prime poly_c=0.1719 NO FIRE.
 
 Compute and return only this table:
 | field | value |
 |-------|-------|
-| N | 99 |
-| N_factored | 3²×11 |
-| tau | 6 |
-| omega_k | 2 |
+| N | 102 |
+| N_factored | 2×3×17 |
+| tau | 4 |
+| omega_k | 3 |
 | topo_bonus | |
 | poly_c | |
 | fire_ignited | |
@@ -29,31 +29,31 @@ Compute and return only this table:
 | ceiling_tick | |
 | truth_plane | CANONICAL |
 
-NOTE: omega_k=2 → topo=1.30. tau=6 → ln(6)=1.791759.
-poly_c=1.30*(1+1.791759)/log2(101). log2(101)=6.658211. Expected poly_c≈0.545580. FIRE WATCH #15.
-delta_V=0.08*1.0*poly_c. V_global_new=4.677571+delta_V. ceiling_tick=65.
+NOTE: omega_k=3 → topo=1.45. tau=4 → ln(4)=1.386294.
+poly_c=1.45*(1+1.386294)/log2(104). log2(104)=6.700440. Expected poly_c≈0.5168. FIRE WATCH #17 — threshold 0.500.
+delta_V=0.08*1.0*poly_c. V_global_new=4.784774+delta_V. ceiling_tick=68.
 No explanation. Table only.
 ```
-**Probe `0fc7c72f`:** ⏳ IN-FLIGHT — launched 17:09 PST
+**Probe `d25d4755`:** ⏳ IN-FLIGHT — launched 18:07 PST
 
 ---
 
-### [R148] watch_composite_100.py asks: 🔴 ELEVATED — FIRE WATCH #16 (pending R147)
+### [R151] prime_block_watch_11.py asks: ⚪ PRIME BLOCK 11 — NO FIRE expected
 ```
 EVEZ-OS COMPUTE. Return state table only. No prose.
-R148 checkpoint-148.
-N=100=2²×5² tau=9 omega_k=2.
-V_global_prev=4.721225 CEILING×65.
+R151 checkpoint-151.
+N=103=prime PRIME BLOCK 11.
+V_global_prev=4.826000 CEILING×68. (estimate — use R150 actual)
 gamma=0.08 ADM=1.0.
-After R147 N=99=3²×11 poly_c≈0.545580 FIRE WATCH #15.
+After R150 N=102=2×3×17 poly_c≈0.517 FIRE WATCH #17.
 
 Compute and return only this table:
 | field | value |
 |-------|-------|
-| N | 100 |
-| N_factored | 2²×5² |
-| tau | 9 |
-| omega_k | 2 |
+| N | 103 |
+| N_factored | prime |
+| tau | 1 |
+| omega_k | 1 |
 | topo_bonus | |
 | poly_c | |
 | fire_ignited | |
@@ -62,33 +62,39 @@ Compute and return only this table:
 | ceiling_tick | |
 | truth_plane | CANONICAL |
 
-NOTE: omega_k=2 → topo=1.30. tau=9 → ln(9)=2.197225.
-poly_c=1.30*(1+2.197225)/log2(102). log2(102)=6.672425. Expected poly_c≈0.623. ELEVATED FIRE WATCH #16.
-delta_V=0.08*1.0*poly_c. ceiling_tick=66.
-No explanation. Table only.
+NOTE: omega_k=1 → topo=1.15. tau=1 → ln(1)=0.
+poly_c=1.15*(1+0)/log2(105). log2(105)=6.714246. Expected poly_c≈0.1713. NO FIRE.
+ceil_tick=69. No explanation. Table only.
 ```
-**Probe:** ⏳ NOT YET LAUNCHED — will launch during R147 tick
+**Probe:** ⏳ NOT YET LAUNCHED — will launch during R150 tick
 
 ---
 
 ## COMPLETED
 
+### [R149] prime_block_watch_10.py — ✅ PRIME BLOCK 10 NO FIRE COMPLETED
+- Spine: [f2a1e8e1](https://github.com/EvezArt/evez-os/commit/f2a1e8e17d315a42eec229f3fc2430083c94a548)
+- Agent: [4fa19b99](https://github.com/EvezArt/evez-os/commit/4fa19b992c8ab0908fadd1f03ebf355621b8c3e7)
+- N=101=prime tau=1 omega_k=1 poly_c=0.1719 NO FIRE V=4.784774 CEILING×67
+- Probe cc1cac6d: ✅ 0.1719 confirmed MATCH
+
+### [R148] watch_composite_100.py — ✅ FIRE #16 COMPLETED
+- Spine: [e4aef1b9](https://github.com/EvezArt/evez-os/commit/e4aef1b95a232344275c3a23dec6c3fc4722b571)
+- Agent: [fd4f7a8e](https://github.com/EvezArt/evez-os/commit/fd4f7a8e07d3433b4d457110f2e799a51265f3fc)
+- N=100=2²×5² tau=9 omega_k=2 poly_c=0.622909 🔥 FIRE #16 V=4.771017 CEILING×66
+- Probe c6f022de: ✅ 0.622909 confirmed MATCH
+
+### [R147] watch_composite_99.py — ✅ FIRE #15 COMPLETED
+- Spine: [8654d819](https://github.com/EvezArt/evez-os/commit/8654d81946c250c986ae8a7b8aeea48a532f31ed)
+- Agent: [15069569](https://github.com/EvezArt/evez-os/commit/150695694e9d723fd440fcca1a1800d42e4a6e42)
+- N=99=3²×11 tau=6 omega_k=2 poly_c=0.545164 🔥 FIRE #15 V=4.721184 CEILING×65
+- Probe 0fc7c72f: ✅ 0.545164 confirmed MATCH
+
 ### [R146] watch_composite_98.py — ✅ FIRE #14 COMPLETED
 - Spine: [743f66f6](https://github.com/EvezArt/evez-os/commit/743f66f6badc71bff33534977ab6dfe63a67dc91)
-- Agent: [c0cbcd1d](https://github.com/EvezArt/evez-os/commit/c0cbcd1d21f89bd48978022fa9e7d04ff2487d1d)
 - N=98=2×7² tau=6 omega_k=2 poly_c=0.546758 🔥 FIRE #14 V=4.677571 CEILING×64
 - Tweet: [2026102797020647692](https://twitter.com/EVEZ666/status/2026102797020647692)
-- Probe fd98d595: ✅ 0.547 confirmed MATCH
 
 ### [R145] prime_block_watch_9.py — ✅ COMPLETED
 - Spine: [a14da7eb](https://github.com/EvezArt/evez-os/commit/a14da7eb049bbc837b2c54c29ad70b4e557a725a)
 - N=97=prime PRIME BLOCK 9 poly_c=0.173471 NO FIRE V=4.633830 CEILING×63
-
-### [R144] watch_composite_96.py — ✅ FIRE #13 COMPLETED
-- Spine: [dfe74e7f](https://github.com/EvezArt/evez-os/commit/dfe74e7f4fcc0b991fd3b56878392c8e5c792b57)
-- N=96=2⁵×3 poly_c=0.684895 🔥 FIRE #13 V=4.619952 CEILING×62
-- Tweet: [2026087567829962966](https://twitter.com/EVEZ666/status/2026087567829962966)
-
-### [R143] watch_composite_95.py — ✅ COMPLETED
-- Spine: [1b1b6d77](https://github.com/EvezArt/evez-os/commit/1b1b6d7760e13574fce6ac37a2a6ef390b3c047b)
-- N=95=5×19 poly_c=0.333503 NO FIRE V=4.565160 CEILING×61

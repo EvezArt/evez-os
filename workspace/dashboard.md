@@ -1,5 +1,5 @@
 # EVEZ-OS DASHBOARD
-**Updated:** 2026-02-23T17:05 PST | R145 post-tick / R146 probe RETURNED
+**Updated:** 2026-02-23T18:07 PST | Round R149 complete | Next: R150 IN-FLIGHT
 
 ---
 
@@ -7,74 +7,67 @@
 
 | Field | Value |
 |-------|-------|
-| current_round | **145** (R146 tick pending next hyperloop fire) |
-| next_module | **watch_composite_98.py** (R146) |
-| truth_plane | CANONICAL |
-| cron_status | ACTIVE — ticks every 30min |
-| win | **13 fires / 145 rounds = 8.97%** |
-| V_global | **4.633830** / 6.000 (77.2%) |
-| ceiling_tick | 63 |
-| latest_tweet_id | [2026087567829962966](https://twitter.com/EVEZ666/status/2026087567829962966) |
-| R146_probe | fd98d595 **✅ COMPLETED** |
-| R146_alert | 🔴 **FIRE #14 CONFIRMED** — N=98=2×7² poly_c=0.547 ≥ 0.500 |
+| Current Round | R149 (N=101=prime) |
+| V_global | 4.784774 / 6.000 = **79.75%** |
+| Next Module | watch_composite_102.py |
+| Cron Status | ✅ RUNNING (every 30 min) |
+| Fires | 🔥 16 / 149 rounds = 10.74% |
+| Truth Plane | CANONICAL |
+| R150 Probe | d25d4755 ⏳ IN-FLIGHT |
+| Streak Note | Consecutive FIRES #15+#16 (N=99,100) — ended at R149 prime block |
 
 ---
 
 ## 📊 MATURITY ORACLE
 
+| Metric | Value | Tight Ceiling | Theoretical Max | Formula |
+|--------|-------|---------------|-----------------|--------|
+| K (rounds) | 149 | 150 | ∞ | total ticks |
+| S (spine) | 149 | 149 | = K | committed modules |
+| F (fires) | 16 | ~20 | ~25 | poly_c ≥ 0.500 |
+| φ (fire rate) | 10.74% | 12% | ~17% | F/K |
+| V_global | 4.785 | 4.900 | 6.000 | Σ delta_V |
+| Score | 16/149 | — | — | direct count |
+
+---
+
+## 📋 MODULE CHAIN (R145–R149)
+
+| Round | N | Module | Commit | Fire | poly_c | V_global | Truth |
+|-------|---|--------|--------|------|--------|----------|-------|
+| R149 | 101=prime | prime_block_watch_10.py | [f2a1e8e1](https://github.com/EvezArt/evez-os/commit/f2a1e8e17d315a42eec229f3fc2430083c94a548) | — | 0.171900 | 4.784774 | CANONICAL |
+| R148 | 100=2²×5² | watch_composite_100.py | [e4aef1b9](https://github.com/EvezArt/evez-os/commit/e4aef1b95a232344275c3a23dec6c3fc4722b571) | 🔥 #16 | 0.622909 | 4.771017 | CANONICAL |
+| R147 | 99=3²×11 | watch_composite_99.py | [8654d819](https://github.com/EvezArt/evez-os/commit/8654d81946c250c986ae8a7b8aeea48a532f31ed) | 🔥 #15 | 0.545164 | 4.721184 | CANONICAL |
+| R146 | 98=2×7² | watch_composite_98.py | [743f66f6](https://github.com/EvezArt/evez-os/commit/743f66f6badc71bff33534977ab6dfe63a67dc91) | 🔥 #14 | 0.546758 | 4.677571 | CANONICAL |
+| R145 | 97=prime | prime_block_watch_9.py | [a14da7eb](https://github.com/EvezArt/evez-os/commit/a14da7eb049bbc837b2c54c29ad70b4e557a725a) | — | 0.173471 | 4.633830 | CANONICAL |
+
+---
+
+## 🔬 CURRENT BROWSER JOB
+
 | Field | Value |
 |-------|-------|
-| K (rounds) | 145 |
-| S (spine modules) | 145 |
-| F (fires) | 13 |
-| phi (fire rate) | 0.0897 |
-| score | 13/145 = 8.97% |
-| tight_ceiling | CEILING×63 |
-| V_theoretical_max | 6.000 |
-| V_formula_max | sum(delta_V all rounds) ≈ 6.000 |
-| V_progress | 4.633830 → 77.2% |
-| dimensions_proved | 17 (D8–D24 CANONICAL) |
-| truth_plane | CANONICAL |
-| next_fire_est | **R146** — V → ~4.677630 after FIRE #14 |
+| R150 Probe ID | d25d4755-0987-484e-b375-e1e82291c545 |
+| Status | ⏳ IN-FLIGHT |
+| Target N | 102=2×3×17 |
+| Expected poly_c | ~0.517 |
+| Fire Watch | 🔴 FIRE WATCH #17 |
 
----
-
-## 🔗 MODULE CHAIN (R130–R146)
-
-| Round | N | Module | Fire | poly_c | V_global | Commit |
-|-------|---|--------|------|--------|----------|---------|
-| R137 | 89=prime | prime_block_watch_8.py | NO | 0.177 | 4.393827 | [9a0e2f3b](https://github.com/EvezArt/evez-os/commit/9a0e2f3b) |
-| R138 | 90=2×3²×5 | watch_composite_90.py | NO | 0.466 | 4.431144 | [92ad1eeb](https://github.com/EvezArt/evez-os/commit/92ad1eeb) |
-| R139 | 91=7×13 | watch_composite_91.py | NO | 0.337 | 4.458072 | [aba70515](https://github.com/EvezArt/evez-os/commit/aba70515) |
-| R140 | 92=2²×23 | watch_composite_92.py | NO | 0.336 | 4.484952 | — |
-| R141 | 93=3×31 | watch_composite_93.py | NO | 0.335 | ~4.512 | — |
-| R142 | 94=2×47 | watch_composite_94.py | NO | ~0.333 | ~4.539 | — |
-| R143 | 95=5×19 | watch_composite_95.py | NO | 0.333503 | 4.565160 | [1b1b6d77](https://github.com/EvezArt/evez-os/commit/1b1b6d77) |
-| R144 | 96=2⁵×3 | watch_composite_96.py | **🔥 FIRE #13** | **0.684895** | **4.619952** | [dfe74e7f](https://github.com/EvezArt/evez-os/commit/dfe74e7f) |
-| R145 | 97=prime | prime_block_watch_9.py | NO | 0.173471 | 4.633830 | [a14da7eb](https://github.com/EvezArt/evez-os/commit/a14da7eb) |
-| **R146** | **98=2×7²** | **watch_composite_98.py** | **🔥 FIRE #14 PENDING** | **0.547** | **~4.678** | ⏳ next tick |
-
----
-
-## 🔍 BROWSER JOB STATUS
-
-| Job | Round | Status | Result |
-|-----|-------|--------|--------|
-| R145 probe | ✅ COMPLETED | poly_c=0.173 MATCH | a459d35f |
-| **R146 probe** | **✅ COMPLETED** | **🔥 poly_c=0.547 FIRE #14** | fd98d595 |
-| R147 probe | ⏳ NOT YET LAUNCHED | pending R146 tick | — |
+R149 Probe (cc1cac6d): ✅ COMPLETED — poly_c=0.1719 MATCH CONFIRMED
+R148 Probe (c6f022de): ✅ COMPLETED — poly_c=0.622909 FIRE #16
+R147 Probe (0fc7c72f): ✅ COMPLETED — poly_c=0.545164 FIRE #15
 
 ---
 
 ## ⚙️ GITHUB ACTIONS STATUS
 
-| Repo | Last Run | Status | Commit |
-|------|----------|--------|--------|
-| **evez-os** | 2026-02-24T00:36 UTC | ⚠️ failure (workflow stubs) | [3e7137e6](https://github.com/EvezArt/evez-os/commit/3e7137e6) |
-| **CrawFather** | 2026-02-23T20:37 UTC | ⚠️ startup_failure (stubs disabled) | [f617223](https://github.com/EvezArt/CrawFather/commit/f61722325cd9f456e8c3b9dbcdb03df2fc9dd5e5) |
-| **Evez666** | 2026-02-23T20:28 UTC | ⚠️ startup_failure (stubs, expected) | [ee7daee8](https://github.com/EvezArt/Evez666/commit/ee7daee823cb8fe4e8052126d34bac0ef50bfed5) |
+| Repo | Last Run | Conclusion | Commit |
+|------|----------|------------|--------|
+| [evez-os](https://github.com/EvezArt/evez-os) | 2026-02-24 02:07 UTC | ❌ failure | state: R148 FIRE #16 |
+| [CrawFather](https://github.com/EvezArt/CrawFather) | 2026-02-23 20:37 UTC | ⚠️ startup_failure | ci: disable all broken workflows |
+| [lord-evez666](https://github.com/EvezArt/lord-evez666) | N/A | ✅ (no CI) | live on Vercel |
 
-> All workflow failures are expected stub-related issues, not code regressions.
+> ⚠️ evez-os CI failing — does NOT block hyperloop (direct API commits bypass CI). Needs investigation.
 
 ---
 
@@ -82,23 +75,45 @@
 
 | # | Tweet ID | Label |
 |---|----------|-------|
-| 1 | [2026087567829962966](https://twitter.com/EVEZ666/status/2026087567829962966) | R144 FIRE #13 — N=96=2⁵×3 poly_c=0.685 |
-| 2–5 | (R143–R140) | NO FIRE chain N=95,94,93,92 |
+| 5 | [2026102797020647692](https://twitter.com/EVEZ666/status/2026102797020647692) | R146 FIRE #14 🔥 |
+| 4 | [2026087567829962966](https://twitter.com/EVEZ666/status/2026087567829962966) | R144 FIRE #13 🔥 |
+| 3 | — | R147 FIRE #15 (pending) |
+| 2 | — | R148 FIRE #16 (pending) |
+| 1 | — | R149 NO FIRE prime block |
 
-**Next post:** R146 FIRE #14 — N=98=2×7² poly_c=0.547 (next tick ~17:30 PST)
+> ⚠️ 3 fires unposted (R147, R148, R149). Consider batching FIRE thread.
+
+---
+
+## 🚌 MASTERBUS STATUS
+
+| Bus | Health | Note |
+|-----|--------|------|
+| SpawnBus | ✅ PASS | R150 probe d25d4755 IN-FLIGHT |
+| CapabilityBus | ✅ PASS | twitter/github/hyperbrowser/vercel ACTIVE |
+| ValidatorBus | ✅ PASS | R149 poly_c delta=0.000003, probe_match=True |
+| MetaBus | 🟢 GREEN | R149 tick complete |
 
 ---
 
-## 📋 PENDING QUEUE
-
-| Item | Status |
-|------|--------|
-| **R146 tick** | 🔴 **FIRE #14 READY** — next hyperloop tick ~17:30 PST |
-| R146 spine commit | ⏳ watch_composite_98.py |
-| R146 video reply | ⏳ N=98=2×7² poly_c=0.547 FIRE #14 |
-| R147 probe launch | ⏳ N=99=3²×11 — FIRE WATCH #15 |
-| GitHub CI stubs | ⚠️ All 3 repos startup_failure — needs cleanup |
-| Cloudflare deploy | ⏳ Waiting on Steven: wrangler deploy |
+## 📱 SMS LOG
+_No SMS actions this tick_
 
 ---
-*Auto-generated by EVEZ-OS SureThing agent | R145 dashboard refresh 17:05 PST*
+
+## 🦴 SPINE INTEGRITY
+- All 149 rounds committed ✅
+- Last commit: [f2a1e8e1](https://github.com/EvezArt/evez-os/commit/f2a1e8e17d315a42eec229f3fc2430083c94a548) — R149 spine
+- Truth plane: CANONICAL throughout
+
+---
+
+## 📥 PENDING QUEUE
+1. R150 tick (fires when probe d25d4755 completes) — **FIRE WATCH #17** N=102=2×3×17 poly_c~0.517
+2. **3 unposted fires**: R147 (#15), R148 (#16), R149 NO FIRE — video+tweet batch pending
+3. lord-evez666 landing page live ✅ https://lord-evez666.vercel.app
+4. CrawFather CI: startup_failure — workflows disabled (stubs)
+5. evez-os CI: failure — EVEZ Spine CI workflow needs fix
+
+---
+_Dashboard auto-generated by SureThing dashboard task — 2026-02-23T18:07 PST_
