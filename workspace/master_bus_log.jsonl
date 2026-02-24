@@ -1,7 +1,8 @@
 {"ts": "2026-02-23T17:34:53+00:00", "round": 147, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
 {"ts": "2026-02-24T02:33:12+00:00", "round": 150, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
 {"ts": "2026-02-24T07:31:13+00:00", "round": 163, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.299746/6.000=88.33%"}
-{"ts": "2026-02-24T08:11:19+00:00", "round": 163, "health": "NOOP", "reason": "stale — R164 probe in-flight"}
+{"ts": "2026-02-24T08:11:19+00:00", "round": 163, "health": "NOOP", "reason": "stale \u2014 R164 probe in-flight"}
 {"ts": "2026-02-24T08:19:00+00:00", "round": 164, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.378052/6.000=89.63%", "summary": "R164 GREEN FIRE#24 tweet 2026209998330589422"}
-{"ts": "2026-02-24T08:30:01+00:00", "round": 164, "health": "NOOP", "reason": "stale — R165 probe ba99fab0 in-flight"}
-{"ts": "2026-02-24T08:35:10.418509+00:00", "round": 165, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.420190/6.000=90.34%", "summary": "R165 tick. GREEN. V=5.420190 F=25 FIRE#25 probe ba99fab0 confirmed"}
+{"ts": "2026-02-24T08:30:01+00:00", "round": 164, "health": "NOOP", "reason": "stale \u2014 R165 probe ba99fab0 in-flight"}
+{"ts": "2026-02-24T08:31:12+00:00", "round": 165, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.420190/6.000=90.34%", "summary": "R165 tick. GREEN. V=5.420190 F=25 FIRE#25 probe ba99fab0 confirmed"}
+{"ts": "2026-02-24T09:16:49Z", "round": 167, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.491990/6.000=91.53%", "summary": "R167 NO FIRE N=119=7x17 poly_c=0.448366 V=5.491990 CEILING*85 R168 probe ff4e215a launched"}
