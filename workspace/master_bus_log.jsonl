@@ -1,6 +1,2 @@
-{"ts": "2026-02-23T17:34:53+00:00", "round": 147, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
-{"ts": "2026-02-24T07:31:13+00:00", "round": 163, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.299746/6.000=88.33%"}
-{"ts": "2026-02-24T08:31:12+00:00", "round": 165, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.420190/6.000=90.34%", "summary": "R165 FIRE#25"}
-{"ts": "2026-02-24T09:16:49Z", "round": 167, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.491990/6.000=91.53%", "summary": "R167 NO FIRE"}
-{"ts": "2026-02-24T09:30:19Z", "round": 168, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.555132/6.000=92.59%", "summary": "R168 FIRE#26 N=120=2^3x3x5 poly_c=0.789274 probe ff4e215a CONFIRMED"}
-{"ts": "2026-02-24T10:00:51Z", "round": 169, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "v_progress": "5.582942/6.000=93.05%", "summary": "R169 NO FIRE N=121=11^2 poly_c=0.347627 probe 1016d0ec MATCH(delta=0.0)"}
+{"ts": "2026-02-24T10:31:02.584112+00:00", "round": 170, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}
+{"ts": "2026-02-24T02:31:00-08:00", "round": 171, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS"}

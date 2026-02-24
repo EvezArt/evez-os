@@ -1,13 +1,6 @@
 {
-  "updated_at": "2026-02-24T08:18:37.374891+00:00",
-  "twitter_media_upload": "AVAILABLE",
-  "twitter_post": "AVAILABLE",
-  "github_commit": "AVAILABLE",
-  "hyperbrowser_probe": "AVAILABLE",
-  "groq_inference": "AVAILABLE",
-  "openai": "BLOCKED (quota exceeded)",
-  "elevenlabs": "BLOCKED (401 unusual activity)",
-  "cloudflare_do": "BLOCKED (needs CLOUDFLARE_API_TOKEN)",
-  "x402_wallet": "UNFUNDED ($0.00)",
-  "last_unblock": "twitter_media_upload (was 401, now AVAILABLE after account switch)"
+  "health": "PASS",
+  "note": "twitter/github/hyperbrowser ACTIVE (last tick)",
+  "last_run": "2026-02-24T10:31:02.584112+00:00",
+  "last_round": 170
 }
