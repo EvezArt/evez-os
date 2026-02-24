@@ -1,1 +1,2 @@
 {"ts": "2026-02-23T16:31:00-08:00", "round": 145, "health": "GREEN", "spawn": "PASS", "capability": "PASS", "validator": "PASS", "summary": "R145 tick complete. All buses GREEN. FIRE WATCH #14 pending R146 (probe fd98d595 in-flight)."}
+{"ts": "2026-02-23T17:08:00-08:00", "round": 145, "health": "NOOP", "spawn": "SKIP", "capability": "SKIP", "validator": "SKIP", "summary": "NOOP \u2014 round unchanged since last run (145). No hyperloop tick fired between 16:31 and 17:08. R146 FIRE #14 confirmed via probe fd98d595 \u2014 awaiting next hyperloop tick at ~17:30."}
