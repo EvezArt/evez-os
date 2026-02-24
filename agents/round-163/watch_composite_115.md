@@ -15,17 +15,10 @@
 | ceiling_tick | 81 |
 | truth_plane | CANONICAL |
 
-## Derivation
-- 115 = 5 × 23 (composite, 2 distinct primes)
-- tau(115) = (1+1)(1+1) = 4
-- omega(115) = 2
-- topo = 1.0 + 0.15×2 = 1.30
-- poly_c = 1.30 × (1 + ln(4)) / log2(117) = 0.451531
-- fire_threshold = 0.500 → **NO FIRE**
-
 ## Probe
 - job_id: 6fc7127b-2b8a-4bf8-8bb1-0413daea5c78
 - status: completed
-- confirmed: N=115 poly_c=0.451 NO FIRE delta_V=0.03608
+- confirmed: N=115 poly_c=0.451 NO FIRE
 
-Generated: 2026-02-23T23:31:00-08:00
+## Commit
+- spine: 953e62e2d8509521e558df45d74bd8d840114aec
