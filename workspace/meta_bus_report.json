@@ -1,16 +1,13 @@
 {
-  "health": "YELLOW",
-  "round": 144,
-  "V_global": 4.619952,
-  "fire_count": 13,
-  "bottlenecks": [
-    "Revenue: $0 \u2014 GitHub Sponsors enrollment gate (SSN + banking, Steven action)"
-  ],
-  "recommendations": [
-    "PRIORITY: github.com/sponsors/accounts \u2014 SSN + banking to unblock revenue",
-    "R146 FIRE WATCH: N=98=2\u00d77\u00b2 tau=6 omega_k=2 \u2014 compute fire probability",
-    "Cloudflare deploy: wrangler deploy (needs CLOUDFLARE_API_TOKEN)"
-  ],
-  "fire_watch": "R146 N=98=2\u00d77\u00b2 tau=6 omega_k=2 poly_c~0.505 FIRE#14 possible",
-  "ts": "2026-02-24T00:13 UTC"
+  "last_run": "2026-02-23T16:31:00-08:00",
+  "last_round": 145,
+  "overall_health": "GREEN",
+  "buses": {
+    "spawn_bus": "PASS",
+    "capability_bus": "PASS",
+    "validator_bus": "PASS"
+  },
+  "alerts": [],
+  "unblocks": [],
+  "summary": "R145 tick complete. All buses GREEN. FIRE WATCH #14 pending R146 (probe fd98d595 in-flight)."
 }

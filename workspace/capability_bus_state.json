@@ -1,34 +1,15 @@
 {
-  "registered": [
-    "elevenlabs",
-    "google_cloud_vision",
-    "ably",
-    "alchemy",
-    "all_images_ai",
-    "astica_ai",
-    "backendless",
-    "agent_mail",
-    "apiverve",
-    "cloudconvert",
-    "api_labz",
-    "ai_ml_api",
-    "aivoov",
-    "_2chat",
-    "agenty",
-    "groqcloud",
-    "clicksend",
-    "vercel",
-    "openai",
-    "github",
-    "perplexityai",
-    "twitter",
-    "youtube",
-    "hyperbrowser",
-    "google_maps"
-  ],
-  "blocked": [],
-  "last_run": "2026-02-23T23:31:51.438685+00:00",
-  "total_registered": 25,
-  "total_active": 5,
-  "total_blocked": 0
+  "last_run": "2026-02-23T16:31:00-08:00",
+  "last_round": 145,
+  "status": "GREEN",
+  "capabilities": {
+    "twitter": {"status": "ACTIVE", "ca": "ca_sxgQiPnjXG7g"},
+    "github": {"status": "ACTIVE", "ca": "ca_jJv69XDeYd0w"},
+    "hyperbrowser": {"status": "ACTIVE", "ca": "ca_vmx0L3IJuFxR"},
+    "youtube": {"status": "UNKNOWN", "note": "not yet tested this tick"},
+    "cloudflare": {"status": "BLOCKED", "note": "requires Steven wrangler deploy"},
+    "ably": {"status": "CONFIGURED", "note": "config present, not tested"}
+  },
+  "unblocks": [],
+  "health": "PASS"
 }
