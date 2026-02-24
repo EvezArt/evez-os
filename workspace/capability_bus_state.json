@@ -1,1 +1,1 @@
-{"ts":"2026-02-24T05:30:00+00:00","round":158,"capabilities":{"twitter_post":"ACTIVE","twitter_upload":"ACTIVE","github_commit":"ACTIVE","hyperbrowser":"ACTIVE","ffmpeg_sandbox":"WARN-timeout"},"blocked":[],"notes":"ffmpeg encode in sandbox timing out consistently — reduce frame count or use shell timeout"}
+{"ts":"2026-02-24T06:07:00+00:00","round":160,"capabilities":{"twitter_post":"ACTIVE","twitter_upload":"ACTIVE","github_commit":"ACTIVE","hyperbrowser":"ACTIVE","ffmpeg_sandbox":"ACTIVE"},"blocked":[],"notes":"All capabilities green. ffmpeg fixed via os.system."}
