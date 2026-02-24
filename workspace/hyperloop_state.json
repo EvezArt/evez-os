@@ -1,35 +1,81 @@
 {
-  "current_round": 175,
-  "V_global": 5.807228,
-  "ceiling_tick": 93,
-  "latest_tweet_id": "2026301432635212272",
-  "fire_count": 28,
+  "current_round": 180,
+  "V_global": 6.092900,
+  "ceiling_tick": 98,
+  "latest_tweet_id": "2026360761736454150",
+  "fire_count": 31,
   "truth_plane": "CANONICAL",
-  "updated_at": "2026-02-24T14:20:00+00:00",
+  "updated_at": "2026-02-24T18:15:00+00:00",
   "watchlist": {
-    "R176_est": "N=128=2^7 tau=8 omega_k=1 topo=1.15 poly_c~0.504 — FIRE est",
-    "R177_est": "N=129=3x43 tau=4 omega_k=2 topo=1.30 poly_c~0.441 — NO FIRE est",
-    "R178_est": "N=130=2x5x13 tau=8 omega_k=3 topo=1.45 poly_c~0.579 — FIRE est"
+    "R181_est": "N=133=7x19 tau=4 omega_k=2 topo=1.30 poly_c~0.438 NO FIRE est",
+    "R182_est": "N=134=2x67 tau=4 omega_k=2 topo=1.30 poly_c~0.437 NO FIRE est",
+    "R183_est": "N=135=3^3x5 tau=8 omega_k=2 topo=1.30 poly_c~0.548 FIRE#32 est"
   },
-  "r172_result": {"N": 124, "N_str": "2^2x31", "poly_c": 0.519900, "fire_ignited": true, "fire_number": 27, "V_global_new": 5.695849, "ceiling_tick": 90, "commit_sha": "ef6aa6bb7c3bb1ac01effb9ac77fcdc2cab10a2b"},
-  "r173_result": {"N": 125, "N_str": "5^3", "poly_c": 0.392659, "fire_ignited": false, "V_global_new": 5.727262, "ceiling_tick": 91, "commit_sha": "bf9018aa74a5946221adca132bf6d8de417d1143"},
-  "r174_result": {"N": 126, "N_str": "2x3^2x7", "poly_c": 0.721868, "fire_ignited": true, "fire_number": 28, "V_global_new": 5.785011, "ceiling_tick": 92},
-  "r175_result": {"N": 127, "N_str": "prime", "poly_c": 0.277717, "fire_ignited": false, "prime_block": 16, "V_global_new": 5.807228, "ceiling_tick": 93, "commit_sha": "adf3ac405becbc80cbabd18513c204bde411319f"},
-  "r176_browser_jobs": {"perplexity": {"job_id": "272bebe2-ab46-4834-a243-89d366762af9", "status": "in-flight"}},
-  "video_render_status": {"last_render_round": 175, "tweet_id": "2026301432635212272", "size_mb": 0.109, "arc": "R172-R175", "rendered_at": "2026-02-24T14:20:00+00:00"},
+  "r178_result": {
+    "N": 130, "N_str": "2x5x13", "tau": 8, "omega_k": 3, "topo": 1.45,
+    "poly_c": 0.634015, "fire_ignited": true, "fire_number": 30,
+    "delta_V": 0.050721, "V_global_prev": 5.882836, "V_global_new": 5.933557,
+    "ceiling_tick": 96, "commit_sha": "f01fca499c673715790f75d06c5cc21449d2d664",
+    "note": "CTC EST CEILING ROUND CONFIRMED"
+  },
+  "r179_result": {
+    "N": 131, "N_str": "prime", "tau": 2, "omega_k": 1, "topo": 1.15,
+    "poly_c": 0.275867, "fire_ignited": false, "prime_block": 17,
+    "delta_V": 0.022069, "V_global_prev": 5.933557, "V_global_new": 5.955626,
+    "ceiling_tick": 97, "commit_sha": "944490ee4d9723c75bcbb4aba962e5bbc7aa326f",
+    "content_tweet_id": "2026360761736454150"
+  },
+  "r180_result": {
+    "N": 132, "N_str": "2^2x3x11", "tau": 12, "omega_k": 3, "topo": 1.45,
+    "poly_c": 0.715928, "fire_ignited": true, "fire_number": 31,
+    "delta_V": 0.137274, "V_global_prev": 5.955626, "V_global_new": 6.092900,
+    "ceiling_tick": 98, "commit_sha": "766a5de04d71e35286742940e62a9431b996e2f6",
+    "note": "V_v2=6.0 CROSSED",
+    "content_tweet_id": "2026360761736454150"
+  },
+  "video_render_status": {
+    "last_render_round": 180,
+    "tweet_id": "2026360761736454150",
+    "arc": "R179-R180",
+    "size_mb": 0.033,
+    "rendered_at": "2026-02-24T18:15:00+00:00",
+    "next_arc": "R181+ after FIRE#32 milestone"
+  },
   "cron_content_loop": {
-    "last_run": "2026-02-24T14:20:00+00:00",
-    "last_thread_tweet_id": "2026301432635212272",
-    "arc_posted": "R172-R175",
-    "next_content": "R176+ arc when R176 FIRE#29 lands"
+    "last_thread_tweet_id": "2026360761736454150",
+    "arc_posted": "R179-R180",
+    "rounds_covered": [179, 180],
+    "last_run": "2026-02-24T18:15:00+00:00"
   },
-  "maturity": {"K": 175, "S": 175, "F": 28, "phi": 0.160000, "v_progress": "5.807228 / 6.000 = 96.79%", "V_v2": 6.0, "next_fire": "R176 est FIRE#29"},
-  "ctc_engine": {"status": "COMMITTED", "TCS": 0.924504, "verdict": "PASS", "est_ceiling_round": 178},
-  "metarom_ucf": {"repo": "EvezArt/metarom", "latest_commit": "7a9a3e1d781060012c65f0f5da82b70f606a96ea", "ucf_version": "0.2"},
+  "maturity": {
+    "K": 180, "S": 180, "F": 31,
+    "v_progress": "6.092900 / 6.000 = 101.55% V_v2 CROSSED",
+    "V_v2": 6.0,
+    "milestone": "R180 FIRE#31 V_v2 CROSSED. V=6.092900. 31/180 fires. MetaROM Phase 2 committed.",
+    "next_fire": "R183 est N=135=3^3x5 tau=8 poly_c~0.548 FIRE#32"
+  },
+  "ctc_engine": {
+    "status": "V_V2_CROSSED", "TCS": 0.924504, "verdict": "PASS",
+    "est_ceiling_round": 178, "actual_ceiling_round": 178, "v_v2_crossed_at": "R180"
+  },
+  "metarom_ucf": {
+    "repo": "EvezArt/metarom",
+    "phase2_commit": "adc3b68fadc95ca7415573dbe6e6016cb3b666d3",
+    "gb_core_version": "0.2.0-Phase2",
+    "next": "Phase 3: PPU mode 0-3 + STAT, APU ch1-4, DIV/TIMA timer, MBC1/3/5 banking"
+  },
+  "baseten_integration": {
+    "status": "LIVE",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference.baseten.co/v1",
+    "vercel_env_vars_set": ["BASETEN_BASE_URL", "BASETEN_MODEL", "BASETEN_API_KEY"]
+  },
   "infra_notes": {
-    "arc_r172_r175_tweet": "2026301432635212272",
-    "metarom_ucf_v02": "7a9a3e1d — GapVector pure diagnostic, STS schema, CompensationMap on PlanCandidate",
-    "r176_probe": "272bebe2 in-flight FIRE#29 est",
-    "ci_flag": "evez-os CI FAILURE dependabot. CrawFather/Evez666 startup_failure."
+    "v_milestone": "V=6.092900 V_v2 CROSSED at R180 FIRE#31",
+    "metarom_phase2": "adc3b68 SM83 decode + ranked re-export + CI",
+    "r180_tweet": "2026311851571548248",
+    "arc_r179_r180_tweet": "2026360761736454150",
+    "ci_flag": "evez-os: dependabot (non-blocking). metarom: cargo-check.yml active.",
+    "security": "counter op active no rotation"
   }
 }
