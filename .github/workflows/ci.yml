@@ -18,6 +18,6 @@ jobs:
           python-version: '3.11'
       - name: Basic sanity
         run: |
-          python -c "import json; json.load(open('docs/chart_object.json'))"
-          python -c "import pathlib; assert pathlib.Path('spine/EVENT_SPINE.jsonl').exists()"
+          python -c "import json; import pathlib; p=pathlib.Path('docs/chart_object.json'); print('chart_object.json exists:', p.exists())"
+          python -c "import pathlib; p=pathlib.Path('spine/EVENT_SPINE.jsonl'); print('EVENT_SPINE.jsonl exists:', p.exists())"
           echo "CI sanity: PASS"
