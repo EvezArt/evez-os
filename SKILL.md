@@ -60,14 +60,10 @@ Add to Termux:Boot for autorun — see ANDROID.md.
 
 | Command | What It Does |
 |---------|-------------|
-| `evez.py init` | Initialize event + ARG spines |
+| `evez.py lint` | Compile-check Python modules in `spine/` |
 | `evez.py play --seed N --steps N` | Generate forensic episode |
-| `evez.py play --loop` | Infinite self-play |
-| `evez.py cycle --ring R4 --anomaly "desc"` | Log FSC cycle |
-| `evez.py lint` | Audit spine for violations |
-| `evez.py arg-init` | Initialize ARG spine |
-| `evez.py arg-narrate --tail N` | Narrate from spine tail |
-| `evez.py trigger` | Auto-generate missions |
+| `evez.py visualize-thought --input spine.jsonl` | Render visual cognition artifacts |
+| `evez.py verify [target]` | Print repository integrity summary |
 | `self_cartography.py` | Mermaid + DOT diagrams |
 | `run_all.py --seed --mode spicy` | Full demo |
 
