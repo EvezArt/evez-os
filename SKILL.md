@@ -27,7 +27,6 @@ maps failure surfaces, and generates infinite adversarial missions from its own 
 ## Quick Start
 
 ```bash
-cd core
 python3 tools/evez.py init
 python3 tools/evez.py play --seed 42 --steps 14
 ```
@@ -35,7 +34,7 @@ python3 tools/evez.py play --seed 42 --steps 14
 ## One-Command Demo
 
 ```bash
-cd core && python3 tools/run_all.py --seed --mode spicy
+python3 tools/run_all.py --seed --mode spicy
 ```
 
 ## Play Forever
@@ -49,7 +48,7 @@ python3 tools/evez.py play --loop --steps 14
 ```bash
 pkg install python
 git clone https://github.com/EvezArt/evez-os.git
-cd evez-os/core
+cd evez-os
 python tools/evez.py init
 python tools/run_all.py --seed --mode spicy
 ```
