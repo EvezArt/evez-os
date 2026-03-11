@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EvezBrain Dream Visualizer</title>
+  <style>
+    body { margin: 0; background: #080b14; color: #d7ddff; font-family: Inter, system-ui, sans-serif; }
+    #hud { padding: 12px; position: fixed; left: 0; top: 0; right: 0; background: rgba(8,11,20,.7); }
+    canvas { width: 100vw; height: 100vh; display: block; }
+    .tag { color: #ffda59; }
+  </style>
+</head>
+<body>
+  <div id="hud">Mode: <strong id="mode">IDLE</strong> | Insights: <span class="tag" id="insights">0</span> | Goals: <span class="tag" id="goals">0</span></div>
+  <canvas id="graph"></canvas>
+  <script>
+    const cvs = document.getElementById('graph');
+    const ctx = cvs.getContext('2d');
+    const state = { memories: [], insights: [], goals: [], arcs: [] };
+
+    function resize() { cvs.width = innerWidth; cvs.height = innerHeight; }
+    addEventListener('resize', resize); resize();
+
+    function makeNode(type, label) {
+      const angle = Math.random() * Math.PI * 2;
+      const radius = (type === 'goal' ? 320 : 180) + Math.random() * 120;
+      return { type, label, x: cvs.width/2 + Math.cos(angle)*radius, y: cvs.height/2 + Math.sin(angle)*radius };
+    }
+
+    function draw() {
+      ctx.clearRect(0,0,cvs.width,cvs.height);
+      state.arcs.forEach((a, i) => {
+        const pulse = (Date.now()/180 + i) % 12;
+        ctx.strokeStyle = `rgba(80,180,255,${0.15 + (pulse/12)*0.65})`;
+        ctx.beginPath(); ctx.moveTo(a.a.x, a.a.y); ctx.lineTo(a.b.x, a.b.y); ctx.stroke();
+      });
+      [...state.memories, ...state.insights, ...state.goals].forEach(n => {
+        const color = n.type === 'memory' ? '#7ca6ff' : n.type === 'insight' ? '#ffcf3f' : '#ffd700';
+        const r = n.type === 'goal' ? 8 : n.type === 'insight' ? 6 : 4;
+        ctx.fillStyle = color;
+        ctx.beginPath(); ctx.arc(n.x,n.y,r,0,Math.PI*2); ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+
+    const stream = new EventSource('/api/dream/stream');
+    stream.onmessage = (ev) => {
+      try {
+        const s = JSON.parse(ev.data);
+        document.getElementById('mode').textContent = 'DREAM_MODE';
+        const mA = makeNode('memory', s.session_id + '-a');
+        const mB = makeNode('memory', s.session_id + '-b');
+        const insight = makeNode('insight', `insight-${s.insights_generated}`);
+        state.memories.push(mA, mB); state.insights.push(insight); state.arcs.push({a:mA,b:insight}, {a:mB,b:insight});
+        document.getElementById('insights').textContent = state.insights.length;
+      } catch (_) {}
+    };
+
+    fetch('/agents/dream/goals.jsonl').then(r => r.text()).then(txt => {
+      txt.split('\n').filter(Boolean).forEach(line => {
+        const g = JSON.parse(line); state.goals.push(makeNode('goal', g.description));
+      });
+      document.getElementById('goals').textContent = state.goals.length;
+    }).catch(() => {});
+
+    draw();
+  </script>
+</body>
+</html>
