@@ -2,7 +2,7 @@
 """
 tools/evez.py -- EVEZ-OS master tool dispatcher
 Creator: Steven Crawford-Maggard EVEZ666
-Subcommands: lint, play, visualize-thought, verify
+Subcommands: lint, play, visualize-thought, verify, mesh-node
 """
 import sys, os, pathlib, argparse, subprocess
 
@@ -75,6 +75,28 @@ def cmd_verify(args):
     print("verify: PASS")
     return 0
 
+def cmd_mesh_node(args):
+    mesh_script = HERE / "evezbrain_mesh.py"
+    if not mesh_script.exists():
+        print("evezbrain_mesh.py not found in tools/ — mesh-node unavailable")
+        return 1
+    cmd = [
+        sys.executable, str(mesh_script),
+        "--node-id", args.node_id,
+        "--host", args.host,
+        "--port", str(args.port),
+        "--priority", str(args.priority),
+        "--heartbeat", str(args.heartbeat),
+        "--peer-timeout", str(args.peer_timeout),
+    ]
+    for s in args.seed:
+        cmd.extend(["--seed", s])
+    if args.emit_demo:
+        cmd.append("--emit-demo")
+    if args.log_level:
+        cmd.extend(["--log-level", args.log_level])
+    return subprocess.call(cmd)
+
 if __name__ == "__main__":
     p = argparse.ArgumentParser(prog="evez")
     sub = p.add_subparsers(dest="cmd")
@@ -89,6 +111,16 @@ if __name__ == "__main__":
     viz_p.add_argument("--fps", type=int, default=2)
     ver_p = sub.add_parser("verify")
     ver_p.add_argument("target", nargs="?", default="latest")
+    mesh_p = sub.add_parser("mesh-node")
+    mesh_p.add_argument("--node-id", required=True)
+    mesh_p.add_argument("--host", default="0.0.0.0")
+    mesh_p.add_argument("--port", type=int, required=True)
+    mesh_p.add_argument("--seed", action="append", default=[])
+    mesh_p.add_argument("--priority", type=int, default=1)
+    mesh_p.add_argument("--heartbeat", type=float, default=1.5)
+    mesh_p.add_argument("--peer-timeout", type=float, default=6.0)
+    mesh_p.add_argument("--emit-demo", action="store_true")
+    mesh_p.add_argument("--log-level", default="INFO")
     args = p.parse_args()
     if args.cmd == "lint":
         sys.exit(cmd_lint(args))
@@ -98,6 +130,8 @@ if __name__ == "__main__":
         sys.exit(cmd_visualize(args))
     elif args.cmd == "verify":
         sys.exit(cmd_verify(args))
+    elif args.cmd == "mesh-node":
+        sys.exit(cmd_mesh_node(args))
     else:
         p.print_help()
         sys.exit(0)
