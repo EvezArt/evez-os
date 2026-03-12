@@ -6,6 +6,25 @@ import json, os, hashlib, hmac, time
 from http.server import BaseHTTPRequestHandler
 
 def verify_stripe_signature(payload, sig_header, secret):
+    """Verify the HMAC-SHA256 signature on an incoming Stripe webhook request.
+
+    Parses the ``Stripe-Signature`` header to extract the timestamp (``t``)
+    and one or more v1 signature values.  Reconstructs the signed payload as
+    ``"<timestamp>.<raw_body>"`` and computes the expected HMAC.  Uses
+    ``hmac.compare_digest`` to prevent timing attacks.
+
+    Rejects requests where the timestamp is more than 5 minutes (300 s) old
+    to mitigate replay attacks.
+
+    Args:
+        payload:    Raw request body bytes as received from the client.
+        sig_header: Value of the ``Stripe-Signature`` HTTP header.
+        secret:     Webhook signing secret from the Stripe dashboard.
+
+    Returns:
+        bool — True if at least one v1 signature matches; False otherwise or
+        on any parsing error.
+    """
     try:
         elements = {k: v for k, v in (x.split('=', 1) for x in sig_header.split(','))}
         timestamp = int(elements.get('t', '0'))
@@ -17,6 +36,30 @@ def verify_stripe_signature(payload, sig_header, secret):
     except: return False
 
 def handle_event(event):
+    """Dispatch a verified Stripe event to its handler and return a result dict.
+
+    Supported event types and their returned ``action`` values:
+
+    +-----------------------------------------+-----------------------------+
+    | Stripe event type                       | action                      |
+    +=========================================+=============================+
+    | ``checkout.session.completed``          | ``checkout_complete``       |
+    | ``payment_intent.succeeded``            | ``payment_succeeded``       |
+    | ``payment_intent.payment_failed``       | ``payment_failed``          |
+    | ``customer.subscription.created``       | ``customer_subscription_…`` |
+    | ``customer.subscription.deleted``       | ``customer_subscription_…`` |
+    | ``issuing_authorization.request``       | ``issuing_authorize``       |
+    | ``issuing_transaction.created``         | ``issuing_transaction``     |
+    | *(anything else)*                       | ``unhandled``               |
+    +-----------------------------------------+-----------------------------+
+
+    Args:
+        event: Parsed JSON dict from the Stripe webhook body.
+
+    Returns:
+        Dict with at minimum an ``action`` key plus event-specific fields
+        (e.g. ``session_id``, ``payment_intent``, ``subscription_id``).
+    """
     etype = event.get('type', '')
     data = event.get('data', {}).get('object', {})
     if etype == 'checkout.session.completed':
