@@ -19,7 +19,7 @@ metadata:
 
 # EVEZ OS — Forensic Game Engine
 
-> "The game can\'t end because the attack surface can\'t end."
+> "The game can't end because the attack surface can't end."
 
 A self-auditing forensic game engine that probes systems, detects contradictions,
 maps failure surfaces, and generates infinite adversarial missions from its own traces.
@@ -27,7 +27,8 @@ maps failure surfaces, and generates infinite adversarial missions from its own 
 ## Quick Start
 
 ```bash
-cd core
+git clone https://github.com/EvezArt/evez-os.git
+cd evez-os
 python3 tools/evez.py init
 python3 tools/evez.py play --seed 42 --steps 14
 ```
@@ -35,7 +36,7 @@ python3 tools/evez.py play --seed 42 --steps 14
 ## One-Command Demo
 
 ```bash
-cd core && python3 tools/run_all.py --seed --mode spicy
+python3 tools/run_all.py --seed --mode spicy
 ```
 
 ## Play Forever
@@ -47,9 +48,9 @@ python3 tools/evez.py play --loop --steps 14
 ## Android (Termux)
 
 ```bash
-pkg install python
+pkg install python git
 git clone https://github.com/EvezArt/evez-os.git
-cd evez-os/core
+cd evez-os
 python tools/evez.py init
 python tools/run_all.py --seed --mode spicy
 ```
@@ -58,18 +59,20 @@ Add to Termux:Boot for autorun — see ANDROID.md.
 
 ## All Commands
 
+All commands are run from the **repo root** (`evez-os/`).
+
 | Command | What It Does |
 |---------|-------------|
-| `evez.py init` | Initialize event + ARG spines |
-| `evez.py play --seed N --steps N` | Generate forensic episode |
-| `evez.py play --loop` | Infinite self-play |
-| `evez.py cycle --ring R4 --anomaly "desc"` | Log FSC cycle |
-| `evez.py lint` | Audit spine for violations |
-| `evez.py arg-init` | Initialize ARG spine |
-| `evez.py arg-narrate --tail N` | Narrate from spine tail |
-| `evez.py trigger` | Auto-generate missions |
-| `self_cartography.py` | Mermaid + DOT diagrams |
-| `run_all.py --seed --mode spicy` | Full demo |
+| `tools/evez.py init` | Seed event + ARG spines with demo data (safe to re-run) |
+| `tools/evez.py play --seed N --steps N` | Run latest spine module |
+| `tools/evez.py play --loop` | Infinite self-play |
+| `tools/evez.py cycle --ring R4 --anomaly "desc"` | Log FSC cycle |
+| `tools/evez.py lint` | Audit spine for violations |
+| `tools/evez.py arg-init` | Initialize ARG spine |
+| `tools/evez.py arg-narrate --tail N` | Narrate from spine tail |
+| `tools/evez.py trigger` | Auto-generate missions |
+| `tools/evez.py verify` | Spine integrity check |
+| `tools/run_all.py --seed --mode spicy` | Full demo (seed + narrate) |
 
 ## Packs
 

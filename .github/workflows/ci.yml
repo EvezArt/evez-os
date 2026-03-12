@@ -3,21 +3,45 @@ on:
   push:
     branches:
       - main
+      - 'fix/**'
       - 'agent/**'
   pull_request:
     branches:
       - main
 
 jobs:
-  lint:
+  smoke:
+    name: CLI smoke tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Basic sanity
+
+      - name: Verify entrypoints are importable
         run: |
-          python -c "import json; import pathlib; p=pathlib.Path('docs/chart_object.json'); print('chart_object.json exists:', p.exists())"
-          python -c "import pathlib; p=pathlib.Path('spine/EVENT_SPINE.jsonl'); print('EVENT_SPINE.jsonl exists:', p.exists())"
-          echo "CI sanity: PASS"
+          python -c "import sys; sys.path.insert(0, '.'); import tools.evez"
+          python -c "import sys; sys.path.insert(0, '.'); import tools.run_all"
+
+      - name: evez init (idempotent seed)
+        run: python3 tools/evez.py init
+
+      - name: evez lint
+        run: python3 tools/evez.py lint
+
+      - name: evez verify
+        run: python3 tools/evez.py verify
+
+      - name: run_all dry import
+        run: python -c "import sys; sys.path.insert(0, '.'); from tools.run_all import _ensure_files, _read_jsonl; _ensure_files(); print('run_all import: OK')"
+
+      - name: Assert spine seeded
+        run: |
+          python -c "
+          import pathlib
+          p = pathlib.Path('spine/EVENT_SPINE.jsonl')
+          assert p.exists() and p.stat().st_size > 0, f'EVENT_SPINE.jsonl missing or empty: {p}'
+          print('spine/EVENT_SPINE.jsonl: OK')
+          "
