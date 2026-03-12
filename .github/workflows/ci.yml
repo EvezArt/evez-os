@@ -9,15 +9,27 @@ on:
       - main
 
 jobs:
-  lint:
+  root-cli-smoke:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Basic sanity
+
+      - name: Inventory sanity
         run: |
-          python -c "import json; import pathlib; p=pathlib.Path('docs/chart_object.json'); print('chart_object.json exists:', p.exists())"
-          python -c "import pathlib; p=pathlib.Path('spine/EVENT_SPINE.jsonl'); print('EVENT_SPINE.jsonl exists:', p.exists())"
-          echo "CI sanity: PASS"
+          test -f README.md
+          test -f SKILL.md
+          test -f tools/evez.py
+          python -V
+
+      - name: CLI smoke
+        run: |
+          python tools/evez.py --help
+          python tools/evez.py lint
+          python tools/evez.py verify
+
+      - name: Unit smoke tests
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py' -v

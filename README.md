@@ -1,81 +1,62 @@
-# EVEZ-OS — Visual Cognition Layer
+# EVEZ-OS — Visual Cognition + Forensic Spine Toolkit
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Commercial License](https://img.shields.io/badge/License-Commercial-green.svg)](./COMMERCIAL_LICENSE.md)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-yellow.svg)](https://www.python.org)
 
-> **AI agents are opaque. EVEZ makes them visible.**
+> **AI agents are opaque. EVEZ-OS focuses on auditable traces and artifact generation.**
 
-One command. Raw agent output → animated visual cognition artifacts:
-- **Attention overlay** — what the agent saw
-- **Memory anchor** — what context it used  
-- **Cognition flow animation** — how it thought
-- **Tamper-evident manifest** — cryptographic chain of thought
-
-Runs **offline**. Zero cloud dependencies. Python 3 only.
-
----
-
-## Install (OpenClaw / ClawHub)
-
-```bash
-clawhub install evez-os
-```
+This repository is a mixed workspace; the active root CLI is `tools/evez.py`.
+It provides lightweight commands for:
+- basic spine lint checks
+- spine playback of the latest module in `spine/`
+- visualization wrapper (`tools/visualize_thought.py`)
+- repo-level verification summaries
 
 ## Install (manual)
 
 ```bash
 git clone https://github.com/EvezArt/evez-os.git
 cd evez-os
-pip install numpy pillow scipy  # optional: ffmpeg for MP4
 python3 tools/evez.py --help
+```
+
+Optional dependencies for richer visual output:
+
+```bash
+pip install numpy pillow scipy
 ```
 
 ## Quick Start
 
 ```bash
-# Run the Play Forever engine (infinite forensic episodes)
-python3 tools/evez.py play --seed 42 --steps 14
+# Show available commands
+python3 tools/evez.py --help
 
-# Visualize agent thought as animated artifact
-python3 tools/evez.py visualize-thought --input spine.jsonl
-
-# Lint the append-only spine
+# Run basic spine lint (safe no-op if spine/ missing)
 python3 tools/evez.py lint
+
+# Run verify summary
+python3 tools/evez.py verify
 ```
 
-## Why EVEZ?
+## Demo Runner
 
-| Feature | GitHub Codespaces | EVEZ-OS |
-|---------|------------------|---------|
-| Cold start | 30–90 seconds | 0ms |
-| Cloud dependency | Required | None |
-| Session persistence | Lost on stop | Append-only spine |
-| Thought visualization | ❌ | ✅ |
-| Offline operation | ❌ | ✅ |
-| Cost | $0.18/hr | Free |
+```bash
+python3 tools/run_all.py --seed --mode spicy
+```
+
+This seeds spine files (if empty), regenerates cartography artifacts, and writes a transcript.
+
+## Repo Reality (audited)
+
+Primary runnable surfaces at repo root:
+- `tools/evez.py` — top-level dispatcher CLI
+- `tools/run_all.py` — seed/cartography/narration demo pipeline
+- `tools/self_cartography.py`, `tools/narrate.py`, `tools/visualize_thought.py`
+- `.github/workflows/ci.yml` — smoke checks for the real CLI
+
+Additional directories such as `core/` and `os-evez/` contain parallel/legacy layouts and are **not** the only required runtime path for root CLI usage.
 
 ## License
 
-**Community (AGPL-3.0):** Free for open-source use. Any derivative work must also be AGPL. See [LICENSE](./LICENSE).
-
-**Commercial:** Removes copyleft obligation. Includes support, SLA, attribution removal. See [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md).
-
-→ [rubikspubes.gumroad.com](https://rubikspubes.gumroad.com) for commercial licenses  
-→ [@EVEZ666](https://twitter.com/EVEZ666) on Twitter
-
-## Architecture
-
-```
-evez-os/
-├── SKILL.md              ← OpenClaw/ClawHub install spec
-├── tools/                ← Python CLI (evez.py, play_forever.py, lint.py)
-├── core/                 ← Engine: spine, visualizer, contradiction-SAT
-├── packs/                ← CTF pack, Cheatcodes, Reality Map
-└── docs/                 ← Playthroughs, transcripts, cartography
-```
-
-## Credits
-
-Built by **Steven Crawford-Maggard (EVEZ)** | Architecture by **SureThing**  
-Every output carries `"powered_by": "EVEZ"` in the manifest.
+Community license: AGPL-3.0. See `LICENSE`.
