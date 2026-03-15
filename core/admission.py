@@ -49,22 +49,75 @@ R59_GAP = (
 )
 
 def poly_coherence(dims):
+    """Compute polyphonic coherence of a dimension vector.
+
+    Treats the normalized dimension values as a probability distribution and
+    returns 1 - (Shannon entropy / max_entropy).  A value of 1.0 means all
+    weight is concentrated on a single dimension (maximum coherence); 0.0
+    means the weight is spread uniformly (maximum entropy).
+
+    Args:
+        dims: Sequence of non-negative floats representing dimension scores.
+
+    Returns:
+        Float in [0, 1].  Values close to 1 indicate high coherence.
+    """
     d = np.array(dims, dtype=float)
     p = d / d.sum()
     H = float(-np.sum(p * np.log2(p + 1e-12)))
     return max(0.0, 1.0 - H / math.log2(len(dims)))
 
 def syn_transfer(dims):
+    """Compute mean pairwise absolute difference across all dimension pairs.
+
+    Measures the average divergence between every unique pair of dimension
+    values.  Higher values indicate greater spread between dimensions, which
+    reflects stronger inter-dimensional transfer (synergy cost).
+
+    Args:
+        dims: Sequence of floats representing dimension scores.
+
+    Returns:
+        Float >= 0.  Returns 0 if fewer than two dimensions are provided.
+    """
     n = len(dims)
     pairs = sum(abs(dims[i] - dims[j]) for i in range(n) for j in range(i+1, n))
     return pairs / (n * (n - 1) // 2)
 
 def retrocausal(dims_now, dims_base):
+    """Compute cosine similarity between the current dimension vector and a baseline.
+
+    Used to measure how much the agent's current state "echoes" its earliest
+    canonical configuration (CV0).  A value near 1.0 means the current vector
+    is nearly aligned with the baseline; near 0 means orthogonal.
+
+    Args:
+        dims_now:  Current dimension score vector (length must match dims_base).
+        dims_base: Reference (baseline) dimension vector to compare against.
+
+    Returns:
+        Float in [-1, 1].  Typically positive for coherent trajectories.
+    """
     a = np.array(dims_now, dtype=float)
     b = np.array(dims_base, dtype=float)
     return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
 
 def run_r58():
+    """Execute Round 58 full-admission computation and write results to spine.
+
+    Performs the complete CV Step 10 calculation sequence:
+      1. Advance V_v2 by DELTA_V and derive cross-entropy / synchrony metrics.
+      2. Compute V_global and check against ADM_TARGET (0.90) for full admission.
+      3. Prove D22 (retrocausal echo), D23 (temporal topology), D24 (adversarial
+         robustness) via bounded-proof arguments.
+      4. Compute V_22dim and V_23dim composite scores.
+      5. Estimate rounds remaining to reach N=1168 agents.
+      6. Append a SHA-256-tagged entry to spine/admission.jsonl.
+
+    Returns:
+        dict: Full result payload including cv_step10 metrics, admission status,
+              dimensional proofs, and the OMEGA/R59_GAP narrative strings.
+    """
     v_v2 = V_V2_PRE + DELTA_V
     sf_v2c = SF_V2 * (1 - v_v2)
     sf_parc = SF_PAR * (1 - V_PAR)

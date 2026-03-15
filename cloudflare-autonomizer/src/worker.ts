@@ -33,17 +33,40 @@ export class EvezAutonomizerAgent extends Agent<Env, EvezState> {
     truth_plane: "CANONICAL",
   };
 
+  /** Return the full current Durable Object state snapshot. */
   @callable()
   getState(): EvezState {
     return this.state;
   }
 
+  /**
+   * Merge incoming round data into the agent state.
+   *
+   * Accepts a partial EvezState payload and shallow-merges it with the
+   * existing state, always updating `last_updated` to the current ISO
+   * timestamp.  Used by the /ingest HTTP endpoint and direct RPC callers.
+   *
+   * @param payload - Partial state fields to apply (e.g. current_round, V_global).
+   * @returns Object with `ok: true` and the resulting `current_round`.
+   */
   @callable()
   ingestRound(payload: Partial<EvezState>): { ok: boolean; round: number } {
     this.setState({ ...this.state, ...payload, last_updated: new Date().toISOString() });
     return { ok: true, round: this.state.current_round };
   }
 
+  /**
+   * Compute the hyperloop poly_c fire metric inline for a given integer N.
+   *
+   * Uses fixed parameters tau=2, omega_k=2:
+   *   topo    = 1 + 0.15 * omega_k
+   *   poly_c  = topo * (1 + ln(tau)) / log2(N + 2)
+   *   fire    = poly_c >= 0.5
+   *   delta_V = 0.08 * poly_c
+   *
+   * @param N - Integer being analysed (must be >= 2 for a meaningful result).
+   * @returns Object containing N, poly_c, fire flag, and delta_V (6 d.p.).
+   */
   @callable()
   computeInline(N: number): { N: number; poly_c: number; fire: boolean; delta_V: number } {
     const tau = 2, omega_k = 2;
@@ -54,11 +77,20 @@ export class EvezAutonomizerAgent extends Agent<Env, EvezState> {
     return { N, poly_c: Math.round(poly_c * 1e6) / 1e6, fire, delta_V: Math.round(delta_V * 1e6) / 1e6 };
   }
 
+  /** Return a lightweight health payload including version, current round, and V_global. */
   @callable()
   health(): { status: string; version: string; round: number; V: number } {
     return { status: "CANONICAL", version: this.env.EVEZ_VERSION, round: this.state.current_round, V: this.state.V_global };
   }
 
+  /**
+   * Handle incoming WebSocket messages from connected clients.
+   *
+   * Supports two message types:
+   *   - `{ type: "get_state" }` — responds with the full current state.
+   *   - anything else           — responds with a subscription acknowledgement.
+   * Malformed JSON sends an error response without throwing.
+   */
   async onMessage(connection: Connection, message: string) {
     try {
       const msg = JSON.parse(message);
@@ -72,6 +104,10 @@ export class EvezAutonomizerAgent extends Agent<Env, EvezState> {
     }
   }
 
+  /**
+   * Broadcast a state_update message to all active WebSocket connections
+   * whenever the Durable Object state changes.
+   */
   async onStateUpdate(state: EvezState) {
     this.broadcast(JSON.stringify({ type: "state_update", data: state }));
   }

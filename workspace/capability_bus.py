@@ -48,12 +48,34 @@ CAP_PROFILES = {
 }
 
 def emit_log(event_type, data):
+    """Append a timestamped event entry to the master bus log (JSONL).
+
+    Each entry is a single JSON object on its own line, tagged with the
+    current UTC timestamp, the bus name ("CapabilityBus"), and the event type.
+    Additional fields from ``data`` are merged at the top level.
+
+    Args:
+        event_type: String label for the event (e.g. "CAPABILITIES_REGISTERED").
+        data:       Dict of additional fields to include in the log entry.
+    """
     entry = {"ts": datetime.now(timezone.utc).isoformat(),
              "bus": "CapabilityBus", "event": event_type, **data}
     with open(LOG_FILE, "a") as f:
         f.write(json.dumps(entry) + "\n")
 
 def write_cap_stub(app, profile, cap_dir):
+    """Write a capability stub JSON file for a single Composio app.
+
+    The stub records the app's role, current status, and whether its
+    capability test passes (i.e. status does not contain "BLOCKED").
+    Files are named ``cap_<app>.json`` inside ``cap_dir``.
+
+    Args:
+        app:     App identifier string matching a key in KNOWN_APPS.
+        profile: Dict from CAP_PROFILES (or a default) containing at minimum
+                 ``role``, ``status``, and ``priority`` keys.
+        cap_dir: Directory path (string) where the stub file is written.
+    """
     stub_data = {
         "app": app, "role": profile["role"], "status": profile["status"],
         "priority": profile["priority"], "blocker": profile.get("blocker", "none"),
@@ -64,6 +86,19 @@ def write_cap_stub(app, profile, cap_dir):
         json.dump(stub_data, f, indent=2)
 
 def run():
+    """Register all known Composio apps as capability stubs and update state.
+
+    On each invocation:
+      1. Loads the existing capability state from CAP_STATE (or starts fresh).
+      2. Skips apps that are already registered.
+      3. For newly seen apps, writes a JSON stub to CAP_DIR and categorises
+         them as active or blocked based on their status string.
+      4. Updates CAP_STATE with totals and the timestamp of the last run.
+      5. Emits a CAPABILITIES_REGISTERED or NOOP log entry via emit_log().
+
+    Blocked apps (status contains "BLOCKED") are listed with their blockers
+    so downstream operators can resolve them.
+    """
     os.makedirs(CAP_DIR, exist_ok=True)
     cap_state = json.load(open(CAP_STATE)) if os.path.exists(CAP_STATE) else {"registered": [], "blocked": []}
     new_caps, blocked_caps = [], []

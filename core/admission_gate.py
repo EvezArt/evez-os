@@ -84,33 +84,126 @@ R45_GAP = (
 )
 
 def V_8dim(k=1.0, s=0.730, f=0.443, phi=0.235):
+    """Compute the 8-dimensional weighted Lyapunov score.
+
+    Combines four key dimensions with fixed weights:
+      - k   (0.05): knowledge anchor
+      - s   (0.25): sigma_f score
+      - f   (0.45): falsification capability (dominant term)
+      - phi (0.25): cross-agent coupling potential
+
+    Args:
+        k:   Knowledge anchor in [0, 1]. Default 1.0.
+        s:   Sigma-f value. Default 0.730.
+        f:   Falsification score. Default 0.443.
+        phi: Coupling potential. Default 0.235.
+
+    Returns:
+        Float in [0, 1].
+    """
     return 0.05*k + 0.25*s + 0.45*f + 0.25*phi
 
 def V_9dim(v8, t=T_COMBINED):
+    """Extend an 8-dim score to 9 dimensions by folding in temporal coherence.
+
+    D8 (temporal coherence, T) is blended using weight W_T=0.05, leaving
+    (1 - W_T) weight on the existing 8-dimensional score.
+
+    Args:
+        v8: 8-dimensional Lyapunov score from V_8dim().
+        t:  Temporal coherence value T (default: T_COMBINED = 0.9677).
+
+    Returns:
+        Float in [0, 1].
+    """
     return (1.0 - W_T) * v8 + W_T * t
 
 def delta_V_v2():
+    """Return the per-step V_v2 increment for the child agent's trajectory.
+
+    Derived as sigma_f(v2) * delta_V_parent; the child gains V in proportion
+    to its own falsification strength scaled by the parent's step size.
+
+    Returns:
+        Float — V increment applied once per round.
+    """
     return SIGMA_F_V2 * DELTA_V_PARENT
 
 def v2_trajectory(n_steps=11):
+    """Generate the V_v2 trajectory from start to n_steps rounds ahead.
+
+    Starting from V_V2_START and advancing by delta_V_v2() each step,
+    capped at 1.0 (maximum admission score).
+
+    Args:
+        n_steps: Number of steps to project (default 11).
+
+    Returns:
+        List of floats, one per step, from step 0 through n_steps.
+    """
     dv = delta_V_v2()
     return [round(min(1.0, V_V2_START + i * dv), 6) for i in range(n_steps)]
 
 def steps_to_full_admission():
+    """Compute the number of steps until V_v2 reaches V_TARGET.
+
+    Uses ceiling division so the returned count is the first step at which
+    full admission is guaranteed.
+
+    Returns:
+        int — minimum number of steps required.
+    """
     dv = delta_V_v2()
     return math.ceil((V_TARGET - V_V2_START) / dv)
 
 def provisional_V_global(w_v2):
+    """Compute the network-wide V_global under provisional child admission.
+
+    Blends the parent network's existing V_PARENT (across N_PARENT agents)
+    with the child's current V_v2, weighted by the child's admission weight.
+
+    Args:
+        w_v2: Child admission weight (V_V2_START / V_TARGET).
+
+    Returns:
+        Float — provisional global Lyapunov score.
+    """
     return (N_PARENT * V_PARENT + w_v2 * V_V2_START) / (N_PARENT + w_v2)
 
 def G_N8():
+    """Compute the growth rate G for the network after child reaches full admission (N=8).
+
+    Formula: G = sigma_net_N8 * (1 - E_coupling) * lambda_local * sqrt(N8)
+
+    Returns:
+        Float — growth coefficient used to update the maturity metric M7.
+    """
     sigma_net = (N_PARENT * SIGMA_NET_N7 + SIGMA_F_V2) / (N_PARENT + 1)
     return sigma_net * (1 - E_COUPLING) * LAMBDA_LOCAL * math.sqrt(N_PARENT + 1)
 
 def M7_N8(g_n8):
+    """Compute the updated maturity metric M7 after the N=8 growth step.
+
+    Uses an exponential-approach formula: M7_new = M6 + G*(1 - M6), so
+    maturity converges toward 1.0 at a rate proportional to G.
+
+    Args:
+        g_n8: Growth rate returned by G_N8().
+
+    Returns:
+        Float — updated maturity score in [M6_ANCHOR, 1.0].
+    """
     return M6_ANCHOR + g_n8 * (1 - M6_ANCHOR)
 
 def V_global_N8(V_v2_full):
+    """Compute V_global after the child achieves full admission (N=8, uniform weight).
+
+    Args:
+        V_v2_full: Final V_v2 value at full admission (from v2_trajectory).
+
+    Returns:
+        Float — network-average Lyapunov score with the child at full weight.
+    """
     return (N_PARENT * V_PARENT + V_v2_full) / (N_PARENT + 1)
 
 def run_r44():

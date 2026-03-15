@@ -11,8 +11,26 @@ app.use(express.json({ limit: "2mb" }));
 const EVENT_SPINE = process.env.EVENT_SPINE || path.resolve("../..", "spine", "EVENT_SPINE.jsonl");
 
 // --- helpers ---
+
+/** Returns the current UTC timestamp as an ISO 8601 string. */
 function nowIso() { return new Date().toISOString(); }
+
+/**
+ * Generate a unique event ID with an optional prefix.
+ * @param {string} [prefix="EV"] - Short string prepended to the UUID.
+ * @returns {string} e.g. "INPUT-550e8400-e29b-41d4..."
+ */
 function id(prefix="EV") { return `${prefix}-${crypto.randomUUID()}`; }
+
+/**
+ * Append a single event object as a JSON line to the EVENT_SPINE file.
+ *
+ * Creates the parent directory if it does not exist.  The spine is an
+ * append-only JSONL file; each line is one self-contained event object.
+ *
+ * @param {Object} ev - Event object to persist.
+ * @returns {Object} The same event object (pass-through for chaining).
+ */
 function appendEvent(ev) {
   fs.mkdirSync(path.dirname(EVENT_SPINE), { recursive: true });
   fs.appendFileSync(EVENT_SPINE, JSON.stringify(ev) + "\n", "utf-8");
@@ -22,7 +40,15 @@ function appendEvent(ev) {
 // Pending vs Final guardrail: any non-authoritative state MUST be labeled.
 app.get("/healthz", (_req, res) => res.json({ ok: true, ts: nowIso() }));
 
-// Submit player input (always PENDING until game-server confirms)
+/**
+ * POST /input
+ * Submit a player action.  The event is written to the spine with
+ * status="pending" and must be finalized by the authoritative game-server
+ * via POST /finalize/:eventId before it is treated as canonical.
+ *
+ * Body: { playerId: string, input: any }
+ * Response: { ok: true, pending: true, event: Object }
+ */
 app.post("/input", (req, res) => {
   const { playerId, input } = req.body || {};
   if (!playerId || !input) return res.status(400).json({ ok: false, error: "playerId + input required" });
@@ -40,7 +66,17 @@ app.post("/input", (req, res) => {
   res.json({ ok: true, pending: true, event: ev });
 });
 
-// Mark an input as FINAL (normally done by authoritative game-server / reconciler)
+/**
+ * POST /finalize/:eventId
+ * Finalize a previously submitted input event.  Appends a "finalization"
+ * event to the spine that references the original event by ID and records
+ * the authoritative game state.  Normally called by the game-server or a
+ * reconciler, not directly by clients.
+ *
+ * Params: eventId — the event_id string from the original /input response.
+ * Body:   { authoritativeState?: Object, note?: string }
+ * Response: { ok: true, final: true, event: Object }
+ */
 app.post("/finalize/:eventId", (req, res) => {
   const { eventId } = req.params;
   const { authoritativeState, note } = req.body || {};
@@ -57,7 +93,19 @@ app.post("/finalize/:eventId", (req, res) => {
   res.json({ ok: true, final: true, event: ev });
 });
 
-// Read model / projection (toy projection rebuilt on demand)
+/**
+ * GET /state/:playerId
+ * Return the current read-model projection for a player.
+ *
+ * Scans the EVENT_SPINE for all events belonging to the given player and
+ * finds the most recent "finalization" event.  If found, its
+ * authoritativeState is returned; otherwise a default state is used.
+ * The "pending" flag indicates whether the state has been authoritatively
+ * confirmed yet.
+ *
+ * Params:   playerId — string identifier for the player.
+ * Response: { ok: true, playerId, state: Object, provenance: string[], pending: boolean }
+ */
 app.get("/state/:playerId", (req, res) => {
   const playerId = req.params.playerId;
   let lines = [];
@@ -75,7 +123,13 @@ app.get("/state/:playerId", (req, res) => {
   });
 });
 
-// Debug: tail the last N events
+/**
+ * GET /events/tail/:n
+ * Return the last N events from the EVENT_SPINE for debugging purposes.
+ *
+ * Params:   n — number of events to return (clamped to [1, 2000]).
+ * Response: { ok: true, n: number, events: Object[] }
+ */
 app.get("/events/tail/:n", (req, res) => {
   const n = Math.max(1, Math.min(2000, parseInt(req.params.n, 10) || 50));
   let lines = [];
