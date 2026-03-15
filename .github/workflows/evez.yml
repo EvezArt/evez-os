@@ -10,7 +10,7 @@ on:
 jobs:
   lint-play-visualize:
     name: Lint - Play - Visualize
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     timeout-minutes: 10
 
     steps:
