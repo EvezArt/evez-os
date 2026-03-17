@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 import json, time, uuid, os
 from pathlib import Path
@@ -20,6 +21,29 @@ class FSCCycleIn(BaseModel):
     context: dict = Field(default_factory=dict)
     controlled_reduction: dict = Field(default_factory=dict)
 
+
+
+DREAM_JOURNAL = os.getenv("DREAM_JOURNAL", str(Path(__file__).resolve().parents[2] / "agents" / "dream" / "dream_journal.jsonl"))
+
+
+def _dream_stream():
+    path = Path(DREAM_JOURNAL)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.touch(exist_ok=True)
+    with path.open("r", encoding="utf-8") as fp:
+        fp.seek(0, os.SEEK_END)
+        while True:
+            line = fp.readline()
+            if not line:
+                time.sleep(1)
+                yield ": keepalive\n\n"
+                continue
+            yield f"data: {line.strip()}\n\n"
+
+
+@app.get("/api/dream/stream")
+def dream_stream():
+    return StreamingResponse(_dream_stream(), media_type="text/event-stream")
 @app.get("/healthz")
 def healthz():
     return {"ok": True, "event_spine": EVENT_SPINE}
