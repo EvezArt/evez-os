@@ -44,6 +44,17 @@ python3 tools/evez.py visualize-thought --input spine.jsonl
 python3 tools/evez.py lint
 ```
 
+
+## EvezBrain Mesh Network
+
+Run resilient inter-agent mesh coordination (WebSocket pub/sub + leader failover):
+
+```bash
+python3 tools/evez.py mesh-node --node-id brain-a --port 8765 --seed ws://127.0.0.1:8766 --priority 5
+```
+
+See `workspace/EVEZBRAIN_MESH_NETWORK.md` for protocol details.
+
 ## Why EVEZ?
 
 | Feature | GitHub Codespaces | EVEZ-OS |
