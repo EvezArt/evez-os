@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 import json, time, uuid, os
 from pathlib import Path
+from self_mutation_engine import SelfMutationEngine
 
 try:
     from tools.evez import fsc_from_cycle, validate_cycle
@@ -56,3 +57,14 @@ def run_cycle(c: FSCCycleIn):
     with open(EVENT_SPINE, "a", encoding="utf-8") as f:
         f.write(json.dumps(cycle, ensure_ascii=False) + "\n")
     return {"accepted": True, "cycle_id": cycle["cycle_id"], "pending": True, "validation": cycle["validation"]}
+
+
+class SelfMutationIn(BaseModel):
+    reward_scores: dict[str, float] = Field(default_factory=dict)
+    threshold: float = 0.5
+
+
+@app.post("/self-mutate")
+def self_mutate(payload: SelfMutationIn):
+    engine = SelfMutationEngine(repo_root=Path(__file__).resolve().parents[2])
+    return engine.mutate(reward_scores=payload.reward_scores, threshold=payload.threshold)
