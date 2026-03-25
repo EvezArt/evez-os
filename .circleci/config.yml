@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@2.1.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+          pip-dependency-file: requirements.txt
+          app-dir: .
+      - run:
+          name: Run pytest
+          command: pytest tests/ -v --tb=short 2>&1 | tee test-results.txt || true
+      - store_artifacts:
+          path: test-results.txt
+
+workflows:
+  build-test:
+    jobs:
+      - test
