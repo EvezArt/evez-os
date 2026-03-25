@@ -1,0 +1,57 @@
+# Render Blueprint — deploys full EVEZ-OS stack in one command
+# Usage: render blueprint apply
+
+services:
+  - type: web
+    name: evez-os
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: evez-db
+          property: connectionString
+      - key: METAROM_URL
+        value: https://metarom.onrender.com
+      - key: AGENTNET_URL
+        value: https://evez-agentnet.onrender.com
+      - fromGroup: evez-secrets
+
+  - type: web
+    name: metarom
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.metarom:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: evez-db
+          property: connectionString
+
+  - type: worker
+    name: wormhole-cron
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m app.cron_wormhole
+    envVars:
+      - key: METAROM_URL
+        value: https://metarom.onrender.com
+      - fromGroup: evez-secrets
+
+  - type: worker
+    name: a011-cron
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m app.cron_a011
+    envVars:
+      - key: METAROM_URL
+        value: https://metarom.onrender.com
+      - fromGroup: evez-secrets
+
+databases:
+  - name: evez-db
+    databaseName: evez
+    user: evez
+    plan: free
+    postgresMajorVersion: 16
