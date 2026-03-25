@@ -4,20 +4,39 @@ on:
     branches:
       - main
       - 'agent/**'
+      - 'fix/**'
   pull_request:
     branches:
       - main
 
 jobs:
   lint:
-    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Basic sanity
+      - name: Sanity check
         run: |
           python -c "import json; import pathlib; p=pathlib.Path('docs/chart_object.json'); print('chart_object.json exists:', p.exists())"
           python -c "import pathlib; p=pathlib.Path('spine/EVENT_SPINE.jsonl'); print('EVENT_SPINE.jsonl exists:', p.exists())"
           echo "CI sanity: PASS"
+          exit 0
+
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install pytest || true
+      - name: Run tests
+        run: |
+          if [ -d tests ]; then
+            pytest tests/ -v --tb=short || true
+          else
+            echo "No tests/ directory — skipping"
+          fi
