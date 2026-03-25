@@ -2,7 +2,7 @@ name: EVEZ Spine CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'fix/**']
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
 jobs:
   lint-play-visualize:
     name: Lint - Play - Visualize
-    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
