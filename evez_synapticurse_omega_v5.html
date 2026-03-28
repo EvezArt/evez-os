@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>EVEZ Ω-FRAME v5 — SynaptiCurse</title>
+<style>
+  :root {
+    --bg:#03000f;--panel:#0a0520;--border:#3a0070;--accent:#9b00ff;
+    --fire:#ff4400;--phi-color:#00ffe7;--gold:#ffd700;--text:#e0d0ff;
+    --green:#00ff88;--red:#ff2244;--dim:#4a3a6a;
+    --epoch-color:#ff9900;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Courier New',monospace;}
+  body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;
+    background-image:radial-gradient(ellipse at 50% 0%,#1a004433 0%,transparent 70%),
+    radial-gradient(ellipse at 80% 80%,#00004422 0%,transparent 60%);}
+  header{background:linear-gradient(90deg,#0a0030,#1a0050,#0a0030);
+    border-bottom:1px solid var(--accent);padding:8px 12px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+  header h1{font-size:1.05rem;color:var(--phi-color);letter-spacing:2px;text-shadow:0 0 8px var(--accent);}
+  .hpill{font-size:0.6rem;padding:3px 8px;border-radius:20px;border:1px solid;animation:hbeat 2s infinite;}
+  .hpill.ok{border-color:var(--green);color:var(--green);}
+  .hpill.warn{border-color:var(--gold);color:var(--gold);}
+  @keyframes hbeat{0%,100%{opacity:1}50%{opacity:0.4}}
+
+  /* GRID */
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;gap:6px;padding:6px;}
+  @media(max-width:700px){.grid{grid-template-columns:1fr;}}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:8px;position:relative;}
+  .panel h2{font-size:0.65rem;color:var(--accent);letter-spacing:2px;margin-bottom:6px;text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:4px;}
+
+  /* RADAR */
+  #radarCanvas{width:100%;aspect-ratio:1;display:block;}
+  .att-row{display:flex;justify-content:space-between;align-items:center;margin-top:4px;gap:4px;}
+  .att-label{font-size:0.55rem;color:var(--dim);width:70px;}
+  .att-bar{flex:1;height:6px;background:#111;border-radius:3px;overflow:hidden;}
+  .att-fill{height:100%;border-radius:3px;transition:width 0.4s;}
+  .att-val{font-size:0.55rem;width:32px;text-align:right;}
+
+  /* PHI / EPOCH */
+  .phi-row{display:flex;gap:6px;margin-top:6px;align-items:center;flex-wrap:wrap;}
+  .phi-chip{font-size:0.7rem;padding:3px 8px;border-radius:12px;border:1px solid var(--phi-color);color:var(--phi-color);background:#00ffe710;}
+  .v-chip{font-size:0.7rem;padding:3px 8px;border-radius:12px;border:1px solid var(--gold);color:var(--gold);background:#ffd70010;}
+  .epoch-chip{font-size:0.6rem;padding:2px 6px;border-radius:10px;border:1px solid var(--epoch-color);color:var(--epoch-color);background:#ff990010;}
+
+  /* TICK VISUALIZER */
+  #tickCanvas{width:100%;height:100px;display:block;border:1px solid var(--border);border-radius:4px;margin-top:4px;background:#000008;}
+  .fire-flash{animation:fflash 0.3s;}
+  @keyframes fflash{0%{background:#ff440022}100%{background:transparent}}
+
+  /* DAEMON BUS */
+  .btn-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;}
+  .btn{font-size:0.6rem;padding:4px 8px;border-radius:4px;border:1px solid var(--accent);background:#0a0020;color:var(--accent);cursor:pointer;transition:all 0.2s;}
+  .btn:hover{background:var(--accent);color:#000;}
+  .btn.fire{border-color:var(--fire);color:var(--fire);}
+  .btn.fire:hover{background:var(--fire);color:#000;}
+  #busLog{height:130px;overflow-y:auto;font-size:0.55rem;background:#000008;border:1px solid var(--border);border-radius:4px;padding:6px;line-height:1.6;}
+  #busLog .log-ok{color:var(--green);}
+  #busLog .log-err{color:var(--red);}
+  #busLog .log-info{color:var(--phi-color);}
+  #busLog .log-fire{color:var(--fire);font-weight:bold;}
+  #busLog .log-warn{color:var(--gold);}
+
+  /* REACTOR */
+  #reactorInput{width:100%;height:90px;background:#000010;border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:0.55rem;padding:6px;resize:none;}
+  #reactorOutput{margin-top:6px;font-size:0.55rem;background:#000010;border:1px solid var(--border);border-radius:4px;padding:6px;min-height:40px;color:var(--phi-color);white-space:pre-wrap;word-break:break-all;}
+
+  /* IDENTITY */
+  #identityInput{width:100%;height:80px;background:#000010;border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:0.5rem;padding:6px;resize:none;}
+  #identityLog{margin-top:6px;font-size:0.5rem;color:var(--dim);min-height:30px;}
+
+  /* ECOSYSTEM */
+  #ecoGrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;}
+  .eco-card{background:#000010;border:1px solid var(--border);border-radius:4px;padding:5px;font-size:0.5rem;}
+  .eco-card .repo-name{color:var(--accent);font-weight:bold;font-size:0.55rem;}
+  .eco-card .repo-stat{color:var(--dim);}
+  .eco-card.healthy{border-color:#1a4a1a;}
+  .eco-card.warn{border-color:#4a3a00;}
+  .eco-card.dead{border-color:#4a0000;}
+
+  /* MEV RADAR */
+  #mevCanvas{width:100%;aspect-ratio:1;display:block;}
+
+  /* METAROM */
+  #mmClock{font-size:2rem;color:var(--fire);text-align:center;text-shadow:0 0 12px var(--fire);letter-spacing:4px;margin:8px 0;}
+  #mmPhase{font-size:0.6rem;text-align:center;color:var(--gold);}
+  #mmBoss{font-size:0.55rem;text-align:center;color:var(--dim);margin-top:4px;}
+  .song-btn{display:block;width:100%;margin-top:8px;padding:6px;background:#000030;border:1px solid var(--phi-color);color:var(--phi-color);border-radius:4px;cursor:pointer;font-size:0.6rem;letter-spacing:2px;}
+  .song-btn:hover{background:var(--phi-color);color:#000;}
+
+  /* TRIANGULATION */
+  #triCanvas{width:100%;height:120px;display:block;background:#000008;border:1px solid var(--border);border-radius:4px;margin-top:4px;}
+  .tri-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:4px;}
+  .tri-stat{font-size:0.5rem;text-align:center;padding:3px;border:1px solid var(--border);border-radius:3px;}
+  .tri-stat span{display:block;font-size:0.7rem;color:var(--phi-color);}
+
+  /* STRANGE LOOP */
+  #loopArea{width:100%;height:60px;background:#000010;border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:0.6rem;padding:6px;resize:none;}
+  #ghostLine{font-size:0.55rem;color:var(--dim);margin-top:3px;min-height:14px;font-style:italic;}
+
+  /* ENV TERMINAL */
+  #envInput{width:100%;background:#000008;border:1px solid var(--border);border-radius:4px;color:var(--green);font-size:0.55rem;padding:5px;outline:none;}
+  #envLog{height:80px;overflow-y:auto;font-size:0.5rem;background:#000008;border:1px solid var(--border);border-radius:4px;padding:5px;color:var(--green);margin-top:4px;}
+
+  /* EPOCH BAR */
+  #epochBar{background:var(--panel);border-top:1px solid var(--border);padding:6px 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+  #epochBar .ep-item{font-size:0.5rem;padding:2px 6px;border-radius:10px;border:1px solid var(--dim);color:var(--dim);}
+  #epochBar .ep-item.active{border-color:var(--epoch-color);color:var(--epoch-color);text-shadow:0 0 4px var(--epoch-color);}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:4px;height:4px;}
+  ::-webkit-scrollbar-track{background:#000;}
+  ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
+
+  .span2{grid-column:span 2;}
+  @media(max-width:700px){.span2{grid-column:span 1;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚡ EVEZ Ω-FRAME v5 — SynaptiCurse</h1>
+  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+    <div class="hpill ok" id="battPill">⚡ BAT --</div>
+    <div class="hpill ok" id="tickPill">TICK 0</div>
+    <div class="hpill warn" id="firePill">FIRE 0</div>
+    <div class="hpill ok" id="entPill">ENT 0.00</div>
+  </div>
+</header>
+
+<div class="grid">
+
+  <!-- COGNITIVE RADAR -->
+  <div class="panel">
+    <h2>⬡ Cognitive Radar</h2>
+    <canvas id="radarCanvas" width="300" height="300"></canvas>
+    <div class="att-row"><span class="att-label">Aperture</span><div class="att-bar"><div class="att-fill" id="aBar" style="width:50%;background:var(--phi-color)"></div></div><span class="att-val" id="aVal">0.50</span></div>
+    <div class="att-row"><span class="att-label">Altitude</span><div class="att-bar"><div class="att-fill" id="altBar" style="width:50%;background:var(--gold)"></div></div><span class="att-val" id="altVal">0.50</span></div>
+    <div class="att-row"><span class="att-label">Anchorage</span><div class="att-bar"><div class="att-fill" id="ancBar" style="width:50%;background:var(--green)"></div></div><span class="att-val" id="ancVal">0.50</span></div>
+    <div class="phi-row">
+      <div class="phi-chip">Φ <span id="phiVal">0.00</span></div>
+      <div class="v-chip">V_global <span id="vVal">0.00</span></div>
+      <div class="epoch-chip" id="epochChip">EPOCH 0</div>
+    </div>
+  </div>
+
+  <!-- TICK VISUALIZER -->
+  <div class="panel">
+    <h2>⚙ EVEZCore Tick Engine</h2>
+    <canvas id="tickCanvas" width="600" height="100"></canvas>
+    <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
+      <div style="font-size:0.55rem;color:var(--dim);">poly_c: <span id="polycVal" style="color:var(--phi-color)">--</span></div>
+      <div style="font-size:0.55rem;color:var(--dim);">topo: <span id="topoVal" style="color:var(--gold)">--</span></div>
+      <div style="font-size:0.55rem;color:var(--dim);">τ: <span id="tauVal" style="color:var(--green)">--</span></div>
+      <div style="font-size:0.55rem;color:var(--dim);">N: <span id="nVal" style="color:var(--text)">--</span></div>
+    </div>
+    <div id="lastFireBox" style="margin-top:6px;font-size:0.55rem;color:var(--fire);min-height:14px;"></div>
+  </div>
+
+  <!-- DAEMON BUS -->
+  <div class="panel">
+    <h2>🔌 Daemon Bus — Supabase</h2>
+    <div class="btn-row">
+      <button class="btn" onclick="busCall('status')">STATUS</button>
+      <button class="btn" onclick="busCall('pending')">PENDING</button>
+      <button class="btn" onclick="busCall('heartbeat')">HEARTBEAT</button>
+      <button class="btn fire" onclick="busInject()">INJECT TASK</button>
+      <button class="btn" onclick="busLog.innerHTML=''">CLR</button>
+    </div>
+    <div id="busLog"><span class="log-info">// daemon bus ready — tap STATUS to connect</span></div>
+  </div>
+
+  <!-- RESEARCH REACTOR -->
+  <div class="panel">
+    <h2>⚗ Research Data Reactor</h2>
+    <textarea id="reactorInput" placeholder="Paste JSON array / object / raw text / logs here..."></textarea>
+    <div class="btn-row" style="margin-top:4px;">
+      <button class="btn" onclick="analyzeReactor()">ANALYZE</button>
+      <button class="btn fire" onclick="reactorInput.value='';reactorOutput.textContent=''">CLR</button>
+    </div>
+    <div id="reactorOutput">// output will appear here</div>
+  </div>
+
+  <!-- MEV RADAR -->
+  <div class="panel">
+    <h2>📡 ePBS Cross-Domain MEV</h2>
+    <canvas id="mevCanvas" width="300" height="300"></canvas>
+  </div>
+
+  <!-- METAROM MM CLOCK -->
+  <div class="panel">
+    <h2>🎮 MetaROM — MM 3-Day Clock</h2>
+    <div id="mmClock">72:00:00</div>
+    <div id="mmPhase">Dawn of the First Day</div>
+    <div id="mmBoss">Boss: Odolwa (Woodfall Temple)</div>
+    <button class="song-btn" id="sotBtn" onclick="songOfTime()">♪ SONG OF TIME — RESET</button>
+  </div>
+
+  <!-- TRIANGULATION MATRIX -->
+  <div class="panel">
+    <h2>△ Triangulation Matrix</h2>
+    <canvas id="triCanvas" width="600" height="120"></canvas>
+    <div class="tri-stats">
+      <div class="tri-stat">Brain α<span id="triA">0.000</span></div>
+      <div class="tri-stat">Brain β<span id="triB">0.000</span></div>
+      <div class="tri-stat">Brain γ<span id="triC">0.000</span></div>
+    </div>
+    <div style="font-size:0.5rem;color:var(--dim);margin-top:4px;">Centroid: <span id="triCentroid" style="color:var(--phi-color)">--</span> | SynaptiCurse Idx: <span id="sciVal" style="color:var(--fire)">--</span></div>
+  </div>
+
+  <!-- ECOSYSTEM NERVOUS SYSTEM -->
+  <div class="panel span2">
+    <h2>🌐 Ecosystem Nervous System — GitHub</h2>
+    <div id="ecoGrid"></div>
+    <div style="font-size:0.5rem;color:var(--dim);margin-top:4px;" id="ecoStatus">Polling every 30s…</div>
+  </div>
+
+  <!-- IDENTITY INJECTION -->
+  <div class="panel">
+    <h2>🧬 Identity Injection Port</h2>
+    <textarea id="identityInput" placeholder='{"IDENTITY_SEED":{"User":"EVEZ","Archetype":"Temporal Physics Mechanic","Core_Interests":["Neuromorphic","Quantum Consciousness"],"Mission":"Merge map and territory"}}'></textarea>
+    <div class="btn-row" style="margin-top:4px;">
+      <button class="btn" onclick="injectIdentity()">INJECT</button>
+      <button class="btn fire" onclick="clearIdentity()">RESET FRAME</button>
+    </div>
+    <div id="identityLog">// frame awaits seed</div>
+  </div>
+
+  <!-- STRANGE LOOP PROMPT -->
+  <div class="panel">
+    <h2>🔁 Strange Loop Prompt</h2>
+    <textarea id="loopArea" placeholder="Type query / intent / directive..." oninput="loopInput(this)" onkeydown="loopKey(event,this)"></textarea>
+    <div id="ghostLine">// ghost cursor trains on your keystrokes</div>
+    <div class="btn-row" style="margin-top:4px;">
+      <button class="btn" onclick="markovStats()">MARKOV STATS</button>
+      <button class="btn fire" onclick="markovBrain={}; appendLog(busLog,'log-warn','Markov brain wiped.')">WIPE BRAIN</button>
+    </div>
+  </div>
+
+  <!-- ENV TERMINAL -->
+  <div class="panel">
+    <h2>💻 .env Terminal</h2>
+    <input id="envInput" placeholder="SUPABASE_URL=... or > status" onkeydown="envKey(event,this)"/>
+    <div id="envLog">// .env terminal ready
+// prefix keys with VAR=val to set, or > command</div>
+  </div>
+
+</div>
+
+<!-- EPOCH BAR -->
+<div id="epochBar"></div>
+
+<script>
+// ─────────────────────────────────────────────
+// EVEZ CORE STATE
+// ─────────────────────────────────────────────
+const S = {
+  aperture: 0.5, altitude: 0.5, anchorage: 0.5,
+  phi: 0, V_global: 0, N: 2, tau: 1, omega_k: 0.1,
+  topo: 1.0, entropy: 0.3, tickCount: 0, fireCount: 0,
+  mouseX: 0, mouseY: 0, lastMX: 0, lastMY: 0,
+  tremor: 0, jerkBuf: [], polycHistory: [], vHistory: [],
+  lastFire: null
+};
+
+const CONSOLE_WAR_EPOCHS = [
+  {n:"Pong Era",v:0.0},{n:"Atari/NES",v:0.6},{n:"SNES/Genesis",v:1.2},
+  {n:"PS1/N64",v:1.8},{n:"PS2/Xbox",v:2.4},{n:"PS3/360",v:3.0},
+  {n:"PS4/XO",v:3.6},{n:"Switch Era",v:4.2},{n:"PS5/SeriesX",v:4.8},
+  {n:"Singularity",v:5.4}
+];
+
+const MM_BOSSES = [
+  "Odolwa (Woodfall Temple)","Goht (Snowhead Temple)",
+  "Gyorg (Great Bay Temple)","Twinmold (Stone Tower Temple)"
+];
+const MM_PHASES = [
+  "Dawn of the First Day","First Day","Afternoon","Dusk",
+  "Dawn of the Second Day","Second Day","Second Afternoon","Second Dusk",
+  "Dawn of the Final Day","Final Day","Last Hours","MIDNIGHT — RESET"
+];
+
+// Markov brain
+let markovBrain = {};
+let lastToken = null;
+
+// ENV store
+const envStore = {};
+
+// ─────────────────────────────────────────────
+// EVEZ CORE PHYSICS (from evez_core.py)
+// poly_c = topo * (1 + ln(tau)) / log2(N+2)
+// ─────────────────────────────────────────────
+function computePolyC() {
+  const tau = Math.max(0.01, S.tau);
+  const N = Math.max(1, S.N);
+  return S.topo * (1 + Math.log(tau)) / Math.log2(N + 2);
+}
+
+function coreTickEngine() {
+  // modulate topo and omega_k from attention + entropy
+  S.topo = 0.5 + S.aperture * 0.8 + S.entropy * 0.4;
+  S.tau += 0.07 * (1 + S.altitude * 0.5);
+  S.N = Math.max(2, S.N + (Math.random() < 0.3 ? 1 : 0));
+  S.omega_k = 0.05 + S.anchorage * 0.15 + S.tremor * 0.1;
+
+  const poly_c = computePolyC();
+  const delta_V = 0.08 * poly_c * (1 + S.tremor * 0.2);
+  S.V_global = Math.min(6.0, S.V_global + delta_V);
+
+  const fire = poly_c > 0.500;
+  if (fire) {
+    S.fireCount++;
+    S.lastFire = { tick: S.tickCount, poly_c, V_global: S.V_global };
+    document.body.classList.add('fire-flash');
+    setTimeout(() => document.body.classList.remove('fire-flash'), 300);
+  }
+
+  S.polycHistory.push({ v: poly_c, fire });
+  S.vHistory.push(S.V_global);
+  if (S.polycHistory.length > 200) S.polycHistory.shift();
+  if (S.vHistory.length > 200) S.vHistory.shift();
+
+  // Phi proxy: IIT-inspired — scales with connections * integration
+  S.phi = Math.min(9.99, S.N * poly_c * S.anchorage * 1.2);
+
+  S.tickCount++;
+
+  updateHUD(poly_c, fire);
+  drawTick();
+  updateEpoch();
+  updateTriangulation();
+}
+
+// ─────────────────────────────────────────────
+// HUD
+// ─────────────────────────────────────────────
+function updateHUD(poly_c, fire) {
+  document.getElementById('polycVal').textContent = poly_c.toFixed(4);
+  document.getElementById('topoVal').textContent = S.topo.toFixed(3);
+  document.getElementById('tauVal').textContent = S.tau.toFixed(2);
+  document.getElementById('nVal').textContent = S.N;
+  document.getElementById('tickPill').textContent = 'TICK ' + S.tickCount;
+  document.getElementById('firePill').textContent = 'FIRE ' + S.fireCount;
+  document.getElementById('entPill').textContent = 'ENT ' + S.entropy.toFixed(2);
+  document.getElementById('phiVal').textContent = S.phi.toFixed(3);
+  document.getElementById('vVal').textContent = S.V_global.toFixed(3);
+
+  setBar('aBar','aVal', S.aperture);
+  setBar('altBar','altVal', S.altitude);
+  setBar('ancBar','ancVal', S.anchorage);
+
+  if (fire && S.lastFire) {
+    document.getElementById('lastFireBox').textContent =
+      `⚡ FIRE @ tick ${S.lastFire.tick} | poly_c=${S.lastFire.poly_c.toFixed(4)} | V=${S.lastFire.V_global.toFixed(3)}`;
+  }
+
+  drawRadar();
+}
+
+function setBar(barId, valId, v) {
+  document.getElementById(barId).style.width = (v*100).toFixed(1)+'%';
+  document.getElementById(valId).textContent = v.toFixed(2);
+}
+
+// ─────────────────────────────────────────────
+// RADAR CANVAS
+// ─────────────────────────────────────────────
+const radarCanvas = document.getElementById('radarCanvas');
+const rctx = radarCanvas.getContext('2d');
+let radarAngle = 0;
+function drawRadar() {
+  const w = radarCanvas.width, h = radarCanvas.height;
+  const cx = w/2, cy = h/2, r = Math.min(w,h)*0.42;
+  rctx.clearRect(0,0,w,h);
+
+  // BG
+  const grad = rctx.createRadialGradient(cx,cy,0,cx,cy,r);
+  grad.addColorStop(0,'#0a002233');
+  grad.addColorStop(1,'#03000f');
+  rctx.fillStyle=grad; rctx.fillRect(0,0,w,h);
+
+  // Grid rings
+  for(let i=1;i<=4;i++){
+    rctx.beginPath(); rctx.arc(cx,cy,r*(i/4),0,Math.PI*2);
+    rctx.strokeStyle=`rgba(80,0,150,${0.15+i*0.07})`; rctx.lineWidth=1; rctx.stroke();
+  }
+  // Axes
+  for(let i=0;i<8;i++){
+    const a=i*Math.PI/4;
+    rctx.beginPath(); rctx.moveTo(cx,cy);
+    rctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+    rctx.strokeStyle='rgba(80,0,150,0.2)'; rctx.lineWidth=1; rctx.stroke();
+  }
+
+  // Sweep line
+  radarAngle = (radarAngle + 0.04 * (1 + S.entropy)) % (Math.PI*2);
+  const sweepGrad = rctx.createConicalGradient ? null : null;
+  rctx.save();
+  rctx.translate(cx,cy);
+  const sg = rctx.createLinearGradient(0,0,r*Math.cos(radarAngle),r*Math.sin(radarAngle));
+  sg.addColorStop(0,'rgba(155,0,255,0.6)');
+  sg.addColorStop(1,'rgba(155,0,255,0)');
+  rctx.beginPath(); rctx.moveTo(0,0);
+  rctx.lineTo(r*Math.cos(radarAngle),r*Math.sin(radarAngle));
+  rctx.strokeStyle='rgba(155,0,255,0.7)'; rctx.lineWidth=2; rctx.stroke();
+  rctx.restore();
+
+  // Blips — aperture, altitude, anchorage, phi, V_global, entropy
+  const blips = [
+    {v:S.aperture,  a:0,          c:'#00ffe7', label:'APT'},
+    {v:S.altitude,  a:Math.PI/3,  c:'#ffd700', label:'ALT'},
+    {v:S.anchorage, a:Math.PI*2/3,c:'#00ff88', label:'ANC'},
+    {v:Math.min(1,S.phi/10), a:Math.PI,   c:'#ff44ff', label:'Φ'},
+    {v:Math.min(1,S.V_global/6), a:Math.PI*4/3, c:'#ff9900', label:'V'},
+    {v:S.entropy,   a:Math.PI*5/3,c:'#ff4400', label:'ENT'}
+  ];
+  blips.forEach(b=>{
+    const br = r*b.v*0.88;
+    const bx = cx + br*Math.cos(b.a);
+    const by = cy + br*Math.sin(b.a);
+    rctx.beginPath(); rctx.arc(bx,by,5+S.tremor*6,0,Math.PI*2);
+    rctx.fillStyle=b.c+'99'; rctx.fill();
+    rctx.beginPath(); rctx.arc(bx,by,3,0,Math.PI*2);
+    rctx.fillStyle=b.c; rctx.fill();
+    rctx.font='9px Courier New'; rctx.fillStyle=b.c;
+    rctx.fillText(b.label, bx+6, by-4);
+  });
+
+  // Polygon connecting blips
+  rctx.beginPath();
+  blips.forEach((b,i)=>{
+    const br=r*b.v*0.88;
+    const bx=cx+br*Math.cos(b.a), by=cy+br*Math.sin(b.a);
+    i===0?rctx.moveTo(bx,by):rctx.lineTo(bx,by);
+  });
+  rctx.closePath();
+  rctx.strokeStyle='rgba(155,0,255,0.35)'; rctx.lineWidth=1.5; rctx.stroke();
+  rctx.fillStyle='rgba(155,0,255,0.07)'; rctx.fill();
+
+  // Center dot
+  rctx.beginPath(); rctx.arc(cx,cy,4,0,Math.PI*2);
+  rctx.fillStyle='#fff'; rctx.fill();
+}
+
+// ─────────────────────────────────────────────
+// TICK CANVAS
+// ─────────────────────────────────────────────
+const tickCanvas = document.getElementById('tickCanvas');
+const tctx = tickCanvas.getContext('2d');
+function drawTick() {
+  const w=tickCanvas.width, h=tickCanvas.height;
+  tctx.clearRect(0,0,w,h);
+  tctx.fillStyle='#000008'; tctx.fillRect(0,0,w,h);
+
+  const len = S.polycHistory.length;
+  if(len<2) return;
+
+  // V_global gold wave
+  tctx.beginPath();
+  S.vHistory.forEach((v,i)=>{
+    const x=i/Math.max(1,S.vHistory.length-1)*w;
+    const y=h-(v/6)*h*0.85;
+    i===0?tctx.moveTo(x,y):tctx.lineTo(x,y);
+  });
+  tctx.strokeStyle='rgba(255,215,0,0.2)'; tctx.lineWidth=1.5; tctx.stroke();
+
+  // poly_c teal wave
+  tctx.beginPath();
+  S.polycHistory.forEach((p,i)=>{
+    const x=i/Math.max(1,len-1)*w;
+    const y=h-(Math.min(p.v,2)/2)*h*0.85;
+    i===0?tctx.moveTo(x,y):tctx.lineTo(x,y);
+  });
+  tctx.strokeStyle='rgba(0,255,231,0.7)'; tctx.lineWidth=1.5; tctx.stroke();
+
+  // Fire dots
+  S.polycHistory.forEach((p,i)=>{
+    if(p.fire){
+      const x=i/Math.max(1,len-1)*w;
+      const y=h-(Math.min(p.v,2)/2)*h*0.85;
+      tctx.beginPath(); tctx.arc(x,y,3,0,Math.PI*2);
+      tctx.fillStyle='#ff4400'; tctx.fill();
+    }
+  });
+
+  // Fire line
+  tctx.beginPath();
+  tctx.moveTo(0,h-(0.5/2)*h*0.85);
+  tctx.lineTo(w,h-(0.5/2)*h*0.85);
+  tctx.strokeStyle='rgba(255,68,0,0.3)'; tctx.lineWidth=1;
+  tctx.setLineDash([4,4]); tctx.stroke(); tctx.setLineDash([]);
+}
+
+// ─────────────────────────────────────────────
+// EPOCH BAR
+// ─────────────────────────────────────────────
+function updateEpoch() {
+  let currentEpoch = 0;
+  CONSOLE_WAR_EPOCHS.forEach((e,i)=>{ if(S.V_global>=e.v) currentEpoch=i; });
+  document.getElementById('epochChip').textContent = 'EPOCH '+currentEpoch+': '+CONSOLE_WAR_EPOCHS[currentEpoch].n;
+  const bar = document.getElementById('epochBar');
+  bar.innerHTML = CONSOLE_WAR_EPOCHS.map((e,i)=>
+    `<span class="ep-item${i===currentEpoch?' active':''}">${e.n}</span>`
+  ).join('');
+}
+
+// ─────────────────────────────────────────────
+// MEV RADAR
+// ─────────────────────────────────────────────
+const mevCanvas = document.getElementById('mevCanvas');
+const mctx = mevCanvas.getContext('2d');
+const MEV_DOMAINS = [
+  {name:'L1 ePBS',   coverage:0.70, color:'#ff4400'},
+  {name:'Arb/L2',    coverage:0.15, color:'#ff9900'},
+  {name:'Optimism',  coverage:0.10, color:'#ffd700'},
+  {name:'Arbitrum',  coverage:0.08, color:'#00ff88'},
+  {name:'zkSync',    coverage:0.04, color:'#00ffe7'},
+  {name:'Base',      coverage:0.03, color:'#9b00ff'},
+  {name:'Bridges',   coverage:0.02, color:'#ff44ff'}
+];
+let mevAngle = 0;
+function drawMEV() {
+  const w=mevCanvas.width, h=mevCanvas.height;
+  const cx=w/2, cy=h/2, r=Math.min(w,h)*0.4;
+  mctx.clearRect(0,0,w,h);
+  mctx.fillStyle='#000008'; mctx.fillRect(0,0,w,h);
+
+  // Rings
+  for(let i=1;i<=4;i++){
+    mctx.beginPath(); mctx.arc(cx,cy,r*(i/4),0,Math.PI*2);
+    mctx.strokeStyle=`rgba(60,0,100,${0.2+i*0.08})`; mctx.lineWidth=1; mctx.stroke();
+  }
+
+  mevAngle = (mevAngle + 0.018) % (Math.PI*2);
+  const total = MEV_DOMAINS.reduce((a,b)=>a+b.coverage,0);
+  let accum = mevAngle;
+  MEV_DOMAINS.forEach(d=>{
+    const span = (d.coverage/total)*Math.PI*2;
+    const br = r*Math.min(1, d.coverage*4+0.2);
+    const ax=cx+br*Math.cos(accum+span/2), ay=cy+br*Math.sin(accum+span/2);
+    mctx.beginPath(); mctx.moveTo(cx,cy);
+    mctx.arc(cx,cy,br,accum,accum+span);
+    mctx.closePath();
+    mctx.fillStyle=d.color+'33'; mctx.fill();
+    mctx.strokeStyle=d.color+'88'; mctx.lineWidth=1.5; mctx.stroke();
+    // label
+    mctx.font='8px Courier New'; mctx.fillStyle=d.color;
+    mctx.fillText(d.name, ax-20, ay+3);
+    accum += span;
+  });
+
+  // Center
+  mctx.beginPath(); mctx.arc(cx,cy,5,0,Math.PI*2);
+  mctx.fillStyle='#ff4400'; mctx.fill();
+}
+
+// ─────────────────────────────────────────────
+// METAROM — MM 3-DAY CLOCK
+// ─────────────────────────────────────────────
+let mmSecondsLeft = 72*3600;
+let mmRunning = true;
+function tickMM() {
+  if(!mmRunning) return;
+  mmSecondsLeft = Math.max(0, mmSecondsLeft - 1);
+  const h=Math.floor(mmSecondsLeft/3600);
+  const m=Math.floor((mmSecondsLeft%3600)/60);
+  const s=mmSecondsLeft%60;
+  document.getElementById('mmClock').textContent =
+    String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+
+  const progress = 1 - mmSecondsLeft/(72*3600);
+  const phaseIdx = Math.min(MM_PHASES.length-1, Math.floor(progress*MM_PHASES.length));
+  const bossIdx = Math.min(MM_BOSSES.length-1, Math.floor(progress*MM_BOSSES.length));
+  document.getElementById('mmPhase').textContent = MM_PHASES[phaseIdx];
+  document.getElementById('mmBoss').textContent = 'Boss: '+MM_BOSSES[bossIdx];
+
+  // V_global coupling: MM clock urgency feeds entropy
+  S.entropy = Math.min(1, S.entropy + (1-mmSecondsLeft/(72*3600))*0.001);
+
+  if(mmSecondsLeft===0){
+    document.getElementById('mmClock').textContent='00:00:00';
+    document.getElementById('mmPhase').textContent='MIDNIGHT — MOON IS FALLING';
+    appendLog(document.getElementById('busLog'),'log-fire','⚠ MM CLOCK: MOON CRASH — SONG OF TIME REQUIRED');
+  }
+}
+function songOfTime() {
+  mmSecondsLeft = 72*3600;
+  S.V_global = Math.max(0, S.V_global - 1.2);
+  S.tau = 1;
+  appendLog(document.getElementById('busLog'),'log-info','♪ Song of Time played — clock reset, V_global -1.2');
+  document.getElementById('sotBtn').textContent = '♪ SONG OF TIME — ✓ RESET';
+  setTimeout(()=>{ document.getElementById('sotBtn').textContent='♪ SONG OF TIME — RESET'; },2000);
+}
+
+// ─────────────────────────────────────────────
+// TRIANGULATION MATRIX
+// ─────────────────────────────────────────────
+const triCanvas = document.getElementById('triCanvas');
+const trctx = triCanvas.getContext('2d');
+let triPhase = 0;
+function updateTriangulation() {
+  triPhase += 0.025;
+  const a = 0.3+S.aperture*0.4 + 0.1*Math.sin(triPhase);
+  const b = 0.3+S.altitude*0.4 + 0.1*Math.sin(triPhase+2.1);
+  const c = 0.3+S.anchorage*0.4 + 0.1*Math.sin(triPhase+4.2);
+  const centroid = (a+b+c)/3;
+  const sci = Math.abs(a-b)*0.5 + Math.abs(b-c)*0.5 + S.tremor * 0.3 + S.entropy * 0.2;
+
+  document.getElementById('triA').textContent = a.toFixed(3);
+  document.getElementById('triB').textContent = b.toFixed(3);
+  document.getElementById('triC').textContent = c.toFixed(3);
+  document.getElementById('triCentroid').textContent = centroid.toFixed(4);
+  document.getElementById('sciVal').textContent = sci.toFixed(4);
+
+  const w=triCanvas.width, h=triCanvas.height;
+  trctx.clearRect(0,0,w,h);
+  trctx.fillStyle='#000008'; trctx.fillRect(0,0,w,h);
+
+  // Three brain points
+  const pts = [
+    {x:w*0.15+a*w*0.15, y:h*0.5, label:'α', color:'#00ffe7'},
+    {x:w*0.5,           y:h*0.1+b*h*0.7, label:'β', color:'#ffd700'},
+    {x:w*0.85-c*w*0.15, y:h*0.5, label:'γ', color:'#00ff88'}
+  ];
+  const cx2=(pts[0].x+pts[1].x+pts[2].x)/3;
+  const cy2=(pts[0].y+pts[1].y+pts[2].y)/3;
+
+  // Triangle
+  trctx.beginPath();
+  trctx.moveTo(pts[0].x,pts[0].y);
+  trctx.lineTo(pts[1].x,pts[1].y);
+  trctx.lineTo(pts[2].x,pts[2].y);
+  trctx.closePath();
+  trctx.strokeStyle='rgba(155,0,255,0.5)'; trctx.lineWidth=1.5; trctx.stroke();
+  trctx.fillStyle='rgba(155,0,255,0.05)'; trctx.fill();
+
+  // Centroid
+  trctx.beginPath(); trctx.arc(cx2,cy2,5,0,Math.PI*2);
+  trctx.fillStyle='#ff4400'; trctx.fill();
+
+  // Retrocausal shadow (offset back in time)
+  trctx.beginPath();
+  trctx.moveTo(pts[0].x-4,pts[0].y+3);
+  trctx.lineTo(pts[1].x-4,pts[1].y+3);
+  trctx.lineTo(pts[2].x-4,pts[2].y+3);
+  trctx.closePath();
+  trctx.strokeStyle='rgba(255,68,0,0.2)'; trctx.lineWidth=1; trctx.stroke();
+
+  // Brain nodes
+  pts.forEach(p=>{
+    trctx.beginPath(); trctx.arc(p.x,p.y,6,0,Math.PI*2);
+    trctx.fillStyle=p.color; trctx.fill();
+    trctx.font='9px Courier New'; trctx.fillStyle=p.color;
+    trctx.fillText(p.label, p.x+8, p.y-4);
+  });
+}
+
+// ─────────────────────────────────────────────
+// ECOSYSTEM NERVOUS SYSTEM
+// ─────────────────────────────────────────────
+const REPOS = [
+  'EvezArt/evez-os','EvezArt/CrawFather','EvezArt/ClawdBot',
+  'EvezArt/AgentVault','EvezArt/LORD','EvezArt/FIRE-traces',
+  'EvezArt/synapticurse','EvezArt/daemon-bus'
+];
+async function pollEcosystem() {
+  const grid = document.getElementById('ecoGrid');
+  grid.innerHTML = '';
+  document.getElementById('ecoStatus').textContent = 'Polling '+(new Date().toLocaleTimeString())+'…';
+  for(const repo of REPOS){
+    const card = document.createElement('div');
+    card.className='eco-card';
+    try{
+      const r = await fetch(`https://api.github.com/repos/${repo}`);
+      if(r.ok){
+        const d=await r.json();
+        const daysAgo=Math.floor((Date.now()-new Date(d.pushed_at))/(86400000));
+        const health = daysAgo<3?'healthy':daysAgo<14?'warn':'dead';
+        card.className='eco-card '+health;
+        card.innerHTML=`<div class="repo-name">⬡ ${d.name}</div>
+          <div class="repo-stat">★ ${d.stargazers_count} | 🍴 ${d.forks_count} | ${daysAgo}d ago</div>
+          <div class="repo-stat">${d.description?d.description.slice(0,50)+'…':'no desc'}</div>`;
+      } else {
+        card.innerHTML=`<div class="repo-name" style="color:var(--dim)">${repo.split('/')[1]}</div><div class="repo-stat" style="color:var(--red)">404 or private</div>`;
+      }
+    }catch(e){
+      card.innerHTML=`<div class="repo-name" style="color:var(--dim)">${repo.split('/')[1]}</div><div class="repo-stat" style="color:var(--red)">network err</div>`;
+    }
+    grid.appendChild(card);
+  }
+}
+
+// ─────────────────────────────────────────────
+// DAEMON BUS
+// ─────────────────────────────────────────────
+const SUPABASE_URL = 'https://vziaqxquzohqskesuxgz.supabase.co/functions/v1/daemon-bus';
+const busLogEl = document.getElementById('busLog');
+function appendLog(el, cls, msg) {
+  const d=document.createElement('div');
+  d.className=cls; d.textContent='['+new Date().toLocaleTimeString()+'] '+msg;
+  el.appendChild(d); el.scrollTop=el.scrollHeight;
+}
+async function busCall(action) {
+  appendLog(busLogEl,'log-info','→ '+action.toUpperCase());
+  try{
+    const url = SUPABASE_URL+'?action='+action+(action==='heartbeat'?'&agent_id=omega-frame-v5':'');
+    const r = await fetch(url);
+    const text = await r.text();
+    let parsed;
+    try{ parsed=JSON.parse(text); }catch(e){ parsed=text; }
+    const cls = r.ok?'log-ok':'log-err';
+    appendLog(busLogEl,cls,JSON.stringify(parsed).slice(0,200));
+    if(r.ok && parsed){
+      if(parsed.loops) appendLog(busLogEl,'log-info','loops: '+parsed.loops);
+      if(parsed.agents) appendLog(busLogEl,'log-info','agents: '+JSON.stringify(parsed.agents).slice(0,100));
+    }
+  }catch(e){
+    appendLog(busLogEl,'log-err','FETCH ERR: '+e.message);
+  }
+}
+async function busInject() {
+  const task = {
+    agent:'omega-frame-v5',
+    action:'synapticurse_tick',
+    payload:{ V_global:S.V_global, phi:S.phi, tick:S.tickCount, timestamp:Date.now() }
+  };
+  appendLog(busLogEl,'log-warn','→ INJECT TASK: '+JSON.stringify(task).slice(0,100));
+  try{
+    const r = await fetch(SUPABASE_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(task)
+    });
+    const text=await r.text();
+    appendLog(busLogEl,r.ok?'log-fire':'log-err','← '+text.slice(0,150));
+  }catch(e){
+    appendLog(busLogEl,'log-err','INJECT ERR: '+e.message);
+  }
+}
+
+// ─────────────────────────────────────────────
+// RESEARCH REACTOR
+// ─────────────────────────────────────────────
+function analyzeReactor() {
+  const raw = document.getElementById('reactorInput').value.trim();
+  if(!raw){ document.getElementById('reactorOutput').textContent='// paste data first'; return; }
+  let tokens=[];
+  let parsed=null;
+  try{
+    parsed=JSON.parse(raw);
+    const flat=flattenJSON(parsed);
+    tokens=flat.join(' ').toLowerCase().split(/\s+/).filter(t=>t.length>2);
+  }catch(e){
+    tokens=raw.toLowerCase().split(/\s+/).filter(t=>t.length>2);
+  }
+  const unique=new Set(tokens);
+  const entropy=tokens.length>0?(unique.size/tokens.length):0;
+  S.entropy=Math.min(1,entropy);
+  S.aperture=Math.min(1,S.aperture+entropy*0.15);
+
+  // Train Markov
+  tokens.forEach((t,i)=>{
+    if(i>0){ const prev=tokens[i-1];
+      if(!markovBrain[prev]) markovBrain[prev]=[];
+      markovBrain[prev].push(t);
+    }
+  });
+
+  // Top terms
+  const freq={};
+  tokens.forEach(t=>{ freq[t]=(freq[t]||0)+1; });
+  const top=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,20);
+
+  let out=`tokens: ${tokens.length} | unique: ${unique.size} | entropy: ${entropy.toFixed(4)}\n`;
+  out+=`top terms:\n${top.map(([k,v])=>`  ${k}: ${v}`).join('\n')}`;
+  if(parsed && typeof parsed==='object'){
+    out+=`\n\nstruct: ${Array.isArray(parsed)?'array['+parsed.length+']':'object{'+Object.keys(parsed).join(', ')+'}'}`;
+  }
+  document.getElementById('reactorOutput').textContent=out;
+  appendLog(busLogEl,'log-info','⚗ Reactor: entropy='+entropy.toFixed(4)+', tokens='+tokens.length);
+}
+function flattenJSON(obj, acc=[]) {
+  if(typeof obj==='string') acc.push(obj);
+  else if(Array.isArray(obj)) obj.forEach(v=>flattenJSON(v,acc));
+  else if(obj && typeof obj==='object') Object.values(obj).forEach(v=>flattenJSON(v,acc));
+  return acc;
+}
+
+// ─────────────────────────────────────────────
+// STRANGE LOOP + MARKOV
+// ─────────────────────────────────────────────
+function loopInput(ta) {
+  const words=ta.value.trim().split(/\s+/);
+  const last=words[words.length-1];
+  const next=markovPredict(last);
+  document.getElementById('ghostLine').textContent = next?'→ '+next:'// type more to train ghost';
+
+  // Token entropy from typing
+  const u=new Set(words); S.entropy=Math.min(1, u.size/Math.max(1,words.length));
+  S.altitude=Math.min(1,S.altitude+0.01);
+
+  // Train on current
+  if(lastToken && last){ if(!markovBrain[lastToken]) markovBrain[lastToken]=[]; markovBrain[lastToken].push(last); }
+  lastToken=last;
+}
+function loopKey(e,ta) {
+  if(e.key==='Tab'){ e.preventDefault();
+    const ghost=document.getElementById('ghostLine').textContent.replace('→ ','').trim();
+    if(ghost&&ghost!='// type more to train ghost') ta.value+=' '+ghost;
+    appendLog(busLogEl,'log-info','GHOST_ACCEPT: '+ghost);
+  }
+  if(e.key==='Enter' && !e.shiftKey){ e.preventDefault();
+    const line=ta.value.trim();
+    appendLog(busLogEl,'log-fire','Ω '+line.slice(0,120));
+    ta.value='';
+  }
+}
+function markovPredict(token) {
+  if(!token||!markovBrain[token]) return null;
+  const opts=markovBrain[token];
+  return opts[Math.floor(Math.random()*opts.length)];
+}
+function markovStats() {
+  const keys=Object.keys(markovBrain);
+  appendLog(busLogEl,'log-info','Markov: '+keys.length+' tokens, '+
+    keys.reduce((a,k)=>a+markovBrain[k].length,0)+' edges');
+}
+
+// ─────────────────────────────────────────────
+// IDENTITY INJECTION
+// ─────────────────────────────────────────────
+function injectIdentity() {
+  const raw=document.getElementById('identityInput').value.trim();
+  let seed=null;
+  try{ seed=JSON.parse(raw); }catch(e){
+    document.getElementById('identityLog').textContent='// parse error: '+e.message; return;
+  }
+  localStorage.setItem('EVEZ_IDENTITY_SEED_V3',raw);
+  const flat=JSON.stringify(seed).toLowerCase();
+  const log=document.getElementById('identityLog');
+
+  // Archetype → CSS
+  if(flat.includes('temporal')||flat.includes('quantum')||flat.includes('physics')){
+    document.documentElement.style.setProperty('--bg','#000815');
+    document.documentElement.style.setProperty('--panel','#00101e');
+    document.documentElement.style.setProperty('--border','#003060');
+    document.documentElement.style.setProperty('--accent','#0088ff');
+    document.documentElement.style.setProperty('--phi-color','#00ccff');
+    log.textContent='// TEMPORAL/QUANTUM archetype loaded → deep blue frame';
+  } else if(flat.includes('hermetic')||flat.includes('esoteric')||flat.includes('shaman')){
+    document.documentElement.style.setProperty('--bg','#0d0008');
+    document.documentElement.style.setProperty('--panel','#1a0012');
+    document.documentElement.style.setProperty('--border','#5a0030');
+    document.documentElement.style.setProperty('--accent','#cc44aa');
+    document.documentElement.style.setProperty('--phi-color','#ffaa44');
+    log.textContent='// HERMETIC archetype loaded → amber-violet frame';
+  } else {
+    log.textContent='// Identity injected — no archetype match, frame unchanged';
+  }
+
+  // Extract keys
+  const s=seed.IDENTITY_SEED||seed;
+  if(s.User) appendLog(busLogEl,'log-info','IDENTITY: User='+s.User);
+  if(s.Archetype) appendLog(busLogEl,'log-info','IDENTITY: Archetype='+s.Archetype);
+  if(s.Mission) appendLog(busLogEl,'log-info','IDENTITY: Mission='+s.Mission);
+  if(s.Core_Interests) appendLog(busLogEl,'log-info','IDENTITY: Interests='+s.Core_Interests.join(', '));
+}
+function clearIdentity() {
+  localStorage.removeItem('EVEZ_IDENTITY_SEED_V3');
+  ['--bg','--panel','--border','--accent','--phi-color'].forEach(v=>
+    document.documentElement.style.removeProperty(v));
+  document.getElementById('identityLog').textContent='// frame reset to default';
+}
+
+// ─────────────────────────────────────────────
+// ENV TERMINAL
+// ─────────────────────────────────────────────
+const envLogEl = document.getElementById('envLog');
+function envKey(e,inp) {
+  if(e.key!=='Enter') return;
+  const cmd=inp.value.trim(); inp.value='';
+  if(!cmd) return;
+  if(cmd.startsWith('>')) {
+    const c=cmd.slice(1).trim().toLowerCase();
+    if(c==='status') envLogEl.textContent+='\n> status: '+Object.keys(envStore).length+' keys set';
+    else if(c==='dump') envLogEl.textContent+='\n'+JSON.stringify(envStore,null,2);
+    else if(c==='clear') envLogEl.textContent='';
+    else envLogEl.textContent+='\n> unknown: '+c;
+  } else if(cmd.includes('=')) {
+    const [k,...rest]=cmd.split('='); envStore[k.trim()]=rest.join('=').trim();
+    envLogEl.textContent+='\n✓ '+k.trim()+' set';
+  } else { envLogEl.textContent+='\n// unknown input — use KEY=val or >command'; }
+  envLogEl.scrollTop=envLogEl.scrollHeight;
+}
+
+// ─────────────────────────────────────────────
+// MOUSE ENTROPY
+// ─────────────────────────────────────────────
+let lastVX=0, lastVY=0;
+document.addEventListener('mousemove',e=>{
+  const vx=e.clientX-S.mouseX, vy=e.clientY-S.mouseY;
+  const jerk=Math.sqrt((vx-lastVX)**2+(vy-lastVY)**2);
+  S.jerkBuf.push(jerk); if(S.jerkBuf.length>30) S.jerkBuf.shift();
+  S.tremor=Math.min(1, S.jerkBuf.reduce((a,b)=>a+b,0)/(S.jerkBuf.length*40));
+  S.mouseX=e.clientX; S.mouseY=e.clientY; lastVX=vx; lastVY=vy;
+  S.anchorage=Math.max(0.05, 1-S.tremor);
+});
+document.addEventListener('touchmove',e=>{
+  if(!e.touches[0]) return;
+  const vx=e.touches[0].clientX-S.mouseX, vy=e.touches[0].clientY-S.mouseY;
+  const jerk=Math.sqrt(vx*vx+vy*vy);
+  S.jerkBuf.push(jerk); if(S.jerkBuf.length>30) S.jerkBuf.shift();
+  S.tremor=Math.min(1, S.jerkBuf.reduce((a,b)=>a+b,0)/(S.jerkBuf.length*40));
+  S.mouseX=e.touches[0].clientX; S.mouseY=e.touches[0].clientY;
+  S.anchorage=Math.max(0.05,1-S.tremor);
+},{passive:true});
+
+// ─────────────────────────────────────────────
+// BATTERY
+// ─────────────────────────────────────────────
+function initBattery() {
+  if(!navigator.getBattery) return;
+  navigator.getBattery().then(b=>{
+    function update(){
+      const pct=Math.round(b.level*100);
+      const pill=document.getElementById('battPill');
+      pill.textContent='⚡ BAT '+pct+'%';
+      if(pct>60){ pill.className='hpill ok'; document.documentElement.style.setProperty('--border','#3a0070');}
+      else if(pct>25){ pill.className='hpill warn'; document.documentElement.style.setProperty('--border','#4a3a00');}
+      else { pill.className='hpill'; pill.style.borderColor='var(--red)'; pill.style.color='var(--red)';
+        document.documentElement.style.setProperty('--border','#4a0000');}
+    }
+    update(); b.addEventListener('levelchange',update); b.addEventListener('chargingchange',update);
+  });
+}
+
+// ─────────────────────────────────────────────
+// STARTUP
+// ─────────────────────────────────────────────
+function init() {
+  initBattery();
+  // Restore identity
+  const saved=localStorage.getItem('EVEZ_IDENTITY_SEED_V3');
+  if(saved){ document.getElementById('identityInput').value=saved; injectIdentity(); }
+
+  // Core physics tick 900ms
+  setInterval(coreTickEngine, 900);
+  // MEV radar 60fps
+  setInterval(drawMEV, 40);
+  // MM clock 1s
+  setInterval(tickMM, 1000);
+  // Ecosystem poll 30s
+  pollEcosystem(); setInterval(pollEcosystem, 30000);
+
+  // Initial draws
+  drawRadar(); drawTick(); updateEpoch();
+  appendLog(busLogEl,'log-ok','⚡ EVEZ Ω-FRAME v5 SynaptiCurse — ONLINE');
+  appendLog(busLogEl,'log-info','EVEZCore physics engine active — tick interval 900ms');
+  appendLog(busLogEl,'log-info','MM 3-Day Clock running — V_global coupled');
+  appendLog(busLogEl,'log-info','Daemon bus endpoint: '+SUPABASE_URL);
+}
+window.addEventListener('load', init);
+</script>
+</body>
+</html>
