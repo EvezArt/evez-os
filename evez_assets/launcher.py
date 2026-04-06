@@ -13,35 +13,56 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 def main():
     if len(sys.argv) < 2:
         print("=== EVEZ Assets Launcher ===")
-        print("\nCore Systems:")
-        print("  integrator    - Run unified integrator (ALL SYSTEMS)")
+        print("\nSystem:")
+        print("  integrator    - Unified system (ALL modules)")
+        print("  api           - HTTP API server")
         
-        print("\nSensory Skills:")
-        print("  vision        - Computer vision & image analysis")
-        print("  audio         - Speech recognition & TTS")
-        print("  robotics      - Motor control & sensors")
-        
-        print("\nCognitive Skills:")
-        print("  nlp           - Natural language understanding")
-        print("  cognition     - FIRE events with topology")
-        print("  consciousness - Self-awareness & introspection")
-        
-        print("\nOperational Skills:")
-        print("  spine         - Append-only event spine")
-        print("  agent         - Autonomous decision agent")
-        print("  memory        - Unified memory store")
-        print("  loop          - OODA self-improvement loop")
+        print("\nCognition & Learning:")
+        print("  cognition     - FIRE events, topology")
+        print("  consciousness - Self-awareness")
         print("  meta          - Learning to learn")
+        print("  autonomous_loop - OODA improvement")
         
-        print("\nNetwork & Data:")
-        print("  swarm         - Multi-agent orchestration")
-        print("  network       - P2P mesh & consensus")
-        print("  pattern       - Cross-domain pattern detection")
-        print("  finance       - Trading & portfolio")
+        print("\nData & Analysis:")
+        print("  nlp           - Language processing")
+        print("  analyzer      - Statistics, reports")
+        print("  forecaster    - Time series prediction")
+        print("  graph         - Knowledge graphs")
+        print("  optimizer     - Math optimization")
+        
+        print("\nPlanning & Operations:")
+        print("  planner       - Goal decomposition")
+        print("  workflow      - Business process automation")
+        print("  scheduler     - Task scheduling")
+        
+        print("\nSensory & Physical:")
+        print("  vision        - Computer vision")
+        print("  audio         - Speech & sound")
+        print("  robotics      - Motor control")
+        print("  simulation    - Physics engine")
+        
+        print("\nMemory & Storage:")
+        print("  spine         - Event log")
+        print("  memory        - Semantic memory")
+        print("  database      - SQL-like storage")
+        print("  cache         - TTL caching")
+        
+        print("\nNetwork & Agents:")
+        print("  network       - P2P mesh")
+        print("  swarm         - Multi-agent")
+        print("  pattern       - Cross-domain patterns")
+        print("  agent         - Decision agent")
+        
+        print("\nFinancial & Strategy:")
+        print("  finance       - Trading engine")
+        print("  blockchain    - Distributed ledger")
+        print("  crypto        - Cryptocurrency")
+        print("  game          - Game theory")
         
         print("\nInfrastructure:")
-        print("  security      - Encryption & threat detection")
-        print("  api           - HTTP API server (port 8765)")
+        print("  security      - Encryption, threats")
+        print("  repl          - Interactive shell")
+        
         print("\nUsage: python3 launcher.py [command]")
         print("\nUsage: python3 launcher.py [command]")
         return
@@ -281,6 +302,23 @@ def main():
         print(repl.execute("eval x * 2"))
         print(repl.execute("get x"))
         print(f"Status: {repl.get_status()}")
+        
+    elif command == "money":
+        from money_engine import MoneyEngine, RevenueStream
+        money = MoneyEngine("seed-001")
+        money.track_cost("api", 0.5)
+        money.scan_coupons()
+        money.scan_affiliates()
+        money.execute_top_opportunities(2)
+        report = money.get_full_report()
+        print(f"ROI: {report['financial_summary']['roi_percentage']:.1f}%, Profit: ${report['financial_summary']['net_profit']:.2f}")
+        
+    elif command == "hyper":
+        from hyper_optimizer import HyperOptimizer
+        opt = HyperOptimizer("super-001")
+        result = opt.run_optimization_cycle()
+        print(f"Sub-seeds: {result['sub_seeds_active']}, Improvements: {result['improvements']}")
+        print(f"Params: {result['current_params']}")
         
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
