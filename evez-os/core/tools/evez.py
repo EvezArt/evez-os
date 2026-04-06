@@ -162,7 +162,7 @@ class EvezOS:
 
 def main():
     parser = argparse.ArgumentParser(description="EVEZ-OS Core Tool")
-    parser.add_argument("command", choices=["init", "play", "visualize-thought", "lint", "status", "advance", "meme", "learn", "blindspot", "topology"])
+    parser.add_argument("command", choices=["init", "play", "visualize-thought", "lint", "status", "advance", "meme", "learn", "blindspot", "topology", "speculate", "execute"])
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--steps", type=int, default=14)
     parser.add_argument("--loop", action="store_true")
@@ -205,6 +205,21 @@ def main():
     elif args.command == "topology":
         psyop = PsyopEngine()
         print(json.dumps(psyop.get_topology(), indent=2))
+    elif args.command == "speculate":
+        from speculative_executor import SpeculativeExecutor
+        spec = SpeculativeExecutor()
+        # Simple test
+        result = spec.speculate("test_current", "test_next")
+        print(json.dumps(result, indent=2))
+    elif args.command == "execute":
+        from execution_engine import ExecutionEngine
+        engine = ExecutionEngine()
+        print(json.dumps({"status": "ready"}, indent=2))
+    elif args.command == "overdrive":
+        from overdrive import OverdriveMode
+        od = OverdriveMode()
+        result = od.activate()
+        print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":

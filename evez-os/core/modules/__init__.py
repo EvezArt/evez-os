@@ -6,6 +6,9 @@ from .skeptic_entity import SkepticEntity
 from .child_entity import ChildEntity
 from .provenance import ProvenanceTracker
 from .psyop_engine import PsyopEngine
+from .execution_engine import ExecutionEngine
+from .speculative_executor import SpeculativeExecutor
+from .overdrive import OverdriveMode
 
 __all__ = [
     "TrunkManager",
@@ -14,5 +17,7 @@ __all__ = [
     "SkepticEntity",
     "ChildEntity",
     "ProvenanceTracker",
-    "PsyopEngine"
+    "PsyopEngine",
+    "ExecutionEngine",
+    "SpeculativeExecutor"
 ]
