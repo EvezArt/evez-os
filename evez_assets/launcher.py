@@ -77,6 +77,14 @@ def main():
             result = finance.auto_trade_cycle()
         print(f"Performance: {finance.get_performance()}")
         
+    elif command == "pattern":
+        from pattern_detector import PatternDetector
+        detector = PatternDetector()
+        patterns = detector.detect_patterns(threshold=0.4)
+        print(f"Patterns: {len(patterns)} detected")
+        for p in detector.get_strongest_patterns(3):
+            print(f"  {p.domain_a} ↔ {p.domain_b}: {p.correlation:.3f}")
+        
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
         
