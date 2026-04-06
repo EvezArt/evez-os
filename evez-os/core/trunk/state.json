@@ -1,0 +1,11 @@
+{
+  "objective": "Build EVEZ-OS",
+  "last_completed": 14,
+  "execution_gap": 0,
+  "next_action": "Run first harvest",
+  "drift_risk": false,
+  "branches": [],
+  "history": [],
+  "initialized": "2026-04-06T11:23:03.282980",
+  "last_update": "2026-04-06T11:23:08.004008"
+}

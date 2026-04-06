@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "content": "User prefers short responses",
+    "timestamp": "2026-04-06T05:21:58.845567",
+    "metadata": {
+      "tags": [
+        "preference",
+        "style"
+      ]
+    },
+    "access_count": 1,
+    "_score": 2
+  },
+  {
+    "id": 2,
+    "content": "Gateway runs on port 3001",
+    "timestamp": "2026-04-06T05:21:58.845742",
+    "metadata": {
+      "tags": [
+        "config",
+        "technical"
+      ]
+    },
+    "access_count": 0
+  },
+  {
+    "id": 3,
+    "content": "Browser automation skill available",
+    "timestamp": "2026-04-06T05:21:58.845962",
+    "metadata": {
+      "tags": [
+        "skill",
+        "automation"
+      ]
+    },
+    "access_count": 0
+  },
+  {
+    "id": 4,
+    "content": "Profit engine ledger at /profit-engine/",
+    "timestamp": "2026-04-06T05:21:58.846200",
+    "metadata": {
+      "tags": [
+        "finance",
+        "tracking"
+      ]
+    },
+    "access_count": 0
+  }
+]

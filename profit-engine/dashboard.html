@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profit Engine Dashboard</title>
+  <style>
+    body { font-family: system-ui; max-width: 800px; margin: 0 auto; padding: 20px; background: #0d1117; color: #c9d1d9; }
+    h1 { color: #58a6ff; }
+    .card { background: #161b22; padding: 20px; border-radius: 8px; margin: 10px 0; }
+    .metric { font-size: 2em; font-weight: bold; color: #3fb950; }
+    .label { color: #8b949e; font-size: 0.9em; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #30363d; }
+    th { color: #8b949e; }
+    .roi-pos { color: #3fb950; }
+    .roi-neg { color: #f85149; }
+  </style>
+</head>
+<body>
+  <h1>📊 Profit Engine Dashboard</h1>
+  
+  <div class="card">
+    <div class="label">Total Operational Cost</div>
+    <div class="metric" id="total-cost">$0.00</div>
+  </div>
+  
+  <div class="card">
+    <div class="label">Total Revenue</div>
+    <div class="metric" id="total-revenue">$0.00</div>
+  </div>
+  
+  <div class="card">
+    <div class="label">Current ROI</div>
+    <div class="metric" id="total-roi">0%</div>
+  </div>
+  
+  <div class="card">
+    <h2>Top Opportunities</h2>
+    <table id="opportunities">
+      <thead><tr><th>Name</th><th>Source</th><th>ROI</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <div class="card">
+    <h2>Recent Cycles</h2>
+    <table id="cycles">
+      <thead><tr><th>Time</th><th>API Cost</th><th>Compute Cost</th><th>Total</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    fetch('ledger.json')
+      .then(r => r.json())
+      .then(data => {
+        // Calculate totals
+        let totalCost = 0, totalRevenue = 0;
+        data.cycles?.forEach(c => totalCost += c.costs?.total || 0);
+        data.opportunities?.forEach(o => totalRevenue += o.expected_revenue || 0);
+        
+        document.getElementById('total-cost').textContent = '$' + totalCost.toFixed(2);
+        document.getElementById('total-revenue').textContent = '$' + totalRevenue.toFixed(2);
+        
+        const roi = totalCost > 0 ? ((totalRevenue - totalCost) / totalCost * 100) : 0;
+        const roiEl = document.getElementById('total-roi');
+        roiEl.textContent = roi.toFixed(0) + '%';
+        roiEl.className = 'metric ' + (roi >= 100 ? 'roi-pos' : 'roi-neg');
+        
+        // Opportunities
+        const oppBody = document.querySelector('#opportunities tbody');
+        (data.opportunities || []).slice(0, 5).forEach(o => {
+          const row = oppBody.insertRow();
+          row.insertCell().textContent = o.name;
+          row.insertCell().textContent = o.source;
+          const roiCell = row.insertCell();
+          roiCell.textContent = (o.roi * 100).toFixed(0) + '%';
+          roiCell.className = o.roi >= 1 ? 'roi-pos' : 'roi-neg';
+        });
+        
+        // Cycles
+        const cycleBody = document.querySelector('#cycles tbody');
+        (data.cycles || []).slice(-5).reverse().forEach(c => {
+          const row = cycleBody.insertRow();
+          row.insertCell().textContent = new Date(c.timestamp).toLocaleTimeString();
+          row.insertCell().textContent = '$' + (c.costs?.api || 0).toFixed(2);
+          row.insertCell().textContent = '$' + (c.costs?.compute || 0).toFixed(2);
+          row.insertCell().textContent = '$' + (c.costs?.total || 0).toFixed(2);
+        });
+      });
+  </script>
+</body>
+</html>

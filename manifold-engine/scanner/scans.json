@@ -1,0 +1,152 @@
+[
+  {
+    "name": "Amazon Associates",
+    "url": "https://affiliate-program.amazon.com/",
+    "category": "affiliate",
+    "payout": "1-10%",
+    "difficulty": "easy",
+    "requirements": "Any traffic",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Rewardful",
+    "url": "https://www.rewardful.com/",
+    "category": "affiliate",
+    "payout": "30% recurring",
+    "difficulty": "easy",
+    "requirements": "Stripe referrals",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "ShareASale",
+    "url": "https://www.shareasale.com/",
+    "category": "affiliate",
+    "payout": "Varies",
+    "difficulty": "medium",
+    "requirements": "Approved merchants",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Awin",
+    "url": "https://www.awin.com/",
+    "category": "affiliate",
+    "payout": "Varies",
+    "difficulty": "medium",
+    "requirements": "Site requirements",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Gumroad",
+    "url": "https://gumroad.com/",
+    "category": "marketplace",
+    "payout": "10% fee",
+    "difficulty": "easy",
+    "requirements": "Digital products",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Lemon Squeezy",
+    "url": "https://www.lemonsqueezy.com/",
+    "category": "marketplace",
+    "payout": "5% + 50c",
+    "difficulty": "easy",
+    "requirements": "Digital products",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "PromptBase",
+    "url": "https://promptbase.com/",
+    "category": "marketplace",
+    "payout": "Varies",
+    "difficulty": "easy",
+    "requirements": "Quality prompts",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Guru",
+    "url": "https://www.guru.com/",
+    "category": "freelance",
+    "payout": "Flat fee",
+    "difficulty": "medium",
+    "requirements": "Skills portfolio",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Upwork",
+    "url": "https://www.upwork.com/",
+    "category": "freelance",
+    "payout": "10-20%",
+    "difficulty": "medium",
+    "requirements": "Profile + tests",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Rakuten",
+    "url": "https://www.rakuten.com/",
+    "category": "cashback",
+    "payout": "1-40%",
+    "difficulty": "easy",
+    "requirements": "Shopping links",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Honey",
+    "url": "https://www.joinhoney.com/",
+    "category": "cashback",
+    "payout": "Varies",
+    "difficulty": "easy",
+    "requirements": "Browser extension",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Coinbase Earn",
+    "url": "https://www.coinbase.com/earn",
+    "category": "crypto",
+    "payout": "Varies",
+    "difficulty": "medium",
+    "requirements": "Educational tasks",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Delta",
+    "url": "https://delta.app/",
+    "category": "crypto",
+    "payout": "Free tier",
+    "difficulty": "easy",
+    "requirements": "Portfolio tracking",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Poe",
+    "url": "https://poe.com/",
+    "category": "marketplace",
+    "payout": "API access",
+    "difficulty": "medium",
+    "requirements": "Bot creation",
+    "verified": true,
+    "last_checked": ""
+  },
+  {
+    "name": "Character AI Plus",
+    "url": "https://character.ai/",
+    "category": "marketplace",
+    "payout": "Subscription",
+    "difficulty": "easy",
+    "requirements": "Character creation",
+    "verified": true,
+    "last_checked": ""
+  }
+]

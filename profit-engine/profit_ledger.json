@@ -1,0 +1,45 @@
+{
+  "updated": "2026-04-06T06:22:56.643578",
+  "transactions": [
+    {
+      "id": 1,
+      "type": "revenue",
+      "amount": 100.0,
+      "source": "Gumroad",
+      "description": "Digital product",
+      "timestamp": "2026-04-06T05:55:24.113227"
+    },
+    {
+      "id": 2,
+      "type": "revenue",
+      "amount": 50.0,
+      "source": "Affiliate",
+      "description": "Amazon",
+      "timestamp": "2026-04-06T05:55:24.113516"
+    },
+    {
+      "id": 3,
+      "type": "cost",
+      "amount": 15.0,
+      "description": "Platform fees",
+      "timestamp": "2026-04-06T05:55:24.113817"
+    },
+    {
+      "id": 4,
+      "type": "cost",
+      "amount": 0,
+      "description": "Infrastructure",
+      "timestamp": "2026-04-06T06:22:56.643308"
+    },
+    {
+      "id": 5,
+      "type": "cost",
+      "amount": 0,
+      "description": "Tools",
+      "timestamp": "2026-04-06T06:22:56.643573"
+    }
+  ],
+  "revenue": 150.0,
+  "costs": 15.0,
+  "profit": 135.0
+}

@@ -1,0 +1,47 @@
+{
+  "tasks_run": 30,
+  "updated": "2026-04-06T05:39:13.569927",
+  "router_amplitudes": {
+    "fast": 1.0,
+    "coder": 1.0,
+    "reason": 1.0,
+    "creative": 1.0,
+    "research": 1.3310000000000004
+  },
+  "patterns": {
+    "explain": 0.09966799462495582,
+    "quantum": 0.09966799462495582,
+    "entanglement": 0.09966799462495582,
+    "simple": 0.09966799462495582,
+    "terms": 0.09966799462495582,
+    "fibonacci(n):": 0.09966799462495582,
+    "return": 0.09966799462495582,
+    "else": 0.09966799462495582,
+    "fibonacci(n-1)": 0.09966799462495582,
+    "fibonacci(n-2)": 0.09966799462495582,
+    "does": 0.09966799462495582,
+    "e=mc\u00b2?": 0.09966799462495582,
+    "write": 0.09966799462495582,
+    "haiku": 0.09966799462495582,
+    "about": 0.09966799462495582,
+    "neural": 0.09966799462495582,
+    "networks": 0.09966799462495582,
+    "research": 0.09966799462495582,
+    "shows": 0.09966799462495582,
+    "will": 0.09966799462495582,
+    "transform": 0.09966799462495582,
+    "society": 0.09966799462495582
+  },
+  "negative_latency": {
+    "typical_time": 1.0,
+    "optimized_time": 0.15000000000000002,
+    "negative_latency": 0,
+    "techniques": {
+      "prefetching": 0.3,
+      "prediction": 0.2,
+      "caching": 0.2,
+      "inversion": 0.15
+    },
+    "slippage_reduction": "85%"
+  }
+}
