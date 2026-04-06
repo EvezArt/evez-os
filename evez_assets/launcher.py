@@ -13,21 +13,35 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 def main():
     if len(sys.argv) < 2:
         print("=== EVEZ Assets Launcher ===")
-        print("\nAvailable commands:")
-        print("  spine         - Run event spine demo")
-        print("  agent         - Run autonomous agent demo")
-        print("  memory        - Run memory store demo")
-        print("  cognition     - Run cognition engine demo")
-        print("  loop          - Run autonomous loop demo")
-        print("  swarm         - Run swarm orchestrator demo")
-        print("  finance       - Run finance engine demo")
-        print("  pattern       - Run pattern detector demo")
-        print("  network       - Run network mesh demo")
-        print("  meta          - Run meta-learner demo")
-        print("  consciousness - Run consciousness demo")
+        print("\nCore Systems:")
         print("  integrator    - Run unified integrator (ALL SYSTEMS)")
-        print("  full          - Run full integrated system demo")
-        print("  api           - Start HTTP API server (port 8765)")
+        
+        print("\nSensory Skills:")
+        print("  vision        - Computer vision & image analysis")
+        print("  audio         - Speech recognition & TTS")
+        print("  robotics      - Motor control & sensors")
+        
+        print("\nCognitive Skills:")
+        print("  nlp           - Natural language understanding")
+        print("  cognition     - FIRE events with topology")
+        print("  consciousness - Self-awareness & introspection")
+        
+        print("\nOperational Skills:")
+        print("  spine         - Append-only event spine")
+        print("  agent         - Autonomous decision agent")
+        print("  memory        - Unified memory store")
+        print("  loop          - OODA self-improvement loop")
+        print("  meta          - Learning to learn")
+        
+        print("\nNetwork & Data:")
+        print("  swarm         - Multi-agent orchestration")
+        print("  network       - P2P mesh & consensus")
+        print("  pattern       - Cross-domain pattern detection")
+        print("  finance       - Trading & portfolio")
+        
+        print("\nInfrastructure:")
+        print("  security      - Encryption & threat detection")
+        print("  api           - HTTP API server (port 8765)")
         print("\nUsage: python3 launcher.py [command]")
         print("\nUsage: python3 launcher.py [command]")
         return
@@ -129,6 +143,43 @@ def main():
             result = integrator.run_cycle()
             print(f"Cycle {result['cycle']}: {result['state']} → {result['decision']}")
         print(f"Status: {integrator.get_system_status()['subsystems']}")
+        
+    elif command == "vision":
+        from vision import VisionEngine
+        vision = VisionEngine()
+        result = vision.analyze_image()
+        print(f"Objects: {len(result['objects'])}, Scene: {result['scene_type']}")
+        print(f"Text: {vision.detect_text()}")
+        
+    elif command == "audio":
+        from audio import AudioEngine
+        audio = AudioEngine()
+        result = audio.listen()
+        print(f"Heard: {result['transcription']}")
+        print(f"Speak: {audio.speak('Acknowledged')}")
+        
+    elif command == "robotics":
+        from robotics import RoboticsEngine
+        robotics = RoboticsEngine()
+        result = robotics.move_to(5.0, 3.0)
+        print(f"Move: {result['status']}, Distance: {result['distance']:.2f}m")
+        sensors = robotics.read_sensors()
+        print(f"Sensors: {len(sensors['sensors'])} active")
+        
+    elif command == "nlp":
+        from nlp import NLPEngine
+        nlp = NLPEngine()
+        result = nlp.parse("EVEZ system at location San Francisco is running great")
+        print(f"Intent: {result['intent']['name']}, Sentiment: {result['sentiment']}")
+        print(f"Entities: {len(result['entities'])}")
+        
+    elif command == "security":
+        from security import SecurityEngine
+        security = SecurityEngine()
+        hashed = security.hash_data("test data")
+        enc = security.encrypt("secret", "key1")
+        threat = security.detect_threat({})
+        print(f"Hash: {hashed[:16]}..., Threat: {threat['threat_level']}")
         
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
