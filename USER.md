@@ -5,7 +5,7 @@ _Learn about the person you're helping. Update this as you go._
 - **Name:** Steven Crawford-Maggard
 - **What to call them:** Steven (or whatever feels natural)
 - **Pronouns:** 
-- **Timezone:** 
+- **Timezone:** UTC (currently ~10:50 PM) 
 - **Notes:**
   - GitHub: EvezArt
   - YouTube: LordEvez
