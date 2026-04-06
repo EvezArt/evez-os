@@ -181,6 +181,27 @@ def main():
         threat = security.detect_threat({})
         print(f"Hash: {hashed[:16]}..., Threat: {threat['threat_level']}")
         
+    elif command == "database":
+        from database import DatabaseEngine, Column, DataType
+        db = DatabaseEngine()
+        db.create_table("test", [Column("id", DataType.INTEGER, True), Column("val", DataType.TEXT)])
+        db.insert("test", {"id": 1, "val": "hello"})
+        print(f"Tables: {len(db.tables)}, Rows: {db.select('test')}")
+        
+    elif command == "scheduler":
+        from scheduler import SchedulerEngine
+        scheduler = SchedulerEngine()
+        scheduler.schedule_recurring("task1", 60, {"data": "test"})
+        pending = scheduler.get_pending()
+        print(f"Jobs: {len(scheduler.jobs)}, Pending: {len(pending)}")
+        
+    elif command == "cache":
+        from cache import CacheEngine
+        cache = CacheEngine(default_ttl=60)
+        cache.set("x", 100)
+        cache.set("y", {"nested": True})
+        print(f"Get x: {cache.get('x')}, Stats: {cache.get_stats()}")
+        
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
         
