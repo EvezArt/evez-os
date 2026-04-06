@@ -1,0 +1,42 @@
+{
+  "name": "evez",
+  "description": "EVEZ autonomous system operations - spine, agent, memory, cognition, swarm, finance",
+  "version": "1.0.0",
+  "commands": {
+    "spine": {
+      "description": "Event spine operations",
+      "args": ["action", "type", "data"],
+      "examples": ["evez spine append DECISION {action: optimize}", "evez spine verify", "evez spine state"]
+    },
+    "agent": {
+      "description": "Autonomous agent decisions",
+      "args": ["complexity", "confidence"],
+      "examples": ["evez agent decide 25.0 0.8"]
+    },
+    "memory": {
+      "description": "Memory store operations",
+      "args": ["action", "query", "tags"],
+      "examples": ["evez memory store Important info critical", "evez memory search market"]
+    },
+    "cognition": {
+      "description": "FIRE cognition events",
+      "args": ["type", "claim", "confidence"],
+      "examples": ["evez cognition F System optimized 0.9"]
+    },
+    "swarm": {
+      "description": "Swarm orchestration",
+      "args": ["action", "name", "capabilities"],
+      "examples": ["evez swarm register Alpha search code"]
+    },
+    "finance": {
+      "description": "Finance engine",
+      "args": ["action", "symbol", "side"],
+      "examples": ["evez finance trade BTC long"]
+    },
+    "full": {
+      "description": "Run full system cycle",
+      "args": [],
+      "examples": ["evez full"]
+    }
+  }
+}
