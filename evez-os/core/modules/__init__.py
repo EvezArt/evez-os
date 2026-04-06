@@ -9,6 +9,7 @@ from .psyop_engine import PsyopEngine
 from .execution_engine import ExecutionEngine
 from .speculative_executor import SpeculativeExecutor
 from .overdrive import OverdriveMode
+from .revenue_engine import RevenueEngine
 
 __all__ = [
     "TrunkManager",
