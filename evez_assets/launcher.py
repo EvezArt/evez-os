@@ -202,6 +202,50 @@ def main():
         cache.set("y", {"nested": True})
         print(f"Get x: {cache.get('x')}, Stats: {cache.get_stats()}")
         
+    elif command == "blockchain":
+        from blockchain import BlockchainEngine, TransactionType
+        bc = BlockchainEngine()
+        bc.add_validator("alice", 500)
+        bc.create_transaction("system", "alice", 100)
+        block = bc.mine_block("alice")
+        print(f"Chain: {len(bc.chain)} blocks, Valid: {bc.verify_chain()}")
+        
+    elif command == "crypto":
+        from crypto import CryptoEngine, CryptoAsset, OrderSide, OrderType
+        c = CryptoEngine()
+        c.get_quote(CryptoAsset.BTC)
+        print(f"Quote BTC: ${c.prices[CryptoAsset.BTC]:.2f}, Portfolio: ${c.get_portfolio_value():.2f}")
+        
+    elif command == "workflow":
+        from workflow import WorkflowEngine, WorkflowNode, NodeType
+        wf = WorkflowEngine()
+        nodes = [WorkflowNode("s", NodeType.START, "Start"), WorkflowNode("e", NodeType.END, "End")]
+        nodes[0].next_nodes = ["e"]
+        wf.define_workflow("test", nodes)
+        inst = wf.create_instance("test")
+        print(f"Workflow: {len(wf.workflows)}, Instance: {inst}")
+        
+    elif command == "graph":
+        from graph import GraphEngine
+        g = GraphEngine()
+        g.add_node("a", "Alpha"), g.add_node("b", "Beta"), g.add_edge("a", "b", "knows")
+        path = g.bfs("a", "b")
+        print(f"Graph: {len(g.nodes)} nodes, Path: {path}")
+        
+    elif command == "simulation":
+        from simulation import SimulationEngine
+        sim = SimulationEngine(20, 20)
+        sim.add_particle(10, 10, 1, 1)
+        sim.update_physics(5)
+        print(f"Simulation: {len(sim.particles)} particles, Stats: {sim.get_particle_stats()}")
+        
+    elif command == "game":
+        from game_theory import GameTheoryEngine, AgentStrategy, StrategyType
+        gt = GameTheoryEngine()
+        agents = [AgentStrategy("A", StrategyType.COOPERATE), AgentStrategy("B", StrategyType.DEFECT)]
+        result = gt.simulate_tournament(agents, 10)
+        print(f"Game: Winner: {result[0].name}, Score: {result[0].score}")
+        
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
         
