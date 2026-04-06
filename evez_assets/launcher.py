@@ -14,16 +14,20 @@ def main():
     if len(sys.argv) < 2:
         print("=== EVEZ Assets Launcher ===")
         print("\nAvailable commands:")
-        print("  spine       - Run event spine demo")
-        print("  agent       - Run autonomous agent demo")
-        print("  memory      - Run memory store demo")
-        print("  cognition   - Run cognition engine demo")
-        print("  loop        - Run autonomous loop demo")
-        print("  swarm       - Run swarm orchestrator demo")
-        print("  finance     - Run finance engine demo")
-        print("  pattern     - Run pattern detector demo")
-        print("  full        - Run full integrated system demo")
-        print("  api         - Start HTTP API server (port 8765)")
+        print("  spine         - Run event spine demo")
+        print("  agent         - Run autonomous agent demo")
+        print("  memory        - Run memory store demo")
+        print("  cognition     - Run cognition engine demo")
+        print("  loop          - Run autonomous loop demo")
+        print("  swarm         - Run swarm orchestrator demo")
+        print("  finance       - Run finance engine demo")
+        print("  pattern       - Run pattern detector demo")
+        print("  network       - Run network mesh demo")
+        print("  meta          - Run meta-learner demo")
+        print("  consciousness - Run consciousness demo")
+        print("  integrator    - Run unified integrator (ALL SYSTEMS)")
+        print("  full          - Run full integrated system demo")
+        print("  api           - Start HTTP API server (port 8765)")
         print("\nUsage: python3 launcher.py [command]")
         print("\nUsage: python3 launcher.py [command]")
         return
@@ -98,6 +102,33 @@ def main():
         network.propose("prop-001", {"action": "test"})
         network.vote("prop-001")
         print(f"Topology: {network.get_topology()}")
+        
+    elif command == "meta":
+        from meta_learner import MetaLearner
+        import random
+        learner = MetaLearner()
+        contexts = [{"domain": "finance"}, {"domain": "cognition"}]
+        for i in range(20):
+            learner.record(random.choice(contexts), random.choice(["optimize", "expand"]), random.uniform(-1, 1))
+        result = learner.meta_learn()
+        print(f"Strategy: {result['current_strategy']}, Events: {result['total_learning_events']}")
+        
+    elif command == "consciousness":
+        from consciousness import Consciousness
+        consciousness = Consciousness()
+        consciousness.experience("init", 0.9, "System initialized")
+        consciousness.introspect("capabilities")
+        thought = consciousness.think("self_improvement")
+        print(f"Awareness: {thought['awareness_level']}, Confidence: {thought['self_model_confidence']:.2f}")
+        print(f"State: {consciousness.get_state()['awareness_level']}")
+        
+    elif command == "integrator":
+        from integrator import EVEZIntegrator
+        integrator = EVEZIntegrator()
+        for i in range(3):
+            result = integrator.run_cycle()
+            print(f"Cycle {result['cycle']}: {result['state']} → {result['decision']}")
+        print(f"Status: {integrator.get_system_status()['subsystems']}")
         
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
