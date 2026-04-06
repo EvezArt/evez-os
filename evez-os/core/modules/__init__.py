@@ -10,6 +10,7 @@ from .execution_engine import ExecutionEngine
 from .speculative_executor import SpeculativeExecutor
 from .overdrive import OverdriveMode
 from .revenue_engine import RevenueEngine
+from .evez_os_core import EVEZOS_Enhanced, ToolRegistry, ContextManager, AgentLifecycle
 
 __all__ = [
     "TrunkManager",
