@@ -19,7 +19,12 @@ def main():
         print("  memory      - Run memory store demo")
         print("  cognition   - Run cognition engine demo")
         print("  loop        - Run autonomous loop demo")
+        print("  swarm       - Run swarm orchestrator demo")
+        print("  finance     - Run finance engine demo")
+        print("  pattern     - Run pattern detector demo")
         print("  full        - Run full integrated system demo")
+        print("  api         - Start HTTP API server (port 8765)")
+        print("\nUsage: python3 launcher.py [command]")
         print("\nUsage: python3 launcher.py [command]")
         return
     
@@ -84,6 +89,15 @@ def main():
         print(f"Patterns: {len(patterns)} detected")
         for p in detector.get_strongest_patterns(3):
             print(f"  {p.domain_a} ↔ {p.domain_b}: {p.correlation:.3f}")
+        
+    elif command == "network":
+        from network_mesh import NetworkMesh
+        network = NetworkMesh("main-node", 9000)
+        network.discover_node("peer-1", "10.0.0.1", 9001, ["spine"])
+        network.discover_node("peer-2", "10.0.0.2", 9002, ["cognition"])
+        network.propose("prop-001", {"action": "test"})
+        network.vote("prop-001")
+        print(f"Topology: {network.get_topology()}")
         
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
