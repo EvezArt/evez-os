@@ -246,6 +246,34 @@ def main():
         result = gt.simulate_tournament(agents, 10)
         print(f"Game: Winner: {result[0].name}, Score: {result[0].score}")
         
+    elif command == "planner":
+        from planner import PlannerEngine, TaskPriority
+        p = PlannerEngine()
+        subgoals = p.decompose_goal("build system")
+        print(f"Decomposition: {subgoals}")
+        
+    elif command == "optimizer":
+        from optimizer import OptimizerEngine
+        opt = OptimizerEngine()
+        def f(x): return (x["a"]-5)**2 + (x["b"]-3)**2
+        result = opt.gradient_descent(f, {"a": 0, "b": 0}, iterations=20)
+        print(f"Optimum: a={result.solution['a']:.2f}, b={result.solution['b']:.2f}")
+        
+    elif command == "forecaster":
+        from forecaster import ForecasterEngine
+        fc = ForecasterEngine()
+        fc.add_data("test", [10, 12, 14, 16, 18, 20])
+        forecast = fc.forecast("test", horizon=3)
+        print(f"Forecast: {forecast.predictions}, Model: {forecast.model}")
+        
+    elif command == "analyzer":
+        from analyzer import AnalyzerEngine
+        an = AnalyzerEngine()
+        an.add_dataset("demo", [1, 2, 3, 4, 5, 100])
+        stats = an.compute_statistics(an.datasets["demo"])
+        outliers = an.detect_outliers(an.datasets["demo"])
+        print(f"Stats: mean={stats[1].value:.1f}, Outliers: {len(outliers)}")
+        
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
         
