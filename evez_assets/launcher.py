@@ -274,6 +274,14 @@ def main():
         outliers = an.detect_outliers(an.datasets["demo"])
         print(f"Stats: mean={stats[1].value:.1f}, Outliers: {len(outliers)}")
         
+    elif command == "repl":
+        from repl import REPLEngine
+        repl = REPLEngine()
+        print(repl.execute("set x 10"))
+        print(repl.execute("eval x * 2"))
+        print(repl.execute("get x"))
+        print(f"Status: {repl.get_status()}")
+        
     elif command == "full":
         print("=== Full EVEZ System Integration ===\n")
         
