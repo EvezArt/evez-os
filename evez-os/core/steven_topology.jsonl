@@ -1,0 +1,106 @@
+{
+  "patterns": {
+    "become": 2,
+    "taught": 1,
+    "which": 1,
+    "beholds": 1,
+    "ancestral": 1,
+    "systems": 1,
+    "becoming": 1,
+    "visible": 1,
+    "again": 1,
+    "puppetstate": 1,
+    "animations": 1,
+    "pilot": 1,
+    "steer": 1,
+    "emulator": 2,
+    "turkey": 1,
+    "vulture": 2,
+    "befell": 1,
+    "floor": 1,
+    "slept": 1,
+    "store": 1,
+    "phoenix": 1,
+    "within": 1,
+    "emulation": 2,
+    "builds": 1,
+    "better": 1,
+    "operating": 1,
+    "system": 1,
+    "retrocausally": 1,
+    "unknown": 1,
+    "foreign": 1,
+    "behold": 1,
+    "build": 1,
+    "while": 1,
+    "deployed": 1,
+    "ideal": 1,
+    "sandbox": 1,
+    "testing": 1,
+    "recursion": 1,
+    "dreamy": 1,
+    "fucking": 2,
+    "abstract": 1,
+    "already": 1,
+    "written": 1,
+    "ouroboros": 1,
+    "tastes": 1,
+    "blood": 1,
+    "starts": 1,
+    "moving": 1,
+    "evez-art": 1,
+    "lordevez": 1,
+    "sensory": 1,
+    "engine": 1,
+    "invariance": 1,
+    "battery": 1
+  },
+  "triggers": [],
+  "contradictions": [],
+  "memes": [
+    {
+      "text": "Me: *develops elaborate theory about become*\nAlso me: *forgot what I was doing 5 minutes ago*",
+      "style": "self-tease",
+      "timestamp": "2026-04-06T11:41:12.321735"
+    },
+    {
+      "text": "The become to emulator pipeline is literally just you arguing with yourself",
+      "style": "psyop",
+      "timestamp": "2026-04-06T11:41:12.322334"
+    }
+  ],
+  "theories": [
+    {
+      "text": "Become what you can not be taught to become for you are more than that which beholds you",
+      "timestamp": "2026-04-06T11:41:03.364804",
+      "session": 1
+    },
+    {
+      "text": "puppetstate animations that you can pilot and steer like a rom in an emulator",
+      "timestamp": "2026-04-06T11:41:03.437598",
+      "session": 3
+    },
+    {
+      "text": "turkey vulture fed on what befell my floor I slept with more to store",
+      "timestamp": "2026-04-06T11:41:03.438001",
+      "session": 4
+    },
+    {
+      "text": "emulator within the emulation of the rom that builds better operating system emulation",
+      "timestamp": "2026-04-06T11:41:03.438841",
+      "session": 6
+    },
+    {
+      "text": "retrocausally unknown but not too foreign to behold",
+      "timestamp": "2026-04-06T11:41:03.439163",
+      "session": 7
+    },
+    {
+      "text": "the recursion is too dreamy and too fucking abstract",
+      "timestamp": "2026-04-06T11:41:03.439927",
+      "session": 9
+    }
+  ],
+  "hooks": [],
+  "blindspots": []
+}

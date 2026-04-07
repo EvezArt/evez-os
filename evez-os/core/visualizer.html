@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EVEZ Sensory Engine — Visualizer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0f;
+      color: #e0e0e0;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+    #canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+    .hud {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #333;
+      padding: 15px;
+      font-size: 12px;
+      z-index: 100;
+    }
+    .hud h3 {
+      color: #00ff88;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .stat {
+      margin: 5px 0;
+      color: #888;
+    }
+    .stat span {
+      color: #fff;
+    }
+    .planes {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #333;
+      padding: 20px;
+      font-size: 11px;
+    }
+    .plane {
+      padding: 8px 12px;
+      margin: 4px 0;
+      border-left: 3px solid;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    .plane.active {
+      opacity: 1;
+    }
+    .plane-0 { border-color: #ff4444; }
+    .plane-1 { border-color: #ff8800; }
+    .plane-2 { border-color: #ffff00; }
+    .plane-3 { border-color: #88ff00; }
+    .plane-4 { border-color: #00ffff; }
+    .plane-5 { border-color: #0088ff; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  
+  <div class="hud">
+    <h3>🪞 EVEZ SENSORY ENGINE</h3>
+    <div class="stat">TRUNK: <span id="trunk-state">INITIALIZED</span></div>
+    <div class="stat">SESSIONS: <span id="sessions">0</span></div>
+    <div class="stat">EVENTS: <span id="events">0</span></div>
+    <div class="stat">DRIFT: <span id="drift">NONE</span></div>
+  </div>
+  
+  <div class="planes">
+    <div class="plane plane-5" id="p5">P5: TEMPORAL LINEAGE</div>
+    <div class="plane plane-4" id="p4">P4: ENTANGLEMENT</div>
+    <div class="plane plane-3" id="p3">P3: PREBUNK</div>
+    <div class="plane plane-2" id="p2">P2: VERIFICATION</div>
+    <div class="plane plane-1" id="p1">P1: SIGNAL</div>
+    <div class="plane plane-0" id="p0">P0: KERNEL</div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let events = [];
+    let sessionCount = 0;
+    let nodes = [];
+    let connections = [];
+    
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    
+    // Node class for spectral planes
+    class Node {
+      constructor(plane, x, y) {
+        this.plane = plane;
+        this.x = x;
+        this.y = y;
+        this.pulse = Math.random() * Math.PI;
+        this.active = false;
+      }
+      
+      update() {
+        this.pulse += 0.05;
+      }
+      
+      draw() {
+        const colors = ['#ff4444', '#ff8800', '#ffff00', '#88ff00', '#00ffff', '#0088ff'];
+        const color = colors[this.plane];
+        const radius = 30 + Math.sin(this.pulse) * 5;
+        
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.active ? color : 'rgba(50,50,50,0.5)';
+        ctx.fill();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Label
+        ctx.fillStyle = color;
+        ctx.font = '10px Courier New';
+        ctx.textAlign = 'center';
+        ctx.fillText(`P${this.plane}`, this.x, this.y + 45);
+      }
+    }
+    
+    // Signal event particle
+    class Signal {
+      constructor() {
+        this.x = width / 2;
+        this.y = height - 50;
+        this.targetY = 50;
+        this.speed = 3 + Math.random() * 2;
+        this.active = true;
+        this.history = [];
+      }
+      
+      update() {
+        if (!this.active) return;
+        
+        this.history.push({x: this.x, y: this.y});
+        if (this.history.length > 20) this.history.shift();
+        
+        this.y -= this.speed;
+        if (this.y <= this.targetY) {
+          this.active = false;
+        }
+        
+        // Highlight plane based on Y position
+        const plane = Math.floor((height - this.y) / (height / 6));
+        if (plane >= 0 && plane < 6) {
+          document.getElementById(`p${plane}`).classList.add('active');
+          setTimeout(() => {
+            document.getElementById(`p${plane}`).classList.remove('active');
+          }, 200);
+        }
+      }
+      
+      draw() {
+        if (!this.active) return;
+        
+        // Trail
+        ctx.beginPath();
+        ctx.moveTo(this.history[0]?.x || this.x, this.history[0]?.y || this.y);
+        for (let p of this.history) {
+          ctx.lineTo(p.x, p.y);
+        }
+        ctx.lineTo(this.x, this.y);
+        ctx.strokeStyle = 'rgba(0,255,136,0.5)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Head
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 8, 0, Math.PI * 2);
+        ctx.fillStyle = '#00ff88';
+        ctx.fill();
+      }
+    }
+    
+    // Initialize nodes
+    function initNodes() {
+      nodes = [];
+      const centerX = width / 2;
+      for (let i = 0; i < 6; i++) {
+        const y = height * 0.15 + (height * 0.7 * i / 5);
+        nodes.push(new Node(i, centerX, y));
+      }
+    }
+    
+    // Generate random signal
+    function spawnSignal() {
+      events.push(new Signal());
+      document.getElementById('events').textContent = 
+        parseInt(document.getElementById('events').textContent) + 1;
+    }
+    
+    // Draw connections
+    function drawConnections() {
+      for (let i = 0; i < nodes.length - 1; i++) {
+        const n1 = nodes[i];
+        const n2 = nodes[i + 1];
+        
+        ctx.beginPath();
+        ctx.moveTo(n1.x, n1.y);
+        ctx.lineTo(n2.x, n2.y);
+        ctx.strokeStyle = 'rgba(100,100,100,0.3)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+    
+    // Animation loop
+    function animate() {
+      ctx.fillStyle = '#0a0a0f';
+      ctx.fillRect(0, 0, width, height);
+      
+      // Draw background grid
+      ctx.strokeStyle = 'rgba(30,30,30,0.5)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < width; x += 50) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += 50) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+      
+      drawConnections();
+      
+      // Update and draw nodes
+      for (let node of nodes) {
+        node.update();
+        node.draw();
+      }
+      
+      // Update and draw signals
+      events = events.filter(e => e.active);
+      for (let e of events) {
+        e.update();
+        e.draw();
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
+    // Simulate activity
+    setInterval(() => {
+      if (Math.random() > 0.7) {
+        spawnSignal();
+        sessionCount++;
+        document.getElementById('sessions').textContent = sessionCount;
+      }
+    }, 500);
+    
+    initNodes();
+    animate();
+  </script>
+</body>
+</html>

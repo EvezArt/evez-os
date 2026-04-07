@@ -1,0 +1,8 @@
+{
+  "receipt_id": "RECEIPT-20260407081952",
+  "event_count": 182,
+  "objective": "Execute first harvest - close first revenue transaction",
+  "last_action": "run_harvest_cycle",
+  "success": true,
+  "timestamp": "2026-04-07T08:19:52.561829Z"
+}
