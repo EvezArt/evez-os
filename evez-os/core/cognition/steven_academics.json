@@ -1,0 +1,61 @@
+{
+  "sources": [
+    {
+      "platform": "Academia.edu",
+      "handle": "StevenCrawfordMaggard",
+      "url": "independent.academia.edu/StevenCrawfordMaggard"
+    },
+    {
+      "platform": "Academia.edu",
+      "handle": "StevenCrawford22",
+      "url": "independent.academia.edu/StevenCrawford22"
+    },
+    {
+      "platform": "Academia.edu",
+      "handle": "SCrawfordMaggard",
+      "url": "independent.academia.edu/SCrawfordMaggard"
+    }
+  ],
+  "papers": [
+    {
+      "title": "EM Drive / Plasma Thrust System",
+      "description": "Ionized air plasma + rotating electromagnetic fields = asymmetric thrust",
+      "key_concepts": [
+        "plasma ionization",
+        "magnetic fields",
+        "EM drive",
+        "thrust without reaction"
+      ],
+      "math": "Maxwell equations, Lorentz force, plasma physics"
+    },
+    {
+      "title": "Quantum Foundations + QCD + Relativistic Physics",
+      "research_interests": [
+        "Quantum Foundations",
+        "Quantum Chromodynamics",
+        "Relativistic Physics"
+      ],
+      "key_concepts": [
+        "quantum mechanics",
+        "QCD",
+        "general relativity"
+      ]
+    },
+    {
+      "title": "Non-Human Technologies (Reverse Engineering)",
+      "description": "Reverse engineering technologies not of human origin",
+      "key_concepts": [
+        "anomalous physics",
+        "exotic matter",
+        "multi-timeframe existence"
+      ]
+    }
+  ],
+  "research_interests": [
+    "Quantum Foundations",
+    "Quantum Chromodynamics",
+    "Relativistic Physics",
+    "EM Drive / Plasma Propulsion",
+    "Non-Human Technologies"
+  ]
+}
