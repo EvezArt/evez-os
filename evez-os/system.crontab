@@ -2,13 +2,13 @@
 # Edit with: crontab -e
 
 # Health Check - Every 15 minutes
-*/15 * * * * cd /root/.openclaw/workspace && ./evez-os/auto_maintenance.sh health >> /var/log/evez-maintenance.log 2>&1
+*/15 * * * * /usr/local/bin/openclaw status --short >> /var/log/evez-maintenance.log 2>&1
 
 # Git Sync - Every hour
-0 * * * * cd /root/.openclaw/workspace && git add -A && git commit -m "Auto sync $(date +\%Y-\%m-\%d-\%H:\%M)" && git push origin twin-autonomy >> /var/log/evez-maintenance.log 2>&1
+0 * * * * /usr/bin/git -C /root/.openclaw/workspace add -A && /usr/bin/git -C /root/.openclaw/workspace commit -m "Auto sync $(date +\%Y-\%m-\%d-\%H:\%M)" && /usr/bin/git -C /root/.openclaw/workspace push origin twin-autonomy >> /var/log/evez-maintenance.log 2>&1
 
 # Context Bridge Sync - Every 30 minutes
-*/30 * * * * cd /root/.openclaw/workspace && ./evez-os/auto_maintenance.sh context-bridge >> /var/log/evez-maintenance.log 2>&1
+*/30 * * * * /root/.openclaw/workspace/evez-os/auto_maintenance.sh context-bridge >> /var/log/evez-maintenance.log 2>&1
 
 # Memory Cleanup - Daily at 3am
-0 3 * * * cd /root/.openclaw/workspace && ./evez-os/auto_maintenance.sh memory-cleanup >> /var/log/evez-maintenance.log 2>&1
+0 3 * * * /root/.openclaw/workspace/evez-os/auto_maintenance.sh memory-cleanup >> /var/log/evez-maintenance.log 2>&1

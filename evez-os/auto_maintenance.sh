@@ -22,7 +22,7 @@ case "$1" in
         ;;
     health)
         log "OpenClaw health check..."
-        openclaw status --short 2>&1 | tail -20
+        /usr/local/bin/openclaw status --short 2>&1 | tail -20
         ;;
     context-bridge)
         log "Context bridge sync..."
