@@ -36,3 +36,11 @@ The Kilo CLI (`kilo`) is an agentic coding assistant for the terminal, pre-confi
 3. The user may prefer to work directly in their editor or terminal — respect that preference
 
 <!-- END:kilo-cli -->
+
+<!-- BEGIN:linear -->
+## Linear
+
+Linear is configured as your project management tool. Use it  to track issues, plan projects, and manage product roadmaps.
+You can interact with the `Linear` MCP server using your `mcporter` skill.
+
+  <!-- END:linear -->

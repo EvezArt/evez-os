@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "self-improving-agent": {
+      "version": "3.0.13",
+      "installedAt": 1775538587839
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1775538737918
+    },
+    "weather": {
+      "version": "1.0.0",
+      "installedAt": 1775538872802
+    }
+  }
+}

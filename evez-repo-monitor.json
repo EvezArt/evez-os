@@ -1,0 +1,15 @@
+{
+  "name": "EVEZ Repo Monitor",
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 3 * * *"
+  },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "Check EvezArt repos for new activity: evez-os, Evez666, maes, evez-agentnet, evez-autonomous-ledger. Use `gh api repos/EvezArt/{repo} -F per_page=1 --jq '.stargazers_count,.open_issues_count,.updated_at[:10]'` for each. Report any changes from last run to main session.",
+    "model": "kilocode/kilo-auto/free"
+  },
+  "delivery": {
+    "mode": "announce"
+  }
+}
