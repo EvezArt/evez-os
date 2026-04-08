@@ -9,64 +9,64 @@
   ],
   "recent_decisions": [
     {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:56:07.359406"
+      "decision": "Math Agency: Job accepted",
+      "rationale": "Prove EM Drive thrust equations",
+      "outcome": "Value: $1500",
+      "timestamp": "2026-04-08T05:12:13.838786"
+    },
+    {
+      "decision": "Math Agency: Job completed",
+      "rationale": "Derivation: \nF = d/dt (\u03b3 m v) for asymmetric EM fi",
+      "outcome": "Receipt: RECEIPT-MATH AGENCY-001-20260408051213",
+      "timestamp": "2026-04-08T05:12:13.839572"
     },
     {
       "decision": "Autonomous cycle",
       "rationale": "Meme propagation for revenue",
       "outcome": "success",
-      "timestamp": "2026-04-08T04:57:08.080923"
+      "timestamp": "2026-04-08T05:12:21.441588"
+    },
+    {
+      "decision": "Research Agency: Job accepted",
+      "rationale": "Synthesize non-human tech",
+      "outcome": "Value: $1750",
+      "timestamp": "2026-04-08T05:12:51.442271"
+    },
+    {
+      "decision": "Research Agency: Job completed",
+      "rationale": "SYNTHESIS: Non-Human Technology Analysis\n\nABSTRACT",
+      "outcome": "Receipt: RECEIPT-RESEARCH AGENCY-001-20260408051251",
+      "timestamp": "2026-04-08T05:12:51.443163"
+    },
+    {
+      "decision": "MAPA iteration 0",
+      "rationale": "Derive the thrust equation for an EM Drive with as",
+      "outcome": "Correct: False",
+      "timestamp": "2026-04-08T05:13:17.445861"
+    },
+    {
+      "decision": "MAPA iteration 1",
+      "rationale": "Derive the thrust equation for an EM Drive with as",
+      "outcome": "Correct: False",
+      "timestamp": "2026-04-08T05:13:17.446632"
+    },
+    {
+      "decision": "MAPA iteration 2",
+      "rationale": "Derive the thrust equation for an EM Drive with as",
+      "outcome": "Correct: False",
+      "timestamp": "2026-04-08T05:13:17.447282"
+    },
+    {
+      "decision": "MAPA iteration 3",
+      "rationale": "Derive the thrust equation for an EM Drive with as",
+      "outcome": "Correct: True",
+      "timestamp": "2026-04-08T05:13:17.447950"
     },
     {
       "decision": "Autonomous cycle",
       "rationale": "Meme propagation for revenue",
       "outcome": "success",
-      "timestamp": "2026-04-08T04:58:08.727457"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:59:09.522348"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T05:00:10.245831"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T05:01:11.439299"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T05:02:12.403237"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T05:03:12.887938"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T05:04:13.759909"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T05:05:14.484248"
+      "timestamp": "2026-04-08T05:13:22.319094"
     }
   ],
   "context_stack": [],
