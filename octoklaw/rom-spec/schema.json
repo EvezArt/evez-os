@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OctoKlaw-ROM Schema",
+  "description": "JSON schema for OctoKlaw-ROM emulator ROMs — world state, action space, reward signal, terminal condition",
+  "type": "object",
+  "required": ["world_state", "action_space", "reward_signal", "terminal_condition", "generation_meta"],
+  "properties": {
+    "world_state": {
+      "type": "object",
+      "required": ["name", "description"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for this ROM"
+        },
+        "description": {
+          "type": "string",
+          "description": "What this ROM does"
+        },
+        "context": {
+          "type": "object",
+          "description": "Additional context variables"
+        },
+        "resources": {
+          "type": "object",
+          "description": "Available resources at start"
+        },
+        "initial_state": {
+          "type": "object",
+          "description": "Starting values for state variables"
+        },
+        "constraints": {
+          "type": "object",
+          "description": "Resource constraints or limits"
+        }
+      }
+    },
+    "action_space": {
+      "type": "array",
+      "description": "Available actions the agent can take",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["navigate", "click", "type", "select", "evaluate", "screenshot", "wait", "read", "noop", "exec", "message"]
+          },
+          "params": {
+            "type": "object",
+            "description": "Action parameters"
+          },
+          "description": {
+            "type": "string",
+            "description": "What this action does"
+          },
+          "weight": {
+            "type": "number",
+            "description": "Base weight for action selection"
+          }
+        }
+      }
+    },
+    "reward_signal": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["linear", "exponential", "sparse", "custom"]
+        },
+        "weights": {
+          "type": "object",
+          "description": "Reward component weights"
+        },
+        "formula": {
+          "type": "string",
+          "description": "Custom reward formula (for 'custom' type)"
+        },
+        "components": {
+          "type": "object",
+          "description": "Named reward components"
+        }
+      }
+    },
+    "terminal_condition": {
+      "type": "object",
+      "description": "Conditions that end the episode",
+      "properties": {
+        "max_iterations": {
+          "type": "integer",
+          "description": "Maximum iterations before termination"
+        },
+        "reward_threshold": {
+          "type": "number",
+          "description": "Total reward at which to terminate"
+        },
+        "time_limit_ms": {
+          "type": "integer",
+          "description": "Time limit in milliseconds"
+        },
+        "custom_check": {
+          "type": "string",
+          "description": "Custom termination check (JS expression)"
+        }
+      }
+    },
+    "generation_meta": {
+      "type": "object",
+      "required": ["generation"],
+      "properties": {
+        "generation": {
+          "type": "integer",
+          "description": "Generation number"
+        },
+        "parent_generation": {
+          "type": "integer",
+          "description": "Parent generation number (-1 for genesis)"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "ISO timestamp of creation"
+        },
+        "efficiency_metrics": {
+          "type": "object",
+          "description": "Efficiency metrics from parent"
+        },
+        "capabilities_added": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "New capabilities in this generation"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes about this generation"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": { "type": "string" },
+        "version": { "type": "string" },
+        "license": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

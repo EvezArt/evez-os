@@ -1,0 +1,3 @@
+{
+  "fields": ["timestamp","task_id","provider","error_type","next_action"]
+}

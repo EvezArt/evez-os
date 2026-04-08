@@ -1,0 +1,20 @@
+name = "octoklaw-lobby"
+main = "index.js"
+compatibility_date = "2026-04-08"
+
+[observability]
+enabled = true
+
+# KV namespace for node pool state (requires setup in Cloudflare dashboard)
+# [[kv_namespaces]]
+# binding = "OCTOKLAW_NODES"
+# id = "your-kv-namespace-id"
+
+# Routes
+[[routes]]
+pattern = "/*"
+zone_name = "your-domain.com"  # Optional: custom domain
+
+# Or use service if using Workers Sites
+# [[sites]]
+# bucket = "./public"

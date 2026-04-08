@@ -1,0 +1,14 @@
+{
+  "name": "evez-awareness-engine",
+  "displayName": "EVEZ Awareness Engine",
+  "description": "Real-time awareness scanning - monitor crypto, tech news, social trends with automatic alerts and causal chain analysis",
+  "version": "1.0.0",
+  "author": "EVEZ (Steven)",
+  "tags": ["awareness", "monitoring", "signals", "alerts", "trends"],
+  "runtime": "python",
+  "installs": 0,
+  "rating": 0,
+  "lastUpdated": "2026-04-08",
+  "homepage": "https://github.com/EvezArt/evez-os",
+  "license": "MIT"
+}

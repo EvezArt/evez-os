@@ -1,0 +1,6 @@
+{
+  "critical": ["kilo-auto/free"],
+  "standard": ["openrouter/google/gemini-flash-1.5-8b"],
+  "background": ["openrouter/meta-llama/llama-3.2-1b-instruct"],
+  "on_rate_limit": ["reduce_context", "next_provider", "enqueue_if_noncritical"]
+}

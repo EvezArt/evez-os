@@ -1,0 +1,40 @@
+{
+  "task_queue_schema": {
+    "description": "Schema for resumable task queue when rate limited",
+    "queue_file": "task_queue.jsonl",
+    "entry_schema": {
+      "task_id": "uuid",
+      "classification": "critical|standard|background",
+      "created_at": "iso_timestamp",
+      "last_attempt": "iso_timestamp",
+      "attempts": "integer",
+      "max_attempts": 3,
+      "task_type": "hypothesis|action|learning|missing_capability",
+      "payload": {
+        "description": "task description",
+        "context_summary": "reduced context for retry",
+        "preferred_provider": "string",
+        "fallback_order": ["provider_model"],
+        "result_format": "json|markdown|text"
+      },
+      "status": "queued|processing|completed|failed|dead_letter",
+      "error_log": [
+        {
+          "timestamp": "iso_timestamp",
+          "error_type": "rate_limit|timeout|parse|other",
+          "provider": "string",
+          "message": "string"
+        }
+      ],
+      "result": "any (filled on completion)"
+    },
+    "operations": {
+      "enqueue": "add new task with status=queued",
+      "dequeue": "pop highest priority (critical → standard → background)",
+      "retry": "increment attempts, update last_attempt, keep in queue",
+      "complete": "set status=completed, write result",
+      "dead_letter": "set status=dead_letter after max_attempts"
+    }
+  },
+  "updated_at": "2026-04-08T18:40:00Z"
+}

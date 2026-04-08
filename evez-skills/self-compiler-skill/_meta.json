@@ -1,0 +1,14 @@
+{
+  "name": "evez-self-compiler",
+  "displayName": "EVEZ Self Compiler",
+  "description": "Validate and compile EVEZ-OS Python modules with AST-based syntax checking and import resolution",
+  "version": "1.0.0",
+  "author": "EVEZ (Steven)",
+  "tags": ["compiler", "validation", "python", "evez-os", "module"],
+  "runtime": "python",
+  "installs": 0,
+  "rating": 0,
+  "lastUpdated": "2026-04-08",
+  "homepage": "https://github.com/EvezArt/evez-os",
+  "license": "MIT"
+}

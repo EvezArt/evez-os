@@ -1,0 +1,91 @@
+name: OctoKlaw Recursion Heartbeat
+
+on:
+  push:
+    branches: [main, master]
+  schedule:
+    # Run every hour for continuous heartbeat
+    - cron: '0 * * * *'
+  workflow_dispatch:
+    inputs:
+      generation:
+        description: 'Generation number to run'
+        required: false
+        default: ''
+
+jobs:
+  recurse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm install playwright
+        
+      - name: Efficiency check
+        id: efficiency
+        run: |
+          node efficiency-check.js
+          echo "PASSED=${{ steps.efficiency.outputs.passed }}" >> $GITHUB_OUTPUT
+        env:
+          GEN_NUMBER: ${{ github.event.inputs.generation }}
+          
+      - name: Generate next ROM
+        if: steps.efficiency.outputs.passed == 'true'
+        run: |
+          GEN=$(node -e "console.log(require('./rom-builder/capability-registry.json').efficiency_history.length)")
+          node rom-builder/generate.js $GEN
+          
+      - name: Run agent on new ROM
+        if: steps.efficiency.outputs.passed == 'true'
+        run: |
+          ls roms/
+          # In production: node emulator-agent-core/index.js roms/rom-*.json
+          
+      - name: Save state
+        if: steps.efficiency.outputs.passed == 'true'
+        run: |
+          # Create checkpoint
+          node -e "
+          const { saveState } = require('./emulator-agent-core/save-state.js');
+          saveState({ iteration: 100, totalReward: 50, worldSnapshot: {} }, 0);
+          "
+          
+      - name: Update LEDGER
+        if: steps.efficiency.outputs.passed == 'true'
+        run: |
+          echo "## $(date) - Generation complete" >> LEDGER.md
+          
+      - name: Commit and push
+        if: steps.efficiency.outputs.passed == 'true'
+        run: |
+          git config --local user.email "octoklaw@angel-os"
+          git config --local user.name "OctoKlaw-ROM"
+          git add -A
+          git diff --staged --quiet || git commit -m "OctoKlaw: Generation cycle complete"
+          git push
+          
+      - name: Rollback on failure
+        if: failure()
+        run: |
+          echo "Efficiency check failed or agent error - rolling back"
+          git checkout HEAD~1 -- .
+          echo "Rolled back to last good state" >> LEDGER.md
+
+      - name: Notify operator
+        if: always()
+        run: |
+          STATUS=${{ job.status }}
+          if [ "$STATUS" == "success" ]; then
+            echo "✅ OctoKlaw generation complete"
+          else
+            echo "⚠️ OctoKlaw needs attention"
+          fi

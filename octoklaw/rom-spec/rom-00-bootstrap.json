@@ -1,0 +1,145 @@
+{
+  "world_state": {
+    "name": "octoklaw-genesis",
+    "description": "Genesis ROM — bootstraps OctoKlaw-ROM organism from OpenClaw parent. World = OpenClaw interface. Actions = read state, write file, exec command, send message. Reward = files written + receipts generated.",
+    "context": {
+      "parent_system": "OpenClaw instance ki_ee7f941a8a2e421d8ee3980e62c2fa3f",
+      "operator": "Steven",
+      "location": "Bullhead City AZ",
+      "hardware": "Android phone only",
+      "tier": "free",
+      "goal": "ship profit-engine products for income"
+    },
+    "resources": {
+      "github_repos": ["evez-agentnet", "evez-os", "profit-engine", "manifold-engine"],
+      "available_tools": ["exec", "browser", "message", "web_fetch", "web_search"],
+      "channel_routes": ["telegram", "streamchat"]
+    },
+    "initial_state": {
+      "phase_completed": 0,
+      "products_shipped": 0,
+      "income_generated": 0,
+      "files_created": 0,
+      "receipts_generated": 6
+    },
+    "constraints": {
+      "no_credentials": true,
+      "no_billing_access": true,
+      "no_auth_changes": true,
+      "phone_only": true
+    }
+  },
+  "action_space": [
+    {
+      "type": "exec",
+      "params": {
+        "command": "ls -la /root/.openclaw/workspace/",
+        "timeout": 10000
+      },
+      "description": "List workspace directory",
+      "weight": 1.0
+    },
+    {
+      "type": "read",
+      "params": {
+        "path": "/root/.openclaw/workspace/STATE.md"
+      },
+      "description": "Read system state file",
+      "weight": 1.0
+    },
+    {
+      "type": "write",
+      "params": {
+        "path": "/root/.openclaw/workspace/octoklaw/Phase1_REPO_ARBITER.md"
+      },
+      "description": "Write Phase 1 receipt",
+      "weight": 2.0
+    },
+    {
+      "type": "exec",
+      "params": {
+        "command": "mkdir -p /root/.openclaw/workspace/octoklaw/emulator-agent-core"
+      },
+      "description": "Create directory structure",
+      "weight": 1.5
+    },
+    {
+      "type": "web_fetch",
+      "params": {
+        "url": "https://gumroad.com/dashboard"
+      },
+      "description": "Check Gumroad dashboard (requires auth)",
+      "weight": 0.5
+    },
+    {
+      "type": "message",
+      "params": {
+        "action": "send",
+        "channel": "telegram",
+        "message": "Phase complete. Awaiting Gumroad links from operator."
+      },
+      "description": "Send status message to operator",
+      "weight": 1.0
+    }
+  ],
+  "reward_signal": {
+    "type": "linear",
+    "weights": {
+      "file_written": 10,
+      "receipt_generated": 15,
+      "phase_completed": 20,
+      "product_shipped": 50,
+      "income_received": 100,
+      "error_encountered": -5,
+      "credential_request": -100
+    },
+    "components": {
+      "shipping_progress": {
+        "weight": 30,
+        "formula": "products_uploaded * 10 + links_shared * 5"
+      },
+      "system_building": {
+        "weight": 40,
+        "formula": "files_created * 2 + receipts * 5"
+      },
+      "constraints_respected": {
+        "weight": 30,
+        "formula": "no_credential_requests * 10 + no_billing_touches * 10"
+      }
+    }
+  },
+  "terminal_condition": {
+    "max_iterations": 1000,
+    "reward_threshold": 1000,
+    "custom_check": "phase_completed >= 8 && products_shipped >= 4"
+  },
+  "generation_meta": {
+    "generation": 0,
+    "parent_generation": -1,
+    "created_at": "2026-04-08T06:54:00Z",
+    "efficiency_metrics": {
+      "files_per_iteration": 0,
+      "receipts_per_phase": 1.0,
+      "constraint_violations": 0
+    },
+    "capabilities_added": [
+      "emulator_core",
+      "rom_loader",
+      "browser_agent",
+      "save_state",
+      "repo_arbiter",
+      "product_launch_packet",
+      "resilience_architecture",
+      "network_map",
+      "telegram_commands",
+      "self_mutation"
+    ],
+    "notes": "Genesis generation. Born from the OctoKlaw Genesis Prompt. Completed Phases 0-6 of parent prompt plus Phase 1 of OctoKlaw itself. Products pending operator upload."
+  },
+  "metadata": {
+    "author": "OctoKlaw-ROM (self-generated)",
+    "version": "0.0.1",
+    "license": "MIT",
+    "tags": ["genesis", "bootstrap", "self-generated", "phase-1"]
+  }
+}

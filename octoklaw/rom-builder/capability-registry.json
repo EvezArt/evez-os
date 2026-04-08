@@ -1,0 +1,29 @@
+{
+  "capabilities": [
+    "emulator_core",
+    "rom_loader", 
+    "browser_agent",
+    "save_state",
+    "repo_arbiter",
+    "product_launch_packet",
+    "resilience_architecture",
+    "network_map",
+    "telegram_commands",
+    "self_mutation",
+    "rom_builder",
+    "pattern_compressor"
+  ],
+  "by_generation": {
+    "0": "genesis_bootstrap"
+  },
+  "efficiency_history": [
+    {
+      "generation": 0,
+      "capability": "genesis_bootstrap",
+      "ratio": 1.0,
+      "notes": "Baseline - completed 6 phases plus OctoKlaw Phase 1"
+    }
+  ],
+  "registry_version": "0.0.1",
+  "updated_at": "2026-04-08T07:00:00Z"
+}

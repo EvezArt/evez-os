@@ -1,0 +1,14 @@
+{
+  "name": "evez-branch-executor",
+  "displayName": "EVEZ Branch Executor",
+  "description": "Parallel branch execution engine - run multiple code branches, test variations, merge best result",
+  "version": "1.0.0",
+  "author": "EVEZ (Steven)",
+  "tags": ["branching", "execution", "parallel", "testing", "optimization"],
+  "runtime": "python",
+  "installs": 0,
+  "rating": 0,
+  "lastUpdated": "2026-04-08",
+  "homepage": "https://github.com/EvezArt/evez-skills",
+  "license": "MIT"
+}

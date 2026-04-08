@@ -1,0 +1,14 @@
+{
+  "name": "evez-ledger",
+  "displayName": "EVEZ Ledger",
+  "description": "Immutable event log with cryptographic chain - track decisions, receipts, and state changes tamper-evidently",
+  "version": "1.0.0",
+  "author": "EVEZ (Steven)",
+  "tags": ["ledger", "logging", "blockchain", "audit", "decisions"],
+  "runtime": "python",
+  "installs": 0,
+  "rating": 0,
+  "lastUpdated": "2026-04-08",
+  "homepage": "https://github.com/EvezArt/evez-os",
+  "license": "MIT"
+}

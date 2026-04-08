@@ -1,0 +1,3 @@
+{
+  "fields": ["id","created_at","task_class","status","input_summary","output_path","attempts"]
+}

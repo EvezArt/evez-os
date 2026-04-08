@@ -1,0 +1,77 @@
+{
+  "contract_version": "1.0",
+  "trunk_objective": "intelligence_multiplication_for_revenue",
+  "target_surface": "github_sponsors_or_kofi",
+  "min_action_type": "publish_listing_or_sponsor_cta",
+  "hard_constraints": {
+    "harvest_count_min": 0,
+    "revenue_target_min_usd": 1,
+    "skill_assets_min": 3,
+    "must_increment": ["harvest_count", "skill_assets", "revenue_usd"],
+    "safety_rails": {
+      "never_delete_revenue_surfaces": true,
+      "always_log_compliance": true,
+      "reject_non_revenue_moves": false,
+      "enforce_m_or_harvest_tradeoff": true
+    }
+  },
+  "harvest_tracking": {
+    "harvest_count": 0,
+    "first_harvest_closed": false,
+    "mrr_proxy_cents": 0,
+    "skill_asset_count": 3,
+    "last_harvest_timestamp": null
+  },
+  "play_modes": {
+    "harvest": {
+      "priority": "revenue",
+      "min_harvest_increment": 1,
+      "timeout_hours": 4
+    },
+    "explore": {
+      "priority": "multiplication",
+      "allow_research_only": true,
+      "counter_balance_harvest_every_n_cycles": 3
+    }
+  },
+  "current_mode": "harvest",
+  "engines": {
+    "multiplication": {
+      "path": "core/engines/multiplication.py",
+      "status": "ready",
+      "M_current": 1.5
+    },
+    "harvest": {
+      "path": "core/engines/harvest.py",
+      "status": "ready",
+      "last_run": "2026-04-08T17:57:00Z",
+      "result": "blocked - Twitter account creation"
+    },
+    "critic": {
+      "path": "core/engines/critic.py",
+      "status": "ready"
+    }
+  },
+  "agencies": {
+    "revenue": {
+      "status": "ready",
+      "expected_value_usd": 200,
+      "time_to_harvest_hours": 72,
+      "target_surfaces": ["github_sponsors", "kofi", "consulting_dm"]
+    },
+    "quantum": {
+      "status": "ready"
+    },
+    "invariance": {
+      "status": "ready"
+    },
+    "builder": {
+      "status": "ready"
+    },
+    "outreach": {
+      "status": "ready"
+    }
+  },
+  "initialized": "2026-04-06T11:23:03.282980",
+  "last_update": "2026-04-08T17:57:00Z"
+}

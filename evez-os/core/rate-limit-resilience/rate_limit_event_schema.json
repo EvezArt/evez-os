@@ -1,0 +1,30 @@
+{
+  "rate_limit_event_schema": {
+    "description": "Schema for rate limit events - logs what blocked and when to retry",
+    "log_file": "rate_limit_log.jsonl",
+    "event_schema": {
+      "event_id": "uuid",
+      "timestamp": "iso_timestamp",
+      "event_type": "rate_limit|timeout|quota_exhausted|provider_down",
+      "provider": "string",
+      "model": "string",
+      "classification": "critical|standard|background",
+      "original_task_id": "uuid (if from queue)",
+      "context_size_before": "integer_tokens",
+      "context_size_after": "integer_tokens",
+      "action_taken": "switched_provider|reduced_context|queued|deferred_to_cron",
+      "new_provider": "string (if switched)",
+      "new_model": "string (if switched)",
+      "retry_after": "iso_timestamp (if provided by provider)",
+      "resolution": "success|failed|pending",
+      "notes": "any"
+    },
+    "aggregation": {
+      "by_provider": "group events by provider to identify problem areas",
+      "by_classification": "track which task types hit limits most",
+      "by_hour": "identify time-based patterns",
+      "success_rate": "resolved / total events"
+    }
+  },
+  "updated_at": "2026-04-08T18:40:00Z"
+}

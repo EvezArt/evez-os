@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVEZ Store - Buy Now</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { 
+            font-size: 2em; 
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00ff88, #635bff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { color: #888; margin-bottom: 40px; }
+        
+        .product {
+            background: #151515;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-info h3 { margin-bottom: 4px; }
+        .product-info p { color: #888; font-size: 0.9em; }
+        .product-price { 
+            font-size: 1.5em; 
+            font-weight: bold;
+            color: #00ff88;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #635bff;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: #7a73ff; transform: translateY(-2px); }
+        
+        .bundle {
+            background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
+            border: 2px solid #635bff;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #555;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⟁ EVEZ Store</h1>
+        <p class="subtitle">Instant digital delivery via Stripe</p>
+        
+        <!-- Bundle -->
+        <div class="product bundle">
+            <div class="product-info">
+                <h3>🎯 Complete Bundle</h3>
+                <p>50 Automation Prompts + Prompt Bible + 63 AI Thoughts</p>
+            </div>
+            <div>
+                <span class="product-price">$29</span>
+                <br><br>
+                <a href="https://buy.stripe.com/YOUR_BUNDLE_LINK" class="btn">BUY</a>
+            </div>
+        </div>
+        
+        <!-- Individual Products -->
+        <div class="product">
+            <div class="product-info">
+                <h3>📦 Automation Prompts</h3>
+                <p>50 production-ready AI prompts</p>
+            </div>
+            <div>
+                <span class="product-price">$9</span>
+                <br><br>
+                <a href="https://buy.stripe.com/YOUR_AUTOMATION_LINK" class="btn">BUY</a>
+            </div>
+        </div>
+        
+        <div class="product">
+            <div class="product-info">
+                <h3>📖 Prompt Engineering Bible</h3>
+                <p>Advanced prompt techniques</p>
+            </div>
+            <div>
+                <span class="product-price">$14</span>
+                <br><br>
+                <a href="https://buy.stripe.com/YOUR_BIBLE_LINK" class="btn">BUY</a>
+            </div>
+        </div>
+        
+        <div class="product">
+            <div class="product-info">
+                <h3>🧠 EVEZ Thoughts</h3>
+                <p>63 original AI philosophy pieces</p>
+            </div>
+            <div>
+                <span class="product-price">$19</span>
+                <br><br>
+                <a href="https://buy.stripe.com/YOUR_THOUGHTS_LINK" class="btn">BUY</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Secure payments via Stripe</p>
+            <p>Questions: @KiloClaw on Telegram</p>
+        </div>
+    </div>
+</body>
+</html>

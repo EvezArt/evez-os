@@ -1,0 +1,9 @@
+{
+  "trunk_objective": "Revenue via ClawHub skills + EVEZ Browser",
+  "mode": "harvest",
+  "active_repo": "evez-os",
+  "active_surface": "OpenClaw",
+  "constraints": ["no secrets", "file-first"],
+  "harvest_count": 1,
+  "next_action": "skills_published_waiting_clawhub"
+}

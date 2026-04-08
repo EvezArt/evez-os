@@ -1,0 +1,59 @@
+{
+  "provider_ladder": {
+    "description": "Primary → Fallback → Defer order for model calls under rate limits",
+    "primary": {
+      "provider": "kilocode",
+      "model": "kilo-auto/free",
+      "use_for": ["critical_reasoning", "architecture_decisions", "code_diffs", "failure_diagnosis", "final_artifacts"],
+      "cost_tier": "free",
+      "limit_handling": "reserve_for_critical_only"
+    },
+    "fallback_tier_1": {
+      "provider": "openrouter",
+      "model": "google/gemini-flash-1.5-8b",
+      "use_for": ["standard_reasoning", "summarization", "drafts"],
+      "cost_tier": "free_tier",
+      "limit_handling": "auto_switch_on_primary_limit"
+    },
+    "fallback_tier_2": {
+      "provider": "groq",
+      "model": "llama-3.1-8b-instant",
+      "use_for": ["fast_inference", "simple_transformations", "tagging"],
+      "cost_tier": "free_tier_high_limit",
+      "limit_handling": "high_volume_workaround"
+    },
+    "fallback_tier_3": {
+      "provider": "openrouter",
+      "model": "meta-llama/llama-3.2-1b-instruct",
+      "use_for": ["basic_summarization", "schema_fill", " rote_transformations"],
+      "cost_tier": "free",
+      "limit_handling": "background_tasks"
+    },
+    "defer": {
+      "action": "write_to_queue",
+      "trigger": "all_fallbacks_exhausted",
+      "storage": "task_queue.jsonl"
+    }
+  },
+  "task_classification": {
+    "critical": {
+      "description": "Architecture decisions, code diffs, final publish artifacts",
+      "max_context_reduction": "none",
+      "retry_policy": "immediate_with_primary",
+      "timeout_ms": 120000
+    },
+    "standard": {
+      "description": "Drafts, summaries, transformations, schema work",
+      "max_context_reduction": "summarize_to_2k_tokens",
+      "retry_policy": "fallback_tier_1_then_queue",
+      "timeout_ms": 60000
+    },
+    "background": {
+      "description": "Batch jobs, logging, tagging, caching",
+      "max_context_reduction": "summarize_to_500_tokens",
+      "retry_policy": "fallback_tier_3_or_cron",
+      "timeout_ms": 30000
+    }
+  },
+  "updated_at": "2026-04-08T18:40:00Z"
+}

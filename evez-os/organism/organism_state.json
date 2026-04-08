@@ -1,0 +1,94 @@
+{
+  "organism_schema": {
+    "version": "1.0.0",
+    "description": "Shared state object for EVEZ organism - read/written by all pulses",
+    "trunk_objective": "string - current main goal",
+    "trunk_mode": "explore|harvest|critic",
+    "constraints": {
+      "no_auth_changes": true,
+      "no_billing": true,
+      "no_secrets": true
+    },
+    "current_target_surface": "clawhub|gumroad|fiverr|github_sponsors|consulting",
+    "last_harvest_result": {
+      "action_proposed": "string",
+      "action_type": "publish|post|dmessage|create",
+      "status": "pending|executed|rejected",
+      "receipt": "path_to_artifact"
+    },
+    "top_learnings": [
+      {
+        "cycle": "integer",
+        "learning": "string",
+        "source": "critic|critic"
+      }
+    ],
+    "open_missing_capabilities": [
+      {
+        "capability": "string",
+        "blocking_action": "string",
+        "can_automate": true
+      }
+    ],
+    "next_required_action": {
+      "type": "publish|queue|drain|scan",
+      "target": "string",
+      "depends_on": "auth_completed|artifact_ready"
+    },
+    "pulse_state": {
+      "last_pulse_a": "iso_timestamp",
+      "last_pulse_b": "iso_timestamp",
+      "last_pulse_c": "iso_timestamp",
+      "queue_depth": 0,
+      "consecutive_blocks": 0
+    }
+  },
+  "pulse_state": {
+    "last_pulse_a": "2026-04-08T18:34:41.488489",
+    "last_pulse_b": "2026-04-08T18:34:41.526278",
+    "cycle_count": 1,
+    "last_pulse_c": "2026-04-08T18:34:41.557552"
+  },
+  "last_hypothesis_batch": [
+    {
+      "type": "hypothesis",
+      "id": "hypo_20260408183441",
+      "description": "Package evez-os awareness_engine as ClawHub skill",
+      "opportunity": "skill_marketplace",
+      "estimated_value": "medium"
+    },
+    {
+      "type": "hypothesis",
+      "id": "hypo_20260408183441_2",
+      "description": "Create EVEZ YouTube content from yvyx_posts.jsonl",
+      "opportunity": "content_creation",
+      "estimated_value": "low"
+    },
+    {
+      "type": "hypothesis",
+      "id": "hypo_20260408183441_3",
+      "description": "Offer EVEZ consulting via Telegram channel",
+      "opportunity": "consulting",
+      "estimated_value": "high"
+    }
+  ],
+  "trunk_mode": "harvest",
+  "last_harvest_result": {
+    "action_proposed": "Package evez-os awareness_engine as ClawHub skill",
+    "action_type": "publish_skill_listing",
+    "status": "pending",
+    "receipt": "action_action_20260408183441.json"
+  },
+  "top_learnings": [
+    {
+      "cycle": 1,
+      "learning": "Harvest produced: Package evez-os awareness_engine as ClawHub skill",
+      "source": "harvest"
+    },
+    {
+      "cycle": 1,
+      "learning": "Explorer generated 3 hypotheses",
+      "source": "explore"
+    }
+  ]
+}
