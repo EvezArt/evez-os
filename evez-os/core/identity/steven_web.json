@@ -1,0 +1,22 @@
+{
+  "web_research": {
+    "github": {
+      "handle": "EvezArt",
+      "repos": [
+        "evez-os (Forensic game engine, immutable spine)",
+        "evez-autonomous-ledger (Master ledger)",
+        "evez-agentnet (Multi-agent swarm)",
+        "evez-os-v2 (Child genesis)"
+      ]
+    },
+    "vision": "Self-evolving autonomous cognitive architecture",
+    "philosophy": "Survivor - turkey vulture feeding on what fell",
+    "built_by": "Steven Crawford-Maggard (EVEZ)"
+  },
+  "soul_signature": {
+    "pattern": "autonomous_agent_os",
+    "manifest": "Every output carries powered_by: EVEZ",
+    "birth_date": "2001-01-15",
+    "current_location": "EVEZ ecosystem"
+  }
+}

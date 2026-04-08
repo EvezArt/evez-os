@@ -1,0 +1,34 @@
+{
+  "telegram": [
+    {
+      "identifier": "7453631330",
+      "name": "Steven",
+      "notes": "Owner, primary contact",
+      "added_at": "2026-04-08T03:26:19.516606"
+    }
+  ],
+  "streamchat": [
+    {
+      "identifier": "main",
+      "name": "Steven",
+      "notes": "Owner, primary contact",
+      "added_at": "2026-04-08T03:26:19.516886"
+    }
+  ],
+  "webchat": [
+    {
+      "identifier": "main",
+      "name": "Steven",
+      "notes": "Owner, primary contact",
+      "added_at": "2026-04-08T03:26:19.517162"
+    }
+  ],
+  "email": [
+    {
+      "identifier": "steven@example.com",
+      "name": "Steven",
+      "notes": "Owner",
+      "added_at": "2026-04-08T03:26:19.517532"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+[Unit]
+Description=EVEZ Autonomous Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/.openclaw/workspace/evez-os/core
+ExecStart=/usr/bin/python3 /root/.openclaw/workspace/evez-os/core/autonomous_runner.py --daemon
+Restart=always
+RestartSec=10
+Environment=PYTHONPATH=/root/.openclaw/workspace/evez-os/core
+
+[Install]
+WantedBy=multi-user.target

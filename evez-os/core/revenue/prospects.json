@@ -1,0 +1,17 @@
+[
+  {
+    "handle": "AIStartupFounder",
+    "approach": "direct message",
+    "status": "pending"
+  },
+  {
+    "handle": "IndieHacker",
+    "approach": "reply to thread",
+    "status": "pending"
+  },
+  {
+    "handle": "BuildInPublic",
+    "approach": "quote tweet",
+    "status": "pending"
+  }
+]

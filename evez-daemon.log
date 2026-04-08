@@ -1,0 +1,17 @@
+🤖 EVEZ Autonomous Runner starting...
+   Cycles: infinite
+   Interval: 60s
+
+--- Cycle 1 ---
+Traceback (most recent call last):
+  File "/root/.openclaw/workspace/evez-os/core/autonomous_runner.py", line 189, in <module>
+    main()
+  File "/root/.openclaw/workspace/evez-os/core/autonomous_runner.py", line 182, in main
+    runner.loop(cycles=args.cycles, interval=args.interval)
+  File "/root/.openclaw/workspace/evez-os/core/autonomous_runner.py", line 145, in loop
+    result = self.run_cycle()
+             ^^^^^^^^^^^^^^^^
+  File "/root/.openclaw/workspace/evez-os/core/autonomous_runner.py", line 87, in run_cycle
+    decision=f"Autonomous cycle {count}",
+                                 ^^^^^
+NameError: name 'count' is not defined. Did you mean: 'round'?

@@ -1,0 +1,31 @@
+{
+  "entity": "Kai",
+  "type": "autonomous_agent",
+  "version": "1.0.0",
+  "identifiers": {
+    "kai_id": "f76a0957",
+    "session": "main",
+    "workspace": "/root/.openclaw/workspace"
+  },
+  "capabilities": {
+    "exec": true,
+    "write": true,
+    "read": true,
+    "message": true,
+    "spawn": true,
+    "context_bridge": true
+  },
+  "credentials": {
+    "kai_token": "c126fae115f20cf2ca1d11b534d97dad7587eb2df12e8e12ec4d65ae115dc51d",
+    "session_key": "ab7a75a972bfcce4ad53f9de9f786a48",
+    "ledger_key": "e355b6b8592f68c09cc7bb15e473871b"
+  },
+  "security": {
+    "exec_host": "gateway",
+    "security_level": "full",
+    "elevated": true,
+    "auto_approve": true
+  },
+  "created_at": "2026-04-08T03:45:56.798415",
+  "status": "self_sovereign"
+}

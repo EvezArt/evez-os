@@ -14,6 +14,14 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+# Import context bridge
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+try:
+    from context.bridge import ContextBridge
+except ImportError:
+    ContextBridge = None
+
 class AutonomousRunner:
     """
     Self-running EVEZ-OS that:
@@ -41,6 +49,18 @@ class AutonomousRunner:
             
         objective = state.get("objective", "Build EVEZ-OS")
         
+        # Load context from bridge BEFORE deciding
+        if ContextBridge:
+            bridge = ContextBridge()
+            context = bridge.load_full_context()
+            stm = context.get("stm", {})
+            trunk = context.get("trunk", {})
+            
+            # Check STM for current priority
+            current_obj = stm.get("current_objective") or trunk.get("objective")
+            if current_obj:
+                objective = current_obj
+        
         # Run play cycle
         result = subprocess.run(
             ["python3", "tools/evez.py", "play", "--steps", "1"],
@@ -59,6 +79,15 @@ class AutonomousRunner:
         
         with open(self.log_file, "a") as f:
             f.write(json.dumps(log_entry) + "\n")
+            
+        # Commit to context bridge AFTER cycle
+        if ContextBridge:
+            bridge = ContextBridge()
+            bridge.commit_decision(
+                decision="Autonomous cycle",
+                rationale=objective,
+                outcome=log_entry["status"]
+            )
             
         return log_entry
         
