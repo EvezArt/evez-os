@@ -8,18 +8,6 @@
   ],
   "recent_decisions": [
     {
-      "decision": "Autonomous cycle",
-      "rationale": "Execute first harvest - close first revenue transaction",
-      "outcome": "success",
-      "timestamp": "2026-04-08T03:15:31.681168"
-    },
-    {
-      "decision": "Created Context Bridge system",
-      "rationale": "Connect short-term and long-term context; all decisions now flow through bridge",
-      "outcome": "bridge.py active, autonomous_runner integrated",
-      "timestamp": "2026-04-08T03:15:36.370011"
-    },
-    {
       "decision": "Revenue: x/post",
       "rationale": "X post ready: BCI stack is forming:\n\u2022 Science Corp ($230M) = implant commercialization\n\u2022 Neurosoft = undercapitali...",
       "outcome": "ready",
@@ -66,6 +54,18 @@
       "rationale": "Previous cycles succeeded but revenue not closed - need explicit revenue path",
       "outcome": "STM updated with revenue objective, pending actions populated",
       "timestamp": "2026-04-08T03:21:43.726106"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Close first revenue transaction",
+      "outcome": "success",
+      "timestamp": "2026-04-08T03:22:04.167932"
+    },
+    {
+      "decision": "Created prospect list for consulting outreach",
+      "rationale": "Need targets for consulting DMs",
+      "outcome": "prospects.json created with 3 targets",
+      "timestamp": "2026-04-08T03:22:41.568050"
     }
   ],
   "context_stack": [],
