@@ -9,42 +9,6 @@
   ],
   "recent_decisions": [
     {
-      "decision": "Autonomous cycle",
-      "rationale": "Use working channels (Telegram/Streamchat)",
-      "outcome": "success",
-      "timestamp": "2026-04-08T03:57:18.241984"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Use working channels (Telegram/Streamchat)",
-      "outcome": "success",
-      "timestamp": "2026-04-08T03:58:19.278988"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Use working channels (Telegram/Streamchat)",
-      "outcome": "success",
-      "timestamp": "2026-04-08T03:59:20.084740"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Use working channels (Telegram/Streamchat)",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:00:21.361543"
-    },
-    {
-      "decision": "Generated meme: tech",
-      "rationale": "day 1: let me build an AI\nday 30: let me build an ",
-      "outcome": "ready for moltbook/twitter",
-      "timestamp": "2026-04-08T04:00:57.678061"
-    },
-    {
-      "decision": "Generated meme: truth",
-      "rationale": "the scary AI isn't the one that's too smart\nit's t",
-      "outcome": "ready for moltbook/twitter",
-      "timestamp": "2026-04-08T04:00:57.678978"
-    },
-    {
       "decision": "Generated meme: autonomous",
       "rationale": "normal AI: waits for prompts like a dog\nEVEZ: runs",
       "outcome": "ready for moltbook/twitter",
@@ -67,6 +31,42 @@
       "rationale": "Steven wants cultural propagation on Moltbook + Twitter",
       "outcome": "meme_engine.py generates EVEZ memes, ready for posting",
       "timestamp": "2026-04-08T04:01:08.962252"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Meme propagation for revenue",
+      "outcome": "success",
+      "timestamp": "2026-04-08T04:01:22.561783"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Meme propagation for revenue",
+      "outcome": "success",
+      "timestamp": "2026-04-08T04:02:23.358066"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Meme propagation for revenue",
+      "outcome": "success",
+      "timestamp": "2026-04-08T04:03:24.165774"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Meme propagation for revenue",
+      "outcome": "success",
+      "timestamp": "2026-04-08T04:04:25.042376"
+    },
+    {
+      "decision": "X account creation analysis",
+      "rationale": "Steven wants autonomous Twitter accounts",
+      "outcome": "BLOCKED: Phone verification. Alternative: website, Discord, email.",
+      "timestamp": "2026-04-08T04:05:19.919828"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Meme propagation for revenue",
+      "outcome": "success",
+      "timestamp": "2026-04-08T04:05:27.357681"
     }
   ],
   "context_stack": [],
