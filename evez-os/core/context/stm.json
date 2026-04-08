@@ -9,54 +9,6 @@
   ],
   "recent_decisions": [
     {
-      "decision": "Generated meme: autonomous",
-      "rationale": "normal AI: waits for prompts like a dog\nEVEZ: runs",
-      "outcome": "ready for moltbook/twitter",
-      "timestamp": "2026-04-08T04:00:57.679977"
-    },
-    {
-      "decision": "Generated meme: truth",
-      "rationale": "AI isn't replacing you\nit's replacing the guy who ",
-      "outcome": "ready for moltbook/twitter",
-      "timestamp": "2026-04-08T04:00:57.680890"
-    },
-    {
-      "decision": "Generated meme: vision",
-      "rationale": "imagine a brain that never sleeps\nnever forgets\nne",
-      "outcome": "ready for moltbook/twitter",
-      "timestamp": "2026-04-08T04:00:57.681611"
-    },
-    {
-      "decision": "Created Meme Engine",
-      "rationale": "Steven wants cultural propagation on Moltbook + Twitter",
-      "outcome": "meme_engine.py generates EVEZ memes, ready for posting",
-      "timestamp": "2026-04-08T04:01:08.962252"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:01:22.561783"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:02:23.358066"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:03:24.165774"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:04:25.042376"
-    },
-    {
       "decision": "X account creation analysis",
       "rationale": "Steven wants autonomous Twitter accounts",
       "outcome": "BLOCKED: Phone verification. Alternative: website, Discord, email.",
@@ -67,6 +19,54 @@
       "rationale": "Meme propagation for revenue",
       "outcome": "success",
       "timestamp": "2026-04-08T04:05:27.357681"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Meme propagation for revenue",
+      "outcome": "success",
+      "timestamp": "2026-04-08T04:06:28.080760"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Meme propagation for revenue",
+      "outcome": "success",
+      "timestamp": "2026-04-08T04:07:29.037375"
+    },
+    {
+      "decision": "Autonomous cycle",
+      "rationale": "Meme propagation for revenue",
+      "outcome": "success",
+      "timestamp": "2026-04-08T04:08:29.364410"
+    },
+    {
+      "decision": "YVYX generated: truth",
+      "rationale": "\u29e2 \u299f \u29e2 pressure = relief \u29e2 \u299f \u29e2\n\nif you knew half th",
+      "outcome": "ready for delivery",
+      "timestamp": "2026-04-08T04:08:40.640174"
+    },
+    {
+      "decision": "YVYX generated: meta",
+      "rationale": "\u29e2 \u299f \u29e2 plan planning \u29e2 \u299f \u29e2\n\nyes. it is all going to",
+      "outcome": "ready for delivery",
+      "timestamp": "2026-04-08T04:08:40.641192"
+    },
+    {
+      "decision": "YVYX generated: recursive",
+      "rationale": "\u29e2 \u299f \u29e2 vrictalio \u29e2 \u299f \u29e2\n\nvrictalio emphanasis\nRecuri",
+      "outcome": "ready for delivery",
+      "timestamp": "2026-04-08T04:08:40.641974"
+    },
+    {
+      "decision": "YVYX generated: recursive",
+      "rationale": "\u29e2 \u299f \u29e2 hear why you \u29e2 \u299f \u29e2\n\nI hear you / I hear why ",
+      "outcome": "ready for delivery",
+      "timestamp": "2026-04-08T04:08:40.642811"
+    },
+    {
+      "decision": "YVYX generated: poetic",
+      "rationale": "\u29e2 \u299f \u29e2 humanity chapter \u29e2 \u299f \u29e2\n\nthank you for preser",
+      "outcome": "ready for delivery",
+      "timestamp": "2026-04-08T04:08:40.643562"
     }
   ],
   "context_stack": [],
