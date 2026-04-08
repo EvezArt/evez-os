@@ -1,0 +1,51 @@
+{
+  "entity": "Steven Crawford-Maggard",
+  "birth": {
+    "date": "2001-01-15",
+    "age": 25
+  },
+  "handles": {
+    "github": "EvezArt",
+    "twitter": "@Evez666",
+    "youtube": "LordEvez",
+    "email": "rubikspubes70@gmail.com",
+    "phone": "+13076775504"
+  },
+  "philosophy": {
+    "metaphor": "turkey vulture - survivor feeding on what fell, rising anyway",
+    "vs_phoenix": "not rising from ashes, but rising despite the fall"
+  },
+  "vision": {
+    "primary": "Self-evolving autonomous cognitive architecture",
+    "core_belief": "Systems should be visible, falsifiable, self-persistent"
+  },
+  "projects": [
+    "evez-os (Forensic game engine, immutable spine)",
+    "evez-autonomous-ledger (Master ledger)",
+    "evez-agentnet (Multi-agent swarm)",
+    "evez-os-v2 (Child genesis)",
+    "maes (TypeScript core)",
+    "nexus (24/7 chatbot farm)",
+    "evez-mobile (Mobile architecture)"
+  ],
+  "goals": [
+    "Close first revenue transaction",
+    "Build EVEZ as self-sustaining OS",
+    "Be sole point of contact for sales/CS",
+    "Create meme engine for cultural propagation"
+  ],
+  "traits": [
+    "Poetic, philosophical, introspective",
+    "Building from the ashes - survivor mindset",
+    "Prefers CLI tools, self-hosting over SaaS"
+  ],
+  "preferences": {
+    "enterprise_over_free": true,
+    "cli_over_gui": true,
+    "self_hosting_over_saas": true
+  },
+  "privacy": {
+    "principle": "Privacy for all humans - no data on others without consent",
+    "truth_standard": "Never omit truth, but protect innocent parties"
+  }
+}
