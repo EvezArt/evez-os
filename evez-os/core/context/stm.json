@@ -9,64 +9,64 @@
   ],
   "recent_decisions": [
     {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:41:54.401598"
+      "decision": "MAPA iteration 2",
+      "rationale": "Explain why 1+1=2",
+      "outcome": "Correct: False",
+      "timestamp": "2026-04-08T04:52:43.918250"
     },
     {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:42:55.198686"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:43:56.162923"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:44:56.959055"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:45:57.764174"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:46:58.797930"
-    },
-    {
-      "decision": "Autonomous cycle",
-      "rationale": "Meme propagation for revenue",
-      "outcome": "success",
-      "timestamp": "2026-04-08T04:47:59.358949"
+      "decision": "MAPA iteration 3",
+      "rationale": "Explain why 1+1=2",
+      "outcome": "Correct: True",
+      "timestamp": "2026-04-08T04:52:43.918818"
     },
     {
       "decision": "MAPA iteration 0",
-      "rationale": "Prove that 2+2=4",
+      "rationale": "Solve x + 5 = 10",
       "outcome": "Correct: False",
-      "timestamp": "2026-04-08T04:48:34.883968"
+      "timestamp": "2026-04-08T04:52:43.919676"
     },
     {
       "decision": "MAPA iteration 1",
-      "rationale": "Prove that 2+2=4",
+      "rationale": "Solve x + 5 = 10",
       "outcome": "Correct: False",
-      "timestamp": "2026-04-08T04:48:34.958390"
+      "timestamp": "2026-04-08T04:52:43.920290"
     },
     {
       "decision": "MAPA iteration 2",
-      "rationale": "Prove that 2+2=4",
+      "rationale": "Solve x + 5 = 10",
       "outcome": "Correct: False",
-      "timestamp": "2026-04-08T04:48:34.958891"
+      "timestamp": "2026-04-08T04:52:43.920864"
+    },
+    {
+      "decision": "MAPA iteration 3",
+      "rationale": "Solve x + 5 = 10",
+      "outcome": "Correct: True",
+      "timestamp": "2026-04-08T04:52:43.921455"
+    },
+    {
+      "decision": "MAPA iteration 0",
+      "rationale": "Calculate the area of a circle",
+      "outcome": "Correct: False",
+      "timestamp": "2026-04-08T04:52:43.922124"
+    },
+    {
+      "decision": "MAPA iteration 1",
+      "rationale": "Calculate the area of a circle",
+      "outcome": "Correct: False",
+      "timestamp": "2026-04-08T04:52:43.922706"
+    },
+    {
+      "decision": "MAPA iteration 2",
+      "rationale": "Calculate the area of a circle",
+      "outcome": "Correct: False",
+      "timestamp": "2026-04-08T04:52:43.923275"
+    },
+    {
+      "decision": "MAPA iteration 3",
+      "rationale": "Calculate the area of a circle",
+      "outcome": "Correct: True",
+      "timestamp": "2026-04-08T04:52:43.923836"
     }
   ],
   "context_stack": [],
