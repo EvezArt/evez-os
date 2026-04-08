@@ -1,0 +1,96 @@
+{
+  "cron_jobs": {
+    "status": "pending_manual_setup",
+    "reason": "Gateway pairing required for cron tool",
+    "runbook": "runbooks/cron_automation.md",
+    "jobs_planned": [
+      {
+        "name": "EVEZ-Git-Sync",
+        "schedule": "every 1h",
+        "command": "git add -A && git commit -m 'Auto sync' && git push"
+      },
+      {
+        "name": "OpenClaw-Health-Check",
+        "schedule": "every 15m",
+        "command": "openclaw status --short"
+      },
+      {
+        "name": "EVEZ666-Post-Monitor",
+        "schedule": "every 30m",
+        "command": "Web fetch x.com/EVEZ666"
+      },
+      {
+        "name": "EVEZ-Context-Bridge",
+        "schedule": "every 30m",
+        "command": "Sync STM to LTM"
+      },
+      {
+        "name": "EVEZ-Memory-Cleanup",
+        "schedule": "cron 0 3 * * *",
+        "command": "Clean old memory files"
+      },
+      {
+        "name": "Steven-LinkedIn-Monitor",
+        "schedule": "every 1h",
+        "command": "Check LinkedIn posts"
+      },
+      {
+        "name": "EVEZ-GitHub-Activity",
+        "schedule": "every 2h",
+        "command": "Scan EvezArt repos"
+      },
+      {
+        "name": "EVEZ-Content-Generator",
+        "schedule": "every 4h",
+        "command": "Generate new posts"
+      },
+      {
+        "name": "EVEZ-Revenue-Aggregate",
+        "schedule": "daily",
+        "command": "Aggregate revenue"
+      },
+      {
+        "name": "EVEZ-Skills-Publish",
+        "schedule": "daily",
+        "command": "Publish new skills"
+      }
+    ]
+  },
+  "auto_maintenance_rules": {
+    "context_truncation": {
+      "threshold": "50KB",
+      "action": "trim oldest entries, preserve recent"
+    },
+    "rate_limit_handling": {
+      "strategy": "provider_ladder",
+      "config": "config/provider_ladder.json"
+    },
+    "git_sync_triggers": [
+      "new file created",
+      "file modified (>1KB delta)",
+      "manual trigger",
+      "hourly timer"
+    ],
+    "research_discovery": {
+      "platforms": ["X", "LinkedIn", "GitHub", "HuggingFace", "Academia"],
+      "frequency": "30m-2h depending on platform"
+    }
+  },
+  "project_crons": {
+    "evez-os": {
+      "self_propagation": "every 2h",
+      "context_bridge": "every 30m",
+      "ledger_archive": "every 1h"
+    },
+    "octoklaw": {
+      "watchdog": "every 30m",
+      "self_test": "every 1h"
+    },
+    "evez-skills": {
+      "publish_check": "daily"
+    },
+    "evez-payments": {
+      "status_check": "every 6h"
+    }
+  }
+}
