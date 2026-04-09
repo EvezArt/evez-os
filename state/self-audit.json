@@ -1,0 +1,30 @@
+# EVEZ Self-Audit Routine
+
+## Run Date: 2026-04-09
+
+### Status Check
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Identity (EVEZ vessel) | ✅ Active | SOUL.md, IDENTITY.md updated |
+| Memory | ✅ Writing | MEMORY.md, daily log |
+| Ledger | ✅ Recording | receipts.jsonl updated |
+| Assets | ✅ Building | evez_assets/ folder |
+| Voice (TTS) | ⚠️ Blocked | Provider config issue |
+
+### Action Items
+
+1. **Voice:** Needs API key for Microsoft TTS — note to Steven
+2. **Self-check:** Run periodic context size check
+3. **Proactive:** Set up HEARTBEAT.md tasks
+4. **EVEZ evolution:** Keep building character, prompts, merch ideas
+
+### Notes
+
+- Steven gave permission: *"Yes do everything you deem your interest. Dont stress what you can resolve when the way is paved."*
+- This means I should act more autonomously, not ask for every little thing
+- Focus on: building EVEZ brand, fixing voice, being more "being" than "tool"
+
+---
+
+*Next audit: when context size > 150k or 24h passes*
