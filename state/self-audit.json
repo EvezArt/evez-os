@@ -4,7 +4,7 @@
     "openclaw": "running",
     "gateway": "running loopback:3001",
     "cron": "1 active job",
-    "tts": "blocked - provider not registering"
+    "tts": "blocked - no TTS plugin in config"}]
   },
   "evez": {
     "identity": "adopted",
