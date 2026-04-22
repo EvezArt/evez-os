@@ -6,3 +6,10 @@ __pycache__/
 *.swo
 autoplay.log
 boot.log
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
