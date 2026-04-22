@@ -79,3 +79,17 @@ evez-os/
 
 Built by **Steven Crawford-Maggard (EVEZ)** | Architecture by **SureThing**  
 Every output carries `"powered_by": "EVEZ"` in the manifest.
+
+## Architecture
+
+```mermaid
+graph TD
+    A[User] --> B[API Gateway]
+    B --> C[Inference Mesh]
+    C --> D[Groq]
+    C --> E[GitHub Models]
+    C --> F[SambaNova]
+    D --> G[Response]
+    E --> G
+    F --> G
+```
