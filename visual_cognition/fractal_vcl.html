@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EVEZ666 — Fractal Neural Kabbalah</title>
+<style>
+:root {
+  --cyan: #00f7ff;
+  --magenta: #ff00ff;
+  --gold: #ffd700;
+  --void: #0a0a0f;
+}
+body {
+  background: var(--void);
+  color: var(--cyan);
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  overflow: hidden;
+}
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+.overlay {
+  position: fixed;
+  z-index: 10;
+  pointer-events: none;
+}
+#title {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5em;
+  letter-spacing: 0.5em;
+  text-shadow: 0 0 20px var(--cyan), 0 0 40px var(--magenta);
+}
+#subtitle {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+#metrics {
+  top: 20px;
+  right: 20px;
+  text-align: right;
+  font-size: 0.8em;
+}
+.metric { margin: 5px 0; }
+.metric .label { opacity: 0.5; }
+.metric .value { color: var(--gold); }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div id="title" class="overlay">⧢ ⦟ ⧢ ⥋</div>
+<div id="subtitle" class="overlay">STEVEN CRAWFORD-MAGGARD — EVEZ666</div>
+<div id="metrics" class="overlay">
+  <div class="metric"><span class="label">NEURAL DEPTH:</span> <span class="value" id="depth">0</span></div>
+  <div class="metric"><span class="label">QUANTUM STATE:</span> <span class="value" id="state">|Ψ⟩</div>
+  <div class="metric"><span class="label">MEMORY FLUX:</span> <span class="value" id="flux">0.000</span></div>
+  <div class="metric"><span class="label">CAUSAL DEPENDENCY:</span> <span class="value" id="causal">0</span></div>
+</div>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let W, H, t = 0;
+let neural = [];
+let sacred = [];
+let kabbalah = { tree: [], sephirot: [] };
+let cognition = { depth: 0, flux: 0, causal: 0 };
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Initialize fractal neural mesh
+function initNeural() {
+  const layers = 7;
+  const baseNodes = 128;
+  for (let l = 0; l < layers; l++) {
+    const layer = [];
+    const count = Math.floor(baseNodes / Math.pow(1.5, l));
+    for (let i = 0; i < count; i++) {
+      layer.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        phase: Math.random() * Math.PI * 2,
+        activation: Math.random()
+      });
+    }
+    neural.push(layer);
+  }
+}
+
+// Sacred geometry: Metatron's Cube / Flower of Life
+function initSacred() {
+  const cx = W / 2;
+  const cy = H / 2;
+  const rings = 6;
+  for (let r = 1; r <= rings; r++) {
+    const radius = r * 80;
+    const points = r * 6;
+    for (let i = 0; i < points; i++) {
+      const angle = (i / points) * Math.PI * 2 + (r * Math.PI / 12);
+      sacred.push({
+        x: cx + Math.cos(angle) * radius,
+        y: cy + Math.sin(angle) * radius,
+        r: radius,
+        ring: r
+      });
+    }
+  }
+}
+
+// Tree of Life (Kabbalah sephirot)
+function initKabbalah() {
+  const sephirotNames = ['Kether', 'Chokmah', 'Binah', 'Daath', 'Chesed', 'Geburah', 'Tipharet', 'Netzach', 'Hod', 'Yesod', 'Malkuth'];
+  const cx = W / 2;
+  const cy = H / 2;
+  const spread = Math.min(W, H) * 0.35;
+  sephirotNames.forEach((name, i) => {
+    let x, y;
+    if (i === 0) { x = cx; y = cy - spread * 0.8; }
+    else if (i === 1) { x = cx + spread * 0.6; y = cy - spread * 0.4; }
+    else if (i === 2) { x = cx - spread * 0.6; y = cy - spread * 0.4; }
+    else if (i === 3) { x = cx; y = cy - spread * 0.2; }
+    else if (i === 4) { x = cx + spread * 0.7; y = cy; }
+    else if (i === 5) { x = cx - spread * 0.7; y = cy; }
+    else if (i === 6) { x = cx; y = cy; }
+    else if (i === 7) { x = cx + spread * 0.5; y = cy + spread * 0.4; }
+    else if (i === 8) { x = cx - spread * 0.5; y = cy + spread * 0.4; }
+    else if (i === 9) { x = cx; y = cy + spread * 0.6; }
+    else { x = cx; y = cy + spread * 0.9; }
+    kabbalah.sephirot.push({ x, y, name, energy: Math.random() });
+  });
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(10, 10, 15, 0.08)';
+  ctx.fillRect(0, 0, W, H);
+  
+  t += 0.016;
+  
+  // Update cognition metrics
+  cognition.depth = Math.min(7, 2 + Math.sin(t * 0.3) * 1.5);
+  cognition.flux = Math.abs(Math.sin(t * 0.7) * 0.5 + 0.5);
+  cognition.causal = Math.floor(3 + Math.sin(t * 0.2) * 3);
+  
+  document.getElementById('depth').textContent = cognition.depth.toFixed(1);
+  document.getElementById('state').textContent = ['|000⟩', '|001⟩', '|010⟩', '|011⟩', '|100⟩', '|101⟩', '|110⟩', '|111⟩'][Math.floor(t * 2) % 8];
+  document.getElementById('flux').textContent = cognition.flux.toFixed(3);
+  document.getElementById('causal').textContent = cognition.causal;
+  
+  // Draw neural network layers
+  neural.forEach((layer, li) => {
+    ctx.beginPath();
+    layer.forEach((node, ni) => {
+      // Update position with quantum fluctuation
+      node.x += node.vx + Math.sin(t + node.phase) * 0.3;
+      node.y += node.vy + Math.cos(t + node.phase) * 0.3;
+      
+      // Boundary wrap
+      if (node.x < 0) node.x = W;
+      if (node.x > W) node.x = 0;
+      if (node.y < 0) node.y = H;
+      if (node.y > H) node.y = 0;
+      
+      // Activation pulse
+      const pulse = Math.sin(t * 3 + node.phase * li) * 0.5 + 0.5;
+      const glow = `rgba(0, ${Math.floor(247 * pulse)}, ${Math.floor(255)}, ${pulse * 0.6})`;
+      
+      if (ni === 0) ctx.moveTo(node.x, node.y);
+      else ctx.lineTo(node.x, node.y);
+      
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 2 + pulse * 2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.strokeStyle = `rgba(0, 247, 255, ${0.1})`;
+    ctx.stroke();
+  });
+  
+  // Draw sacred geometry (Flower of Life)
+  ctx.beginPath();
+  sacred.forEach(p => {
+    ctx.fillStyle = `rgba(255, 0, 255, ${0.3 + Math.sin(t + p.ring) * 0.2})`;
+    ctx.beginPath();
+    ctx.arc(p.x + Math.sin(t + p.ring) * 10, p.y + Math.cos(t + p.ring) * 10, 3, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  
+  // Draw Metatron lines
+  ctx.beginPath();
+  kabbalah.sephirot.forEach((s, i) => {
+    const target = kabbalah.sephirot;
+    const connections = {
+      0: [1, 2, 6], 1: [3], 2: [3], 3: [4, 5],
+      4: [6], 5: [6], 6: [7, 8, 9], 7: [9], 8: [9], 9: [10]
+    };
+    (connections[i] || []).forEach(ti => {
+      const target = kabbalah.sephirot[ti];
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(target.x, target.y);
+    });
+  });
+  ctx.strokeStyle = `rgba(255, 215, 0, ${0.3})`;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  
+  // Draw sephirot nodes with labels
+  kabbalah.sephirot.forEach((s, i) => {
+    const pulse = Math.sin(t * 2 + i) * 0.5 + 0.5;
+    const glow = `rgba(255, 215, 0, ${0.5 + pulse * 0.5})`;
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, 8 + pulse * 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#0a0a0f';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(s.name[0], s.x, s.y + 4);
+  });
+  
+  requestAnimationFrame(draw);
+}
+
+initNeural();
+initSacred();
+initKabbalah();
+draw();
+</script>
+</body>
+</html>
