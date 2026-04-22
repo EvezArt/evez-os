@@ -1,3 +1,4 @@
+[![Test](https://github.com/EvezArt/evez-os/actions/workflows/test-matrix.yml/badge.svg)](https://github.com/EvezArt/evez-os/actions)
 # EVEZ-OS — Visual Cognition Layer
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
