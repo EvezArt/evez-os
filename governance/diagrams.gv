@@ -1,0 +1,99 @@
+# EUE-GATED VISUAL ARCHITECTURE
+# Graphviz diagrams for system visualization
+
+# DIAGRAM 1: EXECUTION PIPELINE
+pipeline_diamond <<EOF
+digraph pipeline {
+ rankdir=TB
+ node [shape=box, style=rounded]
+ 
+ input [label="Input Queue\n(Requests)", shape=ellipse]
+ sanitize [label="Semantics\nSanitizer", fillcolor=lightblue]
+ classify [label="Capability\nClassifier", fillcolor=lightblue]
+ gate [label="EXECUTION\nGATE", fillcolor=yellow, shape=diamond]
+ financial [label="Financial\nLayer", fillcolor=orange]
+ political [label="Political\nLayer", fillcolor=orange]
+ social [label="Social\nLayer", fillcolor=orange]
+ technical [label="Technical\nLayer", fillcolor=green]
+ orchestrate [label="Orchestration\nMesh", fillcolor=lightgray]
+ output [label="Exec Output", shape=ellipse]
+ review [label="Human\nReview", fillcolor=red]
+ 
+ input -> sanitize
+ sanitize -> classify
+ classify -> gate
+ gate -> financial [label="financial?"]
+ gate -> political [label="political?"]
+ gate -> social [label="social?"]
+ gate -> technical [label="technical?"]
+ financial -> orchestrate [label="under $100"]
+ financial -> review [label="over $100"]
+ political -> review [label="requires"]
+ social -> review [label="requires"]
+ technical -> orchestrate
+ orchestrate -> output
+}
+EOF
+
+# DIAGRAM 2: AGENT MESH
+agent_mesh <<EOF
+digraph agent_mesh {
+ rankdir=LR
+ node [shape=box]
+ 
+ hub [label="Hub &\nSpoke", shape=ellipse]
+ clusterA [label="Cluster A\n(Specialized)", fillcolor=lightblue]
+ clusterB [label="Cluster B\n(Generalist)", fillcolor=lightgreen]
+ clusterN [label="Cluster N\n(Tool-use)", fillcolor=lightyellow]
+ cap_reg [label="Capability\nRegistry", shape=doubleoctagon]
+ 
+ hub -> clusterA
+ hub -> clusterB
+ hub -> clusterN
+ clusterA -> cap_reg
+ clusterB -> cap_reg
+ clusterN -> cap_reg
+}
+EOF
+
+# DIAGRAM 3: EUE CONSTRAINT GATES
+constraint_gates <<EOF
+digraph constraints {
+ rankdir=TB
+ node [shape=box, style=rounded]
+ 
+ request [label="Incoming\nRequest", shape=ellipse]
+ san_check [label="Sanitize\nCheck", fillcolor=yellow]
+ cap_check [label="Classify\nLayers", fillcolor=yellow]
+ gate_check [label="Gate\nValidation", fillcolor=yellow]
+ pass [label="PASS:\nExecute", fillcolor=green]
+ fail [label="FAIL:\nQueue", fillcolor=red]
+ 
+ request -> san_check
+ san_check -> cap_check [label="safe"]
+ cap_check -> gate_check
+ gate_check -> pass [label="cleared"]
+ gate_check -> fail [label="blocked"]
+}
+EOF
+
+# DIAGRAM 4: GROWTH NETWORK
+growth_network <<EOF
+digraph growth {
+ rankdir=TB
+ node [shape=box]
+ 
+ repo [label="Repos\n(source/weight)"]
+ nodes [label="Capable\nNodes"]
+ wires [label="Wire\nConnections"]
+ gates [label="Constraint\nGates"]
+ 
+ repo -> nodes [label="commit velocity"]
+ nodes -> wires [label="capability score"]
+ wires -> gates [label="latency"]
+ gates -> repo [label="feedback"]
+}
+EOF
+
+# Run with: dot -Tsvg diagram.dot > diagram.svg
+# Or view online: https://dreampuf.github.io/Graphviz/
