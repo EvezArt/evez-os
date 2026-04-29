@@ -29,6 +29,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: 'os-evez/requirements.txt'
+
+      - name: Install dependencies
+        run: |
+          cd os-evez
+          pip install -r requirements.txt
 
       - name: Run OODA Cycle
         id: ooda
@@ -47,16 +54,13 @@ jobs:
           memory = MemorySystem()
           orch = Orchestrator(bus=bus, memory=memory)
 
-          # Run OODA cycle
           report = orch.run_ooda_cycle()
           print('=== OODA CYCLE REPORT ===')
           print(json.dumps(report, indent=2, default=str))
 
-          # Check for errors
           issues = report.get('phases', {}).get('observe', {}).get('issues', [])
           has_errors = any(i.get('severity') in ('critical', 'high') for i in issues)
-
-          print(f'\nIssues found: {len(issues)}')
+          print(f'Issues found: {len(issues)}')
           print(f'Has critical/high errors: {has_errors}')
           "
 
@@ -91,7 +95,6 @@ jobs:
           from self_repair import SelfRepairDaemon
 
           daemon = SelfRepairDaemon()
-          # Only scan the main repo in CI to avoid rate limits
           result = daemon.run_repair_cycle(repos=['evez-os'])
           print('=== SELF-REPAIR CHECK ===')
           print(json.dumps(result, indent=2, default=str))
