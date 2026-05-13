@@ -1,5 +1,8 @@
 """Spine module — append-only event log operations.
 Bridge module for tools/evez.py (v1.2.0 Visual Cognition Layer).
+
+Constitutional Rule #2: No claim without falsifier.
+Events of kind=*.event MUST include a 'falsifier' field or they are rejected.
 """
 from __future__ import annotations
 
@@ -14,6 +17,30 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 HASH_ALG = "sha256"
 GENESIS_HASH = "0" * 64  # Genesis block hash — all zeros
+
+
+class FalsifierGateError(ValueError):
+    """Raised when an event violates Constitutional Rule #2."""
+    pass
+
+
+def _validate_falsifier_gate(event: Dict[str, Any]) -> None:
+    """Constitutional Rule #2: no claim without falsifier.
+    
+    Events with kind ending in '.event' require a non-null 'falsifier' field.
+    This prevents gossip (unverifiable claims) from corrupting the proof ledger.
+    """
+    kind = event.get("kind") or event.get("type") or ""
+    
+    # Gate applies to *.event kinds and 'claim' kinds
+    if kind.endswith(".event") or kind == "claim":
+        falsifier = event.get("falsifier")
+        if falsifier is None or (isinstance(falsifier, str) and falsifier.strip() == ""):
+            raise FalsifierGateError(
+                f"Constitutional Rule #2 violation: kind='{kind}' requires a non-null 'falsifier' field. "
+                f"Event rejected to prevent unverifiable claims in the proof ledger. "
+                f"trace_id={event.get('trace_id', '?')}"
+            )
 
 
 
@@ -52,7 +79,11 @@ def append_event(path: Path, event: Dict[str, Any]) -> Dict[str, Any]:
     """Append event to spine with auto-generated hash and timestamp.
     Args: path first, event second (matching tools/evez.py calling convention).
     Returns: event dict with 'hash' key added.
+    Raises: FalsifierGateError if event violates Constitutional Rule #2.
     """
+    # Pre-write validation: enforce falsifier gate
+    _validate_falsifier_gate(event)
+
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
 

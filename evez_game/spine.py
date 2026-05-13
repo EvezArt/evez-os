@@ -14,8 +14,11 @@ Hash computation:
 
 "event_without_hash_fields" excludes keys: "hash", "prev_hash", "sig".
 
+Constitutional Rule #2: No claim without falsifier.
+Events of kind=*.event MUST include a 'falsifier' field or they are rejected.
+
 This module supports:
-- append_event(...): appends with correct chain fields
+- append_event(...): appends with correct chain fields (falsifier-gated)
 - read_events(...): streaming reader
 - lint(...): verifies chain + basic invariants
 """
@@ -34,6 +37,29 @@ HASH_ALG = "sha256"
 GENESIS_HASH = hashlib.sha256(b"EVEZ-SPINE-GENESIS").hexdigest()
 
 HASH_FIELDS = {"hash", "prev_hash", "sig"}
+
+
+class FalsifierGateError(ValueError):
+    """Raised when an event violates Constitutional Rule #2."""
+    pass
+
+
+def _validate_falsifier_gate(event: Dict[str, Any]) -> None:
+    """Constitutional Rule #2: no claim without falsifier.
+    
+    Events with kind ending in '.event' require a non-null 'falsifier' field.
+    This prevents gossip (unverifiable claims) from corrupting the proof ledger.
+    """
+    kind = event.get("kind") or event.get("type") or ""
+    
+    if kind.endswith(".event") or kind == "claim":
+        falsifier = event.get("falsifier")
+        if falsifier is None or (isinstance(falsifier, str) and falsifier.strip() == ""):
+            raise FalsifierGateError(
+                f"Constitutional Rule #2 violation: kind='{kind}' requires a non-null 'falsifier' field. "
+                f"Event rejected to prevent unverifiable claims in the proof ledger. "
+                f"trace_id={event.get('trace_id', '?')}"
+            )
 
 
 def _strip_hash_fields(event: Dict[str, Any]) -> Dict[str, Any]:
@@ -70,9 +96,15 @@ def read_events(path: Path) -> Iterator[Dict[str, Any]]:
             yield json.loads(line)
 
 
-def append_event(path: Path, event: Dict[str, Any]) -> Dict[str, Any]:
-    """Append an event to the spine with correct hash chaining."""
+def append_event(path: Path, event: Dict[str, Any]) -> Dict[str]:
+    """Append an event to the spine with correct hash chaining.
+    
+    Raises: FalsifierGateError if event violates Constitutional Rule #2.
+    """
     import json
+
+    # Pre-write validation: enforce falsifier gate
+    _validate_falsifier_gate(event)
 
     path.parent.mkdir(parents=True, exist_ok=True)
 
