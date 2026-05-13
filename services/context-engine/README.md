@@ -319,3 +319,41 @@ class ContextEngine:
 ---
 
 *context-engine v1.0 — append-only. Canonical reference: docs/architecture/EVEZ_IMPL.md*
+
+
+## Synaptic Memory Graph (EvezBrain)
+
+`services/context-engine/synaptic_memory.py` adds a persistent, self-indexing memory graph built on NetworkX.
+
+### What it stores as nodes
+- Files (`file`)
+- Functions extracted from Python files (`function`)
+- Agent actions, including command executions (`agent_action`)
+- API calls (`api_call`)
+
+### How it links nodes
+- Structural links such as `defines` from file → function
+- Semantic links (`semantic_similarity`) via token cosine similarity
+
+### Persistence
+- GraphML: `services/context-engine/data/synaptic_memory.graphml`
+- Token index: `services/context-engine/data/synaptic_memory_index.json`
+
+### Auto-growth workflow
+1. `ingest_file(path, action="read"|"write"|"scan")` on every file touch
+2. `record_agent_action(...)` on every agent action
+3. `record_api_call(...)` for every external/internal API invocation
+4. `capture_exec([...])` to execute commands while auto-logging outputs
+
+### Quick start
+```python
+from synaptic_memory import SynapticMemoryGraph
+
+brain = SynapticMemoryGraph()
+brain.ingest_file('services/agent/app.py', action='read')
+brain.record_agent_action('edit', 'Modified agent prompt parser')
+brain.record_api_call('POST', '/context-engine/ingest', {'raw_signals': []}, 200)
+brain.capture_exec(['python', '--version'])
+brain.flush()
+print(brain.stats())
+```
