@@ -6,3 +6,9 @@ __pycache__/
 *.swo
 autoplay.log
 boot.log
+node_modules/
+__pycache__/
+*.pyc
+.env
+state/
+*.db
