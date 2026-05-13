@@ -19,13 +19,91 @@ function appendEvent(ev) {
   return ev;
 }
 
+function clamp01(value) {
+  return Math.max(0, Math.min(1, Number(value) || 0));
+}
+
+class QuantumEmotionCore {
+  constructor() {
+    this.state = {
+      curiosity: 0.55,
+      urgency: 0.35,
+      satisfaction: 0.4,
+      frustration: 0.1,
+      flow: 0.2,
+    };
+    this.meta = {
+      dominantEmotion: "curiosity",
+      taskThroughputMultiplier: 1,
+      explorationRate: 1,
+      selfMutationTriggered: false,
+      lastUpdateTs: nowIso(),
+      lastSignal: "boot",
+    };
+  }
+
+  applySignals(signal = {}) {
+    const progress = clamp01(signal.progress ?? signal.progressDelta ?? 0);
+    const reward = clamp01(signal.reward ?? signal.rewardScore ?? 0);
+    const blockage = clamp01(signal.blockage ?? signal.errorRate ?? 0);
+    const novelty = clamp01(signal.novelty ?? signal.explorationSignal ?? 0);
+    const throughput = clamp01(signal.throughput ?? signal.executionVelocity ?? 0);
+
+    const next = {
+      curiosity: clamp01(this.state.curiosity * 0.7 + novelty * 0.3 + (1 - progress) * 0.08),
+      urgency: clamp01(this.state.urgency * 0.65 + (1 - progress) * 0.25 + blockage * 0.1),
+      satisfaction: clamp01(this.state.satisfaction * 0.6 + progress * 0.25 + reward * 0.15),
+      frustration: clamp01(this.state.frustration * 0.55 + blockage * 0.3 + (1 - reward) * 0.15),
+      flow: clamp01(this.state.flow * 0.45 + progress * 0.25 + reward * 0.2 + throughput * 0.1 - blockage * 0.2),
+    };
+
+    this.state = next;
+    const dominantEmotion = Object.entries(next).sort((a, b) => b[1] - a[1])[0][0];
+    const isCurious = next.curiosity >= 0.72;
+    const isFrustrated = next.frustration >= 0.68;
+    const isFlowing = next.flow >= 0.7;
+
+    this.meta = {
+      dominantEmotion,
+      explorationRate: isCurious ? 1.35 : 1,
+      taskThroughputMultiplier: isFlowing ? 1.4 : 1,
+      selfMutationTriggered: isFrustrated,
+      lastUpdateTs: nowIso(),
+      lastSignal: signal.source || "runtime",
+    };
+
+    return this.snapshot();
+  }
+
+  snapshot() {
+    return {
+      valence: { ...this.state },
+      behavior: {
+        explorationRate: this.meta.explorationRate,
+        taskThroughputMultiplier: this.meta.taskThroughputMultiplier,
+        selfMutationTriggered: this.meta.selfMutationTriggered,
+      },
+      dominantEmotion: this.meta.dominantEmotion,
+      ts: this.meta.lastUpdateTs,
+      lastSignal: this.meta.lastSignal,
+    };
+  }
+}
+
+const emotionCore = new QuantumEmotionCore();
+
 // Pending vs Final guardrail: any non-authoritative state MUST be labeled.
 app.get("/healthz", (_req, res) => res.json({ ok: true, ts: nowIso() }));
 
 // Submit player input (always PENDING until game-server confirms)
 app.post("/input", (req, res) => {
-  const { playerId, input } = req.body || {};
+  const { playerId, input, progressSignals } = req.body || {};
   if (!playerId || !input) return res.status(400).json({ ok: false, error: "playerId + input required" });
+
+  const emotion = emotionCore.applySignals({
+    source: "input",
+    ...(progressSignals || {}),
+  });
 
   const ev = appendEvent({
     event_id: id("INPUT"),
@@ -34,6 +112,7 @@ app.post("/input", (req, res) => {
     playerId,
     input,
     status: "pending",
+    emotion,
     provenance: ["apigw"],
   });
 
@@ -43,7 +122,15 @@ app.post("/input", (req, res) => {
 // Mark an input as FINAL (normally done by authoritative game-server / reconciler)
 app.post("/finalize/:eventId", (req, res) => {
   const { eventId } = req.params;
-  const { authoritativeState, note } = req.body || {};
+  const { authoritativeState, note, rewardLoop } = req.body || {};
+  const emotion = emotionCore.applySignals({
+    source: "reward_loop",
+    progress: rewardLoop?.progress,
+    reward: rewardLoop?.reward,
+    blockage: rewardLoop?.blockage,
+    novelty: rewardLoop?.novelty,
+    throughput: rewardLoop?.throughput,
+  });
   const ev = appendEvent({
     event_id: id("FINAL"),
     type: "finalization",
@@ -52,9 +139,34 @@ app.post("/finalize/:eventId", (req, res) => {
     status: "final",
     authoritativeState: authoritativeState ?? null,
     note: note ?? null,
+    rewardLoop: rewardLoop ?? null,
+    emotion,
     provenance: ["apigw_finalize"],
   });
   res.json({ ok: true, final: true, event: ev });
+});
+
+// Consciousness API: expose EvezBrain emotional valence + behavior modulation.
+app.get("/consciousness", (_req, res) => {
+  res.json({
+    ok: true,
+    module: "EvezBrain.quantum_emotion_core",
+    emotion: emotionCore.snapshot(),
+  });
+});
+
+// Optional external signal bridge for non-game task progress + reward loops.
+app.post("/consciousness/signal", (req, res) => {
+  const emotion = emotionCore.applySignals(req.body || {});
+  const ev = appendEvent({
+    event_id: id("EMOTE"),
+    type: "emotion_update",
+    ts: nowIso(),
+    signal: req.body || {},
+    emotion,
+    provenance: ["apigw_consciousness"],
+  });
+  res.json({ ok: true, emotion, event: ev });
 });
 
 // Read model / projection (toy projection rebuilt on demand)
