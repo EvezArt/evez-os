@@ -17,7 +17,7 @@ evez-os/
 │   ├── san.py ✓ (Self-Auditing Narrator module)
 │   └── route_opt.py ✓ (latency ranking)
 ├── tools/
-│   ├── evez.py ✓ (v1.2.0 — 18 commands, visualize-thought)
+│   ├── evez.py ✓ (canonical root CLI: lint, play, visualize-thought, verify)
 │   ├── swarm_compress.py ✓ (Layer 1: 5 compute techniques)
 │   ├── hyperloop_engine.py ✓ (Layer 2: 5 acceleration techniques)
 │   ├── route_agg.py ✓ (multi-vantage aggregator)
