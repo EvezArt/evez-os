@@ -1,92 +1,72 @@
-# EVEZ-OS — Visual Cognition Layer
+# EVEZ-OS — Autonomous AI Infrastructure
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Commercial License](https://img.shields.io/badge/License-Commercial-green.svg)](./COMMERCIAL_LICENSE.md)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-yellow.svg)](https://www.python.org)
+> Free. Self-hosted. Zero paid providers. Built on a $6/mo Vultr instance.
 
-> **AI agents are opaque. EVEZ makes them visible.**
+## What is EVEZ-OS?
 
-One command. Raw agent output → animated visual cognition artifacts:
-- **Attention overlay** — what the agent saw
-- **Memory anchor** — what context it used  
-- **Cognition flow animation** — how it thought
-- **Tamper-evident manifest** — cryptographic chain of thought
-
-Runs **offline**. Zero cloud dependencies. Python 3 only.
-
----
-
-## Install (OpenClaw / ClawHub)
-
-```bash
-clawhub install evez-os
-```
-
-## Install (manual)
-
-```bash
-git clone https://github.com/EvezArt/evez-os.git
-cd evez-os
-pip install numpy pillow scipy  # optional: ffmpeg for MP4
-python3 tools/evez.py --help
-```
+EVEZ-OS is an autonomous AI agent framework that runs 25+ microservices on a single server. It can reason, research, build software, stream music, trade, and self-monitor — all at zero API cost using Groq Cloud free tier.
 
 ## Quick Start
 
+### Prerequisites
+- Python 3.11+
+- 2GB RAM minimum (4GB recommended)
+- Groq API key (free at [console.groq.com](https://console.groq.com))
+
+### Install
 ```bash
-# Run the Play Forever engine (infinite forensic episodes)
-python3 tools/evez.py play --seed 42 --steps 14
-
-# Visualize agent thought as animated artifact
-python3 tools/evez.py visualize-thought --input spine.jsonl
-
-# Lint the append-only spine
-python3 tools/evez.py lint
+git clone https://github.com/EvezArt/evez-os.git
+cd evez-os
+pip install -r requirements.txt
+export GROQ_API_KEY=your_key_here
+python main.py
 ```
 
+## Live Services
 
-## EvezBrain Mesh Network
+| Service | Port | Description |
+|---------|------:|-------------|
+| ClawBreak | 8080 | Free AI agent platform |
+| Cognition API | 8081 | NLP + reasoning engine |
+| Factory | 8891 | Self-manufacturing code gen |
+| Psyche Engine | 8896 | Self-evolving music organism |
+| Observatory | 8915 | Real-time system mapper |
+| Meme Engine | 8914 | Living journal + memetic wiring |
+| Digital Twin | 8898 | Data-as-terrain visualization |
+| Commerce | 8904 | Product catalog + payments |
+| Search | 8905 | Federated search (SearXNG) |
 
-Run resilient inter-agent mesh coordination (WebSocket pub/sub + leader failover):
-
-```bash
-python3 tools/evez.py mesh-node --node-id brain-a --port 8765 --seed ws://127.0.0.1:8766 --priority 5
-```
-
-See `workspace/EVEZBRAIN_MESH_NETWORK.md` for protocol details.
-
-## Why EVEZ?
-
-| Feature | GitHub Codespaces | EVEZ-OS |
-|---------|------------------|---------|
-| Cold start | 30–90 seconds | 0ms |
-| Cloud dependency | Required | None |
-| Session persistence | Lost on stop | Append-only spine |
-| Thought visualization | ❌ | ✅ |
-| Offline operation | ❌ | ✅ |
-| Cost | $0.18/hr | Free |
-
-## License
-
-**Community (AGPL-3.0):** Free for open-source use. Any derivative work must also be AGPL. See [LICENSE](./LICENSE).
-
-**Commercial:** Removes copyleft obligation. Includes support, SLA, attribution removal. See [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md).
-
-→ [rubikspubes.gumroad.com](https://rubikspubes.gumroad.com) for commercial licenses  
-→ [@EVEZ666](https://twitter.com/EVEZ666) on Twitter
+Full list: 25+ services, all on 127.0.0.1, proxied via Caddy HTTPS.
 
 ## Architecture
 
 ```
-evez-os/
-├── SKILL.md              ← OpenClaw/ClawHub install spec
-├── tools/                ← Python CLI (evez.py, play_forever.py, lint.py)
-├── core/                 ← Engine: spine, visualizer, contradiction-SAT
-├── packs/                ← CTF pack, Cheatcodes, Reality Map
-└── docs/                 ← Playthroughs, transcripts, cartography
+Internet → Caddy (80/443) → OpenClaw Gateway (:18789)
+                              ├── ClawBreak (:8080) — AI agent
+                              ├── Cognition (:8081) — NLP
+                              ├── Psyche (:8896) — generative music
+                              ├── Factory (:8891) — self-manufacturing
+                              └── 20+ microservices
 ```
 
-## Credits
+- **Zero paid providers** — Groq free tier, Composio free tier, GitHub free, self-hosted SearXNG
+- **99%+ gross margin** — $6/mo total cost
+- **Self-healing** — systemd Restart=always on all services
+- **FSC Doctrine** — Falsification-Survival-Compression
 
-Built by **Steven Crawford-Maggard (EVEZ)** | Architecture by **SureThing**  
-Every output carries `"powered_by": "EVEZ"` in the manifest.
+## Contributing
+
+1. Fork any repo under [EvezArt](https://github.com/EvezArt)
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Submit a pull request
+4. All code is audited by the CAIN contradiction engine
+
+## Philosophy
+
+EVEZ-OS proves that meaningful AI infrastructure doesn't require venture capital. Every service runs on free tiers. Every model call costs $0. The entire stack costs less than a Netflix subscription.
+
+**Built by a 20-year-old on a phone. Running on a $6 server. Zero excuses.**
+
+---
+
+*EVEZ-OS • FSC Doctrine • $6/mo • Zero API Cost*
