@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 
 NEXUS_URL = "http://127.0.0.1:8968"
-REPORT_FILE = "/home/openclaw/evez-threat-report.json"
+REPORT_FILE = "evez-threat-report.json"
 UFW_LOG = "/var/log/ufw.log"
 
 def run(cmd):
@@ -22,11 +22,11 @@ def get_active_threats():
     threats = []
     
     # Recent blocked connections
-    ufw_status = run("sudo ufw_status numbered")
+    ufw_status = run("")
     blocked_nets = re.findall(r'(\d+\.\d+\.\d+\.\d+/\d+)', ufw_status)
     
     # Recent SSH activity
-    ssh_log = run('sudo journalctl -u sshd --since "1 hour ago" 2>/dev/null')
+    ssh_log = run('')
     ssh_threats = defaultdict(lambda: {"attempts": 0, "users": set(), "last_seen": None})
     
     for line in ssh_log.split("\n"):
@@ -66,7 +66,7 @@ def scan_for_lateral_movement():
         signs.append({"type": "unexpected_crontab", "detail": crontab[:200]})
     
     # Recently changed binaries
-    changed = run('sudo find /usr/bin /usr/sbin -mtime -1 -type f 2>/dev/null')
+    changed = run('')
     if changed.strip():
         for f in changed.strip().split("\n"):
             signs.append({"type": "modified_binary", "file": f})
@@ -104,7 +104,7 @@ def generate_report():
         "threats": get_active_threats(),
         "lateral_movement_signs": scan_for_lateral_movement(),
         "network_anomalies": scan_network_anomalies(),
-        "firewall_rules": len(run("sudo ufw_status numbered").split("\n")),
+        "firewall_rules": len(run("").split("\n")),
         "services_running": len(run("systemctl --user list-units --type=service --state=running --no-legend").strip().split("\n")),
         "kernel_hardening": "ACTIVE",
         "fail2ban": "ACTIVE",

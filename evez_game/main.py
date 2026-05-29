@@ -189,7 +189,7 @@ class EVEZGame:
                 self.cognition.process({"tick": self.tick})
                 
                 # Sleep
-                time.sleep(0.1)
+                time.sleep(0.01)
                 
         except KeyboardInterrupt:
             self.stop()

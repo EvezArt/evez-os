@@ -2,7 +2,7 @@
 FROM node:20-alpine AS terminals-base
 WORKDIR /app
 COPY terminals/package*.json ./
-RUN npm ci --only=production
+RUN npm install --omit=dev
 COPY terminals/ .
 COPY memory/ ./memory/
 COPY identity/ ./identity/

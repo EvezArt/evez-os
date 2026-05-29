@@ -2,7 +2,7 @@
 FROM node:20-alpine AS services-base
 WORKDIR /app
 COPY services/package*.json ./
-RUN npm ci --only=production
+RUN npm install --omit=dev
 COPY services/ .
 EXPOSE 3002
 ENV NODE_ENV=production

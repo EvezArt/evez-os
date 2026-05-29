@@ -11,3 +11,45 @@ anomaly: Players report 'hit markers' that vanish after rollback; blame shifts b
 If your resolver lies, your world-map lies. Two vantages or you're worshipping one cache.
 [2026-02-17T18:57:51.092610+00:00] XRAY_ROOM::game_backend — Internet X-Ray: Rollback is Paid-For Illusion provenance=1
 Client-side prediction is a performance lie you ship on purpose. Label pending state like you mean it, or the player will call your truth a bug.
+[2026-02-17T18:57:51.092519+00:00] XRAY_ROOM::public_internet — Internet X-Ray: Naming is Reality provenance=1
+If your resolver lies, your world-map lies. Two vantages or you're worshipping one cache.
+[2026-02-17T18:57:51.092610+00:00] XRAY_ROOM::game_backend — Internet X-Ray: Rollback is Paid-For Illusion provenance=1
+Client-side prediction is a performance lie you ship on purpose. Label pending state like you mean it, or the player will call your truth a bug.
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. no fucking vibes, no mystical shortcuts
+{"kind": "play.episode_start", "episode_id": "EP-20260218-122438-1", "timestamp": "2026-02-18T12:24:38Z", "seed": 1, "steps": 3, "truth_plane": "truth", "triggered_by": null, "notes": "Episode start (projection can change; spine cannot)."}
+[2026-02-18T12:24:38Z] PUBLIC_INTERNET — the world argues about truth at line-rate. you do not get one reality, you get convergence. the internet does not care about your story
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 1, "trace_id": "T0e660829d415da8b", "timestamp": "2026-02-18T12:24:38Z", "lobby": "TLS", "motif": "identity court", "claim": "In TLS, a failure may present as: identity cou
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. no fucking vibes, no mystical shortcuts
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 2, "trace_id": "Tedc3c918867ed639", "timestamp": "2026-02-18T12:24:38Z", "lobby": "FSC", "motif": "confidence outruns falsifier", "claim": "In FSC, a failure may present as
+[2026-02-18T12:24:38Z] PUBLIC_INTERNET — the world argues about truth at line-rate. you do not get one reality, you get convergence. the internet does not care about your story
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 3, "trace_id": "Tea515270e08b64b3", "timestamp": "2026-02-18T12:24:38Z", "lobby": "BGP", "motif": "route ghost", "claim": "In BGP, a failure may present as: route ghost.",
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. no fucking vibes, no mystical shortcuts
+{"kind": "play.episode_end", "episode_id": "EP-20260218-122438-1", "timestamp": "2026-02-18T12:24:38Z", "truth_plane": "truth", "notes": "Episode end."}
+[2026-02-17T18:57:51.092519+00:00] XRAY_ROOM::public_internet — Internet X-Ray: Naming is Reality provenance=1
+If your resolver lies, your world-map lies. Two vantages or you're worshipping one cache.
+[2026-02-17T18:57:51.092610+00:00] XRAY_ROOM::game_backend — Internet X-Ray: Rollback is Paid-For Illusion provenance=1
+Client-side prediction is a performance lie you ship on purpose. Label pending state like you mean it, or the player will call your truth a bug.
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. 
+{"kind": "play.episode_start", "episode_id": "EP-20260218-122438-1", "timestamp": "2026-02-18T12:24:38Z", "seed": 1, "steps": 3, "truth_plane": "truth", "triggered_by": null, "notes": "Episode start (projection can change; spine cannot)."}
+[2026-02-18T12:24:38Z] PUBLIC_INTERNET — the world argues about truth at line-rate. you do not get one reality, you get convergence. 
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 1, "trace_id": "T0e660829d415da8b", "timestamp": "2026-02-18T12:24:38Z", "lobby": "TLS", "motif": "identity court", "claim": "In TLS, a failure may present as: identity cou
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. 
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 2, "trace_id": "Tedc3c918867ed639", "timestamp": "2026-02-18T12:24:38Z", "lobby": "FSC", "motif": "confidence outruns falsifier", "claim": "In FSC, a failure may present as
+[2026-02-18T12:24:38Z] PUBLIC_INTERNET — the world argues about truth at line-rate. you do not get one reality, you get convergence. 
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 3, "trace_id": "Tea515270e08b64b3", "timestamp": "2026-02-18T12:24:38Z", "lobby": "BGP", "motif": "route ghost", "claim": "In BGP, a failure may present as: route ghost.",
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. 
+{"kind": "play.episode_end", "episode_id": "EP-20260218-122438-1", "timestamp": "2026-02-18T12:24:38Z", "truth_plane": "truth", "notes": "Episode end."}
+[2026-02-17T18:57:51.092519+00:00] XRAY_ROOM::public_internet — Internet X-Ray: Naming is Reality provenance=1
+If your resolver lies, your world-map lies. Two vantages or you're worshipping one cache.
+[2026-02-17T18:57:51.092610+00:00] XRAY_ROOM::game_backend — Internet X-Ray: Rollback is Paid-For Illusion provenance=1
+Client-side prediction is a performance lie you ship on purpose. Label pending state like you mean it, or the player will call your truth a bug.
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. 
+{"kind": "play.episode_start", "episode_id": "EP-20260218-122438-1", "timestamp": "2026-02-18T12:24:38Z", "seed": 1, "steps": 3, "truth_plane": "truth", "triggered_by": null, "notes": "Episode start (projection can change; spine cannot)."}
+[2026-02-18T12:24:38Z] PUBLIC_INTERNET — the world argues about truth at line-rate. you do not get one reality, you get convergence. 
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 1, "trace_id": "T0e660829d415da8b", "timestamp": "2026-02-18T12:24:38Z", "lobby": "TLS", "motif": "identity court", "claim": "In TLS, a failure may present as: identity cou
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. 
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 2, "trace_id": "Tedc3c918867ed639", "timestamp": "2026-02-18T12:24:38Z", "lobby": "FSC", "motif": "confidence outruns falsifier", "claim": "In FSC, a failure may present as
+[2026-02-18T12:24:38Z] PUBLIC_INTERNET — the world argues about truth at line-rate. you do not get one reality, you get convergence. 
+{"kind": "play.step", "episode_id": "EP-20260218-122438-1", "step": 3, "trace_id": "Tea515270e08b64b3", "timestamp": "2026-02-18T12:24:38Z", "lobby": "BGP", "motif": "route ghost", "claim": "In BGP, a failure may present as: route ghost.",
+[2026-02-18T12:24:38Z] MIXED_REALITY — multiple layers impersonate each other. your job is to stop trusting vibes and start trusting probes. 
+{"kind": "play.episode_end", "episode_id": "EP-20260218-122438-1", "timestamp": "2026-02-18T12:24:38Z", "truth_plane": "truth", "notes": "Episode end."}
