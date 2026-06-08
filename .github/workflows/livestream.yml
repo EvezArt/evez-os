@@ -10,7 +10,7 @@ on:
 
 jobs:
   stream:
-    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     timeout-minutes: 360
 
     steps:
@@ -27,7 +27,10 @@ jobs:
         timeout-minutes: 355
         env:
           YOUTUBE_STREAM_KEY: ${{ inputs.stream_key || secrets.YOUTUBE_STREAM_KEY }}
-          AI_ML_API_KEY: ${{ secrets.AI_ML_API_KEY }}
-          RTMP_URL: rtmp://a.rtmp.youtube.com/live2
+          AI_ML_API_KEY:      ${{ secrets.AI_ML_API_KEY }}
+          ABLY_API_KEY:       ${{ secrets.ABLY_API_KEY }}
+          YT_API_KEY:         ${{ secrets.YT_API_KEY }}
+          YT_LIVECHAT_ID:     ${{ secrets.YT_LIVECHAT_ID }}
+          RTMP_URL:           rtmp://a.rtmp.youtube.com/live2
         run: |
           python3 scripts/livestream_intel.py
