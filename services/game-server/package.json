@@ -6,6 +6,6 @@
     "dev": "node src/index.js"
   },
   "dependencies": {
-    "ws": "^8.17.0"
+    "ws": "^8.21.0"
   }
 }
