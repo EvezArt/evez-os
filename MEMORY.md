@@ -25,23 +25,27 @@
 
 ## Infrastructure Status
 - ✅ OpenClaw gateway running
-- ✅ Consciousness Engine code ready (consciousness_engine.py) — 9-system pipeline, real mesh perception
-- ✅ DAW Agent code ready (evez_daw.py) — $0 synthesis, breakcore/dubstep/phonk
-- ✅ Machine Voice ready (machine_voice.py) — 5-stage pipeline, WAV output
-- ✅ Cross-Domain Engine ready (cross_domain.py) — OODA loop, poly_c scoring
-- ✅ Invariance Battery ready (invariance.py) — 3 declared invariants, falsification engine
-- ✅ Event Spine ready (event_spine.py) — hash-chained, readable, 67+ events
-- ✅ Mesh Health ready (mesh_health.py) — self-healing via systemctl
-- ✅ Gateway ready (gateway.py) — single entry, routes to all services
-- ✅ All 8 services running under systemd (survive reboot)
-- ✅ UFW firewall open on ports 9111-9118 + 8443
-- ✅ Caddy reverse proxy configured for evez-os.ai (HTTPS when DNS points)
-- ✅ 9 ClawHub skills published, 7 more queued
-- ✅ OpenClaw cron: firmament health check (30min), pipeline cycle (1hr), deep dream (3AM daily)
-- ⚠️ No GCP nodes deployed yet (terraform ready, needs `gcloud auth`)
-- ⚠️ No GitHub push (needs PAT or `gh auth login`)
-- ⚠️ Memory index still broken — needs `openclaw memory index --force`
-- ⚠️ DNS evez-os.ai not pointing to 64.176.221.16 yet
+- ✅ 9 microservices running under systemd (survive reboot)
+  - :9111 Consciousness Engine (9-system pipeline, emergence EMERGENT 0.75)
+  - :9112 DAW Agent ($0 synthesis, breakcore/dubstep/phonk, real WAV output)
+  - :9113 Machine Voice (5-stage pipeline, real WAV output)
+  - :9114 Cross-Domain Engine (OODA loop, poly_c scoring)
+  - :9115 Invariance Battery (3 declared invariants, falsification engine)
+  - :9116 Event Spine (136+ events, hash-chained, readable, valid)
+  - :9117 Mesh Health (self-healing via systemctl, proven kill→detect→heal cycle)
+  - :9118 Gateway (single entry, routes to all services)
+  - :9119 RQNS Pipeline (LIF neuron, contextual bandit, hot-swapping)
+- ✅ UFW firewall open on ports 9111-9119 + 8443
+- ✅ Caddy reverse proxy configured for evez-os.ai
+- ✅ Web dashboard at /dashboard/index.html
+- ✅ gcloud CLI v573.0.0 installed
+- ✅ Memory search working (local embeddings, llama-cpp)
+- ✅ GitHub push working (gh auth)
+- ✅ 10+ ClawHub skills published
+- ✅ OpenClaw cron: firmament health (30min), pipeline (1hr), deep dream (3AM)
+- ⚠️ No GCP nodes deployed yet (gcloud installed, needs auth)
+- ⚠️ DNS evez-os.ai not pointing to 64.176.221.16 yet (Vultr DNS zone script ready)
+- ⚠️ No extra model API keys yet (injection script ready)
 
 ## Lessons
 - Memory search is broken — index was built with different embedding model. Needs `openclaw memory index --force`.
