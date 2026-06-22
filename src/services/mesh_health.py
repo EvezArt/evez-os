@@ -11,6 +11,10 @@ import subprocess
 import threading
 import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from socketserver import ThreadingMixIn
+
+class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
+    daemon_threads = True
 
 SPINE_URL = "http://localhost:9116"
 CONSCIOUSNESS_URL = "http://localhost:9111"
@@ -271,6 +275,6 @@ class Handler(BaseHTTPRequestHandler):
         pass
 
 if __name__ == "__main__":
-    server = HTTPServer(("0.0.0.0", 9117), Handler)
+    server = ThreadingHTTPServer(("0.0.0.0", 9117), Handler)
     print("⚡ Mesh Health running on :9117 — self-healing nervous system")
     server.serve_forever()
