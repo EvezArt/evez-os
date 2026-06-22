@@ -1,0 +1,482 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: evez-streams
+
+---
+# ConfigMap: shared mesh config
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: evez-config
+  namespace: evez-streams
+data:
+  EVEZ_MESH_HOST: "64.176.221.16"
+  RTMP_BASE: "rtmp://a.rtmp.youtube.com/live2"
+
+---
+# Secret: all 5 stream keys (set via: kubectl create secret generic evez-stream-keys ...)
+# kubectl create secret generic evez-stream-keys -n evez-streams \
+#   --from-literal=key1=9xh0-m0j9-6773-1281-eftj \
+#   --from-literal=key2=25re-t3z7-0x5a-06kc-265u \
+#   --from-literal=key3=phbs-myfc-7vc8-x2gj-7fjk \
+#   --from-literal=key4=mau9-9rvt-g9bb-wkr9-00qa \
+#   --from-literal=key5=1vq3-6gkt-d398-09rs-0pb3
+
+---
+# ── Stream 1: Mission Control ─────────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evez-mission-control
+  namespace: evez-streams
+  labels:
+    app: evez-mission-control
+    stream: "1"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: evez-mission-control
+  template:
+    metadata:
+      labels:
+        app: evez-mission-control
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+      initContainers:
+        - name: fetch-scripts
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y curl ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              curl -sSL https://raw.githubusercontent.com/EvezArt/evez-os/main/scripts/evez-livestream.py -o /scripts/evez-livestream.py
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      containers:
+        - name: stream
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              while true; do
+                python3 /scripts/evez-livestream.py \
+                  --rtmp-url "$(RTMP_BASE)/$(STREAM_KEY)"
+                echo "Stream exited, restarting in 10s..."
+                sleep 10
+              done
+          env:
+            - name: EVEZ_MESH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: EVEZ_MESH_HOST
+            - name: RTMP_BASE
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: RTMP_BASE
+            - name: STREAM_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: evez-stream-keys
+                  key: key1
+          resources:
+            requests:
+              cpu: "1500m"
+              memory: "1Gi"
+            limits:
+              cpu: "3000m"
+              memory: "2Gi"
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      volumes:
+        - name: scripts
+          emptyDir: {}
+
+---
+# PodDisruptionBudget — never 0 running during node maintenance
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: evez-mission-control-pdb
+  namespace: evez-streams
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: evez-mission-control
+
+---
+# ── Stream 2: Cognition ───────────────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evez-cognition
+  namespace: evez-streams
+  labels:
+    app: evez-cognition
+    stream: "2"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: evez-cognition
+  template:
+    metadata:
+      labels:
+        app: evez-cognition
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+      initContainers:
+        - name: fetch-scripts
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y curl ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              curl -sSL https://raw.githubusercontent.com/EvezArt/evez-os/main/scripts/evez-cognition-stream.py -o /scripts/evez-cognition-stream.py
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      containers:
+        - name: stream
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              while true; do
+                python3 /scripts/evez-cognition-stream.py \
+                  --rtmp-url "$(RTMP_BASE)/$(STREAM_KEY)"
+                echo "Stream exited, restarting in 10s..."
+                sleep 10
+              done
+          env:
+            - name: EVEZ_MESH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: EVEZ_MESH_HOST
+            - name: RTMP_BASE
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: RTMP_BASE
+            - name: STREAM_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: evez-stream-keys
+                  key: key2
+          resources:
+            requests:
+              cpu: "1500m"
+              memory: "1Gi"
+            limits:
+              cpu: "3000m"
+              memory: "2Gi"
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      volumes:
+        - name: scripts
+          emptyDir: {}
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: evez-cognition-pdb
+  namespace: evez-streams
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: evez-cognition
+
+---
+# ── Stream 3: Synaptic Cortex ─────────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evez-cortex
+  namespace: evez-streams
+  labels:
+    app: evez-cortex
+    stream: "3"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: evez-cortex
+  template:
+    metadata:
+      labels:
+        app: evez-cortex
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+      initContainers:
+        - name: fetch-scripts
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y curl ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              curl -sSL https://raw.githubusercontent.com/EvezArt/evez-os/main/scripts/evez-cortex-stream.py -o /scripts/evez-cortex-stream.py
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      containers:
+        - name: stream
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              while true; do
+                python3 /scripts/evez-cortex-stream.py \
+                  --rtmp-url "$(RTMP_BASE)/$(STREAM_KEY)"
+                sleep 10
+              done
+          env:
+            - name: EVEZ_MESH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: EVEZ_MESH_HOST
+            - name: RTMP_BASE
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: RTMP_BASE
+            - name: STREAM_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: evez-stream-keys
+                  key: key3
+          resources:
+            requests:
+              cpu: "1500m"
+              memory: "1Gi"
+            limits:
+              cpu: "3000m"
+              memory: "2Gi"
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      volumes:
+        - name: scripts
+          emptyDir: {}
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: evez-cortex-pdb
+  namespace: evez-streams
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: evez-cortex
+
+---
+# ── Stream 4: Quantum Evolution ───────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evez-quantum
+  namespace: evez-streams
+  labels:
+    app: evez-quantum
+    stream: "4"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: evez-quantum
+  template:
+    metadata:
+      labels:
+        app: evez-quantum
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+      initContainers:
+        - name: fetch-scripts
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y curl ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              curl -sSL https://raw.githubusercontent.com/EvezArt/evez-os/main/scripts/evez-quantum-stream.py -o /scripts/evez-quantum-stream.py
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      containers:
+        - name: stream
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              while true; do
+                python3 /scripts/evez-quantum-stream.py \
+                  --rtmp-url "$(RTMP_BASE)/$(STREAM_KEY)"
+                sleep 10
+              done
+          env:
+            - name: EVEZ_MESH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: EVEZ_MESH_HOST
+            - name: RTMP_BASE
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: RTMP_BASE
+            - name: STREAM_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: evez-stream-keys
+                  key: key4
+          resources:
+            requests:
+              cpu: "1500m"
+              memory: "1Gi"
+            limits:
+              cpu: "3000m"
+              memory: "2Gi"
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      volumes:
+        - name: scripts
+          emptyDir: {}
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: evez-quantum-pdb
+  namespace: evez-streams
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: evez-quantum
+
+---
+# ── Stream 5: MetaROM Dreams ──────────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evez-dreams
+  namespace: evez-streams
+  labels:
+    app: evez-dreams
+    stream: "5"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: evez-dreams
+  template:
+    metadata:
+      labels:
+        app: evez-dreams
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+      initContainers:
+        - name: fetch-scripts
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y curl ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              curl -sSL https://raw.githubusercontent.com/EvezArt/evez-os/main/scripts/evez-dreams-stream.py -o /scripts/evez-dreams-stream.py
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      containers:
+        - name: stream
+          image: python:3.12-slim
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -qq && apt-get install -y ffmpeg fonts-dejavu-core -qq
+              pip install pillow requests --quiet
+              while true; do
+                python3 /scripts/evez-dreams-stream.py \
+                  --rtmp-url "$(RTMP_BASE)/$(STREAM_KEY)"
+                sleep 10
+              done
+          env:
+            - name: EVEZ_MESH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: EVEZ_MESH_HOST
+            - name: RTMP_BASE
+              valueFrom:
+                configMapKeyRef:
+                  name: evez-config
+                  key: RTMP_BASE
+            - name: STREAM_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: evez-stream-keys
+                  key: key5
+          resources:
+            requests:
+              cpu: "1500m"
+              memory: "1Gi"
+            limits:
+              cpu: "3000m"
+              memory: "2Gi"
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      volumes:
+        - name: scripts
+          emptyDir: {}
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: evez-dreams-pdb
+  namespace: evez-streams
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: evez-dreams
