@@ -1,0 +1,26 @@
+# fly.toml — EVEZ-OS Stream Renderer for Fly.io
+# Deploy: fly launch --no-deploy && fly secrets set YOUTUBE_STREAM_KEY=xxx && fly deploy
+
+app = "evez-streams"
+primary_region = "lax"
+
+[build]
+  dockerfile = "Dockerfile.streams"
+
+[env]
+  STREAM_ID = "1"  # Change per stream: 1-5
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+
+  [[services.tcp_checks]]
+    grace_period = "30s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "5s"
+
+[vm]
+  memory = "1gb"
+  cpu_kind = "shared"
+  cpus = 1
