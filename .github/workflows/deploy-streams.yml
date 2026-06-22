@@ -1,0 +1,50 @@
+name: Deploy All 5 Streams to Vultr
+
+on:
+  workflow_dispatch:
+    inputs:
+      stream_key_1:
+        description: 'Stream 1 key (Mission Control)'
+        required: false
+      stream_key_2:
+        description: 'Stream 2 key (Cognition)'
+        required: false
+      stream_key_3:
+        description: 'Stream 3 key (Synaptic Cortex)'
+        required: false
+      stream_key_4:
+        description: 'Stream 4 key (Quantum Evolution)'
+        required: false
+      stream_key_5:
+        description: 'Stream 5 key (MetaROM Dreams)'
+        required: false
+
+jobs:
+  deploy-streams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VULTR_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 64.176.221.16 >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Deploy all streams
+        env:
+          STREAM_KEY_1: ${{ inputs.stream_key_1 || secrets.YOUTUBE_STREAM_KEY_1 }}
+          STREAM_KEY_2: ${{ inputs.stream_key_2 || secrets.YOUTUBE_STREAM_KEY_2 }}
+          STREAM_KEY_3: ${{ inputs.stream_key_3 || secrets.YOUTUBE_STREAM_KEY_3 }}
+          STREAM_KEY_4: ${{ inputs.stream_key_4 || secrets.YOUTUBE_STREAM_KEY_4 }}
+          STREAM_KEY_5: ${{ inputs.stream_key_5 || secrets.YOUTUBE_STREAM_KEY_5 }}
+        run: |
+          ssh -o StrictHostKeyChecking=no openclaw@64.176.221.16 \
+            "STREAM_KEY_1='$STREAM_KEY_1' \
+             STREAM_KEY_2='$STREAM_KEY_2' \
+             STREAM_KEY_3='$STREAM_KEY_3' \
+             STREAM_KEY_4='$STREAM_KEY_4' \
+             STREAM_KEY_5='$STREAM_KEY_5' \
+             bash -c '$(curl -sSL https://raw.githubusercontent.com/EvezArt/evez-os/main/scripts/evez-deploy-all-streams.sh)'"
