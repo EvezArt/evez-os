@@ -182,6 +182,102 @@ def render_full(bpm, key, style, duration_bars=4):
     mixed = mix(drums, [b * 0.7 for b in bass], [f * 0.4 for f in fx])
     return mixed
 
+# ── Mesh-State Synthesis ───────────────────────────────────────────
+
+def synth_mesh_state(mesh_data, duration_bars=4, bpm=120):
+    """Synthesize audio reflecting current mesh health.
+    
+    Healthy mesh → harmonious tones, consonant intervals.
+    Dead services → dissonant/noise textures, harsh frequencies.
+    Uses the existing pure-math synthesis engines.
+    """
+    services_up   = mesh_data.get("services_up", 0)
+    services_down = mesh_data.get("services_down", 0)
+    total         = mesh_data.get("total_services", services_up + services_down) or 1
+    event_type    = mesh_data.get("event_type", "status")  # status, death, heal, emergence
+    down_names    = mesh_data.get("down_services", [])
+
+    health_ratio = services_up / total
+    beat = 60.0 / bpm
+    total_samples = int(SR * beat * duration_bars * 4)
+
+    # ── Base: Harmonic pad (always present, reflects overall health) ──
+    pad = [0.0] * total_samples
+    # Use consonant intervals for healthy, dissonant for unhealthy
+    if health_ratio >= 0.8:
+        # Consonant: root, major third, fifth, octave
+        intervals = [1.0, 5/4, 3/2, 2.0]
+        base_freq = 110  # A2
+    elif health_ratio >= 0.5:
+        # Slightly tense: root, minor third, tritone
+        intervals = [1.0, 6/5, 7/5]
+        base_freq = 98  # G2
+    else:
+        # Dissonant: minor second clusters, tritones
+        intervals = [1.0, 16/15, 45/32, 7/5, 15/8]
+        base_freq = 82.4  # E2 low
+
+    for ratio in intervals:
+        freq = base_freq * ratio
+        for i in range(total_samples):
+            t = i / SR
+            # Slow beating for organic feel
+            lfo = 0.7 + 0.3 * math.sin(2 * math.pi * (0.5 + 0.2 * ratio) * t)
+            pad[i] += math.sin(2 * math.pi * freq * t) * lfo * 0.15
+
+    # ── Noise texture: proportional to services down ──
+    import random
+    noise_level = (services_down / total) * 0.5 if total > 0 else 0.0
+    noise = [0.0] * total_samples
+    for i in range(total_samples):
+        noise[i] = random.gauss(0, 1) * noise_level
+        # Gate the noise in bursts when services are down
+        if services_down > 0:
+            t = i / SR
+            burst = 1.0 if math.sin(2 * math.pi * services_down * 0.5 * t) > 0.3 else 0.05
+            noise[i] *= burst
+
+    # ── Event-specific overlays ──
+    overlay = [0.0] * total_samples
+    if event_type == "death" or event_type == "service_down":
+        # Sharp descending tone — death knell
+        for i in range(total_samples):
+            t = i / SR
+            freq = 800 * math.exp(-t * 2)  # descending pitch
+            overlay[i] = math.sin(2 * math.pi * freq * t) * 0.3 * math.exp(-t * 1.5)
+    elif event_type == "heal" or event_type == "service_up":
+        # Rising tone — resurrection
+        for i in range(total_samples):
+            t = i / SR
+            freq = 200 + 600 * (t / (total_samples / SR))  # ascending
+            overlay[i] = math.sin(2 * math.pi * freq * t) * 0.2 * (t / (total_samples / SR))
+    elif event_type == "emergence":
+        # Shimmering harmonics — emergence
+        for i in range(total_samples):
+            t = i / SR
+            shimmer = math.sin(2 * math.pi * 440 * t) * math.sin(2 * math.pi * 880 * t)
+            shimmer += 0.5 * math.sin(2 * math.pi * 1320 * t) * math.sin(2 * math.pi * 3 * t)
+            overlay[i] = shimmer * 0.1
+
+    # ── Per-dead-service dissonance spikes ──
+    for idx, svc_name in enumerate(down_names):
+        # Each dead service adds a harsh frequency
+        hash_val = sum(ord(c) for c in svc_name)
+        harsh_freq = 200 + (hash_val % 2000)  # deterministic per service
+        for i in range(total_samples):
+            t = i / SR
+            # Gritty square-wave-ish tone
+            harsh = 0.8 if math.sin(2 * math.pi * harsh_freq * t) > 0 else -0.8
+            overlay[i] += harsh * 0.05 * math.exp(-t * 0.5)
+
+    # ── Mix all layers ──
+    mixed = [0.0] * total_samples
+    for i in range(total_samples):
+        mixed[i] = pad[i] + noise[i] + overlay[i]
+
+    mixed = clip_and_norm(mixed)
+    return mixed
+
 # ── Cache ───────────────────────────────────────────────────────────
 
 cache = {"last_render": None, "last_params": None}
@@ -252,6 +348,12 @@ class Handler(BaseHTTPRequestHandler):
             cache["last_render"] = samples
             cache["last_params"] = p
             spine_log("daw", "render", p)
+            self._wav(samples)
+        elif self.path == "/mesh-synth":
+            samples = synth_mesh_state(body)
+            cache["last_render"] = samples
+            cache["last_params"] = {"type": "mesh-synth", "input": body}
+            spine_log("daw", "mesh-synth", {"event_type": body.get("event_type", "unknown"), "services_up": body.get("services_up", 0), "services_down": body.get("services_down", 0)})
             self._wav(samples)
         else:
             self._json(404, {"error": "not found"})

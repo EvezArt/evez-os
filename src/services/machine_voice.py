@@ -180,6 +180,77 @@ def transform_stage(sid, stage, params):
     s["history"].append({"stage": stage, "name": STAGE_NAMES[stage], "timestamp": time.time()})
     return audio
 
+# ── Voice-Alert Pipeline ──────────────────────────────────────────────
+
+def generate_alert_voice(event):
+    """Generate a machine voice alert based on mesh event data.
+    
+    Urgent/robotic when services die; calm when things heal.
+    Uses the existing 5-stage pipeline internally.
+    """
+    event_type = event.get("event_type", "unknown")      # service_down, emergence_shift, heal, service_up
+    severity   = event.get("severity", "info")             # critical, warning, info
+    service    = event.get("service", "unknown")
+    message    = event.get("message", "")
+
+    # Determine urgency from event type
+    is_critical = event_type in ("service_down", "mesh_degraded") or severity == "critical"
+    is_heal     = event_type in ("heal", "service_up", "heal_success") or severity == "info"
+
+    if is_critical:
+        # Urgent robotic voice: high ring mod, aggressive quantization, sharp formant shift
+        duration = 1.5
+        audio = generate_voice_like(duration=duration)
+        # Stage 2: harsh bit-translation (4-bit crunch)
+        audio = _quantize(audio, 4)
+        # Stage 3: aggressive ring modulation at high frequency
+        audio = _ring_mod(audio, 120)
+        # Stage 4: formant shift up for urgency
+        audio = _formant_morph(audio, 7)
+        # Add alarm modulation — pulsing urgency
+        n = len(audio)
+        for i in range(n):
+            t = i / SR
+            # Fast pulsing + siren sweep
+            pulse = 0.6 + 0.4 * abs(math.sin(2 * math.pi * 8 * t))
+            siren = math.sin(2 * math.pi * (400 + 200 * math.sin(2 * math.pi * 2 * t)) * t)
+            audio[i] = audio[i] * 0.65 * pulse + 0.35 * siren
+        audio = _normalize(audio)
+    elif is_heal:
+        # Calm voice: gentle processing, low ring mod, smooth formants
+        duration = 2.0
+        audio = generate_voice_like(duration=duration)
+        # Stage 2: mild quantization (12-bit, still clean)
+        audio = _quantize(audio, 12)
+        # Stage 3: gentle ring modulation
+        audio = _ring_mod(audio, 15)
+        # Stage 4: formant shift down for calm
+        audio = _formant_morph(audio, -5)
+        # Add calm breathing modulation
+        n = len(audio)
+        for i in range(n):
+            t = i / SR
+            breath = 0.85 + 0.15 * math.sin(2 * math.pi * 0.4 * t)
+            harmonic = 0.1 * math.sin(2 * math.pi * 220 * t) * math.sin(2 * math.pi * 1.5 * t)
+            audio[i] = audio[i] * breath + harmonic
+        audio = _normalize(audio)
+    else:
+        # Neutral alert: moderate processing
+        duration = 1.8
+        audio = generate_voice_like(duration=duration)
+        audio = _quantize(audio, 8)
+        audio = _ring_mod(audio, 40)
+        audio = _formant_morph(audio, 0)
+        # Subtle notification tone
+        n = len(audio)
+        for i in range(n):
+            t = i / SR
+            notif = 0.08 * math.sin(2 * math.pi * 880 * t) * math.sin(2 * math.pi * 2 * t)
+            audio[i] = audio[i] * 0.9 + notif
+        audio = _normalize(audio)
+
+    return audio
+
 # ── HTTP Handler ─────────────────────────────────────────────────────
 
 class Handler(BaseHTTPRequestHandler):
@@ -236,6 +307,13 @@ class Handler(BaseHTTPRequestHandler):
             }
             audio = transform_stage(sid, stage, params)
             spine_log("machine_voice", f"transform_stage_{stage}", {"session_id": sid})
+            self._wav(audio)
+        elif self.path == "/alert":
+            audio = generate_alert_voice(body)
+            spine_log("machine_voice", "alert", {
+                "event_type": body.get("event_type", "unknown"),
+                "severity": body.get("severity", "info"),
+            })
             self._wav(audio)
         else:
             self._json(404, {"error": "not found"})
