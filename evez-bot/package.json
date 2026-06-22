@@ -1,0 +1,15 @@
+{
+  "name": "evez-bot",
+  "version": "1.0.0",
+  "description": "EVEZ Bot — Slack, Discord, and Telegram integration for the Autonomous AI Mesh",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "slack": "node bot.js --platform=slack",
+    "discord": "node bot.js --platform=discord",
+    "telegram": "node bot.js --platform=telegram"
+  },
+  "keywords": ["evez", "ai", "mesh", "bot", "slack", "discord", "telegram"],
+  "license": "MIT",
+  "engines": { "node": ">=18.0.0" }
+}

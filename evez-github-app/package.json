@@ -1,0 +1,12 @@
+{
+  "name": "evez-github-app",
+  "version": "1.0.0",
+  "description": "EVEZ GitHub App — Invariance checks, release notes, and status checks on every push",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": ["evez", "github", "ci", "invariance", "automation"],
+  "license": "MIT"
+}

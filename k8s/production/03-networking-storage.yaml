@@ -1,0 +1,174 @@
+# EVEZ K8s Production - NetworkPolicies, Ingress, PVCs
+---
+# ─── PVCs ─────────────────────────────────────────────────────
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: event-spine-pvc
+  namespace: evez-mesh
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests: { storage: 10Gi }
+  storageClassName: standard
+---
+# ─── Network Policies ─────────────────────────────────────────
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-default
+  namespace: evez-mesh
+spec:
+  podSelector: {}
+  policyTypes: ["Ingress", "Egress"]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-mesh-internal
+  namespace: evez-mesh
+spec:
+  podSelector: { matchLabels: {} }
+  policyTypes: ["Ingress"]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels: { app.kubernetes.io/part-of: evez-mesh }
+      ports:
+        - port: 9111
+        - port: 9112
+        - port: 9113
+        - port: 9114
+        - port: 9115
+        - port: 9116
+        - port: 9117
+        - port: 9118
+        - port: 9119
+        - port: 9121
+        - port: 9123
+        - port: 9124
+        - port: 9125
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-gateway
+  namespace: evez-mesh
+spec:
+  podSelector: { matchLabels: { app: gateway } }
+  policyTypes: ["Ingress"]
+  ingress:
+    - from: []
+      ports:
+        - port: 9118
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-dns
+  namespace: evez-mesh
+spec:
+  podSelector: {}
+  policyTypes: ["Egress"]
+  egress:
+    - to: []
+      ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    - to:
+        - namespaceSelector: {}
+          podSelector: { matchLabels: { k8s-app: kube-dns } }
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-internet
+  namespace: evez-mesh
+spec:
+  podSelector: { matchLabels: { tier: core } }
+  policyTypes: ["Egress"]
+  egress:
+    - to:
+        - ipBlock: { cidr: 0.0.0.0/0 }
+---
+# ─── Ingress ──────────────────────────────────────────────────
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: evez-mesh-ingress
+  namespace: evez-mesh
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - evez-os.ai
+        - api.evez-os.ai
+      secretName: evez-tls
+  rules:
+    - host: evez-os.ai
+      http:
+        paths:
+          - path: /api/consciousness
+            pathType: Prefix
+            backend:
+              service:
+                name: consciousness-engine
+                port: { number: 9111 }
+          - path: /api/daw
+            pathType: Prefix
+            backend:
+              service:
+                name: daw-agent
+                port: { number: 9112 }
+          - path: /api/voice
+            pathType: Prefix
+            backend:
+              service:
+                name: machine-voice
+                port: { number: 9113 }
+          - path: /api/cross-domain
+            pathType: Prefix
+            backend:
+              service:
+                name: cross-domain-engine
+                port: { number: 9114 }
+          - path: /api/invariance
+            pathType: Prefix
+            backend:
+              service:
+                name: invariance-battery
+                port: { number: 9115 }
+          - path: /api/spine
+            pathType: Prefix
+            backend:
+              service:
+                name: event-spine
+                port: { number: 9116 }
+          - path: /api/mesh
+            pathType: Prefix
+            backend:
+              service:
+                name: mesh-health
+                port: { number: 9117 }
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port: { number: 9118 }
+    - host: api.evez-os.ai
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port: { number: 9118 }

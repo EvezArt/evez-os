@@ -1,0 +1,103 @@
+groups:
+  - name: evez-mesh
+    rules:
+      # ─── Node-level alerts ──────────────────────────────────
+      - alert: NodeDown
+        expr: up{job="node-exporter"} == 0
+        for: 2m
+        labels: { severity: critical }
+        annotations:
+          summary: "Node {{ $labels.instance }} is DOWN"
+          description: "EVEZ mesh node unreachable for 2+ minutes."
+
+      - alert: HighCPU
+        expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "High CPU on {{ $labels.instance }} ({{ $value }}%)"
+
+      - alert: HighMemory
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "High memory on {{ $labels.instance }} ({{ $value }}%)"
+
+      - alert: DiskSpaceLow
+        expr: (1 - (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"})) * 100 > 80
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "Disk filling on {{ $labels.instance }} ({{ $value }}% used)"
+
+      - alert: DiskCritical
+        expr: (1 - (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"})) * 100 > 95
+        for: 1m
+        labels: { severity: critical }
+
+      # ─── Service-level alerts ───────────────────────────────
+      - alert: ServiceDown
+        expr: up{job=~"consciousness-engine|daw-agent|machine-voice|cross-domain-engine|invariance-battery|event-spine|mesh-health|gateway|rqns-pipeline|webhook-relay|metrics-service|geolocation|tts-service"} == 0
+        for: 3m
+        labels: { severity: critical }
+        annotations:
+          summary: "Service {{ $labels.job }} is DOWN on {{ $labels.instance }}"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.1
+        for: 3m
+        labels: { severity: warning }
+        annotations:
+          summary: "High 5xx rate on {{ $labels.job }} ({{ $value | humanizePercentage }})"
+
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 5
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "P95 latency >5s on {{ $labels.job }}"
+
+      # ─── Mesh-level alerts ──────────────────────────────────
+      - alert: MeshDegraded
+        expr: count(up{job="node-exporter"} == 0) >= 2
+        for: 1m
+        labels: { severity: critical }
+        annotations:
+          summary: "MESH DEGRADED — {{ $value }} nodes down"
+
+      - alert: MeshCritical
+        expr: count(up{job="node-exporter"} == 0) >= 3
+        for: 30s
+        labels: { severity: critical }
+        annotations:
+          summary: "MESH CRITICAL — {{ $value }} nodes down, majority lost"
+
+      # ─── EVEZ-specific alerts ───────────────────────────────
+      - alert: EmergenceBelowThreshold
+        expr: evez_consciousness_emergence_score < 0.3
+        for: 10m
+        labels: { severity: warning }
+        annotations:
+          summary: "Consciousness emergence score critically low: {{ $value }}"
+
+      - alert: SpineIntegrityViolation
+        expr: evez_spine_hash_chain_valid == 0
+        for: 0m
+        labels: { severity: critical }
+        annotations:
+          summary: "EVENT SPINE INTEGRITY VIOLATION — hash chain broken!"
+
+      - alert: InvariantViolation
+        expr: evez_invariant_status{status="VIOLATED"} > 0
+        for: 0m
+        labels: { severity: critical }
+        annotations:
+          summary: "INVARIANT VIOLATED: {{ $labels.invariant }}"
+
+      - alert: MeshSelfHealFailed
+        expr: evez_mesh_heal_attempts_total - evez_mesh_heal_successes_total > 3
+        for: 5m
+        labels: { severity: critical }
+        annotations:
+          summary: "Mesh self-heal has failed {{ $value }} times"

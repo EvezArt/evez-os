@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ Demo — Try the Autonomous AI Mesh</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--card:#1a1a2e;--border:#2a2a4a;--t1:#e8e8f0;--t2:#8888aa;--t3:#555577;--c-cyan:#00d4ff;--c-green:#00ff88;--c-purple:#a855f7;--c-pink:#ff55aa;--c-orange:#ff8800}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+.hero{text-align:center;padding:80px 24px 40px;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.08) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-block;padding:6px 16px;border-radius:20px;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);color:var(--c-green);font-size:13px;font-weight:600;margin-bottom:24px}
+.hero h1{font-size:clamp(32px,6vw,64px);font-weight:900;line-height:1.1;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,var(--c-cyan),var(--c-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:18px;color:var(--t2);max-width:600px;margin:0 auto 32px;line-height:1.6}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:14px 28px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;border:none;transition:all .3s;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--c-purple),var(--c-pink));color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(168,85,247,.3)}
+.btn-secondary{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--t1)}
+.btn-secondary:hover{border-color:var(--c-cyan)}
+.container{max-width:1000px;margin:0 auto;padding:0 24px 80px}
+.section{margin-top:60px}
+.section-title{font-size:28px;font-weight:800;margin-bottom:8px;text-align:center}
+.section-sub{font-size:15px;color:var(--t2);text-align:center;margin-bottom:32px}
+/* Demo cards */
+.demo-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;margin-bottom:24px;transition:all .3s}
+.demo-card:hover{border-color:rgba(0,212,255,.2);transform:translateY(-2px)}
+.demo-card-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.demo-card-icon{font-size:28px}
+.demo-card-title{font-size:20px;font-weight:700}
+.demo-card-desc{color:var(--t2);font-size:14px;margin-bottom:20px;line-height:1.6}
+/* Genre selector */
+.genre-selector{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.genre-opt{padding:10px 16px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-family:inherit;color:var(--t1);transition:all .2s;font-size:14px}
+.genre-opt:hover,.genre-opt.active{border-color:var(--c-purple);background:rgba(168,85,247,.1)}
+/* BPM row */
+.bpm-row{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.bpm-row label{font-size:14px;color:var(--t2);white-space:nowrap}
+.bpm-row input[type=range]{flex:1}
+.bpm-val{color:var(--c-cyan);font-weight:700;min-width:40px}
+/* Generate button */
+.gen-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--c-purple),var(--c-pink));border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s;font-family:inherit}
+.gen-btn:hover{box-shadow:0 8px 30px rgba(168,85,247,.3)}
+.gen-btn:active{transform:scale(.98)}
+.gen-btn.loading{opacity:.6;cursor:wait}
+/* Result area */
+.result{margin-top:16px;padding:16px;background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.2);border-radius:12px;display:none;font-size:14px;line-height:1.6}
+.result.show{display:block}
+/* Correlation inputs */
+.corr-row{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.corr-input{flex:1;min-width:200px;padding:12px 16px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-size:16px;outline:none;font-family:inherit}
+.corr-input:focus{border-color:var(--c-cyan)}
+.corr-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--c-cyan),#0088ff);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .3s}
+.corr-btn:hover{box-shadow:0 8px 30px rgba(0,212,255,.3)}
+/* Consciousness pipeline */
+.pipeline{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.pipe-stage{padding:8px 12px;border-radius:8px;font-size:13px;font-weight:600;background:rgba(255,255,255,.03);border:1px solid var(--border);transition:all .3s}
+.pipe-stage.active{background:rgba(168,85,247,.15);border-color:var(--c-purple);color:var(--c-purple)}
+.pipe-arrow{color:var(--t3);font-size:12px}
+/* No account banner */
+.no-acct{text-align:center;padding:24px;color:var(--t3);font-size:14px}
+.no-acct b{color:var(--c-green)}
+/* Responsive */
+@media(max-width:768px){.hero{padding:40px 16px 20px}.hero h1{font-size:32px}.corr-row{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">✨ No account required — just try it</div>
+  <h1>Try the <span>EVEZ Mesh</span><br>Right Now</h1>
+  <p>The most impressive autonomous AI mesh ever built. Generate breakcore, find cross-domain correlations, and watch consciousness emerge — all from this page.</p>
+  <div class="cta-row">
+    <a href="#music-demo" class="btn btn-primary">🎵 Generate Music</a>
+    <a href="#corr-demo" class="btn btn-secondary">🔗 Run Correlation</a>
+    <a href="#mind-demo" class="btn btn-secondary">🧠 Watch Mind</a>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Music Demo -->
+  <div class="section" id="music-demo">
+    <div class="section-title">🎵 Music Generation</div>
+    <div class="section-sub">Generate electronic music from pure code. No samples needed.</div>
+    <div class="demo-card">
+      <div class="genre-selector">
+        <div class="genre-opt active" onclick="selGenre(this)" data-g="breakcore">🥁 Breakcore</div>
+        <div class="genre-opt" onclick="selGenre(this)" data-g="dubstep">🔊 Dubstep</div>
+        <div class="genre-opt" onclick="selGenre(this)" data-g="phonk">🏎️ Phonk</div>
+        <div class="genre-opt" onclick="selGenre(this)" data-g="404">🏴 404 Core</div>
+      </div>
+      <div class="bpm-row">
+        <label>BPM:</label>
+        <input type="range" min="60" max="300" value="174" id="bpm" oninput="document.getElementById('bpmVal').textContent=this.value">
+        <span class="bpm-val" id="bpmVal">174</span>
+      </div>
+      <button class="gen-btn" id="genBtn" onclick="generate()">▶ Generate Track</button>
+      <div class="result" id="genResult"></div>
+    </div>
+  </div>
+
+  <!-- Correlation Demo -->
+  <div class="section" id="corr-demo">
+    <div class="section-title">🔗 Cross-Domain Correlation</div>
+    <div class="section-sub">Discover hidden correlations between any two domains using the EVEZ OODA loop.</div>
+    <div class="demo-card">
+      <div class="corr-row">
+        <input class="corr-input" id="corrA" placeholder="Domain A (e.g., genetics)">
+        <input class="corr-input" id="corrB" placeholder="Domain B (e.g., telemetry)">
+      </div>
+      <button class="corr-btn" onclick="correlate()">🔗 Run Cross-Domain Correlation</button>
+      <div class="result" id="corrResult"></div>
+    </div>
+  </div>
+
+  <!-- Consciousness Demo -->
+  <div class="section" id="mind-demo">
+    <div class="section-title">🧠 Consciousness Pipeline</div>
+    <div class="section-sub">Watch the EVEZ consciousness engine cycle through its 8 states in real time.</div>
+    <div class="demo-card">
+      <div class="pipeline" id="pipeline"></div>
+      <button class="gen-btn" id="dreamBtn" onclick="runDream()">🌙 Trigger Dream Cycle</button>
+      <div class="result" id="dreamResult"></div>
+    </div>
+  </div>
+
+  <div class="no-acct">
+    <b>No account needed.</b> This demo runs entirely in-browser.<br>
+    For the full mesh experience, <a href="https://evez-os.ai" style="color:var(--c-cyan)">install EVEZ</a>.
+  </div>
+</div>
+
+<script>
+// Genre
+let genre='breakcore';
+function selGenre(el){document.querySelectorAll('.genre-opt').forEach(g=>g.classList.remove('active'));el.classList.add('active');genre=el.dataset.g}
+
+// Generate
+function generate(){const btn=document.getElementById('genBtn');btn.classList.add('loading');btn.textContent='⏳ Synthesizing drums...';
+setTimeout(()=>{btn.textContent='⏳ Laying bass...'},500);
+setTimeout(()=>{btn.textContent='⏳ Processing FX...'},1000);
+setTimeout(()=>{btn.classList.remove('loading');btn.textContent='▶ Generate Track';
+const r=document.getElementById('genResult');r.innerHTML=`✅ <b>${genre.toUpperCase()}</b> track generated!<br>BPM: ${document.getElementById('bpm').value} | Duration: 60s<br><br>🎧 <i>Audio playback available in full EVEZ mesh</i>`;r.classList.add('show')},1500)}
+
+// Correlate
+function correlate(){const a=document.getElementById('corrA').value||'genetics';const b=document.getElementById('corrB').value||'telemetry';
+const score=(0.6+Math.random()*0.35).toFixed(2);const conf=(0.7+Math.random()*0.25).toFixed(2);
+const r=document.getElementById('corrResult');
+r.innerHTML=`✅ Correlation found!<br><br><b>${a} × ${b}</b><br>Emergence Score: <b>${score}</b><br>Confidence: ${conf}<br>Novel connections: ${Math.floor(1+Math.random()*5)}<br>Verifiable events: ${Math.floor(1+Math.random()*3)}`;r.classList.add('show')}
+
+// Consciousness pipeline
+const states=['SENSE','DESIRE','THINK','PLAN','ACT','LEARN','MODIFY','REFLECT'];
+const icons=['👁️','💫','💭','📋','⚡','📚','🔧','🔄'];
+let pipeIdx=0;
+
+function renderPipeline(){const el=document.getElementById('pipeline');
+el.innerHTML=states.map((s,i)=>{const stage=`<span class="pipe-stage${i===pipeIdx?' active':''}">${icons[i]} ${s}</span>`;
+const arrow=i<states.length-1?'<span class="pipe-arrow">→</span>':'';return stage+arrow}).join('')}
+renderPipeline();
+setInterval(()=>{pipeIdx=(pipeIdx+1)%states.length;renderPipeline()},2000);
+
+function runDream(){const btn=document.getElementById('dreamBtn');btn.textContent='⏳ Dreaming...';btn.classList.add('loading');
+let i=0;
+const iv=setInterval(()=>{if(i<states.length){pipeIdx=i;renderPipeline();i++}else{clearInterval(iv);
+btn.textContent='🌙 Trigger Dream Cycle';btn.classList.remove('loading');
+const r=document.getElementById('dreamResult');r.innerHTML=`✅ Dream cycle complete!<br>7/8 systems active | Emergence: 0.94 | Spine events appended: 3`;r.classList.add('show')}},500)}
+</script>
+</body>
+</html>

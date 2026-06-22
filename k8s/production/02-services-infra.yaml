@@ -1,0 +1,319 @@
+# EVEZ K8s Production - Infrastructure Services (9117-9125) + Gateway + NetworkPolicy + Ingress + PVCs
+---
+# ─── Mesh Health (:9117) ──────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: mesh-health, namespace: evez-mesh, labels: { app: mesh-health, tier: infra } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: mesh-health } }
+  template:
+    metadata: { labels: { app: mesh-health } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: mesh-health
+          image: evez/mesh-health:latest
+          ports: [{ containerPort: 9117 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 256Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9117 }
+            initialDelaySeconds: 10; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9117 }
+            initialDelaySeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata: { name: mesh-health, namespace: evez-mesh }
+spec: { selector: { app: mesh-health }, ports: [{ port: 9117, targetPort: 9117, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: mesh-health-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: mesh-health }
+  minReplicas: 2; maxReplicas: 3
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: mesh-health, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: mesh-health } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── Gateway (:9118) ─────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: gateway, namespace: evez-mesh, labels: { app: gateway, tier: infra } }
+spec:
+  replicas: 3
+  selector: { matchLabels: { app: gateway } }
+  template:
+    metadata: { labels: { app: gateway } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: gateway
+          image: evez/gateway:latest
+          ports: [{ containerPort: 9118 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          env:
+            - { name: CONSCIOUSNESS_URL, value: "http://consciousness-engine:9111" }
+            - { name: DAW_URL, value: "http://daw-agent:9112" }
+            - { name: VOICE_URL, value: "http://machine-voice:9113" }
+            - { name: CROSS_DOMAIN_URL, value: "http://cross-domain-engine:9114" }
+            - { name: INVARIANCE_URL, value: "http://invariance-battery:9115" }
+            - { name: SPINE_URL, value: "http://event-spine:9116" }
+            - { name: MESH_URL, value: "http://mesh-health:9117" }
+            - { name: RQNS_URL, value: "http://rqns-pipeline:9119" }
+            - { name: WEBHOOK_URL, value: "http://webhook-relay:9121" }
+            - { name: METRICS_URL, value: "http://metrics:9123" }
+          resources:
+            requests: { cpu: 200m, memory: 128Mi }
+            limits: { cpu: "1", memory: 256Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9118 }
+            initialDelaySeconds: 10; periodSeconds: 10
+          readinessProbe:
+            httpGet: { path: /health, port: 9118 }
+            initialDelaySeconds: 5; periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata: { name: gateway, namespace: evez-mesh }
+spec: { type: ClusterIP, selector: { app: gateway }, ports: [{ port: 9118, targetPort: 9118, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: gateway-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: gateway }
+  minReplicas: 3; maxReplicas: 8
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 60 } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: gateway-pdb, namespace: evez-mesh }
+spec: { minAvailable: 2, selector: { matchLabels: { app: gateway } } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: gateway, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: gateway } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── RQNS Pipeline (:9119) ────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: rqns-pipeline, namespace: evez-mesh, labels: { app: rqns-pipeline, tier: core } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: rqns-pipeline } }
+  template:
+    metadata: { labels: { app: rqns-pipeline } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: rqns-pipeline
+          image: evez/rqns-pipeline:latest
+          ports: [{ containerPort: 9119 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 256Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9119 }
+            initialDelaySeconds: 15; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9119 }
+            initialDelaySeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata: { name: rqns-pipeline, namespace: evez-mesh }
+spec: { selector: { app: rqns-pipeline }, ports: [{ port: 9119, targetPort: 9119, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: rqns-pipeline-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: rqns-pipeline }
+  minReplicas: 2; maxReplicas: 3
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: rqns-pipeline, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: rqns-pipeline } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── Webhook Relay (:9121) ────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: webhook-relay, namespace: evez-mesh, labels: { app: webhook-relay, tier: infra } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: webhook-relay } }
+  template:
+    metadata: { labels: { app: webhook-relay } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: webhook-relay
+          image: evez/webhook-relay:latest
+          ports: [{ containerPort: 9121 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 250m, memory: 128Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9121 }
+            initialDelaySeconds: 10; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9121 }
+            initialDelaySeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata: { name: webhook-relay, namespace: evez-mesh }
+spec: { selector: { app: webhook-relay }, ports: [{ port: 9121, targetPort: 9121, name: http }] }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: webhook-relay, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: webhook-relay } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── Metrics (:9123) ─────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: metrics, namespace: evez-mesh, labels: { app: metrics, tier: infra } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: metrics } }
+  template:
+    metadata: { labels: { app: metrics } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: metrics
+          image: evez/metrics:latest
+          ports: [{ containerPort: 9123 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 250m, memory: 128Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9123 }
+            initialDelaySeconds: 10; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9123 }
+            initialDelaySeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata: { name: metrics, namespace: evez-mesh }
+spec: { selector: { app: metrics }, ports: [{ port: 9123, targetPort: 9123, name: http }] }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: metrics, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: metrics } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── Geolocation (:9124) ──────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: geolocation, namespace: evez-mesh, labels: { app: geolocation, tier: infra } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: geolocation } }
+  template:
+    metadata: { labels: { app: geolocation } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: geolocation
+          image: evez/geolocation:latest
+          ports: [{ containerPort: 9124 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 250m, memory: 128Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9124 }
+            initialDelaySeconds: 10; periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /health, port: 9124 }
+            initialDelaySeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata: { name: geolocation, namespace: evez-mesh }
+spec: { selector: { app: geolocation }, ports: [{ port: 9124, targetPort: 9124, name: http }] }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: geolocation, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: geolocation } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── TTS Service (:9125) ─────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: tts-service, namespace: evez-mesh, labels: { app: tts-service, tier: infra } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: tts-service } }
+  template:
+    metadata: { labels: { app: tts-service } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: tts-service
+          image: evez/tts-service:latest
+          ports: [{ containerPort: 9125 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { cpu: "1", memory: 512Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9125 }
+            initialDelaySeconds: 20; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9125 }
+            initialDelaySeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata: { name: tts-service, namespace: evez-mesh }
+spec: { selector: { app: tts-service }, ports: [{ port: 9125, targetPort: 9125, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: tts-service-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: tts-service }
+  minReplicas: 2; maxReplicas: 4
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: tts-service, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: tts-service } }
+  endpoints: [{ port: http, path: /metrics }]

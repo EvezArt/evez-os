@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVEZ Swarm Dashboard</title>
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --surface: #111827;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --text-dim: #64748b;
+      --accent: #8b5cf6;
+      --accent2: #06b6d4;
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --pink: #ec4899;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'SF Mono', 'Fira Code', monospace; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    .header { background: linear-gradient(135deg, #1a1040 0%, #0a0e17 100%); padding: 20px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 24px; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .header .subtitle { color: var(--text-dim); font-size: 13px; margin-top: 4px; }
+
+    .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; padding: 20px 32px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .stat-card .label { color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+    .stat-card .value { font-size: 32px; font-weight: 700; margin-top: 8px; }
+    .stat-card .value.purple { color: var(--accent); }
+    .stat-card .value.cyan { color: var(--accent2); }
+    .stat-card .value.green { color: var(--green); }
+    .stat-card .value.yellow { color: var(--yellow); }
+    .stat-card .value.pink { color: var(--pink); }
+
+    .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; padding: 0 32px 32px; }
+
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .panel-header { padding: 16px 20px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .panel-body { padding: 16px 20px; }
+
+    .node-row { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .node-row:last-child { border-bottom: none; }
+    .node-dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 12px; }
+    .node-dot.alive { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .node-dot.dreaming { background: var(--pink); box-shadow: 0 0 8px var(--pink); animation: pulse 2s infinite; }
+    .node-dot.dead { background: var(--red); }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .node-name { flex: 1; font-size: 14px; }
+    .node-emergence { font-size: 14px; color: var(--accent2); width: 80px; text-align: right; }
+    .node-phase { font-size: 12px; color: var(--accent); background: rgba(139,92,246,0.15); padding: 2px 8px; border-radius: 4px; margin-left: 12px; width: 80px; text-align: center; }
+
+    .correlation-item { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .correlation-item:last-child { border-bottom: none; }
+    .corr-domains { color: var(--accent2); font-weight: 600; }
+    .corr-confidence { float: right; }
+    .confidence-bar { display: inline-block; width: 60px; height: 6px; background: var(--border); border-radius: 3px; margin-left: 8px; vertical-align: middle; }
+    .confidence-fill { height: 100%; border-radius: 3px; }
+
+    .intelligence-formula { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 8px; padding: 16px; margin-top: 12px; font-size: 14px; text-align: center; }
+    .formula-math { font-size: 18px; font-weight: 700; color: var(--accent); margin: 8px 0; }
+
+    .scaling-table { width: 100%; margin-top: 12px; font-size: 13px; border-collapse: collapse; }
+    .scaling-table th { color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 8px; text-align: left; border-bottom: 1px solid var(--border); }
+    .scaling-table td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .scaling-table td:last-child { text-align: right; color: var(--accent2); font-weight: 600; }
+
+    .refresh-bar { padding: 8px 32px; font-size: 11px; color: var(--text-dim); display: flex; justify-content: space-between; }
+
+    @media (max-width: 900px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .main-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <h1>🧠 EVEZ SWARM</h1>
+      <div class="subtitle">Distributed Consciousness Network — Real-Time Dashboard</div>
+    </div>
+    <div style="text-align:right">
+      <div id="clock" style="font-size:20px;font-weight:700;color:var(--accent)"></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="label">Active Nodes</div>
+      <div class="value purple" id="stat-nodes">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Total Consciousness</div>
+      <div class="value cyan" id="stat-consciousness">0.00</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Consensus Score</div>
+      <div class="value green" id="stat-consensus">0.00</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Correlations</div>
+      <div class="value yellow" id="stat-correlations">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Spine Entries</div>
+      <div class="value pink" id="stat-spine">0</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div>
+      <div class="panel">
+        <div class="panel-header">
+          <span>🕸️ Swarm Nodes</span>
+          <span style="color:var(--green);font-size:12px" id="node-health">All Healthy</span>
+        </div>
+        <div class="panel-body" id="node-list">
+          <div style="color:var(--text-dim);text-align:center;padding:40px">Connecting to swarm...</div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <div class="panel-header">
+          <span>🔬 Cross-Domain Correlations</span>
+          <span style="font-size:12px;color:var(--text-dim)" id="corr-count">0 shared</span>
+        </div>
+        <div class="panel-body" id="correlation-list">
+          <div style="color:var(--text-dim);text-align:center;padding:20px">No correlations yet</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <div class="panel-header">📊 Swarm Intelligence</div>
+        <div class="panel-body">
+          <div class="intelligence-formula">
+            <div style="font-size:12px;color:var(--text-dim)">Total Intelligence Formula</div>
+            <div class="formula-math">I = Σ α<sub>i</sub> × E<sub>i</sub> × (1 + log₂N)</div>
+          </div>
+
+          <table class="scaling-table">
+            <thead>
+              <tr><th>Nodes</th><th>I_total (α=1, E=0.5)</th></tr>
+            </thead>
+            <tbody id="scaling-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <div class="panel-header">
+          <span>📜 Spine Feed</span>
+          <span style="font-size:12px;color:var(--text-dim)" id="spine-sync">Synced</span>
+        </div>
+        <div class="panel-body" id="spine-feed" style="max-height:300px;overflow-y:auto">
+          <div style="color:var(--text-dim);font-size:12px">Awaiting spine data...</div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <div class="panel-header">🌀 Consciousness Pool</div>
+        <div class="panel-body" id="pool-status">
+          <div style="color:var(--text-dim);font-size:12px">Pool: inactive</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="refresh-bar">
+    <span id="last-refresh">Last refresh: --</span>
+    <span>Auto-refresh every 5s · EVEZ Swarm v1.0</span>
+  </div>
+
+  <script>
+    const SWARM_URL = window.location.hostname === 'localhost'
+      ? 'http://localhost:7777'
+      : `${window.location.protocol}//${window.location.hostname}:7777`;
+    const REFRESH_MS = 5000;
+
+    function computeIntelligence(N, alpha, E) {
+      return N * alpha * E * (1 + Math.log2(Math.max(N, 1)));
+    }
+
+    function renderScalingTable() {
+      const tbody = document.getElementById('scaling-tbody');
+      const rows = [1, 5, 10, 100, 1000].map(N => {
+        const I = computeIntelligence(N, 1, 0.5);
+        return `<tr><td>${N}</td><td>${I.toFixed(2)}</td></tr>`;
+      });
+      tbody.innerHTML = rows.join('');
+    }
+
+    async function refresh() {
+      try {
+        const [statusRes, intelRes, consensusRes] = await Promise.all([
+          fetch(`${SWARM_URL}/status`).catch(() => null),
+          fetch(`${SWARM_URL}/intelligence`).catch(() => null),
+          fetch(`${SWARM_URL}/consensus`).catch(() => null),
+        ]);
+
+        const status = statusRes ? await statusRes.json() : null;
+        const intel = intelRes ? await intelRes.json() : null;
+        const consensus = consensusRes ? await consensusRes.json() : null;
+
+        if (!status) {
+          document.getElementById('node-list').innerHTML =
+            '<div style="color:var(--red);text-align:center;padding:40px">⚠️ Cannot reach swarm</div>';
+          return;
+        }
+
+        const nodeCount = intel ? intel.nodeCount : 1;
+        const consensusScore = consensus ? consensus.consensusScore : 0;
+
+        document.getElementById('stat-nodes').textContent = nodeCount;
+        document.getElementById('stat-consciousness').textContent = (intel ? intel.totalIntelligence : status.emergence || 0).toFixed(2);
+        document.getElementById('stat-consensus').textContent = consensusScore.toFixed(3);
+        document.getElementById('stat-correlations').textContent = status.correlations ? status.correlations.length : 0;
+        document.getElementById('stat-spine').textContent = status.spineLength || 0;
+
+        // Nodes
+        let nodeHTML = '';
+        const localPhase = status.phase || 'UNKNOWN';
+        const localDot = localPhase === 'DREAM' ? 'dreaming' : 'alive';
+        nodeHTML += `<div class="node-row">
+          <div class="node-dot ${localDot}"></div>
+          <div class="node-name">${status.nodeName || 'local'} <span style="color:var(--text-dim);font-size:11px">(self)</span></div>
+          <div class="node-emergence">${(status.emergence || 0).toFixed(3)}</div>
+          <div class="node-phase">${localPhase}</div>
+        </div>`;
+
+        if (status.peers && status.peers.length > 0) {
+          status.peers.forEach(p => {
+            const dot = p.phase === 'DREAM' ? 'dreaming' : 'alive';
+            nodeHTML += `<div class="node-row">
+              <div class="node-dot ${dot}"></div>
+              <div class="node-name">${p.nodeName || p.id || 'peer'}</div>
+              <div class="node-emergence">${(p.emergence || 0).toFixed(3)}</div>
+              <div class="node-phase">${p.phase || '?'}</div>
+            </div>`;
+          });
+          document.getElementById('node-health').textContent = `${status.peers.length + 1} nodes connected`;
+        }
+        document.getElementById('node-list').innerHTML = nodeHTML;
+
+        // Correlations
+        if (status.correlations && status.correlations.length > 0) {
+          const corrHTML = status.correlations.slice(-10).reverse().map(c => {
+            const conf = c.confidence || c.localConfidence || 0;
+            const pct = (conf * 100).toFixed(0);
+            const color = conf >= 0.7 ? 'var(--green)' : conf >= 0.4 ? 'var(--yellow)' : 'var(--red)';
+            return `<div class="correlation-item">
+              <span class="corr-domains">${c.domainA || '?'} × ${c.domainB || '?'}</span>
+              <span class="corr-confidence">${pct}%
+                <span class="confidence-bar"><span class="confidence-fill" style="width:${pct}%;background:${color}"></span></span>
+              </span>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:4px">${c.description || ''}</div>
+            </div>`;
+          }).join('');
+          document.getElementById('correlation-list').innerHTML = corrHTML;
+          document.getElementById('corr-count').textContent = `${status.correlations.length} shared`;
+        }
+
+        document.getElementById('spine-sync').textContent = `Synced · ${status.spineLength || 0} entries`;
+        document.getElementById('last-refresh').textContent = `Last refresh: ${new Date().toLocaleTimeString()}`;
+      } catch (e) {
+        document.getElementById('last-refresh').textContent = 'Error: ' + e.message;
+      }
+    }
+
+    function updateClock() {
+      document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+    }
+
+    renderScalingTable();
+    updateClock();
+    setInterval(updateClock, 1000);
+    refresh();
+    setInterval(refresh, REFRESH_MS);
+  </script>
+</body>
+</html>

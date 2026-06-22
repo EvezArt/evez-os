@@ -1,0 +1,387 @@
+# EVEZ K8s Production - Core Services (9111-9116)
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: evez-mesh
+  labels:
+    app.kubernetes.io/part-of: evez-mesh
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: evez-mesh-sa
+  namespace: evez-mesh
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: evez-mesh-config
+  namespace: evez-mesh
+data:
+  MESH_MODE: "production"
+  LOG_LEVEL: "info"
+  METRICS_ENABLED: "true"
+  HEALTH_CHECK_INTERVAL: "30"
+  EVENT_SPINE_ENABLED: "true"
+  EMERGENCE_THRESHOLD: "0.5"
+  FALSIFICATION_WEIGHT: "3.0"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: evez-consciousness-config
+  namespace: evez-mesh
+data:
+  PIPELINE_MODE: "7-system"
+  EMERGENCE_TARGET: "0.8"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: evez-daw-config
+  namespace: evez-mesh
+data:
+  SYNTHESIS_MODE: "$0"
+  GENRES: "breakcore,dubstep,phonk"
+  SAMPLE_RATE: "44100"
+---
+# ─── Consciousness Engine (:9111) ─────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consciousness-engine
+  namespace: evez-mesh
+  labels: { app: consciousness-engine, tier: core }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: consciousness-engine }
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }
+  template:
+    metadata:
+      labels: { app: consciousness-engine, tier: core }
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9111"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: evez-mesh-sa
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: consciousness-engine
+          image: evez/consciousness-engine:latest
+          ports: [{ containerPort: 9111, protocol: TCP }]
+          envFrom:
+            - configMapRef: { name: evez-mesh-config }
+            - configMapRef: { name: evez-consciousness-config }
+          resources:
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { cpu: "1", memory: 512Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9111 }
+            initialDelaySeconds: 30; periodSeconds: 15; failureThreshold: 3
+          readinessProbe:
+            httpGet: { path: /health, port: 9111 }
+            initialDelaySeconds: 10; periodSeconds: 10
+          volumeMounts:
+            - name: event-spine; mountPath: /var/lib/evez/spine
+      volumes:
+        - name: event-spine; persistentVolumeClaim: { claimName: event-spine-pvc }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: consciousness-engine, namespace: evez-mesh, labels: { app: consciousness-engine } }
+spec:
+  type: ClusterIP
+  selector: { app: consciousness-engine }
+  ports: [{ port: 9111, targetPort: 9111, name: http }]
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: consciousness-engine-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: consciousness-engine }
+  minReplicas: 2; maxReplicas: 5
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: consciousness-engine-pdb, namespace: evez-mesh }
+spec: { minAvailable: 1, selector: { matchLabels: { app: consciousness-engine } } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: consciousness-engine, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: consciousness-engine } }
+  endpoints: [{ port: http, path: /metrics, interval: 15s }]
+---
+# ─── DAW Agent (:9112) ────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: daw-agent, namespace: evez-mesh, labels: { app: daw-agent, tier: core } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: daw-agent } }
+  strategy: { type: RollingUpdate, rollingUpdate: { maxSurge: 1, maxUnavailable: 0 } }
+  template:
+    metadata:
+      labels: { app: daw-agent, tier: core }
+      annotations: { prometheus.io/scrape: "true", prometheus.io/port: "9112" }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: daw-agent
+          image: evez/daw-agent:latest
+          ports: [{ containerPort: 9112 }]
+          envFrom:
+            - configMapRef: { name: evez-mesh-config }
+            - configMapRef: { name: evez-daw-config }
+          resources:
+            requests: { cpu: 500m, memory: 512Mi }
+            limits: { cpu: "2", memory: 1Gi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9112 }
+            initialDelaySeconds: 30; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9112 }
+            initialDelaySeconds: 10; periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata: { name: daw-agent, namespace: evez-mesh }
+spec: { type: ClusterIP, selector: { app: daw-agent }, ports: [{ port: 9112, targetPort: 9112, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: daw-agent-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: daw-agent }
+  minReplicas: 2; maxReplicas: 4
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 75 } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: daw-agent-pdb, namespace: evez-mesh }
+spec: { minAvailable: 1, selector: { matchLabels: { app: daw-agent } } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: daw-agent, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: daw-agent } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── Machine Voice (:9113) ────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: machine-voice, namespace: evez-mesh, labels: { app: machine-voice, tier: core } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: machine-voice } }
+  template:
+    metadata:
+      labels: { app: machine-voice }
+      annotations: { prometheus.io/scrape: "true", prometheus.io/port: "9113" }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: machine-voice
+          image: evez/machine-voice:latest
+          ports: [{ containerPort: 9113 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { cpu: "1", memory: 512Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9113 }
+            initialDelaySeconds: 20; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9113 }
+            initialDelaySeconds: 10; periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata: { name: machine-voice, namespace: evez-mesh }
+spec: { selector: { app: machine-voice }, ports: [{ port: 9113, targetPort: 9113, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: machine-voice-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: machine-voice }
+  minReplicas: 2; maxReplicas: 4
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: machine-voice-pdb, namespace: evez-mesh }
+spec: { minAvailable: 1, selector: { matchLabels: { app: machine-voice } } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: machine-voice, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: machine-voice } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── Cross-Domain Engine (:9114) ──────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: cross-domain-engine, namespace: evez-mesh, labels: { app: cross-domain-engine, tier: analysis } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: cross-domain-engine } }
+  template:
+    metadata: { labels: { app: cross-domain-engine } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: cross-domain-engine
+          image: evez/cross-domain-engine:latest
+          ports: [{ containerPort: 9114 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { cpu: "1", memory: 512Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9114 }
+            initialDelaySeconds: 20; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9114 }
+            initialDelaySeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata: { name: cross-domain-engine, namespace: evez-mesh }
+spec: { selector: { app: cross-domain-engine }, ports: [{ port: 9114, targetPort: 9114, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: cross-domain-engine-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: cross-domain-engine }
+  minReplicas: 2; maxReplicas: 3
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: cross-domain-engine, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: cross-domain-engine } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── Invariance Battery (:9115) ────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: invariance-battery, namespace: evez-mesh, labels: { app: invariance-battery, tier: safety } }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: invariance-battery } }
+  template:
+    metadata: { labels: { app: invariance-battery } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: invariance-battery
+          image: evez/invariance-battery:latest
+          ports: [{ containerPort: 9115 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 256Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9115 }
+            initialDelaySeconds: 15; periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /health, port: 9115 }
+            initialDelaySeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata: { name: invariance-battery, namespace: evez-mesh }
+spec: { selector: { app: invariance-battery }, ports: [{ port: 9115, targetPort: 9115, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: invariance-battery-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: invariance-battery }
+  minReplicas: 2; maxReplicas: 3
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: invariance-battery-pdb, namespace: evez-mesh }
+spec: { minAvailable: 1, selector: { matchLabels: { app: invariance-battery } } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: invariance-battery, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: invariance-battery } }
+  endpoints: [{ port: http, path: /metrics }]
+---
+# ─── Event Spine (:9116) ──────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: event-spine, namespace: evez-mesh, labels: { app: event-spine, tier: core } }
+spec:
+  replicas: 3
+  selector: { matchLabels: { app: event-spine } }
+  template:
+    metadata: { labels: { app: event-spine } }
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: event-spine
+          image: evez/event-spine:latest
+          ports: [{ containerPort: 9116 }]
+          envFrom: [{ configMapRef: { name: evez-mesh-config } }]
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 256Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 9116 }
+            initialDelaySeconds: 15; periodSeconds: 15
+          readinessProbe:
+            httpGet: { path: /health, port: 9116 }
+            initialDelaySeconds: 5; periodSeconds: 10
+          volumeMounts:
+            - name: spine-data; mountPath: /var/lib/evez/spine
+      volumes:
+        - name: spine-data; persistentVolumeClaim: { claimName: event-spine-pvc }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: event-spine, namespace: evez-mesh }
+spec: { selector: { app: event-spine }, ports: [{ port: 9116, targetPort: 9116, name: http }] }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: event-spine-hpa, namespace: evez-mesh }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: event-spine }
+  minReplicas: 3; maxReplicas: 5
+  metrics:
+    - type: Resource; resource: { name: cpu, target: { type: Utilization, averageUtilization: 60 } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: event-spine-pdb, namespace: evez-mesh }
+spec: { minAvailable: 2, selector: { matchLabels: { app: event-spine } } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: event-spine, namespace: evez-mesh, labels: { release: prometheus } }
+spec:
+  selector: { matchLabels: { app: event-spine } }
+  endpoints: [{ port: http, path: /metrics }]

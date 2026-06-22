@@ -1,0 +1,184 @@
+# EVEZ Prometheus Configuration
+# Scrapes all 11 services across mesh nodes
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+  external_labels:
+    cluster: 'evez-firmament'
+    environment: 'production'
+
+rule_files:
+  - '/etc/prometheus/alerts/*.yml'
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
+scrape_configs:
+  # ─── Self-monitoring ────────────────────────────────────────
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # ─── Node Exporter (per host) ───────────────────────────────
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets:
+          - 'evez-alpha:9100'
+          - 'evez-beta:9100'
+          - 'evez-gamma:9100'
+          - 'evez-delta:9100'
+          - 'evez-omega:9100'
+        labels:
+          group: 'mesh-nodes'
+
+  # ─── EVEZ Microservices ────────────────────────────────────
+  - job_name: 'consciousness-engine'
+    metrics_path: /metrics
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - 'consciousness-engine:9111'
+          - 'evez-alpha:9111'
+        labels:
+          service: 'consciousness'
+          tier: 'core'
+
+  - job_name: 'daw-agent'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'daw-agent:9112'
+          - 'evez-beta:9112'
+        labels:
+          service: 'daw'
+          tier: 'core'
+
+  - job_name: 'machine-voice'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'machine-voice:9113'
+          - 'evez-beta:9113'
+        labels:
+          service: 'voice'
+          tier: 'core'
+
+  - job_name: 'cross-domain-engine'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'cross-domain-engine:9114'
+          - 'evez-alpha:9114'
+        labels:
+          service: 'cross-domain'
+          tier: 'analysis'
+
+  - job_name: 'invariance-battery'
+    metrics_path: /metrics
+    scrape_interval: 20s
+    static_configs:
+      - targets:
+          - 'invariance-battery:9115'
+          - 'evez-gamma:9115'
+        labels:
+          service: 'invariance'
+          tier: 'safety'
+
+  - job_name: 'event-spine'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'event-spine:9116'
+          - 'evez-gamma:9116'
+        labels:
+          service: 'spine'
+          tier: 'core'
+
+  - job_name: 'mesh-health'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'mesh-health:9117'
+          - 'evez-delta:9117'
+        labels:
+          service: 'mesh-health'
+          tier: 'infra'
+
+  - job_name: 'gateway'
+    metrics_path: /metrics
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - 'gateway:9118'
+          - 'evez-delta:9118'
+        labels:
+          service: 'gateway'
+          tier: 'infra'
+
+  - job_name: 'rqns-pipeline'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'rqns-pipeline:9119'
+          - 'evez-delta:9119'
+        labels:
+          service: 'rqns'
+          tier: 'core'
+
+  - job_name: 'webhook-relay'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'webhook-relay:9121'
+        labels:
+          service: 'webhook'
+          tier: 'infra'
+
+  - job_name: 'metrics-service'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'metrics:9123'
+        labels:
+          service: 'metrics'
+          tier: 'infra'
+
+  - job_name: 'geolocation'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'geolocation:9124'
+        labels:
+          service: 'geolocation'
+          tier: 'infra'
+
+  - job_name: 'tts-service'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'tts-service:9125'
+        labels:
+          service: 'tts'
+          tier: 'infra'
+
+  # ─── Blackbox uptime checks ────────────────────────────────
+  - job_name: 'uptime-checks'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+          - http://consciousness-engine:9111/health
+          - http://daw-agent:9112/health
+          - http://gateway:9118/health
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115

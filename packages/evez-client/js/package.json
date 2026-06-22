@@ -1,0 +1,15 @@
+{
+  "name": "evez-client",
+  "version": "1.0.0",
+  "description": "JavaScript/TypeScript SDK for the EVEZ Autonomous AI Mesh",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "keywords": ["evez", "ai", "mesh", "consciousness", "music", "sdk"],
+  "license": "MIT",
+  "engines": { "node": ">=18.0.0" },
+  "repository": { "type": "git", "url": "https://github.com/evez-os/evez-client-js" },
+  "homepage": "https://evez-os.ai"
+}

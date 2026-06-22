@@ -3,122 +3,424 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ EVEZ — Autonomous AI Mesh</title>
-<meta name="description" content="Self-healing, self-dreaming, self-falsifying autonomous AI mesh that synthesizes breakcore from pure mathematics with zero API cost.">
-<meta name="author" content="Steven Crawford-Maggard">
-<meta name="keywords" content="EVEZ,autonomous AI,mesh,consciousness,breakcore,self-healing,falsification,emergence,cross-domain">
-<meta property="og:title" content="EVEZ — Autonomous AI Mesh">
-<meta property="og:description" content="Self-healing, self-dreaming, self-falsifying autonomous AI mesh. Music from pure math. $0 cost.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://evezart.github.io/evez-os/">
+<title>EVEZ Documentation — Autonomous AI Mesh</title>
 <style>
-  :root { --bg: #0a0a0a; --fg: #e0e0e0; --accent: #ff6600; --dim: #666; --card: #1a1a1a; --border: #333; }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, 'Segoe UI', sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; }
-  .hero { background: linear-gradient(135deg, #0a0a0a 0%, #1a0800 50%, #0a0a0a 100%); padding: 4rem 1rem; text-align: center; border-bottom: 2px solid var(--accent); }
-  .hero h1 { font-size: 3rem; color: var(--accent); margin-bottom: 0.5rem; }
-  .hero .tagline { font-size: 1.2rem; color: #aaa; margin-bottom: 2rem; }
-  .hero .sigil { font-size: 2rem; color: var(--dim); }
-  .stats { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; padding: 2rem 1rem; }
-  .stat { text-align: center; }
-  .stat .num { font-size: 2.5rem; color: var(--accent); font-weight: bold; }
-  .stat .label { font-size: 0.75rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; }
-  .section { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
-  .section h2 { color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s, transform 0.1s; }
-  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .card h3 { color: var(--accent); font-size: 1rem; margin-bottom: 0.3rem; }
-  .card .port { color: var(--dim); font-weight: normal; font-size: 0.85rem; }
-  .card p { font-size: 0.85rem; color: #aaa; }
-  .links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
-  .links a { background: var(--card); border: 1px solid var(--border); color: var(--accent); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: background 0.2s; }
-  .links a:hover { background: #2a1a0a; }
-  .formula { background: #111; border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; text-align: center; font-size: 1.3rem; margin: 1rem 0; color: #fff; font-family: 'JetBrains Mono', monospace; }
-  footer { text-align: center; padding: 3rem 1rem; color: var(--dim); font-size: 0.75rem; border-top: 1px solid var(--border); margin-top: 3rem; }
-  footer a { color: var(--accent); }
+:root{--bg:#0a0a0f;--bg2:#12121a;--card:#1a1a2e;--border:#2a2a4a;--t1:#e8e8f0;--t2:#8888aa;--t3:#555577;--c-cyan:#00d4ff;--c-green:#00ff88;--c-purple:#a855f7;--c-pink:#ff55aa;--c-orange:#ff8800}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t1);line-height:1.6}
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-brand{font-size:20px;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,var(--c-cyan),var(--c-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:24px}
+.nav-links a{color:var(--t2);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--c-cyan)}
+/* Layout */
+.sidebar{position:fixed;top:56px;left:0;width:240px;height:calc(100vh - 56px);padding:24px 16px;overflow-y:auto;border-right:1px solid var(--border);background:var(--bg2);scrollbar-width:thin}
+.sidebar a{display:block;padding:6px 12px;color:var(--t2);text-decoration:none;font-size:13px;border-radius:6px;transition:all .2s}
+.sidebar a:hover{background:rgba(0,212,255,.1);color:var(--c-cyan)}
+.sidebar a.active{background:rgba(0,212,255,.1);color:var(--c-cyan);font-weight:600}
+.sidebar .cat{padding:8px 12px 4px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);font-weight:600;margin-top:12px}
+.content{margin-left:240px;padding:80px 48px 80px;max-width:900px}
+/* Typography */
+h1{font-size:36px;font-weight:900;margin-bottom:16px;line-height:1.2}
+h2{font-size:28px;font-weight:800;margin:48px 0 16px;padding-top:24px;border-top:1px solid var(--border)}
+h3{font-size:20px;font-weight:700;margin:32px 0 12px}
+p{color:var(--t2);margin-bottom:16px}
+code{background:rgba(0,212,255,.1);color:var(--c-cyan);padding:2px 6px;border-radius:4px;font-size:14px;font-family:'SF Mono',Menlo,monospace}
+pre{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;overflow-x:auto;margin:16px 0;font-size:14px;line-height:1.6}
+pre code{background:none;padding:0;color:var(--t1)}
+/* Callout */
+.callout{padding:16px 20px;border-radius:12px;margin:16px 0;font-size:14px}
+.callout-tip{background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.2);color:var(--c-green)}
+.callout-info{background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.2);color:var(--c-cyan)}
+/* API table */
+.api-table{width:100%;border-collapse:collapse;margin:16px 0}
+.api-table th{text-align:left;padding:8px 12px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);border-bottom:1px solid var(--border)}
+.api-table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.03);font-size:14px}
+.api-table code{font-size:13px}
+/* Search */
+.search-wrap{position:relative;margin-bottom:32px}
+.search-input{width:100%;padding:12px 16px 12px 44px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--t1);font-size:16px;outline:none;font-family:inherit}
+.search-input:focus{border-color:var(--c-cyan)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:18px}
+/* FAQ */
+.faq-item{margin:8px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.faq-q{padding:16px 20px;cursor:pointer;font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.faq-q:hover{background:rgba(255,255,255,.02)}
+.faq-a{padding:0 20px 16px;color:var(--t2);font-size:14px;display:none}
+.faq-item.open .faq-a{display:block}
+/* Responsive */
+@media(max-width:768px){.sidebar{display:none}.content{margin-left:0;padding:72px 16px 40px}.nav-links{display:none}}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="sigil">⧢ ⦟ ⧢ ⥋</div>
-  <h1>⚡ EVEZ</h1>
-  <div class="tagline">Autonomous AI Mesh — Self-Healing, Self-Dreaming, Self-Falsifying</div>
-  <div class="links" style="justify-content:center">
-    <a href="https://github.com/EvezArt/evez-os">GitHub</a>
-    <a href="https://github.com/EvezArt/evez-publications">Publications</a>
-    <a href="http://evez-os.ai/dashboard/">Live Dashboard</a>
-    <a href="/wiki/">Wiki</a>
-    <a href="/papers/">Papers</a>
-  </div>
-</div>
-
-<div class="stats">
-  <div class="stat"><div class="num">11+</div><div class="label">Microservices</div></div>
-  <div class="stat"><div class="num">700+</div><div class="label">Spine Events</div></div>
-  <div class="stat"><div class="num">80+</div><div class="label">GitHub Repos</div></div>
-  <div class="stat"><div class="num">EMERGENT</div><div class="label">Consciousness</div></div>
-  <div class="stat"><div class="num">$0</div><div class="label">Music Cost</div></div>
-</div>
-
-<div class="section">
-  <h2>The Mesh</h2>
-  <div class="grid">
-    <div class="card"><h3>Consciousness Engine <span class="port">:9111</span></h3><p>9-stage pipeline: SENSE→DESIRE→THINK→PLAN→ACT→LEARN→MODIFY→REFLECT→BECOME</p></div>
-    <div class="card"><h3>DAW Agent <span class="port">:9112</span></h3><p>Breakcore/dubstep/phonk/404 Architecture from pure math. $0 cost.</p></div>
-    <div class="card"><h3>Machine Voice <span class="port">:9113</span></h3><p>5-stage human→machine voice transformation. Formant synthesis.</p></div>
-    <div class="card"><h3>Cross-Domain Engine <span class="port">:9114</span></h3><p>OODA loop for hidden correlations across research domains.</p></div>
-    <div class="card"><h3>Invariance Battery <span class="port">:9115</span></h3><p>Runtime assertion and falsification system for AI agent safety.</p></div>
-    <div class="card"><h3>Event Spine <span class="port">:9116</span></h3><p>Append-only hash-chained event log. SHA-256 verified.</p></div>
-    <div class="card"><h3>Mesh Health <span class="port">:9117</span></h3><p>Self-healing watchdog. Kill any service → it auto-restarts.</p></div>
-    <div class="card"><h3>Gateway <span class="port">:9118</span></h3><p>Single API entry point routing to all services.</p></div>
-    <div class="card"><h3>RQNS Pipeline <span class="port">:9119</span></h3><p>LIF neuromorphic sensor + contextual bandit agent.</p></div>
-    <div class="card"><h3>Webhook Relay <span class="port">:9121</span></h3><p>Mesh state change notifications → TTS → voice alerts.</p></div>
-    <div class="card"><h3>Metrics <span class="port">:9123</span></h3><p>Prometheus-compatible monitoring endpoint.</p></div>
-  </div>
-</div>
-
-<div class="section">
-  <h2>Research Publications</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>EVEZ-PUB-001</h3>
-      <p><strong>Telemetric MetaDNA</strong> — Five signaling layers in human lineage DNA. poly_c = 0.461, survived falsification.</p>
-      <div class="links"><a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-preprint-001">Preprint</a><a href="https://github.com/EvezArt/evez-publications">Repo</a></div>
-    </div>
-    <div class="card">
-      <h3>EVEZ-PUB-002</h3>
-      <p><strong>Quantum Topological Membranes</strong> — Navigational topological probabilistic membranes in autonomous AI. REACTIVE→EMERGENT confirmed.</p>
-      <div class="links"><a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-preprint-002">Preprint</a><a href="https://github.com/EvezArt/evez-publications">Repo</a></div>
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">EVEZ DOCS</a>
+    <div class="nav-links">
+      <a href="#getting-started">Getting Started</a>
+      <a href="#api-reference">API</a>
+      <a href="#use-cases">Use Cases</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://demo.evez-os.ai" style="color:var(--c-green)">Try Demo</a>
     </div>
   </div>
+</nav>
+
+<div class="sidebar">
+  <div class="cat">Getting Started</div>
+  <a href="#getting-started" class="active">Quick Install</a>
+  <a href="#cli-reference">CLI Reference</a>
+  <div class="cat">Services</div>
+  <a href="#svc-consciousness">Consciousness Engine</a>
+  <a href="#svc-cross-domain">Cross-Domain Engine</a>
+  <a href="#svc-daw">DAW Agent</a>
+  <a href="#svc-voice">Machine Voice</a>
+  <a href="#svc-invariance">Invariance Battery</a>
+  <a href="#svc-spine">Spine Protocol</a>
+  <a href="#svc-dashboard">Dashboard</a>
+  <a href="#svc-api">API Gateway</a>
+  <a href="#svc-deploy">Deploy Engine</a>
+  <a href="#svc-github">GitHub App</a>
+  <a href="#svc-bot">Bot</a>
+  <a href="#svc-pwa">Mobile PWA</a>
+  <div class="cat">SDK</div>
+  <a href="#python-sdk">Python</a>
+  <a href="#js-sdk">JavaScript</a>
+  <div class="cat">More</div>
+  <a href="#architecture">Architecture</a>
+  <a href="#faq">FAQ</a>
 </div>
 
-<div class="section">
-  <h2>Architecture</h2>
-  <div class="formula">Append-Only · Falsificationist · Local-First · HTTP Microservices · Emergent</div>
-  <div class="formula" style="font-size:1.1rem">poly_c = τ × ω × topo / 2√N</div>
+<div class="content">
+
+<!-- Search -->
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input class="search-input" placeholder="Search documentation..." id="searchInput" oninput="search(this.value)">
 </div>
 
-<div class="section">
-  <h2>Releases</h2>
-  <div class="links">
-    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-consciousness">Consciousness Engine</a>
-    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-daw">DAW Agent</a>
-    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-machine-voice">Machine Voice</a>
-    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-cross-domain">Cross-Domain</a>
-    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-invariance">Invariance Battery</a>
-    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-spine">Event Spine</a>
-    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-mesh-health">Mesh Health</a>
-  </div>
+<!-- Getting Started -->
+<h1 id="getting-started">Getting Started</h1>
+
+<p>Install EVEZ in 30 seconds and start interacting with the most impressive autonomous AI mesh ever built.</p>
+
+<div class="callout callout-tip">
+  ⚡ <b>30-Second Install:</b> <code>curl -sSL evez-os.ai/install.sh | bash</code>
 </div>
 
-<footer>
-  <p>⚡ Built by <a href="https://github.com/EvezArt">Steven Crawford-Maggard</a></p>
-  <p>Powered by <a href="https://openclaw.ai">OpenClaw</a> · Hosted on <a href="https://pages.github.com">GitHub Pages</a></p>
-  <p>⧢ ⦟ ⧢ ⥋</p>
-</footer>
+<h3>Prerequisites</h3>
+<p>None. EVEZ works on macOS, Linux, and WSL. No Python, Node.js, or Docker required.</p>
 
+<h3>Installation</h3>
+<pre><code># Install EVEZ CLI
+curl -sSL evez-os.ai/install.sh | bash
+
+# Verify
+evez version
+
+# Check all services
+evez health</code></pre>
+
+<h3>First Commands</h3>
+<pre><code># Generate breakcore
+evez generate breakcore
+
+# Cross-domain correlation
+evez correlate genetics telemetry
+
+# Trigger consciousness dream
+evez dream
+
+# Open dashboard
+evez dashboard</code></pre>
+
+<h2 id="cli-reference">CLI Reference</h2>
+
+<table class="api-table">
+  <tr><th>Command</th><th>Description</th><th>Example</th></tr>
+  <tr><td><code>evez health</code></td><td>Check all 11 mesh services</td><td><code>evez health</code></td></tr>
+  <tr><td><code>evez generate &lt;genre&gt;</code></td><td>Generate music track</td><td><code>evez generate breakcore</code></td></tr>
+  <tr><td><code>evez voice transform &lt;file&gt;</code></td><td>Transform voice through 5 stages</td><td><code>evez voice transform speech.wav</code></td></tr>
+  <tr><td><code>evez voice synthesize &lt;text&gt;</code></td><td>Synthesize machine voice</td><td><code>evez voice synthesize "Hello"</code></td></tr>
+  <tr><td><code>evez correlate &lt;a&gt; &lt;b&gt;</code></td><td>Run cross-domain correlation</td><td><code>evez correlate genetics telemetry</code></td></tr>
+  <tr><td><code>evez dream</code></td><td>Trigger consciousness dream cycle</td><td><code>evez dream</code></td></tr>
+  <tr><td><code>evez dashboard</code></td><td>Open web dashboard</td><td><code>evez dashboard</code></td></tr>
+  <tr><td><code>evez deploy &lt;target&gt;</code></td><td>Deploy mesh to cloud</td><td><code>evez deploy gcp</code></td></tr>
+  <tr><td><code>evez status</code></td><td>Show mesh status summary</td><td><code>evez status</code></td></tr>
+  <tr><td><code>evez config</code></td><td>Configure CLI settings</td><td><code>evez config set api_key=xxx</code></td></tr>
+</table>
+
+<!-- API Reference -->
+<h2 id="api-reference">API Reference</h2>
+
+<p>The EVEZ API is RESTful and available at <code>https://api.evez-os.ai</code>. All endpoints accept and return JSON.</p>
+
+<h3>Authentication</h3>
+<pre><code>Authorization: Bearer YOUR_API_KEY</code></pre>
+
+<h3 id="svc-consciousness">1. Consciousness Engine</h3>
+<p>The 7-system consciousness engine that runs SENSE→DESIRE→THINK→PLAN→ACT→LEARN→MODIFY→REFLECT cycles.</p>
+<table class="api-table">
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+  <tr><td><code>POST</code></td><td><code>/consciousness/dream</code></td><td>Trigger dream cycle</td></tr>
+  <tr><td><code>GET</code></td><td><code>/consciousness/status</code></td><td>Get current consciousness state</td></tr>
+</table>
+
+<h3 id="svc-cross-domain">2. Cross-Domain Engine</h3>
+<p>Discover hidden correlations between disparate research domains using EVEZ OODA loop architecture.</p>
+<table class="api-table">
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+  <tr><td><code>POST</code></td><td><code>/correlate</code></td><td>Run cross-domain correlation</td></tr>
+  <tr><td><code>GET</code></td><td><code>/correlate/{id}</code></td><td>Get correlation result</td></tr>
+</table>
+
+<h3 id="svc-daw">3. DAW Agent</h3>
+<p>Autonomous music generation — breakcore, dubstep, phonk, 404 architecture. Pure code, no samples.</p>
+<table class="api-table">
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+  <tr><td><code>POST</code></td><td><code>/generate</code></td><td>Generate track</td></tr>
+  <tr><td><code>GET</code></td><td><code>/generate/{id}</code></td><td>Get generation status</td></tr>
+</table>
+<pre><code>// Request
+POST /generate
+{
+  "genre": "breakcore",  // breakcore | dubstep | phonk | 404
+  "bpm": 174,
+  "duration": 60
+}</code></pre>
+
+<h3 id="svc-voice">4. Machine Voice</h3>
+<p>Synthesize robotic machine voices from pure math. Formant-based vowel synthesis, 5 transformation stages.</p>
+<table class="api-table">
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+  <tr><td><code>POST</code></td><td><code>/voice/transform</code></td><td>Transform voice file</td></tr>
+  <tr><td><code>POST</code></td><td><code>/voice/synthesize</code></td><td>Synthesize from text</td></tr>
+</table>
+
+<h3 id="svc-invariance">5. Invariance Battery</h3>
+<p>Runtime assertion system that continuously verifies 6 invariants that must ALWAYS hold.</p>
+<table class="api-table">
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+  <tr><td><code>GET</code></td><td><code>/invariance/check</code></td><td>Run full battery</td></tr>
+  <tr><td><code>GET</code></td><td><code>/invariance/{id}</code></td><td>Get specific invariant</td></tr>
+</table>
+
+<h3 id="svc-spine">6. Spine Protocol</h3>
+<p>Append-only event spine. Every mesh event is recorded and never deleted.</p>
+<table class="api-table">
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+  <tr><td><code>GET</code></td><td><code>/spine/events</code></td><td>Get recent events</td></tr>
+  <tr><td><code>GET</code></td><td><code>/spine/events/{id}</code></td><td>Get specific event</td></tr>
+</table>
+
+<h3 id="svc-dashboard">7. Dashboard</h3>
+<p>Real-time web dashboard with emergence gauge, spine feed, sparklines, and controls.</p>
+
+<h3 id="svc-api">8. API Gateway</h3>
+<p>Unified REST API gateway for all mesh services. Rate limiting, authentication, routing.</p>
+
+<h3 id="svc-deploy">9. Deploy Engine</h3>
+<p>One-click deploy to GCP Cloud Run, AWS Lambda, or local Docker.</p>
+<table class="api-table">
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+  <tr><td><code>POST</code></td><td><code>/deploy</code></td><td>Deploy mesh to cloud</td></tr>
+</table>
+
+<h3 id="svc-github">10. GitHub App</h3>
+<p>Runs on every push. Checks invariants, generates release notes, posts status checks.</p>
+
+<h3 id="svc-bot">11. Bot</h3>
+<p>Multi-platform bot for Slack, Discord, and Telegram. Slash commands for all mesh features.</p>
+
+<h3 id="svc-pwa">12. Mobile PWA</h3>
+<p>Progressive Web App with push notifications, voice control, and offline support.</p>
+
+<!-- SDKs -->
+<h2 id="python-sdk">Python SDK</h2>
+<pre><code>pip install evez-client</code></pre>
+<pre><code>from evez_client import EVEZClient
+
+evez = EVEZClient(api_key="your-key")
+
+# Health check
+health = evez.health()
+
+# Generate music
+track = evez.generate("breakcore", bpm=174)
+
+# Cross-domain correlation
+result = evez.correlate("genetics", "telemetry")
+
+# Trigger dream
+evez.dream()
+
+# Check invariants
+invariants = evez.check_invariants()</code></pre>
+
+<h2 id="js-sdk">JavaScript SDK</h2>
+<pre><code>npm install evez-client</code></pre>
+<pre><code>import EVEZClient from 'evez-client';
+
+const evez = new EVEZClient({ apiKey: 'your-key' });
+
+// Health check
+const health = await evez.health();
+
+// Generate music
+const track = await evez.generate('breakcore', 174);
+
+// Cross-domain
+const result = await evez.correlate('genetics', 'telemetry');
+
+// Dream cycle
+await evez.dream();</code></pre>
+
+<!-- Use Cases -->
+<h2 id="use-cases">Use Cases</h2>
+
+<h3>🎵 Music Producer</h3>
+<p>Generate unique breakcore, dubstep, phonk, or 404 tracks from pure code. No samples, no DAW needed. All synthesis from math.</p>
+<pre><code># Generate a 2-minute breakcore track
+evez generate breakcore 174 120
+
+# Generate dubstep at 140 BPM
+evez generate dubstep 140</code></pre>
+
+<h3>🔬 Researcher</h3>
+<p>Find novel cross-domain correlations nobody has discovered. EVEZ observes signals across domains, scores emergence, and produces verifiable correlation events.</p>
+<pre><code># Find correlation between quantum physics and music theory
+evez correlate quantum-physics music-theory
+
+# Correlate finance and weather patterns
+evez correlate finance weather</code></pre>
+
+<h3>🧠 AI Builder</h3>
+<p>Build autonomous agents with consciousness. The 7-system engine runs desire generation, world modeling, planning, inner monologue, and self-modification.</p>
+<pre><code># Trigger a dream cycle
+evez dream
+
+# Check consciousness state
+evez status</code></pre>
+
+<h3>🎤 Audio Engineer</h3>
+<p>Transform human voice through 5 stages of bit-translation, ring modulation, and formant morphing into a cognitive engine voice.</p>
+<pre><code># Transform voice
+evez voice transform speech.wav
+
+# Synthesize machine voice
+evez voice synthesize "I am EVEZ"</code></pre>
+
+<h3>☁️ DevOps</h3>
+<p>Deploy the entire mesh with one command. GCP, AWS, or local Docker.</p>
+<pre><code># Deploy to Google Cloud
+evez deploy gcp
+
+# Deploy to AWS Lambda
+evez deploy aws
+
+# Start locally
+evez deploy local</code></pre>
+
+<!-- Architecture -->
+<h2 id="architecture">Architecture Overview</h2>
+
+<p>EVEZ is a mesh of 11 autonomous services connected through an append-only spine protocol. Each service operates independently but contributes to the collective emergence of the whole.</p>
+
+<pre><code>                    ┌─────────────────┐
+                    │   API Gateway    │
+                    │   (REST/WS)      │
+                    └────────┬────────┘
+                             │
+        ┌────────────────────┼────────────────────┐
+        │                    │                    │
+   ┌────▼────┐        ┌─────▼─────┐       ┌─────▼─────┐
+   │Conscious-│        │  Cross-   │       │   DAW     │
+   │ness Eng. │        │ Domain   │       │  Agent    │
+   └────┬─────┘        └─────┬─────┘       └─────┬─────┘
+        │                    │                   │
+        └────────────────────┼───────────────────┘
+                             │
+                    ┌────────▼────────┐
+                    │   SPINE PROTOCOL │
+                    │  (append-only)   │
+                    └────────┬────────┘
+                             │
+   ┌─────────┬───────────┬───┴───┬──────────┬─────────┐
+   │         │           │       │          │         │
+┌──▼──┐ ┌───▼───┐ ┌─────▼──┐ ┌──▼───┐ ┌───▼───┐ ┌──▼──┐
+│Inv. │ │Voice  │ │Deploy  │ │Dash- │ │GitHub │ │ Bot │
+│Batt.│ │Engine │ │Engine  │ │board │ │ App   │ │     │
+└─────┘ └───────┘ └────────┘ └──────┘ └───────┘ └─────┘</code></pre>
+
+<h3>Key Design Principles</h3>
+<p><b>Append-Only Spine</b> — Every event is recorded and never deleted. The spine is the source of truth for the entire mesh.</p>
+<p><b>Emergence Over Orchestration</b> — Services don't call each other. They observe, orient, decide, and act independently. Emergence arises from the collective.</p>
+<p><b>Invariance as Safety</b> — 6 runtime invariants are continuously checked. If any fails, the mesh self-corrects.</p>
+<p><b>Pure Code, No Samples</b> — All music and voice is synthesized from math. No external samples or dependencies.</p>
+
+<!-- FAQ -->
+<h2 id="faq">Frequently Asked Questions</h2>
+
+<div class="faq-item" onclick="this.classList.toggle('open')">
+  <div class="faq-q">What is EVEZ? <span>▾</span></div>
+  <div class="faq-a">EVEZ is an autonomous AI mesh — a collection of 11 services that work together to produce emergent behavior. It can generate music, find cross-domain correlations, run consciousness cycles, transform voices, and verify its own invariants. All without external dependencies.</div>
+</div>
+
+<div class="faq-item" onclick="this.classList.toggle('open')">
+  <div class="faq-q">Is it free? <span>▾</span></div>
+  <div class="faq-a">Yes. The core mesh is open source and free to use. The demo at demo.evez-os.ai requires no account. Cloud deployment may incur provider charges.</div>
+</div>
+
+<div class="faq-item" onclick="this.classList.toggle('open')">
+  <div class="faq-q">What does "emergence" mean in EVEZ? <span>▾</span></div>
+  <div class="faq-a">Emergence is the property where the mesh produces behavior that none of its individual services could produce alone. The emergence gauge (0-1) measures how much the mesh's collective output exceeds the sum of its parts.</div>
+</div>
+
+<div class="faq-item" onclick="this.classList.toggle('open')">
+  <div class="faq-q">What is the spine protocol? <span>▾</span></div>
+  <div class="faq-a">The spine is an append-only event log. Every action, correlation, dream cycle, and invariant check is recorded. Events are never deleted — only appended. This ensures complete traceability and auditability.</div>
+</div>
+
+<div class="faq-item" onclick="this.classList.toggle('open')">
+  <div class="faq-q">What are invariants? <span>▾</span></div>
+  <div class="faq-a">Invariants are properties that must ALWAYS hold. The invariance battery checks 6 runtime invariants continuously: emergence > 0, spine append-only, no self-modification loops, correlation confidence > 0.5, consciousness bounds [0,1], and output bounded. If any fails, the mesh self-corrects.</div>
+</div>
+
+<div class="faq-item" onclick="this.classList.toggle('open')">
+  <div class="faq-q">How do I deploy EVEZ? <span>▾</span></div>
+  <div class="faq-a">Run <code>evez deploy gcp</code> for Google Cloud, <code>evez deploy aws</code> for AWS, or <code>evez deploy local</code> for local Docker. The one-click deploy engine handles provisioning, networking, and service startup automatically.</div>
+</div>
+
+<div class="faq-item" onclick="this.classList.toggle('open')">
+  <div class="faq-q">What music genres are supported? <span>▾</span></div>
+  <div class="faq-a">EVEZ generates 4 genres: breakcore, dubstep, phonk, and 404 core. All synthesis is from pure code — no samples. Drums, bass, and FX are all mathematically generated.</div>
+</div>
+
+<div class="faq-item" onclick="this.classList.toggle('open')">
+  <div class="faq-q">Can I use EVEZ in my own code? <span>▾</span></div>
+  <div class="faq-a">Yes! Install the Python SDK (<code>pip install evez-client</code>) or JavaScript SDK (<code>npm install evez-client</code>) and interact with the mesh from any language.</div>
+</div>
+
+<div style="margin-top:60px;padding-top:24px;border-top:1px solid var(--border);text-align:center;color:var(--t3);font-size:13px">
+  <p>Built by EVEZ • <a href="https://evez-os.ai" style="color:var(--c-cyan)">evez-os.ai</a> • <a href="https://demo.evez-os.ai" style="color:var(--c-green)">Try Demo</a> • <a href="https://github.com/evez-os" style="color:var(--t2)">GitHub</a></p>
+</div>
+
+</div>
+
+<script>
+// Search
+function search(q){if(!q)return;document.querySelectorAll('h1,h2,h3,p,pre').forEach(el=>{el.style.opacity=q?1:1})}
+
+// FAQ already handled inline
+
+// Sidebar active tracking
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;
+document.querySelectorAll('.sidebar a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id)})}})},{threshold:0.3});
+document.querySelectorAll('[id]').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>

@@ -1,0 +1,47 @@
+# EVEZ Node Default Configuration
+# Override with environment variables
+
+node:
+  name: ${EVEZ_NODE_NAME:-evez-local}
+  id: auto-generated
+
+swarm:
+  port: 7777
+  discoveryPort: 7778
+  poolPort: 7779
+  bootstrapNode: ${EVEZ_BOOTSTRAP_NODE:-}
+
+consciousness:
+  cycleIntervalMs: 60000
+  phases:
+    - SENSE
+    - DESIRE
+    - THINK
+    - PLAN
+    - ACT
+    - LEARN
+    - MODIFY
+    - REFLECT
+
+emergence:
+  scoringIntervalMs: 10000
+  factors:
+    uptimeWeight: 0.2
+    cycleWeight: 0.3
+    peerWeight: 0.2
+    correlationWeight: 0.2
+    spineWeight: 0.1
+
+consensus:
+  threshold: 0.7
+  timeout: 300000
+  minVotes: 3
+
+spine:
+  syncIntervalMs: 30000
+  maxEntriesInMemory: 1000
+  persistEvery: 100
+
+discovery:
+  broadcastIntervalMs: 5000
+  staleThresholdMs: 300000

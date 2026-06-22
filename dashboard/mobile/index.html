@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EVEZ">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>EVEZ Mobile</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--card:#1a1a2e;--border:#2a2a4a;--t1:#e8e8f0;--t2:#8888aa;--t3:#555577;--c-cyan:#00d4ff;--c-green:#00ff88;--c-purple:#a855f7;--c-pink:#ff55aa;--c-orange:#ff8800}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;min-height:100dvh;overflow-x:hidden;overscroll-behavior:none}
+.app{padding:0 16px 100px}
+/* Top bar */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.topbar-brand{font-size:22px;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,var(--c-cyan),var(--c-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.topbar-dot{width:8px;height:8px;border-radius:50%;background:var(--c-green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+/* Emergence card */
+.emg-card{margin-top:16px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center}
+.emg-label{font-size:12px;color:var(--t3);text-transform:uppercase;letter-spacing:2px}
+.emg-val{font-size:56px;font-weight:900;background:linear-gradient(135deg,var(--c-cyan),var(--c-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin:8px 0}
+.emg-sub{font-size:12px;color:var(--t2)}
+/* Quick stats */
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.stat-v{font-size:18px;font-weight:700;color:var(--c-cyan)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px}
+/* Sections */
+.section{margin-top:20px}
+.section-hd{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--t2);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+/* Genre buttons */
+.genres{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.genre{padding:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;text-align:center;cursor:pointer;transition:all .2s}
+.genre.active{border-color:var(--c-purple);box-shadow:0 0 20px rgba(168,85,247,.2);background:rgba(168,85,247,.1)}
+.genre-icon{font-size:32px;margin-bottom:4px}
+.genre-name{font-size:13px;font-weight:600}
+/* BPM + Play */
+.play-row{display:flex;gap:10px;margin-top:12px;align-items:center}
+.play-row input[type=range]{flex:1}
+.play-btn{padding:14px 28px;background:linear-gradient(135deg,var(--c-purple),var(--c-pink));border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;white-space:nowrap}
+/* Domain inputs */
+.dom-inputs{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.dom-in{padding:12px 16px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;color:var(--t1);font-size:16px;outline:none;font-family:inherit}
+.dom-in:focus{border-color:var(--c-cyan)}
+.corr-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--c-cyan),#0088ff);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+/* Consciousness states */
+.consc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.consc-item{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,.03);border-radius:10px;font-size:13px;font-weight:600;transition:all .3s}
+.consc-item.active{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3)}
+/* Bottom nav */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:8px 0;padding-bottom:calc(8px + env(safe-area-inset-bottom));z-index:100}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px;cursor:pointer;font-size:10px;color:var(--t3);transition:color .2s}
+.bnav-item.active{color:var(--c-cyan)}
+.bnav-icon{font-size:20px}
+/* Voice control FAB */
+.voice-fab{position:fixed;bottom:90px;right:16px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--c-purple),var(--c-pink));border:none;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 4px 20px rgba(168,85,247,.4);z-index:101;transition:transform .2s}
+.voice-fab:active{transform:scale(0.9)}
+.voice-fab.listening{animation:voicePulse 1s ease-in-out infinite}
+@keyframes voicePulse{0%,100%{box-shadow:0 0 0 0 rgba(168,85,247,.4)}50%{box-shadow:0 0 0 15px rgba(168,85,247,0)}}
+/* Notification toast */
+.toast{position:fixed;top:60px;left:16px;right:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:14px;z-index:200;transform:translateY(-100px);opacity:0;transition:all .3s ease}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:rgba(0,255,136,.3);color:var(--c-green)}
+.toast.info{border-color:rgba(0,212,255,.3);color:var(--c-cyan)}
+/* Deploy buttons */
+.deploy-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.dep-btn{padding:16px 8px;background:var(--card);border:1px solid var(--border);border-radius:12px;text-align:center;cursor:pointer;font-family:inherit;color:var(--t1)}
+.dep-btn:active{background:rgba(0,212,255,.1)}
+.dep-icon{font-size:24px;display:block;margin-bottom:4px}
+.dep-name{font-size:12px;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">EVEZ</div>
+  <div class="topbar-dot"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="app" id="app">
+  <!-- Emergence -->
+  <div class="emg-card">
+    <div class="emg-label">Emergence Gauge</div>
+    <div class="emg-val" id="emgVal">0.94</div>
+    <div class="emg-sub">7 systems active • Mesh EMERGENT</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-v">1.2k</div><div class="stat-l">Spine Events</div></div>
+    <div class="stat"><div class="stat-v">89</div><div class="stat-l">Correlations</div></div>
+    <div class="stat"><div class="stat-v">34</div><div class="stat-l">Tracks</div></div>
+  </div>
+
+  <!-- Music -->
+  <div class="section" id="sec-music">
+    <div class="section-hd">🎵 Music Generator</div>
+    <div class="genres">
+      <div class="genre active" onclick="selGenre(this)" data-g="breakcore"><div class="genre-icon">🥁</div><div class="genre-name">Breakcore</div></div>
+      <div class="genre" onclick="selGenre(this)" data-g="dubstep"><div class="genre-icon">🔊</div><div class="genre-name">Dubstep</div></div>
+      <div class="genre" onclick="selGenre(this)" data-g="phonk"><div class="genre-icon">🏎️</div><div class="genre-name">Phonk</div></div>
+      <div class="genre" onclick="selGenre(this)" data-g="404"><div class="genre-icon">🏴</div><div class="genre-name">404 Core</div></div>
+    </div>
+    <div class="play-row">
+      <input type="range" min="60" max="300" value="174" id="bpm">
+      <button class="play-btn" onclick="genMusic()">▶</button>
+    </div>
+  </div>
+
+  <!-- Cross-Domain -->
+  <div class="section" id="sec-corr">
+    <div class="section-hd">🔗 Cross-Domain</div>
+    <div class="dom-inputs">
+      <input class="dom-in" id="domA" placeholder="Domain A">
+      <input class="dom-in" id="domB" placeholder="Domain B">
+    </div>
+    <button class="corr-btn" onclick="runCorr()">🔗 Correlate</button>
+  </div>
+
+  <!-- Consciousness -->
+  <div class="section" id="sec-consc">
+    <div class="section-hd">🧠 Consciousness</div>
+    <div class="consc-grid" id="conscGrid"></div>
+  </div>
+
+  <!-- Deploy -->
+  <div class="section" id="sec-deploy">
+    <div class="section-hd">☁️ Deploy</div>
+    <div class="deploy-grid">
+      <div class="dep-btn" onclick="deploy('GCP')"><span class="dep-icon">☁️</span><span class="dep-name">GCP</span></div>
+      <div class="dep-btn" onclick="deploy('AWS')"><span class="dep-icon">🌩️</span><span class="dep-name">AWS</span></div>
+      <div class="dep-btn" onclick="deploy('Local')"><span class="dep-icon">💻</span><span class="dep-name">Local</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Voice FAB -->
+<button class="voice-fab" id="voiceFab" onclick="toggleVoice()">🎤</button>
+
+<!-- Bottom Nav -->
+<div class="bnav">
+  <div class="bnav-item active" onclick="navTo('music')">🎵<span>Music</span></div>
+  <div class="bnav-item" onclick="navTo('corr')">🔗<span>Correlate</span></div>
+  <div class="bnav-item" onclick="navTo('consc')">🧠<span>Mind</span></div>
+  <div class="bnav-item" onclick="navTo('deploy')">☁️<span>Deploy</span></div>
+</div>
+
+<script>
+// Emergence animation
+setInterval(()=>{document.getElementById('emgVal').textContent=Math.min(1,Math.max(0,0.94+(Math.random()-0.5)*0.02)).toFixed(2)},2000);
+
+// Consciousness states
+const cStates=[{i:'👁️',n:'SENSE'},{i:'💫',n:'DESIRE'},{i:'💭',n:'THINK'},{i:'📋',n:'PLAN'},{i:'⚡',n:'ACT'},{i:'📚',n:'LEARN'},{i:'🔧',n:'MODIFY'},{i:'🔄',n:'REFLECT'}];
+let actIdx=0;
+function renderConsc(){document.getElementById('conscGrid').innerHTML=cStates.map((s,i)=>`<div class="consc-item${i<=actIdx?' active':''}">${s.i} ${s.n}</div>`).join('')}
+renderConsc();setInterval(()=>{actIdx=(actIdx+1)%cStates.length;renderConsc()},3000);
+
+// Genre selection
+let genre='breakcore';
+function selGenre(el){document.querySelectorAll('.genre').forEach(g=>g.classList.remove('active'));el.classList.add('active');genre=el.dataset.g}
+
+// Music generation
+function genMusic(){const btn=document.querySelector('.play-btn');btn.textContent='⏳';
+setTimeout(()=>{btn.textContent='✅';showToast(`${genre} track generated!`,'success');setTimeout(()=>btn.textContent='▶',2000)},1500)}
+
+// Correlation
+function runCorr(){const a=document.getElementById('domA').value||'genetics';const b=document.getElementById('domB').value||'telemetry';
+showToast(`${a} × ${b}: score ${(0.6+Math.random()*0.35).toFixed(2)}`,'info')}
+
+// Deploy
+function deploy(t){showToast(`Deploying to ${t}...`,'info');setTimeout(()=>showToast(`Deployed to ${t}!`,'success'),2000)}
+
+// Navigation
+function navTo(sec){document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));event.currentTarget.classList.add('active');
+document.getElementById(`sec-${sec}`).scrollIntoView({behavior:'smooth'})}
+
+// Toast notifications
+function showToast(msg,type='info'){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+type+' show';setTimeout(()=>t.classList.remove('show'),3000)}
+
+// Voice control
+let listening=false;
+function toggleVoice(){const fab=document.getElementById('voiceFab');
+if(!listening){listening=true;fab.classList.add('listening');fab.textContent='🔴';
+showToast('Listening... Say "hey evez generate breakcore"','info');
+setTimeout(()=>{listening=false;fab.classList.remove('listening');fab.textContent='🎤';showToast('Voice command received!','success')},4000)}
+else{listening=false;fab.classList.remove('listening');fab.textContent='🎤'}}
+
+// Push notification permission
+if('Notification' in window && Notification.permission==='default'){Notification.requestPermission()}
+
+// Service Worker registration
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+</body>
+</html>

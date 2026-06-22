@@ -1,0 +1,105 @@
+{
+  "name": "evez",
+  "displayName": "EVEZ — Autonomous AI Mesh",
+  "description": "Monitor and control your EVEZ Autonomous AI Mesh from VS Code. Service status, music generation, invariance checks, and spine events at a glance.",
+  "version": "1.0.0",
+  "publisher": "evez-os",
+  "license": "MIT",
+  "icon": "icons/evez.png",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other", "Machine Learning", "Programming Languages"],
+  "keywords": ["evez", "ai", "mesh", "consciousness", "music", "correlation"],
+  "activationEvents": ["*"],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "evez-sidebar",
+          "title": "EVEZ Mesh",
+          "icon": "icons/evez.svg"
+        }
+      ]
+    },
+    "views": {
+      "evez-sidebar": [
+        {
+          "id": "evez.status",
+          "name": "Mesh Status",
+          "icon": "icons/evez.svg"
+        },
+        {
+          "id": "evez.spine",
+          "name": "Spine Events"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "evez.health",
+        "title": "EVEZ: Check Mesh Health"
+      },
+      {
+        "command": "evez.generateBreakcore",
+        "title": "EVEZ: Generate Breakcore"
+      },
+      {
+        "command": "evez.generateDubstep",
+        "title": "EVEZ: Generate Dubstep"
+      },
+      {
+        "command": "evez.generatePhonk",
+        "title": "EVEZ: Generate Phonk"
+      },
+      {
+        "command": "evez.checkInvariants",
+        "title": "EVEZ: Check Invariants"
+      },
+      {
+        "command": "evez.viewSpineEvents",
+        "title": "EVEZ: View Spine Events"
+      },
+      {
+        "command": "evez.runCorrelation",
+        "title": "EVEZ: Run Cross-Domain Correlation"
+      },
+      {
+        "command": "evez.openDashboard",
+        "title": "EVEZ: Open Dashboard"
+      }
+    ],
+    "configuration": {
+      "title": "EVEZ",
+      "properties": {
+        "evez.apiUrl": {
+          "type": "string",
+          "default": "https://api.evez-os.ai",
+          "description": "EVEZ API URL"
+        },
+        "evez.dashboardUrl": {
+          "type": "string",
+          "default": "https://dashboard.evez-os.ai",
+          "description": "EVEZ Dashboard URL"
+        },
+        "evez.autoRefresh": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-refresh mesh status"
+        },
+        "evez.refreshInterval": {
+          "type": "number",
+          "default": 30,
+          "description": "Refresh interval in seconds"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node test.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0"
+  }
+}

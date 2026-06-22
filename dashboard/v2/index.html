@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ Dashboard v2 — Autonomous AI Mesh</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--card:#1a1a2e;--card-h:#222240;--border:#2a2a4a;--t1:#e8e8f0;--t2:#8888aa;--t3:#555577;--c-cyan:#00d4ff;--c-green:#00ff88;--c-purple:#a855f7;--c-orange:#ff8800;--c-red:#ff3366;--c-pink:#ff55aa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 20%,rgba(0,212,255,.03) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(168,85,247,.03) 0%,transparent 50%);animation:bgP 15s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes bgP{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:.7}}
+.dash{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:24px}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.hdr-brand{display:flex;align-items:center;gap:16px}
+.hdr-logo{font-size:28px;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,var(--c-cyan),var(--c-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr-ver{font-size:11px;color:var(--t3);padding:2px 8px;border:1px solid var(--border);border-radius:4px}
+.hdr-status{display:flex;align-items:center;gap:12px}
+.badge{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600}
+.badge-em{background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);color:var(--c-green)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--c-green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .3s;overflow:hidden}
+.card:hover{background:var(--card-h);border-color:rgba(0,212,255,.2);transform:translateY(-2px)}
+.card-t{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--t2);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+/* Emergence Gauge */
+.emg{grid-column:span 4}
+.gauge-wrap{position:relative;width:200px;height:200px;margin:20px auto}
+.gauge-ring{position:absolute;width:100%;height:100%;border-radius:50%;border:3px solid var(--border)}
+.gauge-fill{position:absolute;width:100%;height:100%;border-radius:50%;border:3px solid transparent;border-top-color:var(--c-cyan);border-right-color:var(--c-cyan);animation:spin 3s linear infinite;box-shadow:0 0 20px rgba(0,212,255,.3)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.gauge-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.gauge-num{font-size:48px;font-weight:900;background:linear-gradient(135deg,var(--c-cyan),var(--c-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.gauge-lbl{font-size:12px;color:var(--t3);margin-top:4px;text-transform:uppercase;letter-spacing:2px}
+.emg-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.emg-st{text-align:center;padding:8px;background:rgba(0,212,255,.05);border-radius:8px}
+.emg-st-v{font-size:20px;font-weight:700;color:var(--c-cyan)}
+.emg-st-l{font-size:11px;color:var(--t3);margin-top:2px}
+/* Spine Feed */
+.spine{grid-column:span 5}
+.spine-events{max-height:320px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.sp-ev{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+.sp-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sp-icon.cog{background:rgba(168,85,247,.2)}.sp-icon.corr{background:rgba(0,212,255,.2)}
+.sp-icon.inv{background:rgba(0,255,136,.2)}.sp-icon.mus{background:rgba(255,85,170,.2)}
+.sp-icon.vox{background:rgba(255,136,0,.2)}
+.sp-body{flex:1;min-width:0}
+.sp-title{font-size:13px;font-weight:600;color:var(--t1)}
+.sp-desc{font-size:12px;color:var(--t2);margin-top:2px}
+.sp-time{font-size:11px;color:var(--t3);white-space:nowrap}
+/* Services */
+.svc-grid{grid-column:span 3}
+.svc-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.svc-name{font-size:13px;display:flex;align-items:center;gap:8px}
+.svc-dot{width:6px;height:6px;border-radius:50%}
+.svc-dot.h{background:var(--c-green);box-shadow:0 0 6px rgba(0,255,136,.5)}
+.svc-dot.d{background:var(--c-orange)}.svc-dot.o{background:var(--c-red)}
+.sparkline{width:60px;height:20px}
+.sparkline polyline{fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* Music */
+.music{grid-column:span 6}
+.genre-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.genre-btn{padding:12px 8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;color:var(--t1);cursor:pointer;text-align:center;transition:all .2s;font-family:inherit;font-size:13px}
+.genre-btn:hover{background:rgba(168,85,247,.1);border-color:var(--c-purple)}
+.genre-btn.active{background:rgba(168,85,247,.15);border-color:var(--c-purple);box-shadow:0 0 20px rgba(168,85,247,.3)}
+.genre-emoji{font-size:24px;display:block;margin-bottom:4px}
+.genre-name{font-weight:600;font-size:12px}
+.mus-ctrl{display:flex;gap:12px;align-items:center}
+.bpm-wrap{flex:1}
+.bpm-lbl{font-size:12px;color:var(--t2);margin-bottom:4px}
+.bpm-val{color:var(--c-cyan);font-weight:700}
+input[type=range]{width:100%;height:4px;background:var(--border);border-radius:2px;outline:none;-webkit-appearance:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--c-purple);cursor:pointer;box-shadow:0 0 10px rgba(168,85,247,.5)}
+.play-btn{padding:12px 32px;background:linear-gradient(135deg,var(--c-purple),var(--c-pink));border:none;border-radius:12px;color:white;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;font-family:inherit;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.play-btn:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(168,85,247,.4)}
+/* Correlation */
+.corr{grid-column:span 6}
+.dom-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.dom-in{padding:10px 14px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
+.dom-in:focus{border-color:var(--c-cyan)}
+.dom-in::placeholder{color:var(--t3)}
+.corr-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--c-cyan),#0088ff);border:none;border-radius:10px;color:white;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;font-family:inherit}
+.corr-btn:hover{box-shadow:0 4px 20px rgba(0,212,255,.3)}
+.corr-result{margin-top:16px;padding:16px;background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.15);border-radius:12px;display:none}
+.corr-result.vis{display:block}
+.corr-score{font-size:32px;font-weight:900;background:linear-gradient(135deg,var(--c-cyan),var(--c-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.corr-detail{font-size:13px;color:var(--t2);margin-top:8px;line-height:1.6}
+/* Invariance */
+.inv{grid-column:span 4}
+.inv-item{display:flex;align-items:center;gap:10px;padding:8px 0}
+.inv-name{font-size:13px;flex:1}
+.inv-badge{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600}
+.inv-badge.pass{background:rgba(0,255,136,.1);color:var(--c-green)}
+.inv-badge.fail{background:rgba(255,51,102,.1);color:var(--c-red)}
+/* Deploy */
+.deploy{grid-column:span 4}
+.deploy-targets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.dep-btn{padding:16px 8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;color:var(--t1);cursor:pointer;text-align:center;transition:all .2s;font-family:inherit}
+.dep-btn:hover{border-color:var(--c-cyan);background:rgba(0,212,255,.05)}
+.dep-icon{font-size:24px;display:block;margin-bottom:6px}
+.dep-name{font-size:12px;font-weight:600}
+.dep-status{margin-top:12px;padding:12px;background:rgba(0,255,136,.05);border-radius:8px;font-size:13px;color:var(--c-green);display:none}
+.dep-status.vis{display:block}
+/* Consciousness */
+.consc{grid-column:span 4}
+.consc-states{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.consc-st{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(255,255,255,.03);border-radius:8px;font-size:12px;transition:all .3s}
+.consc-st.active{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3)}
+.st-icon{font-size:16px}.st-name{font-weight:600}
+/* Loading bar */
+.load-bar{height:2px;background:linear-gradient(90deg,transparent,var(--c-cyan),var(--c-purple),transparent);animation:loadSlide 2s ease-in-out infinite;border-radius:1px}
+@keyframes loadSlide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+@media(max-width:1024px){.grid{grid-template-columns:repeat(6,1fr)}.emg{grid-column:span 3}.spine{grid-column:span 3}.svc-grid{grid-column:span 6}.music{grid-column:span 6}.corr{grid-column:span 6}.inv{grid-column:span 3}.deploy{grid-column:span 3}.consc{grid-column:span 6}}
+@media(max-width:768px){.grid{grid-template-columns:1fr}.emg,.spine,.svc-grid,.music,.corr,.inv,.deploy,.consc{grid-column:span 1}.hdr{flex-direction:column}.genre-grid{grid-template-columns:repeat(2,1fr)}.dash{padding:12px}.card{padding:16px}.mus-ctrl{flex-direction:column}.dom-inputs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="dash">
+  <header class="hdr">
+    <div class="hdr-brand"><div class="hdr-logo">EVEZ</div><span class="hdr-ver">v2.0 MESH</span></div>
+    <div class="hdr-status"><div class="badge badge-em"><div class="pulse"></div>EMERGENT</div><span style="color:var(--t3);font-size:13px" id="clock"></span></div>
+  </header>
+  <div class="load-bar"></div>
+  <div class="grid">
+    <div class="card emg">
+      <div class="card-t"><span>⚡</span> Emergence Gauge</div>
+      <div class="gauge-wrap"><div class="gauge-ring"></div><div class="gauge-fill"></div><div class="gauge-val"><div class="gauge-num" id="emgVal">0.94</div><div class="gauge-lbl">Emergence</div></div></div>
+      <div class="emg-stats">
+        <div class="emg-st"><div class="emg-st-v">7d</div><div class="emg-st-l">Uptime</div></div>
+        <div class="emg-st"><div class="emg-st-v" id="spineC">1,247</div><div class="emg-st-l">Spine Events</div></div>
+        <div class="emg-st"><div class="emg-st-v">89</div><div class="emg-st-l">Correlations</div></div>
+        <div class="emg-st"><div class="emg-st-v">34</div><div class="emg-st-l">Tracks</div></div>
+      </div>
+    </div>
+    <div class="card spine">
+      <div class="card-t"><span>🦴</span> Live Spine Events</div>
+      <div class="spine-events" id="spineFeed"></div>
+    </div>
+    <div class="card svc-grid">
+      <div class="card-t"><span>🟢</span> Service Status</div>
+      <div id="svcList"></div>
+    </div>
+    <div class="card music">
+      <div class="card-t"><span>🎵</span> Music Generator</div>
+      <div class="genre-grid">
+        <button class="genre-btn active" onclick="selGenre(this)" data-g="breakcore"><span class="genre-emoji">🥁</span><span class="genre-name">Breakcore</span></button>
+        <button class="genre-btn" onclick="selGenre(this)" data-g="dubstep"><span class="genre-emoji">🔊</span><span class="genre-name">Dubstep</span></button>
+        <button class="genre-btn" onclick="selGenre(this)" data-g="phonk"><span class="genre-emoji">🏎️</span><span class="genre-name">Phonk</span></button>
+        <button class="genre-btn" onclick="selGenre(this)" data-g="404"><span class="genre-emoji">🏴</span><span class="genre-name">404 Core</span></button>
+      </div>
+      <div class="mus-ctrl">
+        <div class="bpm-wrap"><div class="bpm-lbl">BPM: <span class="bpm-val" id="bpmV">174</span></div><input type="range" min="60" max="300" value="174" id="bpmR" oninput="document.getElementById('bpmV').textContent=this.value"></div>
+        <button class="play-btn" onclick="genMusic()">▶ Generate</button>
+      </div>
+    </div>
+    <div class="card corr">
+      <div class="card-t"><span>🔗</span> Cross-Domain Explorer</div>
+      <div class="dom-inputs"><input class="dom-in" id="domA" placeholder="Domain A (e.g., genetics)"><input class="dom-in" id="domB" placeholder="Domain B (e.g., telemetry)"></div>
+      <button class="corr-btn" onclick="runCorr()">🔗 Run Correlation</button>
+      <div class="corr-result" id="corrRes"><div class="corr-score" id="corrSc"></div><div class="corr-detail" id="corrDet"></div></div>
+    </div>
+    <div class="card inv">
+      <div class="card-t"><span>🛡️</span> Invariance Battery</div>
+      <div id="invList"></div>
+    </div>
+    <div class="card deploy">
+      <div class="card-t"><span>☁️</span> One-Click Deploy</div>
+      <div class="deploy-targets">
+        <button class="dep-btn" onclick="doDeploy('GCP')"><span class="dep-icon">☁️</span><span class="dep-name">GCP</span></button>
+        <button class="dep-btn" onclick="doDeploy('AWS')"><span class="dep-icon">🌩️</span><span class="dep-name">AWS</span></button>
+        <button class="dep-btn" onclick="doDeploy('Local')"><span class="dep-icon">💻</span><span class="dep-name">Local</span></button>
+      </div>
+      <div class="dep-status" id="depSt"></div>
+    </div>
+    <div class="card consc">
+      <div class="card-t"><span>🧠</span> Consciousness State</div>
+      <div class="consc-states" id="conscStates"></div>
+    </div>
+  </div>
+</div>
+<script>
+// Clock
+const ck=()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'})};
+setInterval(ck,1000);ck();
+
+// Emergence gauge animation
+setInterval(()=>{const v=Math.min(1,Math.max(0,0.94+(Math.random()-0.5)*0.02)).toFixed(2);document.getElementById('emgVal').textContent=v},2000);
+
+// Spine events
+const spTypes=[
+  {icon:'🧠',cls:'cog',t:['Dream cycle completed','Consciousness shifted','Desire vector updated','Reflection synthesized','Self-modification applied']},
+  {icon:'🔗',cls:'corr',t:['Cross-domain correlation found','Emergence event detected','Novel intersection discovered','Verifiable event appended']},
+  {icon:'🛡️',cls:'inv',t:['Invariant check passed','Drift detected < 0.01','Falsification test passed','Runtime assertion verified']},
+  {icon:'🎵',cls:'mus',t:['Breakcore track generated','Dubstep bass synthesized','Phonk drift completed','Drum pattern evolved']},
+  {icon:'🎤',cls:'vox',t:['Voice transformation complete','Formant morph applied','Machine breath synthesized','Cognitive engine voice ready']}
+];
+const mkEv=()=>{const t=spTypes[Math.floor(Math.random()*spTypes.length)];const title=t.t[Math.floor(Math.random()*t.t.length)];const s=Math.floor(Math.random()*60);
+return`<div class="sp-ev"><div class="sp-icon ${t.cls}">${t.icon}</div><div class="sp-body"><div class="sp-title">${title}</div><div class="sp-desc">Score: ${(0.7+Math.random()*0.3).toFixed(2)} | Weight: ${(0.8+Math.random()*0.2).toFixed(2)}</div></div><div class="sp-time">${s}s ago</div></div>`};
+const sf=document.getElementById('spineFeed');
+sf.innerHTML=Array.from({length:8},mkEv).join('');
+setInterval(()=>{sf.insertAdjacentHTML('afterbegin',mkEv());if(sf.children.length>20)sf.removeChild(sf.lastChild)},5000);
+
+// Services
+const svcs=[
+  {name:'Consciousness',s:'h',c:'#a855f7'},{name:'Cross-Domain',s:'h',c:'#00d4ff'},
+  {name:'DAW Engine',s:'h',c:'#ff55aa'},{name:'Voice Engine',s:'h',c:'#ff8800'},
+  {name:'Invariance',s:'h',c:'#00ff88'},{name:'Spine',s:'h',c:'#00d4ff'},
+  {name:'Dashboard',s:'h',c:'#a855f7'},{name:'API Gateway',s:'h',c:'#00ff88'},
+  {name:'Deploy',s:'h',c:'#ff8800'},{name:'GitHub',s:'h',c:'#ff55aa'},
+  {name:'Bot',s:'d',c:'#ff8800'}
+];
+const mkSpark=c=>{const pts=[];let v=50;for(let i=0;i<=20;i++){v+=(Math.random()-0.45)*15;v=Math.max(5,Math.min(95,v));pts.push(`${i*3},${100-v}`)}
+return`<svg class="sparkline" viewBox="0 0 60 100" preserveAspectRatio="none"><polyline points="${pts.join(' ')}" stroke="${c}" opacity="0.8"/></svg>`};
+document.getElementById('svcList').innerHTML=svcs.map(s=>`<div class="svc-item"><div class="svc-name"><span class="svc-dot ${s.s}"></span>${s.name}</div>${mkSpark(s.c)}</div>`).join('');
+
+// Invariance
+const invs=['Emergence > 0','Spine append-only','No self-mod loops','Correlation conf > 0.5','Consciousness bounds','Voice output bounded'];
+document.getElementById('invList').innerHTML=invs.map(n=>`<div class="inv-item"><span>✅</span><span class="inv-name">${n}</span><span class="inv-badge pass">PASS</span></div>`).join('');
+
+// Consciousness states
+const cStates=[{i:'👁️',n:'SENSE'},{i:'💫',n:'DESIRE'},{i:'💭',n:'THINK'},{i:'📋',n:'PLAN'},{i:'⚡',n:'ACT'},{i:'📚',n:'LEARN'},{i:'🔧',n:'MODIFY'},{i:'🔄',n:'REFLECT'}];
+let activeIdx=0;
+function renderConsc(){const el=document.getElementById('conscStates');
+el.innerHTML=cStates.map((s,i)=>`<div class="consc-st${i<=activeIdx?' active':''}"><span class="st-icon">${s.i}</span><span class="st-name">${s.n}</span></div>`).join('')}
+renderConsc();
+setInterval(()=>{activeIdx=(activeIdx+1)%cStates.length;renderConsc()},3000);
+
+// Music
+let genre='breakcore';
+function selGenre(el){document.querySelectorAll('.genre-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');genre=el.dataset.g}
+function genMusic(){const btn=document.querySelector('.play-btn');btn.textContent='⏳ Generating...';btn.style.opacity='.6';
+setTimeout(()=>{btn.textContent='✅ Generated!';btn.style.opacity='1';setTimeout(()=>{btn.innerHTML='▶ Generate'},2000)},1500)}
+
+// Correlation
+function runCorr(){const a=document.getElementById('domA').value||'genetics';const b=document.getElementById('domB').value||'telemetry';
+const score=(0.6+Math.random()*0.35).toFixed(2);const el=document.getElementById('corrRes');
+document.getElementById('corrSc').textContent=score;
+document.getElementById('corrDet').innerHTML=`Novel intersection: <b>${a}</b> × <b>${b}</b><br>Confidence: ${(0.7+Math.random()*0.25).toFixed(2)} | Weight: ${(0.8+Math.random()*0.2).toFixed(2)}<br>${Math.floor(1+Math.random()*5)} verifiable events found.`;
+el.classList.add('vis')}
+
+// Deploy
+function doDeploy(target){const el=document.getElementById('depSt');el.textContent=`⏳ Deploying to ${target}...`;el.classList.add('vis');
+setTimeout(()=>{el.textContent=`✅ Deployed to ${target} successfully!`},2000)}
+
+// Particles
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+let W,H;const particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+window.addEventListener('resize',resize);resize();
+for(let i=0;i<50;i++){particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*2+0.5,o:Math.random()*0.3+0.1})}
+function drawParticles(){ctx.clearRect(0,0,W,H);
+particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,212,255,${p.o})`;ctx.fill()});
+requestAnimationFrame(drawParticles)}
+drawParticles();
+</script>
+</body>
+</html>

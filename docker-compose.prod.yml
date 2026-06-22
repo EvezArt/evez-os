@@ -1,0 +1,364 @@
+# EVEZ Production Docker Compose
+# Health checks, restart policies, resource limits, logging, network isolation
+version: "3.9"
+
+x-common: &common
+  restart: always
+  logging:
+    driver: json-file
+    options:
+      max-size: "50m"
+      max-file: "3"
+      tag: "{{.Name}}"
+
+x-health-defaults: &health-defaults
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 30s
+
+services:
+  # ─── Core Services ───────────────────────────────────────────
+  consciousness-engine:
+    <<: *common
+    build: ./services/consciousness-engine
+    container_name: evez-consciousness
+    ports: ["9111:9111"]
+    networks: [core-tier]
+    environment:
+      - MESH_MODE=production
+      - PIPELINE_MODE=7-system
+      - EMERGENCE_THRESHOLD=0.5
+      - EVENT_SPINE_URL=http://event-spine:9116
+    volumes:
+      - spine-data:/var/lib/evez/spine
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9111/health"]
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 512M }
+        reservations: { cpus: "0.25", memory: 256M }
+
+  daw-agent:
+    <<: *common
+    build: ./services/daw-agent
+    container_name: evez-daw
+    ports: ["9112:9112"]
+    networks: [core-tier]
+    environment:
+      - MESH_MODE=production
+      - SYNTHESIS_MODE=$0
+      - SAMPLE_RATE=44100
+    volumes:
+      - audio-output:/var/lib/evez/audio
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9112/health"]
+    deploy:
+      resources:
+        limits: { cpus: "2.0", memory: 1024M }
+        reservations: { cpus: "0.5", memory: 512M }
+
+  machine-voice:
+    <<: *common
+    build: ./services/machine-voice
+    container_name: evez-voice
+    ports: ["9113:9113"]
+    networks: [core-tier]
+    environment:
+      - MESH_MODE=production
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9113/health"]
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 512M }
+        reservations: { cpus: "0.25", memory: 256M }
+
+  cross-domain-engine:
+    <<: *common
+    build: ./services/cross-domain-engine
+    container_name: evez-cross-domain
+    ports: ["9114:9114"]
+    networks: [analysis-tier]
+    environment:
+      - MESH_MODE=production
+      - EVENT_SPINE_URL=http://event-spine:9116
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9114/health"]
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 512M }
+        reservations: { cpus: "0.25", memory: 256M }
+
+  invariance-battery:
+    <<: *common
+    build: ./services/invariance-battery
+    container_name: evez-invariance
+    ports: ["9115:9115"]
+    networks: [safety-tier]
+    environment:
+      - MESH_MODE=production
+      - FALSIFICATION_WEIGHT=3.0
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9115/health"]
+    deploy:
+      resources:
+        limits: { cpus: "0.5", memory: 256M }
+        reservations: { cpus: "0.1", memory: 128M }
+
+  event-spine:
+    <<: *common
+    build: ./services/event-spine
+    container_name: evez-spine
+    ports: ["9116:9116"]
+    networks: [core-tier, safety-tier, analysis-tier, infra-tier]
+    environment:
+      - MESH_MODE=production
+      - APPEND_ONLY=true
+    volumes:
+      - spine-data:/var/lib/evez/spine
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9116/health"]
+    deploy:
+      resources:
+        limits: { cpus: "0.5", memory: 256M }
+        reservations: { cpus: "0.1", memory: 128M }
+
+  # ─── Infrastructure Services ────────────────────────────────
+  mesh-health:
+    <<: *common
+    build: ./services/mesh-health
+    container_name: evez-mesh-health
+    ports: ["9117:9117"]
+    networks: [infra-tier]
+    environment:
+      - MESH_MODE=production
+      - NODES=consciousness-engine:9111,daw-agent:9112,machine-voice:9113
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9117/health"]
+    deploy:
+      resources:
+        limits: { cpus: "0.5", memory: 256M }
+        reservations: { cpus: "0.1", memory: 128M }
+
+  gateway:
+    <<: *common
+    build: ./services/gateway
+    container_name: evez-gateway
+    ports: ["9118:9118"]
+    networks: [core-tier, analysis-tier, safety-tier, infra-tier, dmz]
+    environment:
+      - CONSCIOUSNESS_URL=http://consciousness-engine:9111
+      - DAW_URL=http://daw-agent:9112
+      - VOICE_URL=http://machine-voice:9113
+      - CROSS_DOMAIN_URL=http://cross-domain-engine:9114
+      - INVARIANCE_URL=http://invariance-battery:9115
+      - SPINE_URL=http://event-spine:9116
+      - MESH_URL=http://mesh-health:9117
+      - RQNS_URL=http://rqns-pipeline:9119
+      - WEBHOOK_URL=http://webhook-relay:9121
+      - METRICS_URL=http://metrics:9123
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9118/health"]
+      interval: 15s
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 256M }
+        reservations: { cpus: "0.2", memory: 128M }
+
+  rqns-pipeline:
+    <<: *common
+    build: ./services/rqns-pipeline
+    container_name: evez-rqns
+    ports: ["9119:9119"]
+    networks: [core-tier]
+    environment:
+      - MESH_MODE=production
+      - FALSIFICATION_WEIGHT=3.0
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9119/health"]
+    deploy:
+      resources:
+        limits: { cpus: "0.5", memory: 256M }
+        reservations: { cpus: "0.1", memory: 128M }
+
+  webhook-relay:
+    <<: *common
+    build: ./services/webhook-relay
+    container_name: evez-webhook
+    ports: ["9121:9121"]
+    networks: [infra-tier, dmz]
+    environment:
+      - MESH_MODE=production
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9121/health"]
+    deploy:
+      resources:
+        limits: { cpus: "0.25", memory: 128M }
+        reservations: { cpus: "0.05", memory: 64M }
+
+  metrics:
+    <<: *common
+    build: ./services/metrics
+    container_name: evez-metrics
+    ports: ["9123:9123"]
+    networks: [infra-tier]
+    environment:
+      - MESH_MODE=production
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9123/health"]
+    deploy:
+      resources:
+        limits: { cpus: "0.25", memory: 128M }
+        reservations: { cpus: "0.05", memory: 64M }
+
+  geolocation:
+    <<: *common
+    build: ./services/geolocation
+    container_name: evez-geo
+    ports: ["9124:9124"]
+    networks: [infra-tier]
+    environment:
+      - MESH_MODE=production
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9124/health"]
+    deploy:
+      resources:
+        limits: { cpus: "0.25", memory: 128M }
+        reservations: { cpus: "0.05", memory: 64M }
+
+  tts-service:
+    <<: *common
+    build: ./services/tts-service
+    container_name: evez-tts
+    ports: ["9125:9125"]
+    networks: [core-tier]
+    environment:
+      - MESH_MODE=production
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "curl", "-sf", "http://localhost:9125/health"]
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 512M }
+        reservations: { cpus: "0.25", memory: 256M }
+
+  # ─── Monitoring Stack ───────────────────────────────────────
+  prometheus:
+    <<: *common
+    image: prom/prometheus:v2.52.0
+    container_name: evez-prometheus
+    ports: ["9090:9090"]
+    networks: [monitoring-tier]
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts:/etc/prometheus/alerts:ro
+      - prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=30d"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle"
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "wget", "-qO-", "http://localhost:9090/-/healthy"]
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 1024M }
+        reservations: { cpus: "0.25", memory: 256M }
+
+  alertmanager:
+    <<: *common
+    image: prom/alertmanager:v0.27.0
+    container_name: evez-alertmanager
+    ports: ["9093:9093"]
+    networks: [monitoring-tier]
+    volumes:
+      - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "wget", "-qO-", "http://localhost:9093/-/healthy"]
+    deploy:
+      resources:
+        limits: { cpus: "0.25", memory: 128M }
+
+  grafana:
+    <<: *common
+    image: grafana/grafana:11.0.0
+    container_name: evez-grafana
+    ports: ["3000:3000"]
+    networks: [monitoring-tier, dmz]
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-evez-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana-datasources:/etc/grafana/provisioning/datasources:ro
+      - ./monitoring/grafana-dashboards:/etc/grafana/provisioning/dashboards:ro
+    healthcheck:
+      <<: *health-defaults
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+    deploy:
+      resources:
+        limits: { cpus: "0.5", memory: 256M }
+
+  node-exporter:
+    <<: *common
+    image: prom/node-exporter:v1.8.0
+    container_name: evez-node-exporter
+    ports: ["9100:9100"]
+    networks: [monitoring-tier]
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--path.rootfs=/rootfs"
+    deploy:
+      resources:
+        limits: { cpus: "0.1", memory: 64M }
+
+networks:
+  core-tier:
+    driver: bridge
+    internal: false
+  analysis-tier:
+    driver: bridge
+    internal: true
+  safety-tier:
+    driver: bridge
+    internal: true
+  infra-tier:
+    driver: bridge
+    internal: true
+  monitoring-tier:
+    driver: bridge
+    internal: true
+  dmz:
+    driver: bridge
+
+volumes:
+  spine-data:
+    driver: local
+  audio-output:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
