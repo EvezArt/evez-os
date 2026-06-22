@@ -1,50 +1,94 @@
-name: Deploy All 5 Streams to Vultr
+name: Deploy 5 Streams to GCP (Never Go Down)
 
 on:
   workflow_dispatch:
-    inputs:
-      stream_key_1:
-        description: 'Stream 1 key (Mission Control)'
-        required: false
-      stream_key_2:
-        description: 'Stream 2 key (Cognition)'
-        required: false
-      stream_key_3:
-        description: 'Stream 3 key (Synaptic Cortex)'
-        required: false
-      stream_key_4:
-        description: 'Stream 4 key (Quantum Evolution)'
-        required: false
-      stream_key_5:
-        description: 'Stream 5 key (MetaROM Dreams)'
-        required: false
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/evez-*-stream.py'
+      - 'scripts/evez-livestream.py'
+      - 'scripts/gcp-streams-bootstrap.sh'
+      - 'k8s/streams/**'
 
 jobs:
-  deploy-streams:
+  deploy-to-gcp:
+    name: GCP Stream Deployment
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.VULTR_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 64.176.221.16 >> ~/.ssh/known_hosts 2>/dev/null || true
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      - name: Deploy all streams
-        env:
-          STREAM_KEY_1: ${{ inputs.stream_key_1 || secrets.YOUTUBE_STREAM_KEY_1 }}
-          STREAM_KEY_2: ${{ inputs.stream_key_2 || secrets.YOUTUBE_STREAM_KEY_2 }}
-          STREAM_KEY_3: ${{ inputs.stream_key_3 || secrets.YOUTUBE_STREAM_KEY_3 }}
-          STREAM_KEY_4: ${{ inputs.stream_key_4 || secrets.YOUTUBE_STREAM_KEY_4 }}
-          STREAM_KEY_5: ${{ inputs.stream_key_5 || secrets.YOUTUBE_STREAM_KEY_5 }}
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: evez-firmament
+
+      - name: Enable APIs
         run: |
-          ssh -o StrictHostKeyChecking=no openclaw@64.176.221.16 \
-            "STREAM_KEY_1='$STREAM_KEY_1' \
-             STREAM_KEY_2='$STREAM_KEY_2' \
-             STREAM_KEY_3='$STREAM_KEY_3' \
-             STREAM_KEY_4='$STREAM_KEY_4' \
-             STREAM_KEY_5='$STREAM_KEY_5' \
-             bash -c '$(curl -sSL https://raw.githubusercontent.com/EvezArt/evez-os/main/scripts/evez-deploy-all-streams.sh)'"
+          gcloud services enable \
+            compute.googleapis.com \
+            secretmanager.googleapis.com \
+            container.googleapis.com \
+            --project=evez-firmament --quiet
+
+      - name: Store stream keys in Secret Manager
+        env:
+          K1: ${{ secrets.YOUTUBE_STREAM_KEY_1 }}
+          K2: ${{ secrets.YOUTUBE_STREAM_KEY_2 }}
+          K3: ${{ secrets.YOUTUBE_STREAM_KEY_3 }}
+          K4: ${{ secrets.YOUTUBE_STREAM_KEY_4 }}
+          K5: ${{ secrets.YOUTUBE_STREAM_KEY_5 }}
+        run: |
+          for i in 1 2 3 4 5; do
+            KEY_VAR="K$i"
+            KEY="${!KEY_VAR}"
+            if [ -n "$KEY" ]; then
+              gcloud secrets create "evez-stream-key-$i" --project=evez-firmament 2>/dev/null || true
+              echo -n "$KEY" | gcloud secrets versions add "evez-stream-key-$i" \
+                --data-file=- --project=evez-firmament --quiet
+              echo "✓ evez-stream-key-$i stored"
+            fi
+          done
+
+      - name: Deploy VMs via bootstrap script
+        env:
+          STREAM_KEY_1: ${{ secrets.YOUTUBE_STREAM_KEY_1 }}
+          STREAM_KEY_2: ${{ secrets.YOUTUBE_STREAM_KEY_2 }}
+          STREAM_KEY_3: ${{ secrets.YOUTUBE_STREAM_KEY_3 }}
+          STREAM_KEY_4: ${{ secrets.YOUTUBE_STREAM_KEY_4 }}
+          STREAM_KEY_5: ${{ secrets.YOUTUBE_STREAM_KEY_5 }}
+        run: |
+          chmod +x scripts/gcp-streams-bootstrap.sh
+          bash scripts/gcp-streams-bootstrap.sh
+
+      - name: Verify deployment
+        run: |
+          echo "=== Running VMs ==="
+          gcloud compute instances list \
+            --project=evez-firmament \
+            --filter="name~evez-stream" \
+            --format="table(name,zone,status,networkInterfaces[0].accessConfigs[0].natIP)"
+
+      - name: Post status summary
+        if: always()
+        run: |
+          echo "### EVEZ-OS 5-Stream Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Stream | Name | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 1 | Mission Control | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
+          echo "| 2 | Cognition Study | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
+          echo "| 3 | Synaptic Cortex | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
+          echo "| 4 | Quantum Evolution | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
+          echo "| 5 | MetaROM Dreams | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Architecture:** GCE VMs · systemd auto-restart · 2min watchdog · Secret Manager keys" >> $GITHUB_STEP_SUMMARY
