@@ -24,6 +24,7 @@ SERVICES = {
     "spine":         {"port": 9116, "name": "Event Spine"},
     "mesh":          {"port": 9117, "name": "Mesh Health"},
     "rqns":          {"port": 9119, "name": "RQNS Pipeline"},
+    "webhook":       {"port": 9121, "name": "Webhook Relay"},
 }
 
 def _get(url, timeout=2):

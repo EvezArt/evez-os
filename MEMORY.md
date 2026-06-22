@@ -35,7 +35,9 @@
   - :9117 Mesh Health (self-healing via systemctl, proven kill→detect→heal cycle)
   - :9118 Gateway (single entry, routes to all services)
   - :9119 RQNS Pipeline (LIF neuron, contextual bandit, hot-swapping)
-- ✅ UFW firewall open on ports 9111-9119 + 8443
+  - :9121 Webhook Relay (mesh state change notifications)
+  - :9123 Metrics (Prometheus-compatible monitoring)
+- ✅ UFW firewall open on ports 9111-9123 + 8443
 - ✅ Caddy reverse proxy configured for evez-os.ai
 - ✅ Web dashboard at /dashboard/index.html
 - ✅ gcloud CLI v573.0.0 installed
