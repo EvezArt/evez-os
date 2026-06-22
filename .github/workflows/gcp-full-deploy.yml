@@ -43,16 +43,16 @@ jobs:
           terraform_version: ${{ env.TF_VERSION }}
 
       - name: Terraform Init
-        working-directory: infrastructure/terraform
+        working-directory: terraform
         run: terraform init -backend-config="prefix=terraform/state"
 
       - name: Terraform Validate
-        working-directory: infrastructure/terraform
+        working-directory: terraform
         run: terraform validate
 
       - name: Terraform Plan
         id: plan
-        working-directory: infrastructure/terraform
+        working-directory: terraform
         run: |
           terraform plan -out=tfplan -var="project_id=${{ env.GCP_PROJECT }}" -var="region=${{ env.GCP_REGION }}"
           echo "changes=true" >> "$GITHUB_OUTPUT"
@@ -83,11 +83,11 @@ jobs:
           terraform_version: ${{ env.TF_VERSION }}
 
       - name: Terraform Init
-        working-directory: infrastructure/terraform
+        working-directory: terraform
         run: terraform init -backend-config="prefix=terraform/state"
 
       - name: Terraform Apply
-        working-directory: infrastructure/terraform
+        working-directory: terraform
         run: |
           terraform apply -auto-approve \
             -var="project_id=${{ env.GCP_PROJECT }}" \
@@ -95,7 +95,7 @@ jobs:
 
       - name: Get Outputs
         id: tf-outputs
-        working-directory: infrastructure/terraform
+        working-directory: terraform
         run: |
           echo "lb_ip=$(terraform output -raw load_balancer_ip)" >> "$GITHUB_OUTPUT"
           echo "vpc_id=$(terraform output -raw vpc_id)" >> "$GITHUB_OUTPUT"
