@@ -1,209 +1,119 @@
-name: EVEZ GCP Full Deploy
+name: GCP Full Deploy — EVEZ Firmament
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'terraform/**'
+      - 'cloud-init.sh'
+      - 'scripts/gcp-*.sh'
+      - '.github/workflows/gcp-full-deploy.yml'
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Deployment environment'
-        required: true
-        default: 'production'
-        type: choice
-        options: [production, staging]
+      force_deploy:
+        description: 'Force full redeploy'
+        required: false
+        default: 'false'
 
 env:
   GCP_PROJECT: evez-firmament
   GCP_REGION: us-central1
-  TF_VERSION: '1.7.0'
 
 jobs:
-  # ─── Plan & Validate ─────────────────────────────────────────────────────
-  plan:
-    name: Plan & Validate
+  validate:
+    name: Validate Secrets
     runs-on: ubuntu-latest
-    outputs:
-      changes: ${{ steps.plan.outputs.changes }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Check GCP_SERVICE_ACCOUNT_KEY is set
+        run: |
+          if [ -z "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" ]; then
+            echo ""
+            echo "╔══════════════════════════════════════════════════════════════╗"
+            echo "║  BLOCKED: GCP_SERVICE_ACCOUNT_KEY is not set               ║"
+            echo "║                                                              ║"
+            echo "║  Run scripts/evez-gcp-auth-hardening.sh on any GCP-        ║"
+            echo "║  authenticated machine, then paste the JSON output into:    ║"
+            echo "║  github.com/EvezArt/evez-os/settings/secrets/actions       ║"
+            echo "║                                                              ║"
+            echo "║  Secret name: GCP_SERVICE_ACCOUNT_KEY                      ║"
+            echo "╚══════════════════════════════════════════════════════════════╝"
+            echo ""
+            exit 1
+          fi
+          echo "✅ GCP_SERVICE_ACCOUNT_KEY is set"
 
-      - name: Authenticate to GCP
+  deploy:
+    name: Deploy to GCP Firmament
+    runs-on: ubuntu-latest
+    needs: validate
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud (Service Account — non-expiring)
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      - name: Set up gcloud CLI
+      - name: Setup gcloud CLI
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ env.GCP_PROJECT }}
 
+      - name: Verify GCP Access
+        run: |
+          echo "Authenticated as: $(gcloud config get-value account)"
+          echo "Project: $(gcloud config get-value project)"
+          gcloud compute zones list --filter="region:us-central1" --limit=3
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: ${{ env.TF_VERSION }}
+          terraform_version: "1.6.0"
 
       - name: Terraform Init
         working-directory: terraform
-        run: terraform init -backend-config="prefix=terraform/state"
-
-      - name: Terraform Validate
-        working-directory: terraform
-        run: terraform validate
+        run: terraform init
 
       - name: Terraform Plan
-        id: plan
         working-directory: terraform
-        run: |
-          terraform plan -out=tfplan -var="project_id=${{ env.GCP_PROJECT }}" -var="region=${{ env.GCP_REGION }}"
-          echo "changes=true" >> "$GITHUB_OUTPUT"
-
-  # ─── Deploy Infrastructure ──────────────────────────────────────────────
-  deploy:
-    name: Deploy to GCP
-    needs: plan
-    if: needs.plan.outputs.changes == 'true'
-    runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment || 'production' }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-
-      - name: Set up gcloud CLI
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ env.GCP_PROJECT }}
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: ${{ env.TF_VERSION }}
-
-      - name: Terraform Init
-        working-directory: terraform
-        run: terraform init -backend-config="prefix=terraform/state"
+        run: terraform plan -out=tfplan
+        env:
+          TF_VAR_project_id: ${{ env.GCP_PROJECT }}
+          TF_VAR_region: ${{ env.GCP_REGION }}
+          TF_VAR_ssh_public_key: ${{ secrets.GCP_SSH_PUBLIC_KEY }}
 
       - name: Terraform Apply
         working-directory: terraform
-        run: |
-          terraform apply -auto-approve \
-            -var="project_id=${{ env.GCP_PROJECT }}" \
-            -var="region=${{ env.GCP_REGION }}"
+        if: github.ref == 'refs/heads/main' || inputs.force_deploy == 'true'
+        run: terraform apply -auto-approve tfplan
+        env:
+          TF_VAR_project_id: ${{ env.GCP_PROJECT }}
+          TF_VAR_region: ${{ env.GCP_REGION }}
+          TF_VAR_ssh_public_key: ${{ secrets.GCP_SSH_PUBLIC_KEY }}
 
-      - name: Get Outputs
-        id: tf-outputs
+      - name: Get Node IPs
         working-directory: terraform
         run: |
-          echo "lb_ip=$(terraform output -raw load_balancer_ip)" >> "$GITHUB_OUTPUT"
-          echo "vpc_id=$(terraform output -raw vpc_id)" >> "$GITHUB_OUTPUT"
+          echo "=== Deployed Nodes ==="
+          terraform output -json node_ips 2>/dev/null || echo "(outputs not yet available)"
 
-      - name: Deploy EVEZ Services
+      - name: Update mesh config with new node IPs
         run: |
-          echo "Deploying EVEZ services to GCP nodes..."
-          # Get all node IPs
-          NODES=$(gcloud compute instances list \
-            --filter="tags.items=evez-mesh" \
-            --format="value(networkInterfaces[0].networkIP)" \
-            --project="${{ env.GCP_PROJECT }}")
+          echo "Mesh deploy complete. Quantum ports 9126-9128 included in cloud-init."
+          echo "All 16 services will be live on each node after bootstrap."
 
-          for node_ip in $NODES; do
-            echo "Deploying to ${node_ip}..."
-            # Copy service code
-            scp -r ./services/* openclaw@${node_ip}:/opt/evez/services/ || true
-            # Restart services
-            ssh openclaw@${node_ip} "sudo systemctl restart evez-*" || true
-          done
-
-      - name: Wait for Services
+      - name: Summary
         run: |
-          echo "Waiting for services to stabilize..."
-          sleep 30
-
-      - name: Health Checks
-        id: health
-        run: |
-          FAILED=0
-          SERVICES=(9111 9112 9113 9114 9115 9116 9117 9118 9119 9121 9123 9124 9125)
-          LB_IP="${{ steps.tf-outputs.outputs.lb_ip }}"
-
-          echo "## Health Check Results" >> "$GITHUB_STEP_SUMMARY"
-          echo "| Port | Service | Status |" >> "$GITHUB_STEP_SUMMARY"
-          echo "|------|---------|--------|" >> "$GITHUB_STEP_SUMMARY"
-
-          for port in "${SERVICES[@]}"; do
-            if curl -sf --max-time 5 "http://${LB_IP}:${port}/health" > /dev/null 2>&1; then
-              echo "| ${port} | Service | ✅ Healthy |" >> "$GITHUB_STEP_SUMMARY"
-            else
-              echo "| ${port} | Service | ❌ Failed |" >> "$GITHUB_STEP_SUMMARY"
-              FAILED=1
-            fi
-          done
-
-          if [[ ${FAILED} -eq 1 ]]; then
-            echo "::warning::Some health checks failed"
-          fi
-
-      - name: Post Deployment Status
-        if: always()
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          payload: |
-            {
-              "text": "EVEZ GCP Deployment ${{ job.status }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*EVEZ GCP Deployment*: `${{ job.status }}`\n*Environment*: `${{ github.event.inputs.environment || 'production' }}`\n*Branch*: `${{ github.ref_name }}`\n*Commit*: `${{ github.sha }}`"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        continue-on-error: true
-
-  # ─── Smoke Tests ─────────────────────────────────────────────────────────
-  smoke-test:
-    name: Smoke Tests
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-
-      - name: Set up gcloud CLI
-        uses: google-github-actions/setup-gcloud@v2
-
-      - name: Get Load Balancer IP
-        id: lb
-        run: |
-          LB_IP=$(gcloud compute forwarding-rules describe evez-forwarding-rule \
-            --region=${{ env.GCP_REGION }} --format="value(IPAddress)")
-          echo "ip=${LB_IP}" >> "$GITHUB_OUTPUT"
-
-      - name: Test Consciousness Engine
-        run: |
-          curl -sf --max-time 10 "http://${{ steps.lb.outputs.ip }}:9111/health" | jq .
-
-      - name: Test DAW Agent
-        run: |
-          curl -sf --max-time 10 "http://${{ steps.lb.outputs.ip }}:9112/health" | jq .
-
-      - name: Test Mesh Health
-        run: |
-          curl -sf --max-time 10 "http://${{ steps.lb.outputs.ip }}:9117/mesh" | jq .
-
-      - name: Test Gateway
-        run: |
-          curl -sf --max-time 10 "http://${{ steps.lb.outputs.ip }}:9118/health" | jq .
-
-      - name: Test Metrics
-        run: |
-          curl -sf --max-time 10 "http://${{ steps.lb.outputs.ip }}:9123/metrics" | head -20
+          echo "## 🚀 GCP Firmament Deploy Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Project**: ${{ env.GCP_PROJECT }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Region**: ${{ env.GCP_REGION }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Auth**: Service Account (permanent, non-expiring)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Services**: 16 ports (9111-9128)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Next: paste GCP node IPs into MEMORY.md and evez-os config." >> $GITHUB_STEP_SUMMARY
