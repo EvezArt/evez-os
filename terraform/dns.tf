@@ -12,19 +12,6 @@ resource "google_dns_managed_zone" "evez_zone" {
   dnssec_config {
     state         = "on"
     non_existence = "nsec3"
-    default_kind  = "dnssec-ds"
-
-    kind = "dns#managedZoneDnsSecConfig"
-
-    key_signing_key {
-      algorithm = "ecdsa_p256"
-      kind     = "dns#dnsKeySpec"
-    }
-
-    zone_signing_key {
-      algorithm = "ecdsa_p256"
-      kind     = "dns#dnsKeySpec"
-    }
   }
 
   labels = var.labels

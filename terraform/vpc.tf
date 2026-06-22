@@ -78,9 +78,8 @@ resource "google_compute_network_peering" "primary_to_secondary" {
   network      = google_compute_network.evez_primary.id
   peer_network = google_compute_network.evez_secondary.id
 
-  export_custom_routes             = true
-  import_custom_routes             = true
-  export_custom_routes_with_public_ip = false
+  export_custom_routes = true
+  import_custom_routes = true
 }
 
 resource "google_compute_network_peering" "secondary_to_primary" {
@@ -88,9 +87,8 @@ resource "google_compute_network_peering" "secondary_to_primary" {
   network      = google_compute_network.evez_secondary.id
   peer_network = google_compute_network.evez_primary.id
 
-  export_custom_routes             = true
-  import_custom_routes             = true
-  export_custom_routes_with_public_ip = false
+  export_custom_routes = true
+  import_custom_routes = true
 }
 
 # ---------- Cloud Router + NAT ----------

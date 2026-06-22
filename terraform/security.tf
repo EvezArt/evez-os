@@ -13,6 +13,8 @@ resource "google_service_account" "evez_monitor" {
 # ---------- Service Account IAM Bindings ----------
 
 resource "google_project_iam_binding" "evez_node_roles" {
+  project = var.project_id
+
   for_each = toset([
     "roles/logging.logWriter",
     "roles/logging.viewer",
@@ -32,6 +34,8 @@ resource "google_project_iam_binding" "evez_node_roles" {
 }
 
 resource "google_project_iam_binding" "evez_monitor_roles" {
+  project = var.project_id
+
   for_each = toset([
     "roles/monitoring.admin",
     "roles/logging.viewer",
@@ -48,7 +52,8 @@ resource "google_project_iam_binding" "evez_monitor_roles" {
 # ---------- OS Login IAM ----------
 
 resource "google_project_iam_binding" "os_login" {
-  role = "roles/compute.osLogin"
+  project = var.project_id
+  role    = "roles/compute.osLogin"
 
   members = [
     "serviceAccount:${google_service_account.evez_node.email}",
@@ -57,7 +62,8 @@ resource "google_project_iam_binding" "os_login" {
 }
 
 resource "google_project_iam_binding" "os_admin_login" {
-  role = "roles/compute.osAdminLogin"
+  project = var.project_id
+  role    = "roles/compute.osAdminLogin"
 
   members = [
     "user:${var.alert_email}",
@@ -85,18 +91,12 @@ resource "google_access_context_manager_service_perimeter" "evez_perimeter" {
   title          = "EVEZ Mesh Service Perimeter"
 
   spec {
-    restricted_services {
-      service = "storage.googleapis.com"
-    }
-    restricted_services {
-      service = "pubsub.googleapis.com"
-    }
-    restricted_services {
-      service = "logging.googleapis.com"
-    }
-    restricted_services {
-      service = "monitoring.googleapis.com"
-    }
+    restricted_services = [
+      "storage.googleapis.com",
+      "pubsub.googleapis.com",
+      "logging.googleapis.com",
+      "monitoring.googleapis.com",
+    ]
 
     ingress_policies {
       ingress_from {
@@ -160,7 +160,8 @@ resource "google_compute_firewall" "deny_egress_default" {
 
 # ---------- IAM audit logging ----------
 
-resource "google_project_audit_config" "evez_audit" {
+# IAM audit logging — use google_project_iam_audit_config instead
+resource "google_project_iam_audit_config" "evez_audit" {
   project = var.project_id
 
   service = "allServices"
