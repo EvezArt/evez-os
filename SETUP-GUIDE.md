@@ -32,12 +32,12 @@ Everything the automated systems couldn't do without your accounts.
 
 ---
 
-## 2. DNS: evez-os.ai → 64.176.221.16
+## 2. DNS: evez-os.ai → evez-os.ai
 
 Point your domain's A record to the Vultr server:
 ```
-evez-os.ai      A       64.176.221.16
-*.evez-os.ai    A       64.176.221.16
+evez-os.ai      A       evez-os.ai
+*.evez-os.ai    A       evez-os.ai
 ```
 Once DNS propagates, Caddy will automatically provision HTTPS via Let's Encrypt. No restart needed.
 

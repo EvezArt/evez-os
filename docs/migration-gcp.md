@@ -8,10 +8,10 @@
 
 ## 1. Migration Overview
 
-Move EVEZ from a single Vultr node (64.176.221.16) to a 5-node GCP mesh with zero downtime. This is done using a **blue-green deployment** strategy — GCP infrastructure is built in parallel, then traffic is switched via DNS.
+Move EVEZ from a single Vultr node (evez-os.ai) to a 5-node GCP mesh with zero downtime. This is done using a **blue-green deployment** strategy — GCP infrastructure is built in parallel, then traffic is switched via DNS.
 
 ### Current State (Vultr)
-- 1 node: Evez666 (64.176.221.16)
+- 1 node: Evez666 (evez-os.ai)
 - 11 microservices on ports 9111-9125
 - Systemd-managed, UFW firewall
 - Caddy reverse proxy (evez-os.ai)
@@ -234,8 +234,8 @@ scp /var/lib/evez/spine/events.json openclaw@<evez-gamma-ip>:/var/lib/evez/spine
 ```bash
 # Only after confirming GCP is fully operational for 48+ hours
 # Take a final snapshot first
-ssh root@64.176.221.16 "tar czf /tmp/evez-final-backup.tar.gz /opt/evez/ /var/lib/evez/"
-scp root@64.176.221.16:/tmp/evez-final-backup.tar.gz ~/evez-vultr-final-backup.tar.gz
+ssh root@evez-os.ai "tar czf /tmp/evez-final-backup.tar.gz /opt/evez/ /var/lib/evez/"
+scp root@evez-os.ai:/tmp/evez-final-backup.tar.gz ~/evez-vultr-final-backup.tar.gz
 
 # Upload to GCS for safekeeping
 gsutil cp ~/evez-vultr-final-backup.tar.gz gs://evez-firmament-backups/vultr-final/
@@ -251,7 +251,7 @@ gsutil cp ~/evez-vultr-final-backup.tar.gz gs://evez-firmament-backups/vultr-fin
 
 If GCP has issues during migration:
 
-1. **Immediate:** Switch DNS back to Vultr IP (64.176.221.16)
+1. **Immediate:** Switch DNS back to Vultr IP (evez-os.ai)
 2. **Vultr is still running** — zero-downtime rollback
 3. Investigate GCP issues
 4. Retry migration after fixes

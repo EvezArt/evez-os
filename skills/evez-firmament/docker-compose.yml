@@ -34,7 +34,7 @@ services:
       - spine-data:/data
     environment:
       - EVEZ_NODE_NAME=Evez666
-      - EVEZ_NODE_IP=64.176.221.16
+      - EVEZ_NODE_IP=evez-os.ai
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:9116/health"]
       interval: 30s

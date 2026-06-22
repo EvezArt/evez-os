@@ -18,11 +18,11 @@
 set -euo pipefail
 
 # --- Configuration ---
-CONSCIOUSNESS_DIR="${EVEZ_CONSCIOUSNESS_DIR:-/var/lib/evez/consciousness}"
-SPINE_DIR="${EVEZ_SPINE_DIR:-/var/lib/evez/spine}"
-CONSENSUS_DIR="${EVEZ_CONSENSUS_DIR:-/var/lib/evez/consensus}"
-HA_DIR="${EVEZ_HA_DIR:-/var/lib/evez/ha}"
-REPORT_DIR="${EVEZ_REPORT_DIR:-/var/lib/evez/certification}"
+CONSCIOUSNESS_DIR="${EVEZ_CONSCIOUSNESS_DIR:-/home/openclaw/.openclaw/workspace/var/lib/evez/consciousness}"
+SPINE_DIR="${EVEZ_SPINE_DIR:-/home/openclaw/.openclaw/workspace/var/lib/evez/spine}"
+CONSENSUS_DIR="${EVEZ_CONSENSUS_DIR:-/home/openclaw/.openclaw/workspace/var/lib/evez/consensus}"
+HA_DIR="${EVEZ_HA_DIR:-/home/openclaw/.openclaw/workspace/var/lib/evez/ha}"
+REPORT_DIR="${EVEZ_REPORT_DIR:-/home/openclaw/.openclaw/workspace/var/lib/evez/certification}"
 LOG_FILE="${REPORT_DIR}/certify.log"
 NODE_ID="${EVEZ_NODE_ID:-$(hostname)}"
 

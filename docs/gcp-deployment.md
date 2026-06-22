@@ -40,7 +40,7 @@
    │ us-west1 │         │us-central1  │        │   Vultr    │
    │ Primary  │         │ Secondary   │        │  Primary   │
    ├──────────┤         ├─────────────┤        └─────────────┘
-   │Controller│         │ Worker-2    │           149.28.134.51
+   │Controller│         │ Worker-2    │           evez-os-worker
    │(e2-std2) │         │ (e2-medium) │
    │Worker-0  │         └─────────────┘
    │Worker-1  │
@@ -409,7 +409,7 @@ terraform output dns_zone_name_servers
 | worker-0.evez-os.ai       | A      | Worker-0 public IP        |
 | worker-1.evez-os.ai       | A      | Worker-1 public IP        |
 | free.evez-os.ai           | A      | Free-tier public IP       |
-| vultr.evez-os.ai          | A      | 149.28.134.51             |
+| vultr.evez-os.ai          | A      | evez-os-worker             |
 | consciousness.evez-os.ai  | CNAME  | controller.evez-os.ai     |
 | desire.evez-os.ai         | CNAME  | controller.evez-os.ai     |
 | world-model.evez-os.ai    | CNAME  | controller.evez-os.ai      |
@@ -426,7 +426,7 @@ terraform output dns_zone_name_servers
 | SSH internal                | VPC CIDRs                | 22              |
 | OpenClaw API internal       | VPC CIDRs                | 8443            |
 | EVEZ services internal      | VPC CIDRs                | 9111-9117       |
-| EVEZ services from Vultr    | 149.28.134.51/32         | 9111-9117       |
+| EVEZ services from Vultr    | evez-os-worker/32         | 9111-9117       |
 | Health checks               | Google probing ranges    | 9111-9117       |
 | IAP tunnel                  | 35.235.240.0/20         | 22              |
 | ICMP internal               | VPC CIDRs                | ICMP            |

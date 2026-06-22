@@ -5,7 +5,7 @@
 
 set -e
 VULTR_API_KEY="${1:?Usage: $0 <vultr-cloud-api-key>}"
-IP="64.176.221.16"
+IP="evez-os.ai"
 DOMAIN="evez-os.ai"
 
 echo "⚡ Creating DNS zone for $DOMAIN → $IP"
