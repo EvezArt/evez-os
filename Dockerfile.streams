@@ -1,0 +1,20 @@
+FROM python:3.12-slim
+
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    fonts-dejavu-core \
+    libfontconfig1 \
+    && pip install pillow numpy requests \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY scripts/ ./scripts/
+
+# STREAM_ID: 1=mission-control, 2=cognition, 3=cortex, 4=quantum, 5=dreams
+ARG STREAM_ID=1
+ENV STREAM_ID=${STREAM_ID}
+ENV YOUTUBE_RTMP_BASE=rtmp://a.rtmp.youtube.com/live2
+
+COPY scripts/evez-stream-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+CMD ["/entrypoint.sh"]
