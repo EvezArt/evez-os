@@ -1,0 +1,55 @@
+services:
+  - type: worker
+    name: evez-stream-1-mission-control
+    runtime: docker
+    dockerfilePath: ./Dockerfile.streams
+    envVars:
+      - key: STREAM_ID
+        value: "1"
+      - key: YOUTUBE_STREAM_KEY_1
+        sync: false
+    autoDeploy: true
+
+  - type: worker
+    name: evez-stream-2-cognition
+    runtime: docker
+    dockerfilePath: ./Dockerfile.streams
+    envVars:
+      - key: STREAM_ID
+        value: "2"
+      - key: YOUTUBE_STREAM_KEY_2
+        sync: false
+    autoDeploy: true
+
+  - type: worker
+    name: evez-stream-3-cortex
+    runtime: docker
+    dockerfilePath: ./Dockerfile.streams
+    envVars:
+      - key: STREAM_ID
+        value: "3"
+      - key: YOUTUBE_STREAM_KEY_3
+        sync: false
+    autoDeploy: true
+
+  - type: worker
+    name: evez-stream-4-quantum
+    runtime: docker
+    dockerfilePath: ./Dockerfile.streams
+    envVars:
+      - key: STREAM_ID
+        value: "4"
+      - key: YOUTUBE_STREAM_KEY_4
+        sync: false
+    autoDeploy: true
+
+  - type: worker
+    name: evez-stream-5-dreams
+    runtime: docker
+    dockerfilePath: ./Dockerfile.streams
+    envVars:
+      - key: STREAM_ID
+        value: "5"
+      - key: YOUTUBE_STREAM_KEY_5
+        sync: false
+    autoDeploy: true
