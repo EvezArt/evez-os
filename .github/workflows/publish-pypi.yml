@@ -1,22 +1,43 @@
 name: Publish to PyPI
+
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: 'Packages to publish (comma-separated, or "all")'
+        required: false
+        default: 'all'
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - evez-consciousness-engine
+          - evez-daw-agent
+          - evez-machine-voice
+          - cross-domain-engine
+          - invariance-battery
+          - evez-client/python
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Install build tools
         run: pip install build twine
-      - name: Build and publish
+
+      - name: Build and publish ${{ matrix.package }}
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          cd packages/evez-consciousness-engine
+          cd packages/${{ matrix.package }}
           python -m build
-          twine upload dist/*
+          twine upload dist/* --skip-existing
