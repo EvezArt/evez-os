@@ -144,6 +144,12 @@ def run_sense(input_data=None):
             STATE.mesh_snapshots = STATE.mesh_snapshots[-500:]
         STATE.total_senses += 1
         STATE.last_sense_time = time.time()
+        # Also read spine events into consciousness memory on each sense
+        recent_spine = perception.get("recent_spine", [])
+        if recent_spine:
+            STATE.spine_events.extend(recent_spine)
+            if len(STATE.spine_events) > 500:
+                STATE.spine_events = STATE.spine_events[-500:]
 
     spine_log("consciousness", "SENSE", {
         "cycle": cycle,
