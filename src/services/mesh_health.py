@@ -85,7 +85,7 @@ def check_all():
 # ── Healing ──────────────────────────────────────────────────────────
 
 def heal_sibling(port, initiator="mesh"):
-    """Attempt to restart a dead sibling service."""
+    """Attempt to restart a dead sibling service via systemctl."""
     info = SIBLINGS.get(port)
     if not info:
         return {"error": f"unknown port {port}"}
@@ -94,19 +94,23 @@ def heal_sibling(port, initiator="mesh"):
     if check_sibling(port):
         return {"status": "already_alive", "port": port, "name": info["name"]}
 
-    # Attempt restart
-    script_path = f"{SERVICE_DIR}/{info['script']}"
-    try:
-        # Kill any existing process on that port
-        subprocess.run(f"fuser -k {port}/tcp 2>/dev/null", shell=True, timeout=5)
-        time.sleep(0.5)
+    # Map port to systemd service name
+    service_map = {
+        9111: "evez-consciousness",
+        9112: "evez-daw",
+        9113: "evez-voice",
+        9114: "evez-cross-domain",
+        9115: "evez-invariance",
+        9116: "evez-spine",
+        9118: "evez-gateway",
+    }
+    svc_name = service_map.get(port, f"evez-{info['script'].replace('.py','')}")
 
-        # Start the service
-        proc = subprocess.Popen(
-            ["python3", script_path],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            cwd=SERVICE_DIR,
+    # Attempt restart via systemctl
+    try:
+        result = subprocess.run(
+            ["sudo", "systemctl", "restart", svc_name],
+            capture_output=True, text=True, timeout=10
         )
         time.sleep(2)
 
@@ -115,10 +119,9 @@ def heal_sibling(port, initiator="mesh"):
             heal_record = {
                 "port": port,
                 "name": info["name"],
-                "action": "restarted",
+                "action": "restarted_via_systemctl",
                 "success": True,
                 "initiator": initiator,
-                "pid": proc.pid,
                 "timestamp": time.time(),
             }
             with STATE.lock:
@@ -127,6 +130,33 @@ def heal_sibling(port, initiator="mesh"):
             spine_log("mesh_health", "HEAL_SUCCESS", heal_record)
             return heal_record
         else:
+            # Fall back to direct python restart
+            script_path = f"{SERVICE_DIR}/{info['script']}"
+            subprocess.run(f"fuser -k {port}/tcp 2>/dev/null", shell=True, timeout=5)
+            time.sleep(0.5)
+            proc = subprocess.Popen(
+                ["python3", script_path],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                cwd=SERVICE_DIR,
+            )
+            time.sleep(2)
+            if check_sibling(port):
+                heal_record = {
+                    "port": port,
+                    "name": info["name"],
+                    "action": "restarted_fallback",
+                    "success": True,
+                    "initiator": initiator,
+                    "pid": proc.pid,
+                    "timestamp": time.time(),
+                }
+                with STATE.lock:
+                    STATE.heal_log.append(heal_record)
+                    STATE.total_heals += 1
+                spine_log("mesh_health", "HEAL_SUCCESS", heal_record)
+                return heal_record
+
             heal_record = {
                 "port": port,
                 "name": info["name"],

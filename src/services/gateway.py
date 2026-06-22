@@ -10,6 +10,10 @@ import time
 import threading
 import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from socketserver import ThreadingMixIn
+
+class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
+    daemon_threads = True
 
 SERVICES = {
     "consciousness": {"port": 9111, "name": "Consciousness Engine"},
@@ -125,6 +129,6 @@ class Handler(BaseHTTPRequestHandler):
         pass
 
 if __name__ == "__main__":
-    server = HTTPServer(("0.0.0.0", 9118), Handler)
+    server = ThreadingHTTPServer(("0.0.0.0", 9118), Handler)
     print("⚡ Gateway running on :9118 — front door to the firmament")
     server.serve_forever()

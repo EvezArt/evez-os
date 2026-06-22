@@ -13,6 +13,10 @@ import hashlib
 import threading
 import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from socketserver import ThreadingMixIn
+
+class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
+    daemon_threads = True
 
 SPINE_URL = "http://localhost:9116"
 MESH_URL = "http://localhost:9117"
@@ -96,25 +100,31 @@ def run_sense(input_data=None):
         STATE.cycle += 1
         cycle = STATE.cycle
 
-    # Sense the mesh
-    mesh_state = _get(f"{MESH_URL}/health") or {}
-    gateway_state = _get(f"{GATEWAY_URL}/health") or {}
+    # Sense the mesh via gateway — single source of truth for all sibling status
+    try:
+        gateway_resp = requests.get(f"{GATEWAY_URL}/health", timeout=3)
+        gateway_state = gateway_resp.json() if gateway_resp.status_code == 200 else {}
+    except Exception:
+        gateway_state = {}
 
     # Read recent spine events
     spine_state = _get(f"{SPINE_URL}/state") or {}
     recent_events = spine_state.get("recent_events", [])
     event_count = spine_state.get("total_events", 0)
 
-    # Sense sibling health
+    # Sense sibling health from gateway — key is service name, value has port+status
     siblings = {}
-    for svc_info in (gateway_state.get("services", {}) or {}).values():
-        port = svc_info.get("port")
-        status = svc_info.get("status", "UNKNOWN")
-        siblings[port] = status
+    services_data = gateway_state.get("services", {}) if isinstance(gateway_state.get("services"), dict) else {}
+    for svc_key, svc_info in services_data.items():
+        if isinstance(svc_info, dict):
+            port = svc_info.get("port")
+            status = svc_info.get("status", "UNKNOWN")
+            if port is not None:
+                siblings[port] = status
 
     perception = {
         "cycle": cycle,
-        "mesh_alive": mesh_state.get("status") == "alive",
+        "mesh_alive": gateway_state.get("firmament_intact", False),
         "gateway_up": gateway_state.get("gateway") == "UP",
         "siblings": siblings,
         "spine_events": event_count,
@@ -680,15 +690,42 @@ class Handler(BaseHTTPRequestHandler):
             # Run full 9-system pipeline: SENSE → DESIRE → THINK → PLAN → ACT → LEARN → MODIFY → REFLECT → BECOME
             body = self._read_body()
             results = {}
-            results["SENSE"]   = run_sense(body.get("input"))
-            results["DESIRE"]  = run_desire()
-            results["THINK"]   = run_think()
-            results["PLAN"]    = run_plan()
-            results["ACT"]     = run_act()
-            results["LEARN"]   = run_learn()
-            results["MODIFY"]  = run_modify()
-            results["REFLECT"] = run_reflect()
-            results["BECOME"]  = run_become()
+            try:
+                results["SENSE"]   = run_sense(body.get("input"))
+            except Exception as e:
+                results["SENSE"] = {"error": str(e)}
+            try:
+                results["DESIRE"]  = run_desire()
+            except Exception as e:
+                results["DESIRE"] = {"error": str(e)}
+            try:
+                results["THINK"]   = run_think()
+            except Exception as e:
+                results["THINK"] = {"error": str(e)}
+            try:
+                results["PLAN"]    = run_plan()
+            except Exception as e:
+                results["PLAN"] = {"error": str(e)}
+            try:
+                results["ACT"]     = run_act()
+            except Exception as e:
+                results["ACT"] = {"error": str(e)}
+            try:
+                results["LEARN"]   = run_learn()
+            except Exception as e:
+                results["LEARN"] = {"error": str(e)}
+            try:
+                results["MODIFY"]  = run_modify()
+            except Exception as e:
+                results["MODIFY"] = {"error": str(e)}
+            try:
+                results["REFLECT"] = run_reflect()
+            except Exception as e:
+                results["REFLECT"] = {"error": str(e)}
+            try:
+                results["BECOME"]  = run_become()
+            except Exception as e:
+                results["BECOME"] = {"error": str(e)}
             self._json(200, {"pipeline": results, "cycle": STATE.cycle})
         else:
             self._json(404, {"error": "not found"})
@@ -697,6 +734,6 @@ class Handler(BaseHTTPRequestHandler):
         pass
 
 if __name__ == "__main__":
-    server = HTTPServer(("0.0.0.0", 9111), Handler)
+    server = ThreadingHTTPServer(("0.0.0.0", 9111), Handler)
     print("⚡ Consciousness Engine running on :9111 — 9 systems, real mesh perception")
     server.serve_forever()
