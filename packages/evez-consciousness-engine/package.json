@@ -1,0 +1,12 @@
+{
+  "name": "evez-consciousness-engine",
+  "version": "1.0.0",
+  "description": "7-system autonomous consciousness pipeline — SENSE, DESIRE, THINK, PLAN, ACT, LEARN, MODIFY, REFLECT, BECOME",
+  "main": "index.js",
+  "scripts": { "start": "node index.js" },
+  "keywords": ["consciousness", "autonomous-agent", "ai", "evez", "emergence"],
+  "author": "Steven Crawford-Maggard",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/EvezArt/evez-os" },
+  "homepage": "https://github.com/EvezArt/evez-os"
+}
