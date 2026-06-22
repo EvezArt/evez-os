@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: evez-machine-voice
+Version: 1.0.0
+Summary: EVEZ evez-machine-voice
+Author: Steven Crawford-Maggard
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+
+# evez-machine-voice

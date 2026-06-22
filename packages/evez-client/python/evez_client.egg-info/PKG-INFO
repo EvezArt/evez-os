@@ -1,0 +1,60 @@
+Metadata-Version: 2.4
+Name: evez-client
+Version: 1.0.0
+Summary: Python SDK for the EVEZ Autonomous AI Mesh
+Author-email: EVEZ <dev@evez-os.ai>
+License: MIT
+Project-URL: Homepage, https://evez-os.ai
+Project-URL: Documentation, https://docs.evez-os.ai
+Project-URL: Repository, https://github.com/evez-os/evez-client-python
+Keywords: evez,ai,mesh,consciousness,music,correlation,autonomous
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# EVEZ Client (Python)
+
+```bash
+pip install evez-client
+```
+
+```python
+from evez_client import EVEZClient
+
+evez = EVEZClient(api_key="your-key")
+
+# Check mesh health
+health = evez.health()
+
+# Generate music
+track = evez.generate("breakcore", bpm=174)
+
+# Cross-domain correlation
+result = evez.correlate("genetics", "telemetry")
+
+# Trigger dream cycle
+evez.dream()
+
+# Check invariants
+invariants = evez.check_invariants()
+```
+
+## API Reference
+
+| Method | Description |
+|--------|-------------|
+| `health()` | Check all mesh services |
+| `generate(genre, bpm, duration)` | Generate music |
+| `voice_transform(input_file, stages)` | Transform voice |
+| `voice_synthesize(text, profile)` | Synthesize machine voice |
+| `correlate(domain_a, domain_b)` | Cross-domain correlation |
+| `dream()` | Consciousness dream cycle |
+| `consciousness_status()` | Get consciousness state |
+| `check_invariants()` | Run invariance battery |
+| `spine_events(limit)` | Get spine events |
+| `deploy(target)` | Deploy to cloud |
+| `status()` | Full mesh status |

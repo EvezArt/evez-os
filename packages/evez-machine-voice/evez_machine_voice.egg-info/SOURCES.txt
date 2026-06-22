@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+setup.py
+evez-machine-voice/__init__.py
+evez_machine_voice.egg-info/PKG-INFO
+evez_machine_voice.egg-info/SOURCES.txt
+evez_machine_voice.egg-info/dependency_links.txt
+evez_machine_voice.egg-info/top_level.txt

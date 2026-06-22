@@ -5,37 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "invariance-battery"
 version = "1.0.0"
-description = "Runtime assertion system that continuously verifies AI agent invariants — falsification-first safety."
+description = "EVEZ invariance-battery"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
-authors = [
-    {name = "Steven Crawford-Maggard", email = "steven@evez-os.ai"},
-]
-keywords = ["invariance", "assertion", "falsification", "safety", "ai-agent", "evez"]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
-    "Topic :: Software Development :: Testing",
-]
-dependencies = [
-    "numpy>=1.24",
-    "pydantic>=2.0",
-]
-
-[project.optional-dependencies]
-dev = ["pytest>=7.0", "pytest-asyncio", "ruff"]
-
-[project.urls]
-Homepage = "https://evez-os.ai"
-Repository = "https://github.com/EvezArt/evez-os"
-
-[project.scripts]
-evez-invariance = "invariance_battery.cli:main"
+authors = [{name = "Steven Crawford-Maggard"}]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]

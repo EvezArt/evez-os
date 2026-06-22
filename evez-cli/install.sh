@@ -1,71 +1,36 @@
-#!/usr/bin/env bash
-# EVEZ CLI Installer — curl -sSL evez-os.ai/install.sh | bash
-set -euo pipefail
+#!/bin/bash
+# ⚡ EVEZ — One-command install
+# curl -sSL https://evezart.github.io/evez-os/install.sh | bash
 
-BOLD='\033[1m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-DIM='\033[2m'
-NC='\033[0m'
+set -e
+VERSION="1.0.0"
 
-echo -e "${CYAN}"
-echo '  ███████╗███████╗██╗  ██╗███████╗'
-echo '  ██╔════╝██╔════╝██║ ██╔╝██╔════╝'
-echo '  █████╗  ███████╗█████╔╝ █████╗'
-echo '  ██╔══╝  ╚════██║██╔═██╗ ██╔══╝'
-echo '  ███████╗███████║██║  ██╗███████╗'
-echo '  ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝'
-echo -e "     Autonomous AI Mesh Installer${NC}"
+echo "⚡ EVEZ v${VERSION} — Installing..."
 echo ""
 
-INSTALL_DIR="${HOME}/.local/bin"
-CONFIG_DIR="${HOME}/.config/evez"
-
-echo -e "${BOLD}Installing EVEZ CLI...${NC}"
-echo ""
-
-# Create directories
-mkdir -p "${INSTALL_DIR}" "${CONFIG_DIR}"
+# Detect OS
+OS="$(uname -s)"
+ARCH="$(uname -m)"
 
 # Download CLI
-CLI_URL="https://evez-os.ai/downloads/evez"
-CLI_PATH="${INSTALL_DIR}/evez"
+echo "📥 Downloading EVEZ CLI..."
+curl -sSL "https://raw.githubusercontent.com/EvezArt/evez-os/main/evez-cli/evez" -o /usr/local/bin/evez 2>/dev/null || {
+  mkdir -p ~/.local/bin
+  curl -sSL "https://raw.githubusercontent.com/EvezArt/evez-os/main/evez-cli/evez" -o ~/.local/bin/evez
+  chmod +x ~/.local/bin/evez
+  echo "   Installed to ~/.local/bin/evez"
+  echo "   Add to PATH: export PATH=\$PATH:~/.local/bin"
+}
 
-echo -e "  ${DIM}→ Downloading CLI...${NC}"
-if curl -sSL "${CLI_URL}" -o "${CLI_PATH}" 2>/dev/null; then
-  chmod +x "${CLI_PATH}"
-else
-  # Fallback: copy from local if available
-  if [[ -f "$(dirname "$0")/evez" ]]; then
-    cp "$(dirname "$0")/evez" "${CLI_PATH}"
-    chmod +x "${CLI_PATH}"
-  else
-    echo -e "  ${DIM}→ Creating CLI from source...${NC}"
-    cat > "${CLI_PATH}" << 'EVEZSCRIPT'
-#!/usr/bin/env bash
-# EVEZ CLI stub — full CLI available at evez-os.ai
-echo "🧠 EVEZ Autonomous AI Mesh"
-echo "Run: evez help"
-echo "Docs: https://docs.evez-os.ai"
-EVEZSCRIPT
-    chmod +x "${CLI_PATH}"
-  fi
-fi
-
-# Add to PATH if needed
-if [[ ":${PATH}:" != *":${INSTALL_DIR}:"* ]]; then
-  echo -e "  ${DIM}→ Adding ${INSTALL_DIR} to PATH...${NC}"
-  echo "export PATH=\"\${PATH}:${INSTALL_DIR}\"" >> "${HOME}/.bashrc"
-  echo "export PATH=\"\${PATH}:${INSTALL_DIR}\"" >> "${HOME}/.zshrc" 2>/dev/null || true
-  export PATH="${PATH}:${INSTALL_DIR}"
-fi
+chmod +x /usr/local/bin/evez 2>/dev/null
 
 echo ""
-echo -e "${GREEN}${BOLD}✅ EVEZ CLI installed!${NC}"
+echo "✅ EVEZ CLI installed!"
 echo ""
-echo -e "  ${BOLD}Get started:${NC}"
-echo "    evez health              # Check mesh services"
-echo "    evez generate breakcore  # Generate music"
-echo "    evez help                # All commands"
+echo "   evez health       → Check mesh status"
+echo "   evez dashboard     → Open web dashboard"
+echo "   evez generate      → Generate music"
+echo "   evez correlate     → Cross-domain correlations"
+echo "   evez dream         → Trigger consciousness"
 echo ""
-echo -e "  ${DIM}Restart your shell or run: source ~/.bashrc${NC}"
+echo "⚡ github.com/EvezArt/evez-os"

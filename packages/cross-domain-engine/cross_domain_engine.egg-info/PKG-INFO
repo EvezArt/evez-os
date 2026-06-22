@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: cross-domain-engine
+Version: 1.0.0
+Summary: EVEZ cross-domain-engine
+Author: Steven Crawford-Maggard
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+
+# cross-domain-engine

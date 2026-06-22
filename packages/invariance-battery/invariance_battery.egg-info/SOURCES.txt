@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+setup.py
+invariance-battery/__init__.py
+invariance_battery.egg-info/PKG-INFO
+invariance_battery.egg-info/SOURCES.txt
+invariance_battery.egg-info/dependency_links.txt
+invariance_battery.egg-info/top_level.txt

@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+setup.py
+evez-daw-agent/__init__.py
+evez_daw_agent.egg-info/PKG-INFO
+evez_daw_agent.egg-info/SOURCES.txt
+evez_daw_agent.egg-info/dependency_links.txt
+evez_daw_agent.egg-info/top_level.txt

@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+evez_client/__init__.py
+evez_client.egg-info/PKG-INFO
+evez_client.egg-info/SOURCES.txt
+evez_client.egg-info/dependency_links.txt
+evez_client.egg-info/top_level.txt

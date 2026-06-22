@@ -1,0 +1,2 @@
+dist
+evez-machine-voice

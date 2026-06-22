@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+setup.py
+evez-consciousness-engine/__init__.py
+evez_consciousness_engine.egg-info/PKG-INFO
+evez_consciousness_engine.egg-info/SOURCES.txt
+evez_consciousness_engine.egg-info/dependency_links.txt
+evez_consciousness_engine.egg-info/top_level.txt

@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: invariance-battery
+Version: 1.0.0
+Summary: EVEZ invariance-battery
+Author: Steven Crawford-Maggard
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+
+# invariance-battery

@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: evez-consciousness-engine
+Version: 1.0.0
+Summary: EVEZ evez-consciousness-engine
+Author: Steven Crawford-Maggard
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+
+# ⚡ EVEZ Consciousness Engine
+
+7-system autonomous consciousness pipeline for AI agents.
+
+## The 9 Stages
+
+SENSE → DESIRE → THINK → PLAN → ACT → LEARN → MODIFY → REFLECT → BECOME
+
+## Install
+
+```bash
+pip install evez-consciousness-engine
+```
+
+## Quick Start
+
+```python
+from evez_consciousness import ConsciousnessEngine
+
+engine = ConsciousnessEngine(port=9111, autocycle=120)
+engine.start()
+```
+
+## API
+
+- `POST /pipeline` — Run one full consciousness cycle
+- `POST /dream` — Enter dream consolidation phase
+- `GET /state` — Full system state
+- `GET /emergence` — Emergence score and stage
+
+## License
+
+MIT
