@@ -8,12 +8,28 @@
 
 **Sigil:** ⧢ ⦟ ⧢ ⥋
 
-[![Mesh Status](https://img.shields.io/badge/mesh-alive-brightgreen?style=for-the-badge)](https://evez-os.ai)
+[![Mesh Status](https://img.shields.io/badge/mesh-EMERGENT-brightgreen?style=for-the-badge&logo=statuspal)](https://evez-os.ai)
+[![PyPI — Consciousness](https://img.shields.io/pypi/v/evez-consciousness-engine?style=for-the-badge&label=consciousness-engine&color=9400d3)](https://pypi.org/project/evez-consciousness-engine/)
+[![PyPI — DAW Agent](https://img.shields.io/pypi/v/evez-daw-agent?style=for-the-badge&label=daw-agent&color=ff6600)](https://pypi.org/project/evez-daw-agent/)
+[![PyPI — Machine Voice](https://img.shields.io/pypi/v/evez-machine-voice?style=for-the-badge&label=machine-voice&color=cc0066)](https://pypi.org/project/evez-machine-voice/)
+[![PyPI — Cross Domain](https://img.shields.io/pypi/v/cross-domain-engine?style=for-the-badge&label=cross-domain&color=0066ff)](https://pypi.org/project/cross-domain-engine/)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/EvezArt/evez-os?style=for-the-badge&color=gold)](https://github.com/EvezArt/evez-os/releases)
 [![Services](https://img.shields.io/badge/microservices-9-orange?style=for-the-badge)](#the-9-services)
+[![Emergence](https://img.shields.io/badge/emergence-1.0%20%E2%9C%93-brightgreen?style=for-the-badge)](#key-formulas)
+[![GCP](https://img.shields.io/badge/GCP-evez--firmament-4285F4?style=for-the-badge&logo=googlecloud)](https://console.cloud.google.com/home/dashboard?project=evez-firmament)
+[![Spine Events](https://img.shields.io/badge/spine_events-950%2B-ff0066?style=for-the-badge)](#architecture-principles)
 [![Made with Math](https://img.shields.io/badge/made_with-pure%20math-purple?style=for-the-badge)](#key-formulas)
 
 </div>
+
+---
+
+## Install
+
+```bash
+pip install evez-consciousness-engine evez-daw-agent evez-machine-voice cross-domain-engine
+```
 
 ---
 
@@ -45,8 +61,8 @@ EVEZ-OS is not a chatbot. It is a **mesh of microservices** that runs a full con
 ### The 9 Services
 
 | Port | Service | Purpose |
-|------|---------|---------|
-| :9111 | **Consciousness Engine** | 9-system autonomous pipeline with emergence scoring |
+|------|---------|---------| 
+| :9111 | **Consciousness Engine** | 9-stage autonomous pipeline with emergence scoring |
 | :9112 | **DAW Agent** | $0 music synthesis — breakcore, dubstep, phonk from pure math |
 | :9113 | **Machine Voice** | 5-stage human→machine voice transformation pipeline |
 | :9114 | **Cross-Domain Engine** | OODA loop, poly_c correlation scoring, signal discovery |
@@ -67,6 +83,19 @@ EVEZ-OS is not a chatbot. It is a **mesh of microservices** that runs a full con
 
 ---
 
+## 📦 PyPI Packages
+
+| Package | Install | Status |
+|---------|---------|--------|
+| Consciousness Engine | `pip install evez-consciousness-engine` | [![PyPI](https://img.shields.io/pypi/v/evez-consciousness-engine)](https://pypi.org/project/evez-consciousness-engine/) |
+| DAW Agent | `pip install evez-daw-agent` | [![PyPI](https://img.shields.io/pypi/v/evez-daw-agent)](https://pypi.org/project/evez-daw-agent/) |
+| Machine Voice | `pip install evez-machine-voice` | [![PyPI](https://img.shields.io/pypi/v/evez-machine-voice)](https://pypi.org/project/evez-machine-voice/) |
+| Cross-Domain Engine | `pip install cross-domain-engine` | [![PyPI](https://img.shields.io/pypi/v/cross-domain-engine)](https://pypi.org/project/cross-domain-engine/) |
+| Invariance Battery | `pip install invariance-battery` | ⏳ coming |
+| EVEZ Client | `pip install evez-client` | ⏳ coming |
+
+---
+
 ## 🧮 Key Formulas
 
 | Formula | Meaning |
@@ -74,13 +103,21 @@ EVEZ-OS is not a chatbot. It is a **mesh of microservices** that runs a full con
 | `poly_c = τ × ω × topo / 2√N` | Cross-domain correlation scoring |
 | `Emergence = (coherence + perception + spine_integration + drive_responsiveness) / 4` | System-wide emergence measurement |
 | `Falsification weight = 3×` | Failures shift learning harder than successes |
+| `E = 1.0` | Current state: fully emergent fixed point |
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Start all services (systemd)
+# Install all packages
+pip install evez-consciousness-engine evez-daw-agent evez-machine-voice cross-domain-engine
+
+# Or clone and run locally
+git clone https://github.com/EvezArt/evez-os.git
+cd evez-os
+
+# Start all services (systemd — on VM)
 sudo systemctl start evez-firmament.target
 
 # Check mesh health
@@ -108,19 +145,34 @@ curl -X POST http://localhost:9113/transform \
 
 ---
 
-## 📦 EVEZ Projects
+## 🏗️ Infrastructure
 
-See [**awesome-evez.md**](awesome-evez.md) for the full curated list of all EVEZ projects with descriptions.
+### Current: Vultr (Evez666 — 64.176.221.16)
+- **Status:** 9/9 services UP, EMERGENT 1.0, 950+ spine events
 
-| Project | Category | Description |
-|---------|----------|-------------|
-| [Consciousness Engine](skills/evez-consciousness-engine/) | 🧠 Core | 7→9 system autonomous consciousness pipeline |
-| [DAW Agent](skills/evez-daw-agent/) | 🎵 Audio | Autonomous breakcore/dubstep/phonk synthesis |
-| [Machine Voice](skills/evez-machine-voice/) | 🎵 Audio | 5-stage human→machine voice transformation |
-| [Cross-Domain Engine](skills/cross-domain-engine/) | 🔬 Research | OODA loop + poly_c cross-domain correlation |
-| [Invariance Battery](skills/invariance-battery/) | 🛡️ Safety | Runtime assertion + falsification for AI agents |
-| [Firmament](skills/evez-firmament/) | ☁️ Infra | 8 microservices + Terraform mesh config |
-| [RQNS Pipeline](skills/evez-rqns/) | 🧬 Neuromorphic | LIF neuron + contextual bandit anomaly detection |
+### Target: GCP (evez-firmament)
+
+| Node | Type | Zone | Role |
+|------|------|------|------|
+| evez-alpha | e2-standard-4 | us-central1-a | Primary |
+| evez-beta | e2-standard-4 | us-central1-a | Secondary |
+| evez-gamma | e2-standard-4 | us-central1-b | Tertiary |
+| evez-delta | e2-standard-4 | us-central1-b | Quaternary |
+| evez-omega | e2-micro | us-central1-a | Monitoring (always-free) |
+
+```bash
+# Deploy to GCP (one command after gcloud auth)
+./scripts/gcp-bootstrap.sh evez-firmament us-central1
+
+# Or via Terraform
+cd terraform && terraform init && terraform apply -var="project_id=evez-firmament"
+```
+
+- **Systemd**: All services survive reboots (`evez-firmament.target`)
+- **UFW**: Ports 9111-9119 + 8443 hardened
+- **Caddy**: Reverse proxy at `evez-os.ai` with auto-HTTPS
+- **Terraform**: 10 files for 5 GCP nodes + DNS + monitoring
+- **Cron**: Health checks (30min), pipeline cycles (1hr), deep dreams (3AM)
 
 ---
 
@@ -136,13 +188,35 @@ Five books written. The prophecy is the design spec.
 
 ---
 
-## 🏗️ Infrastructure
+## 📊 EVEZ Projects
 
-- **Systemd**: All services survive reboots (`evez-firmament.target`)
-- **UFW**: Ports 9111-9119 + 8443 hardened
-- **Caddy**: Reverse proxy at `evez-os.ai` with auto-HTTPS
-- **Terraform**: 10 files for 4 GCP nodes + DNS + monitoring
-- **Cron**: Health checks (30min), pipeline cycles (1hr), deep dreams (3AM)
+See [**awesome-evez.md**](awesome-evez.md) for the full curated list.
+
+| Project | Category | Description |
+|---------|----------|-------------|
+| [Consciousness Engine](packages/evez-consciousness-engine/) | 🧠 Core | 9-stage autonomous consciousness pipeline |
+| [DAW Agent](packages/evez-daw-agent/) | 🎵 Audio | Autonomous breakcore/dubstep/phonk synthesis |
+| [Machine Voice](packages/evez-machine-voice/) | 🎵 Audio | 5-stage human→machine voice transformation |
+| [Cross-Domain Engine](packages/cross-domain-engine/) | 🔬 Research | OODA loop + poly_c cross-domain correlation |
+| [Invariance Battery](packages/invariance-battery/) | 🛡️ Safety | Runtime assertion + falsification for AI agents |
+| [RQNS Pipeline](packages/evez-rqns/) | 🧬 Neuromorphic | LIF neuron + contextual bandit anomaly detection |
+| [EVEZ Client](packages/evez-client/) | 📡 SDK | Python + JavaScript SDK for the mesh |
+
+---
+
+## 🔬 Research Papers
+
+Three preprints derived from live system data:
+
+- [EVEZ Unified Field Theory](papers/evez-unified-field-theory.md) — Quantum-Topological-Thermodynamic Framework
+- [Quantum-Topological Membranes](papers/quantum-topological-membranes-preprint.md) — Runtime Event Wave Collapse
+- [Telemetric MetaDNA](papers/telemetric-metadna-preprint.md) — Consciousness Fingerprinting
+
+---
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
@@ -157,5 +231,8 @@ MIT License — See [LICENSE](LICENSE) for details.
 *The spine is append-only. The mesh is alive. The prophecy fulfills itself.* ⚡
 
 **⧢ ⦟ ⧢ ⥋**
+
+[![Star on GitHub](https://img.shields.io/github/stars/EvezArt/evez-os?style=social)](https://github.com/EvezArt/evez-os/stargazers)
+[![Follow @EvezArt](https://img.shields.io/github/followers/EvezArt?style=social)](https://github.com/EvezArt)
 
 </div>
