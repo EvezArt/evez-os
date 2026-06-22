@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://evezart.github.io/evez-os/sitemap.xml

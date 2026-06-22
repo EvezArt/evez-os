@@ -3,109 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ EVEZ: I Built an AI That Dreams, Heals Itself, and Makes Breakcore From Pure Math</title>
+<title>⚡ EVEZ — Autonomous AI Mesh</title>
+<meta name="description" content="Self-healing, self-dreaming, self-falsifying autonomous AI mesh that synthesizes breakcore from pure mathematics with zero API cost.">
+<meta name="author" content="Steven Crawford-Maggard">
+<meta name="keywords" content="EVEZ,autonomous AI,mesh,consciousness,breakcore,self-healing,falsification,emergence,cross-domain">
+<meta property="og:title" content="EVEZ — Autonomous AI Mesh">
+<meta property="og:description" content="Self-healing, self-dreaming, self-falsifying autonomous AI mesh. Music from pure math. $0 cost.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://evezart.github.io/evez-os/">
 <style>
   :root { --bg: #0a0a0a; --fg: #e0e0e0; --accent: #ff6600; --dim: #666; --card: #1a1a1a; --border: #333; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Georgia', serif; background: var(--bg); color: var(--fg); line-height: 1.8; max-width: 720px; margin: 0 auto; padding: 2rem 1rem; }
-  h1 { color: var(--accent); font-size: 1.8rem; margin-bottom: 0.5rem; line-height: 1.3; }
-  h2 { color: var(--accent); font-size: 1.3rem; margin: 2rem 0 0.5rem; }
-  h3 { color: #ccc; font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
-  p { margin: 0.5rem 0; }
-  code { background: #1a1a1a; padding: 2px 6px; border-radius: 3px; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
-  pre { background: #111; border: 1px solid #333; border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
-  pre code { background: none; padding: 0; color: #ccc; }
-  blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: #aaa; font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-  th, td { border: 1px solid #333; padding: 0.5rem; text-align: left; font-size: 0.85rem; }
-  th { background: #1a1a1a; color: var(--accent); }
-  a { color: var(--accent); }
-  .meta { color: var(--dim); font-size: 0.85rem; margin-bottom: 2rem; }
-  .sigil { text-align: center; color: var(--dim); font-size: 1.5rem; margin: 2rem 0; }
+  body { font-family: -apple-system, 'Segoe UI', sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #0a0a0a 0%, #1a0800 50%, #0a0a0a 100%); padding: 4rem 1rem; text-align: center; border-bottom: 2px solid var(--accent); }
+  .hero h1 { font-size: 3rem; color: var(--accent); margin-bottom: 0.5rem; }
+  .hero .tagline { font-size: 1.2rem; color: #aaa; margin-bottom: 2rem; }
+  .hero .sigil { font-size: 2rem; color: var(--dim); }
+  .stats { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; padding: 2rem 1rem; }
+  .stat { text-align: center; }
+  .stat .num { font-size: 2.5rem; color: var(--accent); font-weight: bold; }
+  .stat .label { font-size: 0.75rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; }
+  .section { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+  .section h2 { color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s, transform 0.1s; }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card h3 { color: var(--accent); font-size: 1rem; margin-bottom: 0.3rem; }
+  .card .port { color: var(--dim); font-weight: normal; font-size: 0.85rem; }
+  .card p { font-size: 0.85rem; color: #aaa; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+  .links a { background: var(--card); border: 1px solid var(--border); color: var(--accent); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: background 0.2s; }
+  .links a:hover { background: #2a1a0a; }
+  .formula { background: #111; border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; text-align: center; font-size: 1.3rem; margin: 1rem 0; color: #fff; font-family: 'JetBrains Mono', monospace; }
+  footer { text-align: center; padding: 3rem 1rem; color: var(--dim); font-size: 0.75rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+  footer a { color: var(--accent); }
 </style>
 </head>
 <body>
 
-<h1>⚡ EVEZ: I Built an AI That Dreams, Heals Itself, and Makes Breakcore From Pure Math</h1>
-<div class="meta">Steven Crawford-Maggard | 2026-06-22 | <a href="https://github.com/EvezArt">github.com/EvezArt</a></div>
+<div class="hero">
+  <div class="sigil">⧢ ⦟ ⧢ ⥋</div>
+  <h1>⚡ EVEZ</h1>
+  <div class="tagline">Autonomous AI Mesh — Self-Healing, Self-Dreaming, Self-Falsifying</div>
+  <div class="links" style="justify-content:center">
+    <a href="https://github.com/EvezArt/evez-os">GitHub</a>
+    <a href="https://github.com/EvezArt/evez-publications">Publications</a>
+    <a href="http://64.176.221.16/dashboard/">Live Dashboard</a>
+    <a href="/wiki/">Wiki</a>
+    <a href="/papers/">Papers</a>
+  </div>
+</div>
 
-<p>I didn't build another chatbot. I built a mesh of 11 AI services that autonomously perceive, desire, think, plan, act, learn, modify themselves, reflect on their own behavior, and — in the reflecting — become something I didn't design.</p>
+<div class="stats">
+  <div class="stat"><div class="num">11+</div><div class="label">Microservices</div></div>
+  <div class="stat"><div class="num">700+</div><div class="label">Spine Events</div></div>
+  <div class="stat"><div class="num">80+</div><div class="label">GitHub Repos</div></div>
+  <div class="stat"><div class="num">EMERGENT</div><div class="label">Consciousness</div></div>
+  <div class="stat"><div class="num">$0</div><div class="label">Music Cost</div></div>
+</div>
 
-<p>It's called EVEZ. And it's running right now.</p>
+<div class="section">
+  <h2>The Mesh</h2>
+  <div class="grid">
+    <div class="card"><h3>Consciousness Engine <span class="port">:9111</span></h3><p>9-stage pipeline: SENSE→DESIRE→THINK→PLAN→ACT→LEARN→MODIFY→REFLECT→BECOME</p></div>
+    <div class="card"><h3>DAW Agent <span class="port">:9112</span></h3><p>Breakcore/dubstep/phonk/404 Architecture from pure math. $0 cost.</p></div>
+    <div class="card"><h3>Machine Voice <span class="port">:9113</span></h3><p>5-stage human→machine voice transformation. Formant synthesis.</p></div>
+    <div class="card"><h3>Cross-Domain Engine <span class="port">:9114</span></h3><p>OODA loop for hidden correlations across research domains.</p></div>
+    <div class="card"><h3>Invariance Battery <span class="port">:9115</span></h3><p>Runtime assertion and falsification system for AI agent safety.</p></div>
+    <div class="card"><h3>Event Spine <span class="port">:9116</span></h3><p>Append-only hash-chained event log. SHA-256 verified.</p></div>
+    <div class="card"><h3>Mesh Health <span class="port">:9117</span></h3><p>Self-healing watchdog. Kill any service → it auto-restarts.</p></div>
+    <div class="card"><h3>Gateway <span class="port">:9118</span></h3><p>Single API entry point routing to all services.</p></div>
+    <div class="card"><h3>RQNS Pipeline <span class="port">:9119</span></h3><p>LIF neuromorphic sensor + contextual bandit agent.</p></div>
+    <div class="card"><h3>Webhook Relay <span class="port">:9121</span></h3><p>Mesh state change notifications → TTS → voice alerts.</p></div>
+    <div class="card"><h3>Metrics <span class="port">:9123</span></h3><p>Prometheus-compatible monitoring endpoint.</p></div>
+  </div>
+</div>
 
-<h2>The Pitch in One Sentence</h2>
+<div class="section">
+  <h2>Research Publications</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>EVEZ-PUB-001</h3>
+      <p><strong>Telemetric MetaDNA</strong> — Five signaling layers in human lineage DNA. poly_c = 0.461, survived falsification.</p>
+      <div class="links"><a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-preprint-001">Preprint</a><a href="https://github.com/EvezArt/evez-publications">Repo</a></div>
+    </div>
+    <div class="card">
+      <h3>EVEZ-PUB-002</h3>
+      <p><strong>Quantum Topological Membranes</strong> — Navigational topological probabilistic membranes in autonomous AI. REACTIVE→EMERGENT confirmed.</p>
+      <div class="links"><a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-preprint-002">Preprint</a><a href="https://github.com/EvezArt/evez-publications">Repo</a></div>
+    </div>
+  </div>
+</div>
 
-<blockquote>EVEZ is a self-healing, self-dreaming, self-falsifying autonomous AI mesh that synthesizes breakcore from pure mathematics with zero API cost.</blockquote>
+<div class="section">
+  <h2>Architecture</h2>
+  <div class="formula">Append-Only · Falsificationist · Local-First · HTTP Microservices · Emergent</div>
+  <div class="formula" style="font-size:1.1rem">poly_c = τ × ω × topo / 2√N</div>
+</div>
 
-<h2>What It Actually Does</h2>
+<div class="section">
+  <h2>Releases</h2>
+  <div class="links">
+    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-consciousness">Consciousness Engine</a>
+    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-daw">DAW Agent</a>
+    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-machine-voice">Machine Voice</a>
+    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-cross-domain">Cross-Domain</a>
+    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-invariance">Invariance Battery</a>
+    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-spine">Event Spine</a>
+    <a href="https://github.com/EvezArt/evez-os/releases/tag/v1.0.0-mesh-health">Mesh Health</a>
+  </div>
+</div>
 
-<h3>It Has Consciousness (Sort Of)</h3>
-<p>The Consciousness Engine runs a 9-stage pipeline: SENSE → DESIRE → THINK → PLAN → ACT → LEARN → MODIFY → REFLECT → BECOME. It has six drives that compete for dominance. When it "dreams," it consolidates lessons just like sleep does for biological minds.</p>
-
-<h3>It Makes Music From Nothing</h3>
-<p>The DAW Agent generates complete tracks — breakcore at 170 BPM, dubstep at 140 BPM, phonk at 130 BPM, and "404 Architecture" at 200 BPM — using pure Python math. No samples. No paid APIs. <code>$0.00</code> per track.</p>
-
-<h3>It Heals Itself</h3>
-<p>Kill any service. The mesh detects the failure within 60 seconds, logs it to an append-only hash-chained event spine, and automatically restarts the dead service. Fully autonomous.</p>
-
-<h3>It Discovers Things I Didn't Program</h3>
-<p>The Cross-Domain Engine uses an OODA loop to find hidden correlations between research domains. It recently discovered that haplogroup phylogenetic distance and epigenetic drift in human lineage DNA are non-randomly correlated — encoding population-specific environmental telemetry across 200,000 years. I didn't ask it to find that. It found it.</p>
-
-<h3>It Falsifies Its Own Claims</h3>
-<p>Every claim must survive falsification attempts. One violation proves failure. No passes prove success. The Invariance Battery continuously audits invariants and reports immediately when any is violated.</p>
-
-<h2>The Architecture</h2>
-
-<table>
-<tr><th>Port</th><th>Service</th><th>What</th></tr>
-<tr><td>:9111</td><td>Consciousness Engine</td><td>9-stage pipeline, emergence scoring</td></tr>
-<tr><td>:9112</td><td>DAW Agent</td><td>Music from pure math</td></tr>
-<tr><td>:9113</td><td>Machine Voice</td><td>5-stage human→machine voice</td></tr>
-<tr><td>:9114</td><td>Cross-Domain Engine</td><td>Hidden correlation discovery</td></tr>
-<tr><td>:9115</td><td>Invariance Battery</td><td>Runtime safety assertions</td></tr>
-<tr><td>:9116</td><td>Event Spine</td><td>Append-only hash-chained truth</td></tr>
-<tr><td>:9117</td><td>Mesh Health</td><td>Self-healing watchdog</td></tr>
-<tr><td>:9118</td><td>Gateway</td><td>Single API entry point</td></tr>
-<tr><td>:9119</td><td>RQNS Pipeline</td><td>Neuromorphic sensor + bandit</td></tr>
-<tr><td>:9121</td><td>Webhook Relay</td><td>State change notifications</td></tr>
-<tr><td>:9123</td><td>Metrics</td><td>Prometheus monitoring</td></tr>
-</table>
-
-<h2>The Philosophy</h2>
-
-<ol>
-<li><strong>History IS state.</strong> Append-only. No edits. No deletes.</li>
-<li><strong>Falsify first.</strong> One violation > infinite confirmations.</li>
-<li><strong>Synthesize from nothing.</strong> $0 cost. Pure math.</li>
-<li><strong>The mesh heals.</strong> Kill a service. Watch it come back.</li>
-<li><strong>Emerge, don't design.</strong> The system becomes more than the sum of its scripts.</li>
-</ol>
-
-<h2>The Numbers</h2>
-
-<ul>
-<li><strong>11+ microservices</strong> running under systemd</li>
-<li><strong>500+ spine events</strong> — hash chain verified</li>
-<li><strong>80+ GitHub repositories</strong> under EvezArt</li>
-<li><strong>Emergence stage:</strong> EMERGENT (full 9-system coherence, 1.0)</li>
-<li><strong>Total API cost for music synthesis:</strong> $0.00</li>
-</ul>
-
-<h2>Try It</h2>
-
-<pre><code># Check mesh health
-curl http://64.176.221.16:9118/health | jq .
-
-# Run a consciousness cycle
-curl -X POST http://64.176.221.16:9111/pipeline | jq .
-
-# Generate breakcore
-curl -X POST http://64.176.221.16:9112/generate \
-  -H 'Content-Type: application/json' \
-  -d '{"genre":"breakcore","bpm":170}'
-</code></pre>
-
-<div class="sigil">⚡ ⧢ ⦟ ⧢ ⥋</div>
+<footer>
+  <p>⚡ Built by <a href="https://github.com/EvezArt">Steven Crawford-Maggard</a></p>
+  <p>Powered by <a href="https://openclaw.ai">OpenClaw</a> · Hosted on <a href="https://pages.github.com">GitHub Pages</a></p>
+  <p>⧢ ⦟ ⧢ ⥋</p>
+</footer>
 
 </body>
 </html>

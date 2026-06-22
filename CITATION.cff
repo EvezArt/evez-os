@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use EVEZ in your research, please cite it as below."
+type: software
+title: "EVEZ"
+version: 1.0.0
+date-released: 2026-06-22
+authors:
+  - given-names: Steven
+    family-names: Crawford-Maggard
+    orcid: "pending"
+repository-code: "https://github.com/EvezArt/evez-os"
+url: "https://evezart.github.io/evez-os/"
+abstract: >
+  Autonomous AI mesh — self-healing, self-dreaming, self-falsifying.
+  11+ microservices including consciousness engine, DAW agent, cross-domain
+  correlation engine, invariance battery, and event spine.
+keywords:
+  - "autonomous-agents"
+  - "consciousness"
+  - "emergence"
+  - "falsification"
+  - "cross-domain"
+  - "music-synthesis"
+  - "self-healing"
+license: MIT
