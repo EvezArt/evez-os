@@ -94,13 +94,13 @@
 <h2>Try It</h2>
 
 <pre><code># Check mesh health
-curl http://64.176.221.16:9118/health | jq .
+curl http://evez-os.ai:9118/health | jq .
 
 # Run a consciousness cycle
-curl -X POST http://64.176.221.16:9111/pipeline | jq .
+curl -X POST http://evez-os.ai:9111/pipeline | jq .
 
 # Generate breakcore
-curl -X POST http://64.176.221.16:9112/generate \
+curl -X POST http://evez-os.ai:9112/generate \
   -H 'Content-Type: application/json' \
   -d '{"genre":"breakcore","bpm":170}'
 </code></pre>

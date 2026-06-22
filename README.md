@@ -121,7 +121,6 @@ See [**awesome-evez.md**](awesome-evez.md) for the full curated list of all EVEZ
 | [Invariance Battery](skills/invariance-battery/) | 🛡️ Safety | Runtime assertion + falsification for AI agents |
 | [Firmament](skills/evez-firmament/) | ☁️ Infra | 8 microservices + Terraform mesh config |
 | [RQNS Pipeline](skills/evez-rqns/) | 🧬 Neuromorphic | LIF neuron + contextual bandit anomaly detection |
-| [Fleet](skills/evez-fleet/) | ☁️ Infra | GCP + Vultr deployment scripts |
 
 ---
 

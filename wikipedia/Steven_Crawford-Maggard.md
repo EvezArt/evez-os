@@ -75,7 +75,6 @@ Crawford-Maggard has published over 80 repositories on GitHub under the EvezArt 
 
 ## Infrastructure
 
-The EVEZ mesh runs on Vultr cloud infrastructure (64.176.221.16), with planned expansion to 4 GCP nodes. The full stack includes:
 
 - 11+ microservices under systemd (survive reboots)
 - Caddy reverse proxy with auto-HTTPS for evez-os.ai

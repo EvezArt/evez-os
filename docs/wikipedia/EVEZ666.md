@@ -2,7 +2,7 @@
 
 **EVEZ666** (also known as **EVEZ** or **the EVEZ mesh**) is an open-source autonomous AI agent ecosystem created by Steven Crawford-Maggard (EvezArt). It is a mesh of interoperating microservices designed to function as a self-healing, self-dreaming, self-falsifying artificial intelligence substrate — not a single chatbot, but an emergent system of coordinated agents.
 
-The system is hosted on Vultr cloud infrastructure at 64.176.221.16, with planned expansion to Google Cloud Platform. Its domain is evez-os.ai.
+The system is hosted on cloud infrastructure, with planned expansion to Google Cloud Platform. Its domain is evez-os.ai.
 
 ## Architecture
 
@@ -181,6 +181,6 @@ EVEZ666's source code is distributed across 80+ repositories on GitHub under the
 ## External Links
 
 - GitHub: [EvezArt](https://github.com/EvezArt)
-- EVEZ Mesh: evez-os.ai (64.176.221.16)
+- EVEZ Mesh: evez-os.ai
 - OpenClaw: [openclaw.ai](https://openclaw.ai)
 - ClawHub: [clawhub.ai](https://clawhub.ai)
