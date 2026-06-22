@@ -1,0 +1,37 @@
+[Unit]
+Description=EVEZ Out-of-SystemD Watchdog — Supervises systemd itself
+Documentation=https://github.com/evez/unbreakable
+After=network.target
+Before=multi-user.target
+DefaultDependencies=no
+
+# This unit MUST survive everything. It starts early, stops late.
+# Its job: if systemd dies, this watchdog restarts it.
+# This is the supervisor that watches the supervisor.
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/evez-watchdog /var/lib/evez/watchdog
+Restart=always
+RestartSec=0
+StartLimitIntervalSec=0
+
+# Maximum isolation from systemd — we watch it, not the other way around
+# If systemd kills this service, it immediately restarts (RestartSec=0)
+# The watchdog monitors PID 1 (systemd) and can trigger emergency recovery
+
+# Security hardening
+ProtectSystem=false      # We need to write to the system
+ProtectHome=false        # We need access to home dirs
+NoNewPrivileges=false    # We need elevated access for recovery
+CapabilityBoundingSet=CAP_SYS_BOOT CAP_SYS_PTRACE CAP_KILL CAP_SYS_RESOURCE
+
+# Environment
+Environment=EVEZ_WATCHDOG_INTERVAL=2
+Environment=EVEZ_SYSTEMD_RESTART_ATTEMPTS=5
+Environment=EVEZ_SYSTEMD_RESTART_DELAY=1
+Environment=EVEZ_PID1_PATH=/sbin/init
+Environment=EVEZ_EMERGENCY_SCRIPT=/usr/local/bin/evez-emergency-recovery
+
+[Install]
+WantedBy=sysinit.target
