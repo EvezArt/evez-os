@@ -37,6 +37,8 @@
   - :9119 RQNS Pipeline (LIF neuron, contextual bandit, hot-swapping)
   - :9121 Webhook Relay (mesh state change notifications)
   - :9123 Metrics (Prometheus-compatible monitoring)
+  - :9124 Geolocation (free ip-api.com)
+  - :9125 TTS Service (pure-math WAV synthesis)
 - ✅ UFW firewall open on ports 9111-9123 + 8443
 - ✅ Caddy reverse proxy configured for evez-os.ai (auto-HTTPS when DNS lands)
 - ✅ Web dashboard at /dashboard/index.html
@@ -52,6 +54,10 @@
 - ✅ Fail2ban + journal rotation + git auto-commit (6hr)
 - ⚠️ No GCP nodes deployed yet (gcloud installed, needs auth)
 - ⚠️ DNS evez-os.ai not pointing to 64.176.221.16 yet (Caddy ready, auto-HTTPS on DNS)
+- ✅ Webhook relay wired to TTS + voice alert chain
+- ✅ Mesh watchdog cron (every 60s): heal, pipeline, emergence check
+- ✅ Grafana + Prometheus installing
+- ✅ Telegram plugin enabled, ready for token
 - ⚠️ 6 model providers need API keys (Gemini, Groq, Cerebras, Together, OpenAI, Anthropic)
 
 ## Lessons
