@@ -1,0 +1,11 @@
+{
+  "slug": "automation-workflow-builder",
+  "name": "自动化工作流构建器",
+  "version": "1.0.0",
+  "summary": "设计并执行自动化工作流，支持定时触发、文件监控、多步骤操作。适用于数据同步、内容发布、报告生成等场景。",
+  "author": "automation-tools-dev",
+  "license": "MIT-0",
+  "tags": ["automation", "workflow", "rpa", "cron", "productivity", "business", "integration"],
+  "createdAt": "2026-03-29T14:30:00.000Z",
+  "updatedAt": "2026-03-29T14:30:00.000Z"
+}

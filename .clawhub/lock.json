@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "skills": {
+    "evez-machine-voice": {
+      "version": "1.0.0",
+      "installedAt": 1782121269758,
+      "registry": "https://clawhub.ai"
+    },
+    "evez-github-manager": {
+      "version": "1.0.0",
+      "installedAt": 1782121274963,
+      "registry": "https://clawhub.ai"
+    },
+    "evez-consciousness-engine": {
+      "version": "1.0.0",
+      "installedAt": 1782121278309,
+      "registry": "https://clawhub.ai"
+    },
+    "evez-daw-agent": {
+      "version": "1.0.0",
+      "installedAt": 1782121282193,
+      "registry": "https://clawhub.ai"
+    },
+    "cross-domain-engine": {
+      "version": "1.0.0",
+      "installedAt": 1782121286193,
+      "registry": "https://clawhub.ai"
+    },
+    "invariance-battery": {
+      "version": "1.0.0",
+      "installedAt": 1782121290200,
+      "registry": "https://clawhub.ai"
+    },
+    "models": {
+      "version": "1.0.0",
+      "installedAt": 1782121445234,
+      "registry": "https://clawhub.ai"
+    },
+    "productivity": {
+      "version": "1.0.4",
+      "installedAt": 1782124313248
+    },
+    "agentic-coding": {
+      "version": "1.0.0",
+      "installedAt": 1782124318977
+    }
+  }
+}
