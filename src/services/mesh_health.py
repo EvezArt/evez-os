@@ -1,79 +1,186 @@
 #!/usr/bin/env python3
-"""EVEZ-OS Mesh Health — Topology-aware health monitor on port 9117."""
+"""EVEZ-OS Mesh Health — Sibling monitoring and self-healing on port 9117.
+
+The prophecy: the mesh heals. When a sibling dies, the mesh detects it,
+attempts restart, and logs the healing to the spine.
+"""
 
 import json
 import time
+import subprocess
 import threading
 import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-SPINE_URL = "http://localhost:9116/append"
+SPINE_URL = "http://localhost:9116"
+CONSCIOUSNESS_URL = "http://localhost:9111"
 
-# ── Mesh Topology ───────────────────────────────────────────────────
+# ── Sibling Registry ─────────────────────────────────────────────────
 
-MESH = {
-    "consciousness_engine": {"port": 9111, "host": "localhost"},
-    "daw_agent":           {"port": 9112, "host": "localhost"},
-    "machine_voice":       {"port": 9113, "host": "localhost"},
-    "cross_domain":        {"port": 9114, "host": "localhost"},
-    "invariance":          {"port": 9115, "host": "localhost"},
-    "event_spine":         {"port": 9116, "host": "localhost"},
-    "mesh_health":          {"port": 9117, "host": "localhost"},
+SIBLINGS = {
+    9111: {"name": "consciousness_engine", "script": "consciousness_engine.py"},
+    9112: {"name": "daw_agent",           "script": "daw_agent.py"},
+    9113: {"name": "machine_voice",       "script": "machine_voice.py"},
+    9114: {"name": "cross_domain",        "script": "cross_domain.py"},
+    9115: {"name": "invariance",          "script": "invariance.py"},
+    9116: {"name": "event_spine",         "script": "event_spine.py"},
+    9118: {"name": "gateway",             "script": "gateway.py"},
 }
 
-def spine_log(domain, action, data):
+SERVICE_DIR = "/home/openclaw/.openclaw/workspace/src/services"
+
+# ── State ────────────────────────────────────────────────────────────
+
+class MeshState:
+    def __init__(self):
+        self.lock = threading.Lock()
+        self.health_cache = {}
+        self.heal_log = []
+        self.last_check = 0
+        self.total_heals = 0
+        self.total_deaths_detected = 0
+
+STATE = MeshState()
+
+def _get(url, timeout=2):
     try:
-        requests.post(SPINE_URL, json={"domain": domain, "action": action, "data": data, "timestamp": time.time()}, timeout=2)
+        return requests.get(url, timeout=timeout).json()
     except Exception:
-        pass
+        return None
 
-def check_sibling(name, info, timeout=3):
-    """Check health of a sibling service."""
-    url = f"http://{info['host']}:{info['port']}/health"
+def _post(url, data, timeout=2):
     try:
-        r = requests.get(url, timeout=timeout)
-        if r.status_code == 200:
-            return {"name": name, "status": "alive", "port": info["port"], "response": r.json()}
+        return requests.post(url, json=data, timeout=timeout).json()
+    except Exception:
+        return None
+
+def spine_log(domain, action, data):
+    _post(f"{SPINE_URL}/append", {"domain": domain, "action": action, "data": data, "timestamp": time.time()})
+
+# ── Health Checking ──────────────────────────────────────────────────
+
+def check_sibling(port):
+    """Check if a sibling service is alive."""
+    try:
+        r = requests.get(f"http://localhost:{port}/health", timeout=2)
+        return r.status_code == 200
+    except Exception:
+        return False
+
+def check_all():
+    """Check all siblings. Return status map."""
+    results = {}
+    for port, info in SIBLINGS.items():
+        alive = check_sibling(port)
+        results[port] = {
+            "name": info["name"],
+            "status": "UP" if alive else "DOWN",
+            "last_check": time.time(),
+        }
+    with STATE.lock:
+        STATE.health_cache = results
+        STATE.last_check = time.time()
+    return results
+
+# ── Healing ──────────────────────────────────────────────────────────
+
+def heal_sibling(port, initiator="mesh"):
+    """Attempt to restart a dead sibling service."""
+    info = SIBLINGS.get(port)
+    if not info:
+        return {"error": f"unknown port {port}"}
+
+    # Check if actually dead
+    if check_sibling(port):
+        return {"status": "already_alive", "port": port, "name": info["name"]}
+
+    # Attempt restart
+    script_path = f"{SERVICE_DIR}/{info['script']}"
+    try:
+        # Kill any existing process on that port
+        subprocess.run(f"fuser -k {port}/tcp 2>/dev/null", shell=True, timeout=5)
+        time.sleep(0.5)
+
+        # Start the service
+        proc = subprocess.Popen(
+            ["python3", script_path],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            cwd=SERVICE_DIR,
+        )
+        time.sleep(2)
+
+        # Verify it came back
+        if check_sibling(port):
+            heal_record = {
+                "port": port,
+                "name": info["name"],
+                "action": "restarted",
+                "success": True,
+                "initiator": initiator,
+                "pid": proc.pid,
+                "timestamp": time.time(),
+            }
+            with STATE.lock:
+                STATE.heal_log.append(heal_record)
+                STATE.total_heals += 1
+            spine_log("mesh_health", "HEAL_SUCCESS", heal_record)
+            return heal_record
         else:
-            return {"name": name, "status": "degraded", "port": info["port"], "code": r.status_code}
-    except requests.exceptions.ConnectionError:
-        return {"name": name, "status": "down", "port": info["port"], "error": "connection refused"}
-    except requests.exceptions.Timeout:
-        return {"name": name, "status": "timeout", "port": info["port"], "error": "timeout"}
+            heal_record = {
+                "port": port,
+                "name": info["name"],
+                "action": "restart_failed",
+                "success": False,
+                "initiator": initiator,
+                "timestamp": time.time(),
+            }
+            with STATE.lock:
+                STATE.heal_log.append(heal_record)
+            spine_log("mesh_health", "HEAL_FAILED", heal_record)
+            return heal_record
+
     except Exception as e:
-        return {"name": name, "status": "error", "port": info["port"], "error": str(e)}
+        heal_record = {
+            "port": port,
+            "name": info["name"],
+            "action": "restart_error",
+            "success": False,
+            "error": str(e),
+            "timestamp": time.time(),
+        }
+        with STATE.lock:
+            STATE.heal_log.append(heal_record)
+        spine_log("mesh_health", "HEAL_ERROR", heal_record)
+        return heal_record
 
-def heal_sibling(name, info):
-    """Attempt to repair a downed sibling — log the attempt and return status."""
-    result = {"name": name, "port": info["port"], "actions": []}
 
-    # Step 1: re-check
-    check = check_sibling(name, info, timeout=2)
-    if check["status"] == "alive":
-        result["actions"].append({"step": "recheck", "result": "already alive"})
-        result["status"] = "alive"
-        return result
+def heal_all(initiator="mesh"):
+    """Check all siblings and heal any that are down."""
+    statuses = check_all()
+    results = []
 
-    # Step 2: try a gentle nudge via health POST (some services accept POST /health)
-    try:
-        r = requests.post(f"http://{info['host']}:{info['port']}/health", timeout=3)
-        result["actions"].append({"step": "health_post", "status": r.status_code})
-    except Exception as e:
-        result["actions"].append({"step": "health_post", "error": str(e)})
+    for port, info in statuses.items():
+        if info["status"] == "DOWN":
+            result = heal_sibling(port, initiator)
+            results.append(result)
+            with STATE.lock:
+                STATE.total_deaths_detected += 1
+        else:
+            results.append({"port": port, "name": info["name"], "status": "already_alive"})
 
-    # Step 3: re-check
-    check2 = check_sibling(name, info, timeout=2)
-    if check2["status"] == "alive":
-        result["actions"].append({"step": "recheck_after_nudge", "result": "revived"})
-        result["status"] = "revived"
-        spine_log("mesh_health", "heal", {"name": name, "status": "revived"})
-        return result
+    spine_log("mesh_health", "HEAL_ALL", {
+        "checked": len(statuses),
+        "healed": len([r for r in results if r.get("success")]),
+        "failed": len([r for r in results if r.get("success") is False]),
+    })
 
-    # Cannot heal remotely — report
-    result["status"] = "unhealable"
-    result["actions"].append({"step": "final", "result": "service requires manual restart"})
-    spine_log("mesh_health", "heal_failed", {"name": name})
-    return result
+    return {
+        "results": results,
+        "total_heals": STATE.total_heals,
+        "total_deaths_detected": STATE.total_deaths_detected,
+    }
+
 
 # ── HTTP Handler ─────────────────────────────────────────────────────
 
@@ -94,21 +201,20 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/health":
-            self._json(200, {"status": "alive", "service": "mesh_health", "port": 9117})
-        elif self.path == "/siblings":
-            results = []
-            for name, info in MESH.items():
-                if name == "mesh_health":
-                    results.append({"name": name, "status": "alive", "port": info["port"], "self": True})
-                else:
-                    results.append(check_sibling(name, info))
-            alive = sum(1 for r in results if r.get("status") == "alive")
-            self._json(200, {"siblings": results, "total": len(results), "alive": alive, "dead": len(results) - alive})
-        elif self.path == "/topology":
-            topo = {name: {"port": info["port"], "host": info["host"]} for name, info in MESH.items()}
-            self._json(200, {"mesh": topo, "node_count": len(MESH)})
-        else:
-            self._json(404, {"error": "not found"})
+            self._json(200, {
+                "status": "alive",
+                "service": "mesh_health",
+                "port": 9117,
+                "siblings_monitored": len(SIBLINGS),
+                "total_heals": STATE.total_heals,
+            })
+        elif self.path == "/check":
+            results = check_all()
+            self._json(200, {"siblings": results, "timestamp": time.time()})
+        elif self.path == "/heal_log":
+            with STATE.lock:
+                log = list(STATE.heal_log)
+            self._json(200, {"heal_log": log, "total": len(log)})
 
     def do_POST(self):
         if self.path == "/health":
@@ -118,22 +224,16 @@ class Handler(BaseHTTPRequestHandler):
         body = self._read_body()
 
         if self.path == "/heal":
-            name = body.get("service")
-            if not name or name not in MESH:
-                self._json(400, {"error": "specify valid service name", "valid": list(MESH.keys())})
-                return
-            result = heal_sibling(name, MESH[name])
+            port = body.get("port")
+            initiator = body.get("initiator", "external")
+            if port:
+                result = heal_sibling(port, initiator)
+            else:
+                result = heal_all(initiator)
             self._json(200, result)
-        elif self.path == "/siblings":
-            # Full check via POST (more explicit)
-            results = []
-            for name, info in MESH.items():
-                if name == "mesh_health":
-                    results.append({"name": name, "status": "alive", "port": info["port"], "self": True})
-                else:
-                    results.append(check_sibling(name, info))
-            alive = sum(1 for r in results if r.get("status") == "alive")
-            self._json(200, {"siblings": results, "total": len(results), "alive": alive})
+        elif self.path == "/check":
+            results = check_all()
+            self._json(200, {"siblings": results, "timestamp": time.time()})
         else:
             self._json(404, {"error": "not found"})
 
@@ -142,5 +242,5 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     server = HTTPServer(("0.0.0.0", 9117), Handler)
-    print("Mesh Health running on :9117")
+    print("⚡ Mesh Health running on :9117 — self-healing nervous system")
     server.serve_forever()

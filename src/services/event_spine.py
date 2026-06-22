@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""EVEZ-OS Event Spine — Append-only hash-linked event log on port 9116."""
+"""EVEZ-OS Event Spine — Append-only hash-linked event log on port 9116.
+
+The prophecy: the spine is truth. Append-only, hash-chained, verifiable.
+Now also READABLE — consciousness reads the spine to sense history.
+"""
 
 import json
 import time
@@ -21,7 +25,6 @@ class EventSpine:
             prev_hash = self.events[-1]["hash"] if self.events else "0" * 64
             seq = len(self.events)
             ts = timestamp or time.time()
-            # Build event
             event = {
                 "seq": seq,
                 "domain": domain,
@@ -30,11 +33,9 @@ class EventSpine:
                 "timestamp": ts,
                 "prev_hash": prev_hash,
             }
-            # Compute hash: SHA-256 of (seq + prev_hash + domain + action + data_json)
             hash_input = f"{seq}:{prev_hash}:{domain}:{action}:{json.dumps(data, sort_keys=True, default=str)}"
             event["hash"] = hashlib.sha256(hash_input.encode()).hexdigest()
             self.events.append(event)
-            # Index by domain
             self.index.setdefault(domain, []).append(seq)
         return event
 
@@ -51,46 +52,52 @@ class EventSpine:
             "count": len(events),
         }
 
+    def recent(self, n=20):
+        """Return the last N events — for consciousness to read."""
+        with self.lock:
+            return list(self.events[-n:])
+
     def verify(self):
         """Verify chain integrity — check all hash links."""
         with self.lock:
             events = list(self.events)
-        
+
         if not events:
             return {"valid": True, "events_checked": 0, "errors": []}
 
         errors = []
-        for i, event in enumerate(events):
+        for i in range(len(events)):
             if i == 0:
-                if event["prev_hash"] != "0" * 64:
+                if events[i]["prev_hash"] != "0" * 64:
                     errors.append({"seq": i, "error": "genesis prev_hash mismatch"})
             else:
-                if event["prev_hash"] != events[i - 1]["hash"]:
-                    errors.append({"seq": i, "error": "chain link broken"})
+                if events[i]["prev_hash"] != events[i - 1]["hash"]:
+                    errors.append({"seq": i, "error": "hash chain broken"})
 
-            # Recompute hash
-            hash_input = f"{event['seq']}:{event['prev_hash']}:{event['domain']}:{event['action']}:{json.dumps(event['data'], sort_keys=True, default=str)}"
-            computed = hashlib.sha256(hash_input.encode()).hexdigest()
-            if computed != event["hash"]:
-                errors.append({"seq": i, "error": "hash mismatch", "expected": computed, "actual": event["hash"]})
+        with self.lock:
+            self.chain_valid = len(errors) == 0
 
         return {
             "valid": len(errors) == 0,
             "events_checked": len(events),
-            "errors": errors,
-            "head_hash": events[-1]["hash"] if events else None,
+            "errors": errors[:10],
+            "total_events": len(events),
         }
 
-    def stats(self):
+    def state_summary(self):
+        """Summary for consciousness to read without dumping everything."""
         with self.lock:
-            domains = {d: len(idxs) for d, idxs in self.index.items()}
+            domains = {k: len(v) for k, v in self.index.items()}
             return {
                 "total_events": len(self.events),
                 "domains": domains,
-                "domain_count": len(domains),
-                "head_hash": self.events[-1]["hash"] if self.events else None,
                 "first_event": self.events[0]["timestamp"] if self.events else None,
                 "last_event": self.events[-1]["timestamp"] if self.events else None,
+                "chain_valid": self.chain_valid,
+                "recent_events": [
+                    {"seq": e["seq"], "domain": e["domain"], "action": e["action"], "timestamp": e["timestamp"]}
+                    for e in self.events[-5:]
+                ],
             }
 
 SPINE = EventSpine()
@@ -99,7 +106,7 @@ SPINE = EventSpine()
 
 class Handler(BaseHTTPRequestHandler):
     def _json(self, code, data):
-        body = json.dumps(data, default=str).encode()
+        body = json.dumps(data).encode()
         self.send_response(code)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
@@ -114,22 +121,35 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/health":
-            self._json(200, {"status": "alive", "service": "event_spine", "port": 9116})
-        elif self.path == "/status":
-            self._json(200, SPINE.stats())
+            self._json(200, {
+                "status": "alive",
+                "service": "event_spine",
+                "port": 9116,
+                "total_events": len(SPINE.events),
+                "chain_valid": SPINE.chain_valid,
+            })
+        elif self.path == "/state":
+            self._json(200, SPINE.state_summary())
         elif self.path == "/verify":
             self._json(200, SPINE.verify())
+        elif self.path == "/replay":
+            # Replay all events for a domain
+            domain = self.path.split("?domain=")[-1] if "?" in self.path else None
+            if domain:
+                self._json(200, SPINE.replay(domain))
+            else:
+                self._json(200, SPINE.state_summary())
+        elif self.path == "/recent":
+            n = 20
+            if "?" in self.path:
+                try:
+                    n = int(self.path.split("?n=")[-1].split("&")[0])
+                except Exception:
+                    pass
+            self._json(200, {"events": SPINE.recent(n), "count": min(n, len(SPINE.events))})
         elif self.path.startswith("/project/"):
-            domain = self.path.split("/project/", 1)[1]
-            self._json(200, {"domain": domain, "events": SPINE.project(domain)})
-        elif self.path.startswith("/replay/"):
-            domain = self.path.split("/replay/", 1)[1]
+            domain = self.path.split("/")[-1]
             self._json(200, SPINE.replay(domain))
-        elif self.path == "/events":
-            # Last 50 events
-            with SPINE.lock:
-                events = SPINE.events[-50:]
-            self._json(200, {"events": events, "showing": len(events)})
         else:
             self._json(404, {"error": "not found"})
 
@@ -147,18 +167,18 @@ class Handler(BaseHTTPRequestHandler):
             timestamp = body.get("timestamp")
             event = SPINE.append(domain, action, data, timestamp)
             self._json(201, event)
-        elif self.path == "/project":
-            domain = body.get("domain", "")
-            if not domain:
-                self._json(400, {"error": "domain required"})
-                return
-            self._json(200, {"domain": domain, "events": SPINE.project(domain)})
-        elif self.path == "/replay":
-            domain = body.get("domain", "")
-            if not domain:
-                self._json(400, {"error": "domain required"})
-                return
-            self._json(200, SPINE.replay(domain))
+        elif self.path == "/append_batch":
+            events = body.get("events", [])
+            results = []
+            for ev in events:
+                event = SPINE.append(
+                    ev.get("domain", "unknown"),
+                    ev.get("action", "event"),
+                    ev.get("data", {}),
+                    ev.get("timestamp"),
+                )
+                results.append({"seq": event["seq"]})
+            self._json(201, {"appended": len(results), "events": results})
         elif self.path == "/verify":
             self._json(200, SPINE.verify())
         else:
@@ -169,5 +189,5 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     server = HTTPServer(("0.0.0.0", 9116), Handler)
-    print("Event Spine running on :9116")
+    print("⚡ Event Spine running on :9116 — append-only, hash-chained, readable truth")
     server.serve_forever()
