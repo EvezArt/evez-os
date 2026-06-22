@@ -1,0 +1,54 @@
+# ============================================================================
+# kustomization.yaml — EVEZ Mesh Kustomize Configuration for GKE
+#
+# Usage:
+#   kubectl apply -k k8s/
+#
+# To override the GCR project ID:
+#   kubectl apply -k k8s/ --load-restrictor LoadRestrictionsNone
+# ============================================================================
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: evez-mesh
+
+commonLabels:
+  app.kubernetes.io/name: evez-mesh
+  app.kubernetes.io/part-of: evez-firmament
+  app.kubernetes.io/managed-by: kustomize
+
+resources:
+  - deployment.yml
+
+# Replace GCR project ID in all images
+images:
+  - name: gcr.io/EVEZ_PROJECT/evez-consciousness-engine
+    newName: gcr.io/evez-mesh-prod/evez-consciousness-engine
+  - name: gcr.io/EVEZ_PROJECT/evez-daw-agent
+    newName: gcr.io/evez-mesh-prod/evez-daw-agent
+  - name: gcr.io/EVEZ_PROJECT/evez-machine-voice
+    newName: gcr.io/evez-mesh-prod/evez-machine-voice
+  - name: gcr.io/EVEZ_PROJECT/evez-cross-domain
+    newName: gcr.io/evez-mesh-prod/evez-cross-domain
+  - name: gcr.io/EVEZ_PROJECT/evez-invariance-battery
+    newName: gcr.io/evez-mesh-prod/evez-invariance-battery
+  - name: gcr.io/EVEZ_PROJECT/evez-event-spine
+    newName: gcr.io/evez-mesh-prod/evez-event-spine
+  - name: gcr.io/EVEZ_PROJECT/evez-mesh-health
+    newName: gcr.io/evez-mesh-prod/evez-mesh-health
+  - name: gcr.io/EVEZ_PROJECT/evez-gateway
+    newName: gcr.io/evez-mesh-prod/evez-gateway
+  - name: gcr.io/EVEZ_PROJECT/evez-rqns
+    newName: gcr.io/evez-mesh-prod/evez-rqns
+  - name: gcr.io/EVEZ_PROJECT/evez-webhook-relay
+    newName: gcr.io/evez-mesh-prod/evez-webhook-relay
+  - name: gcr.io/EVEZ_PROJECT/evez-metrics
+    newName: gcr.io/evez-mesh-prod/evez-metrics
+
+configMapGenerator:
+  - name: evez-config
+    literals:
+      - EVEZ_NODE_NAME=Evez666
+      - SPINE_URL=http://event-spine:9116
+      - GATEWAY_URL=http://gateway:9118

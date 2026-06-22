@@ -1,0 +1,322 @@
+# ============================================================================
+# deploy-gcp.yml — EVEZ Mesh GCP Deployment via GitHub Actions
+#
+# Triggers:
+#   - Push to main (auto-deploy to prod)
+#   - Pull request (plan-only)
+#   - Manual dispatch (plan or apply)
+#
+# Required GitHub Secrets:
+#   GCP_SA_KEY            — Base64-encoded GCP service account key JSON
+#   GCP_PROJECT_ID        — GCP project ID (e.g., evez-mesh-prod)
+#   VULTR_API_KEY         — Vultr API key (optional)
+#   SSH_PUBLIC_KEY        — SSH public key for instance access (optional)
+#
+# Required GCP IAM Roles for the Service Account:
+#   - roles/compute.admin
+#   - roles/dns.admin
+#   - roles/monitoring.admin
+#   - roles/logging.admin
+#   - roles/pubsub.admin
+#   - roles/storage.admin
+#   - roles/iam.securityAdmin
+#   - roles/cloudscheduler.admin
+#   - roles/accesscontextmanager.policyAdmin
+#   - roles/serviceusage.serviceUsageAdmin
+# ============================================================================
+
+name: Deploy EVEZ Mesh to GCP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'terraform/**'
+      - 'src/services/**'
+      - 'docker-compose.yml'
+      - '.github/workflows/deploy-gcp.yml'
+
+  pull_request:
+    branches: [main]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/deploy-gcp.yml'
+
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Terraform action'
+        required: true
+        default: 'plan'
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+      region:
+        description: 'GCP region'
+        required: false
+        default: 'us-west1'
+        type: string
+
+env:
+  GCP_REGION: ${{ github.event.inputs.region || 'us-west1' }}
+  TF_VERSION: '1.9.5'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  # ─── Terraform Plan ──────────────────────────────────────────────────────
+
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' ||
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.action == 'plan'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Init
+        working-directory: terraform
+        run: |
+          terraform init \
+            -upgrade \
+            -backend-config="bucket=${{ secrets.GCP_PROJECT_ID }}-terraform-state" \
+            -backend-config="prefix=terraform/state"
+
+      - name: Terraform Format Check
+        working-directory: terraform
+        run: terraform fmt -check -diff -recursive
+
+      - name: Terraform Validate
+        working-directory: terraform
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: terraform
+        run: |
+          terraform plan \
+            -var="project_id=${{ secrets.GCP_PROJECT_ID }}" \
+            -var="region=${{ env.GCP_REGION }}" \
+            -var="vultr_api_key=${{ secrets.VULTR_API_KEY }}" \
+            -out=tfplan
+
+      - name: Save Plan Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: terraform/tfplan
+          retention-days: 5
+
+  # ─── Terraform Apply ────────────────────────────────────────────────────
+
+  terraform-apply:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+    needs: []
+    if: |
+      github.event_name == 'push' && github.ref == 'refs/heads/main' ||
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.action == 'apply'
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Init
+        working-directory: terraform
+        run: |
+          terraform init \
+            -upgrade \
+            -backend-config="bucket=${{ secrets.GCP_PROJECT_ID }}-terraform-state" \
+            -backend-config="prefix=terraform/state"
+
+      - name: Terraform Apply
+        working-directory: terraform
+        run: |
+          terraform plan \
+            -var="project_id=${{ secrets.GCP_PROJECT_ID }}" \
+            -var="region=${{ env.GCP_REGION }}" \
+            -var="vultr_api_key=${{ secrets.VULTR_API_KEY }}" \
+            -out=tfplan
+
+          terraform apply -auto-approve tfplan
+
+      - name: Terraform Outputs
+        working-directory: terraform
+        id: tf_output
+        run: |
+          terraform output -json > outputs.json
+          echo "controller_ip=$(cat outputs.json | jq -r '.controller_public_ip.value // empty')" >> "$GITHUB_OUTPUT"
+          echo "=== Deployment Outputs ===" && cat outputs.json | jq .
+
+      - name: Deploy EVEZ Services to Controller
+        if: steps.tf_output.outputs.controller_ip != ''
+        run: |
+          echo "Deploying EVEZ services to controller..."
+          gcloud compute scp scripts/deploy-to-gcp-node.sh \
+            evez-controller:/tmp/deploy-evez.sh \
+            --zone=${{ env.GCP_REGION }}-a \
+            --project=${{ secrets.GCP_PROJECT_ID }} \
+            --quiet || true
+
+          gcloud compute ssh evez-controller \
+            --zone=${{ env.GCP_REGION }}-a \
+            --project=${{ secrets.GCP_PROJECT_ID }} \
+            --command="bash /tmp/deploy-evez.sh" \
+            --quiet || true
+
+      - name: Deployment Summary
+        run: |
+          echo "### 🚀 EVEZ Mesh Deployed to GCP" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Resource | Value |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|----------|-------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Project | \`${{ secrets.GCP_PROJECT_ID }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Region | \`${{ env.GCP_REGION }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Controller | \`${{ steps.tf_output.outputs.controller_ip }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Services | 9111-9117 (mesh), 9118 (gateway), 9119 (rqns) |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Commit | \`${{ github.sha }}\` |" >> "$GITHUB_STEP_SUMMARY"
+
+  # ─── Terraform Destroy ──────────────────────────────────────────────────
+
+  terraform-destroy:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.action == 'destroy'
+    environment: production-destroy
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Init
+        working-directory: terraform
+        run: |
+          terraform init \
+            -upgrade \
+            -backend-config="bucket=${{ secrets.GCP_PROJECT_ID }}-terraform-state" \
+            -backend-config="prefix=terraform/state"
+
+      - name: Terraform Destroy
+        working-directory: terraform
+        run: |
+          terraform destroy -auto-approve \
+            -var="project_id=${{ secrets.GCP_PROJECT_ID }}" \
+            -var="region=${{ env.GCP_REGION }}"
+
+      - name: Destroy Summary
+        run: |
+          echo "### 🗑️ EVEZ Mesh GCP Resources Destroyed" >> "$GITHUB_STEP_SUMMARY"
+          echo "Project: \`${{ secrets.GCP_PROJECT_ID }}\` | Region: \`${{ env.GCP_REGION }}\`" >> "$GITHUB_STEP_SUMMARY"
+
+  # ─── Docker Build & Push ────────────────────────────────────────────────
+
+  docker-push:
+    name: Build & Push EVEZ Images
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [terraform-apply]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Configure Docker for GCR
+        run: gcloud auth configure-docker --quiet
+
+      - name: Build & Push EVEZ Service Images
+        run: |
+          REGISTRY="gcr.io/${{ secrets.GCP_PROJECT_ID }}"
+          SERVICES=( \
+            consciousness_engine:9111 \
+            daw_agent:9112 \
+            machine_voice:9113 \
+            cross_domain:9114 \
+            invariance:9115 \
+            event_spine:9116 \
+            mesh_health:9117 \
+            gateway:9118 \
+            rqns:9119 \
+            webhook_relay:9121 \
+            metrics:9123 \
+          )
+
+          for entry in "${SERVICES[@]}"; do
+            SVC="${entry%%:*}"
+            PORT="${entry##*:}"
+            IMAGE="${REGISTRY}/evez-${SVC//_/-}:${{ github.sha }}"
+            echo "Building ${SVC} → ${IMAGE}"
+            docker build \
+              -f src/services/Dockerfile \
+              --build-arg SERVICE="${SVC}" \
+              -t "${IMAGE}" \
+              src/services/
+            docker push "${IMAGE}"
+            echo "✓ Pushed ${IMAGE}"
+          done

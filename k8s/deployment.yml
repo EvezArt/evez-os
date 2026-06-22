@@ -1,0 +1,930 @@
+# ============================================================================
+# EVEZ Mesh — Kubernetes Deployment for GKE
+#
+# Namespace: evez-mesh
+# Services:   All 11 EVEZ microservices
+# Usage:
+#   kubectl apply -k k8s/              # Apply all resources
+#   kubectl get all -n evez-mesh       # Check status
+#   kubectl port-forward -n evez-mesh svc/gateway 9118:9118
+# ============================================================================
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: evez-mesh
+  labels:
+    app.kubernetes.io/name: evez-mesh
+    app.kubernetes.io/part-of: evez-firmament
+
+---
+# ─── ConfigMap ────────────────────────────────────────────────────────────────
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: evez-config
+  namespace: evez-mesh
+data:
+  EVEZ_NODE_NAME: "Evez666"
+  SPINE_URL: "http://event-spine:9116"
+  GATEWAY_URL: "http://gateway:9118"
+  CONSCIOUSNESS_URL: "http://consciousness-engine:9111"
+  RQNS_URL: "http://rqns:9119"
+  SIBLINGS: "consciousness-engine:9111,daw-agent:9112,machine-voice:9113,cross-domain:9114,invariance-battery:9115,event-spine:9116"
+
+---
+# ─── Secret (placeholder — fill with real values or use External Secrets) ───
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: evez-secrets
+  namespace: evez-mesh
+type: Opaque
+stringData:
+  # Replace with real values before applying, or use Sealed Secrets / External Secrets Operator
+  vultr-api-key: ""
+  eve-node-ip: ""
+
+---
+# ─── ServiceAccount ──────────────────────────────────────────────────────────
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: evez-mesh-sa
+  namespace: evez-mesh
+  labels:
+    app.kubernetes.io/name: evez-mesh
+
+---
+# ─── PersistentVolumeClaim — Event Spine Data ────────────────────────────────
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: spine-data
+  namespace: evez-mesh
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard-rwo
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 1. Event Spine (9116) — Must start first
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-spine
+  namespace: evez-mesh
+  labels:
+    app: event-spine
+    tier: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-spine
+  template:
+    metadata:
+      labels:
+        app: event-spine
+        tier: core
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: event-spine
+          image: gcr.io/EVEZ_PROJECT/evez-event-spine:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9116
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          volumeMounts:
+            - name: spine-data
+              mountPath: /data
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9116
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9116
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+      volumes:
+        - name: spine-data
+          persistentVolumeClaim:
+            claimName: spine-data
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-spine
+  namespace: evez-mesh
+spec:
+  selector:
+    app: event-spine
+  ports:
+    - port: 9116
+      targetPort: 9116
+  clusterIP: None  # Headless for internal mesh
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 2. Consciousness Engine (9111)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consciousness-engine
+  namespace: evez-mesh
+  labels:
+    app: consciousness-engine
+    tier: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consciousness-engine
+  template:
+    metadata:
+      labels:
+        app: consciousness-engine
+        tier: core
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: consciousness-engine
+          image: gcr.io/EVEZ_PROJECT/evez-consciousness-engine:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9111
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9111
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9111
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consciousness-engine
+  namespace: evez-mesh
+spec:
+  selector:
+    app: consciousness-engine
+  ports:
+    - port: 9111
+      targetPort: 9111
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 3. DAW Agent (9112)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daw-agent
+  namespace: evez-mesh
+  labels:
+    app: daw-agent
+    tier: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: daw-agent
+  template:
+    metadata:
+      labels:
+        app: daw-agent
+        tier: core
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: daw-agent
+          image: gcr.io/EVEZ_PROJECT/evez-daw-agent:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9112
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9112
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9112
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: daw-agent
+  namespace: evez-mesh
+spec:
+  selector:
+    app: daw-agent
+  ports:
+    - port: 9112
+      targetPort: 9112
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 4. Machine Voice (9113)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: machine-voice
+  namespace: evez-mesh
+  labels:
+    app: machine-voice
+    tier: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: machine-voice
+  template:
+    metadata:
+      labels:
+        app: machine-voice
+        tier: core
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: machine-voice
+          image: gcr.io/EVEZ_PROJECT/evez-machine-voice:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9113
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9113
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9113
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: machine-voice
+  namespace: evez-mesh
+spec:
+  selector:
+    app: machine-voice
+  ports:
+    - port: 9113
+      targetPort: 9113
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 5. Cross-Domain Engine (9114)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cross-domain
+  namespace: evez-mesh
+  labels:
+    app: cross-domain
+    tier: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cross-domain
+  template:
+    metadata:
+      labels:
+        app: cross-domain
+        tier: core
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: cross-domain
+          image: gcr.io/EVEZ_PROJECT/evez-cross-domain:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9114
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9114
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9114
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cross-domain
+  namespace: evez-mesh
+spec:
+  selector:
+    app: cross-domain
+  ports:
+    - port: 9114
+      targetPort: 9114
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 6. Invariance Battery (9115)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invariance-battery
+  namespace: evez-mesh
+  labels:
+    app: invariance-battery
+    tier: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: invariance-battery
+  template:
+    metadata:
+      labels:
+        app: invariance-battery
+        tier: core
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: invariance-battery
+          image: gcr.io/EVEZ_PROJECT/evez-invariance-battery:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9115
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9115
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9115
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: invariance-battery
+  namespace: evez-mesh
+spec:
+  selector:
+    app: invariance-battery
+  ports:
+    - port: 9115
+      targetPort: 9115
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 7. Mesh Health (9117)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mesh-health
+  namespace: evez-mesh
+  labels:
+    app: mesh-health
+    tier: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mesh-health
+  template:
+    metadata:
+      labels:
+        app: mesh-health
+        tier: core
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: mesh-health
+          image: gcr.io/EVEZ_PROJECT/evez-mesh-health:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9117
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9117
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9117
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mesh-health
+  namespace: evez-mesh
+spec:
+  selector:
+    app: mesh-health
+  ports:
+    - port: 9117
+      targetPort: 9117
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 8. Gateway (9118)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: evez-mesh
+  labels:
+    app: gateway
+    tier: infra
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+        tier: infra
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: gateway
+          image: gcr.io/EVEZ_PROJECT/evez-gateway:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9118
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9118
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9118
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+  namespace: evez-mesh
+spec:
+  type: LoadBalancer
+  selector:
+    app: gateway
+  ports:
+    - port: 80
+      targetPort: 9118
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 9. RQNS (9119)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rqns
+  namespace: evez-mesh
+  labels:
+    app: rqns
+    tier: infra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rqns
+  template:
+    metadata:
+      labels:
+        app: rqns
+        tier: infra
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: rqns
+          image: gcr.io/EVEZ_PROJECT/evez-rqns:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9119
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9119
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9119
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rqns
+  namespace: evez-mesh
+spec:
+  selector:
+    app: rqns
+  ports:
+    - port: 9119
+      targetPort: 9119
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 10. Webhook Relay (9121)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhook-relay
+  namespace: evez-mesh
+  labels:
+    app: webhook-relay
+    tier: infra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webhook-relay
+  template:
+    metadata:
+      labels:
+        app: webhook-relay
+        tier: infra
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: webhook-relay
+          image: gcr.io/EVEZ_PROJECT/evez-webhook-relay:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9121
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9121
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9121
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webhook-relay
+  namespace: evez-mesh
+spec:
+  selector:
+    app: webhook-relay
+  ports:
+    - port: 9121
+      targetPort: 9121
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# 11. Metrics (9123)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics
+  namespace: evez-mesh
+  labels:
+    app: metrics
+    tier: infra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics
+  template:
+    metadata:
+      labels:
+        app: metrics
+        tier: infra
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9123"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: evez-mesh-sa
+      containers:
+        - name: metrics
+          image: gcr.io/EVEZ_PROJECT/evez-metrics:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9123
+          envFrom:
+            - configMapRef:
+                name: evez-config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9123
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9123
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metrics
+  namespace: evez-mesh
+spec:
+  selector:
+    app: metrics
+  ports:
+    - port: 9123
+      targetPort: 9123
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# GKE Ingress — Expose Gateway
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: evez-gateway-ingress
+  namespace: evez-mesh
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "evez-gateway-ip"
+    networking.gke.io/managed-certificates: "evez-gateway-cert"
+spec:
+  defaultBackend:
+    service:
+      name: gateway
+      port:
+        number: 80
+
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: evez-gateway-cert
+  namespace: evez-mesh
+spec:
+  domains:
+    - gateway.evez-os.ai
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# HorizontalPodAutoscaler — Gateway auto-scale
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: gateway-hpa
+  namespace: evez-mesh
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: gateway
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# PodDisruptionBudget — Gateway
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: gateway-pdb
+  namespace: evez-mesh
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: gateway
+
+---
+# ═══════════════════════════════════════════════════════════════════════════════
+# NetworkPolicy — Restrict mesh traffic
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: evez-mesh-policy
+  namespace: evez-mesh
+spec:
+  podSelector:
+    matchLabels:
+      tier: core
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              app.kubernetes.io/name: evez-mesh
+    - from:
+        - podSelector:
+            matchLabels:
+              tier: infra
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              app.kubernetes.io/name: evez-mesh

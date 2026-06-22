@@ -91,6 +91,9 @@ variable "vultr_api_key" {
   type        = string
   sensitive   = true
   default     = ""
+
+  # CI/CD: Set via VULTR_API_KEY environment variable
+  # Terraform will auto-detect TF_VAR_vultr_api_key
 }
 
 variable "vultr_primary_ip" {

@@ -16,6 +16,11 @@ terraform {
     }
   }
 
+  # Backend configured dynamically via -backend-config in CI/CD.
+  # For local dev:
+  #   terraform init -backend-config="bucket=evez-mesh-terraform-state"
+  # For CI/CD:
+  #   terraform init -backend-config="bucket=${GCP_PROJECT_ID}-terraform-state" -backend-config="prefix=terraform/state"
   backend "gcs" {
     bucket = "evez-mesh-terraform-state"
     prefix = "terraform/state"
@@ -23,6 +28,8 @@ terraform {
 }
 
 # ---------- Google Provider ----------
+# CI/CD: Set GOOGLE_APPLICATION_CREDENTIALS env var to service account key JSON path
+# Local:  Use `gcloud auth application-default login`
 
 provider "google" {
   project = var.project_id

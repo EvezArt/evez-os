@@ -1,147 +1,177 @@
-# EVEZ-OS — The Firmament
-# 7 microservices, 1 event spine, 1 mesh, infinite emergence
+# ============================================================================
+# EVEZ Mesh — Cloud-Agnostic Docker Compose
 #
-# Architecture:
-#   ┌──────────────────────────────────────────────────┐
-#   │                  EVENT SPINE (:9116)             │
-#   │           Append-only. Immutable. Truth.          │
-#   └───┬──────┬──────┬──────┬──────┬──────┬──────┬────┘
-#       │      │      │      │      │      │      │
-#   ┌───▼──┐┌──▼──┐┌──▼──┐┌──▼──┐┌──▼──┐┌──▼──┐┌──▼──┐
-#   │:9111 ││:9112││:9113││:9114││:9115││:9117││:9118│
-#   │CONSC ││DAW  ││VOICE││XDOM ││INVAR││MESH ││GATE │
-#   │ENGINE││AGENT││SYNTH││ENG  ││BATT ││HLTH ││WAY  │
-#   └──────┘└─────┘└─────┘└─────┘└─────┘└─────┘└─────┘
+# Deploys all 11 EVEZ services to ANY Docker-capable cloud provider:
+#   GCP Cloud Run, AWS ECS, Azure Container Apps, DigitalOcean App Platform,
+#   Fly.io, Railway, Render, or raw Docker on any VPS.
 #
 # Usage:
-#   make start     — Launch all services
-#   make stop      — Stop all services
-#   make health    — Check all services
-#   make test      — Run integration tests
-#   make logs      — Tail all logs
+#   docker compose up -d              # Start all services
+#   docker compose ps                  # Check status
+#   docker compose logs -f             # Tail logs
+#   docker compose down                # Stop all
+#
+# Environment Variables (optional):
+#   EVEZ_NODE_NAME     — Node identity (default: Evez666)
+#   EVEZ_NODE_IP       — Node public IP (default: auto-detect)
+#   SPINE_URL          — Event spine URL (default: http://event-spine:9116)
+#   REGISTRY           — Container image registry prefix (default: builds local)
+#   IMAGE_TAG          — Image tag (default: latest)
+# ============================================================================
 
-version: '3.8'
+version: "3.8"
+
+x-evez-common: &evez-common
+  restart: always
+  networks:
+    - evez-firmament
+  environment: &evez-env
+    EVEZ_NODE_NAME: ${EVEZ_NODE_NAME:-Evez666}
+    EVEZ_NODE_IP: ${EVEZ_NODE_IP:-}
+    SPINE_URL: ${SPINE_URL:-http://event-spine:9116}
 
 services:
-  event-spine:
-    build:
-      context: ./src/services
-      dockerfile: Dockerfile.spine
-    container_name: evez-event-spine
-    ports:
-      - "9116:9116"
-    volumes:
-      - spine-data:/data
-    environment:
-      - EVEZ_NODE_NAME=Evez666
-      - EVEZ_NODE_IP=64.176.221.16
-    healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:9116/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    restart: always
+  # ══════════════════════════════════════════════════════════════════════════
+  # Core Mesh Services (7 microservices)
+  # ══════════════════════════════════════════════════════════════════════════
 
+  # 1. Consciousness Engine — 7-system autonomous cognition (port 9111)
   consciousness-engine:
+    <<: *evez-common
     build:
       context: ./src/services
-      dockerfile: Dockerfile.consciousness
+      dockerfile: Dockerfile
+      args:
+        SERVICE: consciousness_engine
+    image: ${REGISTRY:-evez}/consciousness-engine:${IMAGE_TAG:-latest}
     container_name: evez-consciousness
     ports:
       - "9111:9111"
-    depends_on:
-      event-spine:
-        condition: service_healthy
-    environment:
-      - SPINE_URL=http://event-spine:9116
-      - EVEZ_NODE_NAME=Evez666
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:9111/health"]
       interval: 30s
       timeout: 5s
       retries: 3
-    restart: always
+      start_period: 10s
 
+  # 2. DAW Agent — Breakcore/dubstep/phonk synthesis (port 9112)
   daw-agent:
+    <<: *evez-common
     build:
       context: ./src/services
-      dockerfile: Dockerfile.daw
+      dockerfile: Dockerfile
+      args:
+        SERVICE: daw_agent
+    image: ${REGISTRY:-evez}/daw-agent:${IMAGE_TAG:-latest}
     container_name: evez-daw
     ports:
       - "9112:9112"
     depends_on:
       event-spine:
         condition: service_healthy
-    environment:
-      - SPINE_URL=http://event-spine:9116
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:9112/health"]
       interval: 30s
       timeout: 5s
       retries: 3
-    restart: always
+      start_period: 10s
 
+  # 3. Machine Voice — 5-stage robotic speech synthesis (port 9113)
   machine-voice:
+    <<: *evez-common
     build:
       context: ./src/services
-      dockerfile: Dockerfile.voice
+      dockerfile: Dockerfile
+      args:
+        SERVICE: machine_voice
+    image: ${REGISTRY:-evez}/machine-voice:${IMAGE_TAG:-latest}
     container_name: evez-voice
     ports:
       - "9113:9113"
     depends_on:
       event-spine:
         condition: service_healthy
-    environment:
-      - SPINE_URL=http://event-spine:9116
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:9113/health"]
       interval: 30s
       timeout: 5s
       retries: 3
-    restart: always
+      start_period: 10s
 
+  # 4. Cross-Domain Engine — Cross-domain correlation discovery (port 9114)
   cross-domain:
+    <<: *evez-common
     build:
       context: ./src/services
-      dockerfile: Dockerfile.crossdomain
+      dockerfile: Dockerfile
+      args:
+        SERVICE: cross_domain
+    image: ${REGISTRY:-evez}/cross-domain:${IMAGE_TAG:-latest}
     container_name: evez-crossdomain
     ports:
       - "9114:9114"
     depends_on:
       event-spine:
         condition: service_healthy
-    environment:
-      - SPINE_URL=http://event-spine:9116
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:9114/health"]
       interval: 30s
       timeout: 5s
       retries: 3
-    restart: always
+      start_period: 10s
 
+  # 5. Invariance Battery — Runtime invariant verification (port 9115)
   invariance-battery:
+    <<: *evez-common
     build:
       context: ./src/services
-      dockerfile: Dockerfile.invariance
+      dockerfile: Dockerfile
+      args:
+        SERVICE: invariance
+    image: ${REGISTRY:-evez}/invariance-battery:${IMAGE_TAG:-latest}
     container_name: evez-invariance
     ports:
       - "9115:9115"
     depends_on:
       event-spine:
         condition: service_healthy
-    environment:
-      - SPINE_URL=http://event-spine:9116
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:9115/health"]
       interval: 30s
       timeout: 5s
       retries: 3
-    restart: always
+      start_period: 10s
 
-  mesh-health:
+  # 6. Event Spine — Append-only immutable event log (port 9116)
+  event-spine:
+    <<: *evez-common
     build:
       context: ./src/services
-      dockerfile: Dockerfile.mesh
+      dockerfile: Dockerfile
+      args:
+        SERVICE: event_spine
+    image: ${REGISTRY:-evez}/event-spine:${IMAGE_TAG:-latest}
+    container_name: evez-event-spine
+    ports:
+      - "9116:9116"
+    volumes:
+      - spine-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9116/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # 7. Mesh Health — Self-healing orchestrator (port 9117)
+  mesh-health:
+    <<: *evez-common
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+      args:
+        SERVICE: mesh_health
+    image: ${REGISTRY:-evez}/mesh-health:${IMAGE_TAG:-latest}
     container_name: evez-mesh
     ports:
       - "9117:9117"
@@ -159,20 +189,162 @@ services:
       invariance-battery:
         condition: service_healthy
     environment:
-      - SPINE_URL=http://event-spine:9116
-      - SIBLINGS=consciousness-engine:9111,daw-agent:9112,machine-voice:9113,cross-domain:9114,invariance-battery:9115,event-spine:9116
+      <<: *evez-env
+      SIBLINGS: "consciousness-engine:9111,daw-agent:9112,machine-voice:9113,cross-domain:9114,invariance-battery:9115,event-spine:9116"
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:9117/health"]
       interval: 30s
       timeout: 5s
       retries: 3
-    restart: always
+      start_period: 15s
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # Infrastructure Services (4 support services)
+  # ══════════════════════════════════════════════════════════════════════════
+
+  # 8. Gateway — Single API entry point (port 9118)
+  gateway:
+    <<: *evez-common
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+      args:
+        SERVICE: gateway
+    image: ${REGISTRY:-evez}/gateway:${IMAGE_TAG:-latest}
+    container_name: evez-gateway
+    ports:
+      - "9118:9118"
+    depends_on:
+      event-spine:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9118/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # 9. RQNS Pipeline — Reactive neuromorphic sensing (port 9119)
+  rqns:
+    <<: *evez-common
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+      args:
+        SERVICE: rqns
+    image: ${REGISTRY:-evez}/rqns:${IMAGE_TAG:-latest}
+    container_name: evez-rqns
+    ports:
+      - "9119:9119"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9119/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # 10. Webhook Relay — Mesh state change notifications (port 9121)
+  webhook-relay:
+    <<: *evez-common
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+      args:
+        SERVICE: webhook_relay
+    image: ${REGISTRY:-evez}/webhook-relay:${IMAGE_TAG:-latest}
+    container_name: evez-webhook
+    ports:
+      - "9121:9121"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9121/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # 11. Metrics — Prometheus-compatible metrics exporter (port 9123)
+  metrics:
+    <<: *evez-common
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+      args:
+        SERVICE: metrics
+    image: ${REGISTRY:-evez}/metrics:${IMAGE_TAG:-latest}
+    container_name: evez-metrics
+    ports:
+      - "9123:9123"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9123/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # Optional Add-on Services
+  # ══════════════════════════════════════════════════════════════════════════
+
+  # Geolocation — Free IP/location APIs (port 9124)
+  geolocation:
+    <<: *evez-common
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+      args:
+        SERVICE: geolocation
+    image: ${REGISTRY:-evez}/geolocation:${IMAGE_TAG:-latest}
+    container_name: evez-geolocation
+    ports:
+      - "9124:9124"
+    profiles:
+      - extras
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9124/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # TTS Service — Machine voice TTS pipeline (port 9125)
+  tts-service:
+    <<: *evez-common
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+      args:
+        SERVICE: tts_service
+    image: ${REGISTRY:-evez}/tts-service:${IMAGE_TAG:-latest}
+    container_name: evez-tts
+    ports:
+      - "9125:9125"
+    profiles:
+      - extras
+    depends_on:
+      machine-voice:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9125/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
 volumes:
   spine-data:
     driver: local
 
 networks:
-  default:
+  evez-firmament:
     name: evez-firmament
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
