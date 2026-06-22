@@ -1,0 +1,55 @@
+name: Mirror to Bitbucket (live backup)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'   # sync every 6 hours
+
+jobs:
+  mirror:
+    name: git push --mirror to Bitbucket
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout bare repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror to Bitbucket
+        env:
+          BB_USER: ${{ secrets.BITBUCKET_USERNAME }}
+          BB_PASS: ${{ secrets.BITBUCKET_APP_PASSWORD }}
+        run: |
+          git remote add bitbucket-os \
+            "https://${BB_USER}:${BB_PASS}@bitbucket.org/${BB_USER}/evez-os.git" 2>/dev/null || true
+          git push bitbucket-os --mirror
+
+  mirror-streams:
+    name: Sync stream scripts subfolder to Bitbucket evez-streams
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push stream scripts to evez-streams repo
+        env:
+          BB_USER: ${{ secrets.BITBUCKET_USERNAME }}
+          BB_PASS: ${{ secrets.BITBUCKET_APP_PASSWORD }}
+        run: |
+          mkdir -p /tmp/evez-streams
+          cp scripts/evez-livestream.py         /tmp/evez-streams/01-mission-control.py
+          cp scripts/evez-cognition-stream.py   /tmp/evez-streams/02-cognition.py
+          cp scripts/evez-cortex-stream.py      /tmp/evez-streams/03-cortex.py
+          cp scripts/evez-quantum-stream.py     /tmp/evez-streams/04-quantum.py
+          cp scripts/evez-dreams-stream.py      /tmp/evez-streams/05-dreams.py
+          cp scripts/gcp-streams-bootstrap.sh  /tmp/evez-streams/gcp-bootstrap.sh
+          cp k8s/streams/deployments.yaml      /tmp/evez-streams/k8s-deployments.yaml
+          cd /tmp/evez-streams
+          git init -b main
+          git config user.email "evez@evezart.com"
+          git config user.name "EVEZ-OS Automirror"
+          git add .
+          git commit -m "sync: update stream renderers from EvezArt/evez-os [automated]"
+          git push --force \
+            "https://${BB_USER}:${BB_PASS}@bitbucket.org/${BB_USER}/evez-streams.git" main
