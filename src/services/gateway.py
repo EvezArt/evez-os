@@ -23,6 +23,7 @@ SERVICES = {
     "invariance":    {"port": 9115, "name": "Invariance Battery"},
     "spine":         {"port": 9116, "name": "Event Spine"},
     "mesh":          {"port": 9117, "name": "Mesh Health"},
+    "rqns":          {"port": 9119, "name": "RQNS Pipeline"},
 }
 
 def _get(url, timeout=2):

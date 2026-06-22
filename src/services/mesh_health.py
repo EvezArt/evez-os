@@ -29,6 +29,7 @@ SIBLINGS = {
     9115: {"name": "invariance",          "script": "invariance.py"},
     9116: {"name": "event_spine",         "script": "event_spine.py"},
     9118: {"name": "gateway",             "script": "gateway.py"},
+    9119: {"name": "rqns",                "script": "rqns.py"},
 }
 
 SERVICE_DIR = "/home/openclaw/.openclaw/workspace/src/services"
