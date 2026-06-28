@@ -1,19 +1,21 @@
 # Heartbeat — EVEZ Mesh Monitor
-# Last updated: 2026-06-28 22:20 UTC (17:20 CDT)
+# Last updated: 2026-06-28 22:24 UTC (17:24 CDT)
 
 ## Mesh Status — ALL GREEN
 - [x] 6/6 gateways HTTP 200 (Vultr + 5 GCP)
 - [x] 5/5 API servers 200 — ALL EXTERNALLY ACCESSIBLE
 - [x] 5/5 OSINT servers 200 — ALL HEALTHY
-- [x] 33+ GitHub Pages 200 OK
+- [x] 39 GitHub Pages 200 OK
 - [x] 5/5 Telegram bots configured
 - [x] 24+ Ollama models across 5 nodes
 - [x] All services Restart=always
 - [x] All evez-api services deployed (5/5 GCP nodes)
-- [x] All nodes have 11-13 cron jobs
+- [x] All nodes have 13-14 cron jobs
 - [x] Workspace synced (76+ .md files per node)
 - [x] Skills synced (8-9 per node)
 - [x] All 5 configs validate
+- [x] Peer-watch scripts deployed on all 4 GCP peers
+- [x] Deadman's switch running on evez-primary
 
 ## External Endpoints (ALL 200)
 ### Gateway (port 18789)
@@ -42,30 +44,30 @@
 | Node | IP | Disk | Ollama | Cron | WS | Skills | evez-api | Telegram |
 |------|----|------|--------|------|----|--------|----------|----------|
 | vultr | 207.148.12.53 | — | — | 3 | — | — | — | — |
-| evez-primary | 34.53.51.34 | 68% | 8 | 12 | 76+ | 9 | active | ✅ |
-| gcp-small | 34.23.192.213 | 60% | 3 | 13 | 76 | 8 | active | ✅ |
-| gcp-power | 35.222.248.151 | 38% | 5 | 13 | 76 | 9 | active | ✅ |
-| gcp-openclaw | 136.113.102.152 | 59% | 6 | 13 | 76 | 9 | active | ✅ |
-| gcp-knot | 136.118.144.227 | 71% | 6 | 13 | 76 | 8 | active | ✅ |
+| evez-primary | 34.53.51.34 | 68% | 8 | 14 | 76+ | 9 | user-active | ✅ |
+| gcp-small | 34.23.192.213 | 60% | 3 | 13 | 76 | 8 | system-active | ✅ |
+| gcp-power | 35.222.248.151 | 38% | 5 | 13 | 76 | 9 | user-active | ✅ |
+| gcp-openclaw | 136.113.102.152 | 59% | 6 | 13 | 76 | 9 | system-active | ✅ |
+| gcp-knot | 136.118.144.227 | 71% | 6 | 13 | 76 | 8 | system-active | ✅ |
 
 ## Service Architecture
-- evez-primary: user-level openclaw-gateway.service
-- gcp-small: user-level openclaw-gateway.service
-- gcp-power: user-level openclaw-gateway.service (system service disabled)
-- gcp-openclaw: system openclaw.service (user service disabled to prevent dual conflict)
-- gcp-knot: system openclaw.service (user service disabled)
+- evez-primary: user-level openclaw-gateway.service + user-level evez-api.service
+- gcp-small: user-level openclaw-gateway.service + system-level evez-api/osint-api
+- gcp-power: user-level openclaw-gateway.service + user-level evez-api.service
+- gcp-openclaw: system openclaw.service + system evez-api/osint-api
+- gcp-knot: system openclaw.service + system evez-api/osint-api
 
 ## Defense in Depth
 1. systemd Restart=always (5s restart)
 2. Cron watchdog (2-3 min check + restart)
 3. @reboot recovery
-4. Peer-watch (circular monitoring)
-5. Deadman's switch (gcp-west watches 4 peers)
+4. Peer-watch (circular monitoring, every 3 min)
+5. Deadman's switch (evez-primary watches 4 peers, every 3 min)
 
-## GitHub Pages: 33+ live
+## GitHub Pages: 39 live
 ## Corpus: 32 texts, 35 claims, ~525KB
 ## Releases: 4 (eigenforensics, evez-research, evez-osint-engine, disclosure-file)
-## ClawHub: 13 published skills
+## ClawHub: 13 published skills (6 tracked + 7 manual)
 
 ## Pending (Steven actions)
 - [ ] Revoke old GitHub PAT (github.com/settings/tokens)
