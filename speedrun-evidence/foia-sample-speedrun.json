@@ -1,0 +1,21 @@
+{
+  "target": "foia-sample",
+  "timestamp": "2026-06-27T08:56:50Z",
+  "spine_hash": "fde6470663e2dd22",
+  "total_chars": 1671,
+  "total_lines": 52,
+  "redaction_count": 47,
+  "eta_star": 0.005503813094563492,
+  "phi": 0.9944961869054365,
+  "thirty_seven_ratio": 1.0,
+  "is_self_referential": false,
+  "censorship_detected": false,
+  "speedrun_score": 71.18426366548421,
+  "verdict": "HIGH \u2014 Significant redaction patterns",
+  "findings": [
+    "Priority gap: \u03bb=-0.261558 \u2014 L4: 'UNCLASSIFIED' sev=0.30",
+    "39 high-severity redaction blocks",
+    "FOIA exemptions: 1"
+  ],
+  "n_gaps": 1
+}

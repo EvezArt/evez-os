@@ -1,0 +1,36 @@
+[2026-06-27T05:45:01Z] ⚠️  vultr-knot (207.148.12.53) is DOWN — attempting revive
+[2026-06-27T05:45:42Z] ✅ Sent restart to vultr-knot
+[2026-06-27T05:45:42Z] ⚠️  openclaw-gcp (136.118.144.227) is DOWN — attempting revive
+[2026-06-27T05:45:42Z] ❌ Could not reach openclaw-gcp via SSH
+[2026-06-27T05:45:42Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T05:45:42Z] ❌ Could not reach evez-free-node via SSH
+[2026-06-27T05:50:01Z] ⚠️  vultr-knot (207.148.12.53) is DOWN — attempting revive
+[2026-06-27T05:50:42Z] ✅ Sent restart to vultr-knot
+[2026-06-27T05:50:42Z] ⚠️  openclaw-gcp (136.118.144.227) is DOWN — attempting revive
+[2026-06-27T05:50:42Z] ❌ Could not reach openclaw-gcp via SSH
+[2026-06-27T05:50:42Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T05:55:01Z] ⚠️  vultr-knot (207.148.12.53) is DOWN — attempting revive
+[2026-06-27T05:55:16Z] ✅ Sent restart to vultr-knot
+[2026-06-27T05:55:16Z] ⚠️  openclaw-gcp (136.118.144.227) is DOWN — attempting revive
+[2026-06-27T05:55:16Z] ❌ Could not reach openclaw-gcp via SSH
+[2026-06-27T05:55:16Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T05:55:21Z] ❌ Could not reach evez-free-node via SSH
+[2026-06-27T05:55:56Z] ❌ Could not reach evez-free-node via SSH
+[2026-06-27T06:00:01Z] ⚠️  vultr-knot (207.148.12.53) is DOWN — attempting revive
+[2026-06-27T06:00:04Z] ❌ Could not reach vultr-knot via SSH
+[2026-06-27T06:00:32Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T06:05:01Z] ⚠️  vultr-knot (207.148.12.53) is DOWN — attempting revive
+[2026-06-27T06:05:22Z] ✅ Sent restart to vultr-knot
+[2026-06-27T06:05:22Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T06:05:27Z] ❌ Could not reach evez-free-node via SSH
+[2026-06-27T06:10:01Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T06:10:38Z] ❌ Could not reach evez-free-node via SSH
+[2026-06-27T06:15:01Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T06:17:21Z] ❌ Could not reach evez-free-node via SSH
+[2026-06-27T06:19:20Z] ❌ Could not reach evez-free-node via SSH
+[2026-06-27T06:20:01Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T06:20:01Z] ⏭️  Skipping SSH revive for evez-free-node (e2-micro, resource-constrained)
+[2026-06-27T06:25:02Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T06:25:02Z] ⏭️  Skipping SSH revive for evez-free-node (e2-micro, resource-constrained)
+[2026-06-27T06:30:02Z] ⚠️  evez-free-node (34.23.192.213) is DOWN — attempting revive
+[2026-06-27T06:30:02Z] ⏭️  Skipping SSH revive for evez-free-node (e2-micro, resource-constrained)

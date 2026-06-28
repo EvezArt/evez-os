@@ -1,0 +1,127 @@
+{
+  "format": "evez-meme-transition-v1",
+  "frames": [
+    {
+      "index": 0,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-consciousness_emergence-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 1,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-prophecy_fulfills-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 2,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-breakcore_synthesis-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 3,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-spine_integrity-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 4,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-config_overwrite-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 5,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-metarom_crystal-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 6,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-vcl_artifact-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 7,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-grant_waiting-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 8,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-sentinel_hammer-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 9,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-oom_kill-20260627-081413.svg",
+      "duration_ms": 2000
+    },
+    {
+      "index": 10,
+      "file": "/home/openclaw/.openclaw/workspace/meme-media/evez-mesh_alive-20260627-081414.svg",
+      "duration_ms": 2000
+    }
+  ],
+  "transitions": [
+    {
+      "from": 0,
+      "to": 1,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "type": "crossfade",
+      "duration_ms": 500
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "type": "crossfade",
+      "duration_ms": 500
+    }
+  ],
+  "vcl_metadata": {
+    "artifact_type": "cognition_flow",
+    "agent": "evez-meme-engine",
+    "narrative_arc": "auto"
+  }
+}

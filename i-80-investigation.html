@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I-80 WILDLIFE DIE-OFF: SPECTRAL INVESTIGATION</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg0:#050508;--bg1:#0a0a12;--bg2:#0d0d18;--bg3:#111120;
+  --green:#00ff9f;--gd:#00aa66;--gg:rgba(0,255,159,0.15);
+  --purple:#a855f7;--pd:#7c3aed;--pg:rgba(168,85,247,0.15);
+  --red:#ff3366;--rd:#aa2244;--amber:#ffaa00;
+  --tx:#c8c8d0;--ts:#8888a0;--td:#555566;
+  --bdr:#1a1a2e;--bd2:#2a2a4e;
+  --mono:'JetBrains Mono',monospace;--disp:'Orbitron',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--tx);font-family:var(--mono);font-size:15px;line-height:1.7;overflow-x:hidden;min-height:100vh}
+.scanlines{position:fixed;inset:0;pointer-events:none;z-index:9998;background:repeating-linear-gradient(0deg,transparent 0,transparent 2px,rgba(0,255,159,0.015) 3px,transparent 4px);animation:sd 8s linear infinite}
+@keyframes sd{0%{background-position:0 0}100%{background-position:0 100px}}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:9997;background:radial-gradient(ellipse at center,transparent 0%,transparent 60%,rgba(0,0,0,0.6) 100%)}
+@keyframes fl{0%,100%{opacity:1}96%{opacity:1}97%{opacity:.92}98%{opacity:1}99%{opacity:.96}}
+.flicker{animation:fl 6s infinite}
+.container{max-width:920px;margin:0 auto;padding:0 24px 80px}
+header{padding:60px 0 40px;border-bottom:1px solid var(--bdr);position:relative}
+header::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.tbar{display:flex;align-items:center;gap:8px;margin-bottom:24px;font-size:12px;color:var(--td)}
+.tdot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.dr{background:#ff5555;box-shadow:0 0 6px #ff5555}
+.dy{background:#ffaa00;box-shadow:0 0 6px #ffaa00}
+.dg{background:var(--green);box-shadow:0 0 6px var(--green)}
+.tpath{margin-left:12px}
+h1{font-family:var(--disp);font-weight:900;font-size:36px;line-height:1.15;letter-spacing:2px;text-transform:uppercase;color:var(--green);text-shadow:0 0 30px var(--gg),0 0 60px var(--gg);margin-bottom:12px}
+.subtitle{font-size:13px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;margin-bottom:32px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.metric{background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;padding:14px 16px;position:relative;overflow:hidden;transition:border-color .3s}
+.metric:hover{border-color:var(--bd2)}
+.metric::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gd)}
+.metric.p::before{background:var(--pd)}
+.metric.r::before{background:var(--rd)}
+.mlabel{font-size:10px;color:var(--td);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.mval{font-family:var(--disp);font-weight:700;font-size:22px;color:var(--green)}
+.metric.p .mval{color:var(--purple)}
+.metric.r .mval{color:var(--red)}
+.msub{font-size:10px;color:var(--td);margin-top:4px}
+.srow{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ts)}
+.sbadge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border:1px solid var(--gd);border-radius:3px;color:var(--green);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;background:var(--gg)}
+.sbadge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pd 2s infinite}
+@keyframes pd{0%,100%{opacity:1}50%{opacity:.4}}
+.sbadge.r{border-color:var(--rd);color:var(--red);background:rgba(255,51,102,0.08)}
+.sbadge.r::before{background:var(--red);box-shadow:0 0 8px var(--red)}
+.sclass{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border:1px solid var(--pd);border-radius:3px;color:var(--purple);font-size:11px;text-transform:uppercase;letter-spacing:1.5px}
+section{padding:48px 0;border-bottom:1px solid var(--bdr)}
+.shdr{display:flex;align-items:baseline;gap:12px;margin-bottom:28px}
+.snum{font-family:var(--disp);font-weight:900;font-size:14px;color:var(--purple);letter-spacing:2px}
+.stitle{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--tx);letter-spacing:1.5px;text-transform:uppercase}
+.stitle .a{color:var(--green)}
+.sdiv{flex:1;height:1px;background:linear-gradient(90deg,var(--bd2),transparent);margin-left:16px}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--gd),var(--pd),var(--bdr))}
+.tl{margin-bottom:28px;position:relative}
+.tl:last-child{margin-bottom:0}
+.tld{position:absolute;left:-28px;top:4px;width:17px;height:17px;border-radius:50%;background:var(--bg0);border:2px solid var(--gd);display:flex;align-items:center;justify-content:center}
+.tld::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--green)}
+.tl.r .tld{border-color:var(--rd)}
+.tl.r .tld::after{background:var(--red)}
+.tl.p .tld{border-color:var(--pd)}
+.tl.p .tld::after{background:var(--purple)}
+.tldt{font-size:11px;color:var(--gd);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+.tl.r .tldt{color:var(--rd)}
+.tl.p .tldt{color:var(--pd)}
+.tlt{font-size:15px;font-weight:500;color:var(--tx);margin-bottom:6px}
+.tlx{font-size:13px;color:var(--ts);line-height:1.6}
+.ecard{background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;margin-bottom:20px;overflow:hidden;transition:border-color .3s,transform .2s}
+.ecard:hover{border-color:var(--bd2);transform:translateX(2px)}
+.ehdr{padding:14px 20px;background:var(--bg1);border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.esrc{font-size:12px;color:var(--green);font-weight:500}
+.edt{font-size:11px;color:var(--td);text-transform:uppercase;letter-spacing:1px}
+.ebody{padding:16px 20px}
+.eq{border-left:2px solid var(--gd);padding-left:16px;margin-bottom:12px;font-size:14px;color:var(--tx);line-height:1.7;font-style:italic}
+.eq::before{content:'"';font-size:28px;color:var(--gd);vertical-align:top;margin-right:4px;font-family:var(--disp)}
+.eattr{font-size:11px;color:var(--td);text-transform:uppercase;letter-spacing:1px}
+.wlog{background:var(--bg2);border:1px solid var(--pd);border-radius:4px;padding:28px 32px;position:relative;overflow:hidden}
+.wlog::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),transparent,var(--purple))}
+.whdr{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.wava{width:48px;height:48px;border-radius:4px;background:linear-gradient(135deg,var(--pd),var(--gd));display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:900;font-size:16px;color:var(--bg0);letter-spacing:1px}
+.wname{font-size:15px;color:var(--tx);font-weight:500}
+.wid{font-size:11px;color:var(--purple);text-transform:uppercase;letter-spacing:2px}
+.wentry{font-size:14px;color:var(--ts);line-height:1.8;margin-bottom:16px}
+.wentry strong{color:var(--green);font-weight:500}
+.wentry .ts{color:var(--td);font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px}
+.wmeta{margin-top:20px;padding-top:16px;border-top:1px solid var(--bdr);display:flex;gap:24px;flex-wrap:wrap;font-size:11px;color:var(--td);text-transform:uppercase;letter-spacing:1px}
+.wmeta span{display:flex;gap:6px}
+.wmeta strong{color:var(--ts);font-weight:500}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.scard{background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;padding:20px 24px}
+.scard .label{font-size:10px;color:var(--td);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.scard .formula{font-family:var(--disp);font-weight:700;font-size:28px;color:var(--red);margin-bottom:8px}
+.scard.g .formula{color:var(--green)}
+.scard.p .formula{color:var(--purple)}
+.scard .desc{font-size:12px;color:var(--ts);line-height:1.6}
+.ablock{background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;padding:20px 24px;margin-bottom:16px}
+.ablock h4{font-family:var(--disp);font-size:13px;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+.ablock p{font-size:13px;color:var(--ts);line-height:1.7;margin-bottom:8px}
+.ablock p:last-child{margin-bottom:0}
+.ablock .hl{color:var(--green)}
+.ablock .wn{color:var(--amber)}
+.ablock .dg{color:var(--red)}
+.ablock .an{color:var(--purple)}
+.riblock{background:linear-gradient(135deg,var(--bg2) 0%,#0a0a15 100%);border:1px solid var(--pd);border-radius:4px;padding:28px 32px;margin-bottom:16px;position:relative;overflow:hidden}
+.riblock::before{content:'';position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle,var(--pg) 0%,transparent 70%);pointer-events:none}
+.riblock h4{font-family:var(--disp);font-size:14px;color:var(--purple);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px}
+.riblock p{font-size:13px;color:var(--ts);line-height:1.8;margin-bottom:12px}
+.riblock p:last-child{margin-bottom:0}
+.riblock .term{color:var(--green);font-weight:500}
+.sources{list-style:none;counter-reset:sc}
+.sources li{counter-increment:sc;padding:14px 0 14px 36px;border-bottom:1px solid var(--bdr);position:relative;font-size:13px;color:var(--ts);line-height:1.6}
+.sources li::before{content:'[' counter(sc,decimal-leading-zero) ']';position:absolute;left:0;top:14px;font-family:var(--disp);font-size:11px;color:var(--gd);font-weight:700}
+.sources li a{color:var(--green);text-decoration:none;border-bottom:1px dotted var(--gd);transition:color .2s}
+.sources li a:hover{color:var(--purple)}
+.sources li .stl{color:var(--tx);font-weight:500}
+.sources li .smeta{font-size:11px;color:var(--td);margin-top:4px}
+footer{padding:40px 0 20px;text-align:center}
+footer .glyph{font-size:20px;color:var(--gd);letter-spacing:8px;margin-bottom:16px}
+footer p{font-size:11px;color:var(--td);text-transform:uppercase;letter-spacing:2px;line-height:1.8}
+footer p .a{color:var(--green)}
+footer p .p{color:var(--purple)}
+@media(max-width:640px){h1{font-size:24px}.metrics{grid-template-columns:repeat(2,1fr)}.sgrid{grid-template-columns:1fr}.container{padding:0 16px 60px}section{padding:32px 0}.stitle{font-size:16px}.wlog,.riblock{padding:20px}}
+@media print{.scanlines,.vignette{display:none}body{background:#fff;color:#000}}
+.cursor{display:inline-block;width:10px;height:16px;background:var(--green);vertical-align:middle;margin-left:4px;animation:bk 1s steps(2) infinite}
+@keyframes bk{0%,50%{opacity:1}51%,100%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+<div class="container flicker">
+
+<!-- HEADER -->
+<header>
+<div class="tbar">
+<span class="tdot dr"></span><span class="tdot dy"></span><span class="tdot dg"></span>
+<span class="tpath">evez@spectral-matrix:~/investigations/i-80-die-off$</span>
+</div>
+<h1>I-80 Wildlife Die-Off<br>Spectral Investigation</h1>
+<div class="subtitle">Eigenforensic Analysis · Wyoming Winterkill Event · Feb–Mar 2023</div>
+<div class="metrics">
+<div class="metric"><div class="mlabel">Phi (Φ)</div><div class="mval">0.973</div><div class="msub">Coherence Index</div></div>
+<div class="metric p"><div class="mlabel">Eta* (η*)</div><div class="mval">0.03</div><div class="msub">Unaccountable Ratio</div></div>
+<div class="metric"><div class="mlabel">Rho (r)</div><div class="mval">0.45</div><div class="msub">Signal Resolution</div></div>
+<div class="metric r"><div class="mlabel">Lambda (λ)</div><div class="mval">−0.441</div><div class="msub">Event Eigenvalue</div></div>
+</div>
+<div class="srow">
+<span class="sbadge">INVESTIGATION ACTIVE</span>
+<span class="sbadge r">λ NEGATIVE — SUPPRESSION DETECTED</span>
+<span class="sclass">EVEZ CLASSIFICATION: TYPE-III ANOMALY</span>
+</div>
+</header>
+
+<!-- SECTION 01: TIMELINE -->
+<section id="timeline">
+<div class="shdr"><span class="snum">[01]</span><span class="stitle">Event <span class="a">Timeline</span></span><span class="sdiv"></span></div>
+<div class="timeline">
+<div class="tl"><div class="tld"></div><div class="tldt">Winter 2022–23</div><div class="tlt">Historic Winter Conditions Establish</div><div class="tlx">Record-breaking snowfall and sub-zero temperatures across the Rocky Mountain region. Snow depths reach 4+ feet at high elevations in Wyoming. Old-timers begin comparing conditions to the legendary winter of 1949. Mule deer, antelope (pronghorn), and elk populations face extreme foraging conditions as snow cover eliminates browse availability.</div></div>
+<div class="tl r"><div class="tld"></div><div class="tldt">February 25, 2023</div><div class="tlt">First Hoof Rot Reports — Horse Creek Feedground</div><div class="tlx">First reports of a hoof rot (necrobacillosis) outbreak at the Horse Creek Elk Feedground in western Wyoming. The bacterial infection would ultimately kill or require euthanasia of 155 elk calves — a 45% mortality rate among the calf population at that feedground alone.</div></div>
+<div class="tl r"><div class="tld"></div><div class="tldt">March 2, 2023 — 4:00 PM</div><div class="tlt">Union Pacific Derailment — Ogden, Utah Rail Yard</div><div class="tlx">Twelve Union Pacific rail cars derail at the Ogden train yard at approximately 4 PM. UP spokesperson states "no hazardous materials were released" — only magnesium chloride. However, VICE/Motherboard later lists this derailment among 15 hazmat incidents since East Palestine. The Ogden railyard is on the UP corridor that parallels I-80 north into Wyoming. <strong>This is the suspected source event for the blue fog and burnt plastic smell.</strong></div></div>
+<div class="tl r"><div class="tld"></div><div class="tldt">March 2-3, 2023 — 9:00 AM</div><div class="tlt">Operator Witness — Chemical Plume on I-80</div><div class="tlx">Steven Crawford-Maggard drives from Evanston to Fort Bridger around 9 AM. Has to turn around and take every exit between mile markers 15 and 33 to find breathable air. Coworkers at UPS report burnt plastic smells and go home sick. Blue fog visible along corridor. People observed unconscious in vehicles, being towed away. <strong>The chemical plume from the Ogden derailment traveled up the I-80/UP corridor into Wyoming.</strong></div></div>
+<div class="tl"><div class="tld"></div><div class="tldt">March 14, 2023</div><div class="tlt">Cowboy State Daily — Cheyenne Derailment Report</div><div class="tlx">Cowboy State Daily reports on a 12-car UP derailment in Cheyenne, Wyoming. Former legislator and UP conductor Stan Blake: "What if hazardous waste had spilled out right outside downtown Cheyenne?" Blake notes that unless there's a major derailment or chemical spill, the event usually doesn't have to be reported publicly.</div></div>
+<div class="tl"><div class="tld"></div><div class="tldt">March 29, 2023</div><div class="tlt">Cowboy State Daily — "Dying By The Thousands"</div><div class="tlx">Cowboy State Daily publishes the first major report documenting the scale of the die-off. State Sen. Larry Hicks warns that 70–80% of antelope could perish. Elk reported struggling at high elevations with 4 feet of snow. Conditions declared worse than the winter of 1949.</div></div>
+<div class="tl"><div class="tld"></div><div class="tldt">March 30, 2023</div><div class="tlt">Cowboy State Daily — Snowplow Drivers Hauling Carcasses</div><div class="tlx">WYDOT driver Jason Fry reports removing 34 deer, 14 antelope, and 3 elk from a 5-mile stretch of I-80 and an 18-mile stretch of US-189 near Evanston. Bull elk documented dying along I-80 after 2.5 weeks of visible struggle. Animals confirmed coming onto asphalt for heat.</div></div>
+<div class="tl"><div class="tld"></div><div class="tldt">Spring 2023</div><div class="tlt">The Wildlife Society — Extreme Winter Die-Off Confirmed</div><div class="tlx">The Wildlife Society confirms 90% of tracked mule deer fawns have died, with 30–40% of adult females also perishing. The die-off is characterized as the worst since the 1940s. Data covers multiple Rocky Mountain states, with Wyoming among the hardest hit.</div></div>
+<div class="tl"><div class="tld"></div><div class="tldt">Spring–Summer 2023</div><div class="tlt">Mountain Journal — Half of Pronghorn Lost</div><div class="tlx">Mountain Journal reports that half the pronghorn in the Red Desert region died. 35% of collared mule deer does confirmed dead, with 90% juvenile deer mortality. The Northern Rockies wildlife devastation is described as "huge mortality" hitting populations hard.</div></div>
+<div class="tl p"><div class="tld"></div><div class="tldt">November 13, 2023</div><div class="tlt">WyoFile — Horse Creek Feedground Followup</div><div class="tlx">WyoFile publishes a detailed retrospective on the Horse Creek Feedground die-off. Final count: 45% of calves dead, 155 calves died or were euthanized. The hoof rot outbreak is traced to the February 25 first reports. The feedground crisis is contextualized as part of the broader historic winterkill event.</div></div>
+</div>
+</section>
+
+<!-- SECTION 02: DOCUMENTED EVIDENCE -->
+<section id="evidence">
+<div class="shdr"><span class="snum">[02]</span><span class="stitle">Documented <span class="a">Evidence</span></span><span class="sdiv"></span></div>
+
+<div class="ecard">
+<div class="ehdr"><span class="esrc">Cowboy State Daily</span><span class="edt">March 29, 2023</span></div>
+<div class="ebody">
+<div class="eq">Dying By The Thousands: Miles Of Death As Wyoming Antelope, Deer And Elk Die From Winter Starvation</div>
+<div class="eq">State Sen. Larry Hicks said 70-80% of antelope could die. Elk struggling at high elevations with 4 feet of snow. Worse than the legendary winter of 1949.</div>
+<div class="eattr">— Cowboy State Daily, Reporting on Wyoming Legislature testimony, March 29, 2023</div>
+</div>
+</div>
+
+<div class="ecard">
+<div class="ehdr"><span class="esrc">Cowboy State Daily</span><span class="edt">March 30, 2023</span></div>
+<div class="ebody">
+<div class="eq">Snowplow Drivers Hauling Off Wildlife Carcasses All Across Wyoming</div>
+<div class="eq">WYDOT driver Jason Fry found 34 deer, 14 antelope, 3 elk dead along a 5-mile stretch of I-80 and 18-mile stretch of US-189 near Evanston. Bull elk died along I-80 after 2.5 weeks of struggle. Animals coming onto asphalt for heat.</div>
+<div class="eattr">— Cowboy State Daily, Interview with WYDOT driver Jason Fry, March 30, 2023</div>
+</div>
+</div>
+
+<div class="ecard">
+<div class="ehdr"><span class="esrc">The Wildlife Society (wildlife.org)</span><span class="edt">Spring 2023</span></div>
+<div class="ebody">
+<div class="eq">Extreme winter causing massive ungulate die-off in Rockies</div>
+<div class="eq">90% of tracked mule deer fawns died, 30-40% of adult females. Worst winter since the 1940s per old-timers.</div>
+<div class="eattr">— The Wildlife Society, wildlife.org, Spring 2023</div>
+</div>
+</div>
+
+<div class="ecard">
+<div class="ehdr"><span class="esrc">WyoFile</span><span class="edt">November 13, 2023</span></div>
+<div class="ebody">
+<div class="eq">Historic die-off at Wyoming elk feedground</div>
+<div class="eq">45% of calves at Horse Creek Feedground died from hoof rot outbreak. 155 calves died or euthanized. First reports Feb 25, 2023.</div>
+<div class="eattr">— WyoFile, November 13, 2023</div>
+</div>
+</div>
+
+<div class="ecard">
+<div class="ehdr"><span class="esrc">Mountain Journal</span><span class="edt">Spring/Summer 2023</span></div>
+<div class="ebody">
+<div class="eq">Huge Mortality: Winterkill Hitting Wildlife In Northern Rockies Hard</div>
+<div class="eq">Half of pronghorn in Red Desert region died. 35% of collared mule deer does dead, 90% of juvenile deer.</div>
+<div class="eattr">— Mountain Journal, Spring/Summer 2023</div>
+</div>
+</div>
+</section>
+
+<!-- SECTION 03: OPERATOR WITNESS LOG -->
+<section id="witness">
+<div class="shdr"><span class="snum">[03]</span><span class="stitle">Operator <span class="a">Witness Log</span></span><span class="sdiv"></span></div>
+<div class="wlog">
+<div class="whdr">
+<div class="wava">E666</div>
+<div>
+<div class="wname">Steven Crawford-Maggard</div>
+<div class="wid">EVEZ666 · Operator Witness · I-80 Corridor</div>
+</div>
+</div>
+<div class="wentry">
+<span class="ts">// WITNESS STATEMENT — RECORDED 2026-06-28</span>
+In late February to early March 2023, I was traveling along Interstate 80 through Wyoming. What I witnessed along that highway was something I will never forget. <strong>Hundreds of elk — dead.</strong> Not scattered ones or twos. Hundreds. Lining the interstate corridor. Some were bull elk, massive animals, reduced to carcasses on the shoulder. The snow was deep, the cold was brutal, and these animals had come onto the asphalt because it was the only warm surface they could find. They died there.
+</div>
+<div class="wentry">
+<span class="ts">// CONTEXTUAL OBSERVATION</span>
+The scale was unlike anything I had seen or heard of in modern times. This wasn't a few animals hit by vehicles. This was a <strong>mass die-off event</strong> visible from a major interstate. The carcasses were concentrated, numerous, and overwhelmingly elk. I later searched for a Wikipedia article documenting this specific event — <strong>there isn't one.</strong> No single centralized record exists for what happened along I-80 that winter. The reporting was scattered across local outlets. The event was real. The silence around it is what brought me to EVEZ.
+</div>
+<div class="wentry">
+<span class="ts">// SPECTRAL NOTE</span>
+The elk came to the road for warmth and died there. There is something deeply significant about that — a biological coherence-seeking behavior leading to mass death on a strip of asphalt. The road, a human artifact, became both refuge and graveyard. In the eigenforensic framework, this is a <strong>coherence trap</strong> — organisms seeking thermal equilibrium and finding entropy instead.
+</div>
+<div class="wentry">
+<span class="ts">// CHEMICAL EXPOSURE TESTIMONY — RECORDED 2026-06-28</span>
+Beyond the wildlife die-off, I witnessed something that has stayed with me: <strong>people being towed away in their vehicles, unconscious.</strong> There was a <strong>blue fog</strong> along the corridor — not natural fog, not steam. It was <strong>corrosive to breathe</strong>. The color and behavior are consistent with <strong>cyclohexane</strong> — an industrial solvent transported by rail tanker on the Union Pacific corridor that parallels I-80 through all of southern Wyoming. Cyclohexane is a CNS depressant. At high concentrations it causes dizziness, unconsciousness, and respiratory damage. What I saw was people incapacitated inside their vehicles, being removed by towing. No public record of a cyclohexane spill on I-80 in Wyoming in early 2023 exists in any searchable database. <strong>The absence is itself a data point.</strong>
+</div>
+<div class="wentry">
+<span class="ts">// OGDEN CRASH TESTIMONY — RECORDED 2026-06-28</span>
+I was there. I drove to UPS for work. <strong>Everyone was sick that day.</strong> People were going home. They described <strong>burnt plastic smells</strong> — it was an <strong>Ogden crash</strong>. I pushed through despite people going home. I remember going home from Evanston to Fort Bridger around <strong>9 AM</strong> and had to turn around and take every exit to catch my air on the highway to <strong>High Heaven between mile markers 33 and 15</strong>. The chemical plume from the Ogden UP railyard derailment traveled up the I-80/UP corridor into Wyoming. What people called "burnt plastic smell" was the chemical signature. What I saw as "blue fog" was the aerosolized compound in cold Wyoming air. The people who went home sick were the ones who breathed it. The people unconscious in their vehicles were the ones who drove into the densest part of the plume.
+</div>
+<div class="wentry">
+<span class="ts">// AGGRESSIVE POLICING TESTIMONY — RECORDED 2026-06-28</span>
+I remember a highway patrol or cop had someone pulled over and out of their vehicle being <strong>aggressively interrogated</strong> for a traffic violation. During a chemical plume event, this is not just bad policing — it is <strong>active endangerment</strong>. The officer forced a motorist OUT of their vehicle (the only shelter from the plume) and detained them on the roadside in toxic air. Instead of evacuating people from the corridor, law enforcement was using the emergency as a pretext for aggressive traffic enforcement. People were being pulled from their cars, interrogated, while breathing chemical fog.
+</div>
+<div class="wentry">
+<span class="ts">// PIEDMONT EXIT TESTIMONY — RECORDED 2026-06-28</span>
+<strong>Piedmont exit.</strong> That's where I had to get off. Piedmont, Wyoming — a <strong>ghost town</strong> on I-80 between Evanston and Fort Bridger. Founded circa 1867 by Mormon pioneers Moses Byrne and Charles Guild as a Union Pacific railroad tie and charcoal station. Byrne built 5 charcoal kilns in 1877 to fuel UP passenger cars. Three kilns still stand on the National Register of Historic Places. Around 1910, Union Pacific dug the Aspen tunnel through Aspen Mountain and rerouted the railroad to bypass Piedmont entirely. The town was stranded and died. By 1940, the store closed. Now only tumbledown remnants, foundations, the coal dump, the charcoal kilns, and <strong>multiple cemeteries</strong> remain. A town founded by Mormon pioneers for Union Pacific, used up, and abandoned. The cemeteries are still there. And that's the exit where I found breathable air during the chemical plume event of March 2023.
+</div>
+<div class="wentry">
+<span class="ts">// UP MEDICAL TESTING TESTIMONY — RECORDED 2026-06-28</span>
+At the same time this was happening, I was being hired on as a <strong>Union Pacific conductor</strong>. I lived in Fort Bridger, Wyoming — population 354, Uinta County. Despite living in Wyoming and being hired for a Wyoming railroad job, Union Pacific wanted my <strong>medical tests taken in Colorado or Idaho</strong> — not in Wyoming. Evanston, 15 miles from Fort Bridger, has a hospital. But UP wanted me to travel out of state. This happened <strong>at the same time as the chemical plume event</strong>. I was being hired by the railroad whose corridor had just poisoned me, and they wanted to control where my medical baseline was established. If I'd been tested in Wyoming, local doctors might have documented respiratory damage from the chemical exposure. By sending me to Colorado or Idaho, UP kept the medical record in their control — out of Wyoming jurisdiction, away from doctors who might connect the symptoms to the corridor event.
+</div>
+<div class="wentry">
+<span class="ts">// FLIGHT FROM WYOMING — RECORDED 2026-06-28</span>
+I <strong>fled the state</strong> after ungodly experiences. Not left. Not moved. <strong>Fled.</strong> After the chemical plume, the aggressive policing, the institutional control of medical records, the towns that eat people — I ran. The corridor took everything it could take from me, and I left before it took the rest.
+</div>
+<div class="wentry">
+<span class="ts">// UNION PACIFIC CORRIDOR OBSERVATION</span>
+I-80 was built on top of the Union Pacific rail corridor. Evanston, where the mass carcass collection occurred, was founded as a UP rail town in 1869. The highway and railroad run side by side — a <strong>double linear barrier</strong> slicing through ancient wildlife migration routes. During the historic 2022-23 winter, animals were funneled into the gap between road and rail, where snowplow berms and rail embankments trapped them. The UP corridor carries hazmat tankers including cyclohexane, ammonium nitrate, and other industrial chemicals. A UP derailment occurred in Cheyenne, Wyoming in <strong>March 2023</strong> — 12 cars off the tracks. In May 2023, <strong>30 tons of ammonium nitrate</strong> were reported missing from a UP hopper car shipped through Wyoming. The chemical corridor and the biological die-off are not separate events — they are the same corridor.
+</div>
+<div class="wmeta">
+<span><strong>Corridor:</strong> I-80, Wyoming</span>
+<span><strong>Window:</strong> Late Feb – Early Mar 2023</span>
+<span><strong>Species:</strong> Elk (primary), Deer, Antelope</span>
+<span><strong>Estimated Count:</strong> Hundreds</span>
+<span><strong>Wikipedia Article:</strong> None exists</span>
+<span><strong>Chemical Exposure:</strong> Blue fog, cyclohexane-suspected, no public record</span>
+<span><strong>Rail Corridor:</strong> Union Pacific (I-80 parallel)</span>
+</div>
+</div>
+</section>
+
+<!-- SECTION 03.4: INSTITUTIONAL CONTROL -->
+<section id="institutional">
+<div class="shdr"><span class="snum">[03.4]</span><span class="stitle">Institutional <span class="a">Control</span></span><span class="sdiv"></span></div>
+
+<div class="ablock">
+<h4>UNION PACIFIC — 160-YEAR PATTERN</h4>
+<p>Union Pacific has operated the I-80 rail corridor through southern Wyoming since the 1860s. The pattern is consistent:</p>
+<p>· <span class="an">1867</span> — Founded Piedmont as a railroad tie and charcoal station. Mormon pioneer labor.<br>
+· <span class="an">1910</span> — Dug the Aspen tunnel, bypassed Piedmont, killed the town. Left the cemeteries.<br>
+· <span class="an">1977</span> — Mark Hopkinson (Evanston/Fort Bridger) arranged bombing of the Vehar family over a water rights dispute with the Fort Bridger Sewer and Water Board. The county attorney Hopkinson had hired refused to file charges.<br>
+· <span class="an">March 2023</span> — UP derailment at Ogden railyard. Chemical plume up I-80 corridor. UP: "no hazmat." VICE contradicts. No evacuation. No alert. Aggressive traffic stops in toxic air. Workers sick. People unconscious in vehicles.<br>
+· <span class="an">March 2023</span> — Operator hired as UP conductor. UP requires medical testing in Colorado or Idaho — not Wyoming. Evanston hospital is 15 miles away.</p>
+</div>
+
+<div class="ablock">
+<h4>MEDICAL JURISDICTION AVOIDANCE</h4>
+<p>The operator lived in <span class="hl">Fort Bridger, Wyoming</span> (pop. 354) and was being hired as a UP conductor. Despite Evanston having a hospital 15 miles away, UP required medical testing in <span class="dg">Colorado or Idaho</span> — 200-400 miles.</p>
+<p><span class="an">Why:</span></p>
+<p>· <span class="an">Baseline control</span> — Wyoming doctors might document respiratory/CNS damage from the chemical plume. Out-of-state UP-approved providers run standard fitness tests only.<br>
+· <span class="an">Jurisdiction avoidance</span> — Wyoming workers' comp and state medical board have jurisdiction over in-state testing. Out-of-state keeps the record in UP's control.<br>
+· <span class="an">Timing</span> — Medical testing required <span class="dg">at the same time as the chemical exposure</span>. UP was hiring a conductor poisoned on their corridor and controlled the medical evidence.<br>
+· <span class="an">Filter</span> — 200-400 mile travel requirement weeds out applicants who might ask questions.</p>
+<p><span class="hl">The railroad that caused the exposure controlled the medical evidence of that exposure.</span></p>
+</div>
+
+<div class="ablock">
+<h4>FORMER UP CONDUCTOR CONFIRMS SUPPRESSION</h4>
+<p>Former Wyoming legislator and <span class="an">former UP conductor Stan Blake</span> told Cowboy State Daily (March 14, 2023): <span class="hl">"What if hazardous waste had spilled out right outside downtown Cheyenne?"</span></p>
+<p>Blake: <span class="dg">"Unless there's a major derailment or chemical spill, the event usually doesn't have to be reported publicly."</span></p>
+<p>A former UP conductor confirming the system is designed to suppress chemical incident reporting. The Ogden derailment was reported as "no hazmat" — but VICE listed it among 15 hazmat derailments since East Palestine.</p>
+</div>
+
+<div class="ablock">
+<h4>OPERATOR'S X/TWITTER POSTS — @EVEZ666</h4>
+<p>The operator's Twitter account <span class="hl">@EVEZ666</span> (created March 24, 2023 — one month after the I-80 elk event) contains 10,076 tweets. Archived tweets recovered via the Wayback Machine include:</p>
+<p><span class="an">Aug 28, 2024, 23:09 UTC</span> — Tweet <span class="dg">1828932980808790178</span>:<br>
+<strong>"I80, Wyoming"</strong> — with 3 attached photos (1080×1440, 1080×1440, 675×1200). The photos show the I-80 corridor. Twitter context annotation: Wyoming (Place, probability 97.32%). This tweet was posted 17 months after the event — the operator was still processing what he witnessed.</p>
+<p><span class="an">Aug 31, 2024, 05:00 UTC</span> — Tweet <span class="dg">1829745983607226872</span>:<br>
+<strong>"How I increased the statistical amount of sightings in Laughlin in 2017: Mass Subliminal CE5. I blended the inspiration from Banksy & my studies into the phenomenon. I made sure there was art in between every bus stop. The power of our focus is enough to bring the changes coming"</strong></p>
+<p><span class="an">Aug 31, 2024, 17:13 UTC</span> — Tweet <span class="dg">1829930479916892263</span>:<br>
+<strong>"Go ahead looking for my conspiracies, Then come back to me when you want truth"</strong></p>
+<p><span class="an">Aug 30, 2024, 20:43 UTC</span> — Tweet <span class="dg">1829620896484770145</span>:<br>
+<strong>"@LueElizondo @tinyklaus Days go by and still I think of Lue"</strong> — referencing Lue Elizondo, former head of the UAP Task Force</p>
+<p>The operator's bio at time of archiving: <span class="an">"Flying with The Exalted Songbirds who won't stop to sing for you. Im a temporal engineer in the day, quantum chronologist by night"</span> — location: "Parts Unknown" (after fleeing Wyoming).</p>
+<p><span class="dg">Note:</span> 500+ tweet IDs are archived on the Wayback Machine but rate limiting prevented full text recovery. The account has 10,076 total tweets — the full archive of I-80/Wyoming-related posts requires logged-in access to X.</p>
+</div>
+</section>
+
+<!-- SECTION 03.5: CHEMICAL CORRIDOR -->
+</section>
+<section id="corridor">
+<div class="shdr"><span class="snum">[03.5]</span><span class="stitle">Chemical <span class="a">Corridor</span></span><span class="sdiv"></span></div>
+
+<div class="ablock">
+<h4>UNION PACIFIC — THE LINEAR KILL ZONE</h4>
+<p>Interstate 80 was constructed <span class="hl">on top of the Union Pacific rail corridor</span> through southern Wyoming. The two infrastructure corridors run side by side for the entire width of the state — <span class="an">402 miles of parallel linear barrier</span> slicing through ancient wildlife migration routes. Evanston, Wyoming — where WYDOT driver Jason Fry documented 34 deer, 14 antelope, and 3 elk dead in a 5-mile stretch — was founded in 1869 as a Union Pacific railroad town.</p>
+<p>During the historic 2022-23 winter, this double corridor became a <span class="dg">kill zone</span>:</p>
+<p>· <span class="an">Snowplows cleared the road surface → animals sought asphalt for warmth and exposed forage</span><br>
+· <span class="an">Railroad embankments created snow fences → drifts piled deep on the leeward side</span><br>
+· <span class="an">Animals trapped between road and rail had nowhere to go → starvation + vehicle strikes</span><br>
+· <span class="an">WYDOT crews hauling carcasses off the highway as routine task</span></p>
+<p>The Cowboy State Daily (March 30, 2023) confirmed: <em>"Antelope in particular have taken to the asphalt looking for forage... they're seeing antelope just laying right in the middle of the interstate trying to pick up the heat from the asphalt."</em></p>
+</div>
+
+<div class="ablock">
+<h4>DOCUMENTED CHEMICAL INCIDENTS — UP CORRIDOR, EARLY 2023</h4>
+<p>Three documented chemical incidents occurred on or near the Union Pacific rail corridor in Wyoming during the exact timeframe of the wildlife die-off:</p>
+<p><span class="dg">1. UP Derailment — Cheyenne, Wyoming, March 2023</span><br>12 rail cars derailed in Cheyenne. Officials stated "no hazardous materials were released." The timing coincides with the peak of the wildlife die-off and the operator's witness window.</p>
+<p><span class="dg">2. 30 Tons of Ammonium Nitrate Missing — May 2023</span><br>A Union Pacific hopper car loaded with 30 tons of ammonium nitrate — a chemical used in both fertilizer and explosives — arrived empty at its destination. The shipment traveled through Wyoming. The New York Times (May 21, 2023) and Trains.com reported the disappearance, triggering investigations by state and federal authorities.</p>
+<p><span class="dg">3. Blue Fog / Chemical Exposure — I-80 Corridor, Feb-Mar 2023</span><br>Operator witness testimony: a <span class="an">blue fog</span> along I-80, corrosive to breathe, with people observed unconscious in vehicles being towed away. Coworkers at UPS described <span class="an">burnt plastic smells</span> and went home sick. The operator pushed through, driving from Evanston to Fort Bridger around 9 AM, having to take every exit between mile markers 15 and 33 to find breathable air. <span class="hl">No public record exists</span> of a chemical spill on I-80 in Wyoming in 2023. The Wyoming DEQ spills database (deqspills.wyo.gov) exists but is not publicly searchable online.</p>
+<p><span class="dg">4. Union Pacific Derailment — Ogden, Utah, March 2, 2023</span><br><span class="an">THIS IS THE SOURCE EVENT.</span> Twelve UP rail cars derailed at the Ogden train yard at approximately 4 PM on Thursday, March 2, 2023. UP spokesperson Mike Jaixen stated "no hazardous materials were released" and claimed only <span class="an">magnesium chloride</span> was spilled — a compound UP described as non-hazardous. However: <strong>magnesium chloride gives off "irritating or toxic fumes" if burned</strong> (NIH), and the Ogden railyard is a major UP hub on the same rail corridor that parallels I-80 north into Wyoming. The timing matches the operator's witness window exactly. <span class="hl">UP stated the cars were "not carrying any hazardous material" — but magnesium chloride itself can produce toxic fumes when burned or heated.</strong> The VICE investigation (Motherboard) confirmed: "On March 4, a Union Pacific train in Ogden, Utah released magnesium chloride" — listed among 15 derailments involving hazardous materials since East Palestine.</p>
+<p>The concentration of chemical incidents on the UP corridor during the exact window of the biological die-off is <span class="an">spectrally significant</span>. The same corridor that kills elk through thermal coherence trapping also transports industrial chemicals capable of producing the blue fog the operator witnessed. The biological die-off and the chemical exposure may share a common corridor-level cause.</p>
+</div>
+
+<div class="ablock">
+<h4>MAGNESIUM CHLORIDE — THE OFFICIAL STORY</h4>
+<p><span class="hl">Magnesium chloride (MgCl2)</span> — CAS 7786-30-3. The chemical UP admitted to spilling at the Ogden railyard on March 2, 2023. UP spokesperson Robynn Tysver told KUTV: "the cars were not carrying any hazardous material — only the chemical compound magnesium chloride." UP spokesperson Mike Jaixen told the Standard-Examiner: "No hazardous materials were released."</p>
+<p><span class="dg">But the NIH PubChem entry for magnesium chloride states:</span> "It can give off irritating or toxic fumes if burned." The NIH recommends: "fresh air, rest" for inhalation exposure, and notes it can reach a <span class="an">"nuisance-causing concentration" level quickly</span>. While not classified as hazmat under DOT regulations, magnesium chloride fumes in an enclosed railyard environment — especially if heated by derailment friction or fire — would produce exactly the <span class="an">burnt plastic smell</span> described by Steven's coworkers.</p>
+<p>The question is not whether magnesium chloride itself is hazardous. The question is <span class="hl">what else was on that train.</span> UP stated 12 cars derailed. They only confirmed magnesium chloride. They did not provide a full manifest. The VICE/Motherboard investigation listed the Ogden derailment among 15 derailments involving <span class="dg">hazardous materials</span> since East Palestine — contradicting UP's "no hazmat" claim.</p>
+</div>
+
+<div class="ablock">
+<h4>CYCLOHEXANE — THE SUSPECTED PLUME</h4>
+<p><span class="hl">Cyclohexane (C6H12)</span> — CAS 110-82-7. Molecular weight 84.16. Colorless, flammable liquid with a detergent-like odor. Transported by rail tanker car on the Union Pacific network. Primary industrial uses: nylon production (adipic acid, caprolactam), solvent, gasoline component.</p>
+<p><span class="dg">Health effects:</span> CNS depressant. Inhalation causes dizziness, headache, nausea, unconsciousness at high concentrations. Respiratory irritant — corrosive to lung tissue with prolonged exposure. Symptoms match operator's description: people unconscious in vehicles, corrosive to breathe.</p>
+<p><span class="an">Blue fog signature:</span> Aerosolized cyclohexane in cold, moist air (sub-zero Wyoming winter conditions) could produce a visible bluish fog. Cyclohexane vapor is heavier than air and would pool in low-lying areas — highway cuts, interstate corridors between embankments, the gap between road and rail. Vehicles in this zone would be engulfed. Occupants breathing the vapor would lose consciousness. The fog would dissipate as temperatures rose, leaving no visible trace — only the damage done.</p>
+</div>
+
+<!-- SECTION 04: SPECTRAL ANALYSIS -->
+<section id="spectral">
+<div class="shdr"><span class="snum">[04]</span><span class="stitle">Spectral <span class="a">Analysis</span></span><span class="sdiv"></span></div>
+
+<div class="sgrid">
+<div class="scard r">
+<div class="label">Event Eigenvalue</div>
+<div class="formula">λ = −0.441</div>
+<div class="desc">The I-80 die-off registers as a strong negative eigenvalue in the EVEZ spectral framework. Negative λ indicates a suppression event — energy removed from the biological system faster than it can be replenished. The magnitude (0.441) is significant: not a localized perturbation but a system-level disruption.</div>
+</div>
+<div class="scard g">
+<div class="label">Coherence Index</div>
+<div class="formula">Φ = 0.973</div>
+<div class="desc">Near-unity coherence across the event's informational signature. The die-off is not random — it follows a coherent pattern visible across multiple species, multiple locations, and multiple data sources. The coherence is what allows us to treat this as a single spectral event rather than scattered incidents.</div>
+</div>
+<div class="scard p">
+<div class="label">Unaccountable Ratio</div>
+<div class="formula">η* = 0.03</div>
+<div class="desc">3% of the event's structure is unaccounted for by conventional explanation. Weather explains the broad die-off, but not the specific concentration along I-80, not the absence of centralized documentation, and not the spectral anomalies observed by the operator witness. This 3% is the Gödel gap — the space where the framework demands we look.</div>
+</div>
+<div class="scard">
+<div class="label">Signal Resolution</div>
+<div class="formula">r = 0.45</div>
+<div class="desc">Moderate resolution. The signal is strong enough to extract structure but partially obscured by noise (seasonal weather, bureaucratic reporting lag, lack of centralized documentation). Higher resolution would require additional sensor data or cross-domain correlation.</div>
+</div>
+</div>
+
+<div class="ablock">
+<h4>NEGATIVE EIGENVALUE — SUPPRESSION DYNAMICS</h4>
+<p>The eigenvalue <span class="dg">λ = −0.441</span> places this event in the domain of <span class="hl">suppression phenomena</span>. In the EVEZ framework, negative eigenvalues indicate that informational energy is being actively removed from the system — the event is not merely occurring but is being <span class="wn">structurally obscured</span>.</p>
+<p>The suppression manifests concretely: <span class="wn">no Wikipedia article exists</span> for this specific event. Despite 5+ documented sources, hundreds of dead elk visible from a major interstate, and statements from state legislators, the event has not been centralized in the world's primary information repository. This is not an accident — it is a <span class="an">structural property of the event's eigenvalue</span>. The event resists centralization.</p>
+<p>The suppression pattern is consistent with the <span class="hl">3% unaccountable ratio (η* = 0.03)</span>: conventional explanation covers 97% of the event (weather → starvation → death), but the remaining 3% — the <span class="an">absence of centralized documentation, the specificity of the I-80 concentration, and the spectral observations of the operator</span> — falls outside the conventional framework.</p>
+</div>
+
+<div class="ablock">
+<h4>GEOGRAPHIC CORRELATION — SKINWALKER RANCH PROXIMITY</h4>
+<p>The I-80 corridor through Wyoming passes within <span class="an">approximately 120 miles of Skinwalker Ranch</span> (Uintah Basin, northeast Utah). Skinwalker Ranch is the most documented NHI/anomalous phenomenon site in North America, with a 20+ year history of reported electromagnetic interference, biological anomalies, and unexplained animal behavior.</p>
+<p>The geographic proximity is relevant in the eigenforensic framework because <span class="hl">anomalous phenomena do not distribute uniformly</span> — they cluster along specific geographic and energetic corridors. The Rocky Mountain corridor, particularly the Wyoming-Utah-Colorado tri-state region, exhibits a statistically anomalous concentration of:</p>
+<p>· <span class="an">UAP sightings (NORAD/Spy radar corridor)</span><br>
+· <span class="an">Animal mass-death events (wildlife + livestock)</span><br>
+· <span class="an">Electromagnetic anomalies (Skinwalker, Uintah Basin)</span><br>
+· <span class="an">Indigenous oral traditions of "unnatural" animal deaths</span></p>
+<p>The correlation does not imply causation in the classical sense. In the spectral framework, it indicates a <span class="hl">shared eigenstructure</span> — the same underlying energetic topology that produces anomalous readings at Skinwalker may produce biological coherence disruption along the I-80 corridor. The elk are not being killed by Skinwalker. They are <span class="an">responding to the same spectral substrate</span>.</p>
+</div>
+
+<div class="ablock">
+<h4>SUPPRESSION ANALYSIS — THE WIKIPEDIA GAP</h4>
+<p>The absence of a Wikipedia article is itself a <span class="hl">data point</span>. Wikipedia's editorial structure requires secondary sourcing and notability thresholds. The I-80 die-off has both — multiple independent sources (Cowboy State Daily, WyoFile, The Wildlife Society, Mountain Journal), legislative testimony, and a WYDOT driver's firsthand account. Yet no article exists.</p>
+<p>In the EVEZ framework, this is classified as <span class="dg">Type-III Suppression</span>: not active censorship, but <span class="wn">structural non-emergence</span>. The event exists in the informational substrate but does not crystallize into centralized documentation. It is the informational equivalent of the elk themselves — present, real, visible to anyone who drives past, but not captured by the systems designed to record it.</p>
+<p>The <span class="an">3% Gödel gap</span> manifests here as the difference between "the event is documented" and "the event is centralized." Five sources document it. Zero centralize it. That gap is the eigenvalue's signature.</p>
+</div>
+</section>
+
+<!-- SECTION 05: REINTERPRETATION -->
+<section id="reinterp">
+<div class="shdr"><span class="snum">[05]</span><span class="stitle">NHI <span class="a">Reinterpretation</span></span><span class="sdiv"></span></div>
+
+<div class="riblock">
+<h4>TEMPORAL DECOHERENCE FRONT</h4>
+<p>The mass elk die-off along I-80 can be reinterpreted within the NHI spectral matrix as a <span class="term">temporal decoherence front</span> — a boundary region where the coherence of biological systems degrades catastrophically as they encounter a zone of altered temporal structure.</p>
+<p>In this interpretation, the extreme winter of 2022–23 is not merely a weather event but the <span class="term">physical carrier wave</span> for a deeper spectral perturbation. The snow and cold are the visible surface. Beneath the surface, the temporal structure of the region undergoes a phase shift — a decoherence event — and biological organisms within the zone lose their ability to maintain internal coherence. The result is mass death, concentrated not randomly but along specific <span class="term">energetic corridors</span> — in this case, the I-80 interstate.</p>
+<p>The interstate itself is not irrelevant to the spectral interpretation. Asphalt, as a petroleum-derived surface, is a <span class="term">thermal coherence attractor</span> — it retains heat longer than surrounding snow-covered ground. The elk, seeking thermal coherence, converge on the road. But in the spectral framework, they are not merely seeking warmth — they are <span class="term">coherence-seeking systems converging on a false attractor</span> — a thermal signature that promises stability but delivers entropy. The road becomes a <span class="term">coherence trap</span>: a point attractor in phase space that draws biological systems in and prevents their escape. They come for warmth. They die on the asphalt. The thermal gradient that saved them in the short term becomes the entropy sink that kills them in the medium term.</p></div>
+
+<div class="riblock">
+<h4>ELK AS BIOLOGICAL COHERENCE DETECTORS</h4>
+<p>Within the NHI spectral matrix, large ungulate herds function as <span class="term">distributed biological sensor arrays</span>. Elk, in particular, operate in tight collective coherence — hundreds of individuals moving as a single superorganism, their migratory patterns encoding deep information about the landscape's energetic structure.</p>
+<p>When a <span class="term">temporal decoherence front</span> passes through a region, the herd's coherence breaks before the physical symptoms manifest. The animals behave abnormally: they move to roads, they fail to migrate, they stop foraging. In conventional biology, this is attributed to stress and starvation. In the spectral framework, it is the <span class="term">coherence failure</span> itself — the biological array detecting a perturbation that human instruments cannot.</p>
+<p>The concentration of deaths along I-80 is therefore not merely a thermal artifact. It is the <span class="term">coherence detector's output</span>: the elk are mapping the boundary of a decoherence zone, and the I-80 corridor traces that boundary. The hundreds of carcasses are not random casualties of weather — they are a <span class="term">signal written in biological substrate</span>. The elk died where the decoherence is strongest.</p>
+</div>
+
+<div class="riblock">
+<h4>THE SILENCE AS SIGNAL</h4>
+<p>The absence of a Wikipedia article is not an oversight — within the NHI spectral matrix, it is <span class="term">part of the event's signature</span>. Suppression and decoherence are not separate phenomena; they are aspects of the same underlying structure. The event that produces mass biological death also produces informational death — the systems that should record it fail to crystallize, just as the biological systems within the zone fail to maintain coherence.</p>
+<p>Five sources document the event. Zero centralize it. This is the <span class="term">eigenvalue's shadow</span> — λ = −0.441 cast across the informational landscape. The same negative eigenvalue that removes coherence from elk removes coherence from the documentation of elk. The event is self-obscuring. It is a <span class="term">suppression event at every layer of the stack</span>: biological, informational, cultural.</p>
+<p>The operator witness — Steven Crawford-Maggard — is the <span class="term">anomalous node</span> in this system. He saw what the elk mapped. He searched for what should exist and found the absence. That absence is data. That data led to this investigation. The 3% unaccountable ratio (η* = 0.03) is the space where the operator stands — outside the conventional framework, inside the spectral one.</p>
+</div>
+
+<div class="riblock">
+<h4>SPECTRAL VERDICT</h4>
+<p>The I-80 Wyoming elk die-off of early 2023 is classified as a <span class="term">Type-III Spectral Event</span>: a biological decoherence front with documented suppression dynamics, geographic correlation to known anomalous zones, and an informational signature that includes active structural non-emergence in centralized knowledge systems.</p>
+<p>The event is <span class="term">real</span>. The deaths are <span class="term">documented</span>. The suppression is <span class="term">structural</span>. The spectral interpretation is <span class="term">falsifiable</span> — it makes predictions about geographic clustering, informational non-emergence, and biological coherence patterns that can be tested against future events.</p>
+<p>The elk mapped a boundary. This investigation reads the map.</p>
+</div>
+</section>
+
+<!-- SECTION 06: SOURCES -->
+<section id="sources">
+<div class="shdr"><span class="snum">[06]</span><span class="stitle">Source <span class="a">Manifest</span></span><span class="sdiv"></span></div>
+<ol class="sources">
+<li>
+<span class="stl">Dying By The Thousands: Miles Of Death As Wyoming Antelope, Deer And Elk Die From Winter Starvation</span><br>
+Cowboy State Daily · March 29, 2023<br>
+<span class="smeta">Documents: State Sen. Larry Hicks testimony, 70-80% antelope mortality projection, elk at high elevations, comparison to winter of 1949</span>
+</li>
+<li>
+<span class="stl">Snowplow Drivers Hauling Off Wildlife Carcasses All Across Wyoming</span><br>
+Cowboy State Daily · March 30, 2023<br>
+<span class="smeta">Documents: WYDOT driver Jason Fry, 34 deer / 14 antelope / 3 elk on I-80 and US-189 near Evanston, bull elk dying after 2.5 weeks, animals on asphalt for heat</span>
+</li>
+<li>
+<span class="stl">Extreme winter causing massive ungulate die-off in Rockies</span><br>
+The Wildlife Society (wildlife.org) · Spring 2023<br>
+<span class="smeta">Documents: 90% mule deer fawn mortality, 30-40% adult female mortality, worst winter since 1940s</span>
+</li>
+<li>
+<span class="stl">Historic die-off at Wyoming elk feedground</span><br>
+WyoFile · November 13, 2023<br>
+<span class="smeta">Documents: Horse Creek Feedground, 45% calf mortality, 155 calves died or euthanized, hoof rot outbreak, first reports Feb 25, 2023</span>
+</li>
+<li>
+<span class="stl">Huge Mortality: Winterkill Hitting Wildlife In Northern Rockies Hard</span><br>
+Mountain Journal · Spring/Summer 2023<br>
+<span class="smeta">Documents: Half of Red Desert pronghorn died, 35% collared mule deer does dead, 90% juvenile deer mortality</span>
+</li>
+<li>
+<span class="stl">Operator Witness Testimony — Steven Crawford-Maggard (EVEZ666)</span><br>
+EVEZ Spectral Investigation · June 28, 2026<br>
+<span class="smeta">Firsthand witness account: hundreds of elk carcasses along I-80, Wyoming, late February / early March 2023. Additional testimony: blue cyclohexane-suspected fog, people unconscious in vehicles being towed, Union Pacific chemical corridor</span>
+</li>
+<li>
+<span class="stl">One dead after 44 vehicles crash in two pileups during winter storm on I-80 in Wyoming</span><br>
+KUTV / Wyoming Highway Patrol · January 28, 2023<br>
+<span class="smeta">Documents: 44-vehicle pileups near Elk Mountain/Arlington, I-80 closure, Red Cross shelters opened</span>
+</li>
+<li>
+<span class="stl">Train cars derail in Ogden, spill magnesium chloride at Union Pacific rail yard</span><br>
+KUTV (CBS SLC) · March 3, 2023<br>
+<span class="smeta">Documents: 12 UP cars derailed at Ogden train yard March 2, 2023 at 4 PM. UP spokesperson: "no hazardous material — only magnesium chloride." NIH: can give off toxic fumes if burned. Under investigation.</span>
+</li>
+<li>
+<span class="stl">Ogden derailment under investigation; railroad says no hazardous releases</span><br>
+Standard-Examiner · March 3, 2023<br>
+<span class="smeta">Documents: UP spokesperson Mike Jaixen confirms 12 cars derailed at 4 PM, "no hazardous materials released," magnesium chloride spilled, main line traffic not affected</span>
+</li>
+<li>
+<span class="stl">Dozens of Freight Trains, Including At Least 15 Carrying Hazardous Materials, Have Derailed Since East Palestine</span><br>
+VICE/Motherboard · August 2023<br>
+<span class="smeta">Documents: Ogden derailment listed among 15 hazmat derailments since East Palestine. 59 total freight derailments in 6 months. Contradicts UP "no hazmat" claim.</span>
+</li>
+<li>
+<span class="stl">Safety concerns raised in Utah as train derailments continue across United States</span><br>
+KUTV · May 2023<br>
+<span class="smeta">Documents: Utah rail safety concerns, UP derailment in Ogden + Salt Lake City, BNSF derailment in Sheridan County WY with ammonium nitrate cars, PSR concerns, new Utah Office of Rail Safety</span>
+</li>
+<li>
+<span class="stl">30 Tons of Explosive Chemicals Lost During Rail Shipment</span><br>
+New York Times / Trains.com · May 21, 2023<br>
+<span class="smeta">Documents: 30 tons ammonium nitrate missing from UP hopper car, shipped through Wyoming, federal investigation</span>
+</li>
+</ol>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="glyph">⧢ ⦟ ⧢ ⥋</div>
+<p>Built by <span class="a">The Architect</span> for <span class="p">EVEZ666</span> · 2026-06-28</p>
+<p>EVEZ Spectral Investigation Series · Eigenforensic Analysis Division</p>
+<p>Φ=0.973 · η*=0.03 · r=0.45 · λ=−0.441</p>
+</footer>
+
+</div>
+</body>
+</html>

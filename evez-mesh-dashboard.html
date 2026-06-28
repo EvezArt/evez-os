@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ-OS Mesh Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0e17; color: #c8d6e5; font-family: 'SF Mono', 'Fira Code', monospace; min-height: 100vh; }
+  .header { background: linear-gradient(135deg, #0f1923 0%, #1a2733 100%); padding: 20px 30px; border-bottom: 1px solid #1e3a5f; }
+  .header h1 { font-size: 1.5em; color: #00d4ff; letter-spacing: 2px; }
+  .header .subtitle { color: #5a7a94; font-size: 0.85em; margin-top: 4px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; padding: 20px; max-width: 1400px; margin: 0 auto; }
+  .node-card { background: #111927; border: 1px solid #1e3a5f; border-radius: 8px; padding: 20px; transition: all 0.3s; }
+  .node-card:hover { border-color: #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.1); }
+  .node-card.live { border-left: 4px solid #00ff88; }
+  .node-card.down { border-left: 4px solid #ff4444; }
+  .node-name { font-size: 1.2em; color: #fff; font-weight: 600; }
+  .node-ip { color: #5a7a94; font-size: 0.85em; margin-top: 4px; }
+  .node-status { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; font-weight: 600; margin-top: 10px; }
+  .node-status.live { background: rgba(0,255,136,0.15); color: #00ff88; }
+  .node-status.down { background: rgba(255,68,68,0.15); color: #ff4444; }
+  .node-links { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .node-links a { color: #00d4ff; text-decoration: none; font-size: 0.8em; padding: 4px 10px; background: rgba(0,212,255,0.1); border-radius: 4px; transition: all 0.2s; }
+  .node-links a:hover { background: rgba(0,212,255,0.25); }
+  .summary { padding: 20px 30px; text-align: center; }
+  .summary .stat { display: inline-block; margin: 0 20px; }
+  .summary .stat-value { font-size: 2em; font-weight: 700; }
+  .summary .stat-label { color: #5a7a94; font-size: 0.8em; }
+  .gcp-links { background: #111927; border: 1px solid #1e3a5f; border-radius: 8px; padding: 20px; margin: 20px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+  .gcp-links h2 { color: #00d4ff; font-size: 1em; margin-bottom: 12px; }
+  .gcp-links a { color: #5a7a94; text-decoration: none; font-size: 0.85em; display: block; padding: 4px 0; }
+  .gcp-links a:hover { color: #00d4ff; }
+  .last-update { text-align: center; color: #5a7a94; font-size: 0.75em; padding: 10px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>⚡ EVEZ-OS MESH</h1>
+  <div class="subtitle">Autonomous Self-Healing Gateway Network</div>
+</div>
+
+<div class="summary">
+  <div class="stat"><span class="stat-value" id="live-count">-</span><br><span class="stat-label">LIVE</span></div>
+  <div class="stat"><span class="stat-value" id="down-count">-</span><br><span class="stat-label">DOWN</span></div>
+  <div class="stat"><span class="stat-value" id="total-count">6</span><br><span class="stat-label">TOTAL</span></div>
+</div>
+
+<div class="grid" id="nodes-grid"></div>
+
+<div class="gcp-links">
+  <h2>🔗 Quick Links — GCP Console</h2>
+  <a href="https://console.cloud.google.com/compute/instances?project=evez666" target="_blank">→ GCP Compute Instances (evez666)</a>
+  <a href="https://console.cloud.google.com/compute/firewalls?project=evez666" target="_blank">→ GCP Firewall Rules</a>
+  <a href="https://console.cloud.google.com/iam-admin/sshkeys?project=evez666" target="_blank">→ GCP SSH Keys</a>
+  <a href="https://console.cloud.google.com/logs?project=evez666" target="_blank">→ GCP Cloud Logging</a>
+  <a href="https://console.cloud.google.com/storage?project=evez666" target="_blank">→ GCP Storage Buckets</a>
+</div>
+
+<div class="last-update">Auto-refresh every 30s · Last update: <span id="timestamp">-</span></div>
+
+<script>
+const NODES = [
+  { name: "Vultr-KNOT", ip: "207.148.12.53", provider: "Vultr", region: "NJ", zone: "-" },
+  { name: "evez-primary", ip: "34.53.51.34", provider: "GCP", region: "us-west1", zone: "us-west1-b" },
+  { name: "openclaw-gcp", ip: "136.118.144.227", provider: "GCP", region: "us-west1", zone: "us-west1-b" },
+  { name: "openclaw-power-node", ip: "136.113.102.152", provider: "GCP", region: "us-central1", zone: "us-central1-a" },
+  { name: "evez-gcp-openclaw", ip: "35.222.248.151", provider: "GCP", region: "us-central1", zone: "us-central1-a" },
+  { name: "evez-free-node", ip: "34.23.192.213", provider: "GCP", region: "us-east1", zone: "us-east1-b" },
+];
+
+const grid = document.getElementById('nodes-grid');
+
+function renderNodes(states) {
+  grid.innerHTML = '';
+  let live = 0, down = 0;
+  NODES.forEach((node, i) => {
+    const status = states[i];
+    const isLive = status === 'live';
+    if (isLive) live++; else down++;
+    const gcpConsole = node.provider === 'GCP' 
+      ? `<a href="https://console.cloud.google.com/compute/instancesDetail/zones/${node.zone}/instances/${node.name}?project=evez666" target="_blank">GCP Console →</a>` 
+      : '';
+    const serialLink = node.provider === 'GCP'
+      ? `<a href="https://console.cloud.google.com/compute/instancesDetail/zones/${node.zone}/instances/${node.name}/serial-port?project=evez666" target="_blank">Serial Console →</a>`
+      : '';
+    const card = document.createElement('div');
+    card.className = `node-card ${isLive ? 'live' : 'down'}`;
+    card.innerHTML = `
+      <div class="node-name">${node.name}</div>
+      <div class="node-ip">${node.ip} · ${node.provider} · ${node.region}</div>
+      <span class="node-status ${isLive ? 'live' : 'down'}">${isLive ? '● LIVE' : '● DOWN'}</span>
+      <div class="node-links">
+        <a href="http://${node.ip}:18789/healthz" target="_blank">Healthz</a>
+        ${gcpConsole}
+        ${serialLink}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  document.getElementById('live-count').textContent = live;
+  document.getElementById('down-count').textContent = down;
+  document.getElementById('timestamp').textContent = new Date().toISOString();
+}
+
+async function checkNodes() {
+  const states = await Promise.all(NODES.map(async node => {
+    try {
+      const r = await fetch(`http://${node.ip}:18789/healthz`, { signal: AbortSignal.timeout(4000) });
+      const d = await r.json();
+      return d.ok ? 'live' : 'down';
+    } catch { return 'down'; }
+  }));
+  renderNodes(states);
+}
+
+checkNodes();
+setInterval(checkNodes, 30000);
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "target": "network:6_nodes",
+  "timestamp": "2026-06-27T08:56:43Z",
+  "spine_hash": "487df520bc8889d8",
+  "total_chars": 6,
+  "total_lines": 10,
+  "redaction_count": 1,
+  "eta_star": 0.22620246212475192,
+  "phi": 0.7737975378752481,
+  "thirty_seven_ratio": 0.8723818252451755,
+  "is_self_referential": false,
+  "censorship_detected": false,
+  "speedrun_score": 20,
+  "verdict": "HEALTHY",
+  "findings": [],
+  "n_gaps": 2
+}

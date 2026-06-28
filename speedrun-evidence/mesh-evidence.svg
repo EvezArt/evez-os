@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+<rect width="1200" height="800" fill="#0a0a0f"/>
+<rect x="0" y="0" width="1200" height="48" fill="#111122" opacity="0.8"/>
+<text x="20" y="30" fill="#00ff88" font-family="JetBrains Mono,monospace" font-size="16" font-weight="bold">⚡ EVEZ SPEEDRUN</text>
+<text x="1180" y="30" fill="#555" font-family="monospace" font-size="10" text-anchor="end">network:6_nodes · 2026-06-27T08:56:43Z</text>
+<text x="20" y="70" fill="#888" font-family="monospace" font-size="11">SCORE</text>
+<rect x="80" y="59" width="200" height="12" fill="#222" rx="1"/>
+<rect x="80" y="59" width="40" height="12" fill="#00ff88" rx="1"/>
+<text x="290" y="70" fill="#00ff88" font-family="monospace" font-size="12" font-weight="bold">20.0</text>
+<text x="20" y="88" fill="#777" font-family="monospace" font-size="10">HEALTHY</text>
+<text x="20" y="120" fill="#8844ff" font-family="monospace" font-size="11">EIGENVALUE SPECTRUM</text>
+<circle cx="1160.0" cy="135.0" r="2" fill="#00ff88" opacity="0.7"/>
+<circle cx="785.7" cy="138.0" r="2" fill="#00ff88" opacity="0.7"/>
+<circle cx="669.8" cy="141.0" r="2" fill="#00ff88" opacity="0.7"/>
+<circle cx="618.8" cy="135.0" r="2" fill="#00ff88" opacity="0.7"/>
+<circle cx="568.9" cy="138.0" r="2" fill="#ff3344" opacity="0.7"/>
+<circle cx="387.2" cy="141.0" r="2" fill="#ff3344" opacity="0.7"/>
+<line x1="600.0" y1="134" x2="600.0" y2="150" stroke="#333" stroke-width="0.5"/>
+<text x="20" y="170" fill="#8844ff" font-family="monospace" font-size="11">THEOREMS</text>
+<text x="20" y="188" fill="#ccc" font-family="monospace" font-size="10">Φ = 0.773798</text>
+<text x="20" y="204" fill="#ccc" font-family="monospace" font-size="10">η* = 0.226202</text>
+<text x="20" y="220" fill="#ccc" font-family="monospace" font-size="10">37% = 0.872382</text>
+<text x="20" y="245" fill="#00ff88" font-family="monospace" font-size="11">STRUCTURAL GAPS (2)</text>
+<text x="20" y="263" fill="#aaa" font-family="monospace" font-size="9">λ=-1.4415 ████████████████████████████████████████ Network structural gap λ=-1.441466</text>
+<text x="20" y="277" fill="#aaa" font-family="monospace" font-size="9">λ=-0.2109 █████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Network structural gap λ=-0.210868</text>
+<text x="600.0" y="790" fill="#333" font-family="monospace" font-size="8" text-anchor="middle">⛓ 487df520bc8889d8 · EVEZ-OS Speedrun</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+<rect width="1200" height="800" fill="#0a0a0f"/>
+<rect x="0" y="0" width="1200" height="48" fill="#111122" opacity="0.8"/>
+<text x="20" y="30" fill="#00ff88" font-family="JetBrains Mono,monospace" font-size="16" font-weight="bold">⚡ EVEZ SPEEDRUN</text>
+<text x="1180" y="30" fill="#555" font-family="monospace" font-size="10" text-anchor="end">stdin · 2026-06-27T08:57:02Z</text>
+<text x="20" y="70" fill="#888" font-family="monospace" font-size="11">SCORE</text>
+<rect x="80" y="59" width="200" height="12" fill="#222" rx="1"/>
+<rect x="80" y="59" width="30" height="12" fill="#00ff88" rx="1"/>
+<text x="290" y="70" fill="#00ff88" font-family="monospace" font-size="12" font-weight="bold">15.0</text>
+<text x="20" y="88" fill="#777" font-family="monospace" font-size="10">CLEAN — No significant censorship detected</text>
+<text x="20" y="120" fill="#8844ff" font-family="monospace" font-size="11">EIGENVALUE SPECTRUM</text>
+<text x="20" y="170" fill="#8844ff" font-family="monospace" font-size="11">THEOREMS</text>
+<text x="20" y="188" fill="#ccc" font-family="monospace" font-size="10">Φ = 0.000000</text>
+<text x="20" y="204" fill="#ccc" font-family="monospace" font-size="10">η* = 0.000000</text>
+<text x="20" y="220" fill="#ccc" font-family="monospace" font-size="10">37% = 0.000000</text>
+<text x="600.0" y="790" fill="#333" font-family="monospace" font-size="8" text-anchor="middle">⛓ 8b2d3dabb0d5f2c2 · EVEZ-OS Speedrun</text>
+</svg>

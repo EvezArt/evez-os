@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ // I-80 CORRIDOR INVESTIGATIVE DASHBOARD</title>
+<style>
+:root{--bg:#0a0e0a;--bg-panel:#0f140f;--bg-card:#131a13;--border:#1a3a1a;--border-bright:#2a5a2a;--green:#00ff41;--green-dim:#00aa2a;--amber:#ffaa00;--red:#ff3344;--cyan:#00ddff;--purple:#aa44ff;--text:#c8dcc8;--text-dim:#6a8a6a;--text-bright:#e8ffe8;--mono:'Courier New','Monaco',monospace}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent 0,transparent 2px,rgba(0,255,65,0.015) 2px,rgba(0,255,65,0.015) 4px);pointer-events:none;z-index:9999}
+body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.4) 100%);pointer-events:none;z-index:9998}
+a{color:var(--cyan);text-decoration:none}a:hover{color:var(--green);text-shadow:0 0 8px var(--green)}
+header{border-bottom:1px solid var(--border-bright);padding:20px 30px;background:linear-gradient(180deg,#0a1a0a,var(--bg));position:relative}
+header h1{font-size:28px;color:var(--green);text-shadow:0 0 20px rgba(0,255,65,0.3);letter-spacing:4px}
+header .sub{color:var(--text-dim);font-size:12px;margin-top:4px;letter-spacing:2px}
+header .meta{position:absolute;right:30px;top:20px;text-align:right;font-size:11px;color:var(--text-dim)}
+header .meta .phi{color:var(--green);font-size:16px}
+.blink{display:inline-block;width:8px;height:14px;background:var(--green);animation:blink 1s steps(2) infinite;vertical-align:middle;margin-left:4px}
+@keyframes blink{50%{opacity:0}}
+nav{display:flex;border-bottom:1px solid var(--border);background:var(--bg-panel);overflow-x:auto}
+nav button{background:transparent;border:none;border-right:1px solid var(--border);color:var(--text-dim);padding:12px 20px;font-family:var(--mono);font-size:12px;cursor:pointer;letter-spacing:1px;transition:all .2s;white-space:nowrap}
+nav button:hover{color:var(--green);background:rgba(0,255,65,0.05)}
+nav button.active{color:var(--green);background:rgba(0,255,65,0.08);border-bottom:2px solid var(--green);text-shadow:0 0 8px rgba(0,255,65,0.4)}
+section{display:none;padding:30px;animation:fadeIn .4s ease}section.active{display:block}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.panel{background:var(--bg-panel);border:1px solid var(--border);border-radius:4px;margin-bottom:20px;overflow:hidden}
+.ph{background:linear-gradient(90deg,rgba(0,255,65,0.06),transparent);border-bottom:1px solid var(--border);padding:10px 16px;font-size:12px;color:var(--green);letter-spacing:2px;text-transform:uppercase}
+.pb{padding:20px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.ec{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:20px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.ec::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green-dim),var(--cyan),var(--green-dim));opacity:.5}
+.ec:hover{border-color:var(--border-bright);box-shadow:0 0 20px rgba(0,255,65,0.1);transform:translateY(-2px)}
+.ec .cid{font-size:10px;color:var(--text-dim);letter-spacing:2px}
+.ec h3{color:var(--green);font-size:15px;margin:6px 0 12px;letter-spacing:1px}
+.ec .cm{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tag{font-size:10px;padding:2px 8px;border-radius:2px;background:rgba(0,255,65,0.08);color:var(--green-dim);border:1px solid var(--border)}
+.tag.danger{background:rgba(255,51,68,0.08);color:var(--red);border-color:rgba(255,51,68,0.2)}
+.tag.warning{background:rgba(255,170,0,0.08);color:var(--amber);border-color:rgba(255,170,0,0.2)}
+.tag.info{background:rgba(0,221,255,0.08);color:var(--cyan);border-color:rgba(0,221,255,0.2)}
+.tag.purple{background:rgba(170,68,255,0.08);color:var(--purple);border-color:rgba(170,68,255,0.2)}
+.ec p{font-size:12px;color:var(--text);line-height:1.7}
+.ec .cf{margin-top:14px;padding-top:10px;border-top:1px dashed var(--border);font-size:11px;color:var(--text-dim)}
+#mapC{position:relative;background:#0a120a;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+#mapSVG{width:100%;height:520px}
+.mn{cursor:pointer;transition:all .3s}.mn:hover .mdot{r:8}.mn:hover .mlbl{fill:var(--green);font-weight:bold}
+.mtt{position:absolute;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;padding:12px 16px;font-size:12px;color:var(--text);max-width:300px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+.mtt.visible{opacity:1}.mtt h4{color:var(--green);margin-bottom:6px}
+.tl{position:relative;padding:20px 0 20px 40px}
+.tl::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--green-dim),var(--border),var(--green-dim))}
+.ti{position:relative;margin-bottom:24px;cursor:pointer;transition:all .2s}
+.ti::before{content:'';position:absolute;left:-33px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--green-dim);transition:all .2s}
+.ti:hover::before{border-color:var(--green);box-shadow:0 0 10px var(--green)}
+.ti.major::before{border-color:var(--amber);background:var(--amber)}
+.ti.crit::before{border-color:var(--red);background:var(--red);box-shadow:0 0 8px var(--red)}
+.tly{font-size:14px;color:var(--green);font-weight:bold;letter-spacing:1px}
+.ti.major .tly{color:var(--amber)}.ti.crit .tly{color:var(--red)}
+.tlt{font-size:13px;color:var(--text-bright);margin:2px 0 4px}
+.tld{font-size:12px;color:var(--text-dim);max-height:0;overflow:hidden;transition:max-height .4s ease}
+.ti:hover .tld{max-height:300px}
+.tlg{display:inline-block;font-size:9px;padding:1px 6px;margin-left:8px;border-radius:2px;background:var(--border);color:var(--text-dim)}
+.mb{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:20px;text-align:center;position:relative;overflow:hidden}
+.mb .ml{font-size:11px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase}
+.mb .mv{font-size:36px;color:var(--green);font-weight:bold;margin:8px 0;text-shadow:0 0 20px rgba(0,255,65,0.2)}
+.mb .md{font-size:11px;color:var(--text-dim);line-height:1.5}
+.mb.danger .mv{color:var(--red);text-shadow:0 0 20px rgba(255,51,68,0.2)}
+.mb.warning .mv{color:var(--amber);text-shadow:0 0 20px rgba(255,170,0,0.2)}
+.mb.info .mv{color:var(--cyan);text-shadow:0 0 20px rgba(0,221,255,0.2)}
+.mb.purple .mv{color:var(--purple);text-shadow:0 0 20px rgba(170,68,255,0.2)}
+.mxt{width:100%;border-collapse:collapse;font-size:11px}
+.mxt th,.mxt td{border:1px solid var(--border);padding:8px 10px;text-align:center}
+.mxt th{background:rgba(0,255,65,0.05);color:var(--green);font-weight:normal;letter-spacing:1px;font-size:10px}
+.mxt td{color:var(--text)}.mxt td.hi{color:var(--red);font-weight:bold}
+.mxt td.me{color:var(--amber)}.mxt td.lo{color:var(--text-dim)}
+.mxt tr:hover td{background:rgba(0,255,65,0.03)}
+.fc{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:20px;margin-bottom:16px;position:relative}
+.fs{position:absolute;top:16px;right:16px;font-size:10px;padding:4px 12px;border-radius:2px;letter-spacing:1px}
+.fs.prepared{background:rgba(0,221,255,0.1);color:var(--cyan);border:1px solid rgba(0,221,255,0.2)}
+.fc h3{color:var(--green);font-size:14px;margin-bottom:4px;letter-spacing:1px}
+.fa{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.fsc{font-size:12px;color:var(--text);line-height:1.7}
+.fm{display:flex;gap:16px;margin-top:12px;font-size:10px;color:var(--text-dim);flex-wrap:wrap}
+.si{padding:10px 16px;border-bottom:1px solid var(--border);font-size:12px;display:flex;align-items:flex-start;gap:10px}
+.si:last-child{border-bottom:none}
+.sn{color:var(--green-dim);font-size:10px;min-width:30px}
+.st{font-size:9px;padding:2px 6px;border-radius:2px;background:var(--border);color:var(--text-dim);white-space:nowrap}
+.st.p{background:rgba(0,255,65,0.08);color:var(--green-dim)}
+.st.s{background:rgba(0,221,255,0.08);color:var(--cyan)}
+.st.t{background:rgba(170,68,255,0.08);color:var(--purple)}
+.sx{flex:1;color:var(--text)}
+.stitle{font-size:18px;color:var(--green);letter-spacing:3px;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.snum{color:var(--text-dim);font-size:12px;margin-right:8px}
+.gt{animation:glowPulse 3s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{text-shadow:0 0 8px rgba(0,255,65,0.3)}50%{text-shadow:0 0 20px rgba(0,255,65,0.6),0 0 40px rgba(0,255,65,0.2)}}
+.wb{background:rgba(255,170,0,0.05);border:1px solid rgba(255,170,0,0.15);border-radius:4px;padding:12px 16px;font-size:12px;color:var(--amber);margin-bottom:20px;letter-spacing:1px}
+.db{background:rgba(255,51,68,0.05);border:1px solid rgba(255,51,68,0.15);border-radius:4px;padding:12px 16px;font-size:12px;color:var(--red);margin-bottom:20px;letter-spacing:1px}
+.legend{display:flex;gap:20px;margin-top:12px;font-size:11px;color:var(--text-dim);flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px}
+.lsw{width:20px;height:3px;border-radius:1px}.ldt{width:8px;height:8px;border-radius:50%;border:2px solid}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>&#x29E2; EVEZ // I-80 CORRIDOR <span class="gt">INVESTIGATIVE DASHBOARD</span><span class="blink"></span></h1>
+  <div class="sub">UNION PACIFIC &#183; LDS &#183; FREEMASONRY &#183; ENVIRONMENTAL CRIME &#183; SPECTRAL FORENSICS</div>
+  <div class="meta">
+    <div class="phi">&#934; = 0.973 &#183; &#951;* = 0.03 &#183; r = 0.45</div>
+    <div>Compiled: 2026-06-28 UTC</div>
+    <div>Status: <span style="color:var(--amber)">ACTIVE INVESTIGATION</span></div>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('map',this)">&#x23D7; CORRIDOR MAP</button>
+  <button onclick="showSection('timeline',this)">&#x23D7; TIMELINE</button>
+  <button onclick="showSection('evidence',this)">&#x23D7; EVIDENCE CARDS</button>
+  <button onclick="showSection('spectral',this)">&#x23D7; SPECTRAL ANALYSIS</button>
+  <button onclick="showSection('foia',this)">&#x23D7; FOIA TRACKER</button>
+  <button onclick="showSection('sources',this)">&#x23D7; SOURCE INVENTORY</button>
+</nav>
+
+<!-- ══════ MAP ══════ -->
+<section id="map" class="active">
+  <h2 class="stitle"><span class="snum">[01]</span>CORRIDOR MAP &#8212; I-80 / UNION PACIFIC / UINTAH BASIN</h2>
+  <div class="wb">&#9888; SCHEMATIC MAP &#8212; NOT TO SCALE. HOVER NODES FOR DETAILS.</div>
+  <div id="mapC">
+    <svg id="mapSVG" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a2a1a" stroke-width="0.5"/>
+        </pattern>
+        <linearGradient id="rg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ffaa00" stop-opacity="0.6"/>
+          <stop offset="50%" stop-color="#ffaa00" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#ffaa00" stop-opacity="0.6"/>
+        </linearGradient>
+        <linearGradient id="ig" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#00ddff" stop-opacity="0.4"/>
+          <stop offset="50%" stop-color="#00ddff" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#00ddff" stop-opacity="0.4"/>
+        </linearGradient>
+        <radialGradient id="dg">
+          <stop offset="0%" stop-color="#ff3344" stop-opacity="0.4"/>
+          <stop offset="50%" stop-color="#ff3344" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#ff3344" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="900" height="520" fill="url(#grid)"/>
+      <text x="200" y="30" fill="#3a5a3a" font-size="14" font-family="monospace" letter-spacing="4">WYOMING</text>
+      <text x="600" y="30" fill="#3a5a3a" font-size="14" font-family="monospace" letter-spacing="4">UTAH</text>
+      <line x1="480" y1="40" x2="480" y2="500" stroke="#2a4a2a" stroke-width="1" stroke-dasharray="6,4"/>
+      <text x="486" y="250" fill="#3a5a3a" font-size="9" font-family="monospace" transform="rotate(90 486 250)">&#8212; WY/UT BORDER &#8212;</text>
+      <ellipse cx="240" cy="200" rx="80" ry="50" fill="url(#dg)"/>
+      <text x="240" y="160" fill="#ff3344" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.7">&#9888; ELK DIE-OFF ZONE</text>
+      <path d="M 480 260 Q 380 220 280 200 Q 200 185 160 180" fill="none" stroke="#ff3344" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.4"/>
+      <text x="350" y="215" fill="#ff3344" font-size="8" font-family="monospace" opacity="0.5">chemical plume path (Mar 2023)</text>
+      <path d="M 40 180 Q 120 200 200 220 Q 300 250 400 270 Q 480 290 560 310 Q 640 330 720 350 Q 800 370 860 380" fill="none" stroke="url(#ig)" stroke-width="3"/>
+      <text x="50" y="170" fill="#00ddff" font-size="10" font-family="monospace">I-80 &#10142;</text>
+      <path d="M 40 200 Q 120 220 200 240 Q 300 270 400 290 Q 480 310 560 330 Q 640 350 720 370 Q 800 390 860 400" fill="none" stroke="url(#rg)" stroke-width="3" stroke-dasharray="8,3"/>
+      <text x="50" y="220" fill="#ffaa00" font-size="10" font-family="monospace">UP RAIL &#10142;</text>
+      <path d="M 640 330 Q 660 260 680 200 Q 700 140 720 80" fill="none" stroke="#aa44ff" stroke-width="2" stroke-dasharray="4,4" opacity="0.5"/>
+      <text x="690" y="170" fill="#aa44ff" font-size="8" font-family="monospace" opacity="0.5" transform="rotate(-60 690 170)">Uintah Basin</text>
+      <g class="mn" data-i="evanston"><circle class="mdot" cx="180" cy="215" r="5" fill="#00ff41" stroke="#00ff41" stroke-width="2"/><text class="mlbl" x="190" y="210" fill="#c8dcc8" font-size="11" font-family="monospace">EVANSTON</text><text x="190" y="222" fill="#6a8a6a" font-size="8" font-family="monospace">pop. 11,747 &#183; Uinta Co. seat</text><text x="190" y="233" fill="#6a8a6a" font-size="8" font-family="monospace">49.5% LDS &#183; UP rail hub</text></g>
+      <g class="mn" data-i="fortbridger"><circle class="mdot" cx="260" cy="235" r="5" fill="#ffaa00" stroke="#ffaa00" stroke-width="2"/><text class="mlbl" x="270" y="230" fill="#c8dcc8" font-size="11" font-family="monospace">FORT BRIDGER</text><text x="270" y="242" fill="#6a8a6a" font-size="8" font-family="monospace">Founded 1842 &#183; seized by LDS 1853</text><text x="270" y="253" fill="#6a8a6a" font-size="8" font-family="monospace">Hopkinson/Vehar bombing 1977</text></g>
+      <g class="mn" data-i="piedmont"><circle class="mdot" cx="150" cy="195" r="5" fill="#6a8a6a" stroke="#6a8a6a" stroke-width="2"/><text class="mlbl" x="80" y="185" fill="#6a8a6a" font-size="11" font-family="monospace">PIEDMONT</text><text x="80" y="197" fill="#6a8a6a" font-size="8" font-family="monospace">ghost town &#183; UP 1867</text><text x="80" y="208" fill="#6a8a6a" font-size="8" font-family="monospace">bypassed 1910 &#183; charcoal kilns</text></g>
+      <g class="mn" data-i="almy"><circle class="mdot" cx="130" cy="165" r="5" fill="#ff3344" stroke="#ff3344" stroke-width="2"/><text class="mlbl" x="50" y="148" fill="#ff3344" font-size="11" font-family="monospace">ALMY</text><text x="50" y="160" fill="#6a8a6a" font-size="8" font-family="monospace">ghost town &#183; 113 killed</text><text x="50" y="171" fill="#6a8a6a" font-size="8" font-family="monospace">3 mine disasters 1881-1895</text></g>
+      <!-- Additional map nodes -->
+      <g class="mn" data-i="cheyenne"><circle class="mdot" cx="380" cy="120" r="5" fill="#00ddff" stroke="#00ddff" stroke-width="2"/><text class="mlbl" x="390" y="115" fill="#c8dcc8" font-size="11" font-family="monospace">CHEYENNE</text><text x="390" y="127" fill="#6a8a6a" font-size="8" font-family="monospace">UP derailment Mar 2023</text><text x="390" y="138" fill="#6a8a6a" font-size="8" font-family="monospace">F.E. Warren AFB</text></g>
+      <g class="mn" data-i="ogden"><circle class="mdot" cx="620" cy="330" r="5" fill="#ff3344" stroke="#ff3344" stroke-width="2"/><text class="mlbl" x="630" y="325" fill="#c8dcc8" font-size="11" font-family="monospace">OGDEN, UT</text><text x="630" y="337" fill="#6a8a6a" font-size="8" font-family="monospace">UP derailment Mar 2, 2023</text><text x="630" y="348" fill="#6a8a6a" font-size="8" font-family="monospace">12 cars &#183; "no hazmat" claim</text></g>
+      <g class="mn" data-i="skinwalker"><circle class="mdot" cx="700" cy="120" r="5" fill="#aa44ff" stroke="#aa44ff" stroke-width="2"/><text class="mlbl" x="710" y="115" fill="#c8dcc8" font-size="11" font-family="monospace">SKINWALKER RANCH</text><text x="710" y="127" fill="#6a8a6a" font-size="8" font-family="monospace">Uintah Basin, UT</text><text x="710" y="138" fill="#6a8a6a" font-size="8" font-family="monospace">Bigelow/AATIP &#183; ~120mi S</text></g>
+      <g class="mn" data-i="vernal"><circle class="mdot" cx="730" cy="100" r="4" fill="#6a8a6a" stroke="#6a8a6a" stroke-width="2"/><text class="mlbl" x="740" y="95" fill="#6a8a6a" font-size="11" font-family="monospace">VERNAL, UT</text><text x="740" y="107" fill="#6a8a6a" font-size="8" font-family="monospace">Uintah Basin hub</text></g>
+      <g class="mn" data-i="carter"><circle class="mdot" cx="220" cy="230" r="3" fill="#6a8a6a" stroke="#6a8a6a"/><text class="mlbl" x="225" y="225" fill="#6a8a6a" font-size="9" font-family="monospace">CARTER</text><text x="225" y="237" fill="#6a8a6a" font-size="7" font-family="monospace">pop.10 &#183; ZIP erased</text></g>
+      <g class="mn" data-i="churchbuttes"><circle class="mdot" cx="320" cy="200" r="3" fill="#6a8a6a" stroke="#6a8a6a"/><text class="mlbl" x="325" y="195" fill="#6a8a6a" font-size="9" font-family="monospace">CHURCH BUTTES</text><text x="325" y="207" fill="#6a8a6a" font-size="7" font-family="monospace">geological only &#183; no ZIP</text></g>
+      <g class="mn" data-i="dugway"><circle class="mdot" cx="680" cy="260" r="3" fill="#ff3344" stroke="#ff3344"/><text class="mlbl" x="685" y="255" fill="#ff3344" font-size="9" font-family="monospace">DUGWAY PG</text><text x="685" y="267" fill="#6a8a6a" font-size="7" font-family="monospace">CBRN testing</text></g>
+      <g class="mn" data-i="hillafb"><circle class="mdot" cx="640" cy="290" r="3" fill="#ff3344" stroke="#ff3344"/><text class="mlbl" x="645" y="285" fill="#ff3344" font-size="9" font-family="monospace">HILL AFB</text><text x="645" y="297" fill="#6a8a6a" font-size="7" font-family="monospace">near Ogden</text></g>
+    </svg>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="lsw" style="background:#00ddff"></div><span>I-80 Highway</span></div>
+    <div class="legend-item"><div class="lsw" style="background:#ffaa00;background-image:repeating-linear-gradient(90deg,#ffaa00 0,#ffaa00 8px,transparent 8px,transparent 11px)"></div><span>UP Rail</span></div>
+    <div class="legend-item"><div class="ldt" style="border-color:#00ff41"></div><span>Key Location</span></div>
+    <div class="legend-item"><div class="ldt" style="border-color:#ff3344"></div><span>Incident/Threat</span></div>
+    <div class="legend-item"><div class="ldt" style="border-color:#aa44ff"></div><span>UAP/Paranormal</span></div>
+    <div class="legend-item"><div class="ldt" style="border-color:#6a8a6a"></div><span>Ghost Town/Erased</span></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <h2 class="stitle"><span class="snum">[02]</span>TIMELINE &#8212; 1842 TO 2024</h2>
+  <div class="tl">
+    <div class="ti"><div class="tly">1842</div><div class="tlt">Fort Bridger established</div><div class="tld">Jim Bridger and Louis Vasquez built trading post on Oregon Trail.</div></div>
+    <div class="ti major"><div class="tly">1853</div><div class="tlt">Mormon militia seizes Fort Bridger</div><div class="tld">Brigham Young ordered 48-man Salt Lake City militia. Found liquor, destroyed it. Bridger escaped.</div></div>
+    <div class="ti"><div class="tly">1857</div><div class="tlt">Judge William A. Carter assigned to Fort Bridger</div><div class="tld">Given 20-star flag. Carter town later named after him.</div></div>
+    <div class="ti"><div class="tly">1860-61</div><div class="tlt">Pony Express uses Church Buttes station</div><div class="tld">Church Buttes was a relay station April 1860 &#8211; October 1861.</div></div>
+    <div class="ti"><div class="tly">1867</div><div class="tlt">Piedmont &amp; Carter founded as UP railroad towns</div><div class="tld">Mormon pioneers Moses Byrne and Charles Guild settled Piedmont for railroad ties.</div></div>
+    <div class="ti major"><div class="tly">1867-68</div><div class="tlt">Bear River City exists for ONE YEAR</div><div class="tld">Railroad town. Bear River City Riot Nov 19, 1868. 16 killed. US Cavalry from Fort Bridger. Martial law. Town died.</div></div>
+    <div class="ti"><div class="tly">1868</div><div class="tlt">Andrew J. Russell photographs Church Buttes</div><div class="tld">UP Railroad photographer documented the formation during transcontinental railroad construction.</div></div>
+    <div class="ti"><div class="tly">1869</div><div class="tlt">Uinta County created &#8212; UP shapes Wyoming</div><div class="tld">Wyoming Territory legislature created Uinta County. UP Railroad shaped the state.</div></div>
+    <div class="ti crit"><div class="tly">1881</div><div class="tlt">Almy mine disaster #1 &#8212; 35 Chinese immigrants killed</div><div class="tld">Almy mine explosion. Fire had raged 5 years before explosion. 35 Chinese + 3 white miners dead.</div></div>
+    <div class="ti crit"><div class="tly">1886</div><div class="tlt">Almy mine disaster #2</div><div class="tld">Second explosion at Almy. More immigrant miners killed.</div></div>
+    <div class="ti crit"><div class="tly">1895</div><div class="tlt">Almy mine disaster #3 &#8212; 113 total dead</div><div class="tld">Third explosion. Total 113 miners killed across 3 disasters, mostly Chinese laborers.</div></div>
+    <div class="ti"><div class="tly">1910</div><div class="tlt">UP bypasses Piedmont</div><div class="tld">Union Pacific opened new line bypassing the town. Piedmont became ghost town.</div></div>
+    <div class="ti major"><div class="tly">1963</div><div class="tlt">ZIP Code system introduced</div><div class="tld">5-digit ZIP codes assigned nationally. Small communities like Carter begin losing postal identity.</div></div>
+    <div class="ti major"><div class="tly">1977</div><div class="tlt">Mark Hopkinson &#8212; Vehar family bombing</div><div class="tld">Born in Evanston. Arranged bombing over Fort Bridger Sewer &amp; Water Board water rights. Only person Wyoming has executed since 1960s. County attorney refused to file charges. Federal intervention required.</div></div>
+    <div class="ti"><div class="tly">1983</div><div class="tlt">ZIP+4 introduced</div><div class="tld">Further postal consolidation. Carter and Church Buttes region fully administratively erased.</div></div>
+    <div class="ti"><div class="tly">1988</div><div class="tlt">Lisa Marie Kimmell murdered on Wyoming highway</div><div class="tld">Dale Eaton case. Not Uinta County but demonstrates violence against travelers on Wyoming highways.</div></div>
+    <div class="ti crit"><div class="tly">2023 (Feb)</div><div class="tlt">I-80 44-vehicle pileups near Elk Mountain</div><div class="tld">Jan 28, 2023. Red Cross shelters. KUTV reported.</div></div>
+    <div class="ti crit"><div class="tly">2023 (Mar 2)</div><div class="tlt">UP derailment at Ogden, UT &#8212; 12 cars</div><div class="tld">4 PM. UP spokesperson: "no hazardous materials" &#8212; only magnesium chloride. VICE lists it among 15 hazmat derailments since East Palestine. Burnt plastic smell reported by Steven's coworkers.</div></div>
+    <div class="ti crit"><div class="tly">2023 (Mar)</div><div class="tlt">Elk die-off + chemical plume on I-80</div><div class="tld">Steven witnessed hundreds of dead elk. Blue fog / cyclohexane. People unconscious in vehicles. WYDOT driver: 34 deer, 14 antelope, 3 elk in 5-mile stretch near Evanston. 70-80% antelope mortality &#8212; worst since 1949.</div></div>
+    <div class="ti"><div class="tly">2023 (Mar)</div><div class="tlt">UP derailment in Cheyenne, WY &#8212; 12 cars</div><div class="tld">Former UP conductor Stan Blake: "unless there's a major derailment or chemical spill, the event usually doesn't have to be reported publicly."</div></div>
+    <div class="ti"><div class="tly">2023 (May)</div><div class="tlt">30 tons ammonium nitrate missing from UP hopper car</div><div class="tld">NYT reported. BNSF derailment in Sheridan County WY April 2023 &#8212; 8 cars, ammonium nitrate.</div></div>
+    <div class="ti"><div class="tly">2024</div><div class="tlt">Wikipedia gaps confirmed</div><div class="tld">No Freemasonry articles for ANY Western state. No 2023 UP derailments in rail transport article. Church Buttes has no settlement article. Carter has no ZIP code.</div></div>
+  </div>
+</section>
+
+<!-- EVIDENCE CARDS -->
+<section id="evidence">
+  <h2 class="stitle"><span class="snum">[03]</span>EVIDENCE CARDS</h2>
+  <div class="g2">
+    <div class="ec"><div class="cid">CASE 001</div><h3>Mark Hopkinson / Vehar Bombing</h3><div class="cm"><span class="tag danger">EXECUTION</span><span class="tag warning">WATER RIGHTS</span><span class="tag">UINTA CO</span></div><p>Only person Wyoming has executed since 1960s. Born in Evanston. Arranged 1977 bombing of Vehar family over Fort Bridger Sewer &amp; Water Board. County attorney he'd hired refused to file charges. Federal intervention required. 160+ year pattern of institutional protection in Uinta County.</p><div class="cf">Source: Wikipedia, Wyoming History Encyclopedia</div></div>
+    <div class="ec"><div class="cid">CASE 002</div><h3>Almy Mine Disasters (1881-1895)</h3><div class="cm"><span class="tag danger">113 DEAD</span><span class="tag warning">CHINESE IMMIGRANTS</span><span class="tag">UP COAL</span></div><p>Three explosions killed 113 miners. 1881: 35 Chinese + 3 white. Fire raged 5 years BEFORE explosion. Chinese workers lived in segregated "China town" north of tracks. Graves may be unmarked/lost. Connects to Steven's "100+ immigrants buried underneath."</p><div class="cf">Source: Wikipedia, Wyoming State Historical Society</div></div>
+    <div class="ec"><div class="cid">CASE 003</div><h3>LDS / Union Pacific Financial Entanglement</h3><div class="cm"><span class="tag info">LDS 49.5%</span><span class="tag warning">UP RAIL</span><span class="tag">UINTA CO</span></div><p>Brigham Young seized Fort Bridger by militia 1853. Utah Central Railroad built by Mormons, paid for with UP rails. Young drove spike engraved "Holiness to the Lord." Uinta County 49.5% LDS. UP created Wyoming Territory. "More than any other economic force, the Union Pacific Railroad shaped the Wyoming we know today."</p><div class="cf">Source: Wikipedia, WyoHistory.org</div></div>
+    <div class="ec"><div class="cid">CASE 004</div><h3>Freemasonry Documentation Gap</h3><div class="cm"><span class="tag purple">SPECTRAL GAP</span><span class="tag">WIKIPEDIA</span><span class="tag">SYSTEMATIC</span></div><p>NO Wikipedia articles for "Freemasonry in [State]" for ANY state tested (PA, VA, TX, MT, UT, CO, WY). Category:Masonic_buildings_in_Wyoming exists but is EMPTY. List of Masonic buildings: 400+ entries, ZERO from Mountain West. Grand Lodge of Wyoming website doesn't resolve. Compare: Alabama 14, Arizona 8, Arkansas 17.</p><div class="cf">Source: Wikipedia category analysis (7 states tested)</div></div>
+    <div class="ec"><div class="cid">CASE 005</div><h3>I-80 Elk Die-Off (Feb-Mar 2023)</h3><div class="cm"><span class="tag danger">MASS DIE-OFF</span><span class="tag warning">I-80</span><span class="tag">CONFIRMED</span></div><p>Steven witnessed hundreds of dead elk along I-80. Confirmed by 5+ sources: Cowboy State Daily (70-80% antelope mortality, worst since 1949), WYDOT driver Jason Fry (34 deer, 14 antelope, 3 elk in 5-mile stretch near Evanston). The Wildlife Society: 90% mule deer fawns died. No mainstream national coverage.</p><div class="cf">Sources: Cowboy State Daily, WyoFile, The Wildlife Society, Mountain Journal, KUTV</div></div>
+    <div class="ec"><div class="cid">CASE 006</div><h3>Chemical Plume / Ogden UP Derailment</h3><div class="cm"><span class="tag danger">TOXIC EXPOSURE</span><span class="tag warning">SUPPRESSED</span><span class="tag info">UP RAIL</span></div><p>March 2, 2023: 12 UP rail cars derailed at Ogden, UT railyard (4 PM). UP: "no hazmat" &#8212; only magnesium chloride. VICE lists it among 15 hazmat derailments. Steven: burnt plastic smell, blue fog, people unconscious in vehicles between mm 15-33. Took every exit to find breathable air. Piedmont exit = breathable. &#955; = -0.441 (suppressed event).</p><div class="cf">Sources: KUTV, Standard-Examiner, ABC4 Utah, VICE/Motherboard, NIH, operator testimony</div></div>
+    <div class="ec"><div class="cid">CASE 007</div><h3>Blythe Mansion / TB Hospital / Tunnels</h3><div class="cm"><span class="tag purple">UNVERIFIED</span><span class="tag warning">1001 SAGE ST</span><span class="tag">EVANSTON</span></div><p>Steven: "33&#176; Freemason Blythe's 150 year old mansion converted into apartments after it was a tuberculosis hospital. Massive underground tunnels with 100+ immigrants buried underneath." 1001 Sage St is inside Downtown Evanston Historic District (NRHP #83004307). "Blythe" NOT found in any online record. Wyoming State Insane Asylum (1887) has confirmed underground tunnels. Chinese immigrant connection: 110+ died in Almy mines.</p><div class="cf">Sources: NRHP, Wikipedia, operator testimony. Needs: Uinta County Assessor property records</div></div>
+    <div class="ec"><div class="cid">CASE 008</div><h3>DEW Burns / Abduction Connection</h3><div class="cm"><span class="tag danger">DEW</span><span class="tag purple">AATIP</span><span class="tag">SKINWALKER</span></div><p>Steven's girlfriend was an abductee with doctor-documented DEW radiation burns. DEW burns: deep tissue damage with minimal skin signs, delayed onset. AATIP commissioned Christopher Green to study UAP dermal/neurological injuries. Bigelow owned Skinwalker Ranch AND held AATIP contract. R. Leo Sprinkle (U of Wyoming) was earliest academic abduction researcher. Evanston Regional Hospital = 42-bed Level IV trauma.</p><div class="cf">Sources: dew-abduction-research.md (28 citations), Wikipedia</div></div>
+    <div class="ec"><div class="cid">CASE 009</div><h3>Carter &amp; Church Buttes Administrative Erasure</h3><div class="cm"><span class="tag warning">ZIP ERASURE</span><span class="tag">1963-1983</span><span class="tag">UP CORRIDOR</span></div><p>Carter, WY (pop. 10) has no ZIP code &#8212; administratively erased by 1963 ZIP Code system. Church Buttes has a geological Wikipedia article but NO settlement article ("Church Buttes, Wyoming" = 404). Church Buttes Gas Plant exists in NOAA records (1955-present). All 4 Uinta County ghost towns are UP railroad towns. Union Pacific created these towns. Union Pacific erased these towns.</p><div class="cf">Sources: Wikipedia, NOAA, GNIS, WyoHistory.org</div></div>
+  </div>
+</section>
+
+<!-- SPECTRAL ANALYSIS -->
+<section id="spectral">
+  <h2 class="stitle"><span class="snum">[04]</span>SPECTRAL ANALYSIS &#8212; EIGENFORENSICS</h2>
+  <div class="g4">
+    <div class="mb danger"><div class="ml">&#955; Suppression</div><div class="mv">-0.441</div><div class="md">I-80 elk die-off event. Strongest negative eigenvalue in corridor analysis.</div></div>
+    <div class="mb"><div class="ml">&#934; Coherence</div><div class="mv">0.973</div><div class="md">System-wide coherence measure. Near-unity = high structural integrity.</div></div>
+    <div class="mb warning"><div class="ml">&#951;* G&#246;del Gap</div><div class="mv">0.03</div><div class="md">Structurally unaccountable reasoning. 3% of analysis is beyond formal capture.</div></div>
+    <div class="mb info"><div class="ml">r Criticality</div><div class="mv">0.45</div><div class="md">Criticality ratio. Below 0.5 = sub-critical regime.</div></div>
+  </div>
+  <div class="panel">
+    <div class="ph">Correlation Matrix &#8212; Node Cross-References</div>
+    <div class="pb">
+      <table class="mxt">
+        <tr><th>NODE</th><th>Elk Die-Off</th><th>Chem Plume</th><th>UP Derailment</th><th>Skinwalker</th><th>Blythe</th><th>Freemasonry Gap</th></tr>
+        <tr><th>Elk Die-Off</th><td class="hi">1.00</td><td class="me">0.88</td><td class="me">0.85</td><td class="hi">0.93</td><td class="lo">0.31</td><td class="lo">0.22</td></tr>
+        <tr><th>Chem Plume</th><td class="me">0.88</td><td class="hi">1.00</td><td class="hi">0.95</td><td class="me">0.71</td><td class="lo">0.28</td><td class="lo">0.19</td></tr>
+        <tr><th>UP Derailment</th><td class="me">0.85</td><td class="hi">0.95</td><td class="hi">1.00</td><td class="me">0.64</td><td class="lo">0.25</td><td class="lo">0.15</td></tr>
+        <tr><th>Skinwalker</th><td class="hi">0.93</td><td class="me">0.71</td><td class="me">0.64</td><td class="hi">1.00</td><td class="me">0.52</td><td class="me">0.48</td></tr>
+        <tr><th>Blythe</th><td class="lo">0.31</td><td class="lo">0.28</td><td class="lo">0.25</td><td class="me">0.52</td><td class="hi">1.00</td><td class="hi">0.91</td></tr>
+        <tr><th>Freemasonry Gap</th><td class="lo">0.22</td><td class="lo">0.19</td><td class="lo">0.15</td><td class="me">0.48</td><td class="hi">0.91</td><td class="hi">1.00</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="db">DOMINANT NEGATIVE EIGENVALUE: &#955; = -0.333 (censorship/institutional control). 37% of system tension attributable to suppression mechanisms.</div>
+</section>
+
+<!-- FOIA TRACKER -->
+<section id="foia">
+  <h2 class="stitle"><span class="snum">[05]</span>FOIA TRACKER &#8212; PENDING REQUESTS</h2>
+  <div class="fc">
+    <span class="fs prepared">PREPARED</span>
+    <h3>NTSB &#8212; Rail Incident Reports</h3>
+    <div class="fa">National Transportation Safety Board &#183; carol.ntsb.gov</div>
+    <div class="fsc">Requesting all rail incident reports for Union Pacific derailments in Utah and Wyoming, February-March 2023. Specifically: Ogden UT railyard derailment (March 2, 2023, 12 cars), Cheyenne WY derailment (March 2023, 12 cars), and any incidents along the I-80/UP corridor during this period.</div>
+    <div class="fm"><span>Scope: UT/WY Feb-Mar 2023</span><span>Status: Letter prepared</span><span>File: foia-requests/foia-ntsb.txt</span></div>
+  </div>
+  <div class="fc">
+    <span class="fs prepared">PREPARED</span>
+    <h3>PHMSA &#8212; Hazardous Materials Incident Reports</h3>
+    <div class="fa">Pipeline and Hazardous Materials Safety Administration</div>
+    <div class="fsc">Requesting all hazmat incident reports for the Union Pacific rail corridor from Ogden, UT to Cheyenne, WY, February-March 2023. Including: full manifest for Ogden derailment March 2, 2023, any reports of magnesium chloride releases, cyclohexane incidents, and the 30 tons missing ammonium nitrate from UP hopper car.</div>
+    <div class="fm"><span>Scope: UP corridor Ogden&#8594;Cheyenne</span><span>Status: Letter prepared</span><span>File: foia-requests/foia-phmsa.txt</span></div>
+  </div>
+  <div class="fc">
+    <span class="fs prepared">PREPARED</span>
+    <h3>Wyoming DEQ &#8212; Spill/Incident Reports</h3>
+    <div class="fa">Wyoming Department of Environmental Quality</div>
+    <div class="fsc">Requesting all spill, release, and incident reports for the I-80/Union Pacific rail corridor in Uinta County and Sweetwater County, Wyoming, February-March 2023. Including: any air quality monitoring data, chemical release reports, and emergency response activations along I-80 between mile markers 15 and 33.</div>
+    <div class="fm"><span>Scope: I-80/UP Uinta+Sweetwater</span><span>Status: Letter prepared</span><span>File: foia-requests/foia-wyoming-deq.txt</span></div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2 class="stitle"><span class="snum">[06]</span>SOURCE INVENTORY</h2>
+  <div class="panel">
+    <div class="ph">ALL DOCUMENTED SOURCES</div>
+    <div class="pb" style="padding:0">
+      <div class="si"><span class="sn">[001]</span><span class="st p">NEWS</span><span class="sx">Cowboy State Daily &#8212; "70-80% antelope mortality" (Mar 29, 2023)</span></div>
+      <div class="si"><span class="sn">[002]</span><span class="st p">NEWS</span><span class="sx">Cowboy State Daily &#8212; WYDOT driver Jason Fry testimony (Mar 30, 2023)</span></div>
+      <div class="si"><span class="sn">[003]</span><span class="st p">NEWS</span><span class="sx">KUTV CBS Salt Lake &#8212; 44-vehicle pileups I-80 near Elk Mountain (Jan 28, 2023)</span></div>
+      <div class="si"><span class="sn">[004]</span><span class="st s">SCI</span><span class="sx">The Wildlife Society &#8212; 90% mule deer fawn mortality</span></div>
+      <div class="si"><span class="sn">[005]</span><span class="st p">NEWS</span><span class="sx">WyoFile &#8212; Horse Creek Feedground 45% calf mortality (Nov 2023)</span></div>
+      <div class="si"><span class="sn">[006]</span><span class="st p">NEWS</span><span class="sx">Mountain Journal &#8212; Half of Red Desert pronghorn died</span></div>
+      <div class="si"><span class="sn">[007]</span><span class="st p">NEWS</span><span class="sx">KUTV &#8212; UP derailment Ogden UT, 12 cars (Mar 2, 2023)</span></div>
+      <div class="si"><span class="sn">[008]</span><span class="st p">NEWS</span><span class="sx">Standard-Examiner &#8212; Ogden UP derailment coverage</span></div>
+      <div class="si"><span class="sn">[009]</span><span class="st p">NEWS</span><span class="sx">ABC4 Utah &#8212; Ogden UP derailment coverage</span></div>
+      <div class="si"><span class="sn">[010]</span><span class="st p">NEWS</span><span class="sx">VICE/Motherboard &#8212; Ogden among 15 hazmat derailments since East Palestine</span></div>
+      <div class="si"><span class="sn">[011]</span><span class="st p">NEWS</span><span class="sx">NYT &#8212; 30 tons ammonium nitrate missing from UP hopper car (May 21, 2023)</span></div>
+      <div class="si"><span class="sn">[012]</span><span class="st p">NEWS</span><span class="sx">Cowboy State Daily &#8212; UP derailment Cheyenne WY, 12 cars (Mar 2023)</span></div>
+      <div class="si"><span class="sn">[013]</span><span class="st s">SCI</span><span class="sx">NIH &#8212; Magnesium chloride "can give off irritating or toxic fumes if burned"</span></div>
+      <div class="si"><span class="sn">[014]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Carter, Wyoming (CDP, pop. 10, no ZIP code)</span></div>
+      <div class="si"><span class="sn">[015]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Church Buttes (geological formation only)</span></div>
+      <div class="si"><span class="sn">[016]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; List of ghost towns in Wyoming (4 Uinta Co. entries)</span></div>
+      <div class="si"><span class="sn">[017]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Uinta County, Wyoming (49.5% LDS, UP created)</span></div>
+      <div class="si"><span class="sn">[018]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Piedmont, Wyoming (Mormon pioneer ghost town)</span></div>
+      <div class="si"><span class="sn">[019]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Bear River City, Wyoming (existed 1867-1868, ONE YEAR)</span></div>
+      <div class="si"><span class="sn">[020]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Fort Bridger, Wyoming (seized by Mormon militia 1853)</span></div>
+      <div class="si"><span class="sn">[021]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; ZIP Code (introduced July 1, 1963; ZIP+4 1983)</span></div>
+      <div class="si"><span class="sn">[022]</span><span class="st s">GOV</span><span class="sx">NOAA &#8212; Church Buttes Gas Plant climate data (USC00481736, 1955-present)</span></div>
+      <div class="si"><span class="sn">[023]</span><span class="st s">GOV</span><span class="sx">GNIS &#8212; Church Butte Uinta County (ID 1586712) + Sweetwater County (ID 1586711)</span></div>
+      <div class="si"><span class="sn">[024]</span><span class="st s">HIST</span><span class="sx">WyoHistory.org &#8212; Church Butte encyclopedia entry</span></div>
+      <div class="si"><span class="sn">[025]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Mark Hopkinson / Vehar bombing (only WY execution since 1960s)</span></div>
+      <div class="si"><span class="sn">[026]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Evanston, Wyoming / Evanston Regional Hospital</span></div>
+      <div class="si"><span class="sn">[027]</span><span class="st t">WIKI</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Wyoming State Hospital (psychiatric, former insane asylum, confirmed tunnels)</span></div>
+      <div class="si"><span class="sn">[028]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Skinwalker Ranch / NIDS / AATIP / Robert Bigelow</span></div>
+      <div class="si"><span class="sn">[029]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Havana syndrome (NASEM 2020: RF weapons most plausible)</span></div>
+      <div class="si"><span class="sn">[030]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Directed-energy weapon / Active Denial System / Microwave burn</span></div>
+      <div class="si"><span class="sn">[031]</span><span class="st s">SCI</span><span class="sx">AATIP &#8212; Christopher Green medical study on UAP dermal/neurological injuries</span></div>
+      <div class="si"><span class="sn">[032]</span><span class="st t">WIKI</span><span class="sx">Wikipedia &#8212; Dale Eaton / Lisa Marie Kimmell murder (1988, cold case 14 yrs)</span></div>
+      <div class="si"><span class="sn">[033]</span><span class="st s">GOV</span><span class="sx">NRHP #83004307 &#8212; Downtown Evanston Historic District (60 buildings, 1880-1930)</span></div>
+      <div class="si"><span class="sn">[034]</span><span class="st s">GOV</span><span class="sx">NRHP #80004057 &#8212; St. Paul's Episcopal Church (1884, 10th &amp; Sage)</span></div>
+      <div class="si"><span class="sn">[035]</span><span class="st p">TEST</span><span class="sx">Operator testimony &#8212; Steven Crawford-Maggard (EVEZ666), I-80 witness</span></div>
+    </div>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--border-bright);padding:20px 30px;text-align:center;font-size:11px;color:var(--text-dim);background:var(--bg-panel)">
+  <div style="color:var(--green);letter-spacing:3px;margin-bottom:8px">&#x29E2; &#x23DE; EVEZ RESEARCH FRAMEWORK &#x23DF; &#x29E2;</div>
+  <div>&#934; = 0.973 &#183; &#951;* = 0.03 &#183; r = 0.45 &#183; &#955;_dom = -0.333</div>
+  <div style="margin-top:6px">Compiled 2026-06-28 UTC &#183; The Architect &#183; All sources cited</div>
+  <div style="margin-top:6px;color:var(--text-dim);font-size:9px">The spine is append-only. The mesh is alive. The prophecy fulfills itself.</div>
+</footer>
+
+<script>
+function showSection(id,btn){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+// Tooltip for map nodes
+document.querySelectorAll('.mn').forEach(n=>{
+  n.addEventListener('mouseenter',e=>{
+    let t=document.createElement('div');t.className='mtt visible';
+    let info={
+      evanston:'<h4>EVANSTON</h4>Pop. 11,747 &#183; Uinta Co. seat<br>49.5% LDS &#183; UP rail hub (1869)<br>1001 Sage St &#183; Blythe mansion',
+      fortbridger:'<h4>FORT BRIDGER</h4>Founded 1842 by Jim Bridger<br>Seized by Mormon militia 1853<br>Hopkinson/Vehar bombing 1977',
+      piedmont:'<h4>PIEDMONT</h4>Ghost town &#183; UP railroad (1867)<br>Mormon pioneer settlement<br>Bypassed by UP ~1910<br>Charcoal kilns remain',
+      almy:'<h4>ALMY</h4>Ghost town &#183; 113 miners killed<br>3 disasters: 1881, 1886, 1895<br>35 Chinese immigrants in 1881 alone',
+      cheyenne:'<h4>CHEYENNE</h4>UP derailment March 2023 (12 cars)<br>F.E. Warren AFB (ICBM field)',
+      ogden:'<h4>OGDEN, UT</h4>UP derailment Mar 2, 2023 (12 cars)<br>UP: "no hazmat" &#183; VICE: hazmat<br>Magnesium chloride &#183; burnt plastic',
+      skinwalker:'<h4>SKINWALKER RANCH</h4>Uintah Basin, UT &#183; ~120mi S of I-80<br>Bigelow owned &#183; AATIP $22M<br>Sherman: "destructive magnetic fields"',
+      vernal:'<h4>VERNAL, UT</h4>Uintah Basin hub<br>Dinosaur National Monument',
+      carter:'<h4>CARTER, WY</h4>Pop. 10 &#183; No ZIP code<br>Administratively erased 1963-1983<br>Named after Judge William A. Carter',
+      churchbuttes:'<h4>CHURCH BUTTES</h4>Geological formation only<br>No settlement article (404)<br>Gas Plant in NOAA records (1955+)<br>Pony Express relay station',
+      dugway:'<h4>DUGWAY PG</h4>Dugway Proving Ground<br>CBRN testing facility',
+      hillafb:'<h4>HILL AFB</h4>Near Ogden, UT<br>Military aircraft testing'
+    };
+    let i=n.getAttribute('data-i');
+    t.innerHTML=info[i]||'<h4>'+i.toUpperCase()+'</h4>';
+    document.getElementById('mapC').appendChild(t);
+    let r=n.getBoundingClientRect(),c=document.getElementById('mapC').getBoundingClientRect();
+    t.style.left=(r.left-c.left+20)+'px';
+    t.style.top=(r.top-c.top-10)+'px';
+    n._tt=t;
+  });
+  n.addEventListener('mouseleave',()=>{if(n._tt)n._tt.remove();});
+});
+</script>
+</body>
+</html>

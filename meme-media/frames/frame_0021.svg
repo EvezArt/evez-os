@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+<defs>
+  <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" style="stop-color:#0a0a0f;stop-opacity:1"/>
+    <stop offset="100%" style="stop-color:#1a0a2f;stop-opacity:1"/>
+  </linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="glow-strong"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1080" height="1080" fill="url(#bg)"/>
+<rect x="0" y="0" width="1080" height="1080" fill="rgb(119,53,42)" opacity="0.12"/>
+<circle cx="108.0" cy="108.0" r="6.9" fill="#8844ff" opacity="0.0032"/>
+<text x="108.0" y="126.9" fill="#8844ff" opacity="0.04" font-family="monospace" font-size="9" text-anchor="middle">0.040</text>
+<circle cx="324.0" cy="108.0" r="103.7" fill="#8844ff" opacity="0.048"/>
+<text x="324.0" y="223.7" fill="#8844ff" opacity="0.04" font-family="monospace" font-size="9" text-anchor="middle">0.600</text>
+<circle cx="540.0" cy="108.0" r="86.4" fill="#8844ff" opacity="0.04"/>
+<text x="540.0" y="206.4" fill="#8844ff" opacity="0.04" font-family="monospace" font-size="9" text-anchor="middle">0.500</text>
+<circle cx="756.0" cy="108.0" r="81.1" fill="#8844ff" opacity="0.03755400005342863"/>
+<text x="756.0" y="201.1" fill="#8844ff" opacity="0.04" font-family="monospace" font-size="9" text-anchor="middle">0.469</text>
+<circle cx="972.0" cy="108.0" r="91.7" fill="#8844ff" opacity="0.042445999946571375"/>
+<text x="972.0" y="211.7" fill="#8844ff" opacity="0.04" font-family="monospace" font-size="9" text-anchor="middle">0.531</text>
+<circle cx="540.0" cy="540.0" r="80" fill="none" stroke="#5f3579" stroke-width="1" opacity="0.045"/>
+<circle cx="613.6" cy="508.7" r="3" fill="#5f3579" opacity="0.15"/>
+<line x1="540.0" y1="540.0" x2="613.6" y2="508.7" stroke="#5f3579" stroke-width="0.5" opacity="0.075"/>
+<circle cx="620.0" cy="542.0" r="3" fill="#5f3579" opacity="0.15"/>
+<line x1="540.0" y1="540.0" x2="620.0" y2="542.0" stroke="#5f3579" stroke-width="0.5" opacity="0.075"/>
+<circle cx="461.2" cy="526.0" r="3" fill="#5f3579" opacity="0.15"/>
+<line x1="540.0" y1="540.0" x2="461.2" y2="526.0" stroke="#5f3579" stroke-width="0.5" opacity="0.075"/>
+<circle cx="615.8" cy="565.7" r="3" fill="#5f3579" opacity="0.15"/>
+<line x1="540.0" y1="540.0" x2="615.8" y2="565.7" stroke="#5f3579" stroke-width="0.5" opacity="0.075"/>
+<circle cx="598.4" cy="594.7" r="3" fill="#5f3579" opacity="0.15"/>
+<line x1="540.0" y1="540.0" x2="598.4" y2="594.7" stroke="#5f3579" stroke-width="0.5" opacity="0.075"/>
+<circle cx="540.0" cy="540.0" r="140" fill="none" stroke="#5f3579" stroke-width="1" opacity="0.036"/>
+<circle cx="668.9" cy="485.3" r="3" fill="#5f3579" opacity="0.12"/>
+<line x1="540.0" y1="540.0" x2="668.9" y2="485.3" stroke="#5f3579" stroke-width="0.5" opacity="0.06"/>
+<circle cx="680.0" cy="543.5" r="3" fill="#5f3579" opacity="0.12"/>
+<line x1="540.0" y1="540.0" x2="680.0" y2="543.5" stroke="#5f3579" stroke-width="0.5" opacity="0.06"/>
+<circle cx="402.2" cy="515.5" r="3" fill="#5f3579" opacity="0.12"/>
+<line x1="540.0" y1="540.0" x2="402.2" y2="515.5" stroke="#5f3579" stroke-width="0.5" opacity="0.06"/>
+<circle cx="672.6" cy="585.0" r="3" fill="#5f3579" opacity="0.12"/>
+<line x1="540.0" y1="540.0" x2="672.6" y2="585.0" stroke="#5f3579" stroke-width="0.5" opacity="0.06"/>
+<circle cx="642.1" cy="635.8" r="3" fill="#5f3579" opacity="0.12"/>
+<line x1="540.0" y1="540.0" x2="642.1" y2="635.8" stroke="#5f3579" stroke-width="0.5" opacity="0.06"/>
+<circle cx="540.0" cy="540.0" r="200" fill="none" stroke="#5f3579" stroke-width="1" opacity="0.027"/>
+<circle cx="724.1" cy="461.8" r="3" fill="#5f3579" opacity="0.09"/>
+<line x1="540.0" y1="540.0" x2="724.1" y2="461.8" stroke="#5f3579" stroke-width="0.5" opacity="0.045"/>
+<circle cx="739.9" cy="544.9" r="3" fill="#5f3579" opacity="0.09"/>
+<line x1="540.0" y1="540.0" x2="739.9" y2="544.9" stroke="#5f3579" stroke-width="0.5" opacity="0.045"/>
+<circle cx="343.1" cy="505.0" r="3" fill="#5f3579" opacity="0.09"/>
+<line x1="540.0" y1="540.0" x2="343.1" y2="505.0" stroke="#5f3579" stroke-width="0.5" opacity="0.045"/>
+<circle cx="729.4" cy="604.3" r="3" fill="#5f3579" opacity="0.09"/>
+<line x1="540.0" y1="540.0" x2="729.4" y2="604.3" stroke="#5f3579" stroke-width="0.5" opacity="0.045"/>
+<circle cx="685.9" cy="676.8" r="3" fill="#5f3579" opacity="0.09"/>
+<line x1="540.0" y1="540.0" x2="685.9" y2="676.8" stroke="#5f3579" stroke-width="0.5" opacity="0.045"/>
+<path d="M0.0,521.6 L10.8,524.0 L21.6,527.6 L32.4,532.2 L43.2,537.3 L54.0,542.6 L64.8,547.7 L75.6,552.2 L86.4,555.9 L97.2,558.4 L108.0,559.5 L118.8,559.1 L129.6,557.4 L140.4,554.3 L151.2,550.2 L162.0,545.3 L172.8,540.1 L183.6,534.8 L194.4,529.9 L205.2,525.8 L216.0,522.7 L226.8,520.9 L237.6,520.5 L248.4,521.6 L259.2,524.0 L270.0,527.6 L280.8,532.1 L291.6,537.2 L302.4,542.6 L313.2,547.7 L324.0,552.2 L334.8,555.9 L345.6,558.3 L356.4,559.5 L367.2,559.1 L378.0,557.4 L388.8,554.3 L399.6,550.2 L410.4,545.4 L421.2,540.1 L432.0,534.8 L442.8,530.0 L453.6,525.8 L464.4,522.7 L475.2,520.9 L486.0,520.5 L496.8,521.6 L507.6,524.0 L518.4,527.6 L529.2,532.1 L540.0,537.2 L550.8,542.5 L561.6,547.7 L572.4,552.2 L583.2,555.9 L594.0,558.3 L604.8,559.5 L615.6,559.1 L626.4,557.4 L637.2,554.3 L648.0,550.2 L658.8,545.4 L669.6,540.1 L680.4,534.9 L691.2,530.0 L702.0,525.8 L712.8,522.7 L723.6,520.9 L734.4,520.5 L745.2,521.6 L756.0,524.0 L766.8,527.6 L777.6,532.1 L788.4,537.2 L799.2,542.5 L810.0,547.6 L820.8,552.2 L831.6,555.9 L842.4,558.3 L853.2,559.5 L864.0,559.1 L874.8,557.4 L885.6,554.4 L896.4,550.3 L907.2,545.4 L918.0,540.1 L928.8,534.9 L939.6,530.0 L950.4,525.8 L961.2,522.7 L972.0,520.9 L982.8,520.5 L993.6,521.6 L1004.4,524.0 L1015.2,527.6 L1026.0,532.1 L1036.8,537.2 L1047.6,542.5 L1058.4,547.6 L1069.2,552.2 L1080.0,555.8" fill="none" stroke="#5f3579" stroke-width="2" opacity="0.2" filter="url(#glow)"/>
+<text x="540.0" y="412.5232921501136" fill="#ffffff" opacity="0.95" font-family="Impact,Arial Black,sans-serif" font-size="32" text-anchor="middle" filter="url(#glow)">NEXUS: ChatGPT + Perplexity + OpenClaw. One memory. Many minds. Never sleeps.</text>
+<text x="540.0" y="462.5232921501136" fill="#aaaaaa" opacity="0.7" font-family="Impact,Arial Black,sans-serif" font-size="20" text-anchor="middle" filter="url(#glow)">24/7 unified chatbot entity farm</text>
+<text x="162.0" y="129.6" fill="#5f3579" opacity="0.50" font-family="monospace" font-size="14.4" text-anchor="start">arc: purgatory</text>
+<text x="162.0" y="149.6" fill="#5f3579" opacity="0.31" font-family="monospace" font-size="8.9" text-anchor="start">arc: purgatory</text>
+<text x="540.0" y="1050" fill="#00ff88" opacity="0.2" font-family="Impact,Arial Black,sans-serif" font-size="11" text-anchor="middle" filter="url(#glow)">⛓ dc0e912d750f</text>
+<text x="30" y="35" fill="#8844ff" opacity="0.7" font-family="Impact,Arial Black,sans-serif" font-size="22" text-anchor="start" filter="url(#glow)">◆ EVEZ-OS</text>
+<text x="1050" y="25" fill="#77282a" opacity="0.4" font-family="Impact,Arial Black,sans-serif" font-size="11" text-anchor="end" filter="url(#glow)">η*=0.040</text>
+<text x="1050" y="40" fill="#77282a" opacity="0.4" font-family="Impact,Arial Black,sans-serif" font-size="11" text-anchor="end" filter="url(#glow)">Φ=0.600</text>
+<text x="1050" y="55" fill="#77282a" opacity="0.4" font-family="Impact,Arial Black,sans-serif" font-size="11" text-anchor="end" filter="url(#glow)">r=0.50</text>
+</svg>

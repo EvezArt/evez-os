@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head><title>EvezOS A16 - Phone Pairing</title>
+<style>
+body { background: #0a0a0a; color: #fff; font-family: system-ui; display: flex; flex-direction: column; align-items: center; padding: 40px; }
+h1 { color: #4CAF50; font-size: 28px; margin-bottom: 10px; }
+p { color: #aaa; margin: 5px 0; }
+.qr { background: #fff; padding: 20px; border-radius: 10px; margin: 20px 0; }
+.code { background: #1a1a1a; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 14px; color: #4CAF50; word-break: break-all; max-width: 500px; }
+.instructions { max-width: 500px; line-height: 1.6; }
+.instructions li { margin: 8px 0; color: #ccc; }
+</style>
+</head>
+<body>
+<h1>📱 EvezOS A16 — Phone Pairing</h1>
+<p>Scan this QR code with the OpenClaw Android app to pair your Samsung Galaxy</p>
+<div class="qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjoAAAI6AQAAAAAGM99tAAAFgUlEQVR4nO2dTW7kOAyFH0cGamkDfYAcxb7BHCnIkeYG9lHqAA3YywJscBakJLrSwPxUVY968rRIUmX5gwwwBPVIyqJ4ylh+ew4HIIgggggiiCCCCCKIoP8LSHx0wDIcgmWoMw6RCQCwiWAZ/KNMW75pesWKCCLoKaBRVVXX+v0hMuEQkQHF2pNiXJNiEREASVVV9Qx62ooIIuih0fnvbQDGPwAZrx0wXi8qy/AdChw2QUYFBAAUOOw2AdL+7BURRNAzRnf/xfK2dwIkKLYOwPZNBUgK4Oh0mdIu6L9Dsb1oRQQR9BrQdrEAQ2RIaoEIthyFj3oTC0l+4ooIIujfg3pVne2vHaq6A8CRw+k1T1+GpDBnDpR5L1kRQQQ9AbSI+G5xvHaQaeuAcU0q7ysgE3zzKO9XN2qx/aXtJV+xIoIIemiYoYbgYhkSdBkgurztFk77D+wA+h1AfxOgP0ck7T0aQV8aBFPuxhVAjTxGVfW4pFyYAeSrpwuqqjq392gEEWRDVW8mW+uHiLjt9sVTIymWN1X9GABL5oyMswlqFAR3uXC5wzaF4+p/6dyr1jyO++w1he2mXaXPJqgtUIlGcljhhg7AQ40dLvOZFe/Q2fy45qu0bILaA7llm9mugFvsmp15tV1d4UZdfLa5elo2QQ2CigGruqjdV69crDir3e7R+xK/mPhNyyaoOVCORqy0Kdc8jStyDGKySI5GAMRoZGacTVCjoOyzVwStL+h6HqH4XlI1J9YtFB8ZZxPUKKj47CpR16BjD4F1VfjMvG0vCdCyCWoSFOPsMet/vluEW3ENP06bxzKFlk1Qe6CTZa9AyMoUUTsbtV+tekn9QcsmqEmQFUOZUW8X0/r0401VJgA6b11W+K4XlQlJsUj3A9DTVkQQQQ+Ok56divf+pJKEupGoktBnE9Qm6JyDdBW7ZtJzNrJOzipJvUDLJqhBUNBBfJzNNoySn6k9NVT9CGoc5LqeKsariG0e5yKGuBzo/ey1DgpAYu86QU2Cgp6dC5/cYt2ZZyftmRqtykkuGaHqR1C7IFM6bBt5iM4ARIYje28A1uY7AbGqBFsHmV6yIoIIemxkp1vj7KqS7DhtFPdQnx0n02cT1B6odB4gd8j0OzwRqRo2ijkbqTEGUWWtH0FtgkIOMovVGmLqbN4x416N35OTtGyC2gPFTE1sk/GNYs3P5C6DqGfn/wBaNkHNgYJXDtIfqu2iyCJrnFwrp+izCWoXpLMdIXITnXGIHafzbhvFQ8L0ZTgEo+6QCYfI1PMsVoLaBEWf7R/30FaQu2bOu8p+z1Ws7BYjqGmQzjjErPi+hs/O8EuKcT3EfXZpZS8n/LX7aAR9UVDsn6ldBlaanVOS3l1z77NTDs/pswlqD1T6IE8anp/AcLdvLHesCLEKoxGCWgTdK9bxQul+NK/8Oc4OxSO0bILaAsWKqHiIdjHg/pSXrB+1HIFGyyaoQdD5cBzgh2XYpZbkU4sN67MJahQU6kZyxI1iu6XBYEUMrOfwHbPrBLUJOsfZZ7mjthWUPPsMoPZBVgAtm6AmQVpaIO0dSwAgU38TC6fLKfDyXky+ZOFlesWKCCLowXGS9FI4GSpnI8vJI0EqKQ04AONsgpoEeQ5xnAFg+wZBn1SAS3kLJKDY0o7ld3fmim2AO/jZ337a4qMR9KVB8T019fDV0mVweh1NfgWCt0oi5yrpswn6FUD9TWTKHZFWzTfqTUTkUt7UdMjdycO/xqMR9OVBi4hgkYtXsdr7TQHkF0AmtZLXjwGQ6WesiCCC/uHIOUgvHqn7xto8FjppgjC4nu5lNEJQW6B7bcR+nw29mrffsSK0jNGyCWoRJPrXc/7OWNp7NIIIIogggggiiCCCCPrPQH8CgczYpZLJxysAAAAASUVORK5CYII=" width="300" height="300" /></div>
+<div class="code">Setup code: eyJ1cmwiOiAid3NzOi8vMzQuNTMuNTEuMzQiLCAiYm9vdHN0cmFwVG9rZW4iOiAieXpEVW9RZklXTlBvREg2bVQyU3A4bTh1elpNXzZfQnZTSTBYQS00cDloUSJ9</div>
+<div class="instructions">
+<h2>Instructions:</h2>
+<ol>
+<li>Install OpenClaw from the Play Store or APK</li>
+<li>Open the app and tap "Scan QR Code"</li>
+<li>Point your camera at the QR code above</li>
+<li>Wait for pairing to complete</li>
+<li>Grant all permissions (notifications, camera, location, SMS, contacts, calendar, microphone)</li>
+<li>Enable capabilities in Android Settings</li>
+<li>Say "Evez" to activate voice mode</li>
+</ol>
+<p style="color: #4CAF50; margin-top: 20px;">Gateway: wss://34.53.51.34 (evez-primary)</p>
+<p style="color: #666;">No mercy. Success only.</p>
+</div>
+</body>
+</html>

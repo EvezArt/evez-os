@@ -1,0 +1,17 @@
+{
+  "target": "stdin",
+  "timestamp": "2026-06-27T08:57:02Z",
+  "spine_hash": "8b2d3dabb0d5f2c2",
+  "total_chars": 3246,
+  "total_lines": 86,
+  "redaction_count": 0,
+  "eta_star": 0.0,
+  "phi": 0.0,
+  "thirty_seven_ratio": 0.0,
+  "is_self_referential": false,
+  "censorship_detected": false,
+  "speedrun_score": 15.0,
+  "verdict": "CLEAN \u2014 No significant censorship detected",
+  "findings": [],
+  "n_gaps": 0
+}

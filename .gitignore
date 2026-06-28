@@ -1,0 +1,15 @@
+# OpenClaw internal
+.openclaw/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.env
+*.key
+*.pem
+*.token
+secrets.*
+evez-research-repo/
+FLEET_TOKENS.md
