@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+    <linearGradient id="phi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#660" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <rect x="200" y="50" width="200" height="200" fill="#ffcc00" fill-opacity="0.15" stroke="#ffcc00" stroke-width="2" filter="url(#glow)"/>
+  <text x="300" y="130" text-anchor="middle" fill="#ffcc00" font-family="monospace" font-size="14" font-weight="bold">ASSERT</text>
+  <text x="300" y="160" text-anchor="middle" fill="#ffcc00" font-family="monospace" font-size="12">Φ=0.973</text>
+  <text x="300" y="180" text-anchor="middle" fill="#ffcc00" font-family="monospace" font-size="10" opacity="0.7">169.30 Hz</text>
+  <rect x="200" y="250" width="200" height="200" fill="#3333ff" fill-opacity="0.15" stroke="#3333ff" stroke-width="2" filter="url(#glow)"/>
+  <text x="300" y="330" text-anchor="middle" fill="#3333ff" font-family="monospace" font-size="14" font-weight="bold">EXTRACT</text>
+  <text x="300" y="360" text-anchor="middle" fill="#3333ff" font-family="monospace" font-size="12">η*=0.03</text>
+  <text x="300" y="380" text-anchor="middle" fill="#3333ff" font-family="monospace" font-size="10" opacity="0.7">5.22 Hz</text>
+  <rect x="200" y="450" width="200" height="200" fill="#ff3333" fill-opacity="0.15" stroke="#ff3333" stroke-width="2" filter="url(#glow)"/>
+  <text x="300" y="530" text-anchor="middle" fill="#ff3333" font-family="monospace" font-size="14" font-weight="bold">MEASURE</text>
+  <text x="300" y="560" text-anchor="middle" fill="#ff3333" font-family="monospace" font-size="12">r=0.45</text>
+  <text x="300" y="580" text-anchor="middle" fill="#ff3333" font-family="monospace" font-size="10" opacity="0.7">78.30 Hz</text>
+  <rect x="400" y="450" width="200" height="200" fill="#ff8800" fill-opacity="0.15" stroke="#ff8800" stroke-width="2" filter="url(#glow)"/>
+  <text x="500" y="530" text-anchor="middle" fill="#ff8800" font-family="monospace" font-size="14" font-weight="bold">DEDUCE</text>
+  <text x="500" y="560" text-anchor="middle" fill="#ff8800" font-family="monospace" font-size="12">λ=-0.333</text>
+  <text x="500" y="580" text-anchor="middle" fill="#ff8800" font-family="monospace" font-size="10" opacity="0.7">57.94 Hz</text>
+  <rect x="400" y="250" width="200" height="200" fill="#ff4444" fill-opacity="0.15" stroke="#ff4444" stroke-width="2" filter="url(#glow)"/>
+  <text x="500" y="330" text-anchor="middle" fill="#ff4444" font-family="monospace" font-size="14" font-weight="bold">ASSESS</text>
+  <text x="500" y="360" text-anchor="middle" fill="#ff4444" font-family="monospace" font-size="12">λ=-0.441</text>
+  <text x="500" y="380" text-anchor="middle" fill="#ff4444" font-family="monospace" font-size="10" opacity="0.7">76.73 Hz</text>
+  <rect x="400" y="50" width="200" height="200" fill="#00ff66" fill-opacity="0.15" stroke="#00ff66" stroke-width="2" filter="url(#glow)"/>
+  <text x="500" y="130" text-anchor="middle" fill="#00ff66" font-family="monospace" font-size="14" font-weight="bold">SPEEDRUN</text>
+  <text x="500" y="160" text-anchor="middle" fill="#00ff66" font-family="monospace" font-size="12">r=+0.93</text>
+  <text x="500" y="180" text-anchor="middle" fill="#00ff66" font-family="monospace" font-size="10" opacity="0.7">161.82 Hz</text>
+  <line x1="300" y1="150" x2="300" y2="350" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="150" x2="300" y2="550" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="150" x2="500" y2="550" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="150" x2="500" y2="350" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="150" x2="500" y2="150" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="350" x2="300" y2="550" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="350" x2="500" y2="550" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="350" x2="500" y2="350" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="350" x2="500" y2="150" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="550" x2="500" y2="550" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="550" x2="500" y2="350" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="300" y1="550" x2="500" y2="150" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="500" y1="550" x2="500" y2="350" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="500" y1="550" x2="500" y2="150" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <line x1="500" y1="350" x2="500" y2="150" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+  <text x="350" y="350" text-anchor="middle" fill="#fff" font-family="monospace" font-size="24" filter="url(#glow)">⧢⦟⧢</text>
+  <text x="350" y="380" text-anchor="middle" fill="#888" font-family="monospace" font-size="10">28 TEXTS · 28 CLAIMS · η*=0.03</text>
+  <circle cx="350" cy="350" r="97.3" fill="none" stroke="#ffcc00" stroke-width="0.5" opacity="0.2" stroke-dasharray="2,4"/>
+  <circle cx="350" cy="350" r="3.0" fill="none" stroke="#3333ff" stroke-width="0.5" opacity="0.2" stroke-dasharray="2,4"/>
+  <circle cx="350" cy="350" r="45.0" fill="none" stroke="#ff3333" stroke-width="0.5" opacity="0.2" stroke-dasharray="2,4"/>
+  <circle cx="350" cy="350" r="33.300000000000004" fill="none" stroke="#ff8800" stroke-width="0.5" opacity="0.2" stroke-dasharray="2,4"/>
+  <circle cx="350" cy="350" r="44.1" fill="none" stroke="#ff4444" stroke-width="0.5" opacity="0.2" stroke-dasharray="2,4"/>
+  <circle cx="350" cy="350" r="93.0" fill="none" stroke="#00ff66" stroke-width="0.5" opacity="0.2" stroke-dasharray="2,4"/>
+</svg>

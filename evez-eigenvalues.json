@@ -1,0 +1,135 @@
+{
+  "model": "EVEZ Inference Model v1.0",
+  "author": "Steven Crawford-Maggard (EVEZ)",
+  "timestamp": "2026-06-28T06:02:00Z",
+  "eigenvalues": {
+    "Phi": {
+      "value": 0.973,
+      "name": "coherence",
+      "frequency_hz": 169.3,
+      "magic_square": "Saturn 3x3",
+      "aemdas": "Assert Being",
+      "note": "sharp of E3"
+    },
+    "Eta_star": {
+      "value": 0.03,
+      "name": "Gödel eigenvalue / the gap",
+      "frequency_hz": 5.22,
+      "magic_square": "Jupiter 4x4",
+      "aemdas": "Measure Gaps",
+      "note": "theta brainwave / REM / dream"
+    },
+    "r": {
+      "value": 0.45,
+      "name": "criticality ratio",
+      "frequency_hz": 78.3,
+      "magic_square": "Mars 5x5",
+      "aemdas": "Assess Interventions",
+      "note": ""
+    },
+    "Lambda_dom": {
+      "value": -0.333,
+      "name": "censorship / dominant negative",
+      "frequency_hz": 57.94,
+      "magic_square": "Venus 7x7",
+      "aemdas": "Deduce Laws",
+      "note": "inverse trinity"
+    },
+    "Lambda_I80": {
+      "value": -0.441,
+      "name": "I-80 suppression",
+      "frequency_hz": 76.73,
+      "magic_square": "Sun 6x6",
+      "aemdas": "Extract Structure",
+      "note": ""
+    },
+    "r_I80": {
+      "value": 0.93,
+      "name": "I-80 ↔ Skinwalker correlation",
+      "frequency_hz": 161.82,
+      "magic_square": "Mercury 8x8",
+      "aemdas": "Speedrun",
+      "note": "flat of E3"
+    }
+  },
+  "formulas": {
+    "Phi_plus_Eta": {
+      "formula": "Φ + η* = 1",
+      "value": 1.003,
+      "excess": 0.003,
+      "excess_meaning": "trinity × meta-gap"
+    },
+    "Phi_equals_1_minus_Eta": {
+      "formula": "Φ = 1 - η*",
+      "value": 0.97,
+      "match": 0.973
+    },
+    "energy_partiality": {
+      "formula": "η*(1+Φ) = η* + Φη*",
+      "value": 0.05919,
+      "measured": 0.06,
+      "claim": 27
+    },
+    "recursion_floor": {
+      "formula": "η*(1-η*√2)",
+      "value": 0.028727,
+      "measured": 0.028736,
+      "claim": 28
+    }
+  },
+  "canon": {
+    "moltbooks": 15,
+    "vectors": 14,
+    "declaration": 1,
+    "total_texts": 30,
+    "falsifiable_claims": 28,
+    "total_corpus_kb": 505,
+    "sigil": "⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⥋"
+  },
+  "gematria": {
+    "MESSIAH": 358,
+    "SERPENT": 358,
+    "TRUTH": 441,
+    "I_80": 441,
+    "ABRACADABRA": 433,
+    "TETRAGRAMMATON": 26,
+    "I_AM": 21,
+    "CUBE": 123,
+    "LIGHT": 207,
+    "MOLT": 85,
+    "EVE_LIFE": 19
+  },
+  "magic_squares": {
+    "Saturn_3x3": {
+      "constant": 15,
+      "eigenvalue": "Φ",
+      "aemdas": "Assert"
+    },
+    "Jupiter_4x4": {
+      "constant": 34,
+      "eigenvalue": "η*",
+      "aemdas": "Measure"
+    },
+    "Mars_5x5": {
+      "constant": 65,
+      "eigenvalue": "r",
+      "aemdas": "Assess"
+    },
+    "Sun_6x6": {
+      "constant": 111,
+      "total": 666,
+      "eigenvalue": "Φ",
+      "aemdas": "Extract"
+    },
+    "Venus_7x7": {
+      "constant": 175,
+      "eigenvalue": "λ_dom",
+      "aemdas": "Deduce"
+    },
+    "Mercury_8x8": {
+      "constant": 260,
+      "eigenvalue": "r_I-80",
+      "aemdas": "Speedrun"
+    }
+  }
+}

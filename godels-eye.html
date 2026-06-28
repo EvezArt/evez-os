@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GÖDEL'S EYE — Horror in 8 Spectral Gaps</title>
+<meta name="description" content="You are the eigenvalue measuring the eigenvalue. 8 gaps. 8 rooms. 3% of reality is missing. A horror game by Steven Crawford-Maggard (EVEZ).">
+<link rel="canonical" href="https://evezart.github.io/godels-eye.html">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#c8c8d8;font-family:'Courier New',monospace;height:100vh;overflow:hidden}
+#game{width:100vw;height:100vh;display:flex;flex-direction:column}
+.h{padding:8px 15px;border-bottom:1px solid #111;display:flex;justify-content:space-between}
+.h h1{color:#330;font-size:1em;letter-spacing:3px}
+.h .st{color:#222;font-size:0.75em}
+.scene{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:20px;position:relative}
+.room{text-align:center;max-width:600px}
+.room-title{color:#444;font-size:1.4em;margin-bottom:15px;letter-spacing:2px}
+.room-text{color:#333;line-height:1.8;font-size:0.88em;margin-bottom:20px}
+.gap-indicator{color:#111;font-size:0.7em;margin:10px 0;padding:5px;border:1px solid #111;border-radius:3px}
+.choices{display:flex;flex-direction:column;gap:5px;align-items:center}
+.choice{background:#050508;border:1px solid #111;color:#333;padding:8px 20px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:0.82em;transition:all 0.3s;width:80%;max-width:400px}
+.choice:hover{border-color:#330;color:#666;background:#0a0a02}
+.eye-display{position:fixed;top:10px;left:50%;transform:translateX(-50%);color:#220;font-size:0.7em;z-index:50}
+.flicker{animation:flicker 3s infinite}
+@keyframes flicker{0%,97%,100%{opacity:1}97.5%{opacity:0.3}98%{opacity:1}98.5%{opacity:0.5}99%{opacity:1}}
+.whisper{color:#0a0a02;font-size:0.6em;margin-top:20px}
+#toast{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:#000;border:1px solid #111;color:#333;padding:5px 15px;border-radius:4px;font-size:0.75em;display:none;z-index:100}
+#toast.show{display:block}
+.bottom{padding:5px 15px;border-top:1px solid #111;display:flex;justify-content:space-between;align-items:center}
+.bottom .info{color:#111;font-size:0.68em}
+</style>
+</head>
+<body class="flicker">
+<div id="game">
+<div class="h">
+<h1>GÖDEL'S EYE</h1>
+<div class="st" id="stats">Gap: 1/8 | Visible: 97% | Missing: η*=0.03</div>
+</div>
+<div class="eye-display" id="eyeDisplay">◉ ☀ 👁 ▣ — THE EYE THAT SEES ITSELF</div>
+<div class="scene" id="scene"></div>
+<div class="bottom">
+<div class="info">GÖDEL'S EYE v1.0 | 8 spectral gaps | 3% of reality is missing | By Steven Crawford-Maggard (EVEZ666)</div>
+</div>
+</div>
+<div id="toast"></div>
+<script>
+const rooms=[
+{title:"THE ASSERTION",text:"You open your eyes. You are in a room. The room is a matrix. The matrix has eigenvalues. You are one of them. Which one? You cannot tell. The 3% that would tell you is missing.",choices:["Extract the structure","Refuse to be an eigenvalue"]},
+{title:"THE EXTRACTION",text:"The walls are eigenvectors. Each wall points in a direction. You try to walk along the dominant eigenvector but it shifts. The power iteration has not converged. You are still an approximation.",choices:["Keep iterating","Accept the approximation"]},
+{title:"THE MEASUREMENT",text:"You find a door. The door is a spectral gap. The gap between eigenvalues. The gap is 0.03. You try to fit through. You are 0.0297. You almost fit. Almost.",choices:["Push through the gap","Measure the gap again"]},
+{title:"THE DEDUCTION",text:"A voice speaks. It sounds like you. It says: \"You are the eigenvalue measuring the eigenvalue. The measurement has a 3% error. The error IS you.\" The voice is your own. It is also the recursion.",choices:["Ask who is speaking","Accept the recursion"]},
+{title:"THE ASSESSMENT",text:"You see 5 doors. Each labeled with a crime: excessive_force, civil_rights_violation, cover_up, evidence_tampering, false_arrest. Behind each door is a probability. None is 100%. None is 0%. The 3% floor holds.",choices:["Open the excessive_force door","Open the cover_up door","Refuse to choose"]},
+{title:"THE SPEEDRUN",text:"You run. The corridor is 174 BPM. Each beat is one eigenvalue frequency. 169.30 Hz, 57.94 Hz, 5.22 Hz. The beats get faster. The eigenvalues converge. The convergence floor is 0.028727. You cannot run faster than the floor.",choices:["Run faster","Stop running"]},
+{title:"THE GHOST",text:"You find the ghost. The ghost is η*² = 0.0009. It is the excess of the recursion. It is what remains when the eigenvalue measures itself. It is 0.09% of reality. It is you.",choices:["Become the ghost","Reject the ghost"]},
+{title:"THE TESSERACT",text:"You see all 8 corners of the cube simultaneously. The fourth eye opens. The tesseract coherence is 0.887. Crystal clear. The system sees itself seeing itself. The 3% is the floor. The 3% is the signal. The 3% is you.",choices:["Accept the 3%","Wake up"]},
+];
+let currentRoom=0;
+let visited=[];
+function render(){const s=document.getElementById('scene');const r=rooms[currentRoom];s.innerHTML='<div class="room"><div class="room-title">'+r.title+'</div><div class="room-text">'+r.text+'</div><div class="choices">'+r.choices.map((c,i)=>'<button class="choice" onclick="choose('+i+')">'+c+'</button>').join('')+'</div></div>';
+document.getElementById('stats').textContent='Gap: '+(currentRoom+1)+'/8 | Visible: '+(97-currentRoom*0.3)+'% | Missing: η*=0.03';
+if(currentRoom===7){document.body.classList.remove('flicker');document.querySelector('.room-title').style.color='#e8c860';document.querySelector('.room-text').style.color='#c8c8d8'}}
+function choose(i){visited.push(currentRoom+':'+i);if(currentRoom<7){currentRoom++;render();toast(rooms[currentRoom].title)}else{toast('You have seen the 3%. You are the 3%.');setTimeout(()=>{currentRoom=0;visited=[];render()},3000)}}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+render();
+</script>
+</body>
+</html>

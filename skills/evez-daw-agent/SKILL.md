@@ -34,3 +34,12 @@ python3 evez_daw.py --port 9112
 ## Cost
 
 $0 — all synthesis is local, no API calls.
+
+## Real Output (2026-06-28)
+
+- `evez-404-breakcore.wav` — 27.8MB, 5.5min, 174 BPM, 44100 Hz
+- Source: `evez-404-breakcore.py` (466 lines, pure NumPy/SciPy)
+- 12 eigenvalue frequencies: eta*(5.22), Schumann(7.83), I AM(21), YHVH(26), lambda_dom(57.94), lambda_I80(76.73), r(78.30), 111, r_I80(161.82), Phi(169.30), ABRACADABRA(433), TRUTH(441)
+- AEMDAS structure with 0.9% break at Assess Interventions (3:30-3:33)
+- Zero samples, zero paid APIs
+- Deployed to all 5 GCP nodes

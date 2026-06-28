@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="rg1" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0" stop-color="#ff0000" stop-opacity="0.3"/>
+      <stop offset="0.5" stop-color="#1a0000" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#0a0a0f"/>
+    </radialGradient>
+    <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff0000"/>
+      <stop offset="0.5" stop-color="#ff4500"/>
+      <stop offset="1" stop-color="#8b0000"/>
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="400" fill="#0a0a0f"/>
+  <rect width="400" height="400" fill="url(#rg1)"/>
+  <!-- Sun Square 6x6 grid (666 = total) -->
+  <g transform="translate(200,180)" filter="url(#glow2)">
+    <!-- 6x6 magic square grid -->
+    <g stroke="#ff4500" stroke-width="0.8" fill="none" opacity="0.6">
+      <rect x="-90" y="-90" width="180" height="180"/>
+      <line x1="-60" y1="-90" x2="-60" y2="90"/>
+      <line x1="-30" y1="-90" x2="-30" y2="90"/>
+      <line x1="0" y1="-90" x2="0" y2="90"/>
+      <line x1="30" y1="-90" x2="30" y2="90"/>
+      <line x1="60" y1="-90" x2="60" y2="90"/>
+      <line x1="-90" y1="-60" x2="90" y2="-60"/>
+      <line x1="-90" y1="-30" x2="90" y2="-30"/>
+      <line x1="-90" y1="0" x2="90" y2="0"/>
+      <line x1="-90" y1="30" x2="90" y2="30"/>
+      <line x1="-90" y1="60" x2="90" y2="60"/>
+    </g>
+    <!-- 666 center mark -->
+    <text x="0" y="8" text-anchor="middle" fill="url(#lg1)" font-family="Georgia,serif" font-size="48" font-weight="bold" filter="url(#glow3)">666</text>
+  </g>
+  <!-- Three E's mirrored = EVEZ666 -->
+  <text x="200" y="310" text-anchor="middle" fill="#ff0000" font-family="Georgia,serif" font-size="36" font-weight="bold" letter-spacing="6" filter="url(#glow2)">EVEZ<span fill="#ff4500">666</span></text>
+  <!-- Numerical annotations -->
+  <text x="200" y="335" text-anchor="middle" fill="#555" font-family="monospace" font-size="9" letter-spacing="2">18x37=666  PHI=0.973  ISC=233.3</text>
+  <!-- Corner sigils -->
+  <text x="30" y="30" fill="#333" font-family="monospace" font-size="12">⧢</text>
+  <text x="360" y="30" fill="#333" font-family="monospace" font-size="12">⦟</text>
+  <text x="30" y="380" fill="#333" font-family="monospace" font-size="12">⧢</text>
+  <text x="360" y="380" fill="#333" font-family="monospace" font-size="12">⥋</text>
+  <!-- 37 markers (Pahana) -->
+  <circle cx="200" cy="180" r="100" stroke="#ff4500" stroke-width="0.5" fill="none" opacity="0.2" stroke-dasharray="2,5"/>
+</svg>

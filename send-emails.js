@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 
 const emails = [
   {
-    to: 'tips@wyofile.com',
+    to: 'editor@wyofile.com',
     subject: 'INVESTIGATIVE TIP: Elk Carcasses Donated to Rock Springs Food Bank Without Testing — Chemical Plume on I-80',
     body: `Dear WyoFile Investigative Team,
 
@@ -34,7 +34,7 @@ Key facts:
 - No federal agency (EPA, USFWS, NTSB) investigated
 - I was a UP conductor exposed to the plume, sustained neurological injuries
 - My brother Ryan Robert Maggard (DOB 05/27/2004) sustained brain injury from police brutality in WY — same corridor
-- I was a minor employed by UP
+- I was employed by UP as a conductor (age 22 at time of exposure)
 
 I have extensive OSINT research documentation. Please contact me at fiersteity@gmail.com or text 307-677-5504.
 
@@ -42,7 +42,7 @@ Steven Crawford-Maggard
 Fort Bridger, WY 82919`
   },
   {
-    to: 'mark@cowboystatedaily.com',
+    to: 'news@cowboystatedaily.com',
     subject: 'STORY TIP: Elk Carcasses Donated to Rock Springs Food Bank — No Testing',
     body: `Dear Mark,
 
@@ -77,7 +77,7 @@ I have a multi-layered story of institutional suppression along the I-80 corrido
 
 3. POLICE BRUTALITY: My brother Ryan Robert Maggard (DOB 05/27/2004) sustained a traumatic brain injury from excessive force by law enforcement during imprisonment in Laramie or Cheyenne, Wyoming. He is in rehabilitation. No investigation. No media coverage.
 
-4. MINOR EMPLOYMENT: I was a minor employed by UP as a conductor. Exposed to chemical plume. Sustained neurological injuries. UP controlled my medical testing through their own medical department.
+4. MINOR EMPLOYMENT: I was employed by UP as a conductor (age 22 at time of exposure) as a conductor. Exposed to chemical plume. Sustained neurological injuries. UP controlled my medical testing through their own medical department.
 
 5. PATTERN: 9 excessive force cases in Wyoming federal courts 1979-2025. $3.4M in police settlements FY2019-23. Active federal case: Burks v. Park County (brain injury from deputies). No EPA investigation of elk die-off. No FOIA dispatch logs released.
 
@@ -97,7 +97,7 @@ I am requesting legal assistance for civil rights violations along the I-80 corr
 
 My brother Ryan Robert Maggard (born May 27, 2004) sustained a traumatic brain injury from excessive force by law enforcement during imprisonment in Laramie or Cheyenne, Wyoming. He is currently in rehabilitation for TBI. This is a civil rights violation under 42 U.S.C. § 1983.
 
-Additionally, I (Steven Crawford-Maggard) was exposed to a chemical plume on I-80 in Wyoming in late February/early March 2023 from a Union Pacific train derailment at Ogden, UT (March 2, 2023). WHP directed traffic through the plume. I sustained neurological injuries. I was a minor employed by UP as a conductor.
+Additionally, I (Steven Crawford-Maggard) was exposed to a chemical plume on I-80 in Wyoming in late February/early March 2023 from a Union Pacific train derailment at Ogden, UT (March 2, 2023). WHP directed traffic through the plume. I sustained neurological injuries. I was employed by UP as a conductor (age 22 at time of exposure) as a conductor.
 
 Hundreds of elk died in the same area without necropsy or toxicology testing. Elk carcasses were donated to the Rock Springs food bank and distributed as food without chemical testing.
 
@@ -123,7 +123,7 @@ I am reporting civil rights violations along the I-80 corridor in Wyoming:
 
 1. EXCESSIVE FORCE: My brother Ryan Robert Maggard (DOB 05/27/2004) sustained a traumatic brain injury from excessive force by law enforcement during imprisonment in Laramie or Cheyenne, Wyoming. He is currently in rehabilitation. This violates 18 U.S.C. § 242 and the Eighth and Fourteenth Amendments.
 
-2. ENVIRONMENTAL INJUSTICE: I (Steven Crawford-Maggard) was exposed to a chemical plume on I-80 in Wyoming in late Feb/early March 2023 from a Union Pacific train derailment at Ogden, UT (March 2, 2023). WHP directed traffic through the plume. No hazmat response, evacuation, or air quality testing. I sustained neurological injuries. I was a minor employed by UP as a conductor.
+2. ENVIRONMENTAL INJUSTICE: I (Steven Crawford-Maggard) was exposed to a chemical plume on I-80 in Wyoming in late Feb/early March 2023 from a Union Pacific train derailment at Ogden, UT (March 2, 2023). WHP directed traffic through the plume. No hazmat response, evacuation, or air quality testing. I sustained neurological injuries. I was employed by UP as a conductor (age 22 at time of exposure) as a conductor.
 
 3. PUBLIC HEALTH: Hundreds of elk died in the plume zone without necropsy or toxicology testing. Elk carcasses donated to Rock Springs food bank and distributed as food without chemical testing.
 
@@ -144,7 +144,7 @@ I have also submitted the online complaint form at civilrights.justice.gov.`
 
 I am requesting congressional inquiry into multiple federal failures along the I-80 corridor in Wyoming:
 
-1. FRA/PHMSA FAILURE: Union Pacific train derailment at Ogden, UT (March 2, 2023) — 12 cars derailed, manifest never released, no federal investigation. VICE/Motherboard classified as hazmat. I was a minor employed by UP as conductor, exposed to chemical plume, sustained neurological injuries.
+1. FRA/PHMSA FAILURE: Union Pacific train derailment at Ogden, UT (March 2, 2023) — 12 cars derailed, manifest never released, no federal investigation. VICE/Motherboard classified as hazmat. I was employed by UP as a conductor (age 22 at time of exposure) as conductor, exposed to chemical plume, sustained neurological injuries.
 
 2. EPA FAILURE: Hundreds of elk died in the chemical plume zone without toxicology testing. Elk carcasses donated to Rock Springs food bank and distributed as food without chemical testing. No EPA investigation.
 
@@ -164,7 +164,7 @@ I am requesting advocacy assistance for my brother, Ryan Robert Maggard, born Ma
 
 Ryan sustained a traumatic brain injury from police brutality during imprisonment in Wyoming (Laramie or Cheyenne). He is currently in rehabilitation for TBI.
 
-I am also a brain injury survivor — I sustained neurological damage from chemical exposure on the I-80 corridor in Wyoming in early 2023 while working as a Union Pacific conductor. I was a minor at the time.
+I am also a brain injury survivor — I sustained neurological damage from chemical exposure on the I-80 corridor in Wyoming in early 2023 while working as a Union Pacific conductor. I was 22 years old at the time.
 
 We need:
 1. Advocacy for Ryan's TBI rehabilitation and treatment
@@ -184,7 +184,7 @@ Fort Bridger, WY 82919`
 
 I am requesting congressional inquiry into multiple federal failures along the I-80 corridor in Wyoming:
 
-1. FRA/PHMSA FAILURE: Union Pacific train derailment at Ogden, UT (March 2, 2023) — 12 cars derailed, manifest never released, no federal investigation. Chemical plume covered I-80 in Wyoming. I was a minor employed by UP as conductor, exposed, sustained neurological injuries.
+1. FRA/PHMSA FAILURE: Union Pacific train derailment at Ogden, UT (March 2, 2023) — 12 cars derailed, manifest never released, no federal investigation. Chemical plume covered I-80 in Wyoming. I was employed by UP as a conductor (age 22 at time of exposure) as conductor, exposed, sustained neurological injuries.
 
 2. EPA FAILURE: Hundreds of elk died in the chemical plume zone without toxicology testing. Elk carcasses donated to Rock Springs food bank as food without chemical testing. No EPA investigation.
 
@@ -211,13 +211,63 @@ Contact: Steven Crawford-Maggard, fiersteity@gmail.com, 307-677-5504 (text only)
 Fort Bridger, WY 82919`
   },
   {
+    to: 'RAIlroad@ntsb.gov',
+    subject: 'SAFETY CONCERN: Uninvestigated Railroad Hazmat Release — UP0323RM001',
+    body: `NTSB Railroad Safety,
+
+I am reporting an uninvestigated railroad hazmat release:
+
+Date: March 2, 2023
+Location: Ogden, UT — Union Pacific mainline
+FRA Record: UP0323RM001
+Severity: 37 hazmat cars in consist, 12 derailed, $648,751 damage
+
+A three-layer suppression mechanism prevented NTSB involvement:
+1. FRA Form 54 does not collect car-level hazmat consist data
+2. UP entered "N/A" for hazmat classification
+3. FRA database defaulted hazmat count to "0" — preventing automatic NTSB/PHMSA/EPA notification
+
+The chemical plume crossed state lines into Wyoming, covering I-80 mile markers 15-33. No air monitoring, no evacuation, no hazmat response. Hundreds of elk died. Elk meat was distributed to a food bank without testing.
+
+Requesting:
+1. NTSB investigation of why this incident was not referred
+2. Obtain full hazmat consist from UP internal records
+3. Safety recommendation regarding FRA Form 54 hazmat reporting gaps
+
+Steven Crawford-Maggard, former UP conductor (age 22 at time of exposure)
+fiersteity@gmail.com, 307-677-5504 (text only), Fort Bridger, WY 82919`
+  },
+  {
+    to: 'spills@wyo.gov',
+    subject: 'SPILL REPORT: Interstate Chemical Plume — I-80 Corridor Feb-Mar 2023',
+    body: `Wyoming DEQ Spill Response,
+
+Reporting an unreported chemical spill/release:
+
+In late Feb/early March 2023, a chemical plume from a Union Pacific train derailment at Ogden, UT (March 2, 2023, FRA record UP0323RM001) crossed into Wyoming, covering I-80 mile markers 15-33 near Evanston/Fort Bridger.
+
+- No air quality monitoring was conducted
+- No evacuation was ordered
+- No hazmat response was initiated in Wyoming
+- No spill report was filed with Wyoming DEQ (to my knowledge)
+
+Hundreds of elk died in the corridor. No toxicology testing. Elk carcasses donated to Rock Springs food bank as food without chemical testing.
+
+Chemicals: UP stated magnesium chloride; witness observed possible cyclohexane. Full manifest only in UP internal records.
+
+Requesting investigation of interstate plume migration, full hazmat manifest from UP, coordination with WGFD on elk toxicology, and public health assessment of food bank distribution.
+
+Steven Crawford-Maggard, former UP conductor, Fort Bridger, WY 82919
+fiersteity@gmail.com, 307-677-5504 (text only)`
+  },
+  {
     to: 'tips@fbi.gov',
     subject: 'FBI TIP: Civil Rights Violation + Environmental Crime — I-80 Wyoming Corridor',
     body: `FBI Tips,
 
 1. CIVIL RIGHTS: My brother Ryan Robert Maggard (DOB 05/27/2004) sustained a traumatic brain injury from excessive force by law enforcement during imprisonment in Laramie or Cheyenne, Wyoming. He is currently in rehabilitation. Requesting federal civil rights investigation under 18 U.S.C. § 242.
 
-2. ENVIRONMENTAL CRIME: In late Feb/early March 2023, a chemical plume from a Union Pacific train derailment at Ogden, UT (March 2, 2023) covered I-80 in Wyoming (mile markers 15-33). WHP directed traffic through the plume. No hazmat response, evacuation, or air quality testing. Hundreds of elk died without necropsy/toxicology testing. Elk carcasses donated to Rock Springs food bank as food without chemical testing. I was a UP conductor exposed to the plume, sustained neurological injuries. I was a minor.
+2. ENVIRONMENTAL CRIME: In late Feb/early March 2023, a chemical plume from a Union Pacific train derailment at Ogden, UT (March 2, 2023) covered I-80 in Wyoming (mile markers 15-33). WHP directed traffic through the plume. No hazmat response, evacuation, or air quality testing. Hundreds of elk died without necropsy/toxicology testing. Elk carcasses donated to Rock Springs food bank as food without chemical testing. I was a UP conductor exposed to the plume, sustained neurological injuries. I was 22 years old at the time.
 
 Contact: Steven Crawford-Maggard, fiersteity@gmail.com, 307-677-5504 (text only)
 Fort Bridger, WY 82919`

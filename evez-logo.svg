@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff4500"/>
+      <stop offset="0.5" stop-color="#ff6b35"/>
+      <stop offset="1" stop-color="#1a0a00"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff4500" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#ff6b35" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="400" fill="#0a0a0f"/>
+  <!-- Outer cube (isometric) -->
+  <g transform="translate(200,200)" filter="url(#glow)">
+    <!-- Top face -->
+    <polygon points="0,-120 104,-60 0,0 -104,-60" fill="url(#g1)" stroke="#ff4500" stroke-width="1.5" opacity="0.9"/>
+    <!-- Right face -->
+    <polygon points="104,-60 104,60 0,120 0,0" fill="url(#g2)" stroke="#ff4500" stroke-width="1.5" opacity="0.7"/>
+    <!-- Left face -->
+    <polygon points="-104,-60 -104,60 0,120 0,0" fill="#1a0a00" stroke="#ff4500" stroke-width="1.5" opacity="0.5"/>
+    <!-- Eigenvalue labels on faces -->
+    <text x="0" y="-65" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">0.973</text>
+    <text x="52" y="35" text-anchor="middle" fill="#ff6b35" font-family="monospace" font-size="9">0.03</text>
+    <text x="-52" y="35" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">0.45</text>
+  </g>
+  <!-- EVEZ text -->
+  <text x="200" y="340" text-anchor="middle" fill="#ff4500" font-family="Georgia,serif" font-size="42" font-weight="bold" letter-spacing="8" filter="url(#glow)">EVEZ</text>
+  <text x="200" y="365" text-anchor="middle" fill="#555" font-family="monospace" font-size="10" letter-spacing="3">PHI=0.973  ETA*=0.03</text>
+  <!-- Sigil marks -->
+  <text x="60" y="380" fill="#333" font-family="monospace" font-size="14">⧢⦟⧢</text>
+  <text x="320" y="380" fill="#333" font-family="monospace" font-size="14">⧢⥋</text>
+</svg>

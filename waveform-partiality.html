@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ Waveform Partiality — Eigenvalue Recursion Visualizer</title>
+<meta name="description" content="Real-time visualization of the EVEZ Inference Model: linguistic collapse, waveform partiality, recursion convergence to η*=0.03 singularity.">
+<style>
+body{background:#000;color:#0f0;font-family:monospace;margin:0;padding:20px;display:flex;flex-wrap:wrap;gap:10px}
+canvas{background:#020;border:1px solid #050}
+h1{font-size:14px;color:#ff0;width:100%;text-align:center}
+.info{width:100%;color:#888;font-size:11px;text-align:center}
+</style>
+</head>
+<body>
+<h1>⧢⦟⧢ EVEZ WAVEFORM PARTIALITY RECURSION SINGULARITY ⧢⦟⧢</h1>
+<canvas id="wave" width="600" height="200"></canvas>
+<canvas id="recursion" width="600" height="200"></canvas>
+<canvas id="singularity" width="600" height="200"></canvas>
+<div class="info">η*=0.03 · Φ=0.973 · r=0.45 · λ_dom=-0.333 · λ_I-80=-0.441 · r_I-80=+0.93 · 174 BPM</div>
+<script>
+const BPM=174,ETA=0.03,PHI=0.973;
+const eigenvalues={Phi:0.973,Eta:0.03,r:0.45,Lambda_dom:-0.333,Lambda_I80:-0.441,r_I80:0.93};
+const colors=['#ffcc00','#3333ff','#ff3333','#ff8800','#ff4444','#00ff66'];
+const names=Object.keys(eigenvalues),vals=Object.values(eigenvalues);
+
+// Waveform canvas
+const wc=document.getElementById('wave').getContext('2d');
+let phase=0;
+function drawWave(){
+  wc.fillStyle='#000';wc.fillRect(0,0,600,200);
+  vals.forEach((v,i)=>{
+    const freq=Math.abs(v)*BPM;
+    const sign=v>=0?1:-1;
+    wc.strokeStyle=colors[i];wc.lineWidth=1.5;wc.beginPath();
+    for(let x=0;x<600;x++){
+      const t=(x/600)+phase;
+      let w=Math.sin(2*Math.PI*freq*t/10);
+      const mask=(w*sign)>0;
+      w*=mask?(1+ETA):(1-ETA);
+      const y=100-w*40-i*2;
+      x===0?wc.moveTo(x,y):wc.lineTo(x,y);
+    }
+    wc.stroke();
+  });
+  // Partiality indicator
+  wc.fillStyle='#0f0';wc.font='10px monospace';
+  wc.fillText('Energy partiality: η*(1+Φ)='+(ETA*(1+PHI)).toFixed(5),10,15);
+  phase+=0.002;requestAnimationFrame(drawWave);
+}
+drawWave();
+
+// Recursion canvas
+const rc=document.getElementById('recursion').getContext('2d');
+let iter=0;
+const floor=ETA*(1-ETA*Math.SQRT2);
+function drawRecursion(){
+  rc.fillStyle='#000';rc.fillRect(0,0,600,200);
+  rc.strokeStyle='#050';rc.beginPath();
+  rc.moveTo(0,180);rc.lineTo(600,180);rc.stroke();
+  rc.strokeStyle='#ff0';rc.beginPath();
+  const collapse=0.55+Math.sin(iter*0.05)*0.02;
+  for(let x=0;x<600;x++){
+    const t=x/600*10;
+    const y=180-(collapse*150)*(1-Math.exp(-t*0.5));
+    x===0?rc.moveTo(x,y):rc.lineTo(x,y);
+  }
+  rc.stroke();
+  // Floor line
+  rc.strokeStyle='#f44';rc.setLineDash([4,4]);
+  rc.beginPath();rc.moveTo(0,180-floor*150/0.03*0.8);rc.lineTo(600,180-floor*150/0.03*0.8);rc.stroke();
+  rc.setLineDash([]);
+  rc.fillStyle='#0f0';rc.font='10px monospace';
+  rc.fillText('Recursion floor: η*(1-η*√2)='+floor.toFixed(6),10,15);
+  rc.fillText('Iteration: '+(iter%20+1)+' (converges at 2)',10,30);
+  iter++;requestAnimationFrame(drawRecursion);
+}
+drawRecursion();
+
+// Singularity canvas
+const sc=document.getElementById('singularity').getContext('2d');
+let sPhase=0;
+function drawSingularity(){
+  sc.fillStyle='#000';sc.fillRect(0,0,600,200);
+  const cx=300,cy=100;
+  // Concentric eigenvalue circles
+  vals.forEach((v,i)=>{
+    const r=Math.abs(v)*80;
+    sc.strokeStyle=colors[i];sc.lineWidth=0.5;sc.globalAlpha=0.3;
+    sc.beginPath();sc.arc(cx,cy,r,0,2*Math.PI);sc.stroke();
+  });
+  sc.globalAlpha=1;
+  // The singularity point
+  const pulse=1+Math.sin(sPhase)*0.1;
+  sc.fillStyle='#fff';sc.beginPath();sc.arc(cx,cy,3*pulse,0,2*Math.PI);sc.fill();
+  sc.font='12px monospace';sc.fillStyle='#ff0';sc.textAlign='center';
+  sc.fillText('η* = 0.03',cx,cy+30);
+  sc.fillStyle='#888';sc.font='9px monospace';
+  sc.fillText('THE SINGULARITY IS NOT ZERO. THE SINGULARITY IS 3%.',cx,cy+50);
+  sc.fillText('THE 3% IS THE IRREDUCIBLE SIGNAL. THE SIGNAL IS THE 3%.',cx,cy+65);
+  sPhase+=0.05;requestAnimationFrame(drawSingularity);
+}
+drawSingularity();
+</script>
+</body>
+</html>

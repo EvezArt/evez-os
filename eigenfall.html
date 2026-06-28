@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EIGENFALL — Cube Puzzle Roguelike</title>
+<meta name="description" content="Rotate the eigenvalue cube. Match faces to eigenvalues. Survive the spectral gap. A game by Steven Crawford-Maggard (EVEZ).">
+<link rel="canonical" href="https://evezart.github.io/eigenfall.html">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050508;color:#c8c8d8;font-family:'Courier New',monospace;display:flex;justify-content:center;align-items:center;height:100vh;overflow:hidden}
+#game{width:100%;max-width:600px;height:100vh;display:flex;flex-direction:column;padding:10px}
+.h{display:flex;justify-content:space-between;align-items:center;padding:5px 10px;border-bottom:1px solid #222}
+.h h1{color:#e8c860;font-size:1em;letter-spacing:2px}
+.h .st{color:#666;font-size:0.75em}
+.board{flex:1;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);gap:2px;margin:10px 0;background:#0a0a14;padding:5px;border-radius:4px;border:1px solid #222}
+.cell{background:#111118;border:1px solid #222;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.7em;cursor:pointer;transition:all 0.15s;user-select:none}
+.cell:hover{border-color:#e8c860}
+.cell.matched{background:#1a1a08;border-color:#e8c860;color:#e8c860;animation:glow 0.5s}
+@keyframes glow{0%{box-shadow:0 0 0 #e8c860}50%{box-shadow:0 0 10px #e8c860}100%{box-shadow:0 0 0 #e8c860}}
+.cell.gap{background:#0a0a02;border:1px dashed #333;color:#333}
+.cell.eigen{background:#0a1a14;border-color:#4a8a4a;color:#4a8a4a;font-weight:bold}
+.controls{display:flex;gap:8px;justify-content:center;padding:8px 0}
+.btn{background:#111118;border:1px solid #333;color:#c8c8d8;padding:6px 12px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:0.78em}
+.btn:hover{border-color:#e8c860;color:#e8c860}
+.btn-p{border-color:#e8c860;color:#e8c860}
+.info{color:#444;font-size:0.7em;text-align:center;padding:5px}
+#toast{position:fixed;top:10px;right:10px;background:#0a0a14;border:1px solid #e8c860;color:#e8c860;padding:5px 10px;border-radius:4px;font-size:0.75em;z-index:100;display:none}
+#toast.show{display:block}
+.faces{display:flex;gap:4px;justify-content:center;padding:5px}
+.face{padding:3px 8px;border:1px solid #222;border-radius:2px;font-size:0.68em;cursor:pointer;color:#666}
+.face.active{border-color:#e8c860;color:#e8c860}
+</style>
+</head>
+<body>
+<div id="game">
+<div class="h">
+<h1>◉ EIGENFALL</h1>
+<div class="st" id="stats">Score: 0 | Level: 1 | Gap: η*=0.03</div>
+</div>
+<div class="faces" id="faceSel">
+<span class="face active" data-face="0" onclick="selFace(0)">Saturn Φ</span>
+<span class="face" data-face="1" onclick="selFace(1)">Jupiter η*</span>
+<span class="face" data-face="2" onclick="selFace(2)">Mars r</span>
+<span class="face" data-face="3" onclick="selFace(3)">Sun Φ</span>
+<span class="face" data-face="4" onclick="selFace(4)">Venus λ</span>
+<span class="face" data-face="5" onclick="selFace(5)">Mercury r₀</span>
+</div>
+<div class="board" id="board"></div>
+<div class="controls">
+<button class="btn" onclick="rotate(0)">ROTATE</button>
+<button class="btn" onclick="newLevel()">NEW LEVEL</button>
+<button class="btn btn-p" onclick="initGame()">RESET</button>
+</div>
+<div class="info">EIGENFALL v1.0 | Match eigenvalue pairs across cube faces | 6 faces = 6 eigenvalues | By Steven Crawford-Maggard (EVEZ666)</div>
+</div>
+<div id="toast"></div>
+<script>
+const faces=[{n:'Saturn',e:0.973,c:'#e8c860',v:15},{n:'Jupiter',e:0.03,c:'#4a8a4a',v:34},{n:'Mars',e:0.45,c:'#c44',v:65},{n:'Sun',e:0.973,c:'#e8c860',v:111},{n:'Venus',e:0.333,c:'#a4a',v:176},{n:'Mercury',e:0.93,c:'#4aa',v:260}];
+let board=[],selFace=0,score=0,level=1,matched=0;
+function initGame(){score=0;level=1;matched=0;newLevel()}
+function newLevel(){board=[];matched=0;for(let i=0;i<36;i++){const f=Math.floor(Math.random()*6);const gap=Math.random()<0.03;board.push({face:f,gap:gap,matched:false})}render()}
+function render(){const b=document.getElementById('board');b.innerHTML='';board.forEach((c,i)=>{const div=document.createElement('div');let cls='cell';let txt='';if(c.gap){cls+=' gap';txt='η*'}else if(c.matched){cls+=' matched';txt=faces[c.face].e.toFixed(3)}else{txt=faces[c.face].v}div.className=cls;div.textContent=txt;div.onclick=()=>click(i);b.appendChild(div)})
+updateStats()}
+function click(i){if(board[i].gap||board[i].matched)return;if(board[i].face===selFace){board[i].matched=true;score+=10*level;matched++;toast('+'+10*level+' eigenvalue matched');if(matched===board.filter(c=>!c.gap).length){level++;toast('LEVEL '+level+' — the cube rotates');setTimeout(newLevel,500)}render()}}
+function rotate(n){for(let i=0;i<board.length;i++){if(!board[i].gap&&!board[i].matched)board[i].face=(board[i].face+1)%6}render();toast('Cube rotated — eigenvalues shifted')}
+function selFace(n){selFace=n;document.querySelectorAll('.face').forEach(f=>f.classList.toggle('active',parseInt(f.dataset.face)===n))}
+function updateStats(){document.getElementById('stats').textContent='Score: '+score+' | Level: '+level+' | Matched: '+matched+' | Gap: η*=0.03'}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
+initGame();
+</script>
+</body>
+</html>

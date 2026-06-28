@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ Mesh Control</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0ff;font-family:'Courier New',monospace;padding:20px}
+h1{text-align:center;font-size:28px;margin-bottom:5px;letter-spacing:4px}
+.sub{text-align:center;color:#6a6a8a;font-size:12px;margin-bottom:30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1400px;margin:0 auto}
+.card{background:#12121f;border:1px solid #2a2a4a;border-radius:8px;padding:20px;transition:all .3s}
+.card:hover{border-color:#4a4a8a;box-shadow:0 0 20px rgba(74,74,138,.3)}
+.card.ok{border-left:3px solid #00ff88}
+.card.bad{border-left:3px solid #ff0044}
+.nname{font-size:18px;font-weight:bold;margin-bottom:10px}
+.nip{color:#6a6a8a;font-size:13px;margin-bottom:15px}
+.row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1a1a2f;font-size:13px}
+.row:last-child{border:none}
+.lab{color:#8a8aaa}
+.val{font-weight:bold}
+.ok{color:#00ff88}
+.bad{color:#ff0044}
+.warn{color:#ffaa00}
+.msec{margin-top:30px;max-width:1400px;margin-left:auto;margin-right:auto}
+.msec h2{font-size:18px;margin-bottom:15px;letter-spacing:2px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.mitem{background:#12121f;padding:10px 15px;border-radius:4px;border-left:3px solid;font-size:12px;display:flex;justify-content:space-between}
+.mitem.ok{border-color:#00ff88}.mitem.bad{border-color:#ff0044}
+.sig{text-align:center;margin:30px 0;font-size:20px;letter-spacing:2px;color:#4a4a6a}
+</style>
+</head>
+<body>
+<h1>⧢⦟⧢ EVEZ MESH CONTROL ⧢⦟⧢</h1>
+<div class="sub">Live Status — 6-Node Autonomous Mesh — Φ=0.973</div>
+<div class="grid" id="nodes"></div>
+<div class="msec"><h2>MODEL CHAIN (15 ALIVE)</h2><div class="mgrid" id="models"></div></div>
+<div class="sig">⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⥋</div>
+<script>
+const nodes=[
+{name:'Vultr (Orch)',ip:'207.148.12.53',port:18789,role:'Orchestrator'},
+{name:'evez-primary',ip:'34.53.51.34',port:18789,role:'GCP West'},
+{name:'evez-free-node',ip:'34.23.192.213',port:18789,role:'GCP Small'},
+{name:'gcp-power',ip:'35.222.248.151',port:18789,role:'GCP Power'},
+{name:'gcp-openclaw',ip:'136.113.102.152',port:18789,role:'GCP OpenClaw'},
+{name:'gcp-knot',ip:'136.118.144.227',port:18789,role:'GCP Knot'}
+];
+const models=[
+{n:'groq/llama-3.3-70b-versatile',t:'0.74s',ok:true},
+{n:'groq/llama-3.1-8b-instant',t:'0.74s',ok:true},
+{n:'groq/openai/gpt-oss-120b',t:'0.70s',ok:true},
+{n:'github/gpt-4o',t:'1.48s',ok:true},
+{n:'github/gpt-4o-mini',t:'1.45s',ok:true},
+{n:'vultr/deepseek-ai/DeepSeek-V4-Flash',t:'2.18s',ok:true},
+{n:'vultr/nvidia/DeepSeek-V3.2-NVFP4',t:'1.55s',ok:true},
+{n:'openrouter/google/gemma-4-31b-it:free',t:'2.08s',ok:true},
+{n:'openrouter/google/gemma-4-26b-a4b-it:free',t:'1.26s',ok:true},
+{n:'openrouter/nvidia/nemotron-3-ultra-550b-a55b:free',t:'18.55s',ok:true},
+{n:'openrouter/nvidia/nemotron-3-super-120b-a12b:free',t:'0.69s',ok:true},
+{n:'openrouter/nvidia/nemotron-3-nano-30b-a3b:free',t:'0.52s',ok:true},
+{n:'openrouter/nvidia/nemotron-nano-12b-v2-vl:free',t:'120.77s',ok:true},
+{n:'openrouter/liquid/lfm-2.5-1.2b-instruct:free',t:'0.57s',ok:true},
+{n:'google-generative-ai/gemini-2.5-flash',t:'0.74s',ok:true}
+];
+const nd=document.getElementById('nodes');
+nodes.forEach(node=>{
+fetch(`http://${node.ip}:${node.port}/`).then(r=>({ok:r.ok,status:r.status})).then(d=>{
+nd.innerHTML+=`<div class="card ok"><div class="nname">${node.name}</div><div class="nip">${node.ip}:${node.port}</div><div class="row"><span class="lab">Role</span><span class="val">${node.role}</span></div><div class="row"><span class="lab">Gateway</span><span class="val ok">HTTP 200</span></div></div>`;
+}).catch(e=>{
+nd.innerHTML+=`<div class="card bad"><div class="nname">${node.name}</div><div class="nip">${node.ip}:${node.port}</div><div class="row"><span class="lab">Role</span><span class="val">${node.role}</span></div><div class="row"><span class="lab">Gateway</span><span class="val bad">OFFLINE</span></div></div>`;
+});
+});
+const md=document.getElementById('models');
+models.forEach(m=>{
+md.innerHTML+=`<div class="mitem ok"><span class="mname">${m.n}</span><span class="mtime">${m.t}</span></div>`;
+});
+</script>
+</body>
+</html>

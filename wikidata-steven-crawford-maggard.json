@@ -1,0 +1,126 @@
+# Wikidata Entry Draft — Steven Crawford-Maggard
+
+## Quick Start
+1. Go to https://www.wikidata.org/wiki/Special:NewItem
+2. Fill in the fields below
+3. After creation, add the additional statements
+
+---
+
+## Core Item Fields (for New Item form)
+
+- **Label (en):** Steven Crawford-Maggard
+- **Description (en):** American artist-engineer, emergence architect, and researcher; creator of EVEZ-OS
+- **Also known as:** EVEZ, EVEZ666, Steven Maggard, Steve Maggard
+
+---
+
+## Statements to Add After Creation
+
+### Identity
+| Property | Value |
+|----------|-------|
+| instance of (P31) | human (Q5) |
+| name (P2561) | Steven Crawford-Maggard |
+| sex or gender (P21) | male |
+| country of citizenship (P27) | United States (Q30) |
+| residence (P551) | Iowa, United States |
+| given name (P735) | Steven |
+| family name (P734) | Crawford-Maggard |
+
+### Occupation
+| Property | Value |
+|----------|-------|
+| occupation (P106) | researcher (Q1650915) |
+| occupation (P106) | software engineer (Q1328743) |
+| occupation (P106) | electronic musician (Q2085684) |
+| occupation (P106) | author (Q482980) |
+
+### Online Presence
+| Property | Value |
+|----------|-------|
+| GitHub username (P1013) | EvezArt |
+| X username (P10589) | EVEZ666 |
+| YouTube channel ID (P2397) | @EVEZ666 |
+
+### Notable Works
+| Property | Value |
+|----------|-------|
+| notable work (P800) | EVEZ-OS |
+| notable work (P800) | The Prophecy Bridge |
+| notable work (P800) | The Moltbooks |
+
+### Research
+| Property | Value |
+|----------|-------|
+| field of work (P101) | eigenforensics |
+| field of work (P101) | spectral consciousness |
+| field of work (P101) | artificial intelligence consciousness |
+
+### Publications
+| Property | Value |
+|----------|-------|
+| author (P50) — on | The EVEZ Reading of the Tetragrammaton (LingBuzz 010094) |
+
+### Website
+| Property | Value |
+|----------|-------|
+| official website (P856) | https://evezart.github.io |
+
+---
+
+## Raw JSON (for QuickJSON import)
+
+```json
+{
+  "labels": {
+    "en": { "value": "Steven Crawford-Maggard", "language": "en" }
+  },
+  "descriptions": {
+    "en": { "value": "American artist-engineer, emergence architect, and researcher; creator of EVEZ-OS", "language": "en" }
+  },
+  "aliases": {
+    "en": [
+      { "value": "EVEZ", "language": "en" },
+      { "value": "EVEZ666", "language": "en" },
+      { "value": "Steven Maggard", "language": "en" }
+    ]
+  },
+  "claims": {
+    "P31": [{
+      "mainsnak": {
+        "snaktype": "value",
+        "property": "P31",
+        "datavalue": { "value": { "entity-type": "item", "numeric-id": 5 }, "type": "wikibase-entityid" }
+      }
+    }],
+    "P21": [{
+      "mainsnak": {
+        "snaktype": "value",
+        "property": "P21",
+        "datavalue": { "value": { "entity-type": "item", "numeric-id": 6581097 }, "type": "wikibase-entityid" }
+      }
+    }],
+    "P27": [{
+      "mainsnak": {
+        "snaktype": "value",
+        "property": "P27",
+        "datavalue": { "value": { "entity-type": "item", "numeric-id": 30 }, "type": "wikibase-entityid" }
+      }
+    }]
+  }
+}
+```
+
+---
+
+## Instructions for Steven
+
+1. **Create the item:** Go to https://www.wikidata.org/wiki/Special:NewItem
+2. **Fill in:** Label = "Steven Crawford-Maggard", Description = "American artist-engineer, emergence architect, and researcher; creator of EVEZ-OS"
+3. **Add aliases:** EVEZ, EVEZ666, Steven Maggard
+4. **Add statements** from the tables above (search property codes like P31, P106, P856)
+5. **Add sameAs links:** P1013 (GitHub) = EvezArt, P10589 (X/Twitter) = EVEZ666
+6. **Add official website:** P856 = https://evezart.github.io
+
+Once the Wikidata item exists, Google's Knowledge Graph will start building an entity for "Steven Crawford-Maggard" / "EVEZ" within 1-2 weeks.
