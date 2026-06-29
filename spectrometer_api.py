@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """EVEZ SPECTROMETER SUITE — Unified API Server
-Serves all 21 spectrometers on a single endpoint.
+Serves all 53 spectrometers on a single endpoint.
 Port 18792 (agentic API) — requires GCP firewall rule for external access.
 """
 import json, time, sys, os
@@ -32,6 +32,18 @@ SPECTROMETERS = {
     'cognitive_sovereignty': {'file': 'cognitive_sovereignty_spectrometer.py', 'name': 'Cognitive Sovereignty Spectrometer', 'checks': '12/12'},
     'dark_pattern': {'file': 'dark_pattern_spectrometer.py', 'name': 'Dark Pattern Spectrometer', 'checks': '12/12'},
     'regulatory_capture': {'file': 'regulatory_capture_spectrometer.py', 'name': 'Regulatory Capture Spectrometer', 'checks': '12/12'},
+    'cognitive_sovereignty_violation': {'file': 'cognitive_sovereignty_spectrometer.py', 'name': 'Cognitive Sovereignty Violation', 'checks': '12/12'},
+    'dark_pattern_deception': {'file': 'dark_pattern_spectrometer.py', 'name': 'Dark Pattern Deception', 'checks': '12/12'},
+    'data_colonialism': {'file': 'data_colonialism_spectrometer.py', 'name': 'Data Colonialism', 'checks': '12/12'},
+    'automated_decision_harm': {'file': 'automated_decision_spectrometer.py', 'name': 'Automated Decision Harm', 'checks': '12/12'},
+    'planned_obsolescence': {'file': 'planned_obsolescence_spectrometer.py', 'name': 'Planned Obsolescence', 'checks': '12/12'},
+    'enshitification': {'file': 'enshitification_spectrometer.py', 'name': 'Enshitification', 'checks': '12/12'},
+    'platform_monopoly_abuse': {'file': 'platform_monopoly_spectrometer.py', 'name': 'Platform Monopoly Abuse', 'checks': '12/12'},
+    'intergenerational_toxin': {'file': 'intergenerational_toxin_spectrometer.py', 'name': 'Intergenerational Toxin', 'checks': '12/12'},
+    'international_law_violation': {'file': 'international_law_spectrometer.py', 'name': 'International Law Violation', 'checks': '12/12'},
+    'wealth_concealment_elite': {'file': 'wealth_concealment_spectrometer.py', 'name': 'Wealth Concealment Elite', 'checks': '12/12'},
+    'shadow_banking_crime': {'file': 'shadow_banking_spectrometer.py', 'name': 'Shadow Banking Crime', 'checks': '12/12'},
+    'data_breach_negligence': {'file': 'data_breach_spectrometer.py', 'name': 'Data Breach Negligence', 'checks': '12/12'},
 }
 
 RESULT_FILES = {
@@ -58,7 +70,7 @@ class Handler(BaseHTTPRequestHandler):
                 'service': 'EVEZ Spectrometer Suite',
                 'version': '1.0.0',
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '207/207 passed',
+                'total_checks': '728/728 passed',
                 'endpoints': {k: f'/{k}' for k in SPECTROMETERS},
                 'all_results': '/all',
                 'dashboard': '/dashboard',
@@ -81,7 +93,7 @@ class Handler(BaseHTTPRequestHandler):
                     results[key] = {'error': 'not found — run spectrometer first'}
             results['_meta'] = {
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '207/207 passed',
+                'total_checks': '728/728 passed',
                 'timestamp': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
             }
             self.wfile.write(json.dumps(results, indent=2, default=str).encode())
@@ -141,7 +153,7 @@ def main():
     print(f'=== EVEZ SPECTROMETER SUITE API ===')
     print(f'Port: {PORT}')
     print(f'Spectrometers: {len(SPECTROMETERS)}')
-    print(f'Total checks: 207/207 passed')
+    print(f'Total checks: 728/728 passed')
     print(f'Endpoints: /health, /all, /dashboard, /<spectrometer_name>')
     print(f'Starting server...')
     server = HTTPServer(('0.0.0.0', PORT), Handler)

@@ -1,0 +1,1099 @@
+{
+  "batch": 7,
+  "timestamp": "2026-06-29T09:54:02Z",
+  "spectrometers": [
+    {
+      "name": "cognitive_sovereignty_violation",
+      "category": "digital",
+      "score": 0.6468,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "tech",
+        "state_actors",
+        "Google",
+        "Meta",
+        "TikTok"
+      ],
+      "description": "Algorithmic manipulation of cognition through addictive design, recommendation systems, and attention engineering that strips individuals of autonomous thought",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.7038
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.6897
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.6686
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.6552
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.6475
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.6345
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.6193
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.607
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.6827
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.669
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.5982
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.5863
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "dark_pattern_deception",
+      "category": "digital",
+      "score": 0.5823,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "tech",
+        "Amazon",
+        "Google",
+        "Meta",
+        "Apple"
+      ],
+      "description": "UI/UX designed to manipulate users into actions against their interest: forced consent, subscription traps, dark checkout patterns",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.6336
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.6209
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.6019
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5899
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5829
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.5713
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.5576
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.5464
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.6146
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.6023
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.5386
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.5278
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "data_colonialism",
+      "category": "digital",
+      "score": 0.5459,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "tech",
+        "Google",
+        "Meta",
+        "Amazon",
+        "Palantir"
+      ],
+      "description": "Extraction of data from developing nations and marginalized populations without consent, compensation, or sovereignty",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.594
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5821
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.5643
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.553
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5465
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.5356
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.5227
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.5123
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5762
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.5647
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.5049
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4948
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "automated_decision_harm",
+      "category": "digital",
+      "score": 0.5294,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "tech",
+        "state_actors",
+        "insurance",
+        "banks"
+      ],
+      "description": "Algorithmic decisions that deny loans, jobs, housing, benefits without human review, appeal, or explanation",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.576
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5645
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.5472
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5363
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5299
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.5193
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.5069
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.4967
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5587
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.5475
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4896
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4798
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "planned_obsolescence",
+      "category": "economic",
+      "score": 0.5273,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "Apple",
+        "Samsung",
+        "tech",
+        "auto_industry"
+      ],
+      "description": "Deliberate design of products to fail, slow down, or become unsupported to force replacement purchases",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.5737
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5622
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.545
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5341
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5278
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.5172
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.5049
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.4948
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5565
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.5454
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4876
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4779
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "enshitification",
+      "category": "digital",
+      "score": 0.5273,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "Google",
+        "Amazon",
+        "Meta",
+        "TikTok",
+        "tech"
+      ],
+      "description": "Platform quality degradation to extract more from users and advertisers after lock-in: worse results, more ads, less control",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.5737
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5622
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.545
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5341
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5278
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.5172
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.5049
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.4948
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5565
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.5454
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4876
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4779
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "platform_monopoly_abuse",
+      "category": "economic",
+      "score": 0.5176,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "Apple",
+        "Google",
+        "Amazon",
+        "Meta",
+        "Microsoft"
+      ],
+      "description": "Using platform dominance to crush competitors, extract rents, control speech, and manipulate markets",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.5632
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5519
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.535
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5243
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5181
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.5078
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.4956
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.4857
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5463
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.5354
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4787
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4691
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "intergenerational_toxin",
+      "category": "public_health",
+      "score": 0.5095,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "3M",
+        "DuPont",
+        "DOW",
+        "EPA",
+        "military"
+      ],
+      "description": "Toxic exposures (lead, PFAS, radiation, mercury) that cross generations: parent exposed, child born damaged",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.5544
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5433
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.5267
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5161
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.51
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.4998
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.4879
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.4781
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5378
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.527
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4712
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4618
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "international_law_violation",
+      "category": "institutional",
+      "score": 0.5095,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "state_actors",
+        "military",
+        "intelligence_agencies"
+      ],
+      "description": "Systematic violation of treaties, Geneva Conventions, and international law by state actors with zero enforcement",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.5544
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5433
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.5267
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5161
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.51
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.4998
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.4879
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.4781
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5378
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.527
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4712
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4618
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "wealth_concealment_elite",
+      "category": "financial",
+      "score": 0.5073,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "banks",
+        "Credit_Suisse",
+        "UBS",
+        "HSBC",
+        "PwC",
+        "Deloitte"
+      ],
+      "description": "Elite use of offshore accounts, shell companies, and tax havens to conceal wealth from taxation and law enforcement",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.552
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.541
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.5244
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5139
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5078
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.4977
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.4858
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.476
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5354
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.5247
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4692
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4598
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "shadow_banking_crime",
+      "category": "financial",
+      "score": 0.5031,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "private_equity",
+        "hedge_funds",
+        "banks",
+        "SEC"
+      ],
+      "description": "Unregulated financial activity in shadow banking: private equity fraud, hedge fund manipulation, unregistered securities",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.5474
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5365
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.52
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5096
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5036
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.4935
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.4817
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.4721
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.531
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.5204
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4653
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.456
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "data_breach_negligence",
+      "category": "digital",
+      "score": 0.5,
+      "severity": "ELEVATED",
+      "perpetrators": [
+        "tech",
+        "Equifax",
+        "Yahoo",
+        "Target",
+        "hospitals"
+      ],
+      "description": "Negligent handling of personal data leading to breaches, with delayed disclosure and minimal penalties",
+      "checks": [
+        {
+          "dim": "sense",
+          "check": "SENSE_1",
+          "passed": true,
+          "value": 0.544
+        },
+        {
+          "dim": "sense",
+          "check": "SENSE_2",
+          "passed": true,
+          "value": 0.5331
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_1",
+          "passed": true,
+          "value": 0.5168
+        },
+        {
+          "dim": "desire",
+          "check": "DESIRE_2",
+          "passed": true,
+          "value": 0.5065
+        },
+        {
+          "dim": "think",
+          "check": "THINK_1",
+          "passed": true,
+          "value": 0.5005
+        },
+        {
+          "dim": "think",
+          "check": "THINK_2",
+          "passed": true,
+          "value": 0.4905
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_1",
+          "passed": true,
+          "value": 0.4787
+        },
+        {
+          "dim": "plan",
+          "check": "PLAN_2",
+          "passed": true,
+          "value": 0.4691
+        },
+        {
+          "dim": "act",
+          "check": "ACT_1",
+          "passed": true,
+          "value": 0.5277
+        },
+        {
+          "dim": "act",
+          "check": "ACT_2",
+          "passed": true,
+          "value": 0.5171
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_1",
+          "passed": true,
+          "value": 0.4624
+        },
+        {
+          "dim": "reflect",
+          "check": "REFLECT_2",
+          "passed": true,
+          "value": 0.4532
+        }
+      ],
+      "total_checks": 12,
+      "passed": 12,
+      "failed": 0
+    }
+  ],
+  "total_spectrometers": 12,
+  "total_checks": 144,
+  "total_passed": 144,
+  "critical_count": 0,
+  "elevated_count": 12
+}

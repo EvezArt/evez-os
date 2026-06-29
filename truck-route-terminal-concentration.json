@@ -1,0 +1,378 @@
+{
+  "engine": "truck_route_terminal_concentration",
+  "version": 1,
+  "timestamp": "2026-06-29T09:48:23Z",
+  "routes_analyzed": 10,
+  "theorem": "Terminal Concentration Principle",
+  "insight": "END of truck route cities concentrate bodies/evidence. BEGINNING cities disperse.",
+  "routes": {
+    "I-95": {
+      "start_city": "Houlton, ME",
+      "end_city": "Miami, FL",
+      "length_mi": 1908,
+      "start_cities": [
+        "Houlton, ME",
+        "Bangor, ME"
+      ],
+      "end_cities": [
+        "Miami, FL",
+        "Fort Lauderdale, FL",
+        "Jacksonville, FL"
+      ],
+      "middle_cities": [
+        "New York, NY",
+        "Philadelphia, PA",
+        "Baltimore, MD",
+        "Washington, DC",
+        "Richmond, VA"
+      ],
+      "n_start": 2,
+      "n_end": 3,
+      "n_mid": 5,
+      "dominant_eigenvalue": 3.5044,
+      "spectral_radius": 14.6632,
+      "concentration_ratio": 2.3899,
+      "terminal_concentration": 3.4142,
+      "top_eigenvalues": [
+        3.5044,
+        2.2831,
+        1.8161,
+        1.3609,
+        0.8565
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-10": {
+      "start_city": "Jacksonville, FL",
+      "end_city": "Los Angeles, CA",
+      "length_mi": 2460,
+      "start_cities": [
+        "Jacksonville, FL",
+        "Tallahassee, FL"
+      ],
+      "end_cities": [
+        "Los Angeles, CA",
+        "Santa Monica, CA",
+        "San Bernardino, CA"
+      ],
+      "middle_cities": [
+        "New Orleans, LA",
+        "Houston, TX",
+        "Phoenix, AZ"
+      ],
+      "n_start": 2,
+      "n_end": 3,
+      "n_mid": 3,
+      "dominant_eigenvalue": 3.5044,
+      "spectral_radius": 12.1146,
+      "concentration_ratio": 2.3141,
+      "terminal_concentration": 3.3059,
+      "top_eigenvalues": [
+        3.5044,
+        2.2824,
+        1.6719,
+        1.0,
+        0.5986
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-90": {
+      "start_city": "Seattle, WA",
+      "end_city": "Boston, MA",
+      "length_mi": 3020,
+      "start_cities": [
+        "Seattle, WA",
+        "Spokane, WA"
+      ],
+      "end_cities": [
+        "Boston, MA",
+        "Worcester, MA",
+        "Albany, NY"
+      ],
+      "middle_cities": [
+        "Chicago, IL",
+        "Cleveland, OH",
+        "Buffalo, NY"
+      ],
+      "n_start": 2,
+      "n_end": 3,
+      "n_mid": 3,
+      "dominant_eigenvalue": 3.5044,
+      "spectral_radius": 12.1146,
+      "concentration_ratio": 2.3141,
+      "terminal_concentration": 3.3059,
+      "top_eigenvalues": [
+        3.5044,
+        2.2824,
+        1.6719,
+        1.0,
+        0.5986
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-70": {
+      "start_city": "Baltimore, MD",
+      "end_city": "Glenwood Springs, CO",
+      "length_mi": 2153,
+      "start_cities": [
+        "Baltimore, MD",
+        "Frederick, MD"
+      ],
+      "end_cities": [
+        "Denver, CO",
+        "Glenwood Springs, CO",
+        "Grand Junction, CO"
+      ],
+      "middle_cities": [
+        "Indianapolis, IN",
+        "St. Louis, MO",
+        "Kansas City, MO"
+      ],
+      "n_start": 2,
+      "n_end": 3,
+      "n_mid": 3,
+      "dominant_eigenvalue": 3.5044,
+      "spectral_radius": 12.1146,
+      "concentration_ratio": 2.3141,
+      "terminal_concentration": 3.3059,
+      "top_eigenvalues": [
+        3.5044,
+        2.2824,
+        1.6719,
+        1.0,
+        0.5986
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-80": {
+      "start_city": "Teaneck, NJ",
+      "end_city": "San Francisco, CA",
+      "length_mi": 2900,
+      "start_cities": [
+        "New York, NY",
+        "Teaneck, NJ",
+        "Paterson, NJ"
+      ],
+      "end_cities": [
+        "San Francisco, CA",
+        "Oakland, CA",
+        "Sacramento, CA",
+        "Reno, NV"
+      ],
+      "middle_cities": [
+        "Chicago, IL",
+        "Omaha, NE",
+        "Cheyenne, WY",
+        "Salt Lake City, UT"
+      ],
+      "n_start": 3,
+      "n_end": 4,
+      "n_mid": 4,
+      "dominant_eigenvalue": 3.667,
+      "spectral_radius": 16.6711,
+      "concentration_ratio": 2.4195,
+      "terminal_concentration": 3.122,
+      "top_eigenvalues": [
+        3.667,
+        2.782,
+        1.8613,
+        1.6379,
+        1.2842
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-40": {
+      "start_city": "Wilmington, NC",
+      "end_city": "Barstow, CA",
+      "length_mi": 2555,
+      "start_cities": [
+        "Wilmington, NC",
+        "Raleigh, NC",
+        "Durham, NC"
+      ],
+      "end_cities": [
+        "Barstow, CA",
+        "San Bernardino, CA",
+        "Los Angeles, CA"
+      ],
+      "middle_cities": [
+        "Nashville, TN",
+        "Memphis, TN",
+        "Oklahoma City, OK",
+        "Albuquerque, NM"
+      ],
+      "n_start": 3,
+      "n_end": 3,
+      "n_mid": 4,
+      "dominant_eigenvalue": 3.5044,
+      "spectral_radius": 14.6632,
+      "concentration_ratio": 2.3899,
+      "terminal_concentration": 2.3128,
+      "top_eigenvalues": [
+        3.5044,
+        2.2831,
+        1.8161,
+        1.3609,
+        0.8565
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-5": {
+      "start_city": "Seattle, WA",
+      "end_city": "San Diego, CA",
+      "length_mi": 1381,
+      "start_cities": [
+        "Seattle, WA",
+        "Tacoma, WA",
+        "Olympia, WA"
+      ],
+      "end_cities": [
+        "San Diego, CA",
+        "Los Angeles, CA",
+        "Anaheim, CA"
+      ],
+      "middle_cities": [
+        "Portland, OR",
+        "Sacramento, CA",
+        "Bakersfield, CA"
+      ],
+      "n_start": 3,
+      "n_end": 3,
+      "n_mid": 3,
+      "dominant_eigenvalue": 3.5044,
+      "spectral_radius": 13.429,
+      "concentration_ratio": 2.3486,
+      "terminal_concentration": 2.2728,
+      "top_eigenvalues": [
+        3.5044,
+        2.2829,
+        1.7586,
+        1.1981,
+        0.7384
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-20": {
+      "start_city": "Kent, TX",
+      "end_city": "Florence, SC",
+      "length_mi": 1536,
+      "start_cities": [
+        "Kent, TX",
+        "Midland, TX",
+        "Odessa, TX"
+      ],
+      "end_cities": [
+        "Florence, SC",
+        "Columbia, SC",
+        "Augusta, GA"
+      ],
+      "middle_cities": [
+        "Dallas, TX",
+        "Shreveport, LA",
+        "Atlanta, GA"
+      ],
+      "n_start": 3,
+      "n_end": 3,
+      "n_mid": 3,
+      "dominant_eigenvalue": 3.5044,
+      "spectral_radius": 13.429,
+      "concentration_ratio": 2.3486,
+      "terminal_concentration": 2.2728,
+      "top_eigenvalues": [
+        3.5044,
+        2.2829,
+        1.7586,
+        1.1981,
+        0.7384
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-30": {
+      "start_city": "Fort Worth, TX",
+      "end_city": "North Little Rock, AR",
+      "length_mi": 367,
+      "start_cities": [
+        "Fort Worth, TX",
+        "Dallas, TX"
+      ],
+      "end_cities": [
+        "North Little Rock, AR",
+        "Little Rock, AR"
+      ],
+      "middle_cities": [
+        "Texarkana, AR",
+        "Hope, AR"
+      ],
+      "n_start": 2,
+      "n_end": 2,
+      "n_mid": 2,
+      "dominant_eigenvalue": 3.1914,
+      "spectral_radius": 8.8886,
+      "concentration_ratio": 2.1543,
+      "terminal_concentration": 2.0517,
+      "top_eigenvalues": [
+        3.1914,
+        1.6793,
+        1.2194,
+        0.3542,
+        -0.7777
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    },
+    "I-35": {
+      "start_city": "Laredo, TX",
+      "end_city": "Duluth, MN",
+      "length_mi": 1568,
+      "start_cities": [
+        "Laredo, TX",
+        "San Antonio, TX",
+        "Austin, TX"
+      ],
+      "end_cities": [
+        "Duluth, MN",
+        "Minneapolis, MN"
+      ],
+      "middle_cities": [
+        "Dallas, TX",
+        "Oklahoma City, OK",
+        "Kansas City, MO",
+        "Des Moines, IA"
+      ],
+      "n_start": 3,
+      "n_end": 2,
+      "n_mid": 4,
+      "dominant_eigenvalue": 3.1915,
+      "spectral_radius": 12.6404,
+      "concentration_ratio": 2.2724,
+      "terminal_concentration": 1.466,
+      "top_eigenvalues": [
+        3.1915,
+        1.8539,
+        1.5236,
+        1.1653,
+        0.5859
+      ],
+      "prediction": "END cities have higher probability of bodies/evidence/trafficking victims",
+      "start_dispersal": "BEGINNING cities: dispersal nodes. Cargo/people leave. Evidence spreads.",
+      "end_concentration": "END cities: accumulation nodes. Cargo/people arrive. Evidence concentrates."
+    }
+  }
+}
