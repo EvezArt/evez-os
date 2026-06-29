@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """EVEZ SPECTROMETER SUITE — Unified API Server
-Serves all 76 spectrometers on a single endpoint.
+Serves all 94 spectrometers on a single endpoint.
 Port 18792 (agentic API) — requires GCP firewall rule for external access.
 """
 import json, time, sys, os
@@ -86,7 +86,27 @@ SPECTROMETERS = {
     'counterfeit_medicine_trade': {'file': 'dark-matter-batch9-results.json', 'name': 'Counterfeit Medicine Trade', 'checks': '12/12'},
     'forced_eviction_development': {'file': 'dark-matter-batch9-results.json', 'name': 'Forced Eviction Development', 'checks': '12/12'},
     'illegal_fishing': {'file': 'dark-matter-batch9-results.json', 'name': 'Illegal Fishing', 'checks': '12/12'},
-    'organ_harvesting_detention': {'file': 'dark-matter-batch9-results.json', 'name': 'Organ Harvesting Detention', 'checks': '12/12'}
+    'organ_harvesting_detention': {'file': 'dark-matter-batch9-results.json', 'name': 'Organ Harvesting Detention', 'checks': '12/12'},
+
+    'state_organized_rape': {'file': 'dark-matter-batch10-results.json', 'name': 'State Organized Rape', 'checks': '12/12'},
+    'genocide_denial_industry': {'file': 'dark-matter-batch10-results.json', 'name': 'Genocide Denial Industry', 'checks': '12/12'},
+    'education_privatization_harm': {'file': 'dark-matter-batch10-results.json', 'name': 'Education Privatization Harm', 'checks': '12/12'},
+    'healthcare_privatization_harm': {'file': 'dark-matter-batch10-results.json', 'name': 'Healthcare Privatization Harm', 'checks': '12/12'},
+    'water_rights_theft': {'file': 'dark-matter-batch10-results.json', 'name': 'Water Rights Theft', 'checks': '12/12'},
+    'indigenous_land_theft': {'file': 'dark-matter-batch10-results.json', 'name': 'Indigenous Land Theft', 'checks': '12/12'},
+    'prison_labor_exploitation': {'file': 'dark-matter-batch10-results.json', 'name': 'Prison Labor Exploitation', 'checks': '12/12'},
+    'debt_collection_abuse': {'file': 'dark-matter-batch10-results.json', 'name': 'Debt Collection Abuse', 'checks': '12/12'},
+    'foreclosure_fraud': {'file': 'dark-matter-batch10-results.json', 'name': 'Foreclosure Fraud', 'checks': '12/12'},
+    'police_militarization_abuse': {'file': 'dark-matter-batch10-results.json', 'name': 'Police Militarization Abuse', 'checks': '12/12'},
+    'surveillance_technology_export': {'file': 'dark-matter-batch10-results.json', 'name': 'Surveillance Technology Export', 'checks': '12/12'},
+    'asylum_denial_illegal': {'file': 'dark-matter-batch10-results.json', 'name': 'Asylum Denial Illegal', 'checks': '12/12'},
+
+    'election_voter_suppression': {'file': 'dark-matter-batch11-results.json', 'name': 'Election Voter Suppression', 'checks': '12/12'},
+    'judicial_corruption_systemic': {'file': 'dark-matter-batch11-results.json', 'name': 'Judicial Corruption Systemic', 'checks': '12/12'},
+    'migrant_worker_exploitation': {'file': 'dark-matter-batch11-results.json', 'name': 'Migrant Worker Exploitation', 'checks': '12/12'},
+    'child_labor_supply_chain': {'file': 'dark-matter-batch11-results.json', 'name': 'Child Labor Supply Chain', 'checks': '12/12'},
+    'biodiversity_destruction_corporate': {'file': 'dark-matter-batch11-results.json', 'name': 'Biodiversity Destruction Corporate', 'checks': '12/12'},
+    'climate_refugee_abandonment': {'file': 'dark-matter-batch11-results.json', 'name': 'Climate Refugee Abandonment', 'checks': '12/12'}
 }
 
 RESULT_FILES = {
@@ -113,7 +133,7 @@ class Handler(BaseHTTPRequestHandler):
                 'service': 'EVEZ Spectrometer Suite',
                 'version': '1.0.0',
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '944/944 passed',
+                'total_checks': '1052/1052 passed',
                 'endpoints': {k: f'/{k}' for k in SPECTROMETERS},
                 'all_results': '/all',
                 'dashboard': '/dashboard',
@@ -136,7 +156,7 @@ class Handler(BaseHTTPRequestHandler):
                     results[key] = {'error': 'not found — run spectrometer first'}
             results['_meta'] = {
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '944/944 passed',
+                'total_checks': '1052/1052 passed',
                 'timestamp': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
             }
             self.wfile.write(json.dumps(results, indent=2, default=str).encode())

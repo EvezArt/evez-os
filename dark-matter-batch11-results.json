@@ -1,0 +1,418 @@
+{
+  "batch": 11,
+  "spectrometers": [
+    {
+      "name": "election_voter_suppression",
+      "category": "civil_rights",
+      "perpetrators": [
+        "state_legislatures",
+        "secretaries_of_state",
+        "gerrymanderers",
+        "poll_closers"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.7931,
+        0.8507,
+        0.7285,
+        0.8818,
+        0.845,
+        0.8302
+      ],
+      "spectral_radius": 0.8818,
+      "score": 0.8818,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "state_legislatures": 0.7716,
+        "secretaries_of_state": 1.0173,
+        "gerrymanderers": 0.8247,
+        "poll_closers": 0.9464
+      },
+      "description": "Systematic disenfranchisement through voter ID laws, polling closures, and gerrymandering",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "election_voter_suppression check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "election_voter_suppression check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "election_voter_suppression check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "election_voter_suppression check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "election_voter_suppression check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "election_voter_suppression check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "judicial_corruption_systemic",
+      "category": "civil_rights",
+      "perpetrators": [
+        "corrupt_judges",
+        "prosecutorial_misconduct",
+        "court_clerks",
+        "bond_companies"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.7763,
+        0.8479,
+        0.8277,
+        0.8906,
+        0.8364,
+        0.8425
+      ],
+      "spectral_radius": 0.8906,
+      "score": 0.8906,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "corrupt_judges": 0.883,
+        "prosecutorial_misconduct": 0.8363,
+        "court_clerks": 0.8235,
+        "bond_companies": 0.7571
+      },
+      "description": "Systemic judicial corruption denying due process and enabling wrongful convictions",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "judicial_corruption_systemic check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "judicial_corruption_systemic check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "judicial_corruption_systemic check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "judicial_corruption_systemic check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "judicial_corruption_systemic check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "judicial_corruption_systemic check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "migrant_worker_exploitation",
+      "category": "labor",
+      "perpetrators": [
+        "agribusiness",
+        "construction_firms",
+        "contractors",
+        "immigration_enforcement"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.8381,
+        0.8251,
+        0.768,
+        0.9032,
+        0.8672,
+        0.8158
+      ],
+      "spectral_radius": 0.9032,
+      "score": 0.9032,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "agribusiness": 0.7267,
+        "construction_firms": 0.8279,
+        "contractors": 1.0058,
+        "immigration_enforcement": 1.0798
+      },
+      "description": "Exploitation of undocumented workers through wage theft, dangerous conditions, and deportation threats",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "migrant_worker_exploitation check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "migrant_worker_exploitation check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "migrant_worker_exploitation check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "migrant_worker_exploitation check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "migrant_worker_exploitation check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "migrant_worker_exploitation check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "child_labor_supply_chain",
+      "category": "labor",
+      "perpetrators": [
+        "manufacturers",
+        "suppliers",
+        "brands",
+        "certification_failures"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.8346,
+        0.7721,
+        0.7419,
+        0.8999,
+        0.8657,
+        0.8524
+      ],
+      "spectral_radius": 0.8999,
+      "score": 0.8999,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "manufacturers": 1.0744,
+        "suppliers": 1.0495,
+        "brands": 0.7784,
+        "certification_failures": 0.9433
+      },
+      "description": "Use of child labor in global supply chains with plausible deniability through subcontractors",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "child_labor_supply_chain check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "child_labor_supply_chain check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "child_labor_supply_chain check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "child_labor_supply_chain check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "child_labor_supply_chain check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "child_labor_supply_chain check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "biodiversity_destruction_corporate",
+      "category": "environmental",
+      "perpetrators": [
+        "agribusiness",
+        "logging_companies",
+        "mining_corps",
+        "palm_oil_industry"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.8308,
+        0.8537,
+        0.7138,
+        0.881,
+        0.8902,
+        0.8083
+      ],
+      "spectral_radius": 0.8902,
+      "score": 0.8902,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "agribusiness": 0.8848,
+        "logging_companies": 0.8754,
+        "mining_corps": 0.8594,
+        "palm_oil_industry": 0.8754
+      },
+      "description": "Systematic destruction of biodiversity hotspots for commodity production",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "biodiversity_destruction_corporate check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "biodiversity_destruction_corporate check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "biodiversity_destruction_corporate check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "biodiversity_destruction_corporate check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "biodiversity_destruction_corporate check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "biodiversity_destruction_corporate check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "climate_refugee_abandonment",
+      "category": "human_rights",
+      "perpetrators": [
+        "industrial_nations",
+        "fossil_fuel_companies",
+        "insurers",
+        "governments"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.776,
+        0.8368,
+        0.7722,
+        0.9076,
+        0.8565,
+        0.8959
+      ],
+      "spectral_radius": 0.9076,
+      "score": 0.9076,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "industrial_nations": 1.0006,
+        "fossil_fuel_companies": 0.8637,
+        "insurers": 0.9483,
+        "governments": 0.7811
+      },
+      "description": "Abandonment of climate-displaced populations by the nations and corporations that caused their displacement",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "climate_refugee_abandonment check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "climate_refugee_abandonment check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "climate_refugee_abandonment check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "climate_refugee_abandonment check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "climate_refugee_abandonment check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "climate_refugee_abandonment check 6: dimension enforcement_difficulty"
+        }
+      ]
+    }
+  ],
+  "total_checks": 36,
+  "passed_checks": 36,
+  "all_passed": true,
+  "timestamp": "2026-06-29T10:57:00Z",
+  "note": "FINAL BATCH \u2014 Shadow zeroed"
+}
