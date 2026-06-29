@@ -1,0 +1,1175 @@
+{
+  "batch": 8,
+  "spectrometers": [
+    {
+      "name": "pharmaceutical_price_gouging",
+      "category": "public_health",
+      "perpetrators": [
+        "Martin Shkreli",
+        "Valeant",
+        "Pfizer",
+        "Insulin manufacturers"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.3937,
+        0.4396,
+        0.4594,
+        0.4974,
+        0.721,
+        1.3464
+      ],
+      "spectral_radius": 1.3464,
+      "score": 1.3464,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "Martin Shkreli": 1.008,
+        "Valeant": 2.1861,
+        "Pfizer": 1.3102,
+        "Insulin manufacturers": 1.8538
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "pharmaceutical_price_gouging check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "private_prison_profiteering",
+      "category": "institutional",
+      "perpetrators": [
+        "CoreCivic",
+        "GEO Group",
+        "CCA",
+        "Management & Training Corp"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.2156,
+        0.5081,
+        0.5338,
+        0.5821,
+        0.6999,
+        1.4197
+      ],
+      "spectral_radius": 1.4197,
+      "score": 1.4197,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "CoreCivic": 2.2736,
+        "GEO Group": 1.6844,
+        "CCA": 1.1838,
+        "Management & Training Corp": 2.0266
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "private_prison_profiteering check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "private_prison_profiteering check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "private_prison_profiteering check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "private_prison_profiteering check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "private_prison_profiteering check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "private_prison_profiteering check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "private_prison_profiteering check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "private_prison_profiteering check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "private_prison_profiteering check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "private_prison_profiteering check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "private_prison_profiteering check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "private_prison_profiteering check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "weapons_diversion",
+      "category": "institutional",
+      "perpetrators": [
+        "Pentagon",
+        "Lockheed Martin",
+        "Raytheon",
+        "NRA"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.2557,
+        0.2863,
+        0.4415,
+        0.6188,
+        0.687,
+        1.3565
+      ],
+      "spectral_radius": 1.3565,
+      "score": 1.3565,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "Pentagon": 2.248,
+        "Lockheed Martin": 1.4073,
+        "Raytheon": 1.6726,
+        "NRA": 1.9225
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "weapons_diversion check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "weapons_diversion check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "weapons_diversion check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "weapons_diversion check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "weapons_diversion check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "weapons_diversion check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "weapons_diversion check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "weapons_diversion check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "weapons_diversion check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "weapons_diversion check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "weapons_diversion check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "weapons_diversion check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "chemical_regulatory_capture",
+      "category": "public_health",
+      "perpetrators": [
+        "DuPont",
+        "3M",
+        "BASF",
+        "American Chemistry Council"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.3611,
+        0.4464,
+        0.556,
+        0.6352,
+        0.7294,
+        1.4605
+      ],
+      "spectral_radius": 1.4605,
+      "score": 1.4605,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "DuPont": 1.5414,
+        "3M": 1.209,
+        "BASF": 2.3938,
+        "American Chemistry Council": 2.3246
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "chemical_regulatory_capture check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "agricultural_monoculture_harm",
+      "category": "public_health",
+      "perpetrators": [
+        "Monsanto/Bayer",
+        "Cargill",
+        "Archer Daniels Midland",
+        "Syngenta"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.2504,
+        0.384,
+        0.5338,
+        0.6237,
+        0.6697,
+        1.417
+      ],
+      "spectral_radius": 1.417,
+      "score": 1.417,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "Monsanto/Bayer": 2.391,
+        "Cargill": 1.5692,
+        "Archer Daniels Midland": 2.2762,
+        "Syngenta": 1.9065
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "agricultural_monoculture_harm check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "extractive_debt_trap",
+      "category": "financial",
+      "perpetrators": [
+        "IMF",
+        "World Bank",
+        "China ExIm Bank",
+        "vulture funds"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.3862,
+        0.4472,
+        0.4884,
+        0.7232,
+        0.7736,
+        1.6503
+      ],
+      "spectral_radius": 1.6503,
+      "score": 1.6503,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "IMF": 2.6097,
+        "World Bank": 2.6859,
+        "China ExIm Bank": 2.0227,
+        "vulture funds": 2.0065
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "extractive_debt_trap check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "extractive_debt_trap check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "extractive_debt_trap check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "extractive_debt_trap check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "extractive_debt_trap check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "extractive_debt_trap check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "extractive_debt_trap check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "extractive_debt_trap check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "extractive_debt_trap check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "extractive_debt_trap check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "extractive_debt_trap check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "extractive_debt_trap check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "digital_surveillance_state",
+      "category": "digital",
+      "perpetrators": [
+        "NSA",
+        "GCHQ",
+        "Palantir",
+        "Clearview AI"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.367,
+        0.4164,
+        0.5542,
+        0.6762,
+        0.7569,
+        1.4702
+      ],
+      "spectral_radius": 1.4702,
+      "score": 1.4702,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "NSA": 1.2801,
+        "GCHQ": 1.418,
+        "Palantir": 1.8576,
+        "Clearview AI": 2.1007
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "digital_surveillance_state check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "digital_surveillance_state check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "digital_surveillance_state check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "digital_surveillance_state check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "digital_surveillance_state check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "digital_surveillance_state check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "digital_surveillance_state check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "digital_surveillance_state check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "digital_surveillance_state check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "digital_surveillance_state check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "digital_surveillance_state check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "digital_surveillance_state check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "media_consolidation_capture",
+      "category": "digital",
+      "perpetrators": [
+        "Sinclair",
+        "Comcast/NBCUniversal",
+        "Disney",
+        "News Corp"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.4673,
+        0.5039,
+        0.6215,
+        0.6644,
+        0.751,
+        1.4123
+      ],
+      "spectral_radius": 1.4123,
+      "score": 1.4123,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "Sinclair": 2.3385,
+        "Comcast/NBCUniversal": 1.5541,
+        "Disney": 2.3664,
+        "News Corp": 2.2875
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "media_consolidation_capture check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "media_consolidation_capture check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "media_consolidation_capture check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "media_consolidation_capture check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "media_consolidation_capture check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "media_consolidation_capture check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "media_consolidation_capture check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "media_consolidation_capture check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "media_consolidation_capture check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "media_consolidation_capture check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "media_consolidation_capture check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "media_consolidation_capture check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "pension_theft",
+      "category": "financial",
+      "perpetrators": [
+        "Wall Street",
+        "private equity",
+        "hedge funds",
+        "Cerberus"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.1984,
+        0.3542,
+        0.5784,
+        0.6804,
+        0.755,
+        1.4785
+      ],
+      "spectral_radius": 1.4785,
+      "score": 1.4785,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "Wall Street": 1.5282,
+        "private equity": 2.4607,
+        "hedge funds": 2.4615,
+        "Cerberus": 1.9039
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "pension_theft check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "pension_theft check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "pension_theft check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "pension_theft check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "pension_theft check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "pension_theft check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "pension_theft check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "pension_theft check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "pension_theft check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "pension_theft check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "pension_theft check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "pension_theft check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "water_privatization_harm",
+      "category": "public_health",
+      "perpetrators": [
+        "Veolia",
+        "Suez",
+        "Nestle",
+        "Bluefield"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.3591,
+        0.3986,
+        0.5672,
+        0.6725,
+        0.8063,
+        1.5043
+      ],
+      "spectral_radius": 1.5043,
+      "score": 1.5043,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "Veolia": 1.0916,
+        "Suez": 1.7795,
+        "Nestle": 1.1592,
+        "Bluefield": 1.2532
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "water_privatization_harm check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "water_privatization_harm check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "water_privatization_harm check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "water_privatization_harm check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "water_privatization_harm check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "water_privatization_harm check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "water_privatization_harm check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "water_privatization_harm check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "water_privatization_harm check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "water_privatization_harm check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "water_privatization_harm check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "water_privatization_harm check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "medical_experimentation_coverup",
+      "category": "institutional",
+      "perpetrators": [
+        "CIA MKUltra",
+        "Tuskegee",
+        "Pfizer Nigeria",
+        "J&J talc"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.337,
+        0.4716,
+        0.5803,
+        0.6827,
+        0.8849,
+        1.5862
+      ],
+      "spectral_radius": 1.5862,
+      "score": 1.5862,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "CIA MKUltra": 1.6239,
+        "Tuskegee": 2.4238,
+        "Pfizer Nigeria": 2.2191,
+        "J&J talc": 1.3909
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "medical_experimentation_coverup check 12: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "election_disruption_infrastructure",
+      "category": "digital",
+      "perpetrators": [
+        "Cambridge Analytica",
+        "IRA",
+        "Polarbear",
+        "Team Jorge"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.2329,
+        0.2909,
+        0.5683,
+        0.6042,
+        0.7364,
+        1.6318
+      ],
+      "spectral_radius": 1.6318,
+      "score": 1.6318,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "Cambridge Analytica": 2.0146,
+        "IRA": 2.4259,
+        "Polarbear": 2.0144,
+        "Team Jorge": 2.5562
+      },
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 6: dimension enforcement_difficulty"
+        },
+        {
+          "name": "check_7",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 7: dimension scale"
+        },
+        {
+          "name": "check_8",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 8: dimension organization"
+        },
+        {
+          "name": "check_9",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 9: dimension concealment"
+        },
+        {
+          "name": "check_10",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 10: dimension impact"
+        },
+        {
+          "name": "check_11",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 11: dimension recidivism"
+        },
+        {
+          "name": "check_12",
+          "ok": true,
+          "desc": "election_disruption_infrastructure check 12: dimension enforcement_difficulty"
+        }
+      ]
+    }
+  ],
+  "total_new": 12,
+  "checks_passed": 144,
+  "checks_total": 144,
+  "remaining_shadow": 30,
+  "total_spectrometers": 65,
+  "total_checks": 872
+}

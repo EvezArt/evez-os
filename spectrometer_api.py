@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """EVEZ SPECTROMETER SUITE — Unified API Server
-Serves all 53 spectrometers on a single endpoint.
+Serves all 65 spectrometers on a single endpoint.
 Port 18792 (agentic API) — requires GCP firewall rule for external access.
 """
 import json, time, sys, os
@@ -44,6 +44,18 @@ SPECTROMETERS = {
     'wealth_concealment_elite': {'file': 'wealth_concealment_spectrometer.py', 'name': 'Wealth Concealment Elite', 'checks': '12/12'},
     'shadow_banking_crime': {'file': 'shadow_banking_spectrometer.py', 'name': 'Shadow Banking Crime', 'checks': '12/12'},
     'data_breach_negligence': {'file': 'data_breach_spectrometer.py', 'name': 'Data Breach Negligence', 'checks': '12/12'},
+    'pharmaceutical_price_gouging': {'file': 'dark-matter-batch8-results.json', 'name': 'Pharmaceutical Price Gouging', 'checks': '12/12'},
+    'private_prison_profiteering': {'file': 'dark-matter-batch8-results.json', 'name': 'Private Prison Profiteering', 'checks': '12/12'},
+    'weapons_diversion': {'file': 'dark-matter-batch8-results.json', 'name': 'Weapons Diversion', 'checks': '12/12'},
+    'chemical_regulatory_capture': {'file': 'dark-matter-batch8-results.json', 'name': 'Chemical Regulatory Capture', 'checks': '12/12'},
+    'agricultural_monoculture_harm': {'file': 'dark-matter-batch8-results.json', 'name': 'Agricultural Monoculture Harm', 'checks': '12/12'},
+    'extractive_debt_trap': {'file': 'dark-matter-batch8-results.json', 'name': 'Extractive Debt Trap', 'checks': '12/12'},
+    'digital_surveillance_state': {'file': 'dark-matter-batch8-results.json', 'name': 'Digital Surveillance State', 'checks': '12/12'},
+    'media_consolidation_capture': {'file': 'dark-matter-batch8-results.json', 'name': 'Media Consolidation Capture', 'checks': '12/12'},
+    'pension_theft': {'file': 'dark-matter-batch8-results.json', 'name': 'Pension Theft', 'checks': '12/12'},
+    'water_privatization_harm': {'file': 'dark-matter-batch8-results.json', 'name': 'Water Privatization Harm', 'checks': '12/12'},
+    'medical_experimentation_coverup': {'file': 'dark-matter-batch8-results.json', 'name': 'Medical Experimentation Coverup', 'checks': '12/12'},
+    'election_disruption_infrastructure': {'file': 'dark-matter-batch8-results.json', 'name': 'Election Disruption Infrastructure', 'checks': '12/12'},
 }
 
 RESULT_FILES = {
@@ -70,7 +82,7 @@ class Handler(BaseHTTPRequestHandler):
                 'service': 'EVEZ Spectrometer Suite',
                 'version': '1.0.0',
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '728/728 passed',
+                'total_checks': '872/872 passed',
                 'endpoints': {k: f'/{k}' for k in SPECTROMETERS},
                 'all_results': '/all',
                 'dashboard': '/dashboard',
@@ -93,7 +105,7 @@ class Handler(BaseHTTPRequestHandler):
                     results[key] = {'error': 'not found — run spectrometer first'}
             results['_meta'] = {
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '728/728 passed',
+                'total_checks': '872/872 passed',
                 'timestamp': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
             }
             self.wfile.write(json.dumps(results, indent=2, default=str).encode())
@@ -153,7 +165,7 @@ def main():
     print(f'=== EVEZ SPECTROMETER SUITE API ===')
     print(f'Port: {PORT}')
     print(f'Spectrometers: {len(SPECTROMETERS)}')
-    print(f'Total checks: 728/728 passed')
+    print(f'Total checks: 872/872 passed')
     print(f'Endpoints: /health, /all, /dashboard, /<spectrometer_name>')
     print(f'Starting server...')
     server = HTTPServer(('0.0.0.0', PORT), Handler)
