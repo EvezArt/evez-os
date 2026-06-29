@@ -1,0 +1,825 @@
+{
+  "batch": 9,
+  "spectrometers": [
+    {
+      "name": "human_trafficking_network",
+      "category": "human_rights",
+      "perpetrators": [
+        "transnational_criminal_organizations",
+        "corrupt_border_officials",
+        "illicit_recruiters",
+        "complicit_hotels"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.8024,
+        0.8738,
+        0.8089,
+        0.8942,
+        0.8758,
+        0.9174
+      ],
+      "spectral_radius": 0.9174,
+      "score": 0.9174,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "transnational_criminal_organizations": 0.8716,
+        "corrupt_border_officials": 1.0981,
+        "illicit_recruiters": 0.9226,
+        "complicit_hotels": 0.8209
+      },
+      "description": "Organized networks exploiting vulnerable populations for forced labor, sexual exploitation, and organ removal",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "human_trafficking_network check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "human_trafficking_network check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "human_trafficking_network check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "human_trafficking_network check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "human_trafficking_network check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "human_trafficking_network check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "organ_trafficking",
+      "category": "human_rights",
+      "perpetrators": [
+        "transplant_surgeons",
+        "brokers",
+        "corrupt_hospitals",
+        "trafficking_rings"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.7172,
+        0.8481,
+        0.9165,
+        0.9139,
+        0.7866,
+        0.9134
+      ],
+      "spectral_radius": 0.9165,
+      "score": 0.9165,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "transplant_surgeons": 0.8191,
+        "brokers": 1.0207,
+        "corrupt_hospitals": 0.9265,
+        "trafficking_rings": 0.7498
+      },
+      "description": "Illegal trade in human organs involving medical professionals, brokers, and coerced donors",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "organ_trafficking check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "organ_trafficking check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "organ_trafficking check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "organ_trafficking check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "organ_trafficking check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "organ_trafficking check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "child_exploitation_industry",
+      "category": "human_rights",
+      "perpetrators": [
+        "online_platforms",
+        "production_networks",
+        "distribution_rings",
+        "payment_processors"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.9167,
+        0.9147,
+        0.842,
+        0.9479,
+        0.8444,
+        0.936
+      ],
+      "spectral_radius": 0.9479,
+      "score": 0.9479,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "online_platforms": 0.831,
+        "production_networks": 1.0151,
+        "distribution_rings": 0.8101,
+        "payment_processors": 0.8689
+      },
+      "description": "Industrial-scale exploitation of minors through production, distribution, and monetization networks",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "child_exploitation_industry check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "child_exploitation_industry check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "child_exploitation_industry check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "child_exploitation_industry check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "child_exploitation_industry check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "child_exploitation_industry check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "illegal_arms_trafficking",
+      "category": "illicit_trade",
+      "perpetrators": [
+        "weapons_manufacturers",
+        "corrupt_military_officials",
+        "brokers",
+        "shell_companies"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.8574,
+        0.8558,
+        0.781,
+        0.891,
+        0.9198,
+        0.8588
+      ],
+      "spectral_radius": 0.9198,
+      "score": 0.9198,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "weapons_manufacturers": 0.9628,
+        "corrupt_military_officials": 0.7833,
+        "brokers": 0.7396,
+        "shell_companies": 0.8617
+      },
+      "description": "Cross-border illegal weapons trade enabling conflict, terrorism, and domestic violence",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "illegal_arms_trafficking check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "illegal_arms_trafficking check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "illegal_arms_trafficking check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "illegal_arms_trafficking check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "illegal_arms_trafficking check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "illegal_arms_trafficking check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "conflict_mineral_trade",
+      "category": "illicit_trade",
+      "perpetrators": [
+        "mining_warlords",
+        "smugglers",
+        "tech_companies",
+        "refiners"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.762,
+        0.8351,
+        0.7772,
+        0.8511,
+        0.8344,
+        0.8937
+      ],
+      "spectral_radius": 0.8937,
+      "score": 0.8937,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "mining_warlords": 0.8147,
+        "smugglers": 0.8119,
+        "tech_companies": 0.947,
+        "refiners": 0.8956
+      },
+      "description": "Extraction and trade of minerals financing armed conflict while tech companies maintain plausible deniability",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "conflict_mineral_trade check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "conflict_mineral_trade check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "conflict_mineral_trade check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "conflict_mineral_trade check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "conflict_mineral_trade check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "conflict_mineral_trade check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "wildlife_trafficking",
+      "category": "environmental",
+      "perpetrators": [
+        "poaching_networks",
+        "smugglers",
+        "traditional_medicine_markets",
+        "corrupt_customs"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.7214,
+        0.7993,
+        0.741,
+        0.8498,
+        0.8615,
+        0.8193
+      ],
+      "spectral_radius": 0.8615,
+      "score": 0.8615,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "poaching_networks": 0.9777,
+        "smugglers": 0.8797,
+        "traditional_medicine_markets": 0.7221,
+        "corrupt_customs": 0.7102
+      },
+      "description": "Multi-billion dollar trade driving species extinction and ecosystem collapse",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "wildlife_trafficking check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "wildlife_trafficking check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "wildlife_trafficking check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "wildlife_trafficking check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "wildlife_trafficking check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "wildlife_trafficking check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "illegal_dumping",
+      "category": "environmental",
+      "perpetrators": [
+        "corporations",
+        "waste_brokers",
+        "corrupt_port_officials",
+        "shipping_companies"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.829,
+        0.7644,
+        0.8197,
+        0.8874,
+        0.7792,
+        0.8772
+      ],
+      "spectral_radius": 0.8874,
+      "score": 0.8874,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "corporations": 0.8813,
+        "waste_brokers": 0.8199,
+        "corrupt_port_officials": 0.7216,
+        "shipping_companies": 0.952
+      },
+      "description": "Systematic illegal discharge of toxic waste into oceans, developing nations, and indigenous lands",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "illegal_dumping check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "illegal_dumping check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "illegal_dumping check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "illegal_dumping check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "illegal_dumping check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "illegal_dumping check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "narcotics_money_laundering",
+      "category": "financial",
+      "perpetrators": [
+        "cartels",
+        "banks",
+        "cryptocurrency_mixers",
+        "real_estate_shell_companies"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.8578,
+        0.9066,
+        0.7981,
+        0.8308,
+        0.9172,
+        0.9154
+      ],
+      "spectral_radius": 0.9172,
+      "score": 0.9172,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "cartels": 1.0319,
+        "banks": 0.8213,
+        "cryptocurrency_mixers": 1.0461,
+        "real_estate_shell_companies": 1.0065
+      },
+      "description": "Financial infrastructure enabling drug trade profits to enter legitimate economy through layered transactions",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "narcotics_money_laundering check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "narcotics_money_laundering check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "narcotics_money_laundering check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "narcotics_money_laundering check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "narcotics_money_laundering check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "narcotics_money_laundering check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "counterfeit_medicine_trade",
+      "category": "public_health",
+      "perpetrators": [
+        "manufacturers",
+        "online_pharmacies",
+        "distributors",
+        "regulatory_failures"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.8059,
+        0.8639,
+        0.7544,
+        0.9015,
+        0.8633,
+        0.8899
+      ],
+      "spectral_radius": 0.9015,
+      "score": 0.9015,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "manufacturers": 0.8954,
+        "online_pharmacies": 0.9867,
+        "distributors": 0.8269,
+        "regulatory_failures": 0.8685
+      },
+      "description": "Production and distribution of fake medications killing patients while profiting from desperation",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "counterfeit_medicine_trade check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "counterfeit_medicine_trade check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "counterfeit_medicine_trade check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "counterfeit_medicine_trade check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "counterfeit_medicine_trade check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "counterfeit_medicine_trade check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "forced_eviction_development",
+      "category": "human_rights",
+      "perpetrators": [
+        "developers",
+        "corrupt_local_governments",
+        "private_security",
+        "banks"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.7756,
+        0.8252,
+        0.7529,
+        0.8885,
+        0.8103,
+        0.8369
+      ],
+      "spectral_radius": 0.8885,
+      "score": 0.8885,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "developers": 0.8873,
+        "corrupt_local_governments": 0.8049,
+        "private_security": 0.8094,
+        "banks": 0.8075
+      },
+      "description": "State-enabled land grabs displacing communities for commercial development with violent removal",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "forced_eviction_development check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "forced_eviction_development check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "forced_eviction_development check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "forced_eviction_development check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "forced_eviction_development check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "forced_eviction_development check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "illegal_fishing",
+      "category": "environmental",
+      "perpetrators": [
+        "industrial_fleets",
+        "flag_of_convenience_vessels",
+        "corrupt_coast_guards",
+        "seafood_companies"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.8073,
+        0.7651,
+        0.7326,
+        0.8363,
+        0.8653,
+        0.8201
+      ],
+      "spectral_radius": 0.8653,
+      "score": 0.8653,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "industrial_fleets": 0.8091,
+        "flag_of_convenience_vessels": 0.8634,
+        "corrupt_coast_guards": 0.7647,
+        "seafood_companies": 0.904
+      },
+      "description": "Industrial-scale unauthorized fishing depleting marine ecosystems and destroying coastal economies",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "illegal_fishing check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "illegal_fishing check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "illegal_fishing check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "illegal_fishing check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "illegal_fishing check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "illegal_fishing check 6: dimension enforcement_difficulty"
+        }
+      ]
+    },
+    {
+      "name": "organ_harvesting_detention",
+      "category": "human_rights",
+      "perpetrators": [
+        "detention_states",
+        "medical_complicity",
+        "transplant_tourism_industry",
+        "brokers"
+      ],
+      "dimensions": [
+        "scale",
+        "organization",
+        "concealment",
+        "impact",
+        "recidivism",
+        "enforcement_difficulty"
+      ],
+      "eigenvalues": [
+        0.7657,
+        0.8646,
+        0.8887,
+        0.9629,
+        0.7187,
+        0.9395
+      ],
+      "spectral_radius": 0.9629,
+      "score": 0.9629,
+      "severity": "CRITICAL",
+      "perpetrator_scores": {
+        "detention_states": 1.0167,
+        "medical_complicity": 0.9349,
+        "transplant_tourism_industry": 0.9492,
+        "brokers": 0.8746
+      },
+      "description": "State-sponsored organ extraction from prisoners of conscience for transplant tourism",
+      "checks": [
+        {
+          "name": "check_1",
+          "ok": true,
+          "desc": "organ_harvesting_detention check 1: dimension scale"
+        },
+        {
+          "name": "check_2",
+          "ok": true,
+          "desc": "organ_harvesting_detention check 2: dimension organization"
+        },
+        {
+          "name": "check_3",
+          "ok": true,
+          "desc": "organ_harvesting_detention check 3: dimension concealment"
+        },
+        {
+          "name": "check_4",
+          "ok": true,
+          "desc": "organ_harvesting_detention check 4: dimension impact"
+        },
+        {
+          "name": "check_5",
+          "ok": true,
+          "desc": "organ_harvesting_detention check 5: dimension recidivism"
+        },
+        {
+          "name": "check_6",
+          "ok": true,
+          "desc": "organ_harvesting_detention check 6: dimension enforcement_difficulty"
+        }
+      ]
+    }
+  ],
+  "total_checks": 72,
+  "passed_checks": 72,
+  "all_passed": true,
+  "timestamp": "2026-06-29T10:53:00Z"
+}

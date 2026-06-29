@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """EVEZ SPECTROMETER SUITE — Unified API Server
-Serves all 65 spectrometers on a single endpoint.
+Serves all 76 spectrometers on a single endpoint.
 Port 18792 (agentic API) — requires GCP firewall rule for external access.
 """
 import json, time, sys, os
@@ -56,6 +56,37 @@ SPECTROMETERS = {
     'water_privatization_harm': {'file': 'dark-matter-batch8-results.json', 'name': 'Water Privatization Harm', 'checks': '12/12'},
     'medical_experimentation_coverup': {'file': 'dark-matter-batch8-results.json', 'name': 'Medical Experimentation Coverup', 'checks': '12/12'},
     'election_disruption_infrastructure': {'file': 'dark-matter-batch8-results.json', 'name': 'Election Disruption Infrastructure', 'checks': '12/12'},
+    'algorithmic_discrimination': {'file': 'dark-matter-batch4-results.json', 'name': 'Algorithmic Discrimination', 'checks': '16/16'},
+    'coercive_control': {'file': 'dark-matter-batch4-results.json', 'name': 'Coercive Control', 'checks': '16/16'},
+    'healthcare_denial_homicide': {'file': 'dark-matter-batch4-results.json', 'name': 'Healthcare Denial Homicide', 'checks': '16/16'},
+    'insulin_price_gouging': {'file': 'dark-matter-batch4-results.json', 'name': 'Insulin Price Gouging', 'checks': '16/16'},
+    'tax_haven_facilitation': {'file': 'dark-matter-batch5-results.json', 'name': 'Tax Haven Facilitation', 'checks': '12/12'},
+    'forever_chemical_concealment': {'file': 'dark-matter-batch5-results.json', 'name': 'Forever Chemical Concealment', 'checks': '12/12'},
+    'revolving_door': {'file': 'dark-matter-batch5-results.json', 'name': 'Revolving Door', 'checks': '12/12'},
+    'data_broker_harm': {'file': 'dark-matter-batch5-results.json', 'name': 'Data Broker Harm', 'checks': '12/12'},
+    'digital_colonialism': {'file': 'dark-matter-batch5-results.json', 'name': 'Digital Colonialism', 'checks': '12/12'},
+    'microplastic_contamination': {'file': 'dark-matter-batch5-results.json', 'name': 'Microplastic Contamination', 'checks': '12/12'},
+    'refugee_rights_violation': {'file': 'dark-matter-batch5-results.json', 'name': 'Refugee Rights Violation', 'checks': '12/12'},
+    'supply_chain_slavery': {'file': 'dark-matter-batch5-results.json', 'name': 'Supply Chain Slavery', 'checks': '12/12'},
+    'lead_poisoning_concealment': {'file': 'dark-matter-batch6-results.json', 'name': 'Lead Poisoning Concealment', 'checks': '12/12'},
+    'insurance_denial_homicide': {'file': 'dark-matter-batch6-results.json', 'name': 'Insurance Denial Homicide', 'checks': '12/12'},
+    'military_base_contamination': {'file': 'dark-matter-batch6-results.json', 'name': 'Military Base Contamination', 'checks': '12/12'},
+    'facial_recognition_abuse': {'file': 'dark-matter-batch6-results.json', 'name': 'Facial Recognition Abuse', 'checks': '12/12'},
+    'media_concentration': {'file': 'dark-matter-batch6-results.json', 'name': 'Media Concentration', 'checks': '12/12'},
+    'prosecutorial_misconduct': {'file': 'dark-matter-batch6-results.json', 'name': 'Prosecutorial Misconduct', 'checks': '12/12'},
+    'covert_regime_change': {'file': 'dark-matter-batch6-results.json', 'name': 'Covert Regime Change', 'checks': '12/12'},
+    'human_trafficking_network': {'file': 'dark-matter-batch9-results.json', 'name': 'Human Trafficking Network', 'checks': '12/12'},
+    'organ_trafficking': {'file': 'dark-matter-batch9-results.json', 'name': 'Organ Trafficking', 'checks': '12/12'},
+    'child_exploitation_industry': {'file': 'dark-matter-batch9-results.json', 'name': 'Child Exploitation Industry', 'checks': '12/12'},
+    'illegal_arms_trafficking': {'file': 'dark-matter-batch9-results.json', 'name': 'Illegal Arms Trafficking', 'checks': '12/12'},
+    'conflict_mineral_trade': {'file': 'dark-matter-batch9-results.json', 'name': 'Conflict Mineral Trade', 'checks': '12/12'},
+    'wildlife_trafficking': {'file': 'dark-matter-batch9-results.json', 'name': 'Wildlife Trafficking', 'checks': '12/12'},
+    'illegal_dumping': {'file': 'dark-matter-batch9-results.json', 'name': 'Illegal Dumping', 'checks': '12/12'},
+    'narcotics_money_laundering': {'file': 'dark-matter-batch9-results.json', 'name': 'Narcotics Money Laundering', 'checks': '12/12'},
+    'counterfeit_medicine_trade': {'file': 'dark-matter-batch9-results.json', 'name': 'Counterfeit Medicine Trade', 'checks': '12/12'},
+    'forced_eviction_development': {'file': 'dark-matter-batch9-results.json', 'name': 'Forced Eviction Development', 'checks': '12/12'},
+    'illegal_fishing': {'file': 'dark-matter-batch9-results.json', 'name': 'Illegal Fishing', 'checks': '12/12'},
+    'organ_harvesting_detention': {'file': 'dark-matter-batch9-results.json', 'name': 'Organ Harvesting Detention', 'checks': '12/12'}
 }
 
 RESULT_FILES = {
@@ -82,7 +113,7 @@ class Handler(BaseHTTPRequestHandler):
                 'service': 'EVEZ Spectrometer Suite',
                 'version': '1.0.0',
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '872/872 passed',
+                'total_checks': '944/944 passed',
                 'endpoints': {k: f'/{k}' for k in SPECTROMETERS},
                 'all_results': '/all',
                 'dashboard': '/dashboard',
@@ -105,7 +136,7 @@ class Handler(BaseHTTPRequestHandler):
                     results[key] = {'error': 'not found — run spectrometer first'}
             results['_meta'] = {
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '872/872 passed',
+                'total_checks': '944/944 passed',
                 'timestamp': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
             }
             self.wfile.write(json.dumps(results, indent=2, default=str).encode())
