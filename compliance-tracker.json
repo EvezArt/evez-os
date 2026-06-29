@@ -1,0 +1,1428 @@
+{
+  "timestamp": "2026-06-29T09:46:43Z",
+  "total_blueprints": 108,
+  "executed": 0,
+  "pending": 108,
+  "overdue": 0,
+  "compliance_rate": 0.0,
+  "actors_responded": 0,
+  "actors_total": 83,
+  "blueprints": [
+    {
+      "id": "BP-001",
+      "domain": "climate_denial_industry",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "SEC",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-002",
+      "domain": "addiction_by_design",
+      "severity": "CRITICAL",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "state AGs",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-003",
+      "domain": "child_labor_supply_chain",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOL",
+        "CBP",
+        "ICC"
+      ]
+    },
+    {
+      "id": "BP-004",
+      "domain": "regulatory_capture",
+      "severity": "CRITICAL",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "Congress",
+        "IG offices",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-005",
+      "domain": "migrant_labor",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOL",
+        "DHS",
+        "ICC"
+      ]
+    },
+    {
+      "id": "BP-006",
+      "domain": "water_system_poisoning",
+      "severity": "CRITICAL",
+      "deadline": "7 days",
+      "days_left": 7,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "DOJ",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-007",
+      "domain": "pharmaceutical_fraud",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "FDA",
+        "SEC"
+      ]
+    },
+    {
+      "id": "BP-008",
+      "domain": "air_pollution_homicide",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-009",
+      "domain": "environmental_racism",
+      "severity": "CRITICAL",
+      "deadline": "7 days",
+      "days_left": 7,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "DOJ Civil Rights",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-010",
+      "domain": "nuclear_waste_concealment",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOD",
+        "DOE",
+        "NRC"
+      ]
+    },
+    {
+      "id": "BP-011",
+      "domain": "cognitive_sovereignty",
+      "severity": "CRITICAL",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-012",
+      "domain": "civil_asset_forfeiture",
+      "severity": "CRITICAL",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "state legislatures"
+      ]
+    },
+    {
+      "id": "BP-013",
+      "domain": "prison_labor",
+      "severity": "CRITICAL",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "DOL",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-014",
+      "domain": "election_suppression",
+      "severity": "CRITICAL",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "DOJ Civil Rights",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-015",
+      "domain": "education_debt_peonage",
+      "severity": "CRITICAL",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "ED",
+        "CFPB",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-016",
+      "domain": "gag_order_suppression",
+      "severity": "CRITICAL",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "state legislatures"
+      ]
+    },
+    {
+      "id": "BP-017",
+      "domain": "surveillance_capitalism",
+      "severity": "CRITICAL",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "EU"
+      ]
+    },
+    {
+      "id": "BP-018",
+      "domain": "eviction_displacement",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "HUD",
+        "CFPB",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-019",
+      "domain": "debt_collection_abuse",
+      "severity": "CRITICAL",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "CFPB",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-020",
+      "domain": "algorithmic_discrimination",
+      "severity": "CRITICAL",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "DOJ",
+        "EEOC"
+      ]
+    },
+    {
+      "id": "BP-021",
+      "domain": "carbon_concealment",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "SEC",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-022",
+      "domain": "healthcare_denial_homicide",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-023",
+      "domain": "insulin_price_gouging",
+      "severity": "CRITICAL",
+      "deadline": "7 days",
+      "days_left": 7,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "Congress",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-024",
+      "domain": "coercive_control",
+      "severity": "CRITICAL",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "state legislatures",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-025",
+      "domain": "dark_pattern",
+      "severity": "CRITICAL",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-026",
+      "domain": "genocide_ews",
+      "severity": "CRITICAL",
+      "deadline": "7 days",
+      "days_left": 7,
+      "status": "PENDING",
+      "actors": [
+        "UN",
+        "ICC",
+        "US Congress"
+      ]
+    },
+    {
+      "id": "BP-027",
+      "domain": "famine",
+      "severity": "CRITICAL",
+      "deadline": "7 days",
+      "days_left": 7,
+      "status": "PENDING",
+      "actors": [
+        "UN",
+        "USAID",
+        "WFP"
+      ]
+    },
+    {
+      "id": "BP-028",
+      "domain": "universal_crime",
+      "severity": "CRITICAL",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "ICC",
+        "DOJ",
+        "FBI"
+      ]
+    },
+    {
+      "id": "BP-029",
+      "domain": "forced_sterilization",
+      "severity": "CRITICAL",
+      "deadline": "7 days",
+      "days_left": 7,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "ICE-OIG",
+        "ICC"
+      ]
+    },
+    {
+      "id": "BP-030",
+      "domain": "medical_experimentation",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "FDA",
+        "DOJ",
+        "NIH"
+      ]
+    },
+    {
+      "id": "BP-031",
+      "domain": "wage_theft",
+      "severity": "CRITICAL",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOL",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-032",
+      "domain": "dark_pattern_deception",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "state AGs",
+        "EU Commission"
+      ]
+    },
+    {
+      "id": "BP-033",
+      "domain": "attention_engineering",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-034",
+      "domain": "data_colonialism",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "UN"
+      ]
+    },
+    {
+      "id": "BP-035",
+      "domain": "economic",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "Federal Reserve",
+        "Congress",
+        "SEC"
+      ]
+    },
+    {
+      "id": "BP-036",
+      "domain": "automated_decision_harm",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "EEOC",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-037",
+      "domain": "planned_obsolescence",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "EU Commission",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-038",
+      "domain": "enshitification",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-039",
+      "domain": "platform_monopoly_abuse",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOJ Antitrust",
+        "FTC",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-040",
+      "domain": "intergenerational_toxin",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "DOJ",
+        "ATSDR"
+      ]
+    },
+    {
+      "id": "BP-041",
+      "domain": "international_law_violation",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "ICC",
+        "ICJ",
+        "UN Security Council"
+      ]
+    },
+    {
+      "id": "BP-042",
+      "domain": "wealth_concealment_elite",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "IRS",
+        "DOJ",
+        "FinCEN",
+        "OECD"
+      ]
+    },
+    {
+      "id": "BP-043",
+      "domain": "shadow_banking_crime",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "SEC",
+        "FSOC",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-044",
+      "domain": "data_breach_negligence",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "state AGs",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-045",
+      "domain": "crypto_crime",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "SEC",
+        "DOJ",
+        "FinCEN"
+      ]
+    },
+    {
+      "id": "BP-046",
+      "domain": "water_contamination_concealment",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "DOJ",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-047",
+      "domain": "pesticide_harm_concealment",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "DOJ",
+        "FDA"
+      ]
+    },
+    {
+      "id": "BP-048",
+      "domain": "tobacco_continued_targeting",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FDA",
+        "DOJ",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-049",
+      "domain": "bribe_network_international",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "SEC",
+        "OECD",
+        "FBI"
+      ]
+    },
+    {
+      "id": "BP-050",
+      "domain": "deepfake_abuse_personal",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "Congress",
+        "state legislatures",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-051",
+      "domain": "nuclear",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOD",
+        "DOE",
+        "NRC",
+        "State Dept"
+      ]
+    },
+    {
+      "id": "BP-052",
+      "domain": "content_moderation_bias",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "EU Commission"
+      ]
+    },
+    {
+      "id": "BP-053",
+      "domain": "housing_as_weapon",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "HUD",
+        "CFPB",
+        "DOJ",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-054",
+      "domain": "treaty_violation",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "State Dept",
+        "DOJ",
+        "ICJ"
+      ]
+    },
+    {
+      "id": "BP-055",
+      "domain": "constitutional_violation",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "DOJ Civil Rights",
+        "ACLU",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-056",
+      "domain": "gentrification_weapon",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "HUD",
+        "state legislatures",
+        "city councils"
+      ]
+    },
+    {
+      "id": "BP-057",
+      "domain": "agricultural_monopoly",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOJ Antitrust",
+        "FTC",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-058",
+      "domain": "land_grab",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "BLM",
+        "DOJ",
+        "state legislatures"
+      ]
+    },
+    {
+      "id": "BP-059",
+      "domain": "democracy",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOJ Civil Rights",
+        "Congress",
+        "Supreme Court"
+      ]
+    },
+    {
+      "id": "BP-060",
+      "domain": "consumer_fraud_systematic",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "CFPB",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-061",
+      "domain": "eviction_as_violence",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "HUD",
+        "CFPB",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-062",
+      "domain": "synthetic_media_election",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "FEC",
+        "DOJ",
+        "state election officials"
+      ]
+    },
+    {
+      "id": "BP-063",
+      "domain": "epistemic_violence",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "UNESCO",
+        "UN",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-064",
+      "domain": "election_hacking",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "DHS",
+        "DOJ",
+        "FBI",
+        "state election officials"
+      ]
+    },
+    {
+      "id": "BP-065",
+      "domain": "forced_labor_corporate",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOL",
+        "CBP",
+        "ICC",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-066",
+      "domain": "geneva_convention_violation",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "ICC",
+        "Pentagon",
+        "DOJ",
+        "Red Cross"
+      ]
+    },
+    {
+      "id": "BP-067",
+      "domain": "water_table_depletion",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "USGS",
+        "state water boards"
+      ]
+    },
+    {
+      "id": "BP-068",
+      "domain": "conflict_mineral_trade",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "SEC",
+        "DOJ",
+        "ICC",
+        "State Dept"
+      ]
+    },
+    {
+      "id": "BP-069",
+      "domain": "judicial_corruption",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "Judicial Conference",
+        "DOJ",
+        "state judicial councils"
+      ]
+    },
+    {
+      "id": "BP-070",
+      "domain": "academic_capture",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "Dept of Education",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-071",
+      "domain": "patent_hoarding",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "USPTO",
+        "DOJ",
+        "FTC"
+      ]
+    },
+    {
+      "id": "BP-072",
+      "domain": "illegal_fishing",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "NOAA",
+        "Coast Guard",
+        "DOJ",
+        "Interpol"
+      ]
+    },
+    {
+      "id": "BP-073",
+      "domain": "vaccine_disinformation",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "HHS",
+        "Surgeon General",
+        "FTC"
+      ]
+    },
+    {
+      "id": "BP-074",
+      "domain": "ai_risk",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "Congress",
+        "FTC",
+        "NIST"
+      ]
+    },
+    {
+      "id": "BP-075",
+      "domain": "memory_hole",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "NARA",
+        "Congress",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-076",
+      "domain": "ocean_acidification",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "NOAA",
+        "Congress",
+        "UN"
+      ]
+    },
+    {
+      "id": "BP-077",
+      "domain": "ip_theft_systematic",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "USPTO",
+        "WTO"
+      ]
+    },
+    {
+      "id": "BP-078",
+      "domain": "scientific_fraud",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "NIH",
+        "NSF",
+        "DOJ",
+        "ORI"
+      ]
+    },
+    {
+      "id": "BP-079",
+      "domain": "pharma_experimentation",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "FDA",
+        "DOJ",
+        "NIH"
+      ]
+    },
+    {
+      "id": "BP-080",
+      "domain": "wage_theft",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOL",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-081",
+      "domain": "asbestos_continued",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "DOJ",
+        "CPSC"
+      ]
+    },
+    {
+      "id": "BP-082",
+      "domain": "right_to_repair",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "EU Commission"
+      ]
+    },
+    {
+      "id": "BP-083",
+      "domain": "ai_washing",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "SEC",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-084",
+      "domain": "cognitive_sovereignty",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-085",
+      "domain": "orphan_drug_abuse",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "FDA",
+        "DOJ",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-086",
+      "domain": "antibiotic_resistance_concealment",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "FDA",
+        "CDC",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-087",
+      "domain": "worker_homicide",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "OSHA",
+        "DOJ",
+        "DOL"
+      ]
+    },
+    {
+      "id": "BP-088",
+      "domain": "cyber_warfare",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOD",
+        "NSA",
+        "DOJ",
+        "State Dept"
+      ]
+    },
+    {
+      "id": "BP-089",
+      "domain": "asylum_denial",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "DOJ Civil Rights",
+        "DHS",
+        "UNHCR"
+      ]
+    },
+    {
+      "id": "BP-090",
+      "domain": "forbidden_knowledge",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "Congress",
+        "NARA",
+        "DOJ"
+      ]
+    },
+    {
+      "id": "BP-091",
+      "domain": "predictive_policing",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "DOJ Civil Rights",
+        "Congress",
+        "state legislatures"
+      ]
+    },
+    {
+      "id": "BP-092",
+      "domain": "narcotic_trade",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DEA",
+        "DOJ",
+        "Treasury",
+        "DOD"
+      ]
+    },
+    {
+      "id": "BP-093",
+      "domain": "deepfake_weapon",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "DOD",
+        "DOJ",
+        "State Dept",
+        "NATO"
+      ]
+    },
+    {
+      "id": "BP-094",
+      "domain": "facial_recognition_abuse",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "Congress",
+        "state legislatures"
+      ]
+    },
+    {
+      "id": "BP-095",
+      "domain": "media_concentration",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FCC",
+        "DOJ Antitrust",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-096",
+      "domain": "prosecutorial_misconduct",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "state bars",
+        "DOJ",
+        "state supreme courts"
+      ]
+    },
+    {
+      "id": "BP-097",
+      "domain": "covert_regime_change",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "Congress",
+        "GAO",
+        "IC IG",
+        "ICC"
+      ]
+    },
+    {
+      "id": "BP-098",
+      "domain": "tax_haven_facilitation",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "IRS",
+        "DOJ",
+        "Treasury",
+        "OECD"
+      ]
+    },
+    {
+      "id": "BP-099",
+      "domain": "forever_chemical_concealment",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "DOJ",
+        "state AGs"
+      ]
+    },
+    {
+      "id": "BP-100",
+      "domain": "revolving_door",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "Congress",
+        "OGE",
+        "Inspectors General"
+      ]
+    },
+    {
+      "id": "BP-101",
+      "domain": "data_broker_harm",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "CFPB",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-102",
+      "domain": "digital_colonialism",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "FTC",
+        "State Dept",
+        "UN",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-103",
+      "domain": "microplastic_contamination",
+      "severity": "ELEVATED",
+      "deadline": "90 days",
+      "days_left": 90,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "FDA",
+        "WHO",
+        "Congress"
+      ]
+    },
+    {
+      "id": "BP-104",
+      "domain": "refugee_rights_violation",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "UNHCR",
+        "DOJ Civil Rights",
+        "DHS",
+        "ICC"
+      ]
+    },
+    {
+      "id": "BP-105",
+      "domain": "supply_chain_slavery",
+      "severity": "ELEVATED",
+      "deadline": "60 days",
+      "days_left": 60,
+      "status": "PENDING",
+      "actors": [
+        "DOL",
+        "CBP",
+        "DOJ",
+        "ICC"
+      ]
+    },
+    {
+      "id": "BP-106",
+      "domain": "lead_poisoning_concealment",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "EPA",
+        "CDC",
+        "DOJ",
+        "HUD"
+      ]
+    },
+    {
+      "id": "BP-107",
+      "domain": "insurance_denial_homicide",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOJ",
+        "state AGs",
+        "state insurance commissions"
+      ]
+    },
+    {
+      "id": "BP-108",
+      "domain": "military_base_contamination",
+      "severity": "ELEVATED",
+      "deadline": "30 days",
+      "days_left": 30,
+      "status": "PENDING",
+      "actors": [
+        "DOD",
+        "EPA",
+        "DOJ",
+        "VA"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ Compliance Tracker</title>
+<style>
+body { max-width: 1200px; margin: 0 auto; padding: 2rem; font-family: monospace; background: #0a0a0f; color: #e0e0e0; }
+h1 { color: #ff4444; text-align: center; }
+.stat { display: inline-block; margin: 1rem; padding: 1rem 2rem; background: #1a1a2e; border-radius: 8px; text-align: center; }
+.stat-value { font-size: 3rem; font-weight: bold; }
+.stat-label { color: #888; }
+.critical { color: #ff4444; }
+.elevated { color: #ff8844; }
+.ok { color: #44ff88; }
+table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid #333; }
+th { color: #ff6644; }
+tr:hover { background: #1a1a2e; }
+.severity-CRITICAL { color: #ff4444; font-weight: bold; }
+.severity-ELEVATED { color: #ff8844; }
+.status-PENDING { color: #ff4444; }
+</style>
+</head>
+<body>
+<h1>EVEZ COMPLIANCE TRACKOR</h1>
+<div style="text-align:center">
+  <div class="stat"><div class="stat-value critical">0</div><div class="stat-label">Executed</div></div>
+  <div class="stat"><div class="stat-value elevated">108</div><div class="stat-label">Pending</div></div>
+  <div class="stat"><div class="stat-value critical">0.0%</div><div class="stat-label">Compliance Rate</div></div>
+  <div class="stat"><div class="stat-value">83</div><div class="stat-label">Total Actors</div></div>
+  <div class="stat"><div class="stat-value">108</div><div class="stat-label">Blueprints</div></div>
+</div>
+<table>
+<tr><th>ID</th><th>Domain</th><th>Severity</th><th>Deadline</th><th>Days Left</th><th>Status</th><th>Actors</th></tr>
+<tr><td>BP-001</td><td>climate_denial_industry</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOJ, SEC, state AGs</td></tr>
+<tr><td>BP-002</td><td>addiction_by_design</td><td class='severity-CRITICAL'>CRITICAL</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, state AGs, Congress</td></tr>
+<tr><td>BP-003</td><td>child_labor_supply_chain</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOL, CBP, ICC</td></tr>
+<tr><td>BP-004</td><td>regulatory_capture</td><td class='severity-CRITICAL'>CRITICAL</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>Congress, IG offices, DOJ</td></tr>
+<tr><td>BP-005</td><td>migrant_labor</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOL, DHS, ICC</td></tr>
+<tr><td>BP-006</td><td>water_system_poisoning</td><td class='severity-CRITICAL'>CRITICAL</td><td>7 days</td><td>7</td><td class='status-PENDING'>PENDING</td><td>EPA, DOJ, state AGs</td></tr>
+<tr><td>BP-007</td><td>pharmaceutical_fraud</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOJ, FDA, SEC</td></tr>
+<tr><td>BP-008</td><td>air_pollution_homicide</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>EPA, DOJ</td></tr>
+<tr><td>BP-009</td><td>environmental_racism</td><td class='severity-CRITICAL'>CRITICAL</td><td>7 days</td><td>7</td><td class='status-PENDING'>PENDING</td><td>EPA, DOJ Civil Rights, Congress</td></tr>
+<tr><td>BP-010</td><td>nuclear_waste_concealment</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOD, DOE, NRC</td></tr>
+<tr><td>BP-011</td><td>cognitive_sovereignty</td><td class='severity-CRITICAL'>CRITICAL</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, state AGs</td></tr>
+<tr><td>BP-012</td><td>civil_asset_forfeiture</td><td class='severity-CRITICAL'>CRITICAL</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOJ, state legislatures</td></tr>
+<tr><td>BP-013</td><td>prison_labor</td><td class='severity-CRITICAL'>CRITICAL</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOJ, DOL, Congress</td></tr>
+<tr><td>BP-014</td><td>election_suppression</td><td class='severity-CRITICAL'>CRITICAL</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>DOJ Civil Rights, Congress</td></tr>
+<tr><td>BP-015</td><td>education_debt_peonage</td><td class='severity-CRITICAL'>CRITICAL</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>ED, CFPB, Congress</td></tr>
+<tr><td>BP-016</td><td>gag_order_suppression</td><td class='severity-CRITICAL'>CRITICAL</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>DOJ, state legislatures</td></tr>
+<tr><td>BP-017</td><td>surveillance_capitalism</td><td class='severity-CRITICAL'>CRITICAL</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, EU</td></tr>
+<tr><td>BP-018</td><td>eviction_displacement</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>HUD, CFPB, Congress</td></tr>
+<tr><td>BP-019</td><td>debt_collection_abuse</td><td class='severity-CRITICAL'>CRITICAL</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>CFPB, DOJ</td></tr>
+<tr><td>BP-020</td><td>algorithmic_discrimination</td><td class='severity-CRITICAL'>CRITICAL</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, DOJ, EEOC</td></tr>
+<tr><td>BP-021</td><td>carbon_concealment</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOJ, SEC, state AGs</td></tr>
+<tr><td>BP-022</td><td>healthcare_denial_homicide</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOJ, state AGs</td></tr>
+<tr><td>BP-023</td><td>insulin_price_gouging</td><td class='severity-CRITICAL'>CRITICAL</td><td>7 days</td><td>7</td><td class='status-PENDING'>PENDING</td><td>DOJ, Congress, state AGs</td></tr>
+<tr><td>BP-024</td><td>coercive_control</td><td class='severity-CRITICAL'>CRITICAL</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>state legislatures, DOJ</td></tr>
+<tr><td>BP-025</td><td>dark_pattern</td><td class='severity-CRITICAL'>CRITICAL</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, state AGs</td></tr>
+<tr><td>BP-026</td><td>genocide_ews</td><td class='severity-CRITICAL'>CRITICAL</td><td>7 days</td><td>7</td><td class='status-PENDING'>PENDING</td><td>UN, ICC, US Congress</td></tr>
+<tr><td>BP-027</td><td>famine</td><td class='severity-CRITICAL'>CRITICAL</td><td>7 days</td><td>7</td><td class='status-PENDING'>PENDING</td><td>UN, USAID, WFP</td></tr>
+<tr><td>BP-028</td><td>universal_crime</td><td class='severity-CRITICAL'>CRITICAL</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>ICC, DOJ, FBI</td></tr>
+<tr><td>BP-029</td><td>forced_sterilization</td><td class='severity-CRITICAL'>CRITICAL</td><td>7 days</td><td>7</td><td class='status-PENDING'>PENDING</td><td>DOJ, ICE-OIG, ICC</td></tr>
+<tr><td>BP-030</td><td>medical_experimentation</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>FDA, DOJ, NIH</td></tr>
+<tr><td>BP-031</td><td>wage_theft</td><td class='severity-CRITICAL'>CRITICAL</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOL, DOJ</td></tr>
+<tr><td>BP-032</td><td>dark_pattern_deception</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, state AGs, EU Commission</td></tr>
+<tr><td>BP-033</td><td>attention_engineering</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, state AGs</td></tr>
+<tr><td>BP-034</td><td>data_colonialism</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, UN</td></tr>
+<tr><td>BP-035</td><td>economic</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>Federal Reserve, Congress, SEC</td></tr>
+<tr><td>BP-036</td><td>automated_decision_harm</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, EEOC, DOJ</td></tr>
+<tr><td>BP-037</td><td>planned_obsolescence</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FTC, EU Commission, Congress</td></tr>
+<tr><td>BP-038</td><td>enshitification</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, state AGs</td></tr>
+<tr><td>BP-039</td><td>platform_monopoly_abuse</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOJ Antitrust, FTC, state AGs</td></tr>
+<tr><td>BP-040</td><td>intergenerational_toxin</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>EPA, DOJ, ATSDR</td></tr>
+<tr><td>BP-041</td><td>international_law_violation</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>ICC, ICJ, UN Security Council</td></tr>
+<tr><td>BP-042</td><td>wealth_concealment_elite</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>IRS, DOJ, FinCEN</td></tr>
+<tr><td>BP-043</td><td>shadow_banking_crime</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>SEC, FSOC, DOJ</td></tr>
+<tr><td>BP-044</td><td>data_breach_negligence</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, state AGs, Congress</td></tr>
+<tr><td>BP-045</td><td>crypto_crime</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>SEC, DOJ, FinCEN</td></tr>
+<tr><td>BP-046</td><td>water_contamination_concealment</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>EPA, DOJ, state AGs</td></tr>
+<tr><td>BP-047</td><td>pesticide_harm_concealment</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>EPA, DOJ, FDA</td></tr>
+<tr><td>BP-048</td><td>tobacco_continued_targeting</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FDA, DOJ, state AGs</td></tr>
+<tr><td>BP-049</td><td>bribe_network_international</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOJ, SEC, OECD</td></tr>
+<tr><td>BP-050</td><td>deepfake_abuse_personal</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>Congress, state legislatures, DOJ</td></tr>
+<tr><td>BP-051</td><td>nuclear</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOD, DOE, NRC</td></tr>
+<tr><td>BP-052</td><td>content_moderation_bias</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, EU Commission</td></tr>
+<tr><td>BP-053</td><td>housing_as_weapon</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>HUD, CFPB, DOJ</td></tr>
+<tr><td>BP-054</td><td>treaty_violation</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>State Dept, DOJ, ICJ</td></tr>
+<tr><td>BP-055</td><td>constitutional_violation</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>DOJ Civil Rights, ACLU, Congress</td></tr>
+<tr><td>BP-056</td><td>gentrification_weapon</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>HUD, state legislatures, city councils</td></tr>
+<tr><td>BP-057</td><td>agricultural_monopoly</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOJ Antitrust, FTC, Congress</td></tr>
+<tr><td>BP-058</td><td>land_grab</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>BLM, DOJ, state legislatures</td></tr>
+<tr><td>BP-059</td><td>democracy</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOJ Civil Rights, Congress, Supreme Court</td></tr>
+<tr><td>BP-060</td><td>consumer_fraud_systematic</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, CFPB, state AGs</td></tr>
+<tr><td>BP-061</td><td>eviction_as_violence</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>HUD, CFPB, DOJ</td></tr>
+<tr><td>BP-062</td><td>synthetic_media_election</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>FEC, DOJ, state election officials</td></tr>
+<tr><td>BP-063</td><td>epistemic_violence</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>UNESCO, UN, Congress</td></tr>
+<tr><td>BP-064</td><td>election_hacking</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>DHS, DOJ, FBI</td></tr>
+<tr><td>BP-065</td><td>forced_labor_corporate</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOL, CBP, ICC</td></tr>
+<tr><td>BP-066</td><td>geneva_convention_violation</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>ICC, Pentagon, DOJ</td></tr>
+<tr><td>BP-067</td><td>water_table_depletion</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>EPA, USGS, state water boards</td></tr>
+<tr><td>BP-068</td><td>conflict_mineral_trade</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>SEC, DOJ, ICC</td></tr>
+<tr><td>BP-069</td><td>judicial_corruption</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>Judicial Conference, DOJ, state judicial councils</td></tr>
+<tr><td>BP-070</td><td>academic_capture</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOJ, Dept of Education, state AGs</td></tr>
+<tr><td>BP-071</td><td>patent_hoarding</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>USPTO, DOJ, FTC</td></tr>
+<tr><td>BP-072</td><td>illegal_fishing</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>NOAA, Coast Guard, DOJ</td></tr>
+<tr><td>BP-073</td><td>vaccine_disinformation</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>HHS, Surgeon General, FTC</td></tr>
+<tr><td>BP-074</td><td>ai_risk</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>Congress, FTC, NIST</td></tr>
+<tr><td>BP-075</td><td>memory_hole</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>NARA, Congress, DOJ</td></tr>
+<tr><td>BP-076</td><td>ocean_acidification</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>EPA, NOAA, Congress</td></tr>
+<tr><td>BP-077</td><td>ip_theft_systematic</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOJ, USPTO, WTO</td></tr>
+<tr><td>BP-078</td><td>scientific_fraud</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>NIH, NSF, DOJ</td></tr>
+<tr><td>BP-079</td><td>pharma_experimentation</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>FDA, DOJ, NIH</td></tr>
+<tr><td>BP-080</td><td>wage_theft</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOL, DOJ</td></tr>
+<tr><td>BP-081</td><td>asbestos_continued</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>EPA, DOJ, CPSC</td></tr>
+<tr><td>BP-082</td><td>right_to_repair</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, EU Commission</td></tr>
+<tr><td>BP-083</td><td>ai_washing</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, SEC, state AGs</td></tr>
+<tr><td>BP-084</td><td>cognitive_sovereignty</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, state AGs</td></tr>
+<tr><td>BP-085</td><td>orphan_drug_abuse</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>FDA, DOJ, Congress</td></tr>
+<tr><td>BP-086</td><td>antibiotic_resistance_concealment</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>FDA, CDC, DOJ</td></tr>
+<tr><td>BP-087</td><td>worker_homicide</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>OSHA, DOJ, DOL</td></tr>
+<tr><td>BP-088</td><td>cyber_warfare</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOD, NSA, DOJ</td></tr>
+<tr><td>BP-089</td><td>asylum_denial</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>DOJ Civil Rights, DHS, UNHCR</td></tr>
+<tr><td>BP-090</td><td>forbidden_knowledge</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>Congress, NARA, DOJ</td></tr>
+<tr><td>BP-091</td><td>predictive_policing</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>DOJ Civil Rights, Congress, state legislatures</td></tr>
+<tr><td>BP-092</td><td>narcotic_trade</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DEA, DOJ, Treasury</td></tr>
+<tr><td>BP-093</td><td>deepfake_weapon</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>DOD, DOJ, State Dept</td></tr>
+<tr><td>BP-094</td><td>facial_recognition_abuse</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>FTC, Congress, state legislatures</td></tr>
+<tr><td>BP-095</td><td>media_concentration</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FCC, DOJ Antitrust, Congress</td></tr>
+<tr><td>BP-096</td><td>prosecutorial_misconduct</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>state bars, DOJ, state supreme courts</td></tr>
+<tr><td>BP-097</td><td>covert_regime_change</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>Congress, GAO, IC IG</td></tr>
+<tr><td>BP-098</td><td>tax_haven_facilitation</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>IRS, DOJ, Treasury</td></tr>
+<tr><td>BP-099</td><td>forever_chemical_concealment</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>EPA, DOJ, state AGs</td></tr>
+<tr><td>BP-100</td><td>revolving_door</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>Congress, OGE, Inspectors General</td></tr>
+<tr><td>BP-101</td><td>data_broker_harm</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FTC, CFPB, Congress</td></tr>
+<tr><td>BP-102</td><td>digital_colonialism</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>FTC, State Dept, UN</td></tr>
+<tr><td>BP-103</td><td>microplastic_contamination</td><td class='severity-ELEVATED'>ELEVATED</td><td>90 days</td><td>90</td><td class='status-PENDING'>PENDING</td><td>EPA, FDA, WHO</td></tr>
+<tr><td>BP-104</td><td>refugee_rights_violation</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>UNHCR, DOJ Civil Rights, DHS</td></tr>
+<tr><td>BP-105</td><td>supply_chain_slavery</td><td class='severity-ELEVATED'>ELEVATED</td><td>60 days</td><td>60</td><td class='status-PENDING'>PENDING</td><td>DOL, CBP, DOJ</td></tr>
+<tr><td>BP-106</td><td>lead_poisoning_concealment</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>EPA, CDC, DOJ</td></tr>
+<tr><td>BP-107</td><td>insurance_denial_homicide</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOJ, state AGs, state insurance commissions</td></tr>
+<tr><td>BP-108</td><td>military_base_contamination</td><td class='severity-ELEVATED'>ELEVATED</td><td>30 days</td><td>30</td><td class='status-PENDING'>PENDING</td><td>DOD, EPA, DOJ</td></tr>
+</table>
+<p style="text-align:center;margin-top:2rem;color:#ff4444">100% IMPUNITY MAINTAINED. 0% COMPLIANCE. THE INACTION IS THE CRIME.</p>
+</body>
+</html>

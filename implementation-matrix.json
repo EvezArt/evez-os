@@ -1,0 +1,1253 @@
+{
+  "timestamp": "2026-06-29T09:41:29Z",
+  "total_actors": 83,
+  "total_blueprints": 108,
+  "actor_workload": {
+    "DOJ": {
+      "total_actions": 61,
+      "critical": 18,
+      "elevated": 43,
+      "7_day": 3,
+      "30_day": 24,
+      "60_day": 15,
+      "90_day": 19,
+      "domains": [
+        "pesticide_harm_concealment",
+        "tax_haven_facilitation",
+        "judicial_corruption",
+        "deepfake_abuse_personal",
+        "air_pollution_homicide",
+        "forbidden_knowledge",
+        "wage_theft",
+        "wealth_concealment_elite",
+        "election_hacking",
+        "pharma_experimentation",
+        "regulatory_capture",
+        "coercive_control",
+        "supply_chain_slavery",
+        "shadow_banking_crime",
+        "tobacco_continued_targeting",
+        "scientific_fraud",
+        "asbestos_continued",
+        "orphan_drug_abuse",
+        "bribe_network_international",
+        "medical_experimentation",
+        "water_system_poisoning",
+        "conflict_mineral_trade",
+        "forced_sterilization",
+        "treaty_violation",
+        "memory_hole",
+        "antibiotic_resistance_concealment",
+        "illegal_fishing",
+        "academic_capture",
+        "universal_crime",
+        "synthetic_media_election",
+        "cyber_warfare",
+        "lead_poisoning_concealment",
+        "patent_hoarding",
+        "crypto_crime",
+        "climate_denial_industry",
+        "algorithmic_discrimination",
+        "automated_decision_harm",
+        "ip_theft_systematic",
+        "eviction_as_violence",
+        "intergenerational_toxin",
+        "prosecutorial_misconduct",
+        "land_grab",
+        "civil_asset_forfeiture",
+        "deepfake_weapon",
+        "prison_labor",
+        "forced_labor_corporate",
+        "insurance_denial_homicide",
+        "housing_as_weapon",
+        "pharmaceutical_fraud",
+        "healthcare_denial_homicide",
+        "insulin_price_gouging",
+        "worker_homicide",
+        "carbon_concealment",
+        "gag_order_suppression",
+        "debt_collection_abuse",
+        "narcotic_trade",
+        "forever_chemical_concealment",
+        "water_contamination_concealment",
+        "military_base_contamination",
+        "geneva_convention_violation"
+      ]
+    },
+    "Congress": {
+      "total_actions": 38,
+      "critical": 10,
+      "elevated": 28,
+      "7_day": 2,
+      "30_day": 2,
+      "60_day": 11,
+      "90_day": 23,
+      "domains": [
+        "constitutional_violation",
+        "deepfake_abuse_personal",
+        "revolving_door",
+        "forbidden_knowledge",
+        "enshitification",
+        "election_suppression",
+        "regulatory_capture",
+        "planned_obsolescence",
+        "education_debt_peonage",
+        "eviction_displacement",
+        "orphan_drug_abuse",
+        "covert_regime_change",
+        "memory_hole",
+        "surveillance_capitalism",
+        "attention_engineering",
+        "cognitive_sovereignty",
+        "facial_recognition_abuse",
+        "environmental_racism",
+        "ocean_acidification",
+        "data_breach_negligence",
+        "addiction_by_design",
+        "content_moderation_bias",
+        "digital_colonialism",
+        "media_concentration",
+        "prison_labor",
+        "democracy",
+        "housing_as_weapon",
+        "insulin_price_gouging",
+        "right_to_repair",
+        "data_colonialism",
+        "economic",
+        "microplastic_contamination",
+        "data_broker_harm",
+        "ai_risk",
+        "predictive_policing",
+        "agricultural_monopoly",
+        "epistemic_violence"
+      ]
+    },
+    "FTC": {
+      "total_actions": 25,
+      "critical": 5,
+      "elevated": 20,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 13,
+      "90_day": 12,
+      "domains": [
+        "enshitification",
+        "dark_pattern_deception",
+        "planned_obsolescence",
+        "dark_pattern",
+        "surveillance_capitalism",
+        "attention_engineering",
+        "cognitive_sovereignty",
+        "facial_recognition_abuse",
+        "vaccine_disinformation",
+        "patent_hoarding",
+        "data_breach_negligence",
+        "addiction_by_design",
+        "algorithmic_discrimination",
+        "automated_decision_harm",
+        "content_moderation_bias",
+        "digital_colonialism",
+        "ai_washing",
+        "consumer_fraud_systematic",
+        "right_to_repair",
+        "data_colonialism",
+        "platform_monopoly_abuse",
+        "data_broker_harm",
+        "ai_risk",
+        "agricultural_monopoly"
+      ]
+    },
+    "state AGs": {
+      "total_actions": 21,
+      "critical": 8,
+      "elevated": 13,
+      "7_day": 2,
+      "30_day": 6,
+      "60_day": 10,
+      "90_day": 3,
+      "domains": [
+        "enshitification",
+        "dark_pattern_deception",
+        "tobacco_continued_targeting",
+        "water_system_poisoning",
+        "dark_pattern",
+        "academic_capture",
+        "attention_engineering",
+        "cognitive_sovereignty",
+        "data_breach_negligence",
+        "climate_denial_industry",
+        "addiction_by_design",
+        "insurance_denial_homicide",
+        "healthcare_denial_homicide",
+        "ai_washing",
+        "insulin_price_gouging",
+        "consumer_fraud_systematic",
+        "carbon_concealment",
+        "platform_monopoly_abuse",
+        "forever_chemical_concealment",
+        "water_contamination_concealment"
+      ]
+    },
+    "EPA": {
+      "total_actions": 13,
+      "critical": 3,
+      "elevated": 10,
+      "7_day": 2,
+      "30_day": 8,
+      "60_day": 0,
+      "90_day": 3,
+      "domains": [
+        "pesticide_harm_concealment",
+        "lead_poisoning_concealment",
+        "water_system_poisoning",
+        "microplastic_contamination",
+        "air_pollution_homicide",
+        "intergenerational_toxin",
+        "forever_chemical_concealment",
+        "water_contamination_concealment",
+        "military_base_contamination",
+        "ocean_acidification",
+        "water_table_depletion",
+        "environmental_racism",
+        "asbestos_continued"
+      ]
+    },
+    "ICC": {
+      "total_actions": 12,
+      "critical": 5,
+      "elevated": 7,
+      "7_day": 2,
+      "30_day": 3,
+      "60_day": 3,
+      "90_day": 4,
+      "domains": [
+        "migrant_labor",
+        "conflict_mineral_trade",
+        "child_labor_supply_chain",
+        "forced_sterilization",
+        "covert_regime_change",
+        "supply_chain_slavery",
+        "forced_labor_corporate",
+        "universal_crime",
+        "genocide_ews",
+        "refugee_rights_violation",
+        "geneva_convention_violation",
+        "international_law_violation"
+      ]
+    },
+    "SEC": {
+      "total_actions": 9,
+      "critical": 3,
+      "elevated": 6,
+      "7_day": 0,
+      "30_day": 4,
+      "60_day": 3,
+      "90_day": 2,
+      "domains": [
+        "carbon_concealment",
+        "economic",
+        "bribe_network_international",
+        "conflict_mineral_trade",
+        "shadow_banking_crime",
+        "pharmaceutical_fraud",
+        "crypto_crime",
+        "ai_washing",
+        "climate_denial_industry"
+      ]
+    },
+    "DOL": {
+      "total_actions": 8,
+      "critical": 4,
+      "elevated": 4,
+      "7_day": 0,
+      "30_day": 6,
+      "60_day": 1,
+      "90_day": 1,
+      "domains": [
+        "migrant_labor",
+        "child_labor_supply_chain",
+        "wage_theft",
+        "supply_chain_slavery",
+        "forced_labor_corporate",
+        "prison_labor",
+        "worker_homicide"
+      ]
+    },
+    "FDA": {
+      "total_actions": 8,
+      "critical": 2,
+      "elevated": 6,
+      "7_day": 0,
+      "30_day": 6,
+      "60_day": 1,
+      "90_day": 1,
+      "domains": [
+        "pesticide_harm_concealment",
+        "medical_experimentation",
+        "microplastic_contamination",
+        "antibiotic_resistance_concealment",
+        "pharma_experimentation",
+        "pharmaceutical_fraud",
+        "tobacco_continued_targeting",
+        "orphan_drug_abuse"
+      ]
+    },
+    "state legislatures": {
+      "total_actions": 8,
+      "critical": 3,
+      "elevated": 5,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 4,
+      "90_day": 4,
+      "domains": [
+        "gag_order_suppression",
+        "deepfake_abuse_personal",
+        "land_grab",
+        "civil_asset_forfeiture",
+        "coercive_control",
+        "facial_recognition_abuse",
+        "gentrification_weapon",
+        "predictive_policing"
+      ]
+    },
+    "DOJ Civil Rights": {
+      "total_actions": 7,
+      "critical": 2,
+      "elevated": 5,
+      "7_day": 1,
+      "30_day": 0,
+      "60_day": 5,
+      "90_day": 1,
+      "domains": [
+        "constitutional_violation",
+        "election_suppression",
+        "democracy",
+        "asylum_denial",
+        "refugee_rights_violation",
+        "predictive_policing",
+        "environmental_racism"
+      ]
+    },
+    "CFPB": {
+      "total_actions": 7,
+      "critical": 3,
+      "elevated": 4,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 4,
+      "90_day": 2,
+      "domains": [
+        "eviction_displacement",
+        "data_broker_harm",
+        "debt_collection_abuse",
+        "eviction_as_violence",
+        "housing_as_weapon",
+        "education_debt_peonage",
+        "consumer_fraud_systematic"
+      ]
+    },
+    "DOD": {
+      "total_actions": 6,
+      "critical": 1,
+      "elevated": 5,
+      "7_day": 0,
+      "30_day": 3,
+      "60_day": 0,
+      "90_day": 3,
+      "domains": [
+        "nuclear",
+        "nuclear_waste_concealment",
+        "narcotic_trade",
+        "deepfake_weapon",
+        "military_base_contamination",
+        "cyber_warfare"
+      ]
+    },
+    "UN": {
+      "total_actions": 6,
+      "critical": 2,
+      "elevated": 4,
+      "7_day": 2,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 4,
+      "domains": [
+        "data_colonialism",
+        "digital_colonialism",
+        "genocide_ews",
+        "famine",
+        "ocean_acidification",
+        "epistemic_violence"
+      ]
+    },
+    "State Dept": {
+      "total_actions": 6,
+      "critical": 0,
+      "elevated": 6,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 1,
+      "90_day": 5,
+      "domains": [
+        "conflict_mineral_trade",
+        "nuclear",
+        "treaty_violation",
+        "digital_colonialism",
+        "deepfake_weapon",
+        "cyber_warfare"
+      ]
+    },
+    "HUD": {
+      "total_actions": 5,
+      "critical": 1,
+      "elevated": 4,
+      "7_day": 0,
+      "30_day": 2,
+      "60_day": 2,
+      "90_day": 1,
+      "domains": [
+        "eviction_as_violence",
+        "housing_as_weapon",
+        "gentrification_weapon",
+        "lead_poisoning_concealment",
+        "eviction_displacement"
+      ]
+    },
+    "DHS": {
+      "total_actions": 4,
+      "critical": 1,
+      "elevated": 3,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 3,
+      "90_day": 0,
+      "domains": [
+        "asylum_denial",
+        "migrant_labor",
+        "refugee_rights_violation",
+        "election_hacking"
+      ]
+    },
+    "EU Commission": {
+      "total_actions": 4,
+      "critical": 0,
+      "elevated": 4,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 1,
+      "90_day": 3,
+      "domains": [
+        "planned_obsolescence",
+        "content_moderation_bias",
+        "dark_pattern_deception",
+        "right_to_repair"
+      ]
+    },
+    "CBP": {
+      "total_actions": 3,
+      "critical": 1,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 2,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "child_labor_supply_chain",
+        "supply_chain_slavery",
+        "forced_labor_corporate"
+      ]
+    },
+    "FBI": {
+      "total_actions": 3,
+      "critical": 1,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 1,
+      "90_day": 1,
+      "domains": [
+        "bribe_network_international",
+        "universal_crime",
+        "election_hacking"
+      ]
+    },
+    "NIH": {
+      "total_actions": 3,
+      "critical": 1,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 2,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "medical_experimentation",
+        "scientific_fraud",
+        "pharma_experimentation"
+      ]
+    },
+    "DOJ Antitrust": {
+      "total_actions": 3,
+      "critical": 0,
+      "elevated": 3,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 3,
+      "domains": [
+        "media_concentration",
+        "platform_monopoly_abuse",
+        "agricultural_monopoly"
+      ]
+    },
+    "OECD": {
+      "total_actions": 3,
+      "critical": 0,
+      "elevated": 3,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 2,
+      "90_day": 0,
+      "domains": [
+        "bribe_network_international",
+        "tax_haven_facilitation",
+        "wealth_concealment_elite"
+      ]
+    },
+    "DOE": {
+      "total_actions": 2,
+      "critical": 1,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "nuclear",
+        "nuclear_waste_concealment"
+      ]
+    },
+    "NRC": {
+      "total_actions": 2,
+      "critical": 1,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "nuclear",
+        "nuclear_waste_concealment"
+      ]
+    },
+    "EEOC": {
+      "total_actions": 2,
+      "critical": 1,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 2,
+      "90_day": 0,
+      "domains": [
+        "automated_decision_harm",
+        "algorithmic_discrimination"
+      ]
+    },
+    "ICJ": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 2,
+      "domains": [
+        "international_law_violation",
+        "treaty_violation"
+      ]
+    },
+    "IRS": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 2,
+      "90_day": 0,
+      "domains": [
+        "tax_haven_facilitation",
+        "wealth_concealment_elite"
+      ]
+    },
+    "FinCEN": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 2,
+      "90_day": 0,
+      "domains": [
+        "crypto_crime",
+        "wealth_concealment_elite"
+      ]
+    },
+    "state election officials": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "synthetic_media_election",
+        "election_hacking"
+      ]
+    },
+    "USPTO": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 2,
+      "domains": [
+        "patent_hoarding",
+        "ip_theft_systematic"
+      ]
+    },
+    "NOAA": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 2,
+      "domains": [
+        "ocean_acidification",
+        "illegal_fishing"
+      ]
+    },
+    "NARA": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 2,
+      "domains": [
+        "forbidden_knowledge",
+        "memory_hole"
+      ]
+    },
+    "CDC": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 2,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "lead_poisoning_concealment",
+        "antibiotic_resistance_concealment"
+      ]
+    },
+    "UNHCR": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 2,
+      "90_day": 0,
+      "domains": [
+        "asylum_denial",
+        "refugee_rights_violation"
+      ]
+    },
+    "Treasury": {
+      "total_actions": 2,
+      "critical": 0,
+      "elevated": 2,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "narcotic_trade",
+        "tax_haven_facilitation"
+      ]
+    },
+    "IG offices": {
+      "total_actions": 1,
+      "critical": 1,
+      "elevated": 0,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "regulatory_capture"
+      ]
+    },
+    "ED": {
+      "total_actions": 1,
+      "critical": 1,
+      "elevated": 0,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "education_debt_peonage"
+      ]
+    },
+    "EU": {
+      "total_actions": 1,
+      "critical": 1,
+      "elevated": 0,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "surveillance_capitalism"
+      ]
+    },
+    "US Congress": {
+      "total_actions": 1,
+      "critical": 1,
+      "elevated": 0,
+      "7_day": 1,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "genocide_ews"
+      ]
+    },
+    "USAID": {
+      "total_actions": 1,
+      "critical": 1,
+      "elevated": 0,
+      "7_day": 1,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "famine"
+      ]
+    },
+    "WFP": {
+      "total_actions": 1,
+      "critical": 1,
+      "elevated": 0,
+      "7_day": 1,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "famine"
+      ]
+    },
+    "ICE-OIG": {
+      "total_actions": 1,
+      "critical": 1,
+      "elevated": 0,
+      "7_day": 1,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "forced_sterilization"
+      ]
+    },
+    "Federal Reserve": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "economic"
+      ]
+    },
+    "ATSDR": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "intergenerational_toxin"
+      ]
+    },
+    "UN Security Council": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "international_law_violation"
+      ]
+    },
+    "FSOC": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "shadow_banking_crime"
+      ]
+    },
+    "ACLU": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "constitutional_violation"
+      ]
+    },
+    "city councils": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "gentrification_weapon"
+      ]
+    },
+    "BLM": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "land_grab"
+      ]
+    },
+    "Supreme Court": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "democracy"
+      ]
+    },
+    "FEC": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "synthetic_media_election"
+      ]
+    },
+    "UNESCO": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "epistemic_violence"
+      ]
+    },
+    "Pentagon": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "geneva_convention_violation"
+      ]
+    },
+    "Red Cross": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "geneva_convention_violation"
+      ]
+    },
+    "USGS": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "water_table_depletion"
+      ]
+    },
+    "state water boards": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "water_table_depletion"
+      ]
+    },
+    "Judicial Conference": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "judicial_corruption"
+      ]
+    },
+    "state judicial councils": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "judicial_corruption"
+      ]
+    },
+    "Dept of Education": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "academic_capture"
+      ]
+    },
+    "Coast Guard": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "illegal_fishing"
+      ]
+    },
+    "Interpol": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "illegal_fishing"
+      ]
+    },
+    "HHS": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "vaccine_disinformation"
+      ]
+    },
+    "Surgeon General": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "vaccine_disinformation"
+      ]
+    },
+    "NIST": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "ai_risk"
+      ]
+    },
+    "WTO": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "ip_theft_systematic"
+      ]
+    },
+    "NSF": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "scientific_fraud"
+      ]
+    },
+    "ORI": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 1,
+      "90_day": 0,
+      "domains": [
+        "scientific_fraud"
+      ]
+    },
+    "CPSC": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "asbestos_continued"
+      ]
+    },
+    "OSHA": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "worker_homicide"
+      ]
+    },
+    "NSA": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "cyber_warfare"
+      ]
+    },
+    "DEA": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "narcotic_trade"
+      ]
+    },
+    "NATO": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "deepfake_weapon"
+      ]
+    },
+    "FCC": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "media_concentration"
+      ]
+    },
+    "state bars": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "prosecutorial_misconduct"
+      ]
+    },
+    "state supreme courts": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "prosecutorial_misconduct"
+      ]
+    },
+    "GAO": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "covert_regime_change"
+      ]
+    },
+    "IC IG": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "covert_regime_change"
+      ]
+    },
+    "OGE": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "revolving_door"
+      ]
+    },
+    "Inspectors General": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "revolving_door"
+      ]
+    },
+    "WHO": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 0,
+      "60_day": 0,
+      "90_day": 1,
+      "domains": [
+        "microplastic_contamination"
+      ]
+    },
+    "state insurance commissions": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "insurance_denial_homicide"
+      ]
+    },
+    "VA": {
+      "total_actions": 1,
+      "critical": 0,
+      "elevated": 1,
+      "7_day": 0,
+      "30_day": 1,
+      "60_day": 0,
+      "90_day": 0,
+      "domains": [
+        "military_base_contamination"
+      ]
+    }
+  },
+  "deadline_tracker_entries": 108,
+  "last_hash": "759bc37a1b571136"
+}
