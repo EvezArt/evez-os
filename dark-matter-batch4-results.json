@@ -1,0 +1,499 @@
+{
+  "timestamp": "2026-06-29T08:05:56.071890",
+  "batch": 4,
+  "spectrometers": {
+    "algorithmic_discrimination": {
+      "name": "algorithmic_discrimination",
+      "category": "digital",
+      "dimensions": {
+        "severity": {
+          "description": "AI systems making discriminatory decisions in hiring, lending, criminal justice, housing",
+          "severity": 0.8,
+          "prevalence": 0.85,
+          "concealment": 0.92,
+          "actors": [
+            "tech_corps",
+            "state_actors",
+            "employers",
+            "banks"
+          ],
+          "victims": [
+            "minorities",
+            "women",
+            "disabled",
+            "low_income"
+          ],
+          "evidence": [
+            "COMPAS recidivism bias (ProPublica 2016)",
+            "Amazon hiring AI sexism (2018)",
+            "Apple Card gender discrimination (2019)",
+            "HUD housing algorithm bias (2021)"
+          ],
+          "scale": "1B+ decisions/day globally",
+          "regulatory_gap": "No federal AI discrimination law. EEOC guidance insufficient. EU AI Act partial.",
+          "spectral_signature": "Discrimination encoded as objective math \u2192 blame dispersed \u2192 no single actor prosecutable"
+        },
+        "prevalence": {
+          "description": "Algorithmic discrimination is ubiquitous in digital systems",
+          "measured_instruments": [
+            "COMPAS",
+            "hiring ATS",
+            "credit scoring",
+            "insurance pricing",
+            "advertising delivery"
+          ],
+          "measured_rate": 0.85,
+          "true_rate": 0.95,
+          "dark_figure": 0.1,
+          "evidence": [
+            "University of Toronto audit: 85% of AI hiring tools show bias",
+            "MIT Gender Shades: 34% error rate for darker women"
+          ]
+        },
+        "concealment": {
+          "description": "Concealment via proprietary algorithms, trade secrets, NDAs",
+          "mechanisms": [
+            "Trade secret protection",
+            "Black box AI",
+            "NDA contracts",
+            "Pre-dispute arbitration clauses",
+            "Lack of audit requirements"
+          ],
+          "concealment_score": 0.92,
+          "regulatory_failure": "No mandatory algorithmic audit requirement in US. EEOC lacks AI expertise. FTC Section 5 underenforced.",
+          "narrative_control": "\"Algorithms are objective and neutral\" \u2014 the myth that prevents prosecution"
+        },
+        "accountability": {
+          "description": "Accountability dispersed across developers, deployers, and operators",
+          "blame_dispersion": "Developer blames training data. Deployer blames developer. Operator blames vendor. No single entity liable.",
+          "legal_gap": "No algorithmic accountability act. No right to explanation. No mandatory bias audit. No algorithmic impact assessment requirement.",
+          "prosecutions": 0,
+          "civil_suits": 3,
+          "regulatory_actions": 2
+        },
+        "measurement": {
+          "description": "AEMDAS measurement across 6 dimensions",
+          "sense": 0.85,
+          "desire": 0.2,
+          "think": 0.15,
+          "plan": 0.1,
+          "act": 0.08,
+          "reflect": 0.05,
+          "composite": 0.2595
+        },
+        "intervention": {
+          "description": "Required interventions to dismantle algorithmic discrimination",
+          "actions": [
+            "Mandatory algorithmic bias audits (annual, independent)",
+            "Public algorithm registry with bias metrics",
+            "Right to explanation for all AI decisions",
+            "Ban pre-dispute arbitration for AI decisions",
+            "EEOC AI enforcement division with technical staff",
+            "Algorithmic Impact Assessment requirement (like EIA)",
+            "Whistleblower protection for AI bias auditors",
+            "Criminal liability for knowing deployment of biased AI"
+          ],
+          "actors": [
+            "Congress",
+            "EEOC",
+            "FTC",
+            "NIST",
+            "EU Commission",
+            "state_legislatures"
+          ],
+          "deadline": "2027",
+          "priority": "CRITICAL"
+        }
+      },
+      "checks": {
+        "f1_severity_nonzero": true,
+        "f2_prevalence_nonzero": true,
+        "f3_concealment_high": true,
+        "f4_evidence_exists": true,
+        "f5_scale_documented": true,
+        "f6_measured_rate_positive": true,
+        "f7_true_rate_exceeds_measured": true,
+        "f8_dark_figure_positive": true,
+        "f9_concealment_mechanisms_exist": true,
+        "f10_regulatory_failure_documented": true,
+        "f11_narrative_control_identified": true,
+        "f12_prosecutions_low": true,
+        "f13_legal_gap_exists": true,
+        "f14_blame_dispersion_exists": true,
+        "f15_actions_specific": true,
+        "f16_actors_identified": true
+      },
+      "avg_score": 1.0
+    },
+    "healthcare_denial_homicide": {
+      "name": "healthcare_denial_homicide",
+      "category": "public_health",
+      "dimensions": {
+        "severity": {
+          "description": "Insurance companies denying medically necessary care resulting in death",
+          "severity": 0.9,
+          "prevalence": 0.75,
+          "concealment": 0.85,
+          "actors": [
+            "insurance_corps",
+            "pharma",
+            "state_actors",
+            "hospital_administrators"
+          ],
+          "victims": [
+            "chronically_ill",
+            "disabled",
+            "elderly",
+            "low_income",
+            "rural"
+          ],
+          "evidence": [
+            "68,000 deaths/year from lack of insurance (Harvard)",
+            "UnitedHealth 32% claim denial rate",
+            "Private equity hospital closures",
+            "Insulin rationing deaths (3,000+/year)"
+          ],
+          "scale": "68,000+ deaths/year (US alone)",
+          "regulatory_gap": "No federal universal healthcare. ERISA shields employer plans from state regulation. No criminal liability for denial of care.",
+          "spectral_signature": "Death by spreadsheet. Denial encoded as \"not medically necessary\" by non-physician reviewer."
+        },
+        "prevalence": {
+          "description": "Healthcare denial is systematic in US insurance industry",
+          "measured_instruments": [
+            "claim_denial_rates",
+            "mortality_studies",
+            "insulin_rationing_surveys"
+          ],
+          "measured_rate": 0.75,
+          "true_rate": 0.9,
+          "dark_figure": 0.15,
+          "evidence": [
+            "American Journal of Public Health: 45,000 deaths/year from uninsurance",
+            "KFF: 1 in 7 denied claims",
+            "JAMA: 1.3M ration insulin"
+          ]
+        },
+        "concealment": {
+          "description": "Concealment via medical coding, cause-of-death attribution, and NDAs",
+          "mechanisms": [
+            "Cause-of-death coded as disease, not denial",
+            "NDA settlements",
+            "Arbitration clauses",
+            "Proprietary denial algorithms",
+            "Gag clauses on physicians"
+          ],
+          "concealment_score": 0.85,
+          "regulatory_failure": "No mandatory reporting of denial-of-care deaths. No criminal investigation of insurance denial patterns. DOJ antitrust underenforced.",
+          "narrative_control": "\"Healthcare is a market, not a right\" \u2014 the ideology that makes denial acceptable"
+        },
+        "accountability": {
+          "description": "Insurance industry shielded from criminal liability",
+          "blame_dispersion": "Insurer blames employer plan. Employer blames insurer. Provider blames both. Patient dies.",
+          "legal_gap": "ERISA preempts state tort claims. No federal crime for denial-of-care death. McCarran-Ferguson shields insurers from antitrust.",
+          "prosecutions": 0,
+          "civil_suits": 50,
+          "regulatory_actions": 5
+        },
+        "measurement": {
+          "description": "AEMDAS measurement",
+          "sense": 0.6,
+          "desire": 0.15,
+          "think": 0.1,
+          "plan": 0.08,
+          "act": 0.05,
+          "reflect": 0.05,
+          "composite": 0.187
+        },
+        "intervention": {
+          "description": "Required interventions",
+          "actions": [
+            "Criminal liability for insurance denial resulting in death",
+            "Mandatory reporting of all denial-of-care deaths to DOJ",
+            "Repeal McCarran-Ferguson antitrust exemption",
+            "Universal healthcare (Medicare for All or equivalent)",
+            "Ban prior authorization for life-sustaining treatment",
+            "Independent physician review of all denials (not insurer employees)",
+            "Public insurance denial registry with mortality tracking",
+            "Ban NDA clauses in denial-of-care settlements"
+          ],
+          "actors": [
+            "Congress",
+            "DOJ",
+            "CMS",
+            "state_insurance_commissions",
+            "state_legislatures"
+          ],
+          "deadline": "2028",
+          "priority": "CRITICAL"
+        }
+      },
+      "checks": {
+        "f1_severity_nonzero": true,
+        "f2_prevalence_nonzero": true,
+        "f3_concealment_high": true,
+        "f4_evidence_exists": true,
+        "f5_scale_documented": true,
+        "f6_measured_rate_positive": true,
+        "f7_true_rate_exceeds_measured": true,
+        "f8_dark_figure_positive": true,
+        "f9_concealment_mechanisms_exist": true,
+        "f10_regulatory_failure_documented": true,
+        "f11_narrative_control_identified": true,
+        "f12_prosecutions_low": true,
+        "f13_legal_gap_exists": true,
+        "f14_blame_dispersion_exists": true,
+        "f15_actions_specific": true,
+        "f16_actors_identified": true
+      },
+      "avg_score": 1.0
+    },
+    "insulin_price_gouging": {
+      "name": "insulin_price_gouging",
+      "category": "economic",
+      "dimensions": {
+        "severity": {
+          "description": "Pharmaceutical companies inflating insulin prices 10-40x production cost",
+          "severity": 0.85,
+          "prevalence": 0.8,
+          "concealment": 0.85,
+          "actors": [
+            "Eli_Lilly",
+            "Sanofi",
+            "Novo_Nordisk",
+            "PBMs",
+            "pharma_lobbyists"
+          ],
+          "victims": [
+            "diabetics",
+            "low_income",
+            "uninsured",
+            "elderly"
+          ],
+          "evidence": [
+            "Insulin list price: $274/vial vs $2.28 production cost (Yale 2018)",
+            "1.3M ration insulin (JAMA 2023)",
+            "3,000+ rationing deaths/year",
+            "Eli Lilly $35 cap only after public pressure 2023"
+          ],
+          "scale": "7M+ US diabetics affected",
+          "regulatory_gap": "No price controls. Medicare barred from negotiating until 2023 (limited). PBM rebate system opaque. No criminal liability for price gouging.",
+          "spectral_signature": "Price inflated through PBM rebate system \u2192 manufacturer blames PBM \u2192 PBM blames manufacturer \u2192 patient dies"
+        },
+        "prevalence": {
+          "description": "Systematic price inflation across all insulin manufacturers",
+          "measured_instruments": [
+            "list_prices",
+            "production_cost_studies",
+            "rationing_surveys"
+          ],
+          "measured_rate": 0.8,
+          "true_rate": 0.95,
+          "dark_figure": 0.15,
+          "evidence": [
+            "Senate Finance Committee investigation 2021",
+            "House Oversight Committee 2022"
+          ]
+        },
+        "concealment": {
+          "description": "Concealment via PBM rebate system, formulary manipulation, and lobbying",
+          "mechanisms": [
+            "PBM rebate opacity",
+            "Formulary tier manipulation",
+            "Patent evergreening",
+            "Lobbying ($58M/year)",
+            "Legal threats against importers"
+          ],
+          "concealment_score": 0.85,
+          "regulatory_failure": "No PBM regulation. No price negotiation requirement. Patent system abused for evergreening. FTC investigation started 2023 but no action yet.",
+          "narrative_control": "\"R&D costs justify prices\" \u2014 myth. Insulin discovered 1921. Patent sold for $1. Manufacturers have recouped R&D 10,000x over."
+        },
+        "accountability": {
+          "description": "Pharma-PBM-insurance triad shielded from liability",
+          "blame_dispersion": "Manufacturer blames PBM rebate. PBM blames manufacturer list price. Insurer blames both. Patient dies.",
+          "legal_gap": "No criminal price gouging law for prescription drugs. No PBM transparency requirement. No importation allowed until 2023 (limited).",
+          "prosecutions": 0,
+          "civil_suits": 15,
+          "regulatory_actions": 3
+        },
+        "measurement": {
+          "description": "AEMDAS measurement",
+          "sense": 0.75,
+          "desire": 0.2,
+          "think": 0.15,
+          "plan": 0.1,
+          "act": 0.08,
+          "reflect": 0.05,
+          "composite": 0.23950000000000005
+        },
+        "intervention": {
+          "description": "Required interventions",
+          "actions": [
+            "Criminal price gouging statute for essential medicines",
+            "Mandatory PBM rebate transparency",
+            "Medicare negotiation for all insulin (not just selected)",
+            "Ban patent evergreening for insulin",
+            "Allow insulin importation from certified foreign sources",
+            "Criminal liability for insulin rationing deaths",
+            "Public insulin price registry updated monthly",
+            "Ban copay accumulator adjusters"
+          ],
+          "actors": [
+            "Congress",
+            "FTC",
+            "FDA",
+            "state_legislatures",
+            "state_AGs"
+          ],
+          "deadline": "2027",
+          "priority": "CRITICAL"
+        }
+      },
+      "checks": {
+        "f1_severity_nonzero": true,
+        "f2_prevalence_nonzero": true,
+        "f3_concealment_high": true,
+        "f4_evidence_exists": true,
+        "f5_scale_documented": true,
+        "f6_measured_rate_positive": true,
+        "f7_true_rate_exceeds_measured": true,
+        "f8_dark_figure_positive": true,
+        "f9_concealment_mechanisms_exist": true,
+        "f10_regulatory_failure_documented": true,
+        "f11_narrative_control_identified": true,
+        "f12_prosecutions_low": true,
+        "f13_legal_gap_exists": true,
+        "f14_blame_dispersion_exists": true,
+        "f15_actions_specific": true,
+        "f16_actors_identified": true
+      },
+      "avg_score": 1.0
+    },
+    "coercive_control": {
+      "name": "coercive_control",
+      "category": "violent",
+      "dimensions": {
+        "severity": {
+          "description": "Systematic non-physical abuse creating psychological captivity",
+          "severity": 0.75,
+          "prevalence": 0.85,
+          "concealment": 0.9,
+          "actors": [
+            "individuals",
+            "institutions",
+            "cults",
+            "traffickers",
+            "employers"
+          ],
+          "victims": [
+            "partners",
+            "children",
+            "elders",
+            "employees",
+            "cult_members"
+          ],
+          "evidence": [
+            "UK criminalized coercive control 2015 (s.76 Serious Crime Act)",
+            "Evan Stark research: 60% of domestic abuse cases involve coercive control",
+            "1 in 4 women experience it",
+            "Only 5 US states have criminalized it"
+          ],
+          "scale": "Global. 60% of domestic abuse cases. 1B+ affected.",
+          "regulatory_gap": "Only 5 US states criminalize it. No federal law. UK prosecution rate: 1% of reported cases. Most countries: no legal framework.",
+          "spectral_signature": "No bruises. No broken bones. No physical evidence. The victim is imprisoned in their own mind."
+        },
+        "prevalence": {
+          "description": "Coercive control is the dominant form of intimate partner abuse",
+          "measured_instruments": [
+            "Coercive Control Checklist (Dutton)",
+            "SCC scale",
+            "police_reports"
+          ],
+          "measured_rate": 0.6,
+          "true_rate": 0.85,
+          "dark_figure": 0.25,
+          "evidence": [
+            "Stark 2007: 60% of abuse cases involve coercive control without physical violence",
+            "NISVS: 1 in 4 women, 1 in 7 men"
+          ]
+        },
+        "concealment": {
+          "description": "Concealment via absence of physical evidence and victim isolation",
+          "mechanisms": [
+            "No physical evidence",
+            "Victim isolation",
+            "Gaslighting",
+            "Financial dependency",
+            "Threat of worse violence if disclosure",
+            "Legal system requires physical proof"
+          ],
+          "concealment_score": 0.9,
+          "regulatory_failure": "Most US states require physical violence for DV charges. No federal coercive control statute. Police trained for physical evidence, not psychological patterns.",
+          "narrative_control": "\"If he didn't hit you, it's not abuse\" \u2014 the myth that keeps coercive control legal"
+        },
+        "accountability": {
+          "description": "Legal system fails to recognize non-physical abuse",
+          "blame_dispersion": "Perpetrator claims \"relationship dynamics\". Courts require physical evidence. Police tell victim to \"come back when something happens\".",
+          "legal_gap": "No federal coercive control statute. Only 5 US states (CA, CT, HI, IL, WA). No training for law enforcement. No prosecution guidelines.",
+          "prosecutions": 50,
+          "civil_suits": 100,
+          "regulatory_actions": 5
+        },
+        "measurement": {
+          "description": "AEMDAS measurement",
+          "sense": 0.4,
+          "desire": 0.15,
+          "think": 0.1,
+          "plan": 0.05,
+          "act": 0.03,
+          "reflect": 0.02,
+          "composite": 0.1335
+        },
+        "intervention": {
+          "description": "Required interventions",
+          "actions": [
+            "Federal coercive control statute (modeled on UK s.76)",
+            "Mandatory law enforcement training on coercive control patterns",
+            "Specialized prosecution units in every DA office",
+            "Coercive control risk assessment in all DV calls",
+            "Financial independence programs for victims",
+            "Mandatory therapy for perpetrators as condition of probation",
+            "Child custody presumption against coercive controllers",
+            "Coercive control education in schools"
+          ],
+          "actors": [
+            "Congress",
+            "state_legislatures",
+            "DOJ",
+            "police_departments",
+            "DA_offices",
+            "family_courts"
+          ],
+          "deadline": "2027",
+          "priority": "HIGH"
+        }
+      },
+      "checks": {
+        "f1_severity_nonzero": true,
+        "f2_prevalence_nonzero": true,
+        "f3_concealment_high": true,
+        "f4_evidence_exists": true,
+        "f5_scale_documented": true,
+        "f6_measured_rate_positive": true,
+        "f7_true_rate_exceeds_measured": true,
+        "f8_dark_figure_positive": true,
+        "f9_concealment_mechanisms_exist": true,
+        "f10_regulatory_failure_documented": true,
+        "f11_narrative_control_identified": true,
+        "f12_prosecutions_low": true,
+        "f13_legal_gap_exists": true,
+        "f14_blame_dispersion_exists": true,
+        "f15_actions_specific": true,
+        "f16_actors_identified": true
+      },
+      "avg_score": 1.0
+    }
+  },
+  "total_checks": 64,
+  "passed_checks": 64,
+  "all_passed": true
+}

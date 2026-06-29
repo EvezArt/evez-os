@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ Spectral Action Engine — Do Something About It</title>
+<style>
+:root{--bg:#0a0a0f;--fg:#e0e0e8;--crit:#ff0044;--urg:#ff8800;--mon:#4488ff;--ok:#00ff88;--card:#1a1a2e;--border:#333}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:'SF Mono',Monaco,monospace;padding:20px;line-height:1.6}
+h1{color:var(--crit);font-size:2em;margin-bottom:.3em}
+.sub{opacity:.6;margin-bottom:2em;font-size:.9em}
+.summary{display:flex;gap:20px;margin-bottom:2em;flex-wrap:wrap}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;flex:1;min-width:140px;text-align:center}
+.stat .num{font-size:2.5em;font-weight:bold}
+.stat .label{opacity:.6;font-size:.8em;margin-top:4px}
+.crit .num{color:var(--crit)}
+.urg .num{color:var(--urg)}
+.act .num{color:var(--ok)}
+.bp{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px}
+.bp.crit{border-color:var(--crit)}
+.bp.urg{border-color:var(--urg)}
+.bp.mon{border-color:var(--mon)}
+.bp h2{font-size:1.2em;margin-bottom:.5em}
+.bp.crit h2{color:var(--crit)}
+.bp.urg h2{color:var(--urg)}
+.bp.mon h2{color:var(--mon)}
+.risk-bar{width:100%;height:8px;background:#222;border-radius:4px;margin:12px 0;overflow:hidden}
+.risk-fill{height:100%;border-radius:4px}
+.actor{margin:12px 0;padding-left:12px;border-left:2px solid #444}
+.actor h3{color:var(--fg);font-size:.95em;margin-bottom:4px}
+.actor ul{list-style:none;padding-left:0}
+.actor li{padding:4px 0;font-size:.85em;opacity:.85}
+.actor li:before{content:'→ ';color:var(--ok)}
+.deadline{display:inline-block;background:#222;padding:2px 10px;border-radius:4px;font-size:.8em;margin:8px 0}
+footer{text-align:center;margin-top:3em;opacity:.4;font-size:.8em}
+</style>
+</head>
+<body>
+<h1>EVEZ SPECTRAL ACTION ENGINE</h1>
+<div class="sub">11 spectrometers · 105/105 checks passed · 7 intervention blueprints · 26 actors · 76 specific actions</div>
+
+<div class="summary">
+<div class="stat crit"><div class="num">3</div><div class="label">CRITICAL</div></div>
+<div class="stat urg"><div class="num">2</div><div class="label">URGENT</div></div>
+<div class="stat act"><div class="num">2</div><div class="label">MONITOR/STABLE</div></div>
+<div class="stat"><div class="num">76</div><div class="label">ACTIONS PROPOSED</div></div>
+<div class="stat"><div class="num">26</div><div class="label">ACTORS ASSIGNED</div></div>
+</div>
+
+<div class="bp crit">
+<h2>🚨 CRITICAL — Gaza 2024 (risk: 0.818)</h2>
+<div class="deadline">DEADLINE: IMMEDIATE — hours</div>
+<div class="risk-bar"><div class="risk-fill" style="width:81.8%;background:var(--crit)"></div></div>
+<div class="actor"><h3>UN Security Council</h3><ul><li>Enforce binding ceasefire resolution (Article 25 UN Charter)</li><li>Authorize protective force under Chapter VII</li><li>Impose sanctions on settlement expansion</li></ul></div>
+<div class="actor"><h3>USA</h3><ul><li>Condition military aid on ceasefire compliance</li><li>Appoint special envoy for Gaza reconstruction</li><li>Fund UNRWA at $1B emergency appropriation</li></ul></div>
+<div class="actor"><h3>Egypt</h3><ul><li>Open Rafah crossing permanently for humanitarian aid</li><li>Coordinate medical evacuation for wounded civilians</li><li>Host ceasefire negotiations</li></ul></div>
+<div class="actor"><h3>ICC</h3><ul><li>Issue arrest warrants for war crimes perpetrators</li><li>Investigate siege tactics as collective punishment</li><li>Document evidence of deliberate civilian targeting</li></ul></div>
+<div class="actor"><h3>WHO</h3><ul><li>Deploy field hospitals and surgical teams</li><li>Airlift critically injured children</li><li>Restore dialysis and neonatal care capacity</li></ul></div>
+</div>
+
+<div class="bp crit">
+<h2>🚨 CRITICAL — Sudan/Darfur 2024 (risk: 0.816)</h2>
+<div class="deadline">DEADLINE: IMMEDIATE — hours/days</div>
+<div class="risk-bar"><div class="risk-fill" style="width:81.6%;background:var(--crit)"></div></div>
+<div class="actor"><h3>UN Security Council</h3><ul><li>Pass binding resolution authorizing Chapter VII intervention</li><li>Impose arms embargo on RSF and SAF</li><li>Refer to ICC for crimes against humanity</li></ul></div>
+<div class="actor"><h3>African Union</h3><ul><li>Deploy AU Standby Force to Darfur</li><li>Mediate ceasefire between SAF and RSF</li><li>Open humanitarian corridors from Chad</li></ul></div>
+<div class="actor"><h3>USA</h3><ul><li>Sanction gold exports funding RSF (Algold Ltd)</li><li>Sanction SAF arms suppliers (Egypt, Iran)</li><li>Deploy USAID Disaster Assistance Response Team</li></ul></div>
+<div class="actor"><h3>ICRC</h3><ul><li>Establish safe zones in El Fasher and Nyala</li><li>Negotiate access for food/medical convoys</li><li>Deploy mobile clinics in displacement camps</li></ul></div>
+</div>
+
+<div class="bp crit">
+<h2>🚨 CRITICAL — Myanmar 2024 (risk: 0.744)</h2>
+<div class="deadline">DEADLINE: URGENT — days/weeks</div>
+<div class="risk-bar"><div class="risk-fill" style="width:74.4%;background:var(--crit)"></div></div>
+<div class="actor"><h3>ASEAN</h3><ul><li>Implement Five-Point Consensus with binding timeline</li><li>Sanction jet fuel exports to junta</li><li>Coordinate cross-border aid from Thailand</li></ul></div>
+<div class="actor"><h3>USA</h3><ul><li>Sanction Myanma Oil and Gas Enterprise (MOGE)</li><li>Recognize NUG as legitimate government</li><li>Fund civil society resistance networks</li></ul></div>
+<div class="actor"><h3>Bangladesh</h3><ul><li>Maintain Rohingya refugee protection</li><li>Coordinate with UNHCR for safe repatriation conditions</li><li>Deploy border monitors</li></ul></div>
+</div>
+
+<div class="bp urg">
+<h2>⚠️ URGENT — Russia/NATO 2024 (risk: 0.528)</h2>
+<div class="deadline">DEADLINE: IMMEDIATE — continuous monitoring</div>
+<div class="risk-bar"><div class="risk-fill" style="width:52.8%;background:var(--urg)"></div></div>
+<div class="actor"><h3>UN Security Council</h3><ul><li>Convene emergency P5 meeting on de-escalation</li><li>Reaffirm Reagan-Gorbachev declaration: nuclear war cannot be won</li></ul></div>
+<div class="actor"><h3>USA</h3><ul><li>Open direct military-to-military deconfliction line</li><li>State publicly: no first use of nuclear weapons</li><li>Offer reciprocal verification of NATO exercises</li></ul></div>
+<div class="actor"><h3>Russia</h3><ul><li>Reverse statements on nuclear first use doctrine</li><li>Resume New Start Treaty compliance</li><li>Participate in P5 dialogue</li></ul></div>
+<div class="actor"><h3>China</h3><ul><li>Mediate Russia-NATO de-escalation</li><li>State publicly: nuclear use in Ukraine unacceptable</li><li>Leverage economic ties to deter escalation</li></ul></div>
+</div>
+
+<div class="bp urg">
+<h2>⚠️ URGENT — Tunisia 2024 (risk: 0.505)</h2>
+<div class="deadline">DEADLINE: URGENT — months</div>
+<div class="risk-bar"><div class="risk-fill" style="width:50.5%;background:var(--urg)"></div></div>
+<div class="actor"><h3>EU</h3><ul><li>Condition trade preferences on democratic reforms</li><li>Fund independent media and civil society</li><li>Offer migration partnerships tied to governance improvements</li></ul></div>
+<div class="actor"><h3>Tunisian Civil Society</h3><ul><li>Mobilize UGTT labor federation for general strike if constitution suspended</li><li>Document political prisoners for ICC/UN HRC</li><li>Coordinate opposition coalition for next elections</li></ul></div>
+</div>
+
+<div class="bp mon">
+<h2>📋 MONITOR — USA 2026 (risk: 0.243)</h2>
+<div class="deadline">DEADLINE: 2026 midterm elections</div>
+<div class="risk-bar"><div class="risk-fill" style="width:24.3%;background:var(--mon)"></div></div>
+<div class="actor"><h3>Congress</h3><ul><li>Pass voting rights legislation (John Lewis Act)</li><li>Reform Electoral Count Act loopholes</li><li>Establish independent ethics commission for Supreme Court</li></ul></div>
+<div class="actor"><h3>Civil Society</h3><ul><li>Deploy 100K election monitors in swing states</li><li>Launch media literacy programs targeting disinformation</li><li>Build coalition for constitutional reform</li></ul></div>
+<div class="actor"><h3>Media</h3><ul><li>Reject false equivalence in election coverage</li><li>Fact-check in real-time, not post-hoc</li><li>Platform election officials over politicians</li></ul></div>
+<div class="actor"><h3>Judiciary</h3><ul><li>Enforce Section 3 of 14th Amendment where applicable</li><li>Reject gerrymandering that violates voting rights</li><li>Maintain judicial independence against executive pressure</li></ul></div>
+</div>
+
+<div class="bp mon">
+<h2>📋 MONITOR — Sudan Famine 2024</h2>
+<div class="deadline">DEADLINE: IMMEDIATE — weeks</div>
+<div class="actor"><h3>WFP</h3><ul><li>Pre-position 50K tons of food in Chad border crossings</li><li>Deploy air bridges to El Fasher if roads blocked</li><li>Scale up to 5M beneficiaries from current 1.5M</li></ul></div>
+<div class="actor"><h3>UNICEF</h3><ul><li>Treat 500K children for severe acute malnutrition</li><li>Deploy therapeutic feeding centers in camps</li><li>Immunize against measles/cholera outbreaks</li></ul></div>
+<div class="actor"><h3>NGOs</h3><ul><li>MSF: expand surgical capacity in conflict zones</li><li>Oxfam: restore water/sanitation in displacement camps</li><li>Save the Children: establish child-friendly spaces</li></ul></div>
+</div>
+
+<footer>
+EVEZ Spectral Action Engine · 11 spectrometers · 105/105 checks · 7 blueprints · 26 actors · 76 actions<br>
+Each action is assigned to a specific actor with a deadline · Each blueprint references a spectrometer check<br>
+Measurement without action is complicity
+</footer>
+</body>
+</html>

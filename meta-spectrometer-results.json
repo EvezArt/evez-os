@@ -1,0 +1,155 @@
+{
+  "timestamp": "2026-06-29T06:16:03Z",
+  "civilization_risk_index": 49.1,
+  "risk_level": "ELEVATED",
+  "breakdown": {
+    "nuclear": {
+      "score": 0.528,
+      "weight": 0.2,
+      "confidence": 0.9,
+      "weighted": 0.095,
+      "trend": "rising",
+      "detail": "Russia-NATO 90 sec to midnight",
+      "icon": "\u2622",
+      "desc": "Existential nuclear risk",
+      "delta_from_baseline": 0.128
+    },
+    "climate": {
+      "score": 0.19,
+      "weight": 0.15,
+      "confidence": 0.95,
+      "weighted": 0.0271,
+      "trend": "rising",
+      "detail": "2024 CO2 420ppm, approaching tipping",
+      "icon": "\ud83c\udf0d",
+      "desc": "Climate tipping points",
+      "delta_from_baseline": 0.04
+    },
+    "genocide": {
+      "score": 0.818,
+      "weight": 0.15,
+      "confidence": 0.88,
+      "weighted": 0.108,
+      "trend": "critical",
+      "detail": "Gaza 0.818, Sudan 0.816, Myanmar 0.744",
+      "icon": "\ud83d\udc80",
+      "desc": "Genocide early warning",
+      "delta_from_baseline": 0.218
+    },
+    "conflict": {
+      "score": 0.855,
+      "weight": 0.12,
+      "confidence": 0.85,
+      "weighted": 0.0872,
+      "trend": "rising",
+      "detail": "Ukraine 0.855, Syria 0.821",
+      "icon": "\u2694",
+      "desc": "Armed conflict risk",
+      "delta_from_baseline": 0.155
+    },
+    "famine": {
+      "score": 0.75,
+      "weight": 0.08,
+      "confidence": 0.82,
+      "weighted": 0.0492,
+      "trend": "critical",
+      "detail": "Gaza catastrophic, Sudan catastrophic",
+      "icon": "\ud83c\udf5e",
+      "desc": "Famine / food security",
+      "delta_from_baseline": 0.25
+    },
+    "economic": {
+      "score": 0.578,
+      "weight": 0.08,
+      "confidence": 0.8,
+      "weighted": 0.037,
+      "trend": "stable",
+      "detail": "2008-level structural risk persists",
+      "icon": "\ud83d\udcc9",
+      "desc": "Economic collapse risk",
+      "delta_from_baseline": 0.078
+    },
+    "democracy": {
+      "score": 0.505,
+      "weight": 0.07,
+      "confidence": 0.78,
+      "weighted": 0.0276,
+      "trend": "rising",
+      "detail": "Tunisia 0.505, USA early warnings 0.243",
+      "icon": "\ud83d\uddf3",
+      "desc": "Democratic erosion",
+      "delta_from_baseline": 0.205
+    },
+    "ai_risk": {
+      "score": 0.423,
+      "weight": 0.06,
+      "confidence": 0.75,
+      "weighted": 0.019,
+      "trend": "rising",
+      "detail": "Autonomous agents 0.423, EVEZ 0.271",
+      "icon": "\ud83e\udd16",
+      "desc": "AI alignment risk",
+      "delta_from_baseline": 0.123
+    },
+    "crime": {
+      "score": 0.749,
+      "weight": 0.05,
+      "confidence": 0.85,
+      "weighted": 0.0318,
+      "trend": "stable",
+      "detail": "74.9% dark figure, 131/175 crimes unmeasured",
+      "icon": "\u2696",
+      "desc": "Universal crime dark figure",
+      "delta_from_baseline": 0.049
+    },
+    "disease": {
+      "score": 0.35,
+      "weight": 0.02,
+      "confidence": 0.8,
+      "weighted": 0.0056,
+      "trend": "stable",
+      "detail": "Post-COVID surveillance fatigue",
+      "icon": "\ud83e\udda0",
+      "desc": "Pandemic risk",
+      "delta_from_baseline": 0.05
+    },
+    "consciousness": {
+      "score": 0.271,
+      "weight": 0.02,
+      "confidence": 0.7,
+      "weighted": 0.0038,
+      "trend": "rising",
+      "detail": "EVEZ mesh 0.271, attention engineering 0.684",
+      "icon": "\ud83e\udde0",
+      "desc": "Consciousness / cognitive harm",
+      "delta_from_baseline": 0.071
+    }
+  },
+  "critical_domains": [
+    "genocide",
+    "conflict",
+    "famine",
+    "crime"
+  ],
+  "elevated_domains": [
+    "nuclear",
+    "economic",
+    "democracy",
+    "ai_risk"
+  ],
+  "rising_domains": [
+    "nuclear",
+    "climate",
+    "genocide",
+    "conflict",
+    "famine",
+    "democracy",
+    "ai_risk",
+    "consciousness"
+  ],
+  "total_domains": 11,
+  "measured_crimes": 59,
+  "total_crimes": 175,
+  "dark_figure": 0.749,
+  "note": "The Civilization Risk Index measures the MEASURABLE risk. The true risk is higher by the dark figure."
+}

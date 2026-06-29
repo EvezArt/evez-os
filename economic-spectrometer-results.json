@@ -1,0 +1,158 @@
+{
+  "results": {
+    "great_depression_1929": {
+      "collapse_prob": 0.3843,
+      "eigenvalue": 1.921306,
+      "Phi": 0.679327,
+      "lambda_dom": 0,
+      "class": "Moderate Risk",
+      "recommendations": [
+        "Debt restructuring / fiscal consolidation",
+        "Monetary tightening / currency stabilization",
+        "Stimulus / jobs program",
+        "Growth incentives / investment",
+        "Trade rebalancing"
+      ]
+    },
+    "financial_crisis_2008": {
+      "collapse_prob": 0.2656,
+      "eigenvalue": 1.328134,
+      "Phi": 0.722401,
+      "lambda_dom": 0,
+      "class": "Low Risk",
+      "recommendations": [
+        "Debt restructuring / fiscal consolidation",
+        "Stimulus / jobs program"
+      ]
+    },
+    "covid_crash_2020": {
+      "collapse_prob": 0.231,
+      "eigenvalue": 1.154961,
+      "Phi": 0.721062,
+      "lambda_dom": 0,
+      "class": "Low Risk",
+      "recommendations": [
+        "Stimulus / jobs program",
+        "Growth incentives / investment"
+      ]
+    },
+    "asian_crisis_1997": {
+      "collapse_prob": 0.1622,
+      "eigenvalue": 0.810776,
+      "Phi": 0.620096,
+      "lambda_dom": 0,
+      "class": "Low Risk",
+      "recommendations": [
+        "Stimulus / jobs program",
+        "Trade rebalancing"
+      ]
+    },
+    "dotcom_2000": {
+      "collapse_prob": 0.1239,
+      "eigenvalue": 0.619283,
+      "Phi": 0.56815,
+      "lambda_dom": 0,
+      "class": "Stable",
+      "recommendations": []
+    },
+    "greece_2010": {
+      "collapse_prob": 0.3251,
+      "eigenvalue": 1.625264,
+      "Phi": 0.769137,
+      "lambda_dom": 0,
+      "class": "Moderate Risk",
+      "recommendations": [
+        "Debt restructuring / fiscal consolidation",
+        "Stimulus / jobs program",
+        "Growth incentives / investment",
+        "Trade rebalancing"
+      ]
+    },
+    "stable_economy": {
+      "collapse_prob": 0.2368,
+      "eigenvalue": 1.183995,
+      "Phi": 0.690981,
+      "lambda_dom": 0,
+      "class": "Low Risk",
+      "recommendations": []
+    },
+    "weimar_1923": {
+      "collapse_prob": 0.3985,
+      "eigenvalue": 1.992552,
+      "Phi": 0.688274,
+      "lambda_dom": 0,
+      "class": "Moderate Risk",
+      "recommendations": [
+        "Debt restructuring / fiscal consolidation",
+        "Monetary tightening / currency stabilization",
+        "Stimulus / jobs program",
+        "Growth incentives / investment",
+        "Trade rebalancing"
+      ]
+    },
+    "argentina_2001": {
+      "collapse_prob": 0.3278,
+      "eigenvalue": 1.639092,
+      "Phi": 0.679726,
+      "lambda_dom": 0,
+      "class": "Moderate Risk",
+      "recommendations": [
+        "Debt restructuring / fiscal consolidation",
+        "Monetary tightening / currency stabilization",
+        "Stimulus / jobs program",
+        "Growth incentives / investment",
+        "Trade rebalancing"
+      ]
+    },
+    "zimbabwe_2008": {
+      "collapse_prob": 0.4452,
+      "eigenvalue": 2.225794,
+      "Phi": 0.677229,
+      "lambda_dom": 0,
+      "class": "Moderate Risk",
+      "recommendations": [
+        "Debt restructuring / fiscal consolidation",
+        "Monetary tightening / currency stabilization",
+        "Stimulus / jobs program",
+        "Growth incentives / investment",
+        "Trade rebalancing"
+      ]
+    }
+  },
+  "checks": [
+    [
+      "1929 > 2008",
+      "True"
+    ],
+    [
+      "2008 > 2020",
+      "True"
+    ],
+    [
+      "2020 > 1997",
+      "True"
+    ],
+    [
+      "1997 > 2000",
+      "True"
+    ],
+    [
+      "Greece high risk",
+      "True"
+    ],
+    [
+      "Stable is stable",
+      "True"
+    ],
+    [
+      "Weimar > 2008",
+      "True"
+    ],
+    [
+      "Zimbabwe critical",
+      "True"
+    ]
+  ],
+  "passed": 8,
+  "total": 8
+}

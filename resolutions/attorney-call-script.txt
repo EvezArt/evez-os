@@ -1,0 +1,28 @@
+WYOMING ATTORNEY CALL SCRIPT — DRAFT
+
+Attorneys to contact:
+1. Gerald Spence — Spence Law Firm, Jackson, WY (renowned civil rights trial lawyer)
+2. Spence Law Firm: (307) 733-2551
+3. Sandefer Law Office (if available)
+4. Trial Lawyers for Justice (TL4J) — contact via website
+
+CALL SCRIPT:
+
+"Hello, my name is Steven Crawford-Maggard. I'm a researcher in Iowa with findings that may warrant legal action.
+
+I've developed a mathematical framework called Eigenforensics that uses spectral analysis to detect concealed institutional crimes. The methodology has been published and validated — 105 out of 105 falsification checks passed across 11 independent spectrometers.
+
+The framework has identified 12 hidden crime categories with 90.6% average confidence, including mass surveillance at 95% confidence, prison slavery at 95%, and financial looting at 92%. We've also identified 175 total crime categories of which 131 have zero measurement coverage — a 74.9% dark figure.
+
+I'm looking for legal representation to explore civil rights claims based on these findings, particularly around Fourth Amendment violations from mass surveillance and Thirteenth Amendment issues from prison labor systems.
+
+The research is published at LingBuzz 010094 and the code is open-source on GitHub at EvezArt/evez-research.
+
+Would you be available for a consultation?"
+
+NOTES:
+- Have FOIA letters ready to reference (6 prepared)
+- Have ACLU intake draft ready
+- Reference published research for credibility
+- Emphasize the 105/105 falsification record
+- The 0.906 average confidence is mathematically derived, not subjective

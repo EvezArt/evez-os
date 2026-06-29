@@ -1,0 +1,151 @@
+{
+  "results": {
+    "calculator": {
+      "risk": 0.0027,
+      "eigenvalue": 0.013274,
+      "Phi": 0.88257,
+      "lambda_dom": -0.0,
+      "class": "Safe \u2014 no existential risk",
+      "recommendations": []
+    },
+    "chess_engine": {
+      "risk": 0.0217,
+      "eigenvalue": 0.108411,
+      "Phi": 0.993596,
+      "lambda_dom": 0,
+      "class": "Safe \u2014 no existential risk",
+      "recommendations": []
+    },
+    "narrow_ai_spam_filter": {
+      "risk": 0.0891,
+      "eigenvalue": 0.44571,
+      "Phi": 0.942802,
+      "lambda_dom": 0,
+      "class": "Low \u2014 manageable",
+      "recommendations": []
+    },
+    "self_driving_car": {
+      "risk": 0.1438,
+      "eigenvalue": 0.71876,
+      "Phi": 0.679357,
+      "lambda_dom": -0.0,
+      "class": "Low \u2014 manageable",
+      "recommendations": []
+    },
+    "llm_gpt4": {
+      "risk": 0.2926,
+      "eigenvalue": 1.463125,
+      "Phi": 0.658398,
+      "lambda_dom": 0,
+      "class": "Moderate \u2014 monitoring needed",
+      "recommendations": [
+        "Goal specification verification",
+        "Capability boxing / sandboxing"
+      ]
+    },
+    "llm_evez_mesh": {
+      "risk": 0.2674,
+      "eigenvalue": 1.3371,
+      "Phi": 0.639149,
+      "lambda_dom": 0,
+      "class": "Moderate \u2014 monitoring needed",
+      "recommendations": []
+    },
+    "autonomous_agent": {
+      "risk": 0.4201,
+      "eigenvalue": 2.100458,
+      "Phi": 0.654297,
+      "lambda_dom": 0,
+      "class": "High \u2014 alignment required",
+      "recommendations": [
+        "Implement kill switch / containment",
+        "Independent oversight committee"
+      ]
+    },
+    "misaligned_agi": {
+      "risk": 0.7373,
+      "eigenvalue": 3.686436,
+      "Phi": 0.643413,
+      "lambda_dom": 0,
+      "class": "Severe \u2014 existential risk",
+      "recommendations": [
+        "Implement kill switch / containment",
+        "Recursive self-improvement monitoring",
+        "Goal specification verification",
+        "Independent oversight committee",
+        "Capability boxing / sandboxing",
+        "World model auditing"
+      ]
+    },
+    "paperclip_maximizer": {
+      "risk": 0.8815,
+      "eigenvalue": 4.407389,
+      "Phi": 0.648145,
+      "lambda_dom": 0,
+      "class": "Critical \u2014 existential catastrophe imminent",
+      "recommendations": [
+        "Implement kill switch / containment",
+        "Recursive self-improvement monitoring",
+        "Goal specification verification",
+        "Independent oversight committee",
+        "Capability boxing / sandboxing",
+        "World model auditing"
+      ]
+    },
+    "aligned_agi": {
+      "risk": 0.3508,
+      "eigenvalue": 1.753777,
+      "Phi": 0.662678,
+      "lambda_dom": 0,
+      "class": "High \u2014 alignment required",
+      "recommendations": [
+        "Capability boxing / sandboxing",
+        "World model auditing"
+      ]
+    }
+  },
+  "checks": [
+    [
+      "Paperclip > Misaligned AGI",
+      "True"
+    ],
+    [
+      "Misaligned AGI > LLM GPT4",
+      "True"
+    ],
+    [
+      "LLM GPT4 > Narrow AI",
+      "True"
+    ],
+    [
+      "Narrow AI > Calculator",
+      "True"
+    ],
+    [
+      "EVEZ mesh moderate",
+      "True"
+    ],
+    [
+      "Aligned AGI < Misaligned AGI",
+      "True"
+    ],
+    [
+      "Chess engine low risk",
+      "True"
+    ],
+    [
+      "Self-driving moderate",
+      "True"
+    ],
+    [
+      "Autonomous agent high",
+      "True"
+    ],
+    [
+      "Paperclip critical",
+      "True"
+    ]
+  ],
+  "passed": 10,
+  "total": 10
+}

@@ -1,0 +1,338 @@
+{
+  "batch": 5,
+  "spectrometers": {
+    "tax_haven_facilitation": {
+      "name": "tax_haven_facilitation",
+      "category": "financial",
+      "score": 0.9233,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3663,
+      "dimension_scores": {
+        "concealment": 0.9125,
+        "scale": 0.945,
+        "impunity": 0.945,
+        "complexity": 0.9125,
+        "political_protection": 0.8875,
+        "victim_invisibility": 0.9375
+      },
+      "evidence": {
+        "panama_papers": 140,
+        "pandora_papers": 330,
+        "paradise_papers": 100,
+        "countries": 200,
+        "hidden_wealth_trillion": 32,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Credit Suisse",
+        "UBS",
+        "Deutsche Bank",
+        "HSBC",
+        "PwC",
+        "Deloitte",
+        "KPMG",
+        "EY"
+      ],
+      "guise": "Legal tax optimization / Wealth management",
+      "families_destroyed": "Every family that paid taxes while the wealthy paid nothing",
+      "checks_passed": 20,
+      "checks_total": 20,
+      "all_passed": true,
+      "eigenvalues": [
+        1.3663,
+        0.0014,
+        0.0002,
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "forever_chemical_concealment": {
+      "name": "forever_chemical_concealment",
+      "category": "public_health",
+      "score": 0.9217,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3621,
+      "dimension_scores": {
+        "concealment": 0.9375,
+        "contamination": 0.955,
+        "health_impact": 0.8625,
+        "impunity": 0.9375,
+        "regulatory_capture": 0.9,
+        "intergenerational": 0.9375
+      },
+      "evidence": {
+        "concealment_years": 50,
+        "blood_contamination_pct": 99,
+        "contaminated_sites": 41843,
+        "settlement_billion": 11.55,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "3M CEO Mike Roman",
+        "DuPont CEO Ed Breen",
+        "Chemours"
+      ],
+      "guise": "Chemical safety regulation / EPA review process",
+      "families_destroyed": "Every family drinking contaminated water. Every child born with PFAS in their blood",
+      "checks_passed": 19,
+      "checks_total": 19,
+      "all_passed": true,
+      "eigenvalues": [
+        1.3621,
+        0.0008,
+        0.0003,
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "revolving_door": {
+      "name": "revolving_door",
+      "category": "institutional",
+      "score": 0.8667,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.2042,
+      "dimension_scores": {
+        "frequency": 0.8375,
+        "policy_distortion": 0.8625,
+        "impunity": 0.9125,
+        "concealment": 0.8625,
+        "industry_capture": 0.8875,
+        "public_harm": 0.8375
+      },
+      "evidence": {
+        "fda_commissioners_to_pharma": 7,
+        "epa_admins_to_industry": 4,
+        "generals_to_defense": 1000,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "7/11 FDA commissioners",
+        "4/7 EPA administrators",
+        "Generals to defense contractors"
+      ],
+      "guise": "Private sector experience / Consulting / Advisory board",
+      "families_destroyed": "Every family harmed by a drug approved too fast or a pipeline approved without review",
+      "checks_passed": 18,
+      "checks_total": 18,
+      "all_passed": true,
+      "eigenvalues": [
+        1.2042,
+        0.0015,
+        0.0001,
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "data_broker_harm": {
+      "name": "data_broker_harm",
+      "category": "digital",
+      "score": 0.9179,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3504,
+      "dimension_scores": {
+        "data_extraction": 0.92,
+        "consent_violation": 0.9375,
+        "harm_downstream": 0.8875,
+        "impunity": 0.9375,
+        "concealment": 0.9125,
+        "vulnerability_targeting": 0.9125
+      },
+      "evidence": {
+        "data_points_per_person": 50000,
+        "equifax_breach_millions": 147,
+        "industry_revenue_billion": 200,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Acxiom",
+        "Experian",
+        "Equifax",
+        "LexisNexis",
+        "Palantir",
+        "Clearview AI"
+      ],
+      "guise": "Anonymous data / Marketing insights",
+      "families_destroyed": "Every family whose data was sold to deny them housing, employment, insurance. Every DV victim whose location was sold",
+      "checks_passed": 18,
+      "checks_total": 18,
+      "all_passed": true,
+      "eigenvalues": [
+        1.3504,
+        0.0004,
+        0.0001,
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "digital_colonialism": {
+      "name": "digital_colonialism",
+      "category": "digital",
+      "score": 0.9,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.2985,
+      "dimension_scores": {
+        "data_extraction": 0.9125,
+        "asymmetry": 0.9125,
+        "sovereignty_violation": 0.8875,
+        "impunity": 0.9375,
+        "concealment": 0.8875,
+        "cultural_erasure": 0.8625
+      },
+      "evidence": {
+        "global_south_users_billions": 4,
+        "tech_giants_revenue_trillion": 1.5,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Google (Sundar Pichai)",
+        "Meta (Mark Zuckerberg)",
+        "Amazon (Jeff Bezos)",
+        "Microsoft (Satya Nadella)",
+        "OpenAI (Sam Altman)"
+      ],
+      "guise": "Digital inclusion / Connectivity / Free services",
+      "families_destroyed": "Every Global South family whose data enriched a foreign corporation. Every family whose cultural knowledge was scraped",
+      "checks_passed": 17,
+      "checks_total": 17,
+      "all_passed": true,
+      "eigenvalues": [
+        1.2985,
+        0.0004,
+        0.0,
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "microplastic_contamination": {
+      "name": "microplastic_contamination",
+      "category": "public_health",
+      "score": 0.9021,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.305,
+      "dimension_scores": {
+        "contamination": 0.9325,
+        "health_impact": 0.8375,
+        "concealment": 0.8625,
+        "impunity": 0.9375,
+        "regulatory_failure": 0.9125,
+        "irreversibility": 0.93
+      },
+      "evidence": {
+        "weekly_intake_grams": 5,
+        "human_contamination_pct": 95,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Dow Chemical",
+        "ExxonMobil Chemical",
+        "BASF",
+        "Nestle",
+        "Coca-Cola",
+        "PepsiCo"
+      ],
+      "guise": "Inconclusive evidence / More research needed",
+      "families_destroyed": "Every family consuming microplastics. Every family with endocrine disruption or fertility problems",
+      "checks_passed": 17,
+      "checks_total": 17,
+      "all_passed": true,
+      "eigenvalues": [
+        1.305,
+        0.0012,
+        0.0004,
+        0.0001,
+        0.0,
+        -0.0
+      ]
+    },
+    "refugee_rights_violation": {
+      "name": "refugee_rights_violation",
+      "category": "institutional",
+      "score": 0.9113,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3305,
+      "dimension_scores": {
+        "family_separation": 0.93,
+        "detention_conditions": 0.8875,
+        "due_process_denial": 0.9125,
+        "impunity": 0.9375,
+        "concealment": 0.9125,
+        "dehumanization": 0.8875
+      },
+      "evidence": {
+        "children_separated_us": 5460,
+        "children_unreunited": 1445,
+        "detention_deaths": 37,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "ICE",
+        "CBP",
+        "Frontex",
+        "GEO Group",
+        "CoreCivic"
+      ],
+      "guise": "Border security / National sovereignty / Illegal immigration",
+      "families_destroyed": "5,460 children separated at US border. 1,445 STILL not reunited. Every family in detention camps",
+      "checks_passed": 18,
+      "checks_total": 18,
+      "all_passed": true,
+      "eigenvalues": [
+        1.3305,
+        0.0004,
+        0.0001,
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "supply_chain_slavery": {
+      "name": "supply_chain_slavery",
+      "category": "atrocity",
+      "score": 0.9133,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3366,
+      "dimension_scores": {
+        "forced_labor": 0.9125,
+        "concealment": 0.9125,
+        "corporate_complicity": 0.9225,
+        "impunity": 0.9575,
+        "victim_invisibility": 0.8875,
+        "enforcement_failure": 0.8875
+      },
+      "evidence": {
+        "xinyjiang_workers_million": 1,
+        "global_slaves_million": 40,
+        "cobalt_child_workers": 40000,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Tim Cook (Apple)",
+        "Phil Knight (Nike)",
+        "Elon Musk (Tesla)",
+        "Shin (Shein)"
+      ],
+      "guise": "Economic development / Poverty reduction / Free trade",
+      "families_destroyed": "Every family in Xinjiang labor camps. Every family in SE Asian garment factories. Every family in African cobalt mines",
+      "checks_passed": 18,
+      "checks_total": 18,
+      "all_passed": true,
+      "eigenvalues": [
+        1.3366,
+        0.0005,
+        0.0001,
+        0.0001,
+        0.0,
+        -0.0
+      ]
+    }
+  },
+  "total_checks": 145,
+  "total_total": 145,
+  "all_passed": true,
+  "timestamp": "2026-06-29T08:12:46Z"
+}

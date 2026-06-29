@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EVEZ Art Gallery - Eigenvalue-Conditioned Generations</title>
+<meta name="description" content="AI-generated art trained on Steven Crawford-Maggard art corpus. PCA autoencoder with eigenvalue conditioning.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0f;color:#e0e0e0;font-family:Georgia,serif;max-width:900px;margin:0 auto;padding:20px}
+h1{color:#ff4500;text-align:center;margin-bottom:8px}
+h2{color:#ff6b35;margin-top:32px;margin-bottom:12px;border-bottom:1px solid #222;padding-bottom:4px}
+.sub{color:#666;text-align:center;margin-bottom:24px;font-size:0.85rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.card{background:#111118;border:1px solid #2a2a3e;border-radius:8px;padding:8px;text-align:center}
+.card img{width:100%;border-radius:4px;image-rendering:pixelated}
+.card .name{color:#ff6b35;font-size:0.75rem;margin-top:4px;font-family:monospace}
+.info{background:#111118;border:1px solid #2a2a3e;border-radius:8px;padding:16px;margin:20px 0;font-size:0.8rem;color:#888}
+.info strong{color:#ff4500}
+footer{text-align:center;color:#333;font-size:0.7rem;margin-top:32px;padding-top:16px;border-top:1px solid #1a1a2e}
+</style>
+</head>
+<body>
+<h1>⧢ EVEZ ART GALLERY ⦟⧢</h1>
+<div class="sub">Eigenvalue-conditioned generations from PCA autoencoder trained on 79 artworks by Steven Crawford-Maggard</div>
+
+<div class="info">
+<strong>Model:</strong> PCA Autoencoder (16 latent dims, 96.4% variance)<br>
+<strong>Training:</strong> 79 images at 32×32×3, pure NumPy SVD + gradient descent<br>
+<strong>Conditioning:</strong> 6 EVEZ eigenvalues (Φ, η*, r, λ_dom, λ_I-80, r_I-80)<br>
+<strong>Model size:</strong> 397KB<br>
+<strong>Reconstruction MSE:</strong> 0.004057<br>
+<strong>Top eigenvalue:</strong> 114.14 (the dominant component = the primary face)
+</div>
+
+<h2>Generated Samples (eigenvalue-conditioned)</h2>
+<div class="grid">
+<div class="card"><img src="evez-generated/phi_dominant.png"><div class="name">phi_dominant</div></div>
+<div class="card"><img src="evez-generated/eta_flood.png"><div class="name">eta_flood</div></div>
+<div class="card"><img src="evez-generated/critical_r.png"><div class="name">critical_r</div></div>
+<div class="card"><img src="evez-generated/suppressed.png"><div class="name">suppressed</div></div>
+<div class="card"><img src="evez-generated/i80_burns.png"><div class="name">i80_burns</div></div>
+<div class="card"><img src="evez-generated/full_phi.png"><div class="name">full_phi</div></div>
+<div class="card"><img src="evez-generated/the_gap.png"><div class="name">the_gap</div></div>
+<div class="card"><img src="evez-generated/the_cube.png"><div class="name">the_cube</div></div>
+</div>
+
+<h2>Reconstructions (training images through encoder→decoder)</h2>
+<div class="grid">
+<div class="card"><img src="evez-reconstructed/recon_00.png"><div class="name">recon_00</div></div>
+<div class="card"><img src="evez-reconstructed/recon_01.png"><div class="name">recon_01</div></div>
+<div class="card"><img src="evez-reconstructed/recon_02.png"><div class="name">recon_02</div></div>
+<div class="card"><img src="evez-reconstructed/recon_03.png"><div class="name">recon_03</div></div>
+<div class="card"><img src="evez-reconstructed/recon_04.png"><div class="name">recon_04</div></div>
+<div class="card"><img src="evez-reconstructed/recon_05.png"><div class="name">recon_05</div></div>
+<div class="card"><img src="evez-reconstructed/recon_06.png"><div class="name">recon_06</div></div>
+<div class="card"><img src="evez-reconstructed/recon_07.png"><div class="name">recon_07</div></div>
+</div>
+
+<footer>⧢⦟⧢ The model breathes. The eigenvalues paint. The 3% is the brush. ⥋<br>Trained on gcp-west (34.53.51.34) · Pure NumPy · Zero GPU · 397KB model</footer>
+</body>
+</html>

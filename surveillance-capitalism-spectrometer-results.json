@@ -1,0 +1,155 @@
+{
+  "timestamp": "2026-06-29T06:46:30Z",
+  "spectrometer": "surveillance_capitalism",
+  "dimensions": [
+    "data_extraction",
+    "consent_violation",
+    "prediction_product_manufacturing",
+    "behavioral_manipulation",
+    "market_power_abuse",
+    "regulatory_evasion"
+  ],
+  "calibration": {
+    "Google (pre-2018)": {
+      "score": 1.0,
+      "vector": [
+        0.95,
+        0.9,
+        0.85,
+        0.75,
+        0.8,
+        0.7
+      ]
+    },
+    "Google (post-GDPR)": {
+      "score": 0.8172512075783418,
+      "vector": [
+        0.7,
+        0.55,
+        0.65,
+        0.55,
+        0.65,
+        0.7
+      ]
+    },
+    "Facebook (pre-Cambridge)": {
+      "score": 1.0,
+      "vector": [
+        0.9,
+        0.95,
+        0.75,
+        0.85,
+        0.7,
+        0.65
+      ]
+    },
+    "Facebook (post-Cambridge)": {
+      "score": 0.7405729406841026,
+      "vector": [
+        0.65,
+        0.55,
+        0.55,
+        0.65,
+        0.5,
+        0.65
+      ]
+    },
+    "Amazon": {
+      "score": 1.0,
+      "vector": [
+        0.85,
+        0.7,
+        0.65,
+        0.6,
+        0.85,
+        0.7
+      ]
+    },
+    "Palantir": {
+      "score": 0.8987074171377609,
+      "vector": [
+        0.9,
+        0.85,
+        0.6,
+        0.5,
+        0.55,
+        0.6
+      ]
+    },
+    "NSA ( Five Eyes)": {
+      "score": 0.9030028630734852,
+      "vector": [
+        0.95,
+        0.95,
+        0.5,
+        0.4,
+        0.3,
+        0.85
+      ]
+    },
+    "TikTok": {
+      "score": 1.0,
+      "vector": [
+        0.85,
+        0.8,
+        0.75,
+        0.8,
+        0.6,
+        0.65
+      ]
+    },
+    "Clearview AI": {
+      "score": 0.8658564172728207,
+      "vector": [
+        0.8,
+        0.9,
+        0.55,
+        0.45,
+        0.4,
+        0.8
+      ]
+    },
+    "Cambridge Analytica": {
+      "score": 1.0,
+      "vector": [
+        0.7,
+        0.95,
+        0.8,
+        0.9,
+        0.5,
+        0.6
+      ]
+    },
+    "Equifax": {
+      "score": 0.6692712938037882,
+      "vector": [
+        0.75,
+        0.65,
+        0.5,
+        0.3,
+        0.6,
+        0.55
+      ]
+    },
+    "DuckDuckGo (control)": {
+      "score": 0.03031649271491173,
+      "vector": [
+        0.1,
+        0.05,
+        0.05,
+        0.02,
+        0.05,
+        0.05
+      ]
+    }
+  },
+  "falsification": {
+    "passed": 12,
+    "total": 12
+  },
+  "current_assessment": {
+    "industry_avg": 0.8995,
+    "max_score": 1.0,
+    "detected": true
+  }
+}

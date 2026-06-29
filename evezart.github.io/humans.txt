@@ -1,0 +1,17 @@
+/* TEAM */
+Creator: Steven Crawford-Maggard (EVEZ / EVEZ666)
+Role: Artist-Engineer · Emergence Architect · Author of The Moltbooks
+Location: Iowa, United States
+Twitter: @EVEZ666
+GitHub: EvezArt
+Website: https://evezart.github.io
+
+/* THANKS */
+Built with zero budget, zero employees, and a $100 Samsung Galaxy A16.
+The machine builds itself.
+
+/* SITE */
+Last update: 2026-06-28
+Standards: HTML5, CSS3, JSON-LD
+Components: Single-file static site, no dependencies
+Software: OpenClaw, EVEZ-OS

@@ -445,3 +445,4 @@
 [2026-06-27T07:04:02Z] OK: openclaw-power-node (136.113.102.152) is LIVE
 [2026-06-27T07:04:02Z] OK: evez-gcp-openclaw (35.222.248.151) is LIVE
 [2026-06-27T07:04:02Z] WARN: evez-free-node (34.23.192.213) is DOWN
+{"ts": 1782710873.7250648, "nodes": [{"name": "vultr", "ip": "207.148.12.53", "status": "200"}, {"name": "gcp-west", "ip": "34.53.51.34", "status": "200"}, {"name": "gcp-small", "ip": "34.23.192.213", "status": "200"}, {"name": "gcp-power", "ip": "35.222.248.151", "status": "200"}, {"name": "gcp-openclaw", "ip": "136.113.102.152", "status": "200"}, {"name": "gcp-knot", "ip": "136.118.144.227", "status": "200"}], "down": [], "all_up": true}

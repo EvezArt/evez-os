@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ OSINT — Suspect Inference Matrix Dashboard v1.1.0</title>
+<meta name="description" content="Suspect Inference Networking Matrix Engine — isolates suspects, computes crime probabilities using eigenforensic spectral analysis. AEMDAS pipeline. Interactive dashboard. By Steven Crawford-Maggard (EVEZ).">
+<meta name="keywords" content="evez, osint, eigenforensics, suspect inference, crime probability, aemdas, police misconduct, civil rights, interactive">
+<meta property="og:title" content="EVEZ OSINT — Suspect Inference Matrix v1.1.0">
+<meta property="og:description" content="Interactive dashboard for eigenforensic OSINT analysis">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://evezart.github.io/osint-dashboard.html">
+<style>
+:root{--bg:#0a0a0f;--fg:#c8c8d8;--gold:#e8c860;--green:#7a9a7a;--red:#ff4444;--blue:#44aacc;--border:#222;--card:#111118}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:'Courier New',monospace;margin:0;padding:20px;line-height:1.6}
+h1{color:var(--gold);font-size:1.8em;text-align:center;border-bottom:1px solid var(--border);padding-bottom:10px}
+h2{color:var(--green);margin-top:30px}
+.subtitle{text-align:center;color:#666;margin-bottom:20px}
+.container{max-width:1200px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:15px 0}
+.stat{background:var(--card);border:1px solid var(--border);padding:15px;border-radius:4px;text-align:center}
+.stat-val{font-size:1.8em;color:var(--gold)}
+.stat-label{color:#666;font-size:0.8em}
+.suspect{background:var(--card);border:1px solid var(--border);margin:10px 0;padding:15px;border-radius:4px;transition:border-color 0.3s}
+.suspect:hover{border-color:var(--gold)}
+.suspect-name{color:var(--gold);font-size:1.2em;font-weight:bold;cursor:pointer}
+.suspect-name:hover{text-decoration:underline}
+.bar-container{background:#222;height:20px;border-radius:2px;margin:5px 0;overflow:hidden}
+.bar{height:100%;transition:width 0.5s}
+.bar-suspicion{background:linear-gradient(90deg,#8b0000,var(--red))}
+.bar-prob{background:linear-gradient(90deg,#4a3000,var(--gold))}
+.bar-confidence{background:linear-gradient(90deg,#003a4a,var(--blue))}
+.bar-label{color:#888;font-size:0.8em;margin-top:2px}
+.crime-list{margin:10px 0;padding-left:20px;list-style:none}
+.crime-list li{margin:3px 0;color:#aa8844;cursor:pointer;padding:3px;border-radius:2px}
+.crime-list li:hover{background:#222}
+.crime-list .high{color:var(--red)}
+.crime-list .med{color:var(--gold)}
+.crime-list .low{color:#888}
+.eigenvalue-box{background:#0d0d1a;border:1px solid #333;padding:15px;margin:10px 0;border-radius:4px}
+.footer{text-align:center;color:#444;margin-top:40px;border-top:1px solid #222;padding-top:20px}
+.sigil{color:var(--green);font-size:1.2em;text-align:center;margin:20px 0}
+.badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:0.7em;font-weight:bold;margin-left:5px}
+.badge-red{background:#8b0000;color:#fff}
+.badge-yellow{background:#4a3000;color:var(--gold)}
+.badge-gray{background:#222;color:#888}
+.badge-blue{background:#003a4a;color:var(--blue)}
+#detail{display:none;background:var(--card);border:1px solid var(--gold);padding:20px;margin:15px 0;border-radius:4px}
+#detail h3{color:var(--gold);margin-top:0}
+.tab{display:inline-block;padding:8px 20px;background:var(--card);border:1px solid var(--border);border-bottom:none;border-radius:4px 4px 0 0;cursor:pointer;color:#666}
+.tab.active{color:var(--gold);border-color:var(--gold)}
+.tab-content{display:none;border:1px solid var(--border);padding:15px;margin-top:-1px;border-radius:0 4px 4px 4px}
+.tab-content.active{display:block}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"EVEZ OSINT","version":"1.1.0","author":{"@type":"Person","name":"Steven Crawford-Maggard"},"description":"Suspect Inference Networking Matrix Engine","url":"https://github.com/EvezArt/evez-osint-engine"}
+</script>
+</head>
+<body>
+<div class="container">
+<h1>EVEZ OSINT — Suspect Inference Matrix <span class="badge badge-blue">v1.1.0</span></h1>
+<p class="subtitle">AEMDAS Pipeline · Eigenforensic Spectral Analysis · Interactive Dashboard · by Steven Crawford-Maggard (EVEZ)</p>
+
+<div class="grid">
+<div class="stat"><div class="stat-val">5</div><div class="stat-label">Suspects</div></div>
+<div class="stat"><div class="stat-val">5</div><div class="stat-label">Edges</div></div>
+<div class="stat"><div class="stat-val">25</div><div class="stat-label">Hypotheses</div></div>
+<div class="stat"><div class="stat-val">1</div><div class="stat-label">High-Prob (>50%)</div></div>
+<div class="stat"><div class="stat-val">8.126</div><div class="stat-label">Dominant λ</div></div>
+<div class="stat"><div class="stat-val">0.265</div><div class="stat-label">Spectral Gap</div></div>
+</div>
+
+<div class="eigenvalue-box">
+<strong>Eigenvalue Constants:</strong><br>
+Φ = 0.973 (coherence ceiling) · η* = 0.03 (irreducible uncertainty) · r = 0.45 (criticality) · λ_dom = -0.333 (censorship) · λ_I80 = -0.441 (suppression)<br>
+All probabilities bounded: η* ≤ P ≤ 0.95. The 3% is the floor. The 97.3% is the ceiling.
+</div>
+
+<div class="tab active" onclick="showTab('ranking')">Suspect Ranking</div>
+<div class="tab" onclick="showTab('hypotheses')">Crime Hypotheses</div>
+<div class="tab" onclick="showTab('interventions')">Intervention Priorities</div>
+<div class="tab" onclick="showTab('about')">About</div>
+
+<div id="ranking" class="tab-content active">
+<h2>Suspect Ranking</h2>
+
+<div class="suspect" onclick="showDetail('saloga')">
+<span class="suspect-name">1. Cody Saloga</span> <span class="badge badge-red">officer</span> Evanston PD<br>
+<div class="bar-container"><div class="bar bar-suspicion" style="width:61.25%"></div></div>
+<div class="bar-label">Suspicion: 0.6125</div>
+<div class="bar-container"><div class="bar bar-prob" style="width:66.15%"></div></div>
+<div class="bar-label">Max Crime Probability: 0.6615 (excessive_force)</div>
+<div class="bar-container"><div class="bar bar-confidence" style="width:91.19%"></div></div>
+<div class="bar-label">Confidence: 0.9119</div>
+<ul class="crime-list">
+<li class="high" onclick="event.stopPropagation();showDetail('saloga-excessive_force')">excessive_force: P=0.6615</li>
+<li class="med" onclick="event.stopPropagation();showDetail('saloga-false_arrest')">false_arrest: P=0.4586</li>
+<li class="med" onclick="event.stopPropagation();showDetail('saloga-civil_rights_violation')">civil_rights_violation: P=0.3549</li>
+<li class="low" onclick="event.stopPropagation();showDetail('saloga-cover_up')">cover_up: P=0.3024</li>
+<li class="low" onclick="event.stopPropagation();showDetail('saloga-evidence_tampering')">evidence_tampering: P=0.1522</li>
+</ul>
+</div>
+
+<div class="suspect">
+<span class="suspect-name">2. EPD Chief (Unknown)</span> <span class="badge badge-red">chief</span> Evanston PD<br>
+<div class="bar-container"><div class="bar bar-suspicion" style="width:53.07%"></div></div>
+<div class="bar-label">Suspicion: 0.5307</div>
+<ul class="crime-list">
+<li class="med">excessive_force: P=0.2894</li>
+<li class="low">civil_rights_violation: P=0.1993</li>
+<li class="low">cover_up: P=0.1911</li>
+</ul>
+</div>
+
+<div class="suspect">
+<span class="suspect-name">3. Rock Springs PD (hiring)</span> <span class="badge badge-yellow">supervisor</span> Rock Springs PD<br>
+<div class="bar-container"><div class="bar bar-suspicion" style="width:43.79%"></div></div>
+<div class="bar-label">Suspicion: 0.4379</div>
+<ul class="crime-list">
+<li class="low">cover_up: P=0.1735</li>
+<li class="low">civil_rights_violation: P=0.1261</li>
+</ul>
+</div>
+
+<div class="suspect">
+<span class="suspect-name">4. Dustin Kennedy</span> <span class="badge badge-red">officer</span> Evanston PD<br>
+<div class="bar-container"><div class="bar bar-suspicion" style="width:39.51%"></div></div>
+<div class="bar-label">Suspicion: 0.3951</div>
+<ul class="crime-list">
+<li class="low">excessive_force: P=0.3016</li>
+<li class="low">false_arrest: P=0.2090</li>
+</ul>
+</div>
+
+<div class="suspect">
+<span class="suspect-name">5. EPD Internal Affairs</span> <span class="badge badge-yellow">supervisor</span> Evanston PD<br>
+<div class="bar-container"><div class="bar bar-suspicion" style="width:38.20%"></div></div>
+<div class="bar-label">Suspicion: 0.3820</div>
+<ul class="crime-list">
+<li class="low">cover_up: P=0.1705</li>
+</ul>
+</div>
+</div>
+
+<div id="hypotheses" class="tab-content">
+<h2>Top Crime Hypotheses</h2>
+<div class="eigenvalue-box">
+<strong>H-saloga-excessive_force</strong> <span class="badge badge-red">HIGH PROB</span><br>
+Suspect: Cody Saloga · Crime: excessive force<br>
+Probability: 66.15% · Confidence: 91.19% · Falsifiable: YES<br>
+Evidence: 4 sources (Uinta County Herald, Smith v. Evanston lawsuit, viral YouTube video, Rock Springs PD transfer)
+</div>
+<div class="eigenvalue-box">
+<strong>H-saloga-false_arrest</strong><br>
+Suspect: Cody Saloga · Crime: false arrest<br>
+Probability: 45.86% · Confidence: 91.19% · Falsifiable: YES
+</div>
+<div class="eigenvalue-box">
+<strong>H-saloga-civil_rights_violation</strong><br>
+Suspect: Cody Saloga · Crime: civil rights violation (42 U.S.C. 1983)<br>
+Probability: 35.49% · Confidence: 91.19% · Falsifiable: YES
+</div>
+<div class="eigenvalue-box">
+<strong>H-kennedy-excessive_force</strong><br>
+Suspect: Dustin Kennedy · Crime: excessive force<br>
+Probability: 30.16% · Confidence: 48.30% · Falsifiable: YES
+</div>
+<div class="eigenvalue-box">
+<strong>H-epd-chief-excessive_force</strong><br>
+Suspect: EPD Chief · Crime: excessive force<br>
+Probability: 28.94% · Confidence: 59.77% · Falsifiable: YES
+</div>
+</div>
+
+<div id="interventions" class="tab-content">
+<h2>Intervention Priorities</h2>
+<div class="eigenvalue-box">
+1. <strong style="color:var(--red)">INVESTIGATE_PRIMARY</strong> — Cody Saloga (suspicion: 0.6125)<br>
+<span style="color:#888">Primary suspect. Highest probability across all crime types. 4 evidence sources. Federal lawsuit filed. Transferred to Rock Springs PD.</span>
+</div>
+<div class="eigenvalue-box">
+2. <strong style="color:var(--gold)">INVESTIGATE_SECONDARY</strong> — EPD Chief (suspicion: 0.5307)<br>
+<span style="color:#888">Supervisory accountability. 2022 complaints sealed. Responsible for officer retention and discipline.</span>
+</div>
+<div class="eigenvalue-box">
+3. <strong style="color:#888">MONITOR</strong> — Rock Springs PD (suspicion: 0.4379)<br>
+<span style="color:#888">Hired officer with active federal lawsuit. Hiring records and IA complaints should be requested.</span>
+</div>
+<div class="eigenvalue-box">
+4. <strong style="color:#888">MONITOR</strong> — Dustin Kennedy (suspicion: 0.3951)<br>
+<span style="color:#888">Backup officer at viral arrest. Limited evidence. Body camera footage requested via FOIA.</span>
+</div>
+<div class="eigenvalue-box">
+5. <strong style="color:#888">MONITOR</strong> — EPD Internal Affairs (suspicion: 0.3820)<br>
+<span style="color:#888">3 departmental inquiries in 2022 with sealed outcomes. Accountability failure pattern.</span>
+</div>
+</div>
+
+<div id="about" class="tab-content">
+<h2>About EVEZ OSINT</h2>
+<div class="eigenvalue-box">
+<strong>EVEZ OSINT v1.1.0</strong> — Suspect Inference Matrix Engine<br><br>
+Isolates and identifies suspect inference networking matrices. Computes statistical probabilities of likely crimes using eigenforensic spectral analysis.<br><br>
+<strong>AEMDAS Pipeline (6 stages = 6 cube faces):</strong><br>
+1. ASSERT — Register suspects and events<br>
+2. EXTRACT — Build adjacency matrix<br>
+3. MEASURE — Compute eigenvalues and spectral gaps<br>
+4. DEDUCE — Infer crime hypotheses<br>
+5. ASSESS — Calculate probabilities and confidence<br>
+6. SPEEDRUN — Export reports<br><br>
+<strong>Features:</strong><br>
+- 5 crime types: excessive force, civil rights, cover up, evidence tampering, false arrest<br>
+- Pure Python (no numpy required) — eigenvalue computation via power iteration<br>
+- SQLite database collects anonymous usage statistics<br>
+- Interactive CLI with colored output and progress bars<br>
+- JSON + Markdown export<br>
+- All probabilities falsifiable and bounded: η* ≤ P ≤ 0.95<br><br>
+<strong>Author:</strong> Steven Crawford-Maggard (EVEZ666)<br>
+<strong>License:</strong> MIT<br>
+<strong>GitHub:</strong> <a href="https://github.com/EvezArt/evez-osint-engine">EvezArt/evez-osint-engine</a><br>
+<strong>Research:</strong> <a href="https://lingbuzz.net/lingbuzz/010094">LingBuzz 010094</a>
+</div>
+</div>
+
+<div id="detail"></div>
+
+<div class="sigil">⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⥋</div>
+<div class="footer">
+All probabilities falsifiable. η*=0.03 is the floor. Φ=0.973 is the ceiling.<br>
+The 3% is the uncertainty. The 97.3% is the measurement.<br>
+<a href="https://github.com/EvezArt/evez-osint-engine">GitHub</a> · <a href="https://lingbuzz.net/lingbuzz/010094">Research Paper</a> · <a href="https://github.com/EvezArt/disclosure-file">Disclosure File</a> · By Steven Crawford-Maggard (EVEZ666)
+</div>
+</div>
+<script>
+function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+function showDetail(id){const d=document.getElementById('detail');d.style.display='block';d.innerHTML='<h3>Detail: '+id+'</h3><p>See full analysis in the <a href=https://github.com/EvezArt/evez-osint-engine>GitHub repo</a>.</p>'}
+</script>
+</body>
+</html>

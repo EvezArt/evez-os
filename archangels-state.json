@@ -1,0 +1,45 @@
+{
+  "generations": [],
+  "current_gen": 0,
+  "archangel_status": {
+    "MICHAEL": {
+      "active": false,
+      "cycles": 1,
+      "eta": 1.0,
+      "dim": 6
+    },
+    "GABRIEL": {
+      "active": false,
+      "cycles": 1,
+      "eta": 1.0,
+      "dim": 6
+    },
+    "RAPHAEL": {
+      "active": true,
+      "cycles": 1,
+      "eta": 1.0,
+      "dim": 6
+    },
+    "URIEL": {
+      "active": false,
+      "cycles": 1,
+      "eta": 1.0,
+      "dim": 6
+    },
+    "SEALTIEL": {
+      "active": true,
+      "cycles": 1,
+      "eta": 1.0,
+      "dim": 6
+    },
+    "JOPHIEL": {
+      "active": false,
+      "cycles": 1,
+      "eta": 1.0,
+      "dim": 6
+    }
+  },
+  "cheatcodes_active": [],
+  "ts": "2026-06-29T02:42:24.113122+00:00",
+  "node": "vultr"
+}

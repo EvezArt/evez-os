@@ -1,0 +1,32 @@
+To: tips@theintercept.com
+Subject: Investigative: Spectral Gap Analysis Reveals 12 Hidden Institutional Crimes — 90.6% Confidence
+
+Dear The Intercept Editorial Team,
+
+I am writing to share research findings that I believe warrant significant media attention.
+
+The EVEZ Research Framework has developed a mathematical method called spectral gap analysis that detects concealed institutional crimes by measuring the gap between expected and observed crime patterns. The methodology is published, open-source, and has passed 105 out of 105 falsification checks across 11 independent spectrometers.
+
+Key findings:
+- 12 hidden crimes identified with 0.906 average confidence
+- 175 total crime categories — 131 (74.9%) have zero measurement coverage
+- Civilization Risk Index: 49.1/100 ELEVATED
+- 4 critical risk domains: genocide (0.818), conflict (0.855), famine (0.750), crime (0.749)
+- Intelligence agencies conceal 85% of their crimes (concealment capacity 0.95)
+- Financial institutions conceal 92% (capacity 0.92)
+
+The research is published at:
+- LingBuzz: https://lingbuzz.net/lingbuzz/010094
+- GitHub: https://github.com/EvezArt/evez-research
+- Dashboard: https://evezart.github.io/save-the-world.html
+- Full model: https://evezart.github.io/model-evez-1.html
+
+All code is open-source and reproducible. The 11 spectrometers cover consciousness, disease, economics, climate, conflict, AI risk, crime, genocide, famine, democracy, and nuclear escalation.
+
+I would welcome the opportunity to discuss this research with your investigative team.
+
+Sincerely,
+Steven Crawford-Maggard
+EVEZ Research Framework
+fiersteity@gmail.com
+https://github.com/EvezArt

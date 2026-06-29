@@ -1,0 +1,149 @@
+{
+  "timestamp": "2026-06-29T06:47:48Z",
+  "active_triggers": 11,
+  "domains": {
+    "genocide": {
+      "score": 0.818,
+      "level": "CRITICAL",
+      "blueprint": "BP1",
+      "blueprint_name": "Gaza Genocide Response",
+      "deadline": "48-72 hrs",
+      "actors": [
+        "UNSC",
+        "Egypt",
+        "Israel",
+        "UNRWA",
+        "ICC"
+      ]
+    },
+    "conflict": {
+      "score": 0.855,
+      "level": "CRITICAL",
+      "blueprint": "BP3",
+      "blueprint_name": "Ukraine-Russia De-escalation",
+      "deadline": "30-90 days",
+      "actors": [
+        "US",
+        "Russia",
+        "NATO",
+        "UN",
+        "OSCE"
+      ]
+    },
+    "famine": {
+      "score": 0.75,
+      "level": "CRITICAL",
+      "blueprint": "BP2",
+      "blueprint_name": "S Sudan Famine Response",
+      "deadline": "7 days",
+      "actors": [
+        "UNSC",
+        "AU",
+        "WFP",
+        "NGOs"
+      ]
+    },
+    "nuclear": {
+      "score": 0.528,
+      "level": "ELEVATED",
+      "blueprint": "BP3",
+      "blueprint_name": "Ukraine-Russia De-escalation",
+      "deadline": "30-90 days",
+      "actors": [
+        "US",
+        "Russia",
+        "NATO",
+        "UN",
+        "OSCE"
+      ]
+    },
+    "crime": {
+      "score": 0.749,
+      "level": "CRITICAL",
+      "blueprint": "BP7",
+      "blueprint_name": "Crime Dark Figure Response",
+      "deadline": "90-180 days",
+      "actors": [
+        "ICC",
+        "UNODC",
+        "Interpol",
+        "Prosecutors"
+      ]
+    },
+    "democracy": {
+      "score": 0.505,
+      "level": "ELEVATED",
+      "blueprint": "BP4",
+      "blueprint_name": "Democracy Protection",
+      "deadline": "Before next election",
+      "actors": [
+        "Election authorities",
+        "Tech companies",
+        "Civil society"
+      ]
+    },
+    "ai_risk": {
+      "score": 0.423,
+      "level": "ELEVATED",
+      "blueprint": "BP5",
+      "blueprint_name": "AI Safety Framework",
+      "deadline": "180-365 days",
+      "actors": [
+        "UN",
+        "National AI safety institutes",
+        "Industry"
+      ]
+    },
+    "economic": {
+      "score": 0.578,
+      "level": "ELEVATED",
+      "blueprint": "BP7",
+      "blueprint_name": "Crime Dark Figure Response",
+      "deadline": "90-180 days",
+      "actors": [
+        "ICC",
+        "UNODC",
+        "Interpol",
+        "Prosecutors"
+      ]
+    },
+    "carbon_concealment": {
+      "score": 0.852,
+      "level": "CRITICAL",
+      "blueprint": "BP6",
+      "blueprint_name": "Climate Action",
+      "deadline": "5 years",
+      "actors": [
+        "G20",
+        "National governments",
+        "IPCC"
+      ]
+    },
+    "surveillance_capitalism": {
+      "score": 0.9,
+      "level": "CRITICAL",
+      "blueprint": "BP7",
+      "blueprint_name": "Crime Dark Figure Response",
+      "deadline": "90-180 days",
+      "actors": [
+        "ICC",
+        "UNODC",
+        "Interpol",
+        "Prosecutors"
+      ]
+    },
+    "addiction_by_design": {
+      "score": 0.999,
+      "level": "CRITICAL",
+      "blueprint": "BP7",
+      "blueprint_name": "Crime Dark Figure Response",
+      "deadline": "90-180 days",
+      "actors": [
+        "ICC",
+        "UNODC",
+        "Interpol",
+        "Prosecutors"
+      ]
+    }
+  }
+}

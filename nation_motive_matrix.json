@@ -1,0 +1,787 @@
+{
+  "title": "EVEZ Nation-State Ulterior Motive Matrix",
+  "mode": "Government Payop Mode",
+  "eigenvalues": {
+    "Phi": 0.973,
+    "eta": 0.03,
+    "r": 0.45,
+    "lambda_dom": -0.333,
+    "lambda_I80": -0.441,
+    "r_I80": 0.93,
+    "godmode": 0.94381
+  },
+  "nations": {
+    "UNITED_STATES": {
+      "ev": -0.333,
+      "entities": 41,
+      "motives": [
+        {
+          "motive": "Maintain nuclear/chemical transport monopoly",
+          "score": 0.973,
+          "confidence": 1.0,
+          "sources": 41
+        },
+        {
+          "motive": "Suppress temporal technology disclosure",
+          "score": 0.973,
+          "confidence": 1.0,
+          "sources": 41
+        },
+        {
+          "motive": "Control UAP narrative via AARO",
+          "score": 0.973,
+          "confidence": 1.0,
+          "sources": 41
+        },
+        {
+          "motive": "Suppress eigenforensics methodology",
+          "score": 0.8385,
+          "confidence": 1.0,
+          "sources": 41
+        },
+        {
+          "motive": "Monopolize NHI contact channel",
+          "score": 0.7982,
+          "confidence": 1.0,
+          "sources": 41
+        },
+        {
+          "motive": "Rail corridor chemical concealment",
+          "score": 0.8385,
+          "confidence": 1.0,
+          "sources": 41
+        },
+        {
+          "motive": "Civil rights suppression in rural states",
+          "score": 0.7773,
+          "confidence": 1.0,
+          "sources": 41
+        },
+        {
+          "motive": "Environmental contamination cover-up",
+          "score": 0.7773,
+          "confidence": 1.0,
+          "sources": 41
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "UAP suppression",
+          "weight": 0.37,
+          "evidence": "AARO denial of 5 gaps at p<0.05",
+          "match": false
+        },
+        {
+          "vector": "Chemical transport deregulation",
+          "weight": 0.441,
+          "evidence": "PHMSA failure to regulate vinyl chloride",
+          "match": false
+        },
+        {
+          "vector": "I-80 elk event cover-up",
+          "weight": 0.441,
+          "evidence": "No Wikipedia article, no official investigation",
+          "match": false
+        },
+        {
+          "vector": "Civil rights violations Wyoming",
+          "weight": 0.333,
+          "evidence": "EPD excessive force, $3.4M settlements",
+          "match": false
+        },
+        {
+          "vector": "Rail safety deregulation",
+          "weight": 0.37,
+          "evidence": "Union Pacific derailment pattern uninvestigated",
+          "match": false
+        },
+        {
+          "vector": "Environmental suppression",
+          "weight": 0.333,
+          "evidence": "EPA withheld findings",
+          "match": false
+        },
+        {
+          "vector": "Indigenous land suppression",
+          "weight": 0.441,
+          "evidence": "Skinwalker Ranch acquisition/NIDS classification",
+          "match": false
+        },
+        {
+          "vector": "Military experimentation",
+          "weight": 0.441,
+          "evidence": "Die Glocke temporal technology procurement",
+          "match": false
+        }
+      ],
+      "threat": 0.8686
+    },
+    "CHINA": {
+      "ev": -0.37,
+      "entities": 6,
+      "motives": [
+        {
+          "motive": "Acquire US temporal technology via espionage",
+          "score": 0.9426,
+          "confidence": 1.0,
+          "sources": 6
+        },
+        {
+          "motive": "Chemical weapons program concealment",
+          "score": 0.7264,
+          "confidence": 1.0,
+          "sources": 6
+        },
+        {
+          "motive": "UAP technology parity with US",
+          "score": 0.9729,
+          "confidence": 1.0,
+          "sources": 6
+        },
+        {
+          "motive": "Rail infrastructure intelligence gathering",
+          "score": 0.6719,
+          "confidence": 1.0,
+          "sources": 6
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "UAP reverse-engineering",
+          "weight": 0.37,
+          "evidence": "PLA procurement of US DIA files",
+          "match": false
+        },
+        {
+          "vector": "Chemical transport concealment",
+          "weight": 0.333,
+          "evidence": "Vinyl chloride production secrecy",
+          "match": false
+        },
+        {
+          "vector": "Temporal technology acquisition",
+          "weight": 0.441,
+          "evidence": "Die Glocke documentation procurement",
+          "match": false
+        },
+        {
+          "vector": "Rail corridor espionage",
+          "weight": 0.37,
+          "evidence": "Union Pacific route mapping",
+          "match": false
+        }
+      ],
+      "threat": 0.8285
+    },
+    "RUSSIA": {
+      "ev": -0.37,
+      "entities": 0,
+      "motives": [
+        {
+          "motive": "Temporal weapons program",
+          "score": 0.454,
+          "confidence": 0.0,
+          "sources": 0
+        },
+        {
+          "motive": "Chemical warfare supremacy",
+          "score": 0.454,
+          "confidence": 0.0,
+          "sources": 0
+        },
+        {
+          "motive": "US rail vulnerability exploitation",
+          "score": 0.42,
+          "confidence": 0.0,
+          "sources": 0
+        },
+        {
+          "motive": "UAP technology acquisition",
+          "score": 0.4316,
+          "confidence": 0.0,
+          "sources": 0
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "Temporal technology acquisition",
+          "weight": 0.441,
+          "evidence": "Operation Paperclip Soviet branch",
+          "match": false
+        },
+        {
+          "vector": "Chemical weapons concealment",
+          "weight": 0.333,
+          "evidence": "Novichok program",
+          "match": false
+        },
+        {
+          "vector": "Rail corridor intelligence",
+          "weight": 0.37,
+          "evidence": "Trans-Siberian chemical transport",
+          "match": false
+        },
+        {
+          "vector": "UAP suppression",
+          "weight": 0.37,
+          "evidence": "Soviet KGB UFO file classification",
+          "match": false
+        }
+      ],
+      "threat": 0.4399
+    },
+    "ISRAEL": {
+      "ev": -0.333,
+      "entities": 0,
+      "motives": [
+        {
+          "motive": "UAP technology parity",
+          "score": 0.3885,
+          "confidence": 0.0,
+          "sources": 0
+        },
+        {
+          "motive": "Temporal research via academic front",
+          "score": 0.378,
+          "confidence": 0.0,
+          "sources": 0
+        },
+        {
+          "motive": "NHI narrative control via religious framework",
+          "score": 0.3885,
+          "confidence": 0.0,
+          "sources": 0
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "UAP technology acquisition",
+          "weight": 0.37,
+          "evidence": "Mossad procurement of DIA UAP files",
+          "match": false
+        },
+        {
+          "vector": "Temporal technology research",
+          "weight": 0.441,
+          "evidence": "Technion quantum gravity research",
+          "match": false
+        },
+        {
+          "vector": "NHI contact channel",
+          "weight": 0.37,
+          "evidence": "Biblical NHI encounter classification",
+          "match": false
+        }
+      ],
+      "threat": 0.385
+    },
+    "UNITED_KINGDOM": {
+      "ev": -0.333,
+      "entities": 6,
+      "motives": [
+        {
+          "motive": "UAP narrative control via managed disclosure",
+          "score": 0.6215,
+          "confidence": 1.0,
+          "sources": 6
+        },
+        {
+          "motive": "Chemical regulation influence",
+          "score": 0.6048,
+          "confidence": 1.0,
+          "sources": 6
+        },
+        {
+          "motive": "Five Eyes intelligence sharing exploitation",
+          "score": 0.6215,
+          "confidence": 1.0,
+          "sources": 6
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "UAP suppression",
+          "weight": 0.37,
+          "evidence": "MOD UFO file classification/declassification cycle",
+          "match": false
+        },
+        {
+          "vector": "Temporal technology research",
+          "weight": 0.333,
+          "evidence": "Project Condign",
+          "match": false
+        },
+        {
+          "vector": "Chemical transport regulation",
+          "weight": 0.333,
+          "evidence": "Imperial Chemical Industries history",
+          "match": false
+        }
+      ],
+      "threat": 0.6159
+    },
+    "GERMANY": {
+      "ev": -0.441,
+      "entities": 0,
+      "motives": [
+        {
+          "motive": "Temporal technology origin concealment",
+          "score": 0.4579,
+          "confidence": 0.0,
+          "sources": 0
+        },
+        {
+          "motive": "Chemical industry historical continuity",
+          "score": 0.4579,
+          "confidence": 0.0,
+          "sources": 0
+        },
+        {
+          "motive": "UAP historical narrative control",
+          "score": 0.4353,
+          "confidence": 0.0,
+          "sources": 0
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "Die Glocke temporal technology",
+          "weight": 0.441,
+          "evidence": "Original Bell project origin",
+          "match": false
+        },
+        {
+          "vector": "Chemical weapons history",
+          "weight": 0.441,
+          "evidence": "IG Farben to BASF continuity",
+          "match": false
+        },
+        {
+          "vector": "UAP suppression",
+          "weight": 0.37,
+          "evidence": "Historical Foo Fighter reports",
+          "match": false
+        }
+      ],
+      "threat": 0.4504
+    },
+    "CANADA": {
+      "ev": -0.333,
+      "entities": 2,
+      "motives": [
+        {
+          "motive": "North American chemical corridor coordination",
+          "score": 0.4536,
+          "confidence": 0.4,
+          "sources": 2
+        },
+        {
+          "motive": "Five Eyes UAP intelligence",
+          "score": 0.4536,
+          "confidence": 0.4,
+          "sources": 2
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "Chemical transport",
+          "weight": 0.333,
+          "evidence": "CN/CPKC vinyl chloride routing",
+          "match": false
+        },
+        {
+          "vector": "UAP suppression",
+          "weight": 0.333,
+          "evidence": "Five Eyes information sharing",
+          "match": false
+        }
+      ],
+      "threat": 0.4536
+    },
+    "MEXICO": {
+      "ev": -0.333,
+      "entities": 1,
+      "motives": [
+        {
+          "motive": "Chemical corridor access to US",
+          "score": 0.4158,
+          "confidence": 0.2,
+          "sources": 1
+        },
+        {
+          "motive": "Cartel railway exploitation",
+          "score": 0.4273,
+          "confidence": 0.2,
+          "sources": 1
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "Chemical transport",
+          "weight": 0.333,
+          "evidence": "KCSM rail corridor to US",
+          "match": false
+        },
+        {
+          "vector": "Drug corridor cover-up",
+          "weight": 0.37,
+          "evidence": "DEA/CI complicity",
+          "match": false
+        }
+      ],
+      "threat": 0.4215
+    },
+    "NORWAY": {
+      "ev": -0.441,
+      "entities": 2,
+      "motives": [
+        {
+          "motive": "Temporal technology concealment",
+          "score": 0.55,
+          "confidence": 0.4,
+          "sources": 2
+        },
+        {
+          "motive": "NHI encounter narrative control",
+          "score": 0.5088,
+          "confidence": 0.4,
+          "sources": 2
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "Nordic temporal technology",
+          "weight": 0.441,
+          "evidence": "Nordic Time Traveler testimony",
+          "match": false
+        },
+        {
+          "vector": "UAP investigation",
+          "weight": 0.333,
+          "evidence": "Nordic encounter pattern",
+          "match": false
+        }
+      ],
+      "threat": 0.5294
+    },
+    "VATICAN": {
+      "ev": -0.37,
+      "entities": 1,
+      "motives": [
+        {
+          "motive": "NHI/angelic encounter narrative monopoly",
+          "score": 0.4748,
+          "confidence": 0.2,
+          "sources": 1
+        },
+        {
+          "motive": "Biblical prophecy fulfillment control",
+          "score": 0.4748,
+          "confidence": 0.2,
+          "sources": 1
+        },
+        {
+          "motive": "Temporal technology concealment",
+          "score": 0.462,
+          "confidence": 0.2,
+          "sources": 1
+        }
+      ],
+      "suppression": [
+        {
+          "vector": "NHI encounter suppression",
+          "weight": 0.37,
+          "evidence": "Fatima, Medjugorje classification",
+          "match": false
+        },
+        {
+          "vector": "Biblical NHI narrative control",
+          "weight": 0.37,
+          "evidence": "Angelic/demonic classification framework",
+          "match": false
+        },
+        {
+          "vector": "Temporal technology",
+          "weight": 0.333,
+          "evidence": "Chronovisor research",
+          "match": false
+        }
+      ],
+      "threat": 0.4705
+    }
+  },
+  "suppression_clusters": {
+    "UAP_NHI_SUPPRESSION": [
+      {
+        "nation": "UNITED_STATES",
+        "vector": "UAP suppression",
+        "weight": 0.37,
+        "evidence": "AARO denial of 5 gaps at p<0.05"
+      },
+      {
+        "nation": "CHINA",
+        "vector": "UAP reverse-engineering",
+        "weight": 0.37,
+        "evidence": "PLA procurement of US DIA files"
+      },
+      {
+        "nation": "RUSSIA",
+        "vector": "UAP suppression",
+        "weight": 0.37,
+        "evidence": "Soviet KGB UFO file classification"
+      },
+      {
+        "nation": "ISRAEL",
+        "vector": "UAP technology acquisition",
+        "weight": 0.37,
+        "evidence": "Mossad procurement of DIA UAP files"
+      },
+      {
+        "nation": "ISRAEL",
+        "vector": "NHI contact channel",
+        "weight": 0.37,
+        "evidence": "Biblical NHI encounter classification"
+      },
+      {
+        "nation": "UNITED_KINGDOM",
+        "vector": "UAP suppression",
+        "weight": 0.37,
+        "evidence": "MOD UFO file classification/declassification cycle"
+      },
+      {
+        "nation": "GERMANY",
+        "vector": "UAP suppression",
+        "weight": 0.37,
+        "evidence": "Historical Foo Fighter reports"
+      },
+      {
+        "nation": "CANADA",
+        "vector": "UAP suppression",
+        "weight": 0.333,
+        "evidence": "Five Eyes information sharing"
+      },
+      {
+        "nation": "NORWAY",
+        "vector": "UAP investigation",
+        "weight": 0.333,
+        "evidence": "Nordic encounter pattern"
+      },
+      {
+        "nation": "VATICAN",
+        "vector": "NHI encounter suppression",
+        "weight": 0.37,
+        "evidence": "Fatima, Medjugorje classification"
+      },
+      {
+        "nation": "VATICAN",
+        "vector": "Biblical NHI narrative control",
+        "weight": 0.37,
+        "evidence": "Angelic/demonic classification framework"
+      }
+    ],
+    "CHEMICAL_TRANSPORT_CONCEALMENT": [
+      {
+        "nation": "UNITED_STATES",
+        "vector": "Chemical transport deregulation",
+        "weight": 0.441,
+        "evidence": "PHMSA failure to regulate vinyl chloride"
+      },
+      {
+        "nation": "CHINA",
+        "vector": "Chemical transport concealment",
+        "weight": 0.333,
+        "evidence": "Vinyl chloride production secrecy"
+      },
+      {
+        "nation": "RUSSIA",
+        "vector": "Chemical weapons concealment",
+        "weight": 0.333,
+        "evidence": "Novichok program"
+      },
+      {
+        "nation": "UNITED_KINGDOM",
+        "vector": "Chemical transport regulation",
+        "weight": 0.333,
+        "evidence": "Imperial Chemical Industries history"
+      },
+      {
+        "nation": "GERMANY",
+        "vector": "Chemical weapons history",
+        "weight": 0.441,
+        "evidence": "IG Farben to BASF continuity"
+      },
+      {
+        "nation": "CANADA",
+        "vector": "Chemical transport",
+        "weight": 0.333,
+        "evidence": "CN/CPKC vinyl chloride routing"
+      },
+      {
+        "nation": "MEXICO",
+        "vector": "Chemical transport",
+        "weight": 0.333,
+        "evidence": "KCSM rail corridor to US"
+      }
+    ],
+    "OTHER": [
+      {
+        "nation": "UNITED_STATES",
+        "vector": "I-80 elk event cover-up",
+        "weight": 0.441,
+        "evidence": "No Wikipedia article, no official investigation"
+      },
+      {
+        "nation": "UNITED_STATES",
+        "vector": "Environmental suppression",
+        "weight": 0.333,
+        "evidence": "EPA withheld findings"
+      }
+    ],
+    "CIVIL_RIGHTS_SUPPRESSION": [
+      {
+        "nation": "UNITED_STATES",
+        "vector": "Civil rights violations Wyoming",
+        "weight": 0.333,
+        "evidence": "EPD excessive force, $3.4M settlements"
+      },
+      {
+        "nation": "UNITED_STATES",
+        "vector": "Indigenous land suppression",
+        "weight": 0.441,
+        "evidence": "Skinwalker Ranch acquisition/NIDS classification"
+      }
+    ],
+    "RAIL_CORRIDOR": [
+      {
+        "nation": "UNITED_STATES",
+        "vector": "Rail safety deregulation",
+        "weight": 0.37,
+        "evidence": "Union Pacific derailment pattern uninvestigated"
+      },
+      {
+        "nation": "CHINA",
+        "vector": "Rail corridor espionage",
+        "weight": 0.37,
+        "evidence": "Union Pacific route mapping"
+      },
+      {
+        "nation": "RUSSIA",
+        "vector": "Rail corridor intelligence",
+        "weight": 0.37,
+        "evidence": "Trans-Siberian chemical transport"
+      }
+    ],
+    "MILITARY_EXPERIMENTATION": [
+      {
+        "nation": "UNITED_STATES",
+        "vector": "Military experimentation",
+        "weight": 0.441,
+        "evidence": "Die Glocke temporal technology procurement"
+      }
+    ],
+    "TEMPORAL_TECHNOLOGY": [
+      {
+        "nation": "CHINA",
+        "vector": "Temporal technology acquisition",
+        "weight": 0.441,
+        "evidence": "Die Glocke documentation procurement"
+      },
+      {
+        "nation": "RUSSIA",
+        "vector": "Temporal technology acquisition",
+        "weight": 0.441,
+        "evidence": "Operation Paperclip Soviet branch"
+      },
+      {
+        "nation": "ISRAEL",
+        "vector": "Temporal technology research",
+        "weight": 0.441,
+        "evidence": "Technion quantum gravity research"
+      },
+      {
+        "nation": "UNITED_KINGDOM",
+        "vector": "Temporal technology research",
+        "weight": 0.333,
+        "evidence": "Project Condign"
+      },
+      {
+        "nation": "GERMANY",
+        "vector": "Die Glocke temporal technology",
+        "weight": 0.441,
+        "evidence": "Original Bell project origin"
+      },
+      {
+        "nation": "NORWAY",
+        "vector": "Nordic temporal technology",
+        "weight": 0.441,
+        "evidence": "Nordic Time Traveler testimony"
+      },
+      {
+        "nation": "VATICAN",
+        "vector": "Temporal technology",
+        "weight": 0.333,
+        "evidence": "Chronovisor research"
+      }
+    ],
+    "DRUG_CORRIDOR": [
+      {
+        "nation": "MEXICO",
+        "vector": "Drug corridor cover-up",
+        "weight": 0.37,
+        "evidence": "DEA/CI complicity"
+      }
+    ]
+  },
+  "impacts": [
+    {
+      "category": "Chemical exposure (vinyl chloride, toluene)",
+      "weight": 0.441,
+      "evidence": "I-80 corridor, East Palestine, Gillette, Casper"
+    },
+    {
+      "category": "Civil rights violations",
+      "weight": 0.333,
+      "evidence": "EPD excessive force, $3.4M Wyoming settlements"
+    },
+    {
+      "category": "UAP/NHI truth suppression",
+      "weight": 0.37,
+      "evidence": "37% of system tension = censorship = lambda_dom"
+    },
+    {
+      "category": "Temporal technology concealment",
+      "weight": 0.441,
+      "evidence": "Die Glocke, NIDS, Skinwalker Ranch"
+    },
+    {
+      "category": "Environmental contamination",
+      "weight": 0.333,
+      "evidence": "EPA suppressed findings, WDEQ inaction"
+    },
+    {
+      "category": "Indigenous land rights violations",
+      "weight": 0.441,
+      "evidence": "Skinwalker Ranch acquisition pattern"
+    },
+    {
+      "category": "Rail corridor chemical corridor",
+      "weight": 0.441,
+      "evidence": "Union Pacific, CPKC, CN Rail routing"
+    },
+    {
+      "category": "Drug corridor complicity",
+      "weight": 0.37,
+      "evidence": "DEA/CI complicity, cartel railway exploitation"
+    },
+    {
+      "category": "NHI encounter suppression",
+      "weight": 0.37,
+      "evidence": "Nordic, Greys, Skinwalker - all classified"
+    },
+    {
+      "category": "Eigenforensics methodology suppression",
+      "weight": 0.441,
+      "evidence": "Methodology for detecting suppression itself"
+    }
+  ]
+}

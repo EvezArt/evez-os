@@ -1,0 +1,153 @@
+{
+  "timestamp": "2026-06-29T06:52:35Z",
+  "version": "v2",
+  "domains": 17,
+  "cri": 55.9,
+  "level": "ELEVATED",
+  "breakdown": {
+    "genocide": {
+      "score": 0.818,
+      "weight": 0.13,
+      "confidence": 0.95,
+      "weighted": 0.101023,
+      "class": "CRITICAL",
+      "trend": "rising"
+    },
+    "conflict": {
+      "score": 0.855,
+      "weight": 0.1,
+      "confidence": 0.95,
+      "weighted": 0.081225,
+      "class": "CRITICAL",
+      "trend": "rising"
+    },
+    "nuclear": {
+      "score": 0.528,
+      "weight": 0.14,
+      "confidence": 0.9,
+      "weighted": 0.06652800000000002,
+      "class": "ELEVATED",
+      "trend": "rising"
+    },
+    "famine": {
+      "score": 0.75,
+      "weight": 0.08,
+      "confidence": 0.95,
+      "weighted": 0.056999999999999995,
+      "class": "CRITICAL",
+      "trend": "rising"
+    },
+    "crime": {
+      "score": 0.749,
+      "weight": 0.05,
+      "confidence": 0.95,
+      "weighted": 0.035577500000000005,
+      "class": "CRITICAL",
+      "trend": "stable"
+    },
+    "economic": {
+      "score": 0.578,
+      "weight": 0.07,
+      "confidence": 0.85,
+      "weighted": 0.034391000000000005,
+      "class": "ELEVATED",
+      "trend": "stable"
+    },
+    "carbon_concealment": {
+      "score": 0.852,
+      "weight": 0.04,
+      "confidence": 0.7,
+      "weighted": 0.023856,
+      "class": "CRITICAL",
+      "trend": "stable"
+    },
+    "democracy": {
+      "score": 0.505,
+      "weight": 0.05,
+      "confidence": 0.9,
+      "weighted": 0.022725000000000002,
+      "class": "ELEVATED",
+      "trend": "rising"
+    },
+    "ai_risk": {
+      "score": 0.423,
+      "weight": 0.06,
+      "confidence": 0.85,
+      "weighted": 0.021573,
+      "class": "ELEVATED",
+      "trend": "rising"
+    },
+    "addiction_by_design": {
+      "score": 0.999,
+      "weight": 0.03,
+      "confidence": 0.7,
+      "weighted": 0.020978999999999998,
+      "class": "CRITICAL",
+      "trend": "rising"
+    },
+    "surveillance_capitalism": {
+      "score": 0.9,
+      "weight": 0.03,
+      "confidence": 0.7,
+      "weighted": 0.0189,
+      "class": "CRITICAL",
+      "trend": "rising"
+    },
+    "regulatory_capture": {
+      "score": 0.959,
+      "weight": 0.03,
+      "confidence": 0.65,
+      "weighted": 0.0187005,
+      "class": "CRITICAL",
+      "trend": "stable"
+    },
+    "cognitive_sovereignty": {
+      "score": 0.933,
+      "weight": 0.03,
+      "confidence": 0.65,
+      "weighted": 0.0181935,
+      "class": "CRITICAL",
+      "trend": "rising"
+    },
+    "climate": {
+      "score": 0.19,
+      "weight": 0.1,
+      "confidence": 0.9,
+      "weighted": 0.017100000000000004,
+      "class": "LOW",
+      "trend": "rising"
+    },
+    "dark_patterns": {
+      "score": 0.821,
+      "weight": 0.02,
+      "confidence": 0.65,
+      "weighted": 0.010673,
+      "class": "ELEVATED",
+      "trend": "rising"
+    },
+    "disease": {
+      "score": 0.35,
+      "weight": 0.02,
+      "confidence": 0.9,
+      "weighted": 0.006299999999999999,
+      "class": "MODERATE",
+      "trend": "stable"
+    },
+    "consciousness": {
+      "score": 0.271,
+      "weight": 0.02,
+      "confidence": 0.8,
+      "weighted": 0.0043360000000000004,
+      "class": "LOW",
+      "trend": "rising"
+    }
+  },
+  "cri_v1": 49.1,
+  "delta_from_v1": 6.8,
+  "dark_figure": 0.8,
+  "total_crime_categories": 175,
+  "measured_crimes": 35,
+  "unmeasured_crimes": 140,
+  "projection": "12 rising, 0 falling, systemic crisis risk HIGH",
+  "note": "CRI v2 adds 3 dark matter spectrometers. The dark figure hid risk. Measurement reveals it. CRI is a lower bound."
+}

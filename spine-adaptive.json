@@ -1,0 +1,8011 @@
+{
+  "created": "2026-06-29T01:35:01.301779+00:00",
+  "version": 4,
+  "entries": [
+    {
+      "prev_hash": "genesis",
+      "hash": "1c3028107d7a151b",
+      "timestamp": "2026-06-29T01:35:01.301994+00:00",
+      "data": {
+        "cycle": 1,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 0,
+        "M": 1,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "1c3028107d7a151b",
+      "hash": "73394e684e288b67",
+      "timestamp": "2026-06-29T01:35:01.303372+00:00",
+      "data": {
+        "cycle": 2,
+        "eta_measured": 0.5,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 1,
+        "M": 1,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "73394e684e288b67",
+      "hash": "70418c415ff74c3f",
+      "timestamp": "2026-06-29T01:35:01.303681+00:00",
+      "data": {
+        "cycle": 3,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 1,
+        "M": 1,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "70418c415ff74c3f",
+      "hash": "b60fba557f7f6215",
+      "timestamp": "2026-06-29T01:35:01.304170+00:00",
+      "data": {
+        "cycle": 4,
+        "eta_measured": 0.2,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 2,
+        "M": 2,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b60fba557f7f6215",
+      "hash": "65781ecae68006b8",
+      "timestamp": "2026-06-29T01:35:01.304852+00:00",
+      "data": {
+        "cycle": 5,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 2,
+        "M": 2,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "65781ecae68006b8",
+      "hash": "92b5e7fd6cdc976b",
+      "timestamp": "2026-06-29T01:35:01.305352+00:00",
+      "data": {
+        "cycle": 6,
+        "eta_measured": 0.4,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 3,
+        "M": 3,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "92b5e7fd6cdc976b",
+      "hash": "34a7f87ae89fd380",
+      "timestamp": "2026-06-29T01:35:01.305745+00:00",
+      "data": {
+        "cycle": 7,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 3,
+        "M": 3,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "34a7f87ae89fd380",
+      "hash": "71825d1b24add64d",
+      "timestamp": "2026-06-29T01:35:01.306340+00:00",
+      "data": {
+        "cycle": 8,
+        "eta_measured": 0.4,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 4,
+        "M": 4,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "71825d1b24add64d",
+      "hash": "ccd92378ed1b3aa2",
+      "timestamp": "2026-06-29T01:35:01.306991+00:00",
+      "data": {
+        "cycle": 9,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 4,
+        "M": 4,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "ccd92378ed1b3aa2",
+      "hash": "8c5ad5e7ad8e5742",
+      "timestamp": "2026-06-29T01:35:01.313611+00:00",
+      "data": {
+        "cycle": 10,
+        "eta_measured": 0.1,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 5,
+        "M": 5,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8c5ad5e7ad8e5742",
+      "hash": "bd11bc6df2aeb11a",
+      "timestamp": "2026-06-29T01:35:01.314033+00:00",
+      "data": {
+        "cycle": 11,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 5,
+        "M": 5,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "bd11bc6df2aeb11a",
+      "hash": "6f593b2f8406f4af",
+      "timestamp": "2026-06-29T01:35:01.314639+00:00",
+      "data": {
+        "cycle": 12,
+        "eta_measured": 0.4865,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 6,
+        "M": 6,
+        "ptc": 0.027000000000000024,
+        "ptd": 0.9694112908684631,
+        "enc": 1
+      }
+    },
+    {
+      "prev_hash": "6f593b2f8406f4af",
+      "hash": "68ef4f115659ecc9",
+      "timestamp": "2026-06-29T01:35:01.314962+00:00",
+      "data": {
+        "cycle": 13,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 6,
+        "M": 6,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "68ef4f115659ecc9",
+      "hash": "27f471ae4d75921b",
+      "timestamp": "2026-06-29T01:35:01.315426+00:00",
+      "data": {
+        "cycle": 14,
+        "eta_measured": 0.1946,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 6,
+        "M": 6,
+        "ptc": 0.027000000000000024,
+        "ptd": 0.9694112908684631,
+        "enc": 1
+      }
+    },
+    {
+      "prev_hash": "27f471ae4d75921b",
+      "hash": "31e5dbe770e31fcd",
+      "timestamp": "2026-06-29T01:35:01.315806+00:00",
+      "data": {
+        "cycle": 15,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 6,
+        "M": 6,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "31e5dbe770e31fcd",
+      "hash": "922fd02563fc15e7",
+      "timestamp": "2026-06-29T01:35:01.316400+00:00",
+      "data": {
+        "cycle": 16,
+        "eta_measured": 0.3892,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 7,
+        "M": 7,
+        "ptc": 0.027000000000000024,
+        "ptd": 0.9694112908684631,
+        "enc": 1
+      }
+    },
+    {
+      "prev_hash": "922fd02563fc15e7",
+      "hash": "9074502a95579aee",
+      "timestamp": "2026-06-29T01:35:01.316954+00:00",
+      "data": {
+        "cycle": 17,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 7,
+        "M": 7,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9074502a95579aee",
+      "hash": "18a982cf070c4f20",
+      "timestamp": "2026-06-29T01:35:01.317487+00:00",
+      "data": {
+        "cycle": 18,
+        "eta_measured": 0.3892,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 8,
+        "M": 8,
+        "ptc": 0.027000000000000024,
+        "ptd": 0.9694112908684631,
+        "enc": 1
+      }
+    },
+    {
+      "prev_hash": "18a982cf070c4f20",
+      "hash": "13efb1ee8ca13480",
+      "timestamp": "2026-06-29T01:35:01.317904+00:00",
+      "data": {
+        "cycle": 19,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 8,
+        "M": 8,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "13efb1ee8ca13480",
+      "hash": "838b7afcc26485ef",
+      "timestamp": "2026-06-29T01:35:01.318501+00:00",
+      "data": {
+        "cycle": 20,
+        "eta_measured": 0.0973,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 8,
+        "M": 8,
+        "ptc": 0.027000000000000024,
+        "ptd": 0.9694112908684631,
+        "enc": 1
+      }
+    },
+    {
+      "prev_hash": "838b7afcc26485ef",
+      "hash": "9af3a4c36d48cb9f",
+      "timestamp": "2026-06-29T01:35:01.319430+00:00",
+      "data": {
+        "cycle": 21,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 8,
+        "M": 8,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9af3a4c36d48cb9f",
+      "hash": "be74e50319d364aa",
+      "timestamp": "2026-06-29T01:35:01.319955+00:00",
+      "data": {
+        "cycle": 22,
+        "eta_measured": 0.46987912543163,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 9,
+        "M": 9,
+        "ptc": 0.060241749136739964,
+        "ptd": 0.9650111332616897,
+        "enc": 2
+      }
+    },
+    {
+      "prev_hash": "be74e50319d364aa",
+      "hash": "99c16987bacd3d2f",
+      "timestamp": "2026-06-29T01:35:01.320490+00:00",
+      "data": {
+        "cycle": 23,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 9,
+        "M": 9,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "99c16987bacd3d2f",
+      "hash": "105ff7a7277ddd9e",
+      "timestamp": "2026-06-29T01:35:01.321106+00:00",
+      "data": {
+        "cycle": 24,
+        "eta_measured": 0.18795165017265203,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 9,
+        "M": 9,
+        "ptc": 0.06024174913673985,
+        "ptd": 0.9650111332616897,
+        "enc": 2
+      }
+    },
+    {
+      "prev_hash": "105ff7a7277ddd9e",
+      "hash": "f8d3e951df89eabf",
+      "timestamp": "2026-06-29T01:35:01.321547+00:00",
+      "data": {
+        "cycle": 25,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 9,
+        "M": 9,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "f8d3e951df89eabf",
+      "hash": "a27655a13f5ab093",
+      "timestamp": "2026-06-29T01:35:01.322116+00:00",
+      "data": {
+        "cycle": 26,
+        "eta_measured": 0.37590330034530406,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 10,
+        "M": 10,
+        "ptc": 0.06024174913673985,
+        "ptd": 0.9650111332616897,
+        "enc": 2
+      }
+    },
+    {
+      "prev_hash": "a27655a13f5ab093",
+      "hash": "75ca06d1b01622fe",
+      "timestamp": "2026-06-29T01:35:01.322584+00:00",
+      "data": {
+        "cycle": 27,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 10,
+        "M": 10,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "75ca06d1b01622fe",
+      "hash": "118d5871c7353daa",
+      "timestamp": "2026-06-29T01:35:01.323125+00:00",
+      "data": {
+        "cycle": 28,
+        "eta_measured": 0.37590330034530406,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 11,
+        "M": 11,
+        "ptc": 0.06024174913673985,
+        "ptd": 0.9650111332616897,
+        "enc": 2
+      }
+    },
+    {
+      "prev_hash": "118d5871c7353daa",
+      "hash": "b7ea964041ae6173",
+      "timestamp": "2026-06-29T01:35:01.323606+00:00",
+      "data": {
+        "cycle": 29,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 11,
+        "M": 11,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b7ea964041ae6173",
+      "hash": "b3a1e71e75f774f7",
+      "timestamp": "2026-06-29T01:35:01.324216+00:00",
+      "data": {
+        "cycle": 30,
+        "eta_measured": 0.09397582508632601,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 11,
+        "M": 11,
+        "ptc": 0.06024174913673985,
+        "ptd": 0.9650111332616897,
+        "enc": 2
+      }
+    },
+    {
+      "prev_hash": "b3a1e71e75f774f7",
+      "hash": "9f1cb5197dda1804",
+      "timestamp": "2026-06-29T01:35:01.324717+00:00",
+      "data": {
+        "cycle": 31,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 11,
+        "M": 11,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9f1cb5197dda1804",
+      "hash": "243062d295824b5b",
+      "timestamp": "2026-06-29T01:35:01.325421+00:00",
+      "data": {
+        "cycle": 32,
+        "eta_measured": 0.4493316140368432,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 12,
+        "M": 12,
+        "ptc": 0.10133677192631363,
+        "ptd": 0.959599047679102,
+        "enc": 3
+      }
+    },
+    {
+      "prev_hash": "243062d295824b5b",
+      "hash": "b612539c9e01f3cb",
+      "timestamp": "2026-06-29T01:35:01.325979+00:00",
+      "data": {
+        "cycle": 33,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 12,
+        "M": 12,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b612539c9e01f3cb",
+      "hash": "1f716246c47ac259",
+      "timestamp": "2026-06-29T01:35:01.326995+00:00",
+      "data": {
+        "cycle": 34,
+        "eta_measured": 0.17973264561473729,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 12,
+        "M": 12,
+        "ptc": 0.10133677192631363,
+        "ptd": 0.959599047679102,
+        "enc": 3
+      }
+    },
+    {
+      "prev_hash": "1f716246c47ac259",
+      "hash": "200b98a5f8121fb1",
+      "timestamp": "2026-06-29T01:35:01.327550+00:00",
+      "data": {
+        "cycle": 35,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 12,
+        "M": 12,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "200b98a5f8121fb1",
+      "hash": "39be358d63bcfd8f",
+      "timestamp": "2026-06-29T01:35:01.328416+00:00",
+      "data": {
+        "cycle": 36,
+        "eta_measured": 0.35946529122947457,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 13,
+        "M": 13,
+        "ptc": 0.10133677192631363,
+        "ptd": 0.959599047679102,
+        "enc": 3
+      }
+    },
+    {
+      "prev_hash": "39be358d63bcfd8f",
+      "hash": "2561714ffc1b6dea",
+      "timestamp": "2026-06-29T01:35:01.329113+00:00",
+      "data": {
+        "cycle": 37,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 13,
+        "M": 13,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "2561714ffc1b6dea",
+      "hash": "605922c2b40bbce1",
+      "timestamp": "2026-06-29T01:35:01.330181+00:00",
+      "data": {
+        "cycle": 38,
+        "eta_measured": 0.35946529122947457,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 14,
+        "M": 14,
+        "ptc": 0.10133677192631363,
+        "ptd": 0.959599047679102,
+        "enc": 3
+      }
+    },
+    {
+      "prev_hash": "605922c2b40bbce1",
+      "hash": "fa664919a781eb5c",
+      "timestamp": "2026-06-29T01:35:01.330978+00:00",
+      "data": {
+        "cycle": 39,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 14,
+        "M": 14,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "fa664919a781eb5c",
+      "hash": "0221bfad99e480be",
+      "timestamp": "2026-06-29T01:35:01.331989+00:00",
+      "data": {
+        "cycle": 40,
+        "eta_measured": 0.08986632280736864,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 14,
+        "M": 14,
+        "ptc": 0.10133677192631363,
+        "ptd": 0.959599047679102,
+        "enc": 3
+      }
+    },
+    {
+      "prev_hash": "0221bfad99e480be",
+      "hash": "e16100e34f9c06b4",
+      "timestamp": "2026-06-29T01:35:01.332850+00:00",
+      "data": {
+        "cycle": 41,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 14,
+        "M": 14,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "e16100e34f9c06b4",
+      "hash": "0c7a2f8ea2e81639",
+      "timestamp": "2026-06-29T01:35:01.333871+00:00",
+      "data": {
+        "cycle": 42,
+        "eta_measured": 0.42396425044797803,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 15,
+        "M": 15,
+        "ptc": 0.15207149910404394,
+        "ptd": 0.9529592924132804,
+        "enc": 4
+      }
+    },
+    {
+      "prev_hash": "0c7a2f8ea2e81639",
+      "hash": "17fb71cd664ede4d",
+      "timestamp": "2026-06-29T01:35:01.334735+00:00",
+      "data": {
+        "cycle": 43,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 15,
+        "M": 15,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "17fb71cd664ede4d",
+      "hash": "d708905e61920fb5",
+      "timestamp": "2026-06-29T01:35:01.335688+00:00",
+      "data": {
+        "cycle": 44,
+        "eta_measured": 0.16958570017919122,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 15,
+        "M": 15,
+        "ptc": 0.15207149910404394,
+        "ptd": 0.9529592924132804,
+        "enc": 4
+      }
+    },
+    {
+      "prev_hash": "d708905e61920fb5",
+      "hash": "a7f8b06537c636eb",
+      "timestamp": "2026-06-29T01:35:01.336728+00:00",
+      "data": {
+        "cycle": 45,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 15,
+        "M": 15,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "a7f8b06537c636eb",
+      "hash": "908e10858d08c3d5",
+      "timestamp": "2026-06-29T01:35:01.338490+00:00",
+      "data": {
+        "cycle": 46,
+        "eta_measured": 0.33917140035838245,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 16,
+        "M": 16,
+        "ptc": 0.15207149910404394,
+        "ptd": 0.9529592924132804,
+        "enc": 4
+      }
+    },
+    {
+      "prev_hash": "908e10858d08c3d5",
+      "hash": "defe2c5020445167",
+      "timestamp": "2026-06-29T01:35:01.339666+00:00",
+      "data": {
+        "cycle": 47,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 16,
+        "M": 16,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "defe2c5020445167",
+      "hash": "43cee90b1d121f46",
+      "timestamp": "2026-06-29T01:35:01.344130+00:00",
+      "data": {
+        "cycle": 48,
+        "eta_measured": 0.33917140035838245,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 17,
+        "M": 17,
+        "ptc": 0.15207149910404394,
+        "ptd": 0.9529592924132804,
+        "enc": 4
+      }
+    },
+    {
+      "prev_hash": "43cee90b1d121f46",
+      "hash": "461c2283b7ced3bf",
+      "timestamp": "2026-06-29T01:35:01.345770+00:00",
+      "data": {
+        "cycle": 49,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 17,
+        "M": 17,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "461c2283b7ced3bf",
+      "hash": "591a5e9177f19675",
+      "timestamp": "2026-06-29T01:35:01.347447+00:00",
+      "data": {
+        "cycle": 50,
+        "eta_measured": 0.08479285008959561,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 17,
+        "M": 17,
+        "ptc": 0.15207149910404394,
+        "ptd": 0.9529592924132804,
+        "enc": 4
+      }
+    },
+    {
+      "prev_hash": "591a5e9177f19675",
+      "hash": "15406727cdf25229",
+      "timestamp": "2026-06-29T01:35:01.349389+00:00",
+      "data": {
+        "cycle": 51,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 17,
+        "M": 17,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "15406727cdf25229",
+      "hash": "57c163c89bed4990",
+      "timestamp": "2026-06-29T01:35:01.350630+00:00",
+      "data": {
+        "cycle": 52,
+        "eta_measured": 0.39295403322132627,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 18,
+        "M": 18,
+        "ptc": 0.21409193355734746,
+        "ptd": 0.9449049306599134,
+        "enc": 5
+      }
+    },
+    {
+      "prev_hash": "57c163c89bed4990",
+      "hash": "326a149429b2ce53",
+      "timestamp": "2026-06-29T01:35:01.351360+00:00",
+      "data": {
+        "cycle": 53,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 18,
+        "M": 18,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "326a149429b2ce53",
+      "hash": "0c24c518168a2ee8",
+      "timestamp": "2026-06-29T01:35:01.352184+00:00",
+      "data": {
+        "cycle": 54,
+        "eta_measured": 0.15718161328853053,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 18,
+        "M": 18,
+        "ptc": 0.21409193355734735,
+        "ptd": 0.9449049306599134,
+        "enc": 5
+      }
+    },
+    {
+      "prev_hash": "0c24c518168a2ee8",
+      "hash": "bd3c839d5ce548ec",
+      "timestamp": "2026-06-29T01:35:01.353534+00:00",
+      "data": {
+        "cycle": 55,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 18,
+        "M": 18,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "bd3c839d5ce548ec",
+      "hash": "db0e110544a46919",
+      "timestamp": "2026-06-29T01:35:01.354879+00:00",
+      "data": {
+        "cycle": 56,
+        "eta_measured": 0.31436322657706106,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 19,
+        "M": 19,
+        "ptc": 0.21409193355734735,
+        "ptd": 0.9449049306599134,
+        "enc": 5
+      }
+    },
+    {
+      "prev_hash": "db0e110544a46919",
+      "hash": "80c362e0bfc6eea0",
+      "timestamp": "2026-06-29T01:35:01.356270+00:00",
+      "data": {
+        "cycle": 57,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 19,
+        "M": 19,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "80c362e0bfc6eea0",
+      "hash": "63d5e982bf04e01f",
+      "timestamp": "2026-06-29T01:35:01.365287+00:00",
+      "data": {
+        "cycle": 58,
+        "eta_measured": 0.31436322657706106,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 20,
+        "M": 20,
+        "ptc": 0.21409193355734735,
+        "ptd": 0.9449049306599134,
+        "enc": 5
+      }
+    },
+    {
+      "prev_hash": "63d5e982bf04e01f",
+      "hash": "665b01acbd31481e",
+      "timestamp": "2026-06-29T01:35:01.366942+00:00",
+      "data": {
+        "cycle": 59,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 20,
+        "M": 20,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "665b01acbd31481e",
+      "hash": "a16798ea205c13a1",
+      "timestamp": "2026-06-29T01:35:01.372005+00:00",
+      "data": {
+        "cycle": 60,
+        "eta_measured": 0.07859080664426527,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 20,
+        "M": 20,
+        "ptc": 0.21409193355734735,
+        "ptd": 0.9449049306599134,
+        "enc": 5
+      }
+    },
+    {
+      "prev_hash": "a16798ea205c13a1",
+      "hash": "fa327b3ad6c668e1",
+      "timestamp": "2026-06-29T01:35:01.373292+00:00",
+      "data": {
+        "cycle": 61,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 20,
+        "M": 20,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "fa327b3ad6c668e1",
+      "hash": "156a46d4ffdd1e70",
+      "timestamp": "2026-06-29T01:35:01.374943+00:00",
+      "data": {
+        "cycle": 62,
+        "eta_measured": 0.3558759959785499,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 21,
+        "M": 21,
+        "ptc": 0.2882480080429002,
+        "ptd": 0.9353638681817465,
+        "enc": 6
+      }
+    },
+    {
+      "prev_hash": "156a46d4ffdd1e70",
+      "hash": "925a4239308658da",
+      "timestamp": "2026-06-29T01:35:01.375954+00:00",
+      "data": {
+        "cycle": 63,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 21,
+        "M": 21,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "925a4239308658da",
+      "hash": "a1d6c7e5b471a49d",
+      "timestamp": "2026-06-29T01:35:01.377000+00:00",
+      "data": {
+        "cycle": 64,
+        "eta_measured": 0.14235039839141997,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 21,
+        "M": 21,
+        "ptc": 0.2882480080429002,
+        "ptd": 0.9353638681817465,
+        "enc": 6
+      }
+    },
+    {
+      "prev_hash": "a1d6c7e5b471a49d",
+      "hash": "d5f81b2bf08a9e5d",
+      "timestamp": "2026-06-29T01:35:01.378247+00:00",
+      "data": {
+        "cycle": 65,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 21,
+        "M": 21,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d5f81b2bf08a9e5d",
+      "hash": "dc35353d66882746",
+      "timestamp": "2026-06-29T01:35:01.379802+00:00",
+      "data": {
+        "cycle": 66,
+        "eta_measured": 0.28470079678283994,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 22,
+        "M": 22,
+        "ptc": 0.2882480080429002,
+        "ptd": 0.9353638681817465,
+        "enc": 6
+      }
+    },
+    {
+      "prev_hash": "dc35353d66882746",
+      "hash": "009d3c7adad2c5db",
+      "timestamp": "2026-06-29T01:35:01.381389+00:00",
+      "data": {
+        "cycle": 67,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 22,
+        "M": 22,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "009d3c7adad2c5db",
+      "hash": "d02498458062415d",
+      "timestamp": "2026-06-29T01:35:01.382847+00:00",
+      "data": {
+        "cycle": 68,
+        "eta_measured": 0.28470079678283994,
+        "spectral_class": "M",
+        "mods": 2,
+        "paths": 23,
+        "M": 23,
+        "ptc": 0.2882480080429002,
+        "ptd": 0.9353638681817465,
+        "enc": 6
+      }
+    },
+    {
+      "prev_hash": "d02498458062415d",
+      "hash": "f6d751b63a7d3756",
+      "timestamp": "2026-06-29T01:35:01.384131+00:00",
+      "data": {
+        "cycle": 69,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 23,
+        "M": 23,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "f6d751b63a7d3756",
+      "hash": "e616a8fb737632d1",
+      "timestamp": "2026-06-29T01:35:01.385704+00:00",
+      "data": {
+        "cycle": 70,
+        "eta_measured": 0.07117519919570998,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 23,
+        "M": 23,
+        "ptc": 0.2882480080429002,
+        "ptd": 0.9353638681817465,
+        "enc": 6
+      }
+    },
+    {
+      "prev_hash": "e616a8fb737632d1",
+      "hash": "2e5683f18fa4d8cd",
+      "timestamp": "2026-06-29T01:35:01.387193+00:00",
+      "data": {
+        "cycle": 71,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 23,
+        "M": 23,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "2e5683f18fa4d8cd",
+      "hash": "b7866751a7ce6b51",
+      "timestamp": "2026-06-29T01:35:01.388958+00:00",
+      "data": {
+        "cycle": 72,
+        "eta_measured": 0.31320892737155887,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 24,
+        "M": 24,
+        "ptc": 0.37358214525688227,
+        "ptd": 0.9245037712947384,
+        "enc": 7
+      }
+    },
+    {
+      "prev_hash": "b7866751a7ce6b51",
+      "hash": "bc0700de42bfe321",
+      "timestamp": "2026-06-29T01:35:01.390781+00:00",
+      "data": {
+        "cycle": 73,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 24,
+        "M": 24,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "bc0700de42bfe321",
+      "hash": "d2c8a061ef07d605",
+      "timestamp": "2026-06-29T01:35:01.392340+00:00",
+      "data": {
+        "cycle": 74,
+        "eta_measured": 0.12528357094862355,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 24,
+        "M": 24,
+        "ptc": 0.37358214525688227,
+        "ptd": 0.9245037712947384,
+        "enc": 7
+      }
+    },
+    {
+      "prev_hash": "d2c8a061ef07d605",
+      "hash": "eb262375d05fd991",
+      "timestamp": "2026-06-29T01:35:01.393831+00:00",
+      "data": {
+        "cycle": 75,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 24,
+        "M": 24,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "eb262375d05fd991",
+      "hash": "a6001c3cfd0c0d09",
+      "timestamp": "2026-06-29T01:35:01.395425+00:00",
+      "data": {
+        "cycle": 76,
+        "eta_measured": 0.2505671418972471,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 25,
+        "M": 25,
+        "ptc": 0.37358214525688227,
+        "ptd": 0.9245037712947384,
+        "enc": 7
+      }
+    },
+    {
+      "prev_hash": "a6001c3cfd0c0d09",
+      "hash": "5739fc0cd5ce6cfd",
+      "timestamp": "2026-06-29T01:35:01.398815+00:00",
+      "data": {
+        "cycle": 77,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 25,
+        "M": 25,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "5739fc0cd5ce6cfd",
+      "hash": "3924cad25ea98278",
+      "timestamp": "2026-06-29T01:35:01.407690+00:00",
+      "data": {
+        "cycle": 78,
+        "eta_measured": 0.2505671418972471,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 26,
+        "M": 26,
+        "ptc": 0.37358214525688227,
+        "ptd": 0.9245037712947384,
+        "enc": 7
+      }
+    },
+    {
+      "prev_hash": "3924cad25ea98278",
+      "hash": "8bee518af9c65e6c",
+      "timestamp": "2026-06-29T01:35:01.408909+00:00",
+      "data": {
+        "cycle": 79,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 26,
+        "M": 26,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8bee518af9c65e6c",
+      "hash": "74016310222f6001",
+      "timestamp": "2026-06-29T01:35:01.410254+00:00",
+      "data": {
+        "cycle": 80,
+        "eta_measured": 0.06264178547431178,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 26,
+        "M": 26,
+        "ptc": 0.37358214525688227,
+        "ptd": 0.9245037712947384,
+        "enc": 7
+      }
+    },
+    {
+      "prev_hash": "74016310222f6001",
+      "hash": "dd26de93fc0e2578",
+      "timestamp": "2026-06-29T01:35:01.411447+00:00",
+      "data": {
+        "cycle": 81,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 26,
+        "M": 26,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "dd26de93fc0e2578",
+      "hash": "26813e35e84cd5d5",
+      "timestamp": "2026-06-29T01:35:01.412704+00:00",
+      "data": {
+        "cycle": 82,
+        "eta_measured": 0.2668329767349925,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 27,
+        "M": 27,
+        "ptc": 0.466334046530015,
+        "ptd": 0.912842609436512,
+        "enc": 8
+      }
+    },
+    {
+      "prev_hash": "26813e35e84cd5d5",
+      "hash": "cf4026fa8a1904a4",
+      "timestamp": "2026-06-29T01:35:01.413899+00:00",
+      "data": {
+        "cycle": 83,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 27,
+        "M": 27,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "cf4026fa8a1904a4",
+      "hash": "169bce3714d917ab",
+      "timestamp": "2026-06-29T01:35:01.415849+00:00",
+      "data": {
+        "cycle": 84,
+        "eta_measured": 0.106733190693997,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 27,
+        "M": 27,
+        "ptc": 0.466334046530015,
+        "ptd": 0.912842609436512,
+        "enc": 8
+      }
+    },
+    {
+      "prev_hash": "169bce3714d917ab",
+      "hash": "017c48edd8d22853",
+      "timestamp": "2026-06-29T01:35:01.417371+00:00",
+      "data": {
+        "cycle": 85,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 27,
+        "M": 27,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "017c48edd8d22853",
+      "hash": "a6aa422b652c0fde",
+      "timestamp": "2026-06-29T01:35:01.419022+00:00",
+      "data": {
+        "cycle": 86,
+        "eta_measured": 0.213466381387994,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 28,
+        "M": 28,
+        "ptc": 0.466334046530015,
+        "ptd": 0.912842609436512,
+        "enc": 8
+      }
+    },
+    {
+      "prev_hash": "a6aa422b652c0fde",
+      "hash": "d3255d75c6915f74",
+      "timestamp": "2026-06-29T01:35:01.420475+00:00",
+      "data": {
+        "cycle": 87,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 28,
+        "M": 28,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d3255d75c6915f74",
+      "hash": "2d110beb0b655b1a",
+      "timestamp": "2026-06-29T01:35:01.421952+00:00",
+      "data": {
+        "cycle": 88,
+        "eta_measured": 0.213466381387994,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 29,
+        "M": 29,
+        "ptc": 0.466334046530015,
+        "ptd": 0.912842609436512,
+        "enc": 8
+      }
+    },
+    {
+      "prev_hash": "2d110beb0b655b1a",
+      "hash": "996a5a51098b2da7",
+      "timestamp": "2026-06-29T01:35:01.423140+00:00",
+      "data": {
+        "cycle": 89,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 29,
+        "M": 29,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "996a5a51098b2da7",
+      "hash": "c016da26ec3586b4",
+      "timestamp": "2026-06-29T01:35:01.424530+00:00",
+      "data": {
+        "cycle": 90,
+        "eta_measured": 0.0533665953469985,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 29,
+        "M": 29,
+        "ptc": 0.466334046530015,
+        "ptd": 0.912842609436512,
+        "enc": 8
+      }
+    },
+    {
+      "prev_hash": "c016da26ec3586b4",
+      "hash": "d58b2af8eb88bc98",
+      "timestamp": "2026-06-29T01:35:01.425764+00:00",
+      "data": {
+        "cycle": 91,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 29,
+        "M": 29,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d58b2af8eb88bc98",
+      "hash": "58ed0a09621b7a4d",
+      "timestamp": "2026-06-29T01:35:01.427051+00:00",
+      "data": {
+        "cycle": 92,
+        "eta_measured": 0.22005596140820186,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 30,
+        "M": 30,
+        "ptc": 0.5598880771835963,
+        "ptd": 0.9012295958091696,
+        "enc": 9
+      }
+    },
+    {
+      "prev_hash": "58ed0a09621b7a4d",
+      "hash": "dc6a60317617ca4c",
+      "timestamp": "2026-06-29T01:35:01.428260+00:00",
+      "data": {
+        "cycle": 93,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 30,
+        "M": 30,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "dc6a60317617ca4c",
+      "hash": "68bbd9ee355e7f1b",
+      "timestamp": "2026-06-29T01:35:01.438808+00:00",
+      "data": {
+        "cycle": 94,
+        "eta_measured": 0.08802238456328075,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 30,
+        "M": 30,
+        "ptc": 0.5598880771835963,
+        "ptd": 0.9012295958091696,
+        "enc": 9
+      }
+    },
+    {
+      "prev_hash": "68bbd9ee355e7f1b",
+      "hash": "9229aa767713095d",
+      "timestamp": "2026-06-29T01:35:01.442731+00:00",
+      "data": {
+        "cycle": 95,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 30,
+        "M": 30,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9229aa767713095d",
+      "hash": "769197c754619296",
+      "timestamp": "2026-06-29T01:35:01.444484+00:00",
+      "data": {
+        "cycle": 96,
+        "eta_measured": 0.1760447691265615,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 31,
+        "M": 31,
+        "ptc": 0.5598880771835963,
+        "ptd": 0.9012295958091696,
+        "enc": 9
+      }
+    },
+    {
+      "prev_hash": "769197c754619296",
+      "hash": "082a0b2dc6d7b1d3",
+      "timestamp": "2026-06-29T01:35:01.448492+00:00",
+      "data": {
+        "cycle": 97,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 31,
+        "M": 31,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "082a0b2dc6d7b1d3",
+      "hash": "6f9f5fb376cb90d2",
+      "timestamp": "2026-06-29T01:35:01.450846+00:00",
+      "data": {
+        "cycle": 98,
+        "eta_measured": 0.1760447691265615,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 32,
+        "M": 32,
+        "ptc": 0.5598880771835963,
+        "ptd": 0.9012295958091696,
+        "enc": 9
+      }
+    },
+    {
+      "prev_hash": "6f9f5fb376cb90d2",
+      "hash": "3f01c510906dcddc",
+      "timestamp": "2026-06-29T01:35:01.452731+00:00",
+      "data": {
+        "cycle": 99,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 32,
+        "M": 32,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "3f01c510906dcddc",
+      "hash": "f4e6c53fbee40735",
+      "timestamp": "2026-06-29T01:35:01.454903+00:00",
+      "data": {
+        "cycle": 100,
+        "eta_measured": 0.044011192281640375,
+        "spectral_class": "K",
+        "mods": 1,
+        "paths": 32,
+        "M": 32,
+        "ptc": 0.5598880771835963,
+        "ptd": 0.9012295958091696,
+        "enc": 9
+      }
+    },
+    {
+      "prev_hash": "f4e6c53fbee40735",
+      "hash": "259563a381a6d9c5",
+      "timestamp": "2026-06-29T01:35:01.456892+00:00",
+      "data": {
+        "cycle": 101,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 32,
+        "M": 32,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "259563a381a6d9c5",
+      "hash": "31947b5c1d234c68",
+      "timestamp": "2026-06-29T01:35:01.459032+00:00",
+      "data": {
+        "cycle": 102,
+        "eta_measured": 0.17673577015888495,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 33,
+        "M": 33,
+        "ptc": 0.64652845968223,
+        "ptd": 0.890606591156467,
+        "enc": 10
+      }
+    },
+    {
+      "prev_hash": "31947b5c1d234c68",
+      "hash": "76c3ce3f4166be95",
+      "timestamp": "2026-06-29T01:35:01.461001+00:00",
+      "data": {
+        "cycle": 103,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 33,
+        "M": 33,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "76c3ce3f4166be95",
+      "hash": "ef5b67a51a0f0597",
+      "timestamp": "2026-06-29T01:35:01.462983+00:00",
+      "data": {
+        "cycle": 104,
+        "eta_measured": 0.07069430806355398,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 33,
+        "M": 33,
+        "ptc": 0.64652845968223,
+        "ptd": 0.890606591156467,
+        "enc": 10
+      }
+    },
+    {
+      "prev_hash": "ef5b67a51a0f0597",
+      "hash": "94b86ee42b0dc060",
+      "timestamp": "2026-06-29T01:35:01.464956+00:00",
+      "data": {
+        "cycle": 105,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 33,
+        "M": 33,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "94b86ee42b0dc060",
+      "hash": "e601e93b21e4941e",
+      "timestamp": "2026-06-29T01:35:01.467063+00:00",
+      "data": {
+        "cycle": 106,
+        "eta_measured": 0.14138861612710796,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 34,
+        "M": 34,
+        "ptc": 0.64652845968223,
+        "ptd": 0.890606591156467,
+        "enc": 10
+      }
+    },
+    {
+      "prev_hash": "e601e93b21e4941e",
+      "hash": "e75100f141b53bec",
+      "timestamp": "2026-06-29T01:35:01.469192+00:00",
+      "data": {
+        "cycle": 107,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 34,
+        "M": 34,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "e75100f141b53bec",
+      "hash": "5d2bdc022341ab24",
+      "timestamp": "2026-06-29T01:35:01.471315+00:00",
+      "data": {
+        "cycle": 108,
+        "eta_measured": 0.14138861612710796,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 35,
+        "M": 35,
+        "ptc": 0.64652845968223,
+        "ptd": 0.890606591156467,
+        "enc": 10
+      }
+    },
+    {
+      "prev_hash": "5d2bdc022341ab24",
+      "hash": "8ee8c09662dd67e2",
+      "timestamp": "2026-06-29T01:35:01.473925+00:00",
+      "data": {
+        "cycle": 109,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 35,
+        "M": 35,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8ee8c09662dd67e2",
+      "hash": "aa40c0d5ba72047e",
+      "timestamp": "2026-06-29T01:35:01.483771+00:00",
+      "data": {
+        "cycle": 110,
+        "eta_measured": 0.03534715403177699,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 35,
+        "M": 35,
+        "ptc": 0.64652845968223,
+        "ptd": 0.890606591156467,
+        "enc": 10
+      }
+    },
+    {
+      "prev_hash": "aa40c0d5ba72047e",
+      "hash": "3ee0a99e9439d480",
+      "timestamp": "2026-06-29T01:35:01.491031+00:00",
+      "data": {
+        "cycle": 111,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 35,
+        "M": 35,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "3ee0a99e9439d480",
+      "hash": "6dde372b9d0d8d56",
+      "timestamp": "2026-06-29T01:35:01.493464+00:00",
+      "data": {
+        "cycle": 112,
+        "eta_measured": 0.13980250665472968,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 36,
+        "M": 36,
+        "ptc": 0.7203949866905406,
+        "ptd": 0.8816487353390514,
+        "enc": 11
+      }
+    },
+    {
+      "prev_hash": "6dde372b9d0d8d56",
+      "hash": "c696a9083b9fdf29",
+      "timestamp": "2026-06-29T01:35:01.495837+00:00",
+      "data": {
+        "cycle": 113,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 36,
+        "M": 36,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c696a9083b9fdf29",
+      "hash": "7c9aee04b5e4b34f",
+      "timestamp": "2026-06-29T01:35:01.504242+00:00",
+      "data": {
+        "cycle": 114,
+        "eta_measured": 0.05592100266189187,
+        "spectral_class": "M",
+        "mods": 1,
+        "paths": 36,
+        "M": 36,
+        "ptc": 0.7203949866905406,
+        "ptd": 0.8816487353390514,
+        "enc": 11
+      }
+    },
+    {
+      "prev_hash": "7c9aee04b5e4b34f",
+      "hash": "51c9b9c33f68f845",
+      "timestamp": "2026-06-29T01:35:01.506069+00:00",
+      "data": {
+        "cycle": 115,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 36,
+        "M": 36,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "51c9b9c33f68f845",
+      "hash": "611e248dd1886afa",
+      "timestamp": "2026-06-29T01:35:01.508605+00:00",
+      "data": {
+        "cycle": 116,
+        "eta_measured": 0.11184200532378374,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 37,
+        "M": 37,
+        "ptc": 0.7203949866905406,
+        "ptd": 0.8816487353390514,
+        "enc": 11
+      }
+    },
+    {
+      "prev_hash": "611e248dd1886afa",
+      "hash": "6394dd46e2c970ec",
+      "timestamp": "2026-06-29T01:35:01.510619+00:00",
+      "data": {
+        "cycle": 117,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 37,
+        "M": 37,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "6394dd46e2c970ec",
+      "hash": "b552c4c5755155e5",
+      "timestamp": "2026-06-29T01:35:01.513545+00:00",
+      "data": {
+        "cycle": 118,
+        "eta_measured": 0.11184200532378374,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 38,
+        "M": 38,
+        "ptc": 0.7203949866905406,
+        "ptd": 0.8816487353390514,
+        "enc": 11
+      }
+    },
+    {
+      "prev_hash": "b552c4c5755155e5",
+      "hash": "580d21515d6cd999",
+      "timestamp": "2026-06-29T01:35:01.515285+00:00",
+      "data": {
+        "cycle": 119,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 38,
+        "M": 38,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "580d21515d6cd999",
+      "hash": "a0703e410ecb29c2",
+      "timestamp": "2026-06-29T01:35:01.517544+00:00",
+      "data": {
+        "cycle": 120,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 38,
+        "M": 38,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 11
+      }
+    },
+    {
+      "prev_hash": "a0703e410ecb29c2",
+      "hash": "c4e158f452af4f14",
+      "timestamp": "2026-06-29T01:35:01.519382+00:00",
+      "data": {
+        "cycle": 121,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 38,
+        "M": 38,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c4e158f452af4f14",
+      "hash": "3903831b1762db5a",
+      "timestamp": "2026-06-29T01:35:01.521030+00:00",
+      "data": {
+        "cycle": 122,
+        "eta_measured": 0.11028515831476438,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 39,
+        "M": 39,
+        "ptc": 0.7794296833704712,
+        "ptd": 0.8745543706371052,
+        "enc": 12
+      }
+    },
+    {
+      "prev_hash": "3903831b1762db5a",
+      "hash": "ccc2c05feeb2248d",
+      "timestamp": "2026-06-29T01:35:01.522528+00:00",
+      "data": {
+        "cycle": 123,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 39,
+        "M": 39,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "ccc2c05feeb2248d",
+      "hash": "bc4d129c66509432",
+      "timestamp": "2026-06-29T01:35:01.527870+00:00",
+      "data": {
+        "cycle": 124,
+        "eta_measured": 0.044114063325905756,
+        "spectral_class": "K",
+        "mods": 1,
+        "paths": 39,
+        "M": 39,
+        "ptc": 0.7794296833704712,
+        "ptd": 0.8745543706371052,
+        "enc": 12
+      }
+    },
+    {
+      "prev_hash": "bc4d129c66509432",
+      "hash": "395cc320f9e001e3",
+      "timestamp": "2026-06-29T01:35:01.531238+00:00",
+      "data": {
+        "cycle": 125,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 39,
+        "M": 39,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "395cc320f9e001e3",
+      "hash": "d532dcbe1fd8376a",
+      "timestamp": "2026-06-29T01:35:01.536400+00:00",
+      "data": {
+        "cycle": 126,
+        "eta_measured": 0.08822812665181151,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 40,
+        "M": 40,
+        "ptc": 0.7794296833704712,
+        "ptd": 0.8745543706371052,
+        "enc": 12
+      }
+    },
+    {
+      "prev_hash": "d532dcbe1fd8376a",
+      "hash": "0d6eeeb0f2441c23",
+      "timestamp": "2026-06-29T01:35:01.538491+00:00",
+      "data": {
+        "cycle": 127,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 40,
+        "M": 40,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "0d6eeeb0f2441c23",
+      "hash": "e5456ba93dfe28db",
+      "timestamp": "2026-06-29T01:35:01.540863+00:00",
+      "data": {
+        "cycle": 128,
+        "eta_measured": 0.08822812665181151,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 41,
+        "M": 41,
+        "ptc": 0.7794296833704712,
+        "ptd": 0.8745543706371052,
+        "enc": 12
+      }
+    },
+    {
+      "prev_hash": "e5456ba93dfe28db",
+      "hash": "d7441177e3cef3a9",
+      "timestamp": "2026-06-29T01:35:01.542987+00:00",
+      "data": {
+        "cycle": 129,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 41,
+        "M": 41,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d7441177e3cef3a9",
+      "hash": "a52e22407cd60ed9",
+      "timestamp": "2026-06-29T01:35:01.554155+00:00",
+      "data": {
+        "cycle": 130,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 41,
+        "M": 41,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 12
+      }
+    },
+    {
+      "prev_hash": "a52e22407cd60ed9",
+      "hash": "481877d45d1ea5a0",
+      "timestamp": "2026-06-29T01:35:01.556647+00:00",
+      "data": {
+        "cycle": 131,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 41,
+        "M": 41,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "481877d45d1ea5a0",
+      "hash": "773504ae98b9915d",
+      "timestamp": "2026-06-29T01:35:01.558964+00:00",
+      "data": {
+        "cycle": 132,
+        "eta_measured": 0.08753839776229776,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 42,
+        "M": 42,
+        "ptc": 0.8249232044754045,
+        "ptd": 0.8691262575464439,
+        "enc": 13
+      }
+    },
+    {
+      "prev_hash": "773504ae98b9915d",
+      "hash": "84697fd2047f56d1",
+      "timestamp": "2026-06-29T01:35:01.561072+00:00",
+      "data": {
+        "cycle": 133,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 42,
+        "M": 42,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "84697fd2047f56d1",
+      "hash": "b98457f4e3a42098",
+      "timestamp": "2026-06-29T01:35:01.564524+00:00",
+      "data": {
+        "cycle": 134,
+        "eta_measured": 0.035015359104919104,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 42,
+        "M": 42,
+        "ptc": 0.8249232044754045,
+        "ptd": 0.8691262575464439,
+        "enc": 13
+      }
+    },
+    {
+      "prev_hash": "b98457f4e3a42098",
+      "hash": "afc59736201979a5",
+      "timestamp": "2026-06-29T01:35:01.568302+00:00",
+      "data": {
+        "cycle": 135,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 42,
+        "M": 42,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "afc59736201979a5",
+      "hash": "4c868a49d8c86feb",
+      "timestamp": "2026-06-29T01:35:01.571270+00:00",
+      "data": {
+        "cycle": 136,
+        "eta_measured": 0.07003071820983821,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 43,
+        "M": 43,
+        "ptc": 0.8249232044754045,
+        "ptd": 0.8691262575464439,
+        "enc": 13
+      }
+    },
+    {
+      "prev_hash": "4c868a49d8c86feb",
+      "hash": "51c4cb9a9057d3d6",
+      "timestamp": "2026-06-29T01:35:01.573922+00:00",
+      "data": {
+        "cycle": 137,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 43,
+        "M": 43,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "51c4cb9a9057d3d6",
+      "hash": "f8270ab0ad307467",
+      "timestamp": "2026-06-29T01:35:01.575837+00:00",
+      "data": {
+        "cycle": 138,
+        "eta_measured": 0.07003071820983821,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 44,
+        "M": 44,
+        "ptc": 0.8249232044754045,
+        "ptd": 0.8691262575464439,
+        "enc": 13
+      }
+    },
+    {
+      "prev_hash": "f8270ab0ad307467",
+      "hash": "705fe5d89164339f",
+      "timestamp": "2026-06-29T01:35:01.578350+00:00",
+      "data": {
+        "cycle": 139,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 44,
+        "M": 44,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "705fe5d89164339f",
+      "hash": "50f714547b9a3738",
+      "timestamp": "2026-06-29T01:35:01.581294+00:00",
+      "data": {
+        "cycle": 140,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 44,
+        "M": 44,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 13
+      }
+    },
+    {
+      "prev_hash": "50f714547b9a3738",
+      "hash": "7810e8a9f899fc8c",
+      "timestamp": "2026-06-29T01:35:01.584507+00:00",
+      "data": {
+        "cycle": 141,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 44,
+        "M": 44,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "7810e8a9f899fc8c",
+      "hash": "0c6ea762eb50ad5b",
+      "timestamp": "2026-06-29T01:35:01.587962+00:00",
+      "data": {
+        "cycle": 142,
+        "eta_measured": 0.0701665616149357,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 45,
+        "M": 45,
+        "ptc": 0.8596668767701285,
+        "ptd": 0.8650034763885018,
+        "enc": 14
+      }
+    },
+    {
+      "prev_hash": "0c6ea762eb50ad5b",
+      "hash": "977dae6cad26bd9e",
+      "timestamp": "2026-06-29T01:35:01.590351+00:00",
+      "data": {
+        "cycle": 143,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 45,
+        "M": 45,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "977dae6cad26bd9e",
+      "hash": "59d7d64236883d2c",
+      "timestamp": "2026-06-29T01:35:01.592574+00:00",
+      "data": {
+        "cycle": 144,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 45,
+        "M": 45,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 14
+      }
+    },
+    {
+      "prev_hash": "59d7d64236883d2c",
+      "hash": "c1557ab2dcb3c057",
+      "timestamp": "2026-06-29T01:35:01.595539+00:00",
+      "data": {
+        "cycle": 145,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 45,
+        "M": 45,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c1557ab2dcb3c057",
+      "hash": "9051b39bc635fe39",
+      "timestamp": "2026-06-29T01:35:01.598314+00:00",
+      "data": {
+        "cycle": 146,
+        "eta_measured": 0.056133249291948566,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 46,
+        "M": 46,
+        "ptc": 0.8596668767701285,
+        "ptd": 0.8650034763885018,
+        "enc": 14
+      }
+    },
+    {
+      "prev_hash": "9051b39bc635fe39",
+      "hash": "194794891c3ce197",
+      "timestamp": "2026-06-29T01:35:01.609493+00:00",
+      "data": {
+        "cycle": 147,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 46,
+        "M": 46,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "194794891c3ce197",
+      "hash": "bda0458b36fe3119",
+      "timestamp": "2026-06-29T01:35:01.612400+00:00",
+      "data": {
+        "cycle": 148,
+        "eta_measured": 0.056133249291948566,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 47,
+        "M": 47,
+        "ptc": 0.8596668767701285,
+        "ptd": 0.8650034763885018,
+        "enc": 14
+      }
+    },
+    {
+      "prev_hash": "bda0458b36fe3119",
+      "hash": "da9cd1550826189f",
+      "timestamp": "2026-06-29T01:35:01.615262+00:00",
+      "data": {
+        "cycle": 149,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 47,
+        "M": 47,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "da9cd1550826189f",
+      "hash": "6dd290016910658d",
+      "timestamp": "2026-06-29T01:35:01.618331+00:00",
+      "data": {
+        "cycle": 150,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 47,
+        "M": 47,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 14
+      }
+    },
+    {
+      "prev_hash": "6dd290016910658d",
+      "hash": "9423a9d2ae185a6e",
+      "timestamp": "2026-06-29T01:35:01.622299+00:00",
+      "data": {
+        "cycle": 151,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 47,
+        "M": 47,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9423a9d2ae185a6e",
+      "hash": "d0b9373c6aba3386",
+      "timestamp": "2026-06-29T01:35:01.628723+00:00",
+      "data": {
+        "cycle": 152,
+        "eta_measured": 0.05678554487724702,
+        "spectral_class": "M",
+        "mods": 3,
+        "paths": 48,
+        "M": 48,
+        "ptc": 0.886428910245506,
+        "ptd": 0.8618411573308215,
+        "enc": 15
+      }
+    },
+    {
+      "prev_hash": "d0b9373c6aba3386",
+      "hash": "8438b9e0e2ddb5ae",
+      "timestamp": "2026-06-29T01:35:01.637625+00:00",
+      "data": {
+        "cycle": 153,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 48,
+        "M": 48,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8438b9e0e2ddb5ae",
+      "hash": "7ca6d5b06d12c99d",
+      "timestamp": "2026-06-29T01:35:01.640845+00:00",
+      "data": {
+        "cycle": 154,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 48,
+        "M": 48,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 15
+      }
+    },
+    {
+      "prev_hash": "7ca6d5b06d12c99d",
+      "hash": "20c858784df1afaf",
+      "timestamp": "2026-06-29T01:35:01.643197+00:00",
+      "data": {
+        "cycle": 155,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 48,
+        "M": 48,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "20c858784df1afaf",
+      "hash": "2c0fa54abef04beb",
+      "timestamp": "2026-06-29T01:35:01.646308+00:00",
+      "data": {
+        "cycle": 156,
+        "eta_measured": 0.04542843590179762,
+        "spectral_class": "K",
+        "mods": 3,
+        "paths": 49,
+        "M": 49,
+        "ptc": 0.886428910245506,
+        "ptd": 0.8618411573308215,
+        "enc": 15
+      }
+    },
+    {
+      "prev_hash": "2c0fa54abef04beb",
+      "hash": "8a017a9262358007",
+      "timestamp": "2026-06-29T01:35:01.649441+00:00",
+      "data": {
+        "cycle": 157,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 49,
+        "M": 49,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8a017a9262358007",
+      "hash": "02f06d45c5706221",
+      "timestamp": "2026-06-29T01:35:01.654476+00:00",
+      "data": {
+        "cycle": 158,
+        "eta_measured": 0.04542843590179762,
+        "spectral_class": "K",
+        "mods": 3,
+        "paths": 50,
+        "M": 50,
+        "ptc": 0.886428910245506,
+        "ptd": 0.8618411573308215,
+        "enc": 15
+      }
+    },
+    {
+      "prev_hash": "02f06d45c5706221",
+      "hash": "6595736092401205",
+      "timestamp": "2026-06-29T01:35:01.656616+00:00",
+      "data": {
+        "cycle": 159,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 50,
+        "M": 50,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "6595736092401205",
+      "hash": "54d4e2221bd66644",
+      "timestamp": "2026-06-29T01:35:01.659099+00:00",
+      "data": {
+        "cycle": 160,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 50,
+        "M": 50,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 15
+      }
+    },
+    {
+      "prev_hash": "54d4e2221bd66644",
+      "hash": "cd37c746aa9a3248",
+      "timestamp": "2026-06-29T01:35:01.661525+00:00",
+      "data": {
+        "cycle": 161,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 50,
+        "M": 50,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "cd37c746aa9a3248",
+      "hash": "7f8e4b004c4272c3",
+      "timestamp": "2026-06-29T01:35:01.664786+00:00",
+      "data": {
+        "cycle": 162,
+        "eta_measured": 0.04632396074103351,
+        "spectral_class": "K",
+        "mods": 3,
+        "paths": 51,
+        "M": 51,
+        "ptc": 0.907352078517933,
+        "ptd": 0.8593768388999832,
+        "enc": 16
+      }
+    },
+    {
+      "prev_hash": "7f8e4b004c4272c3",
+      "hash": "62dbdd40546bd760",
+      "timestamp": "2026-06-29T01:35:01.668828+00:00",
+      "data": {
+        "cycle": 163,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 51,
+        "M": 51,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "62dbdd40546bd760",
+      "hash": "b86f3c6ff8e48f5a",
+      "timestamp": "2026-06-29T01:35:01.674588+00:00",
+      "data": {
+        "cycle": 164,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 51,
+        "M": 51,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 16
+      }
+    },
+    {
+      "prev_hash": "b86f3c6ff8e48f5a",
+      "hash": "6021cfd6e91b1b8c",
+      "timestamp": "2026-06-29T01:35:01.678279+00:00",
+      "data": {
+        "cycle": 165,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 51,
+        "M": 51,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "6021cfd6e91b1b8c",
+      "hash": "ee0e85a4ac084028",
+      "timestamp": "2026-06-29T01:35:01.681334+00:00",
+      "data": {
+        "cycle": 166,
+        "eta_measured": 0.03705916859282681,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 52,
+        "M": 52,
+        "ptc": 0.907352078517933,
+        "ptd": 0.8593768388999832,
+        "enc": 16
+      }
+    },
+    {
+      "prev_hash": "ee0e85a4ac084028",
+      "hash": "6034b3c0d43b5304",
+      "timestamp": "2026-06-29T01:35:01.683706+00:00",
+      "data": {
+        "cycle": 167,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 52,
+        "M": 52,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "6034b3c0d43b5304",
+      "hash": "fcef457f42ee1091",
+      "timestamp": "2026-06-29T01:35:01.694214+00:00",
+      "data": {
+        "cycle": 168,
+        "eta_measured": 0.03705916859282681,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 53,
+        "M": 53,
+        "ptc": 0.907352078517933,
+        "ptd": 0.8593768388999832,
+        "enc": 16
+      }
+    },
+    {
+      "prev_hash": "fcef457f42ee1091",
+      "hash": "0d6e319d91b9879c",
+      "timestamp": "2026-06-29T01:35:01.697767+00:00",
+      "data": {
+        "cycle": 169,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 53,
+        "M": 53,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "0d6e319d91b9879c",
+      "hash": "10f6ee143a9cddf3",
+      "timestamp": "2026-06-29T01:35:01.700900+00:00",
+      "data": {
+        "cycle": 170,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 53,
+        "M": 53,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 16
+      }
+    },
+    {
+      "prev_hash": "10f6ee143a9cddf3",
+      "hash": "9490360c8453958d",
+      "timestamp": "2026-06-29T01:35:01.703943+00:00",
+      "data": {
+        "cycle": 171,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 53,
+        "M": 53,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9490360c8453958d",
+      "hash": "b3b2e1a32c225d90",
+      "timestamp": "2026-06-29T01:35:01.709246+00:00",
+      "data": {
+        "cycle": 172,
+        "eta_measured": 0.03802699137806777,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 54,
+        "M": 54,
+        "ptc": 0.9239460172438645,
+        "ptd": 0.8574274258242398,
+        "enc": 17
+      }
+    },
+    {
+      "prev_hash": "b3b2e1a32c225d90",
+      "hash": "77c691ba7b338faa",
+      "timestamp": "2026-06-29T01:35:01.712497+00:00",
+      "data": {
+        "cycle": 173,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 54,
+        "M": 54,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "77c691ba7b338faa",
+      "hash": "10ac21b91efaca50",
+      "timestamp": "2026-06-29T01:35:01.715396+00:00",
+      "data": {
+        "cycle": 174,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 54,
+        "M": 54,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 17
+      }
+    },
+    {
+      "prev_hash": "10ac21b91efaca50",
+      "hash": "df073c903ee0a80f",
+      "timestamp": "2026-06-29T01:35:01.718671+00:00",
+      "data": {
+        "cycle": 175,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 54,
+        "M": 54,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "df073c903ee0a80f",
+      "hash": "292cdb64fff0c834",
+      "timestamp": "2026-06-29T01:35:01.730587+00:00",
+      "data": {
+        "cycle": 176,
+        "eta_measured": 0.030421593102454215,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 55,
+        "M": 55,
+        "ptc": 0.9239460172438645,
+        "ptd": 0.8574274258242398,
+        "enc": 17
+      }
+    },
+    {
+      "prev_hash": "292cdb64fff0c834",
+      "hash": "34c25dbaab27529c",
+      "timestamp": "2026-06-29T01:35:01.735835+00:00",
+      "data": {
+        "cycle": 177,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 55,
+        "M": 55,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "34c25dbaab27529c",
+      "hash": "3f44508f036ac338",
+      "timestamp": "2026-06-29T01:35:01.743919+00:00",
+      "data": {
+        "cycle": 178,
+        "eta_measured": 0.030421593102454215,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 56,
+        "M": 56,
+        "ptc": 0.9239460172438645,
+        "ptd": 0.8574274258242398,
+        "enc": 17
+      }
+    },
+    {
+      "prev_hash": "3f44508f036ac338",
+      "hash": "ff9b83d92ba91efc",
+      "timestamp": "2026-06-29T01:35:01.750453+00:00",
+      "data": {
+        "cycle": 179,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 56,
+        "M": 56,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "ff9b83d92ba91efc",
+      "hash": "765c9857d403f6bf",
+      "timestamp": "2026-06-29T01:35:01.754255+00:00",
+      "data": {
+        "cycle": 180,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 56,
+        "M": 56,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 17
+      }
+    },
+    {
+      "prev_hash": "765c9857d403f6bf",
+      "hash": "f71817c164d95566",
+      "timestamp": "2026-06-29T01:35:01.758062+00:00",
+      "data": {
+        "cycle": 181,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 56,
+        "M": 56,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "f71817c164d95566",
+      "hash": "24995f9fd91dd213",
+      "timestamp": "2026-06-29T01:35:01.770890+00:00",
+      "data": {
+        "cycle": 182,
+        "eta_measured": 0.03137058944346635,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 57,
+        "M": 57,
+        "ptc": 0.9372588211130672,
+        "ptd": 0.8558666694127229,
+        "enc": 18
+      }
+    },
+    {
+      "prev_hash": "24995f9fd91dd213",
+      "hash": "f111157922d85afc",
+      "timestamp": "2026-06-29T01:35:01.783177+00:00",
+      "data": {
+        "cycle": 183,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 57,
+        "M": 57,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "f111157922d85afc",
+      "hash": "1765f38ac15b8a84",
+      "timestamp": "2026-06-29T01:35:01.786806+00:00",
+      "data": {
+        "cycle": 184,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 57,
+        "M": 57,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 18
+      }
+    },
+    {
+      "prev_hash": "1765f38ac15b8a84",
+      "hash": "f7ee7401f3f32c29",
+      "timestamp": "2026-06-29T01:35:01.791093+00:00",
+      "data": {
+        "cycle": 185,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 57,
+        "M": 57,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "f7ee7401f3f32c29",
+      "hash": "96d5527cccb04a15",
+      "timestamp": "2026-06-29T01:35:01.799378+00:00",
+      "data": {
+        "cycle": 186,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 58,
+        "M": 58,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 18
+      }
+    },
+    {
+      "prev_hash": "96d5527cccb04a15",
+      "hash": "9030ca4435780d33",
+      "timestamp": "2026-06-29T01:35:01.802858+00:00",
+      "data": {
+        "cycle": 187,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 58,
+        "M": 58,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9030ca4435780d33",
+      "hash": "668dbeaebc0d2635",
+      "timestamp": "2026-06-29T01:35:01.811171+00:00",
+      "data": {
+        "cycle": 188,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 59,
+        "M": 59,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 18
+      }
+    },
+    {
+      "prev_hash": "668dbeaebc0d2635",
+      "hash": "63df48beeabc3688",
+      "timestamp": "2026-06-29T01:35:01.814501+00:00",
+      "data": {
+        "cycle": 189,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 59,
+        "M": 59,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "63df48beeabc3688",
+      "hash": "0a839fc0e9ca0c09",
+      "timestamp": "2026-06-29T01:35:01.817324+00:00",
+      "data": {
+        "cycle": 190,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 59,
+        "M": 59,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 18
+      }
+    },
+    {
+      "prev_hash": "0a839fc0e9ca0c09",
+      "hash": "5319ba8c3c9186c9",
+      "timestamp": "2026-06-29T01:35:01.822428+00:00",
+      "data": {
+        "cycle": 191,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 59,
+        "M": 59,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "5319ba8c3c9186c9",
+      "hash": "49bb05c78a3c2337",
+      "timestamp": "2026-06-29T01:35:01.826235+00:00",
+      "data": {
+        "cycle": 192,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 60,
+        "M": 60,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 19
+      }
+    },
+    {
+      "prev_hash": "49bb05c78a3c2337",
+      "hash": "bddb822f437b69f0",
+      "timestamp": "2026-06-29T01:35:01.832286+00:00",
+      "data": {
+        "cycle": 193,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 60,
+        "M": 60,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "bddb822f437b69f0",
+      "hash": "ad07f7cbd81e82e0",
+      "timestamp": "2026-06-29T01:35:01.850799+00:00",
+      "data": {
+        "cycle": 194,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 60,
+        "M": 60,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 19
+      }
+    },
+    {
+      "prev_hash": "ad07f7cbd81e82e0",
+      "hash": "f14373e0a49a04c8",
+      "timestamp": "2026-06-29T01:35:01.859618+00:00",
+      "data": {
+        "cycle": 195,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 60,
+        "M": 60,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "f14373e0a49a04c8",
+      "hash": "2874573e83ad81b1",
+      "timestamp": "2026-06-29T01:35:01.866462+00:00",
+      "data": {
+        "cycle": 196,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 61,
+        "M": 61,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 19
+      }
+    },
+    {
+      "prev_hash": "2874573e83ad81b1",
+      "hash": "a59a467b8ec5feae",
+      "timestamp": "2026-06-29T01:35:01.874040+00:00",
+      "data": {
+        "cycle": 197,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 61,
+        "M": 61,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "a59a467b8ec5feae",
+      "hash": "0750637ccdd087d6",
+      "timestamp": "2026-06-29T01:35:01.893624+00:00",
+      "data": {
+        "cycle": 198,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 62,
+        "M": 62,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 19
+      }
+    },
+    {
+      "prev_hash": "0750637ccdd087d6",
+      "hash": "de1b0ef6735bfafa",
+      "timestamp": "2026-06-29T01:35:01.898756+00:00",
+      "data": {
+        "cycle": 199,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 62,
+        "M": 62,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "de1b0ef6735bfafa",
+      "hash": "590726c96a003008",
+      "timestamp": "2026-06-29T01:35:01.902954+00:00",
+      "data": {
+        "cycle": 200,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 62,
+        "M": 62,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 19
+      }
+    },
+    {
+      "prev_hash": "590726c96a003008",
+      "hash": "ec0b7d70fcb6eb15",
+      "timestamp": "2026-06-29T01:35:01.906499+00:00",
+      "data": {
+        "cycle": 201,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 62,
+        "M": 62,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "ec0b7d70fcb6eb15",
+      "hash": "4b6c07f9a7f0347e",
+      "timestamp": "2026-06-29T01:35:01.923942+00:00",
+      "data": {
+        "cycle": 202,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 63,
+        "M": 63,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 20
+      }
+    },
+    {
+      "prev_hash": "4b6c07f9a7f0347e",
+      "hash": "14e4a7d0c0a37f41",
+      "timestamp": "2026-06-29T01:35:01.942197+00:00",
+      "data": {
+        "cycle": 203,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 63,
+        "M": 63,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "14e4a7d0c0a37f41",
+      "hash": "d18f19c33681ee26",
+      "timestamp": "2026-06-29T01:35:01.949641+00:00",
+      "data": {
+        "cycle": 204,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 63,
+        "M": 63,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 20
+      }
+    },
+    {
+      "prev_hash": "d18f19c33681ee26",
+      "hash": "7f63bcd632a2c776",
+      "timestamp": "2026-06-29T01:35:01.953573+00:00",
+      "data": {
+        "cycle": 205,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 63,
+        "M": 63,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "7f63bcd632a2c776",
+      "hash": "d61d0791587ba878",
+      "timestamp": "2026-06-29T01:35:01.959376+00:00",
+      "data": {
+        "cycle": 206,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 64,
+        "M": 64,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 20
+      }
+    },
+    {
+      "prev_hash": "d61d0791587ba878",
+      "hash": "d006c5a4be469e8a",
+      "timestamp": "2026-06-29T01:35:01.965210+00:00",
+      "data": {
+        "cycle": 207,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 64,
+        "M": 64,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d006c5a4be469e8a",
+      "hash": "51e475ec1480996e",
+      "timestamp": "2026-06-29T01:35:01.970779+00:00",
+      "data": {
+        "cycle": 208,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 65,
+        "M": 65,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 20
+      }
+    },
+    {
+      "prev_hash": "51e475ec1480996e",
+      "hash": "4009a3cf2fcc3fa5",
+      "timestamp": "2026-06-29T01:35:01.975826+00:00",
+      "data": {
+        "cycle": 209,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 65,
+        "M": 65,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "4009a3cf2fcc3fa5",
+      "hash": "529c193eef763c64",
+      "timestamp": "2026-06-29T01:35:01.981439+00:00",
+      "data": {
+        "cycle": 210,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 65,
+        "M": 65,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 20
+      }
+    },
+    {
+      "prev_hash": "529c193eef763c64",
+      "hash": "dc9ace8e759f4ad5",
+      "timestamp": "2026-06-29T01:35:01.984476+00:00",
+      "data": {
+        "cycle": 211,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 65,
+        "M": 65,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "dc9ace8e759f4ad5",
+      "hash": "72cd680728afd1cb",
+      "timestamp": "2026-06-29T01:35:01.988644+00:00",
+      "data": {
+        "cycle": 212,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 66,
+        "M": 66,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 21
+      }
+    },
+    {
+      "prev_hash": "72cd680728afd1cb",
+      "hash": "174635720a4fc85b",
+      "timestamp": "2026-06-29T01:35:01.995589+00:00",
+      "data": {
+        "cycle": 213,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 66,
+        "M": 66,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "174635720a4fc85b",
+      "hash": "e11d267e0a22b451",
+      "timestamp": "2026-06-29T01:35:01.998858+00:00",
+      "data": {
+        "cycle": 214,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 66,
+        "M": 66,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 21
+      }
+    },
+    {
+      "prev_hash": "e11d267e0a22b451",
+      "hash": "c037d80727e97d9b",
+      "timestamp": "2026-06-29T01:35:02.007881+00:00",
+      "data": {
+        "cycle": 215,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 66,
+        "M": 66,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c037d80727e97d9b",
+      "hash": "8de48a9c2e6010f2",
+      "timestamp": "2026-06-29T01:35:02.013357+00:00",
+      "data": {
+        "cycle": 216,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 67,
+        "M": 67,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 21
+      }
+    },
+    {
+      "prev_hash": "8de48a9c2e6010f2",
+      "hash": "8972702b8e36b437",
+      "timestamp": "2026-06-29T01:35:02.017525+00:00",
+      "data": {
+        "cycle": 217,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 67,
+        "M": 67,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8972702b8e36b437",
+      "hash": "361e610e15d8eabf",
+      "timestamp": "2026-06-29T01:35:02.022339+00:00",
+      "data": {
+        "cycle": 218,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 68,
+        "M": 68,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 21
+      }
+    },
+    {
+      "prev_hash": "361e610e15d8eabf",
+      "hash": "48bb33a5e16d035c",
+      "timestamp": "2026-06-29T01:35:02.026868+00:00",
+      "data": {
+        "cycle": 219,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 68,
+        "M": 68,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "48bb33a5e16d035c",
+      "hash": "4a1d954dc6a10446",
+      "timestamp": "2026-06-29T01:35:02.031280+00:00",
+      "data": {
+        "cycle": 220,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 68,
+        "M": 68,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 21
+      }
+    },
+    {
+      "prev_hash": "4a1d954dc6a10446",
+      "hash": "66df1883724af1b3",
+      "timestamp": "2026-06-29T01:35:02.042233+00:00",
+      "data": {
+        "cycle": 221,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 68,
+        "M": 68,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "66df1883724af1b3",
+      "hash": "5d34923d46cf80d9",
+      "timestamp": "2026-06-29T01:35:02.051491+00:00",
+      "data": {
+        "cycle": 222,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 69,
+        "M": 69,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 22
+      }
+    },
+    {
+      "prev_hash": "5d34923d46cf80d9",
+      "hash": "fb2ebae931488747",
+      "timestamp": "2026-06-29T01:35:02.055101+00:00",
+      "data": {
+        "cycle": 223,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 69,
+        "M": 69,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "fb2ebae931488747",
+      "hash": "4697b0c4255a98cb",
+      "timestamp": "2026-06-29T01:35:02.059628+00:00",
+      "data": {
+        "cycle": 224,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 69,
+        "M": 69,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 22
+      }
+    },
+    {
+      "prev_hash": "4697b0c4255a98cb",
+      "hash": "6465a0513b263ff9",
+      "timestamp": "2026-06-29T01:35:02.064127+00:00",
+      "data": {
+        "cycle": 225,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 69,
+        "M": 69,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "6465a0513b263ff9",
+      "hash": "71632b70e32bcb2e",
+      "timestamp": "2026-06-29T01:35:02.069839+00:00",
+      "data": {
+        "cycle": 226,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 70,
+        "M": 70,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 22
+      }
+    },
+    {
+      "prev_hash": "71632b70e32bcb2e",
+      "hash": "4b9dd902e7f967f4",
+      "timestamp": "2026-06-29T01:35:02.074452+00:00",
+      "data": {
+        "cycle": 227,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 70,
+        "M": 70,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "4b9dd902e7f967f4",
+      "hash": "b257344f8087648a",
+      "timestamp": "2026-06-29T01:35:02.080748+00:00",
+      "data": {
+        "cycle": 228,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 71,
+        "M": 71,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 22
+      }
+    },
+    {
+      "prev_hash": "b257344f8087648a",
+      "hash": "1426957209175f6c",
+      "timestamp": "2026-06-29T01:35:02.085289+00:00",
+      "data": {
+        "cycle": 229,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 71,
+        "M": 71,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "1426957209175f6c",
+      "hash": "7c27005125ded24b",
+      "timestamp": "2026-06-29T01:35:02.094125+00:00",
+      "data": {
+        "cycle": 230,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 71,
+        "M": 71,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 22
+      }
+    },
+    {
+      "prev_hash": "7c27005125ded24b",
+      "hash": "9a8fe216cf9b36cb",
+      "timestamp": "2026-06-29T01:35:02.097919+00:00",
+      "data": {
+        "cycle": 231,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 71,
+        "M": 71,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9a8fe216cf9b36cb",
+      "hash": "4ff8e3054f060b02",
+      "timestamp": "2026-06-29T01:35:02.106988+00:00",
+      "data": {
+        "cycle": 232,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 72,
+        "M": 72,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 23
+      }
+    },
+    {
+      "prev_hash": "4ff8e3054f060b02",
+      "hash": "b72b0c6c99dfdbf1",
+      "timestamp": "2026-06-29T01:35:02.113212+00:00",
+      "data": {
+        "cycle": 233,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 72,
+        "M": 72,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b72b0c6c99dfdbf1",
+      "hash": "1d62d90b9735208b",
+      "timestamp": "2026-06-29T01:35:02.118127+00:00",
+      "data": {
+        "cycle": 234,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 72,
+        "M": 72,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 23
+      }
+    },
+    {
+      "prev_hash": "1d62d90b9735208b",
+      "hash": "3c2dc2814564e54f",
+      "timestamp": "2026-06-29T01:35:02.128797+00:00",
+      "data": {
+        "cycle": 235,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 72,
+        "M": 72,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "3c2dc2814564e54f",
+      "hash": "29f39ceea5089191",
+      "timestamp": "2026-06-29T01:35:02.133365+00:00",
+      "data": {
+        "cycle": 236,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 73,
+        "M": 73,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 23
+      }
+    },
+    {
+      "prev_hash": "29f39ceea5089191",
+      "hash": "c81a033e0a6f2e59",
+      "timestamp": "2026-06-29T01:35:02.137536+00:00",
+      "data": {
+        "cycle": 237,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 73,
+        "M": 73,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c81a033e0a6f2e59",
+      "hash": "68c530bb8e7fc0a3",
+      "timestamp": "2026-06-29T01:35:02.142276+00:00",
+      "data": {
+        "cycle": 238,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 74,
+        "M": 74,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 23
+      }
+    },
+    {
+      "prev_hash": "68c530bb8e7fc0a3",
+      "hash": "9ef51cad305bb018",
+      "timestamp": "2026-06-29T01:35:02.146517+00:00",
+      "data": {
+        "cycle": 239,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 74,
+        "M": 74,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9ef51cad305bb018",
+      "hash": "993b13200b90b540",
+      "timestamp": "2026-06-29T01:35:02.150714+00:00",
+      "data": {
+        "cycle": 240,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 74,
+        "M": 74,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 23
+      }
+    },
+    {
+      "prev_hash": "993b13200b90b540",
+      "hash": "948102123bf53297",
+      "timestamp": "2026-06-29T01:35:02.153788+00:00",
+      "data": {
+        "cycle": 241,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 74,
+        "M": 74,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "948102123bf53297",
+      "hash": "52e245430748dacc",
+      "timestamp": "2026-06-29T01:35:02.157301+00:00",
+      "data": {
+        "cycle": 242,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 75,
+        "M": 75,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 24
+      }
+    },
+    {
+      "prev_hash": "52e245430748dacc",
+      "hash": "e40e0cb1bc81e063",
+      "timestamp": "2026-06-29T01:35:02.160957+00:00",
+      "data": {
+        "cycle": 243,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 75,
+        "M": 75,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "e40e0cb1bc81e063",
+      "hash": "b5f2701d3e2bc1f9",
+      "timestamp": "2026-06-29T01:35:02.164866+00:00",
+      "data": {
+        "cycle": 244,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 75,
+        "M": 75,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 24
+      }
+    },
+    {
+      "prev_hash": "b5f2701d3e2bc1f9",
+      "hash": "2339ea6902c43a7e",
+      "timestamp": "2026-06-29T01:35:02.168592+00:00",
+      "data": {
+        "cycle": 245,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 75,
+        "M": 75,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "2339ea6902c43a7e",
+      "hash": "03cc49c30bc5ac70",
+      "timestamp": "2026-06-29T01:35:02.171961+00:00",
+      "data": {
+        "cycle": 246,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 76,
+        "M": 76,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 24
+      }
+    },
+    {
+      "prev_hash": "03cc49c30bc5ac70",
+      "hash": "2314a282b2665824",
+      "timestamp": "2026-06-29T01:35:02.175047+00:00",
+      "data": {
+        "cycle": 247,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 76,
+        "M": 76,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "2314a282b2665824",
+      "hash": "966d8d2606b45ace",
+      "timestamp": "2026-06-29T01:35:02.179746+00:00",
+      "data": {
+        "cycle": 248,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 77,
+        "M": 77,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 24
+      }
+    },
+    {
+      "prev_hash": "966d8d2606b45ace",
+      "hash": "80fc505d8cc50187",
+      "timestamp": "2026-06-29T01:35:02.186995+00:00",
+      "data": {
+        "cycle": 249,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 77,
+        "M": 77,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "80fc505d8cc50187",
+      "hash": "b7043968d8ce6c02",
+      "timestamp": "2026-06-29T01:35:02.191539+00:00",
+      "data": {
+        "cycle": 250,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 77,
+        "M": 77,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 24
+      }
+    },
+    {
+      "prev_hash": "b7043968d8ce6c02",
+      "hash": "2790e3cdcb778794",
+      "timestamp": "2026-06-29T01:35:02.194801+00:00",
+      "data": {
+        "cycle": 251,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 77,
+        "M": 77,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "2790e3cdcb778794",
+      "hash": "a6f2ccf5f8d1fc40",
+      "timestamp": "2026-06-29T01:35:02.198399+00:00",
+      "data": {
+        "cycle": 252,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 78,
+        "M": 78,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 25
+      }
+    },
+    {
+      "prev_hash": "a6f2ccf5f8d1fc40",
+      "hash": "323a84da510207f5",
+      "timestamp": "2026-06-29T01:35:02.201834+00:00",
+      "data": {
+        "cycle": 253,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 78,
+        "M": 78,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "323a84da510207f5",
+      "hash": "b3e57d9b7ae426fe",
+      "timestamp": "2026-06-29T01:35:02.207038+00:00",
+      "data": {
+        "cycle": 254,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 78,
+        "M": 78,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 25
+      }
+    },
+    {
+      "prev_hash": "b3e57d9b7ae426fe",
+      "hash": "b78943d480ba8325",
+      "timestamp": "2026-06-29T01:35:02.210938+00:00",
+      "data": {
+        "cycle": 255,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 78,
+        "M": 78,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b78943d480ba8325",
+      "hash": "3c22717b58439c5b",
+      "timestamp": "2026-06-29T01:35:02.215107+00:00",
+      "data": {
+        "cycle": 256,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 79,
+        "M": 79,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 25
+      }
+    },
+    {
+      "prev_hash": "3c22717b58439c5b",
+      "hash": "20850f67653cae10",
+      "timestamp": "2026-06-29T01:35:02.219389+00:00",
+      "data": {
+        "cycle": 257,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 79,
+        "M": 79,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "20850f67653cae10",
+      "hash": "c8cd0716dba2f92d",
+      "timestamp": "2026-06-29T01:35:02.229498+00:00",
+      "data": {
+        "cycle": 258,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 80,
+        "M": 80,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 25
+      }
+    },
+    {
+      "prev_hash": "c8cd0716dba2f92d",
+      "hash": "380ae208adf4ddc5",
+      "timestamp": "2026-06-29T01:35:02.241404+00:00",
+      "data": {
+        "cycle": 259,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 80,
+        "M": 80,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "380ae208adf4ddc5",
+      "hash": "2901d3dcf8c3c13b",
+      "timestamp": "2026-06-29T01:35:02.249464+00:00",
+      "data": {
+        "cycle": 260,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 80,
+        "M": 80,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 25
+      }
+    },
+    {
+      "prev_hash": "2901d3dcf8c3c13b",
+      "hash": "d30b6cb7f59cc23f",
+      "timestamp": "2026-06-29T01:35:02.254783+00:00",
+      "data": {
+        "cycle": 261,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 80,
+        "M": 80,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d30b6cb7f59cc23f",
+      "hash": "36b4cab4f69e00a4",
+      "timestamp": "2026-06-29T01:35:02.259318+00:00",
+      "data": {
+        "cycle": 262,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 81,
+        "M": 81,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 26
+      }
+    },
+    {
+      "prev_hash": "36b4cab4f69e00a4",
+      "hash": "82c5f6335793fe82",
+      "timestamp": "2026-06-29T01:35:02.263839+00:00",
+      "data": {
+        "cycle": 263,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 81,
+        "M": 81,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "82c5f6335793fe82",
+      "hash": "fdaa46a209236ceb",
+      "timestamp": "2026-06-29T01:35:02.268792+00:00",
+      "data": {
+        "cycle": 264,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 81,
+        "M": 81,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 26
+      }
+    },
+    {
+      "prev_hash": "fdaa46a209236ceb",
+      "hash": "997135fe4796a236",
+      "timestamp": "2026-06-29T01:35:02.273251+00:00",
+      "data": {
+        "cycle": 265,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 81,
+        "M": 81,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "997135fe4796a236",
+      "hash": "bfbc722a66c15b8c",
+      "timestamp": "2026-06-29T01:35:02.281187+00:00",
+      "data": {
+        "cycle": 266,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 82,
+        "M": 82,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 26
+      }
+    },
+    {
+      "prev_hash": "bfbc722a66c15b8c",
+      "hash": "3de22cb647f22033",
+      "timestamp": "2026-06-29T01:35:02.285855+00:00",
+      "data": {
+        "cycle": 267,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 82,
+        "M": 82,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "3de22cb647f22033",
+      "hash": "14ef7cd286e6bd4d",
+      "timestamp": "2026-06-29T01:35:02.289640+00:00",
+      "data": {
+        "cycle": 268,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 83,
+        "M": 83,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 26
+      }
+    },
+    {
+      "prev_hash": "14ef7cd286e6bd4d",
+      "hash": "3b4a0a180d02dcdb",
+      "timestamp": "2026-06-29T01:35:02.293859+00:00",
+      "data": {
+        "cycle": 269,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 83,
+        "M": 83,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "3b4a0a180d02dcdb",
+      "hash": "3faee460f27c88ea",
+      "timestamp": "2026-06-29T01:35:02.298131+00:00",
+      "data": {
+        "cycle": 270,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 83,
+        "M": 83,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 26
+      }
+    },
+    {
+      "prev_hash": "3faee460f27c88ea",
+      "hash": "61a77147f2f4f295",
+      "timestamp": "2026-06-29T01:35:02.302171+00:00",
+      "data": {
+        "cycle": 271,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 83,
+        "M": 83,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "61a77147f2f4f295",
+      "hash": "d712157a99d36542",
+      "timestamp": "2026-06-29T01:35:02.306349+00:00",
+      "data": {
+        "cycle": 272,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 84,
+        "M": 84,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 27
+      }
+    },
+    {
+      "prev_hash": "d712157a99d36542",
+      "hash": "c233b9959f49d56b",
+      "timestamp": "2026-06-29T01:35:02.311017+00:00",
+      "data": {
+        "cycle": 273,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 84,
+        "M": 84,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c233b9959f49d56b",
+      "hash": "28735dfea6b73bc2",
+      "timestamp": "2026-06-29T01:35:02.315425+00:00",
+      "data": {
+        "cycle": 274,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 84,
+        "M": 84,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 27
+      }
+    },
+    {
+      "prev_hash": "28735dfea6b73bc2",
+      "hash": "5c74a23ca3f98f56",
+      "timestamp": "2026-06-29T01:35:02.320686+00:00",
+      "data": {
+        "cycle": 275,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 84,
+        "M": 84,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "5c74a23ca3f98f56",
+      "hash": "e677ea398f8d534f",
+      "timestamp": "2026-06-29T01:35:02.327846+00:00",
+      "data": {
+        "cycle": 276,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 85,
+        "M": 85,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 27
+      }
+    },
+    {
+      "prev_hash": "e677ea398f8d534f",
+      "hash": "bc0c51adee5201d8",
+      "timestamp": "2026-06-29T01:35:02.333126+00:00",
+      "data": {
+        "cycle": 277,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 85,
+        "M": 85,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "bc0c51adee5201d8",
+      "hash": "5d57990348067f99",
+      "timestamp": "2026-06-29T01:35:02.343363+00:00",
+      "data": {
+        "cycle": 278,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 86,
+        "M": 86,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 27
+      }
+    },
+    {
+      "prev_hash": "5d57990348067f99",
+      "hash": "1da7784c13413599",
+      "timestamp": "2026-06-29T01:35:02.347886+00:00",
+      "data": {
+        "cycle": 279,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 86,
+        "M": 86,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "1da7784c13413599",
+      "hash": "4c601856768a32f5",
+      "timestamp": "2026-06-29T01:35:02.353459+00:00",
+      "data": {
+        "cycle": 280,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 86,
+        "M": 86,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 27
+      }
+    },
+    {
+      "prev_hash": "4c601856768a32f5",
+      "hash": "d41adaac85b5931c",
+      "timestamp": "2026-06-29T01:35:02.358378+00:00",
+      "data": {
+        "cycle": 281,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 86,
+        "M": 86,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d41adaac85b5931c",
+      "hash": "94f4c4fe91832325",
+      "timestamp": "2026-06-29T01:35:02.363995+00:00",
+      "data": {
+        "cycle": 282,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 87,
+        "M": 87,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 28
+      }
+    },
+    {
+      "prev_hash": "94f4c4fe91832325",
+      "hash": "89e3ada4a2da8449",
+      "timestamp": "2026-06-29T01:35:02.373546+00:00",
+      "data": {
+        "cycle": 283,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 87,
+        "M": 87,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "89e3ada4a2da8449",
+      "hash": "812105535d110c6d",
+      "timestamp": "2026-06-29T01:35:02.378705+00:00",
+      "data": {
+        "cycle": 284,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 87,
+        "M": 87,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 28
+      }
+    },
+    {
+      "prev_hash": "812105535d110c6d",
+      "hash": "b629c68ca17b5b7b",
+      "timestamp": "2026-06-29T01:35:02.383633+00:00",
+      "data": {
+        "cycle": 285,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 87,
+        "M": 87,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b629c68ca17b5b7b",
+      "hash": "91dea68bde505226",
+      "timestamp": "2026-06-29T01:35:02.389170+00:00",
+      "data": {
+        "cycle": 286,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 88,
+        "M": 88,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 28
+      }
+    },
+    {
+      "prev_hash": "91dea68bde505226",
+      "hash": "50a22126974b5418",
+      "timestamp": "2026-06-29T01:35:02.393337+00:00",
+      "data": {
+        "cycle": 287,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 88,
+        "M": 88,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "50a22126974b5418",
+      "hash": "f6f313202516ada3",
+      "timestamp": "2026-06-29T01:35:02.398213+00:00",
+      "data": {
+        "cycle": 288,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 89,
+        "M": 89,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 28
+      }
+    },
+    {
+      "prev_hash": "f6f313202516ada3",
+      "hash": "477d77602477df4f",
+      "timestamp": "2026-06-29T01:35:02.404998+00:00",
+      "data": {
+        "cycle": 289,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 89,
+        "M": 89,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "477d77602477df4f",
+      "hash": "c439bff4b9395725",
+      "timestamp": "2026-06-29T01:35:02.409256+00:00",
+      "data": {
+        "cycle": 290,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 89,
+        "M": 89,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 28
+      }
+    },
+    {
+      "prev_hash": "c439bff4b9395725",
+      "hash": "8d5ab47682c274cb",
+      "timestamp": "2026-06-29T01:35:02.414131+00:00",
+      "data": {
+        "cycle": 291,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 89,
+        "M": 89,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8d5ab47682c274cb",
+      "hash": "9ecc5fe72c091890",
+      "timestamp": "2026-06-29T01:35:02.419439+00:00",
+      "data": {
+        "cycle": 292,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 90,
+        "M": 90,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 29
+      }
+    },
+    {
+      "prev_hash": "9ecc5fe72c091890",
+      "hash": "eec159918deaac2a",
+      "timestamp": "2026-06-29T01:35:02.425842+00:00",
+      "data": {
+        "cycle": 293,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 90,
+        "M": 90,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "eec159918deaac2a",
+      "hash": "da5a354a2c00d8fb",
+      "timestamp": "2026-06-29T01:35:02.431213+00:00",
+      "data": {
+        "cycle": 294,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 90,
+        "M": 90,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 29
+      }
+    },
+    {
+      "prev_hash": "da5a354a2c00d8fb",
+      "hash": "a596ec512ba19235",
+      "timestamp": "2026-06-29T01:35:02.435558+00:00",
+      "data": {
+        "cycle": 295,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 90,
+        "M": 90,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "a596ec512ba19235",
+      "hash": "131dba6c940b089f",
+      "timestamp": "2026-06-29T01:35:02.439823+00:00",
+      "data": {
+        "cycle": 296,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 91,
+        "M": 91,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 29
+      }
+    },
+    {
+      "prev_hash": "131dba6c940b089f",
+      "hash": "d37eb25588ef1679",
+      "timestamp": "2026-06-29T01:35:02.446231+00:00",
+      "data": {
+        "cycle": 297,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 91,
+        "M": 91,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d37eb25588ef1679",
+      "hash": "14addb16e1013b48",
+      "timestamp": "2026-06-29T01:35:02.451560+00:00",
+      "data": {
+        "cycle": 298,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 92,
+        "M": 92,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 29
+      }
+    },
+    {
+      "prev_hash": "14addb16e1013b48",
+      "hash": "b57a549fb4340c9c",
+      "timestamp": "2026-06-29T01:35:02.455347+00:00",
+      "data": {
+        "cycle": 299,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 92,
+        "M": 92,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b57a549fb4340c9c",
+      "hash": "760e7337ed29bd0f",
+      "timestamp": "2026-06-29T01:35:02.460342+00:00",
+      "data": {
+        "cycle": 300,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 92,
+        "M": 92,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 29
+      }
+    },
+    {
+      "prev_hash": "760e7337ed29bd0f",
+      "hash": "2248532f8d6415cd",
+      "timestamp": "2026-06-29T01:35:02.465776+00:00",
+      "data": {
+        "cycle": 301,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 92,
+        "M": 92,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "2248532f8d6415cd",
+      "hash": "8aa1587472aecd5f",
+      "timestamp": "2026-06-29T01:35:02.470956+00:00",
+      "data": {
+        "cycle": 302,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 93,
+        "M": 93,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 30
+      }
+    },
+    {
+      "prev_hash": "8aa1587472aecd5f",
+      "hash": "638e1f2e6c5ae2e8",
+      "timestamp": "2026-06-29T01:35:02.476064+00:00",
+      "data": {
+        "cycle": 303,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 93,
+        "M": 93,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "638e1f2e6c5ae2e8",
+      "hash": "1555d577c93d6c6c",
+      "timestamp": "2026-06-29T01:35:02.480431+00:00",
+      "data": {
+        "cycle": 304,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 93,
+        "M": 93,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 30
+      }
+    },
+    {
+      "prev_hash": "1555d577c93d6c6c",
+      "hash": "948a78a4c11b0c99",
+      "timestamp": "2026-06-29T01:35:02.485221+00:00",
+      "data": {
+        "cycle": 305,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 93,
+        "M": 93,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "948a78a4c11b0c99",
+      "hash": "f3879e3149767a8b",
+      "timestamp": "2026-06-29T01:35:02.489579+00:00",
+      "data": {
+        "cycle": 306,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 94,
+        "M": 94,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 30
+      }
+    },
+    {
+      "prev_hash": "f3879e3149767a8b",
+      "hash": "b917a93c9568a767",
+      "timestamp": "2026-06-29T01:35:02.493191+00:00",
+      "data": {
+        "cycle": 307,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 94,
+        "M": 94,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b917a93c9568a767",
+      "hash": "94306285b7a82bcd",
+      "timestamp": "2026-06-29T01:35:02.497616+00:00",
+      "data": {
+        "cycle": 308,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 95,
+        "M": 95,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 30
+      }
+    },
+    {
+      "prev_hash": "94306285b7a82bcd",
+      "hash": "e9de7f049813b60d",
+      "timestamp": "2026-06-29T01:35:02.504556+00:00",
+      "data": {
+        "cycle": 309,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 95,
+        "M": 95,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "e9de7f049813b60d",
+      "hash": "af2952dfb1500ecf",
+      "timestamp": "2026-06-29T01:35:02.509312+00:00",
+      "data": {
+        "cycle": 310,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 95,
+        "M": 95,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 30
+      }
+    },
+    {
+      "prev_hash": "af2952dfb1500ecf",
+      "hash": "e4d99edea6424e85",
+      "timestamp": "2026-06-29T01:35:02.513903+00:00",
+      "data": {
+        "cycle": 311,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 95,
+        "M": 95,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "e4d99edea6424e85",
+      "hash": "d883fabdf2c56d63",
+      "timestamp": "2026-06-29T01:35:02.521208+00:00",
+      "data": {
+        "cycle": 312,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 96,
+        "M": 96,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 31
+      }
+    },
+    {
+      "prev_hash": "d883fabdf2c56d63",
+      "hash": "080d39607a9f0d21",
+      "timestamp": "2026-06-29T01:35:02.527155+00:00",
+      "data": {
+        "cycle": 313,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 96,
+        "M": 96,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "080d39607a9f0d21",
+      "hash": "ce17b984ca30bec1",
+      "timestamp": "2026-06-29T01:35:02.535958+00:00",
+      "data": {
+        "cycle": 314,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 96,
+        "M": 96,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 31
+      }
+    },
+    {
+      "prev_hash": "ce17b984ca30bec1",
+      "hash": "55d137c4f8934a78",
+      "timestamp": "2026-06-29T01:35:02.542442+00:00",
+      "data": {
+        "cycle": 315,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 96,
+        "M": 96,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "55d137c4f8934a78",
+      "hash": "a72a00aa8cf1923b",
+      "timestamp": "2026-06-29T01:35:02.548661+00:00",
+      "data": {
+        "cycle": 316,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 97,
+        "M": 97,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 31
+      }
+    },
+    {
+      "prev_hash": "a72a00aa8cf1923b",
+      "hash": "f27d538d5f32a3d3",
+      "timestamp": "2026-06-29T01:35:02.555803+00:00",
+      "data": {
+        "cycle": 317,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 97,
+        "M": 97,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "f27d538d5f32a3d3",
+      "hash": "35c7b7ff7430496e",
+      "timestamp": "2026-06-29T01:35:02.561132+00:00",
+      "data": {
+        "cycle": 318,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 98,
+        "M": 98,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 31
+      }
+    },
+    {
+      "prev_hash": "35c7b7ff7430496e",
+      "hash": "9799276b838aa655",
+      "timestamp": "2026-06-29T01:35:02.566028+00:00",
+      "data": {
+        "cycle": 319,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 98,
+        "M": 98,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9799276b838aa655",
+      "hash": "bf7bfce221a3fffb",
+      "timestamp": "2026-06-29T01:35:02.570888+00:00",
+      "data": {
+        "cycle": 320,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 98,
+        "M": 98,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 31
+      }
+    },
+    {
+      "prev_hash": "bf7bfce221a3fffb",
+      "hash": "37c0b7a7ca12a350",
+      "timestamp": "2026-06-29T01:35:02.575081+00:00",
+      "data": {
+        "cycle": 321,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 98,
+        "M": 98,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "37c0b7a7ca12a350",
+      "hash": "db92e493d3b1292a",
+      "timestamp": "2026-06-29T01:35:02.580414+00:00",
+      "data": {
+        "cycle": 322,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 99,
+        "M": 99,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 32
+      }
+    },
+    {
+      "prev_hash": "db92e493d3b1292a",
+      "hash": "b3f2909523986214",
+      "timestamp": "2026-06-29T01:35:02.586578+00:00",
+      "data": {
+        "cycle": 323,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 99,
+        "M": 99,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b3f2909523986214",
+      "hash": "fbf50ecf5910381c",
+      "timestamp": "2026-06-29T01:35:02.592452+00:00",
+      "data": {
+        "cycle": 324,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 99,
+        "M": 99,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 32
+      }
+    },
+    {
+      "prev_hash": "fbf50ecf5910381c",
+      "hash": "7b0199708e490e01",
+      "timestamp": "2026-06-29T01:35:02.600034+00:00",
+      "data": {
+        "cycle": 325,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 99,
+        "M": 99,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "7b0199708e490e01",
+      "hash": "cdf0d66b88b1b301",
+      "timestamp": "2026-06-29T01:35:02.606888+00:00",
+      "data": {
+        "cycle": 326,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 100,
+        "M": 100,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 32
+      }
+    },
+    {
+      "prev_hash": "cdf0d66b88b1b301",
+      "hash": "289ea0c6cd9ef0ef",
+      "timestamp": "2026-06-29T01:35:02.612347+00:00",
+      "data": {
+        "cycle": 327,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 100,
+        "M": 100,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "289ea0c6cd9ef0ef",
+      "hash": "f974683dee2e7e36",
+      "timestamp": "2026-06-29T01:35:02.617687+00:00",
+      "data": {
+        "cycle": 328,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 101,
+        "M": 101,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 32
+      }
+    },
+    {
+      "prev_hash": "f974683dee2e7e36",
+      "hash": "1f5358dbe231c1d3",
+      "timestamp": "2026-06-29T01:35:02.621975+00:00",
+      "data": {
+        "cycle": 329,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 101,
+        "M": 101,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "1f5358dbe231c1d3",
+      "hash": "3b764e15ba752a8c",
+      "timestamp": "2026-06-29T01:35:02.632897+00:00",
+      "data": {
+        "cycle": 330,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 101,
+        "M": 101,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 32
+      }
+    },
+    {
+      "prev_hash": "3b764e15ba752a8c",
+      "hash": "0a9b616339a275d1",
+      "timestamp": "2026-06-29T01:35:02.639705+00:00",
+      "data": {
+        "cycle": 331,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 101,
+        "M": 101,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "0a9b616339a275d1",
+      "hash": "367036430f8267d3",
+      "timestamp": "2026-06-29T01:35:02.645716+00:00",
+      "data": {
+        "cycle": 332,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 102,
+        "M": 102,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 33
+      }
+    },
+    {
+      "prev_hash": "367036430f8267d3",
+      "hash": "14b99d5ceff5db59",
+      "timestamp": "2026-06-29T01:35:02.651636+00:00",
+      "data": {
+        "cycle": 333,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 102,
+        "M": 102,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "14b99d5ceff5db59",
+      "hash": "bb594a84639e4662",
+      "timestamp": "2026-06-29T01:35:02.659421+00:00",
+      "data": {
+        "cycle": 334,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 102,
+        "M": 102,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 33
+      }
+    },
+    {
+      "prev_hash": "bb594a84639e4662",
+      "hash": "d1e99f5482fdbdca",
+      "timestamp": "2026-06-29T01:35:02.668554+00:00",
+      "data": {
+        "cycle": 335,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 102,
+        "M": 102,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d1e99f5482fdbdca",
+      "hash": "7d0377ff96dd222f",
+      "timestamp": "2026-06-29T01:35:02.672856+00:00",
+      "data": {
+        "cycle": 336,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 103,
+        "M": 103,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 33
+      }
+    },
+    {
+      "prev_hash": "7d0377ff96dd222f",
+      "hash": "4dac45f16a2ef29c",
+      "timestamp": "2026-06-29T01:35:02.678269+00:00",
+      "data": {
+        "cycle": 337,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 103,
+        "M": 103,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "4dac45f16a2ef29c",
+      "hash": "0d74de4b12d728e9",
+      "timestamp": "2026-06-29T01:35:02.683386+00:00",
+      "data": {
+        "cycle": 338,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 104,
+        "M": 104,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 33
+      }
+    },
+    {
+      "prev_hash": "0d74de4b12d728e9",
+      "hash": "45b369e2b1135a53",
+      "timestamp": "2026-06-29T01:35:02.688527+00:00",
+      "data": {
+        "cycle": 339,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 104,
+        "M": 104,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "45b369e2b1135a53",
+      "hash": "2ef3a05dbf56cc4b",
+      "timestamp": "2026-06-29T01:35:02.694240+00:00",
+      "data": {
+        "cycle": 340,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 104,
+        "M": 104,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 33
+      }
+    },
+    {
+      "prev_hash": "2ef3a05dbf56cc4b",
+      "hash": "3c7e5d2a2cfbf72d",
+      "timestamp": "2026-06-29T01:35:02.700179+00:00",
+      "data": {
+        "cycle": 341,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 104,
+        "M": 104,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "3c7e5d2a2cfbf72d",
+      "hash": "813d53ed8f2d67d7",
+      "timestamp": "2026-06-29T01:35:02.706238+00:00",
+      "data": {
+        "cycle": 342,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 105,
+        "M": 105,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 34
+      }
+    },
+    {
+      "prev_hash": "813d53ed8f2d67d7",
+      "hash": "27ef87db46ba3876",
+      "timestamp": "2026-06-29T01:35:02.713297+00:00",
+      "data": {
+        "cycle": 343,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 105,
+        "M": 105,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "27ef87db46ba3876",
+      "hash": "de541fe55841e065",
+      "timestamp": "2026-06-29T01:35:02.719431+00:00",
+      "data": {
+        "cycle": 344,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 105,
+        "M": 105,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 34
+      }
+    },
+    {
+      "prev_hash": "de541fe55841e065",
+      "hash": "9da5c3b6e989a289",
+      "timestamp": "2026-06-29T01:35:02.724872+00:00",
+      "data": {
+        "cycle": 345,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 105,
+        "M": 105,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9da5c3b6e989a289",
+      "hash": "db5eb81a73d5fd5b",
+      "timestamp": "2026-06-29T01:35:02.732708+00:00",
+      "data": {
+        "cycle": 346,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 106,
+        "M": 106,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 34
+      }
+    },
+    {
+      "prev_hash": "db5eb81a73d5fd5b",
+      "hash": "a040ba8da733e255",
+      "timestamp": "2026-06-29T01:35:02.738225+00:00",
+      "data": {
+        "cycle": 347,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 106,
+        "M": 106,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "a040ba8da733e255",
+      "hash": "b2a22cd2dcb47421",
+      "timestamp": "2026-06-29T01:35:02.746094+00:00",
+      "data": {
+        "cycle": 348,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 107,
+        "M": 107,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 34
+      }
+    },
+    {
+      "prev_hash": "b2a22cd2dcb47421",
+      "hash": "c5b4dbb6b5272c73",
+      "timestamp": "2026-06-29T01:35:02.752899+00:00",
+      "data": {
+        "cycle": 349,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 107,
+        "M": 107,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c5b4dbb6b5272c73",
+      "hash": "8ddd71e942cb5b1f",
+      "timestamp": "2026-06-29T01:35:02.764699+00:00",
+      "data": {
+        "cycle": 350,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 107,
+        "M": 107,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 34
+      }
+    },
+    {
+      "prev_hash": "8ddd71e942cb5b1f",
+      "hash": "79b4ab7de41646f1",
+      "timestamp": "2026-06-29T01:35:02.769343+00:00",
+      "data": {
+        "cycle": 351,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 107,
+        "M": 107,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "79b4ab7de41646f1",
+      "hash": "679a76e673026ead",
+      "timestamp": "2026-06-29T01:35:02.774198+00:00",
+      "data": {
+        "cycle": 352,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 108,
+        "M": 108,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 35
+      }
+    },
+    {
+      "prev_hash": "679a76e673026ead",
+      "hash": "4fbc768867953c61",
+      "timestamp": "2026-06-29T01:35:02.778499+00:00",
+      "data": {
+        "cycle": 353,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 108,
+        "M": 108,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "4fbc768867953c61",
+      "hash": "ab081bf6c2ec6920",
+      "timestamp": "2026-06-29T01:35:02.784901+00:00",
+      "data": {
+        "cycle": 354,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 108,
+        "M": 108,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 35
+      }
+    },
+    {
+      "prev_hash": "ab081bf6c2ec6920",
+      "hash": "58069f6d1ef8a128",
+      "timestamp": "2026-06-29T01:35:02.792476+00:00",
+      "data": {
+        "cycle": 355,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 108,
+        "M": 108,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "58069f6d1ef8a128",
+      "hash": "4d53d07128548743",
+      "timestamp": "2026-06-29T01:35:02.799121+00:00",
+      "data": {
+        "cycle": 356,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 109,
+        "M": 109,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 35
+      }
+    },
+    {
+      "prev_hash": "4d53d07128548743",
+      "hash": "b025cc69ee6c9ff2",
+      "timestamp": "2026-06-29T01:35:02.805120+00:00",
+      "data": {
+        "cycle": 357,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 109,
+        "M": 109,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b025cc69ee6c9ff2",
+      "hash": "f263cf4c14975145",
+      "timestamp": "2026-06-29T01:35:02.811530+00:00",
+      "data": {
+        "cycle": 358,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 110,
+        "M": 110,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 35
+      }
+    },
+    {
+      "prev_hash": "f263cf4c14975145",
+      "hash": "42d5e21f395123b1",
+      "timestamp": "2026-06-29T01:35:02.819912+00:00",
+      "data": {
+        "cycle": 359,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 110,
+        "M": 110,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "42d5e21f395123b1",
+      "hash": "6e7aee2263c69394",
+      "timestamp": "2026-06-29T01:35:02.829864+00:00",
+      "data": {
+        "cycle": 360,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 110,
+        "M": 110,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 35
+      }
+    },
+    {
+      "prev_hash": "6e7aee2263c69394",
+      "hash": "d00d575fd79332de",
+      "timestamp": "2026-06-29T01:35:02.836125+00:00",
+      "data": {
+        "cycle": 361,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 110,
+        "M": 110,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d00d575fd79332de",
+      "hash": "2cb452030a717dee",
+      "timestamp": "2026-06-29T01:35:02.847429+00:00",
+      "data": {
+        "cycle": 362,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 111,
+        "M": 111,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 36
+      }
+    },
+    {
+      "prev_hash": "2cb452030a717dee",
+      "hash": "28035b32f316f7e7",
+      "timestamp": "2026-06-29T01:35:02.852323+00:00",
+      "data": {
+        "cycle": 363,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 111,
+        "M": 111,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "28035b32f316f7e7",
+      "hash": "ccadf8d61c03981e",
+      "timestamp": "2026-06-29T01:35:02.857791+00:00",
+      "data": {
+        "cycle": 364,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 111,
+        "M": 111,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 36
+      }
+    },
+    {
+      "prev_hash": "ccadf8d61c03981e",
+      "hash": "6c5f7c0c84d25cc7",
+      "timestamp": "2026-06-29T01:35:02.880781+00:00",
+      "data": {
+        "cycle": 365,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 111,
+        "M": 111,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "6c5f7c0c84d25cc7",
+      "hash": "b8169fcc5408f0bf",
+      "timestamp": "2026-06-29T01:35:02.892188+00:00",
+      "data": {
+        "cycle": 366,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 112,
+        "M": 112,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 36
+      }
+    },
+    {
+      "prev_hash": "b8169fcc5408f0bf",
+      "hash": "21363064f7ee6f33",
+      "timestamp": "2026-06-29T01:35:02.901693+00:00",
+      "data": {
+        "cycle": 367,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 112,
+        "M": 112,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "21363064f7ee6f33",
+      "hash": "da62ec3e7ff28375",
+      "timestamp": "2026-06-29T01:35:02.910237+00:00",
+      "data": {
+        "cycle": 368,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 113,
+        "M": 113,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 36
+      }
+    },
+    {
+      "prev_hash": "da62ec3e7ff28375",
+      "hash": "8dcbf7b35afdc620",
+      "timestamp": "2026-06-29T01:35:02.916272+00:00",
+      "data": {
+        "cycle": 369,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 113,
+        "M": 113,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8dcbf7b35afdc620",
+      "hash": "d0e0c25b3d0eef9b",
+      "timestamp": "2026-06-29T01:35:02.930848+00:00",
+      "data": {
+        "cycle": 370,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 113,
+        "M": 113,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 36
+      }
+    },
+    {
+      "prev_hash": "d0e0c25b3d0eef9b",
+      "hash": "c041ee892ec9ad50",
+      "timestamp": "2026-06-29T01:35:02.938839+00:00",
+      "data": {
+        "cycle": 371,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 113,
+        "M": 113,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c041ee892ec9ad50",
+      "hash": "15ce80c44870eec1",
+      "timestamp": "2026-06-29T01:35:02.945603+00:00",
+      "data": {
+        "cycle": 372,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 114,
+        "M": 114,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 37
+      }
+    },
+    {
+      "prev_hash": "15ce80c44870eec1",
+      "hash": "fc9933fb7a4fdb76",
+      "timestamp": "2026-06-29T01:35:02.952520+00:00",
+      "data": {
+        "cycle": 373,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 114,
+        "M": 114,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "fc9933fb7a4fdb76",
+      "hash": "c3eb6fa9e7555da8",
+      "timestamp": "2026-06-29T01:35:02.959501+00:00",
+      "data": {
+        "cycle": 374,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 114,
+        "M": 114,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 37
+      }
+    },
+    {
+      "prev_hash": "c3eb6fa9e7555da8",
+      "hash": "d586eb8f54ade657",
+      "timestamp": "2026-06-29T01:35:02.966331+00:00",
+      "data": {
+        "cycle": 375,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 114,
+        "M": 114,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "d586eb8f54ade657",
+      "hash": "6da7dac17364f7c4",
+      "timestamp": "2026-06-29T01:35:02.974460+00:00",
+      "data": {
+        "cycle": 376,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 115,
+        "M": 115,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 37
+      }
+    },
+    {
+      "prev_hash": "6da7dac17364f7c4",
+      "hash": "ee85755540986615",
+      "timestamp": "2026-06-29T01:35:02.981275+00:00",
+      "data": {
+        "cycle": 377,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 115,
+        "M": 115,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "ee85755540986615",
+      "hash": "5a0cf92c80d8ff8f",
+      "timestamp": "2026-06-29T01:35:02.990391+00:00",
+      "data": {
+        "cycle": 378,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 116,
+        "M": 116,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 37
+      }
+    },
+    {
+      "prev_hash": "5a0cf92c80d8ff8f",
+      "hash": "8915ccdd175df8a0",
+      "timestamp": "2026-06-29T01:35:02.998937+00:00",
+      "data": {
+        "cycle": 379,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 116,
+        "M": 116,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8915ccdd175df8a0",
+      "hash": "6af725b1db57a791",
+      "timestamp": "2026-06-29T01:35:03.006676+00:00",
+      "data": {
+        "cycle": 380,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 116,
+        "M": 116,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 37
+      }
+    },
+    {
+      "prev_hash": "6af725b1db57a791",
+      "hash": "3025b4ed51ca5aa2",
+      "timestamp": "2026-06-29T01:35:03.016310+00:00",
+      "data": {
+        "cycle": 381,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 116,
+        "M": 116,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "3025b4ed51ca5aa2",
+      "hash": "18ed26369b4a8a36",
+      "timestamp": "2026-06-29T01:35:03.022679+00:00",
+      "data": {
+        "cycle": 382,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 117,
+        "M": 117,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 38
+      }
+    },
+    {
+      "prev_hash": "18ed26369b4a8a36",
+      "hash": "9d41934be8cc4ef3",
+      "timestamp": "2026-06-29T01:35:03.037648+00:00",
+      "data": {
+        "cycle": 383,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 117,
+        "M": 117,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9d41934be8cc4ef3",
+      "hash": "cd4bf5d62558862c",
+      "timestamp": "2026-06-29T01:35:03.049920+00:00",
+      "data": {
+        "cycle": 384,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 117,
+        "M": 117,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 38
+      }
+    },
+    {
+      "prev_hash": "cd4bf5d62558862c",
+      "hash": "450e57a95bc42457",
+      "timestamp": "2026-06-29T01:35:03.062744+00:00",
+      "data": {
+        "cycle": 385,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 117,
+        "M": 117,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "450e57a95bc42457",
+      "hash": "98e99f4aeb4a922f",
+      "timestamp": "2026-06-29T01:35:03.068480+00:00",
+      "data": {
+        "cycle": 386,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 118,
+        "M": 118,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 38
+      }
+    },
+    {
+      "prev_hash": "98e99f4aeb4a922f",
+      "hash": "481ece70d94c4d19",
+      "timestamp": "2026-06-29T01:35:03.074897+00:00",
+      "data": {
+        "cycle": 387,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 118,
+        "M": 118,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "481ece70d94c4d19",
+      "hash": "ceb3529ef6feccda",
+      "timestamp": "2026-06-29T01:35:03.093297+00:00",
+      "data": {
+        "cycle": 388,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 119,
+        "M": 119,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 38
+      }
+    },
+    {
+      "prev_hash": "ceb3529ef6feccda",
+      "hash": "709eb6d758f12e66",
+      "timestamp": "2026-06-29T01:35:03.100255+00:00",
+      "data": {
+        "cycle": 389,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 119,
+        "M": 119,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "709eb6d758f12e66",
+      "hash": "89499b9ddcffd777",
+      "timestamp": "2026-06-29T01:35:03.106476+00:00",
+      "data": {
+        "cycle": 390,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 119,
+        "M": 119,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 38
+      }
+    },
+    {
+      "prev_hash": "89499b9ddcffd777",
+      "hash": "0b7ae122146f3066",
+      "timestamp": "2026-06-29T01:35:03.112113+00:00",
+      "data": {
+        "cycle": 391,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 119,
+        "M": 119,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "0b7ae122146f3066",
+      "hash": "ab5ff644d20b7d60",
+      "timestamp": "2026-06-29T01:35:03.118201+00:00",
+      "data": {
+        "cycle": 392,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 120,
+        "M": 120,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 39
+      }
+    },
+    {
+      "prev_hash": "ab5ff644d20b7d60",
+      "hash": "633daa2f05552de4",
+      "timestamp": "2026-06-29T01:35:03.124088+00:00",
+      "data": {
+        "cycle": 393,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 120,
+        "M": 120,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "633daa2f05552de4",
+      "hash": "724e94a614ea3fae",
+      "timestamp": "2026-06-29T01:35:03.130479+00:00",
+      "data": {
+        "cycle": 394,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 120,
+        "M": 120,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 39
+      }
+    },
+    {
+      "prev_hash": "724e94a614ea3fae",
+      "hash": "647a97b21f930a39",
+      "timestamp": "2026-06-29T01:35:03.136559+00:00",
+      "data": {
+        "cycle": 395,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 120,
+        "M": 120,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "647a97b21f930a39",
+      "hash": "53e1956285684173",
+      "timestamp": "2026-06-29T01:35:03.141764+00:00",
+      "data": {
+        "cycle": 396,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 121,
+        "M": 121,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 39
+      }
+    },
+    {
+      "prev_hash": "53e1956285684173",
+      "hash": "deb63de771c1bb1c",
+      "timestamp": "2026-06-29T01:35:03.147034+00:00",
+      "data": {
+        "cycle": 397,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 121,
+        "M": 121,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "deb63de771c1bb1c",
+      "hash": "79dbb389b410e2a4",
+      "timestamp": "2026-06-29T01:35:03.153769+00:00",
+      "data": {
+        "cycle": 398,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 122,
+        "M": 122,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 39
+      }
+    },
+    {
+      "prev_hash": "79dbb389b410e2a4",
+      "hash": "ebd6e98da4014099",
+      "timestamp": "2026-06-29T01:35:03.160876+00:00",
+      "data": {
+        "cycle": 399,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 122,
+        "M": 122,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "ebd6e98da4014099",
+      "hash": "41e92ac9f5413b18",
+      "timestamp": "2026-06-29T01:35:03.166940+00:00",
+      "data": {
+        "cycle": 400,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 122,
+        "M": 122,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 39
+      }
+    },
+    {
+      "prev_hash": "41e92ac9f5413b18",
+      "hash": "b047685198a364df",
+      "timestamp": "2026-06-29T01:35:03.174048+00:00",
+      "data": {
+        "cycle": 401,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 122,
+        "M": 122,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b047685198a364df",
+      "hash": "fa71a3fd76dcda06",
+      "timestamp": "2026-06-29T01:35:03.189130+00:00",
+      "data": {
+        "cycle": 402,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 123,
+        "M": 123,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 40
+      }
+    },
+    {
+      "prev_hash": "fa71a3fd76dcda06",
+      "hash": "e82b47d42b49e28c",
+      "timestamp": "2026-06-29T01:35:03.201217+00:00",
+      "data": {
+        "cycle": 403,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 123,
+        "M": 123,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "e82b47d42b49e28c",
+      "hash": "344327dbd47b9ae6",
+      "timestamp": "2026-06-29T01:35:03.209851+00:00",
+      "data": {
+        "cycle": 404,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 123,
+        "M": 123,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 40
+      }
+    },
+    {
+      "prev_hash": "344327dbd47b9ae6",
+      "hash": "4353998824136245",
+      "timestamp": "2026-06-29T01:35:03.215128+00:00",
+      "data": {
+        "cycle": 405,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 123,
+        "M": 123,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "4353998824136245",
+      "hash": "299a162fab4508e7",
+      "timestamp": "2026-06-29T01:35:03.229512+00:00",
+      "data": {
+        "cycle": 406,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 124,
+        "M": 124,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 40
+      }
+    },
+    {
+      "prev_hash": "299a162fab4508e7",
+      "hash": "27cfc04509e207d3",
+      "timestamp": "2026-06-29T01:35:03.236206+00:00",
+      "data": {
+        "cycle": 407,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 124,
+        "M": 124,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "27cfc04509e207d3",
+      "hash": "891179e657910a76",
+      "timestamp": "2026-06-29T01:35:03.252987+00:00",
+      "data": {
+        "cycle": 408,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 125,
+        "M": 125,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 40
+      }
+    },
+    {
+      "prev_hash": "891179e657910a76",
+      "hash": "464f871ad9f64a76",
+      "timestamp": "2026-06-29T01:35:03.266176+00:00",
+      "data": {
+        "cycle": 409,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 125,
+        "M": 125,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "464f871ad9f64a76",
+      "hash": "a86efbe93dab40f6",
+      "timestamp": "2026-06-29T01:35:03.278478+00:00",
+      "data": {
+        "cycle": 410,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 125,
+        "M": 125,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 40
+      }
+    },
+    {
+      "prev_hash": "a86efbe93dab40f6",
+      "hash": "97839e25124924d2",
+      "timestamp": "2026-06-29T01:35:03.289852+00:00",
+      "data": {
+        "cycle": 411,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 125,
+        "M": 125,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "97839e25124924d2",
+      "hash": "dbd7d93f9a265455",
+      "timestamp": "2026-06-29T01:35:03.309507+00:00",
+      "data": {
+        "cycle": 412,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 126,
+        "M": 126,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 41
+      }
+    },
+    {
+      "prev_hash": "dbd7d93f9a265455",
+      "hash": "c3f189fd13e5b4fc",
+      "timestamp": "2026-06-29T01:35:03.317172+00:00",
+      "data": {
+        "cycle": 413,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 126,
+        "M": 126,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c3f189fd13e5b4fc",
+      "hash": "925d21eb7f8f66a5",
+      "timestamp": "2026-06-29T01:35:03.335685+00:00",
+      "data": {
+        "cycle": 414,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 126,
+        "M": 126,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 41
+      }
+    },
+    {
+      "prev_hash": "925d21eb7f8f66a5",
+      "hash": "bec953789e082d24",
+      "timestamp": "2026-06-29T01:35:03.343276+00:00",
+      "data": {
+        "cycle": 415,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 126,
+        "M": 126,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "bec953789e082d24",
+      "hash": "af310d68c6c6eccc",
+      "timestamp": "2026-06-29T01:35:03.370013+00:00",
+      "data": {
+        "cycle": 416,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 127,
+        "M": 127,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 41
+      }
+    },
+    {
+      "prev_hash": "af310d68c6c6eccc",
+      "hash": "c559b94bd3799422",
+      "timestamp": "2026-06-29T01:35:03.377115+00:00",
+      "data": {
+        "cycle": 417,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 127,
+        "M": 127,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "c559b94bd3799422",
+      "hash": "3e42a6c1c576fa56",
+      "timestamp": "2026-06-29T01:35:03.385710+00:00",
+      "data": {
+        "cycle": 418,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 128,
+        "M": 128,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 41
+      }
+    },
+    {
+      "prev_hash": "3e42a6c1c576fa56",
+      "hash": "3c0202e9eb3ae5f1",
+      "timestamp": "2026-06-29T01:35:03.393051+00:00",
+      "data": {
+        "cycle": 419,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 128,
+        "M": 128,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "3c0202e9eb3ae5f1",
+      "hash": "55648827296b6036",
+      "timestamp": "2026-06-29T01:35:03.402556+00:00",
+      "data": {
+        "cycle": 420,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 128,
+        "M": 128,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 41
+      }
+    },
+    {
+      "prev_hash": "55648827296b6036",
+      "hash": "0a3fda5535dcc361",
+      "timestamp": "2026-06-29T01:35:03.409750+00:00",
+      "data": {
+        "cycle": 421,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 128,
+        "M": 128,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "0a3fda5535dcc361",
+      "hash": "1b8b6a5780c2e447",
+      "timestamp": "2026-06-29T01:35:03.424606+00:00",
+      "data": {
+        "cycle": 422,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 129,
+        "M": 129,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 42
+      }
+    },
+    {
+      "prev_hash": "1b8b6a5780c2e447",
+      "hash": "da87295ecb793661",
+      "timestamp": "2026-06-29T01:35:03.445378+00:00",
+      "data": {
+        "cycle": 423,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 129,
+        "M": 129,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "da87295ecb793661",
+      "hash": "171b044e1de5bd41",
+      "timestamp": "2026-06-29T01:35:03.460815+00:00",
+      "data": {
+        "cycle": 424,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 129,
+        "M": 129,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 42
+      }
+    },
+    {
+      "prev_hash": "171b044e1de5bd41",
+      "hash": "85b0524bbd216e95",
+      "timestamp": "2026-06-29T01:35:03.467020+00:00",
+      "data": {
+        "cycle": 425,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 129,
+        "M": 129,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "85b0524bbd216e95",
+      "hash": "e159c340fc6154a1",
+      "timestamp": "2026-06-29T01:35:03.478502+00:00",
+      "data": {
+        "cycle": 426,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 130,
+        "M": 130,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 42
+      }
+    },
+    {
+      "prev_hash": "e159c340fc6154a1",
+      "hash": "eeac02aadc415ab6",
+      "timestamp": "2026-06-29T01:35:03.485436+00:00",
+      "data": {
+        "cycle": 427,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 130,
+        "M": 130,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "eeac02aadc415ab6",
+      "hash": "25c7842ea32b52d8",
+      "timestamp": "2026-06-29T01:35:03.492935+00:00",
+      "data": {
+        "cycle": 428,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 131,
+        "M": 131,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 42
+      }
+    },
+    {
+      "prev_hash": "25c7842ea32b52d8",
+      "hash": "57108416e4e247eb",
+      "timestamp": "2026-06-29T01:35:03.500054+00:00",
+      "data": {
+        "cycle": 429,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 131,
+        "M": 131,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "57108416e4e247eb",
+      "hash": "841fcc265ea39119",
+      "timestamp": "2026-06-29T01:35:03.505961+00:00",
+      "data": {
+        "cycle": 430,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 131,
+        "M": 131,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 42
+      }
+    },
+    {
+      "prev_hash": "841fcc265ea39119",
+      "hash": "4336508da75726f5",
+      "timestamp": "2026-06-29T01:35:03.515004+00:00",
+      "data": {
+        "cycle": 431,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 131,
+        "M": 131,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "4336508da75726f5",
+      "hash": "95937d669cfc97da",
+      "timestamp": "2026-06-29T01:35:03.519753+00:00",
+      "data": {
+        "cycle": 432,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 132,
+        "M": 132,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 43
+      }
+    },
+    {
+      "prev_hash": "95937d669cfc97da",
+      "hash": "31d3b26a776b6ea4",
+      "timestamp": "2026-06-29T01:35:03.527311+00:00",
+      "data": {
+        "cycle": 433,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 132,
+        "M": 132,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "31d3b26a776b6ea4",
+      "hash": "5b942288cc309ebf",
+      "timestamp": "2026-06-29T01:35:03.542003+00:00",
+      "data": {
+        "cycle": 434,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 132,
+        "M": 132,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 43
+      }
+    },
+    {
+      "prev_hash": "5b942288cc309ebf",
+      "hash": "01945ec1dc83c7a5",
+      "timestamp": "2026-06-29T01:35:03.551282+00:00",
+      "data": {
+        "cycle": 435,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 132,
+        "M": 132,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "01945ec1dc83c7a5",
+      "hash": "4495fe1986c21b40",
+      "timestamp": "2026-06-29T01:35:03.565739+00:00",
+      "data": {
+        "cycle": 436,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 133,
+        "M": 133,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 43
+      }
+    },
+    {
+      "prev_hash": "4495fe1986c21b40",
+      "hash": "b2f1ec5d1f93293f",
+      "timestamp": "2026-06-29T01:35:03.574348+00:00",
+      "data": {
+        "cycle": 437,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 133,
+        "M": 133,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b2f1ec5d1f93293f",
+      "hash": "87f72a729dc2ced6",
+      "timestamp": "2026-06-29T01:35:03.582618+00:00",
+      "data": {
+        "cycle": 438,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 134,
+        "M": 134,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 43
+      }
+    },
+    {
+      "prev_hash": "87f72a729dc2ced6",
+      "hash": "a84a02ccbbc08acc",
+      "timestamp": "2026-06-29T01:35:03.589976+00:00",
+      "data": {
+        "cycle": 439,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 134,
+        "M": 134,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "a84a02ccbbc08acc",
+      "hash": "a8cc5efc72ffb675",
+      "timestamp": "2026-06-29T01:35:03.599991+00:00",
+      "data": {
+        "cycle": 440,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 134,
+        "M": 134,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 43
+      }
+    },
+    {
+      "prev_hash": "a8cc5efc72ffb675",
+      "hash": "883704f42257fcb2",
+      "timestamp": "2026-06-29T01:35:03.608945+00:00",
+      "data": {
+        "cycle": 441,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 134,
+        "M": 134,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "883704f42257fcb2",
+      "hash": "2b08ac1077bed5b1",
+      "timestamp": "2026-06-29T01:35:03.626981+00:00",
+      "data": {
+        "cycle": 442,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 135,
+        "M": 135,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 44
+      }
+    },
+    {
+      "prev_hash": "2b08ac1077bed5b1",
+      "hash": "ab6690ebcb7b9b9a",
+      "timestamp": "2026-06-29T01:35:03.637033+00:00",
+      "data": {
+        "cycle": 443,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 135,
+        "M": 135,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "ab6690ebcb7b9b9a",
+      "hash": "5eeae48bc5f65e97",
+      "timestamp": "2026-06-29T01:35:03.656264+00:00",
+      "data": {
+        "cycle": 444,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 135,
+        "M": 135,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 44
+      }
+    },
+    {
+      "prev_hash": "5eeae48bc5f65e97",
+      "hash": "45a97e668b82bfb2",
+      "timestamp": "2026-06-29T01:35:03.666336+00:00",
+      "data": {
+        "cycle": 445,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 135,
+        "M": 135,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "45a97e668b82bfb2",
+      "hash": "a21ed02f81c0c0fe",
+      "timestamp": "2026-06-29T01:35:03.675254+00:00",
+      "data": {
+        "cycle": 446,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 136,
+        "M": 136,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 44
+      }
+    },
+    {
+      "prev_hash": "a21ed02f81c0c0fe",
+      "hash": "f568fb5828362d9d",
+      "timestamp": "2026-06-29T01:35:03.684730+00:00",
+      "data": {
+        "cycle": 447,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 136,
+        "M": 136,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "f568fb5828362d9d",
+      "hash": "721e2ae2fbe8806a",
+      "timestamp": "2026-06-29T01:35:03.692042+00:00",
+      "data": {
+        "cycle": 448,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 137,
+        "M": 137,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 44
+      }
+    },
+    {
+      "prev_hash": "721e2ae2fbe8806a",
+      "hash": "37254371e959f471",
+      "timestamp": "2026-06-29T01:35:03.700336+00:00",
+      "data": {
+        "cycle": 449,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 137,
+        "M": 137,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "37254371e959f471",
+      "hash": "91fc420fa80e0f9b",
+      "timestamp": "2026-06-29T01:35:03.708408+00:00",
+      "data": {
+        "cycle": 450,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 137,
+        "M": 137,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 44
+      }
+    },
+    {
+      "prev_hash": "91fc420fa80e0f9b",
+      "hash": "cb470b8ec8559f6c",
+      "timestamp": "2026-06-29T01:35:03.715974+00:00",
+      "data": {
+        "cycle": 451,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 137,
+        "M": 137,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "cb470b8ec8559f6c",
+      "hash": "3370bd20de76b39b",
+      "timestamp": "2026-06-29T01:35:03.724230+00:00",
+      "data": {
+        "cycle": 452,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 138,
+        "M": 138,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 45
+      }
+    },
+    {
+      "prev_hash": "3370bd20de76b39b",
+      "hash": "af2a97e4d47453bb",
+      "timestamp": "2026-06-29T01:35:03.732184+00:00",
+      "data": {
+        "cycle": 453,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 138,
+        "M": 138,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "af2a97e4d47453bb",
+      "hash": "ce08843ac9f19181",
+      "timestamp": "2026-06-29T01:35:03.743565+00:00",
+      "data": {
+        "cycle": 454,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 138,
+        "M": 138,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 45
+      }
+    },
+    {
+      "prev_hash": "ce08843ac9f19181",
+      "hash": "0f33848963001093",
+      "timestamp": "2026-06-29T01:35:03.753478+00:00",
+      "data": {
+        "cycle": 455,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 138,
+        "M": 138,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "0f33848963001093",
+      "hash": "95f4682fc4910d29",
+      "timestamp": "2026-06-29T01:35:03.761670+00:00",
+      "data": {
+        "cycle": 456,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 139,
+        "M": 139,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 45
+      }
+    },
+    {
+      "prev_hash": "95f4682fc4910d29",
+      "hash": "9cf385743627db70",
+      "timestamp": "2026-06-29T01:35:03.770522+00:00",
+      "data": {
+        "cycle": 457,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 139,
+        "M": 139,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9cf385743627db70",
+      "hash": "66e11dd1fb176112",
+      "timestamp": "2026-06-29T01:35:03.778679+00:00",
+      "data": {
+        "cycle": 458,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 140,
+        "M": 140,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 45
+      }
+    },
+    {
+      "prev_hash": "66e11dd1fb176112",
+      "hash": "030e1509f10e5abd",
+      "timestamp": "2026-06-29T01:35:03.788175+00:00",
+      "data": {
+        "cycle": 459,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 140,
+        "M": 140,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "030e1509f10e5abd",
+      "hash": "a3b5f63eb6f75de2",
+      "timestamp": "2026-06-29T01:35:03.797325+00:00",
+      "data": {
+        "cycle": 460,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 140,
+        "M": 140,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 45
+      }
+    },
+    {
+      "prev_hash": "a3b5f63eb6f75de2",
+      "hash": "4540b7e09aea4b38",
+      "timestamp": "2026-06-29T01:35:03.806286+00:00",
+      "data": {
+        "cycle": 461,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 140,
+        "M": 140,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "4540b7e09aea4b38",
+      "hash": "cf82481275201d00",
+      "timestamp": "2026-06-29T01:35:03.815055+00:00",
+      "data": {
+        "cycle": 462,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 141,
+        "M": 141,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 46
+      }
+    },
+    {
+      "prev_hash": "cf82481275201d00",
+      "hash": "e32afb256f6e56fc",
+      "timestamp": "2026-06-29T01:35:03.823282+00:00",
+      "data": {
+        "cycle": 463,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 141,
+        "M": 141,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "e32afb256f6e56fc",
+      "hash": "25809226e89e6215",
+      "timestamp": "2026-06-29T01:35:03.834506+00:00",
+      "data": {
+        "cycle": 464,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 141,
+        "M": 141,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 46
+      }
+    },
+    {
+      "prev_hash": "25809226e89e6215",
+      "hash": "0078c0066e66c956",
+      "timestamp": "2026-06-29T01:35:03.841040+00:00",
+      "data": {
+        "cycle": 465,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 141,
+        "M": 141,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "0078c0066e66c956",
+      "hash": "05c51aba0185c9c2",
+      "timestamp": "2026-06-29T01:35:03.849111+00:00",
+      "data": {
+        "cycle": 466,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 142,
+        "M": 142,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 46
+      }
+    },
+    {
+      "prev_hash": "05c51aba0185c9c2",
+      "hash": "11109d3add900ffb",
+      "timestamp": "2026-06-29T01:35:03.855261+00:00",
+      "data": {
+        "cycle": 467,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 142,
+        "M": 142,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "11109d3add900ffb",
+      "hash": "cd1eafb99cdf4696",
+      "timestamp": "2026-06-29T01:35:03.862323+00:00",
+      "data": {
+        "cycle": 468,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 143,
+        "M": 143,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 46
+      }
+    },
+    {
+      "prev_hash": "cd1eafb99cdf4696",
+      "hash": "deec5095517da50c",
+      "timestamp": "2026-06-29T01:35:03.869219+00:00",
+      "data": {
+        "cycle": 469,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 143,
+        "M": 143,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "deec5095517da50c",
+      "hash": "7697b5d2bd94c63c",
+      "timestamp": "2026-06-29T01:35:03.879062+00:00",
+      "data": {
+        "cycle": 470,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 143,
+        "M": 143,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 46
+      }
+    },
+    {
+      "prev_hash": "7697b5d2bd94c63c",
+      "hash": "258434b04e66003d",
+      "timestamp": "2026-06-29T01:35:03.887076+00:00",
+      "data": {
+        "cycle": 471,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 143,
+        "M": 143,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "258434b04e66003d",
+      "hash": "a31f8756de69dc59",
+      "timestamp": "2026-06-29T01:35:03.894397+00:00",
+      "data": {
+        "cycle": 472,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 144,
+        "M": 144,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 47
+      }
+    },
+    {
+      "prev_hash": "a31f8756de69dc59",
+      "hash": "edd1a3e00650077a",
+      "timestamp": "2026-06-29T01:35:03.901937+00:00",
+      "data": {
+        "cycle": 473,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 144,
+        "M": 144,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "edd1a3e00650077a",
+      "hash": "96ac98ae5f189f37",
+      "timestamp": "2026-06-29T01:35:03.909825+00:00",
+      "data": {
+        "cycle": 474,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 144,
+        "M": 144,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 47
+      }
+    },
+    {
+      "prev_hash": "96ac98ae5f189f37",
+      "hash": "6c2d6cf399c0d761",
+      "timestamp": "2026-06-29T01:35:03.917689+00:00",
+      "data": {
+        "cycle": 475,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 144,
+        "M": 144,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "6c2d6cf399c0d761",
+      "hash": "79d5ca347e50bfdb",
+      "timestamp": "2026-06-29T01:35:03.924968+00:00",
+      "data": {
+        "cycle": 476,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 145,
+        "M": 145,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 47
+      }
+    },
+    {
+      "prev_hash": "79d5ca347e50bfdb",
+      "hash": "e376dbbb3da235db",
+      "timestamp": "2026-06-29T01:35:03.932288+00:00",
+      "data": {
+        "cycle": 477,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 145,
+        "M": 145,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "e376dbbb3da235db",
+      "hash": "af7d77caaa1e016a",
+      "timestamp": "2026-06-29T01:35:03.939767+00:00",
+      "data": {
+        "cycle": 478,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 146,
+        "M": 146,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 47
+      }
+    },
+    {
+      "prev_hash": "af7d77caaa1e016a",
+      "hash": "740b14b2a6b5eaf7",
+      "timestamp": "2026-06-29T01:35:03.947807+00:00",
+      "data": {
+        "cycle": 479,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 146,
+        "M": 146,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "740b14b2a6b5eaf7",
+      "hash": "345a85d6ce3ee142",
+      "timestamp": "2026-06-29T01:35:03.955268+00:00",
+      "data": {
+        "cycle": 480,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 146,
+        "M": 146,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 47
+      }
+    },
+    {
+      "prev_hash": "345a85d6ce3ee142",
+      "hash": "b4b13a988b85f00d",
+      "timestamp": "2026-06-29T01:35:03.962733+00:00",
+      "data": {
+        "cycle": 481,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 146,
+        "M": 146,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b4b13a988b85f00d",
+      "hash": "05c6771f4355b830",
+      "timestamp": "2026-06-29T01:35:03.978437+00:00",
+      "data": {
+        "cycle": 482,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 147,
+        "M": 147,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 48
+      }
+    },
+    {
+      "prev_hash": "05c6771f4355b830",
+      "hash": "887a104ba105d82d",
+      "timestamp": "2026-06-29T01:35:03.985748+00:00",
+      "data": {
+        "cycle": 483,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 147,
+        "M": 147,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "887a104ba105d82d",
+      "hash": "182c71bf3595dab4",
+      "timestamp": "2026-06-29T01:35:03.992266+00:00",
+      "data": {
+        "cycle": 484,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 147,
+        "M": 147,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 48
+      }
+    },
+    {
+      "prev_hash": "182c71bf3595dab4",
+      "hash": "33559b747d059592",
+      "timestamp": "2026-06-29T01:35:04.002373+00:00",
+      "data": {
+        "cycle": 485,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 147,
+        "M": 147,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "33559b747d059592",
+      "hash": "fda3964f025c023e",
+      "timestamp": "2026-06-29T01:35:04.012812+00:00",
+      "data": {
+        "cycle": 486,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 148,
+        "M": 148,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 48
+      }
+    },
+    {
+      "prev_hash": "fda3964f025c023e",
+      "hash": "368d881f913a2562",
+      "timestamp": "2026-06-29T01:35:04.021667+00:00",
+      "data": {
+        "cycle": 487,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 148,
+        "M": 148,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "368d881f913a2562",
+      "hash": "1bda342bdd39b8c3",
+      "timestamp": "2026-06-29T01:35:04.030059+00:00",
+      "data": {
+        "cycle": 488,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 149,
+        "M": 149,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 48
+      }
+    },
+    {
+      "prev_hash": "1bda342bdd39b8c3",
+      "hash": "8c7d09aebb64891b",
+      "timestamp": "2026-06-29T01:35:04.038742+00:00",
+      "data": {
+        "cycle": 489,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 149,
+        "M": 149,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "8c7d09aebb64891b",
+      "hash": "6558c612c348555f",
+      "timestamp": "2026-06-29T01:35:04.049181+00:00",
+      "data": {
+        "cycle": 490,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 149,
+        "M": 149,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 48
+      }
+    },
+    {
+      "prev_hash": "6558c612c348555f",
+      "hash": "a11b2997fba9ae20",
+      "timestamp": "2026-06-29T01:35:04.055524+00:00",
+      "data": {
+        "cycle": 491,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 149,
+        "M": 149,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "a11b2997fba9ae20",
+      "hash": "a246207608525331",
+      "timestamp": "2026-06-29T01:35:04.066199+00:00",
+      "data": {
+        "cycle": 492,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 150,
+        "M": 150,
+        "ptc": 0.94,
+        "ptd": 0.85554565404479,
+        "enc": 49
+      }
+    },
+    {
+      "prev_hash": "a246207608525331",
+      "hash": "b9494c6f41a0473d",
+      "timestamp": "2026-06-29T01:35:04.074010+00:00",
+      "data": {
+        "cycle": 493,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 150,
+        "M": 150,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "b9494c6f41a0473d",
+      "hash": "415fef98b2de2430",
+      "timestamp": "2026-06-29T01:35:04.085535+00:00",
+      "data": {
+        "cycle": 494,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 150,
+        "M": 150,
+        "ptc": 0.85,
+        "ptd": 0.8661486072990412,
+        "enc": 49
+      }
+    },
+    {
+      "prev_hash": "415fef98b2de2430",
+      "hash": "1751e5a89a6b29c2",
+      "timestamp": "2026-06-29T01:35:04.095814+00:00",
+      "data": {
+        "cycle": 495,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 150,
+        "M": 150,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "1751e5a89a6b29c2",
+      "hash": "48a6f79fdf1ade24",
+      "timestamp": "2026-06-29T01:35:04.106824+00:00",
+      "data": {
+        "cycle": 496,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 151,
+        "M": 151,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 49
+      }
+    },
+    {
+      "prev_hash": "48a6f79fdf1ade24",
+      "hash": "9170ffcbd9552cc6",
+      "timestamp": "2026-06-29T01:35:04.124609+00:00",
+      "data": {
+        "cycle": 497,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 151,
+        "M": 151,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9170ffcbd9552cc6",
+      "hash": "e6cfb168525d79a9",
+      "timestamp": "2026-06-29T01:35:04.136537+00:00",
+      "data": {
+        "cycle": 498,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 3,
+        "paths": 152,
+        "M": 152,
+        "ptc": 0.925,
+        "ptd": 0.857303756113165,
+        "enc": 49
+      }
+    },
+    {
+      "prev_hash": "e6cfb168525d79a9",
+      "hash": "9adfe00c9d525864",
+      "timestamp": "2026-06-29T01:35:04.155677+00:00",
+      "data": {
+        "cycle": 499,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 152,
+        "M": 152,
+        "ptc": 0.0,
+        "ptd": 0.973,
+        "enc": 0
+      }
+    },
+    {
+      "prev_hash": "9adfe00c9d525864",
+      "hash": "9cbd376489f05c3d",
+      "timestamp": "2026-06-29T01:35:04.165275+00:00",
+      "data": {
+        "cycle": 500,
+        "eta_measured": 0.03,
+        "spectral_class": "G",
+        "mods": 1,
+        "paths": 152,
+        "M": 152,
+        "ptc": 0.7,
+        "ptd": 0.884113009616418,
+        "enc": 49
+      }
+    }
+  ],
+  "stats": {
+    "total_cycles": 500,
+    "g_class_ratio": 0.856,
+    "multiplication_factor": 152
+  }
+}

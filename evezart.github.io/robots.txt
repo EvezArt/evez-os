@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://evezart.github.io/sitemap.xml

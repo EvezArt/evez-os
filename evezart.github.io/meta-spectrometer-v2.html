@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta-Spectrometer v2 — CRI 55.0</title>
+<style>
+body{background:#0a0a0f;color:#e0e0e8;font-family:monospace;padding:20px;line-height:1.6;max-width:1100px;margin:0 auto}
+h1{color:#ff0044;text-align:center;font-size:2.5em}
+.cri{text-align:center;font-size:4em;font-weight:bold;color:#ff0044;margin:20px 0}
+.cri .level{font-size:.3em;opacity:.6}
+.sub{text-align:center;opacity:.5;margin-bottom:2em;font-size:.85em}
+table{width:100%;border-collapse:collapse;margin-bottom:2em;font-size:.85em}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid #333}
+th{color:#ff8800}
+.bar{height:8px;background:#222;border-radius:4px;overflow:hidden;margin:4px 0}
+.fill{height:100%;border-radius:4px}
+.crit{color:#ff0044}.elev{color:#ff8800}.mod{color:#4488ff}.low{color:#00ff88}
+.section{background:#1a1a2e;border:1px solid #333;border-radius:12px;padding:16px;margin-bottom:16px}
+.section h2{color:#ff8800;font-size:1.1em;margin-bottom:8px}
+.trigger{padding:6px 0;border-bottom:1px solid #222;font-size:.85em}
+.trigger:last-child{border:none}
+footer{opacity:.4;text-align:center;margin-top:3em;font-size:.75em}
+a{color:#4488ff}
+</style>
+</head>
+<body>
+<h1>META-SPECTROMETER v2</h1>
+<div class="cri">55.0<span class="level"> / 100 — ELEVATED</span></div>
+<div class="sub">14 domains | Was 49.1 (v1, 11 domains) | Delta +5.9 | Dark matter revealed hidden risk</div>
+
+<table>
+<tr><th>Domain</th><th>Score</th><th>Weight</th><th>Confidence</th><th>Weighted</th><th>Class</th><th>Trend</th></tr>
+<tr><td>genocide</td><td>0.818</td><td>0.13</td><td>0.95</td><td>0.1010</td><td class="crit">CRITICAL</td><td>rising</td></tr>
+<tr><td>conflict</td><td>0.855</td><td>0.12</td><td>0.95</td><td>0.0975</td><td class="crit">CRITICAL</td><td>rising</td></tr>
+<tr><td>nuclear</td><td>0.528</td><td>0.17</td><td>0.90</td><td>0.0808</td><td class="elev">ELEVATED</td><td>rising</td></tr>
+<tr><td>famine</td><td>0.750</td><td>0.08</td><td>0.95</td><td>0.0570</td><td class="crit">CRITICAL</td><td>rising</td></tr>
+<tr><td>crime</td><td>0.749</td><td>0.05</td><td>0.95</td><td>0.0356</td><td class="crit">CRITICAL</td><td>stable</td></tr>
+<tr><td>economic</td><td>0.578</td><td>0.07</td><td>0.85</td><td>0.0344</td><td class="elev">ELEVATED</td><td>stable</td></tr>
+<tr><td>democracy</td><td>0.505</td><td>0.06</td><td>0.90</td><td>0.0273</td><td class="elev">ELEVATED</td><td>rising</td></tr>
+<tr><td class="elev">carbon_concealment (NEW)</td><td>0.852</td><td>0.04</td><td>0.70</td><td>0.0239</td><td class="crit">CRITICAL</td><td>stable</td></tr>
+<tr><td>ai_risk</td><td>0.423</td><td>0.06</td><td>0.85</td><td>0.0216</td><td class="elev">ELEVATED</td><td>rising</td></tr>
+<tr><td class="elev">addiction_by_design (NEW)</td><td>0.999</td><td>0.03</td><td>0.70</td><td>0.0210</td><td class="crit">CRITICAL</td><td>rising</td></tr>
+<tr><td>climate</td><td>0.190</td><td>0.12</td><td>0.90</td><td>0.0205</td><td class="low">LOW</td><td>rising</td></tr>
+<tr><td class="elev">surveillance_capitalism (NEW)</td><td>0.900</td><td>0.03</td><td>0.70</td><td>0.0189</td><td class="crit">CRITICAL</td><td>rising</td></tr>
+<tr><td>disease</td><td>0.350</td><td>0.02</td><td>0.90</td><td>0.0063</td><td class="mod">MODERATE</td><td>stable</td></tr>
+<tr><td>consciousness</td><td>0.271</td><td>0.02</td><td>0.80</td><td>0.0043</td><td class="low">LOW</td><td>rising</td></tr>
+</table>
+
+<div class="section">
+<h2>ACTION BRIDGE — 11 DOMAINS TRIGGERED</h2>
+<div class="trigger"><span class="crit">CRITICAL</span> genocide (0.818) → BP1: Gaza Genocide Response | UNSC, Egypt, Israel, UNRWA, ICC | 48-72 hrs</div>
+<div class="trigger"><span class="crit">CRITICAL</span> conflict (0.855) → BP3: Ukraine-Russia De-escalation | US, Russia, NATO, UN, OSCE | 30-90 days</div>
+<div class="trigger"><span class="crit">CRITICAL</span> famine (0.750) → BP2: S Sudan Famine Response | UNSC, AU, WFP, NGOs | 7 days</div>
+<div class="trigger"><span class="elev">ELEVATED</span> nuclear (0.528) → BP3: Ukraine-Russia De-escalation | US, Russia, NATO, UN, OSCE | 30-90 days</div>
+<div class="trigger"><span class="crit">CRITICAL</span> crime (0.749) → BP7: Crime Dark Figure Response | ICC, UNODC, Interpol, Prosecutors | 90-180 days</div>
+<div class="trigger"><span class="elev">ELEVATED</span> democracy (0.505) → BP4: Democracy Protection | Election authorities, Tech, Civil society | Before next election</div>
+<div class="trigger"><span class="elev">ELEVATED</span> ai_risk (0.423) → BP5: AI Safety Framework | UN, National AI safety institutes, Industry | 180-365 days</div>
+<div class="trigger"><span class="elev">ELEVATED</span> economic (0.578) → BP7: Crime Dark Figure Response | ICC, UNODC, Interpol | 90-180 days</div>
+<div class="trigger"><span class="crit">CRITICAL</span> carbon_concealment (0.852) → BP6: Climate Action | G20, National governments, IPCC | 5 years</div>
+<div class="trigger"><span class="crit">CRITICAL</span> surveillance_capitalism (0.900) → BP7: Crime Dark Figure | ICC, UNODC, Interpol | 90-180 days</div>
+<div class="trigger"><span class="crit">CRITICAL</span> addiction_by_design (0.999) → BP7: Crime Dark Figure | ICC, UNODC, Interpol | 90-180 days</div>
+</div>
+
+<div class="section" style="text-align:center">
+<div style="font-size:1.5em;color:#ff0044">7 CRITICAL | 4 ELEVATED | 10 RISING | 0 FALLING</div>
+<div style="opacity:.6;margin-top:8px">Dark figure: 140/175 = 80.0% of crime categories unmeasured</div>
+<div style="opacity:.5;margin-top:4px">CRI is a lower bound. True risk >= 3.71x measured (dark matter principle)</div>
+<div style="opacity:.4;margin-top:4px">The CRI is not rising because the world is getting worse. It is rising because we are seeing more of it.</div>
+</div>
+
+<footer>
+Meta-Spectrometer v2 (14 domains) | CRI 55.0 | 141/141 spectrometer checks | 37/37 quantum checks<br>
+<a href="dark-matter-crimes.html">Dark Matter Crimes</a> &middot; <a href="save-the-world.html">Save the World</a> &middot; <a href="model-evez-1.html">Model EVEZ-1</a> &middot; <a href="resolutions.html">Resolutions</a><br>
+Liber Obscurum II (30th Moltbook, C130-C133) | The dark matter persists. The 3% persists.
+</footer>
+</body>
+</html>

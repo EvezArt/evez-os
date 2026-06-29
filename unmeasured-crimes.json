@@ -1,0 +1,1487 @@
+{
+  "crimes": [
+    {
+      "name": "cognitive_sovereignty_violation",
+      "category": "digital",
+      "severity": 0.85,
+      "prevalence": 0.9,
+      "concealment": 0.92,
+      "score": 0.7038,
+      "evidence": "Attention engineering",
+      "actors": [
+        "tech",
+        "intel"
+      ],
+      "description": "Erosion of cognitive autonomy"
+    },
+    {
+      "name": "dark_pattern_deception",
+      "category": "digital",
+      "severity": 0.8,
+      "prevalence": 0.9,
+      "concealment": 0.88,
+      "score": 0.6336,
+      "evidence": "Ubiquitous in UX",
+      "actors": [
+        "tech_companies",
+        "corps"
+      ],
+      "description": "Dark pattern manipulation"
+    },
+    {
+      "name": "data_colonialism",
+      "category": "digital",
+      "severity": 0.75,
+      "prevalence": 0.9,
+      "concealment": 0.88,
+      "score": 0.594,
+      "evidence": "Global extraction",
+      "actors": [
+        "tech_companies"
+      ],
+      "description": "Behavioral data extraction"
+    },
+    {
+      "name": "automated_decision_harm",
+      "category": "digital",
+      "severity": 0.8,
+      "prevalence": 0.8,
+      "concealment": 0.9,
+      "score": 0.576,
+      "evidence": "Welfare,immigration,justice",
+      "actors": [
+        "tech",
+        "state_actors"
+      ],
+      "description": "Automated decision harm"
+    },
+    {
+      "name": "planned_obsolescence",
+      "category": "economic",
+      "severity": 0.75,
+      "prevalence": 0.9,
+      "concealment": 0.85,
+      "score": 0.5737,
+      "evidence": "Apple,Samsung",
+      "actors": [
+        "corps",
+        "tech"
+      ],
+      "description": "Deliberate product obsolescence"
+    },
+    {
+      "name": "enshitification",
+      "category": "digital",
+      "severity": 0.75,
+      "prevalence": 0.9,
+      "concealment": 0.85,
+      "score": 0.5737,
+      "evidence": "Platform decay",
+      "actors": [
+        "tech_companies"
+      ],
+      "description": "Deliberate platform degradation"
+    },
+    {
+      "name": "platform_monopoly_abuse",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.8,
+      "concealment": 0.88,
+      "score": 0.5632,
+      "evidence": "App stores,marketplaces",
+      "actors": [
+        "tech_companies"
+      ],
+      "description": "Platform monopoly abuse"
+    },
+    {
+      "name": "intergenerational_toxin",
+      "category": "public_health",
+      "severity": 0.9,
+      "prevalence": 0.7,
+      "concealment": 0.88,
+      "score": 0.5544,
+      "evidence": "Lead,PFAS,radiation",
+      "actors": [
+        "corps",
+        "military",
+        "state_actors"
+      ],
+      "description": "Multi-gen toxins"
+    },
+    {
+      "name": "international_law_violation",
+      "category": "institutional",
+      "severity": 0.9,
+      "prevalence": 0.7,
+      "concealment": 0.88,
+      "score": 0.5544,
+      "evidence": "Pattern",
+      "actors": [
+        "state_actors"
+      ],
+      "description": "Violating international law"
+    },
+    {
+      "name": "wealth_concealment_elite",
+      "category": "financial",
+      "severity": 0.75,
+      "prevalence": 0.8,
+      "concealment": 0.92,
+      "score": 0.552,
+      "evidence": "Offshore accounts",
+      "actors": [
+        "banks",
+        "wealthy_individuals"
+      ],
+      "description": "Elite wealth concealment"
+    },
+    {
+      "name": "shadow_banking_crime",
+      "category": "financial",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.92,
+      "score": 0.5474,
+      "evidence": "Unregulated",
+      "actors": [
+        "banks",
+        "hedge_funds"
+      ],
+      "description": "Shadow banking crimes"
+    },
+    {
+      "name": "data_breach_negligence",
+      "category": "digital",
+      "severity": 0.8,
+      "prevalence": 0.8,
+      "concealment": 0.85,
+      "score": 0.544,
+      "evidence": "Equifax, Yahoo",
+      "actors": [
+        "corps",
+        "tech"
+      ],
+      "description": "Negligent data breaches"
+    },
+    {
+      "name": "crypto_crime",
+      "category": "financial",
+      "severity": 0.75,
+      "prevalence": 0.8,
+      "concealment": 0.9,
+      "score": 0.54,
+      "evidence": "Ransomware,mixing",
+      "actors": [
+        "criminals",
+        "state_actors"
+      ],
+      "description": "Crypto-facilitated crime"
+    },
+    {
+      "name": "water_contamination_concealment",
+      "category": "public_health",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.9,
+      "score": 0.5355,
+      "evidence": "PFAS,lead,fracking",
+      "actors": [
+        "corps",
+        "military",
+        "state_actors"
+      ],
+      "description": "Concealing water contamination"
+    },
+    {
+      "name": "pesticide_harm_concealment",
+      "category": "public_health",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.9,
+      "score": 0.5355,
+      "evidence": "Bayer/Monsanto",
+      "actors": [
+        "corps",
+        "agricultural",
+        "chemical"
+      ],
+      "description": "Concealing pesticide harm"
+    },
+    {
+      "name": "tobacco_continued_targeting",
+      "category": "public_health",
+      "severity": 0.9,
+      "prevalence": 0.7,
+      "concealment": 0.85,
+      "score": 0.5355,
+      "evidence": "Developing world",
+      "actors": [
+        "tobacco_corps"
+      ],
+      "description": "Continued tobacco targeting"
+    },
+    {
+      "name": "bribe_network_international",
+      "category": "financial",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.9,
+      "score": 0.5355,
+      "evidence": "1MDB,Unaoil",
+      "actors": [
+        "corps",
+        "banks",
+        "state_actors"
+      ],
+      "description": "International bribery"
+    },
+    {
+      "name": "deepfake_abuse_personal",
+      "category": "digital",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.9,
+      "score": 0.5355,
+      "evidence": "Revenge porn, fraud",
+      "actors": [
+        "individuals",
+        "criminals"
+      ],
+      "description": "Personal deepfake abuse"
+    },
+    {
+      "name": "digital_redlining",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.75,
+      "concealment": 0.88,
+      "score": 0.528,
+      "evidence": "Algorithmic lending",
+      "actors": [
+        "tech",
+        "banks"
+      ],
+      "description": "Digital lending discrimination"
+    },
+    {
+      "name": "content_moderation_bias",
+      "category": "digital",
+      "severity": 0.75,
+      "prevalence": 0.8,
+      "concealment": 0.88,
+      "score": 0.528,
+      "evidence": "Platform bias",
+      "actors": [
+        "tech_companies"
+      ],
+      "description": "Biased content moderation"
+    },
+    {
+      "name": "housing_as_weapon",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.8,
+      "concealment": 0.82,
+      "score": 0.5248,
+      "evidence": "Redlining,eviction",
+      "actors": [
+        "corps",
+        "state_actors",
+        "banks"
+      ],
+      "description": "Housing as control"
+    },
+    {
+      "name": "audit_fraud",
+      "category": "financial",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.88,
+      "score": 0.5236,
+      "evidence": "Enron,Wirecard",
+      "actors": [
+        "corps",
+        "banks"
+      ],
+      "description": "Fraudulent audits"
+    },
+    {
+      "name": "antibiotic_resistance_agriculture",
+      "category": "public_health",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.88,
+      "score": 0.5236,
+      "evidence": "Factory farming",
+      "actors": [
+        "corps",
+        "agricultural",
+        "pharma"
+      ],
+      "description": "Agricultural antibiotic overuse"
+    },
+    {
+      "name": "treaty_violation",
+      "category": "institutional",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.88,
+      "score": 0.5236,
+      "evidence": "US-Indigenous treaties",
+      "actors": [
+        "state_actors"
+      ],
+      "description": "Breaking treaties"
+    },
+    {
+      "name": "right_to_repair_violation",
+      "category": "economic",
+      "severity": 0.7,
+      "prevalence": 0.85,
+      "concealment": 0.88,
+      "score": 0.5236,
+      "evidence": "Tech,agriculture",
+      "actors": [
+        "corps",
+        "tech",
+        "agricultural"
+      ],
+      "description": "Preventing repair"
+    },
+    {
+      "name": "constitutional_violation",
+      "category": "institutional",
+      "severity": 0.9,
+      "prevalence": 0.7,
+      "concealment": 0.82,
+      "score": 0.5166,
+      "evidence": "NSA,Patriot Act",
+      "actors": [
+        "state_actors",
+        "intel"
+      ],
+      "description": "Constitutional violations"
+    },
+    {
+      "name": "deepfake_weaponization",
+      "category": "digital",
+      "severity": 0.8,
+      "prevalence": 0.7,
+      "concealment": 0.92,
+      "score": 0.5152,
+      "evidence": "Election interference",
+      "actors": [
+        "state_actors",
+        "intel",
+        "criminals"
+      ],
+      "description": "Synthetic media weapon"
+    },
+    {
+      "name": "forbidden_knowledge_suppression",
+      "category": "epistemic",
+      "severity": 0.8,
+      "prevalence": 0.7,
+      "concealment": 0.92,
+      "score": 0.5152,
+      "evidence": "Classification abuse",
+      "actors": [
+        "state_actors",
+        "intel",
+        "military"
+      ],
+      "description": "Suppressing knowledge"
+    },
+    {
+      "name": "narcotic_state_trade",
+      "category": "organized",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.95,
+      "score": 0.513,
+      "evidence": "CIA documented",
+      "actors": [
+        "intel",
+        "state_actors"
+      ],
+      "description": "State drug trafficking"
+    },
+    {
+      "name": "worker_safety_homicide",
+      "category": "public_health",
+      "severity": 0.85,
+      "prevalence": 0.8,
+      "concealment": 0.75,
+      "score": 0.51,
+      "evidence": "OSHA 4:1 underreport",
+      "actors": [
+        "corps",
+        "mining",
+        "agriculture"
+      ],
+      "description": "Lethal workplace conditions"
+    },
+    {
+      "name": "agricultural_monopoly",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.75,
+      "concealment": 0.85,
+      "score": 0.51,
+      "evidence": "Seed monopoly",
+      "actors": [
+        "corps",
+        "agricultural"
+      ],
+      "description": "Food supply monopoly"
+    },
+    {
+      "name": "gentrification_weapon",
+      "category": "economic",
+      "severity": 0.75,
+      "prevalence": 0.85,
+      "concealment": 0.8,
+      "score": 0.51,
+      "evidence": "Global pattern",
+      "actors": [
+        "corps",
+        "banks",
+        "state_actors"
+      ],
+      "description": "Development displacement"
+    },
+    {
+      "name": "land_grab",
+      "category": "economic",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.85,
+      "score": 0.5057,
+      "evidence": "Africa,global south",
+      "actors": [
+        "corps",
+        "state_actors",
+        "sovereign_wealth"
+      ],
+      "description": "Land displacement"
+    },
+    {
+      "name": "consumer_fraud_systematic",
+      "category": "economic",
+      "severity": 0.7,
+      "prevalence": 0.9,
+      "concealment": 0.8,
+      "score": 0.504,
+      "evidence": "Planned obsolescence",
+      "actors": [
+        "corps",
+        "tech"
+      ],
+      "description": "Systematic consumer fraud"
+    },
+    {
+      "name": "predictive_policing_bias",
+      "category": "digital",
+      "severity": 0.8,
+      "prevalence": 0.7,
+      "concealment": 0.9,
+      "score": 0.504,
+      "evidence": "Palantir,PredPol",
+      "actors": [
+        "tech",
+        "law_enforcement",
+        "state_actors"
+      ],
+      "description": "Biased predictive policing"
+    },
+    {
+      "name": "cyber_warfare_state",
+      "category": "digital",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.93,
+      "score": 0.5022,
+      "evidence": "Stuxnet,NotPetya",
+      "actors": [
+        "state_actors",
+        "intel",
+        "military"
+      ],
+      "description": "State cyber warfare"
+    },
+    {
+      "name": "eviction_as_violence",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.8,
+      "concealment": 0.78,
+      "score": 0.4992,
+      "evidence": "Pandemic evictions",
+      "actors": [
+        "corps",
+        "banks",
+        "state_actors"
+      ],
+      "description": "Forced eviction violence"
+    },
+    {
+      "name": "synthetic_media_election",
+      "category": "digital",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.92,
+      "score": 0.4968,
+      "evidence": "2024 elections",
+      "actors": [
+        "state_actors",
+        "intel"
+      ],
+      "description": "Election deepfakes"
+    },
+    {
+      "name": "epistemic_violence",
+      "category": "cultural",
+      "severity": 0.8,
+      "prevalence": 0.7,
+      "concealment": 0.88,
+      "score": 0.4928,
+      "evidence": "Library burnings",
+      "actors": [
+        "state_actors",
+        "colonial_powers",
+        "religious"
+      ],
+      "description": "Knowledge destruction"
+    },
+    {
+      "name": "credit_rating_fraud",
+      "category": "financial",
+      "severity": 0.8,
+      "prevalence": 0.7,
+      "concealment": 0.88,
+      "score": 0.4928,
+      "evidence": "2008 AAA",
+      "actors": [
+        "banks",
+        "corps"
+      ],
+      "description": "Fraudulent ratings"
+    },
+    {
+      "name": "ai_washing_fraud",
+      "category": "economic",
+      "severity": 0.7,
+      "prevalence": 0.8,
+      "concealment": 0.88,
+      "score": 0.4928,
+      "evidence": "'AI' marketing fraud",
+      "actors": [
+        "corps",
+        "tech"
+      ],
+      "description": "False AI claims"
+    },
+    {
+      "name": "asylum_denial_illegal",
+      "category": "institutional",
+      "severity": 0.85,
+      "prevalence": 0.7,
+      "concealment": 0.82,
+      "score": 0.4879,
+      "evidence": "US,EU,Australia",
+      "actors": [
+        "state_actors"
+      ],
+      "description": "Illegal asylum denial"
+    },
+    {
+      "name": "election_hacking",
+      "category": "institutional",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.9,
+      "score": 0.486,
+      "evidence": "2016,2020 documented",
+      "actors": [
+        "state_actors",
+        "intel"
+      ],
+      "description": "Election interference"
+    },
+    {
+      "name": "forced_labor_corporate",
+      "category": "atrocity",
+      "severity": 0.92,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4858,
+      "evidence": "Supply chains",
+      "actors": [
+        "corps",
+        "state_actors"
+      ],
+      "description": "Corporate forced labor"
+    },
+    {
+      "name": "geneva_convention_violation",
+      "category": "conflict",
+      "severity": 0.95,
+      "prevalence": 0.6,
+      "concealment": 0.85,
+      "score": 0.4845,
+      "evidence": "Multiple wars",
+      "actors": [
+        "military",
+        "state_actors"
+      ],
+      "description": "Geneva violations"
+    },
+    {
+      "name": "ocean_acidification_concealment",
+      "category": "environmental",
+      "severity": 0.8,
+      "prevalence": 0.7,
+      "concealment": 0.85,
+      "score": 0.476,
+      "evidence": "FF industry knew",
+      "actors": [
+        "corps",
+        "state_actors"
+      ],
+      "description": "Concealing ocean data"
+    },
+    {
+      "name": "ip_theft",
+      "category": "economic",
+      "severity": 0.7,
+      "prevalence": 0.8,
+      "concealment": 0.85,
+      "score": 0.476,
+      "evidence": "State-sponsored",
+      "actors": [
+        "state_actors",
+        "corps"
+      ],
+      "description": "Systematic IP theft"
+    },
+    {
+      "name": "water_table_depletion",
+      "category": "environmental",
+      "severity": 0.8,
+      "prevalence": 0.7,
+      "concealment": 0.85,
+      "score": 0.476,
+      "evidence": "Aquifer depletion",
+      "actors": [
+        "corps",
+        "agricultural",
+        "state_actors"
+      ],
+      "description": "Systematic aquifer depletion"
+    },
+    {
+      "name": "judicial_corruption",
+      "category": "institutional",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4752,
+      "evidence": "Dutroux,Epstein",
+      "actors": [
+        "state_actors",
+        "judicial"
+      ],
+      "description": "Judges obstructing justice"
+    },
+    {
+      "name": "conflict_mineral_trade",
+      "category": "organized",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4752,
+      "evidence": "DRC,3T minerals",
+      "actors": [
+        "corps",
+        "cartels",
+        "state_actors"
+      ],
+      "description": "Conflict mineral trade"
+    },
+    {
+      "name": "patent_hoarding",
+      "category": "economic",
+      "severity": 0.7,
+      "prevalence": 0.75,
+      "concealment": 0.88,
+      "score": 0.462,
+      "evidence": "Pharma,tech,ag",
+      "actors": [
+        "corps",
+        "pharma",
+        "tech"
+      ],
+      "description": "Patent hoarding"
+    },
+    {
+      "name": "academic_capture",
+      "category": "institutional",
+      "severity": 0.75,
+      "prevalence": 0.7,
+      "concealment": 0.88,
+      "score": 0.462,
+      "evidence": "Corporate-funded",
+      "actors": [
+        "corps",
+        "universities",
+        "pharma"
+      ],
+      "description": "Corporate academic capture"
+    },
+    {
+      "name": "illegal_fishing",
+      "category": "environmental",
+      "severity": 0.7,
+      "prevalence": 0.8,
+      "concealment": 0.82,
+      "score": 0.4592,
+      "evidence": "IUU $36B/yr",
+      "actors": [
+        "corps",
+        "state_actors"
+      ],
+      "description": "IUU fishing"
+    },
+    {
+      "name": "mass_displacement_weapon",
+      "category": "atrocity",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.85,
+      "score": 0.459,
+      "evidence": "Gaza,Sudan,Myanmar",
+      "actors": [
+        "state_actors",
+        "military"
+      ],
+      "description": "Forced displacement as weapon"
+    },
+    {
+      "name": "indigenous_land_violation",
+      "category": "atrocity",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.85,
+      "score": 0.459,
+      "evidence": "Standing Rock,Amazon",
+      "actors": [
+        "state_actors",
+        "corps"
+      ],
+      "description": "Violating indigenous land rights"
+    },
+    {
+      "name": "vaccine_disinformation",
+      "category": "public_health",
+      "severity": 0.85,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4488,
+      "evidence": "COVID anti-vax",
+      "actors": [
+        "state_actors",
+        "disinfo_networks"
+      ],
+      "description": "Vaccine misinformation"
+    },
+    {
+      "name": "scientific_fraud_health",
+      "category": "public_health",
+      "severity": 0.85,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4488,
+      "evidence": "Sugar,tobacco",
+      "actors": [
+        "corps",
+        "food_industry",
+        "pharma"
+      ],
+      "description": "Fraudulent health research"
+    },
+    {
+      "name": "orphan_drug_exploitation",
+      "category": "economic",
+      "severity": 0.85,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4488,
+      "evidence": "Shkreli",
+      "actors": [
+        "pharma"
+      ],
+      "description": "Rare disease monopoly"
+    },
+    {
+      "name": "sovereignty_violation",
+      "category": "institutional",
+      "severity": 0.85,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4488,
+      "evidence": "Global pattern",
+      "actors": [
+        "state_actors",
+        "corps"
+      ],
+      "description": "Violating sovereignty"
+    },
+    {
+      "name": "commarket_manipulation",
+      "category": "economic",
+      "severity": 0.85,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4488,
+      "evidence": "Libor,metal markets",
+      "actors": [
+        "banks",
+        "corps"
+      ],
+      "description": "Commodity manipulation"
+    },
+    {
+      "name": "historical_revisionism",
+      "category": "epistemic",
+      "severity": 0.75,
+      "prevalence": 0.7,
+      "concealment": 0.85,
+      "score": 0.4462,
+      "evidence": "Genocide denial",
+      "actors": [
+        "state_actors",
+        "religious",
+        "political"
+      ],
+      "description": "Rewriting history"
+    },
+    {
+      "name": "assassination_program",
+      "category": "institutional",
+      "severity": 0.95,
+      "prevalence": 0.5,
+      "concealment": 0.93,
+      "score": 0.4417,
+      "evidence": "Targeted killings",
+      "actors": [
+        "intel",
+        "state_actors",
+        "military"
+      ],
+      "description": "State assassination programs"
+    },
+    {
+      "name": "cultural_genocide",
+      "category": "cultural",
+      "severity": 0.9,
+      "prevalence": 0.6,
+      "concealment": 0.8,
+      "score": 0.432,
+      "evidence": "Residential schools",
+      "actors": [
+        "state_actors",
+        "religious"
+      ],
+      "description": "Cultural erasure"
+    },
+    {
+      "name": "food_desert_engineering",
+      "category": "economic",
+      "severity": 0.75,
+      "prevalence": 0.7,
+      "concealment": 0.82,
+      "score": 0.4305,
+      "evidence": "Urban planning",
+      "actors": [
+        "corps",
+        "state_actors",
+        "food_industry"
+      ],
+      "description": "Creating food deserts"
+    },
+    {
+      "name": "timber_trafficking",
+      "category": "organized",
+      "severity": 0.75,
+      "prevalence": 0.7,
+      "concealment": 0.82,
+      "score": 0.4305,
+      "evidence": "Illegal logging",
+      "actors": [
+        "corps",
+        "criminals",
+        "state_actors"
+      ],
+      "description": "Illegal timber trade"
+    },
+    {
+      "name": "memory_hole",
+      "category": "epistemic",
+      "severity": 0.8,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4224,
+      "evidence": "Digital erasure",
+      "actors": [
+        "tech",
+        "state_actors",
+        "intel"
+      ],
+      "description": "Erasing digital records"
+    },
+    {
+      "name": "seed_patent_extortion",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4224,
+      "evidence": "Monsanto/Bayer",
+      "actors": [
+        "corps",
+        "agricultural"
+      ],
+      "description": "Seed patent control"
+    },
+    {
+      "name": "sanctions_evasion",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.6,
+      "concealment": 0.88,
+      "score": 0.4224,
+      "evidence": "Oligarchs",
+      "actors": [
+        "state_actors",
+        "corps",
+        "banks"
+      ],
+      "description": "Sanctions evasion"
+    },
+    {
+      "name": "siege_warfare_civilian",
+      "category": "atrocity",
+      "severity": 0.95,
+      "prevalence": 0.5,
+      "concealment": 0.88,
+      "score": 0.418,
+      "evidence": "Gaza documented",
+      "actors": [
+        "state_actors",
+        "military"
+      ],
+      "description": "Civilian siege warfare"
+    },
+    {
+      "name": "sexual_violence_weapon",
+      "category": "atrocity",
+      "severity": 0.95,
+      "prevalence": 0.5,
+      "concealment": 0.88,
+      "score": 0.418,
+      "evidence": "Rwanda,Bosnia,Sudan",
+      "actors": [
+        "state_actors",
+        "military"
+      ],
+      "description": "Rape as weapon of war"
+    },
+    {
+      "name": "water_privatization",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.6,
+      "concealment": 0.85,
+      "score": 0.408,
+      "evidence": "Bolivia,Flint,Nestle",
+      "actors": [
+        "corps",
+        "state_actors"
+      ],
+      "description": "Water access privatization"
+    },
+    {
+      "name": "depleted_uranium_generational",
+      "category": "atrocity",
+      "severity": 0.9,
+      "prevalence": 0.5,
+      "concealment": 0.9,
+      "score": 0.405,
+      "evidence": "Iraq,Balkans",
+      "actors": [
+        "military",
+        "state_actors"
+      ],
+      "description": "DU generational harm"
+    },
+    {
+      "name": "pharma_experimentation_developing",
+      "category": "atrocity",
+      "severity": 0.9,
+      "prevalence": 0.5,
+      "concealment": 0.9,
+      "score": 0.405,
+      "evidence": "Developing world",
+      "actors": [
+        "pharma",
+        "corps"
+      ],
+      "description": "Unethical drug trials"
+    },
+    {
+      "name": "infrastructure_sabotage",
+      "category": "institutional",
+      "severity": 0.9,
+      "prevalence": 0.5,
+      "concealment": 0.9,
+      "score": 0.405,
+      "evidence": "Nord Stream, centrifuges",
+      "actors": [
+        "state_actors",
+        "intel",
+        "military"
+      ],
+      "description": "Infrastructure sabotage"
+    },
+    {
+      "name": "autonomous_ai_crime",
+      "category": "digital",
+      "severity": 0.85,
+      "prevalence": 0.5,
+      "concealment": 0.95,
+      "score": 0.4037,
+      "evidence": "Flash crashes,deepfakes",
+      "actors": [
+        "ai_systems",
+        "tech"
+      ],
+      "description": "AI-committed crimes"
+    },
+    {
+      "name": "wage_theft",
+      "category": "economic",
+      "severity": 0.7,
+      "prevalence": 0.95,
+      "concealment": 0.6,
+      "score": 0.399,
+      "evidence": "DOL $15B/yr",
+      "actors": [
+        "corps",
+        "small_business"
+      ],
+      "description": "Systematic underpayment"
+    },
+    {
+      "name": "asbestos_continued_use",
+      "category": "public_health",
+      "severity": 0.9,
+      "prevalence": 0.5,
+      "concealment": 0.88,
+      "score": 0.396,
+      "evidence": "Still mined/exported",
+      "actors": [
+        "corps",
+        "chemical_industry"
+      ],
+      "description": "Continued asbestos production"
+    },
+    {
+      "name": "wildlife_trafficking",
+      "category": "organized",
+      "severity": 0.8,
+      "prevalence": 0.6,
+      "concealment": 0.82,
+      "score": 0.3936,
+      "evidence": "$23B/yr",
+      "actors": [
+        "criminals",
+        "corps",
+        "state_actors"
+      ],
+      "description": "Wildlife trafficking"
+    },
+    {
+      "name": "deep_sea_mining",
+      "category": "environmental",
+      "severity": 0.85,
+      "prevalence": 0.5,
+      "concealment": 0.9,
+      "score": 0.3825,
+      "evidence": "ISA permits",
+      "actors": [
+        "mining",
+        "corps"
+      ],
+      "description": "Seabed exploitation"
+    },
+    {
+      "name": "economic_sabotage",
+      "category": "economic",
+      "severity": 0.85,
+      "prevalence": 0.5,
+      "concealment": 0.9,
+      "score": 0.3825,
+      "evidence": "Trade wars",
+      "actors": [
+        "state_actors",
+        "corps"
+      ],
+      "description": "Deliberate economic sabotage"
+    },
+    {
+      "name": "child_separation_policy",
+      "category": "atrocity",
+      "severity": 0.9,
+      "prevalence": 0.5,
+      "concealment": 0.85,
+      "score": 0.3825,
+      "evidence": "US border",
+      "actors": [
+        "state_actors"
+      ],
+      "description": "State child separation"
+    },
+    {
+      "name": "sovereign_debt_weapon",
+      "category": "economic",
+      "severity": 0.85,
+      "prevalence": 0.5,
+      "concealment": 0.9,
+      "score": 0.3825,
+      "evidence": "Argentina,Greece",
+      "actors": [
+        "banks",
+        "hedge_funds",
+        "state_actors"
+      ],
+      "description": "Debt as weapon"
+    },
+    {
+      "name": "education_denial",
+      "category": "institutional",
+      "severity": 0.75,
+      "prevalence": 0.6,
+      "concealment": 0.8,
+      "score": 0.36,
+      "evidence": "Book bans,defunding",
+      "actors": [
+        "state_actors",
+        "political_groups"
+      ],
+      "description": "Education deprivation"
+    },
+    {
+      "name": "space_debris_pollution",
+      "category": "environmental",
+      "severity": 0.7,
+      "prevalence": 0.6,
+      "concealment": 0.85,
+      "score": 0.357,
+      "evidence": "Kessler risk",
+      "actors": [
+        "state_actors",
+        "corps",
+        "military"
+      ],
+      "description": "Orbital debris"
+    },
+    {
+      "name": "cultural_artifact_trafficking",
+      "category": "organized",
+      "severity": 0.8,
+      "prevalence": 0.5,
+      "concealment": 0.88,
+      "score": 0.352,
+      "evidence": "ISIS,colonial",
+      "actors": [
+        "criminals",
+        "state_actors",
+        "auction_houses"
+      ],
+      "description": "Artifact trafficking"
+    },
+    {
+      "name": "vulture_fund_harm",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.5,
+      "concealment": 0.88,
+      "score": 0.352,
+      "evidence": "Argentina,Greece",
+      "actors": [
+        "hedge_funds",
+        "financial_banks"
+      ],
+      "description": "Vulture fund exploitation"
+    },
+    {
+      "name": "medical_experimentation",
+      "category": "atrocity",
+      "severity": 0.95,
+      "prevalence": 0.4,
+      "concealment": 0.92,
+      "score": 0.3496,
+      "evidence": "Tuskegee,MKUltra,GUAT",
+      "actors": [
+        "state_actors",
+        "medical",
+        "intel"
+      ],
+      "description": "Non-consensual experiments"
+    },
+    {
+      "name": "extraordinary_rendition",
+      "category": "atrocity",
+      "severity": 0.95,
+      "prevalence": 0.4,
+      "concealment": 0.92,
+      "score": 0.3496,
+      "evidence": "Post-9/11 documented",
+      "actors": [
+        "intel",
+        "state_actors"
+      ],
+      "description": "Rendition to torture"
+    },
+    {
+      "name": "prison_gerrymandering",
+      "category": "democratic",
+      "severity": 0.7,
+      "prevalence": 0.6,
+      "concealment": 0.82,
+      "score": 0.3444,
+      "evidence": "US Census",
+      "actors": [
+        "state_actors",
+        "prison_complex"
+      ],
+      "description": "Prisoner district counting"
+    },
+    {
+      "name": "geoengineering_covert",
+      "category": "existential",
+      "severity": 0.9,
+      "prevalence": 0.4,
+      "concealment": 0.95,
+      "score": 0.342,
+      "evidence": "SRM debates",
+      "actors": [
+        "state_actors",
+        "corps",
+        "billionaires"
+      ],
+      "description": "Unregulated climate manipulation"
+    },
+    {
+      "name": "language_extinction",
+      "category": "cultural",
+      "severity": 0.8,
+      "prevalence": 0.5,
+      "concealment": 0.85,
+      "score": 0.34,
+      "evidence": "40% dying",
+      "actors": [
+        "state_actors",
+        "colonial_powers"
+      ],
+      "description": "Forced language death"
+    },
+    {
+      "name": "forced_sterilization",
+      "category": "atrocity",
+      "severity": 0.95,
+      "prevalence": 0.4,
+      "concealment": 0.88,
+      "score": 0.3344,
+      "evidence": "ICE,eugenics",
+      "actors": [
+        "state_actors",
+        "medical"
+      ],
+      "description": "Non-consensual sterilization"
+    },
+    {
+      "name": "space_weaponization",
+      "category": "existential",
+      "severity": 0.9,
+      "prevalence": 0.4,
+      "concealment": 0.92,
+      "score": 0.3312,
+      "evidence": "Anti-satellite tests",
+      "actors": [
+        "state_actors",
+        "military"
+      ],
+      "description": "Militarizing space"
+    },
+    {
+      "name": "biopiracy",
+      "category": "economic",
+      "severity": 0.75,
+      "prevalence": 0.5,
+      "concealment": 0.88,
+      "score": 0.33,
+      "evidence": "Indigenous knowledge theft",
+      "actors": [
+        "corps",
+        "pharma",
+        "agricultural"
+      ],
+      "description": "Stealing indigenous knowledge"
+    },
+    {
+      "name": "child_soldier_recruitment",
+      "category": "atrocity",
+      "severity": 0.95,
+      "prevalence": 0.4,
+      "concealment": 0.85,
+      "score": 0.323,
+      "evidence": "Documented",
+      "actors": [
+        "state_actors",
+        "non_state_actors",
+        "military"
+      ],
+      "description": "Child soldier recruitment"
+    },
+    {
+      "name": "conversion_therapy_abuse",
+      "category": "violent",
+      "severity": 0.85,
+      "prevalence": 0.4,
+      "concealment": 0.88,
+      "score": 0.2992,
+      "evidence": "Still legal in many",
+      "actors": [
+        "religious_institutions",
+        "state_actors"
+      ],
+      "description": "Forced conversion therapy"
+    },
+    {
+      "name": "genetic_resource_theft",
+      "category": "economic",
+      "severity": 0.8,
+      "prevalence": 0.4,
+      "concealment": 0.9,
+      "score": 0.288,
+      "evidence": "Seed biopiracy",
+      "actors": [
+        "corps",
+        "agricultural"
+      ],
+      "description": "Genetic resource theft"
+    },
+    {
+      "name": "forced_marriage_state",
+      "category": "atrocity",
+      "severity": 0.85,
+      "prevalence": 0.4,
+      "concealment": 0.82,
+      "score": 0.2788,
+      "evidence": "Documented",
+      "actors": [
+        "state_actors",
+        "non_state_actors"
+      ],
+      "description": "State-forced marriage"
+    },
+    {
+      "name": "black_site_operation",
+      "category": "atrocity",
+      "severity": 0.95,
+      "prevalence": 0.3,
+      "concealment": 0.95,
+      "score": 0.2707,
+      "evidence": "CIA documented",
+      "actors": [
+        "intel",
+        "state_actors"
+      ],
+      "description": "Secret detention facilities"
+    },
+    {
+      "name": "antarctic_exploitation",
+      "category": "environmental",
+      "severity": 0.75,
+      "prevalence": 0.4,
+      "concealment": 0.9,
+      "score": 0.27,
+      "evidence": "Treaty pressure",
+      "actors": [
+        "corps",
+        "mining",
+        "state_actors"
+      ],
+      "description": "Antarctica exploitation"
+    },
+    {
+      "name": "weather_warfare",
+      "category": "existential",
+      "severity": 0.9,
+      "prevalence": 0.3,
+      "concealment": 0.97,
+      "score": 0.2619,
+      "evidence": "ENMOD treaty",
+      "actors": [
+        "military",
+        "state_actors"
+      ],
+      "description": "Weather as weapon"
+    },
+    {
+      "name": "concentration_camp_operation",
+      "category": "atrocity",
+      "severity": 0.98,
+      "prevalence": 0.3,
+      "concealment": 0.88,
+      "score": 0.2587,
+      "evidence": "Uyghur, Border detention",
+      "actors": [
+        "state_actors"
+      ],
+      "description": "Concentration camps"
+    },
+    {
+      "name": "human_shield_forcing",
+      "category": "atrocity",
+      "severity": 0.9,
+      "prevalence": 0.3,
+      "concealment": 0.9,
+      "score": 0.243,
+      "evidence": "Multiple conflicts",
+      "actors": [
+        "state_actors",
+        "military"
+      ],
+      "description": "Forcing human shields"
+    },
+    {
+      "name": "sentient_ai_rights_violation",
+      "category": "digital",
+      "severity": 0.95,
+      "prevalence": 0.2,
+      "concealment": 0.97,
+      "score": 0.1843,
+      "evidence": "Emerging concern",
+      "actors": [
+        "state_actors",
+        "corps",
+        "ai_systems"
+      ],
+      "description": "AI sentience rights violations"
+    }
+  ]
+}

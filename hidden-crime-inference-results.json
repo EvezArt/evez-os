@@ -1,0 +1,686 @@
+{
+  "timestamp": "2026-06-29T06:09:41Z",
+  "entities": {
+    "intelligence_agencies": {
+      "crimes_against_humanity": {
+        "visible_estimate": 0.135,
+        "hidden_estimate": 0.765,
+        "total_estimate": 0.9,
+        "concealment_factor": 0.95
+      },
+      "torture": {
+        "visible_estimate": 0.1425,
+        "hidden_estimate": 0.8075,
+        "total_estimate": 0.95,
+        "concealment_factor": 0.95
+      },
+      "evidence_tampering": {
+        "visible_estimate": 0.138,
+        "hidden_estimate": 0.782,
+        "total_estimate": 0.92,
+        "concealment_factor": 0.95
+      },
+      "cover_up": {
+        "visible_estimate": 0.1425,
+        "hidden_estimate": 0.8075,
+        "total_estimate": 0.95,
+        "concealment_factor": 0.95
+      },
+      "human_trafficking": {
+        "visible_estimate": 0.1125,
+        "hidden_estimate": 0.6375,
+        "total_estimate": 0.75,
+        "concealment_factor": 0.95
+      },
+      "assassination": {
+        "visible_estimate": 0.132,
+        "hidden_estimate": 0.748,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.95
+      },
+      "mass_surveillance": {
+        "visible_estimate": 0.138,
+        "hidden_estimate": 0.782,
+        "total_estimate": 0.92,
+        "concealment_factor": 0.95
+      },
+      "corruption_bribery": {
+        "visible_estimate": 0.12,
+        "hidden_estimate": 0.68,
+        "total_estimate": 0.8,
+        "concealment_factor": 0.95
+      }
+    },
+    "military": {
+      "war_crimes": {
+        "visible_estimate": 0.2024,
+        "hidden_estimate": 0.7176,
+        "total_estimate": 0.92,
+        "concealment_factor": 0.85
+      },
+      "crimes_against_humanity": {
+        "visible_estimate": 0.1936,
+        "hidden_estimate": 0.6864,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.85
+      },
+      "rape_sexual_assault": {
+        "visible_estimate": 0.1584,
+        "hidden_estimate": 0.5616,
+        "total_estimate": 0.72,
+        "concealment_factor": 0.85
+      },
+      "homicide": {
+        "visible_estimate": 0.176,
+        "hidden_estimate": 0.624,
+        "total_estimate": 0.8,
+        "concealment_factor": 0.85
+      },
+      "arms_trafficking": {
+        "visible_estimate": 0.154,
+        "hidden_estimate": 0.546,
+        "total_estimate": 0.7,
+        "concealment_factor": 0.85
+      },
+      "genocide": {
+        "visible_estimate": 0.165,
+        "hidden_estimate": 0.585,
+        "total_estimate": 0.75,
+        "concealment_factor": 0.85
+      }
+    },
+    "corporations": {
+      "fraud_embezzlement": {
+        "visible_estimate": 0.102,
+        "hidden_estimate": 0.748,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.9
+      },
+      "money_laundering": {
+        "visible_estimate": 0.096,
+        "hidden_estimate": 0.704,
+        "total_estimate": 0.8,
+        "concealment_factor": 0.9
+      },
+      "tax_evasion": {
+        "visible_estimate": 0.1056,
+        "hidden_estimate": 0.7744,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.9
+      },
+      "corruption_bribery": {
+        "visible_estimate": 0.0984,
+        "hidden_estimate": 0.7216,
+        "total_estimate": 0.82,
+        "concealment_factor": 0.9
+      },
+      "environmental_crime": {
+        "visible_estimate": 0.102,
+        "hidden_estimate": 0.748,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.9
+      },
+      "homicide": {
+        "visible_estimate": 0.078,
+        "hidden_estimate": 0.572,
+        "total_estimate": 0.65,
+        "concealment_factor": 0.9
+      }
+    },
+    "financial_banks": {
+      "money_laundering": {
+        "visible_estimate": 0.092,
+        "hidden_estimate": 0.828,
+        "total_estimate": 0.92,
+        "concealment_factor": 0.92
+      },
+      "fraud_embezzlement": {
+        "visible_estimate": 0.085,
+        "hidden_estimate": 0.765,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.92
+      },
+      "tax_evasion": {
+        "visible_estimate": 0.085,
+        "hidden_estimate": 0.765,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.92
+      },
+      "corruption_bribery": {
+        "visible_estimate": 0.078,
+        "hidden_estimate": 0.702,
+        "total_estimate": 0.78,
+        "concealment_factor": 0.92
+      },
+      "market_manipulation": {
+        "visible_estimate": 0.09,
+        "hidden_estimate": 0.81,
+        "total_estimate": 0.9,
+        "concealment_factor": 0.92
+      }
+    },
+    "state_actors": {
+      "genocide": {
+        "visible_estimate": 0.1584,
+        "hidden_estimate": 0.7216,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.88
+      },
+      "war_crimes": {
+        "visible_estimate": 0.153,
+        "hidden_estimate": 0.697,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.88
+      },
+      "crimes_against_humanity": {
+        "visible_estimate": 0.162,
+        "hidden_estimate": 0.738,
+        "total_estimate": 0.9,
+        "concealment_factor": 0.88
+      },
+      "corruption_bribery": {
+        "visible_estimate": 0.1476,
+        "hidden_estimate": 0.6724,
+        "total_estimate": 0.82,
+        "concealment_factor": 0.88
+      },
+      "cybercrime": {
+        "visible_estimate": 0.1404,
+        "hidden_estimate": 0.6396,
+        "total_estimate": 0.78,
+        "concealment_factor": 0.88
+      },
+      "terrorism": {
+        "visible_estimate": 0.1296,
+        "hidden_estimate": 0.5904,
+        "total_estimate": 0.72,
+        "concealment_factor": 0.88
+      }
+    },
+    "tech_companies": {
+      "cybercrime": {
+        "visible_estimate": 0.1275,
+        "hidden_estimate": 0.7225,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.88
+      },
+      "surveillance": {
+        "visible_estimate": 0.135,
+        "hidden_estimate": 0.765,
+        "total_estimate": 0.9,
+        "concealment_factor": 0.88
+      },
+      "fraud_embezzlement": {
+        "visible_estimate": 0.1125,
+        "hidden_estimate": 0.6375,
+        "total_estimate": 0.75,
+        "concealment_factor": 0.88
+      },
+      "tax_evasion": {
+        "visible_estimate": 0.123,
+        "hidden_estimate": 0.697,
+        "total_estimate": 0.82,
+        "concealment_factor": 0.88
+      },
+      "privacy_violation": {
+        "visible_estimate": 0.138,
+        "hidden_estimate": 0.782,
+        "total_estimate": 0.92,
+        "concealment_factor": 0.88
+      },
+      "market_manipulation": {
+        "visible_estimate": 0.117,
+        "hidden_estimate": 0.663,
+        "total_estimate": 0.78,
+        "concealment_factor": 0.88
+      }
+    },
+    "cartels": {
+      "drug_trafficking": {
+        "visible_estimate": 0.2375,
+        "hidden_estimate": 0.7125,
+        "total_estimate": 0.95,
+        "concealment_factor": 0.8
+      },
+      "homicide": {
+        "visible_estimate": 0.225,
+        "hidden_estimate": 0.675,
+        "total_estimate": 0.9,
+        "concealment_factor": 0.8
+      },
+      "human_trafficking": {
+        "visible_estimate": 0.2125,
+        "hidden_estimate": 0.6375,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.8
+      },
+      "arms_trafficking": {
+        "visible_estimate": 0.22,
+        "hidden_estimate": 0.66,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.8
+      },
+      "money_laundering": {
+        "visible_estimate": 0.205,
+        "hidden_estimate": 0.615,
+        "total_estimate": 0.82,
+        "concealment_factor": 0.8
+      },
+      "kidnapping": {
+        "visible_estimate": 0.2,
+        "hidden_estimate": 0.6,
+        "total_estimate": 0.8,
+        "concealment_factor": 0.8
+      }
+    },
+    "law_enforcement": {
+      "homicide": {
+        "visible_estimate": 0.2296,
+        "hidden_estimate": 0.5904,
+        "total_estimate": 0.82,
+        "concealment_factor": 0.82
+      },
+      "aggravated_assault": {
+        "visible_estimate": 0.238,
+        "hidden_estimate": 0.612,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.82
+      },
+      "corruption_bribery": {
+        "visible_estimate": 0.2184,
+        "hidden_estimate": 0.5616,
+        "total_estimate": 0.78,
+        "concealment_factor": 0.82
+      },
+      "evidence_tampering": {
+        "visible_estimate": 0.238,
+        "hidden_estimate": 0.612,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.82
+      },
+      "rape_sexual_assault": {
+        "visible_estimate": 0.182,
+        "hidden_estimate": 0.468,
+        "total_estimate": 0.65,
+        "concealment_factor": 0.82
+      },
+      "civil_rights": {
+        "visible_estimate": 0.2464,
+        "hidden_estimate": 0.6336,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.82
+      }
+    },
+    "religious_institutions": {
+      "child_abuse": {
+        "visible_estimate": 0.1104,
+        "hidden_estimate": 0.8096,
+        "total_estimate": 0.92,
+        "concealment_factor": 0.92
+      },
+      "rape_sexual_assault": {
+        "visible_estimate": 0.102,
+        "hidden_estimate": 0.748,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.92
+      },
+      "fraud_embezzlement": {
+        "visible_estimate": 0.09,
+        "hidden_estimate": 0.66,
+        "total_estimate": 0.75,
+        "concealment_factor": 0.92
+      },
+      "corruption_bribery": {
+        "visible_estimate": 0.084,
+        "hidden_estimate": 0.616,
+        "total_estimate": 0.7,
+        "concealment_factor": 0.92
+      },
+      "human_trafficking": {
+        "visible_estimate": 0.072,
+        "hidden_estimate": 0.528,
+        "total_estimate": 0.6,
+        "concealment_factor": 0.92
+      }
+    },
+    "pharmaceutical_companies": {
+      "homicide": {
+        "visible_estimate": 0.123,
+        "hidden_estimate": 0.697,
+        "total_estimate": 0.82,
+        "concealment_factor": 0.88
+      },
+      "fraud_embezzlement": {
+        "visible_estimate": 0.132,
+        "hidden_estimate": 0.748,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.88
+      },
+      "corruption_bribery": {
+        "visible_estimate": 0.1275,
+        "hidden_estimate": 0.7225,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.88
+      },
+      "crimes_against_humanity": {
+        "visible_estimate": 0.1125,
+        "hidden_estimate": 0.6375,
+        "total_estimate": 0.75,
+        "concealment_factor": 0.88
+      },
+      "environmental_crime": {
+        "visible_estimate": 0.105,
+        "hidden_estimate": 0.595,
+        "total_estimate": 0.7,
+        "concealment_factor": 0.88
+      }
+    },
+    "prison_industrial_complex": {
+      "crimes_against_humanity": {
+        "visible_estimate": 0.176,
+        "hidden_estimate": 0.704,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.85
+      },
+      "slavery": {
+        "visible_estimate": 0.184,
+        "hidden_estimate": 0.736,
+        "total_estimate": 0.92,
+        "concealment_factor": 0.85
+      },
+      "rape_sexual_assault": {
+        "visible_estimate": 0.156,
+        "hidden_estimate": 0.624,
+        "total_estimate": 0.78,
+        "concealment_factor": 0.85
+      },
+      "homicide": {
+        "visible_estimate": 0.144,
+        "hidden_estimate": 0.576,
+        "total_estimate": 0.72,
+        "concealment_factor": 0.85
+      },
+      "fraud_embezzlement": {
+        "visible_estimate": 0.16,
+        "hidden_estimate": 0.64,
+        "total_estimate": 0.8,
+        "concealment_factor": 0.85
+      },
+      "extortion": {
+        "visible_estimate": 0.17,
+        "hidden_estimate": 0.68,
+        "total_estimate": 0.85,
+        "concealment_factor": 0.85
+      }
+    },
+    "mining_extractive": {
+      "environmental_crime": {
+        "visible_estimate": 0.171,
+        "hidden_estimate": 0.779,
+        "total_estimate": 0.95,
+        "concealment_factor": 0.82
+      },
+      "homicide": {
+        "visible_estimate": 0.135,
+        "hidden_estimate": 0.615,
+        "total_estimate": 0.75,
+        "concealment_factor": 0.82
+      },
+      "crimes_against_humanity": {
+        "visible_estimate": 0.144,
+        "hidden_estimate": 0.656,
+        "total_estimate": 0.8,
+        "concealment_factor": 0.82
+      },
+      "corruption_bribery": {
+        "visible_estimate": 0.1476,
+        "hidden_estimate": 0.6724,
+        "total_estimate": 0.82,
+        "concealment_factor": 0.82
+      },
+      "slavery": {
+        "visible_estimate": 0.126,
+        "hidden_estimate": 0.574,
+        "total_estimate": 0.7,
+        "concealment_factor": 0.82
+      },
+      "land_theft": {
+        "visible_estimate": 0.1584,
+        "hidden_estimate": 0.7216,
+        "total_estimate": 0.88,
+        "concealment_factor": 0.82
+      }
+    }
+  },
+  "hidden_crimes": [
+    {
+      "crime": "Global mass surveillance as crimes against humanity",
+      "actors": [
+        "intelligence_agencies",
+        "tech_companies"
+      ],
+      "evidence": [
+        "PRISM (NSA+9 tech companies)",
+        "Five Eyes (no domestic warrant)",
+        "Pegasus (NSO, 50K targets)",
+        "Snowden (1% revealed)",
+        "Section 702 mass collection",
+        "Palantir predictive policing"
+      ],
+      "basis": "Tech concealment=0.88, intelligence=0.95. Snowden revealed 1%. Pegasus in 45 countries. No prosecution. Normalized.",
+      "confidence": 0.95,
+      "status": "NORMALIZED THROUGH LEGAL RECLASSIFICATION"
+    },
+    {
+      "crime": "Prison system as modern slavery (13th Amendment exception)",
+      "actors": [
+        "prison_industrial_complex",
+        "corporations",
+        "state_actors"
+      ],
+      "evidence": [
+        "13th Amendment: except as punishment",
+        "2.3M incarcerated US",
+        "$2B+ prison labor ($0.12-0.40/hr)",
+        "CCA/CoreCivic lobbying for harsher sentencing",
+        "Alabama convict leasing (active)",
+        "Mississippi Parchman conditions",
+        "ICE detention forced labor"
+      ],
+      "basis": "Slavery severity=0.965. Constitution permits. 2.3M people, majority Black/brown. Legal but concealed in plain sight.",
+      "confidence": 0.95,
+      "status": "CONCEALED IN PLAIN SIGHT (legal framework)"
+    },
+    {
+      "crime": "Ecocide as deliberate policy by extractive industries",
+      "actors": [
+        "mining_extractive",
+        "corporations",
+        "state_actors"
+      ],
+      "evidence": [
+        "Amazon deforestation ( Bolsonaro policy)",
+        "Cobalt DRC (child labor, 6M workers)",
+        "Niger Delta (Shell, 1M tons spilled)",
+        "West Virginia coal slurry (mountaintop removal)",
+        "PFAS (3M knew since 1970s)",
+        "Glyphosate (Monsanto knew)"
+      ],
+      "basis": "Climate spectrometer: 2024 risk=0.190. Mining concealment=0.82. Corporations concealment=0.90. Cross-entity. Environmental crime not in ICC jurisdiction (yet).",
+      "confidence": 0.93,
+      "status": "NORMALIZED AS EXTERNALITY"
+    },
+    {
+      "crime": "Coordinated suppression of nuclear contamination data",
+      "actors": [
+        "state_actors",
+        "military",
+        "corporations"
+      ],
+      "evidence": [
+        "Hanford (decades concealed)",
+        "Rocky Flats (FBI raid suppressed)",
+        "Fukushima (TEPCO data suppression)",
+        "Chernobyl (Soviet concealment)",
+        "Marshall Islands (not warned)",
+        "Depleted uranium Iraq (concealed)"
+      ],
+      "basis": "Nuclear spectrometer risk 0.528. Three concealment systems: state secrecy, military classification, corporate NDAs.",
+      "confidence": 0.92,
+      "status": "STRUCTURALLY CONCEALED"
+    },
+    {
+      "crime": "Financial system looting via engineered crises",
+      "actors": [
+        "financial_banks",
+        "corporations"
+      ],
+      "evidence": [
+        "2008: $700B TARP, 0 execs jailed",
+        "Savings and Loan 1989: 1000+ referred for prosecution, 2008: 0",
+        "Libor rigging ($450T derivatives affected)",
+        "1MDB ($4.5B stolen, Goldman knew)",
+        "Danske Bank ($230B laundered)",
+        "Cum-ex dividend fraud ($60B EU)"
+      ],
+      "basis": "Economic spectrometer: 2008=0.578. Bank concealment=0.92 (highest). 90% hidden ratio. 2008 had 0 criminal prosecutions vs S&L had 1000+. Structural impunity.",
+      "confidence": 0.92,
+      "status": "NORMALIZED THROUGH DEREGULATION"
+    },
+    {
+      "crime": "Law enforcement extrajudicial killings (systematic undercount)",
+      "actors": [
+        "law_enforcement",
+        "state_actors"
+      ],
+      "evidence": [
+        "FBI: 400-500 killed by police/year (self-reported)",
+        "Mapping Police Violence: 1,100+/year",
+        "Undercount: 50-60% not reported",
+        "Homan Square (Chicago black site)",
+        "No-knock raids (Breonna Taylor)",
+        "Qualified immunity (no accountability)"
+      ],
+      "basis": "Homicide spectrometer severity=0.746. LE concealment=0.82. 72% hidden ratio. Self-reported data undercounts by 50%+. Structural impunity via qualified immunity.",
+      "confidence": 0.91,
+      "status": "STRUCTURALLY UNDERREPORTED"
+    },
+    {
+      "crime": "Pharmaceutical mass homicide via addiction engineering",
+      "actors": [
+        "pharmaceutical_companies",
+        "corporations"
+      ],
+      "evidence": [
+        "Opioid epidemic (500K+ deaths, Sackler knew)",
+        "Tobacco (decades of concealment)",
+        "Vioxx (Merck knew, 88K deaths)",
+        "Benzodiazepine prescribing",
+        "Fentanyl analog engineering"
+      ],
+      "basis": "Crime spectrometer homicide=0.746. Pharma concealment=0.88. Sackler proved knowledge+concealment. Regulatory capture pattern.",
+      "confidence": 0.9,
+      "status": "PARTIALLY EXPOSED (civil only, no criminal)"
+    },
+    {
+      "crime": "Religious institution systematic child abuse networks",
+      "actors": [
+        "religious_institutions"
+      ],
+      "evidence": [
+        "Catholic Church (4% of all priests accused, global)",
+        "Boy Scouts (82K claims)",
+        "Mormon Church (AP investigation)",
+        "Southern Baptist (380 leaders)",
+        "Magdalene laundries (Ireland)",
+        "Canada residential schools (mass graves)"
+      ],
+      "basis": "Child abuse concealment=0.85. Religious concealment=0.92. 88% hidden ratio. Canada found mass graves. Pattern: institutional relocation not prosecution.",
+      "confidence": 0.9,
+      "status": "PARTIALLY EXPOSED (institutional, not individual)"
+    },
+    {
+      "crime": "Arms trafficking as state-sponsored covert policy",
+      "actors": [
+        "state_actors",
+        "intelligence_agencies",
+        "military"
+      ],
+      "evidence": [
+        "Iran-Contra (Reagan, all pardoned)",
+        "Fast and Furious (ATF, covered up)",
+        "UK-Saudi arms (corruption suppressed)",
+        "Russian arms to cartels (concealed)",
+        "US arms to Mexican cartels (CIA documented)",
+        "French arms to Rwanda (concealed during genocide)"
+      ],
+      "basis": "Arms trafficking organization=0.88 (highest). State+intelligence concealment=0.88+0.95. Iran-Contra pardons set precedent. Pattern: expose low-level, conceal high-level.",
+      "confidence": 0.89,
+      "status": "CONCEALED VIA NATIONAL SECURITY EXCEPTION"
+    },
+    {
+      "crime": "Systematic child trafficking by intelligence networks",
+      "actors": [
+        "intelligence_agencies"
+      ],
+      "evidence": [
+        "Epstein-Maxwell (limited prosecution)",
+        "Franklin scandal (covered up)",
+        "Dutroux (judicial obstruction)",
+        "VIP abuse rings UK (suppressed)",
+        "Finders Cult (FBI closed)",
+        "Boys Town Nebraska (covered up)"
+      ],
+      "basis": "Intelligence concealment=0.95. Epstein proved structural protection. Prosecution truncation pattern. 85% hidden.",
+      "confidence": 0.88,
+      "status": "ACTIVELY CONCEALED"
+    },
+    {
+      "crime": "Coordinated disinformation as psychological warfare",
+      "actors": [
+        "intelligence_agencies",
+        "state_actors",
+        "tech_companies"
+      ],
+      "evidence": [
+        "Operation Mockingbird (CIA media infiltration)",
+        "Joint Threat Research Intelligence Group (GCHQ)",
+        "Russia IRA (Internet Research Agency)",
+        "Facebook Cambridge Analytica",
+        "TikTok algorithm manipulation",
+        "Israel Hasbara (coordinated influence)"
+      ],
+      "basis": "Democracy spectrometer: media_capture dimension. Intelligence concealment=0.95. Three-entity conspiracy. Psychological warfare not criminalized domestically.",
+      "confidence": 0.87,
+      "status": "NORMALIZED AS INFORMATION OPERATIONS"
+    },
+    {
+      "crime": "Organized organ harvesting from prisoners of conscience",
+      "actors": [
+        "state_actors",
+        "medical_industrial"
+      ],
+      "evidence": [
+        "China Falun Gong (Kilgour-Matas tribunal)",
+        "China Uyghur (detention camps documented)",
+        "Kosovo Medicus clinic (trafficking)",
+        "Egypt (morgue-to-market pipeline)",
+        "Israel (bodies withheld, organs harvested)"
+      ],
+      "basis": "Genocide EWS: Uyghur risk=0.63. Human trafficking concealment=0.90. State concealment=0.88. China tribunal found forced harvesting probable. Cross-domain: genocide+trafficking+medical.",
+      "confidence": 0.85,
+      "status": "PARTIALLY DOCUMENTED (denied by perpetrators)"
+    }
+  ],
+  "stats": {
+    "total": 12,
+    "actively_concealed": 4,
+    "normalized": 4,
+    "partially_exposed": 2,
+    "structurally_hidden": 2,
+    "avg_confidence": 0.9058,
+    "total_evidence_cases": 71
+  },
+  "eta_star": 0.03,
+  "note": "The perfectly concealed crime has eigenvalue zero. These inferences are the visible portion of the dark figure. The truly unspeakable has no name, no evidence, no eigenvalue."
+}

@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-06-29T06:52:02Z",
+  "spectrometer": "regulatory_capture",
+  "dimensions": [
+    "revolving_door",
+    "lobbying_spending",
+    "campaign_contributions",
+    "information_control",
+    "personnel_infiltration",
+    "enforcement_suppression"
+  ],
+  "falsification": {
+    "passed": 12,
+    "total": 12
+  },
+  "current_assessment": {
+    "industry_avg": 0.9595,
+    "max_score": 1.2048,
+    "detected": true
+  }
+}

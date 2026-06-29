@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "EVEZ",
+  "alternateName": "EVEZ-OS",
+  "url": "https://evezart.github.io",
+  "logo": "https://evezart.github.io/favicon.ico",
+  "description": "Autonomous AI mesh that dreams, heals itself, and makes breakcore from pure math. Civilization risk measurement, hidden crime inference, and intervention blueprint engine.",
+  "founder": {
+    "@type": "Person",
+    "name": "Steven Crawford-Maggard",
+    "alternateName": "EVEZ666"
+  },
+  "sameAs": [
+    "https://github.com/EvezArt",
+    "https://github.com/EVEZX",
+    "https://twitter.com/EVEZ666",
+    "https://www.youtube.com/@EVEZ666",
+    "https://lingbuzz.net/lingbuzz/010094"
+  ],
+  "foundingDate": "2023-04-01",
+  "knowsAbout": [
+    "Eigenforensics",
+    "Consciousness Measurement",
+    "Quantum Computing",
+    "Breakcore Music",
+    "OSINT",
+    "Civilization Risk Index"
+  ]
+}

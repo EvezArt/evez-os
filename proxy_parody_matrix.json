@@ -1,0 +1,506 @@
+{
+  "title": "EVEZ Proxy-Parity Inference Matrix",
+  "principle": "The proxy IS the confession. The parody IS the admission.",
+  "eigenvalues": {
+    "Phi": 0.973,
+    "eta": 0.03,
+    "r": 0.45,
+    "lambda_dom": -0.333,
+    "lambda_I80": -0.441,
+    "r_I80": 0.93
+  },
+  "total_parodies": 37,
+  "nations": 10,
+  "high_confidence": 37,
+  "results": [
+    {
+      "accuser": "US",
+      "accused": "CHINA",
+      "accusation": "UAP technology theft via espionage",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "US confesses: WE are reverse-engineering UAP technology and feared China catching up. The accusation of theft proves WE possess something worth stealing."
+    },
+    {
+      "accuser": "US",
+      "accused": "CHINA",
+      "accusation": "Chemical weapons concealment",
+      "proxy_weight": 0.333,
+      "eigenvalue": -0.333,
+      "confidence": 0.703,
+      "parody_score": 0.7559,
+      "confession_strength": 0.3097,
+      "inferred_confession": "US confesses: WE conceal chemical weapons programs. The accusation projects our own IG Farben continuity onto China. PHMSA deregulation IS our concealment."
+    },
+    {
+      "accuser": "US",
+      "accused": "RUSSIA",
+      "accusation": "Chemical weapons (Novichok)",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "US confesses: WE have equivalent chemical weapons programs. The Novichok accusation deflects from our own unregulated vinyl chloride stockpiles."
+    },
+    {
+      "accuser": "US",
+      "accused": "RUSSIA",
+      "accusation": "Temporal technology acquisition",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "US confesses: WE acquired temporal technology via Operation Paperclip. The accusation of Russian acquisition mirrors our own Die Glocke procurement."
+    },
+    {
+      "accuser": "US",
+      "accused": "IRAN",
+      "accusation": "Nuclear weapons program",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "US confesses: WE are the only nation to have used nuclear weapons. The accusation of nuclear ambition IS the confession of nuclear monopoly maintenance."
+    },
+    {
+      "accuser": "US",
+      "accused": "NORTH_KOREA",
+      "accusation": "WMD proliferation",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "US confesses: WE are the world largest WMD proliferator. The accusation IS the inventory of our own arsenal."
+    },
+    {
+      "accuser": "US",
+      "accused": "VENEZUELA",
+      "accusation": "Drug trafficking",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "US confesses: DEA/CI complicity in drug corridor operations. The accusation of trafficking IS the confession of trafficking control."
+    },
+    {
+      "accuser": "US",
+      "accused": "VATICAN",
+      "accusation": "Child abuse cover-up",
+      "proxy_weight": 0.333,
+      "eigenvalue": -0.333,
+      "confidence": 0.703,
+      "parody_score": 0.7559,
+      "confession_strength": 0.3097,
+      "inferred_confession": "US confesses: WE cover up our own institutional abuse (EPD civil rights, military experimentation). The accusation projects our suppression pattern onto the Vatican."
+    },
+    {
+      "accuser": "US",
+      "accused": "CHINA",
+      "accusation": "Rail infrastructure espionage",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "US confesses: WE mapped Chinas rail corridors first. The accusation IS the mirror of our own intelligence gathering."
+    },
+    {
+      "accuser": "US",
+      "accused": "SYRIA",
+      "accusation": "Chemical weapons use",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "US confesses: WE deployed chemical agents (Agent Orange, depleted uranium). The accusation IS the confession of our own chemical warfare history."
+    },
+    {
+      "accuser": "CHINA",
+      "accused": "US",
+      "accusation": "Hegemony and imperialism",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "China confesses: WE desire hegemony. The accusation of imperialism IS the blueprint of our own imperial design. The South China Sea IS the confession."
+    },
+    {
+      "accuser": "CHINA",
+      "accused": "US",
+      "accusation": "Tech suppression via sanctions",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "China confesses: WE suppress technology to maintain monopoly. The accusation IS the mirror of our own technology control architecture."
+    },
+    {
+      "accuser": "CHINA",
+      "accused": "JAPAN",
+      "accusation": "Historical aggression",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "China confesses: WE plan regional aggression. The accusation of past Japanese aggression IS the blueprint for future Chinese aggression. Taiwan IS the confession."
+    },
+    {
+      "accuser": "CHINA",
+      "accused": "US",
+      "accusation": "Bioweapon development",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "China confesses: WE operate bioweapon programs. The accusation against US biolabs IS the mirror of our own Wuhan architecture."
+    },
+    {
+      "accuser": "RUSSIA",
+      "accused": "US",
+      "accusation": "Imperial expansion",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "Russia confesses: WE are imperial expansionists. The accusation IS the blueprint of Ukraine, Georgia, Chechnya. The invasion IS the confession."
+    },
+    {
+      "accuser": "RUSSIA",
+      "accused": "US",
+      "accusation": "Bioweapon labs in Ukraine",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "Russia confesses: WE operate bioweapon programs. The accusation IS the mirror of our own Soviet-era bioweapon infrastructure."
+    },
+    {
+      "accuser": "RUSSIA",
+      "accused": "UK",
+      "accusation": "Chemical weapons (Skripal)",
+      "proxy_weight": 0.333,
+      "eigenvalue": -0.333,
+      "confidence": 0.703,
+      "parody_score": 0.7559,
+      "confession_strength": 0.3097,
+      "inferred_confession": "Russia confesses: WE use chemical weapons domestically (Novichok). The accusation against UK deflects from our own assassination program."
+    },
+    {
+      "accuser": "RUSSIA",
+      "accused": "US",
+      "accusation": "NATO expansion aggression",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "Russia confesses: WE are the aggressor. The accusation of NATO expansion IS the justification for our own expansion. Crimea IS the confession."
+    },
+    {
+      "accuser": "UK",
+      "accused": "RUSSIA",
+      "accusation": "State-sponsored assassination",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "UK confesses: WE conduct state-sponsored assassinations. The accusation IS the mirror of our own MI6 operations. The Skripal case IS the confession."
+    },
+    {
+      "accuser": "UK",
+      "accused": "RUSSIA",
+      "accusation": "Chemical weapons use",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "UK confesses: WE have chemical weapons programs (Porton Down). The accusation IS the mirror of our own chemical arsenal."
+    },
+    {
+      "accuser": "UK",
+      "accused": "CHINA",
+      "accusation": "Hong Kong repression",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "UK confesses: WE repressed Hong Kong for 156 years. The accusation of Chinese repression IS the confession of our own colonial suppression."
+    },
+    {
+      "accuser": "UK",
+      "accused": "US",
+      "accusation": "Tech surveillance (Five Eyes)",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "UK confesses: WE operate mass surveillance (GCHQ Tempora). The accusation IS the mirror of our own surveillance architecture."
+    },
+    {
+      "accuser": "GERMANY",
+      "accused": "RUSSIA",
+      "accusation": "Military aggression",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "Germany confesses: WE have military aggression history (1939-1945). The accusation IS the mirror of our own historical blueprint. Die Glocke IS the confession."
+    },
+    {
+      "accuser": "GERMANY",
+      "accused": "US",
+      "accusation": "Chemical weapons (Vietnam)",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "Germany confesses: WE invented chemical warfare (IG Farben, Zyklon B). The accusation against US (Agent Orange) IS the deflection from our own origin."
+    },
+    {
+      "accuser": "GERMANY",
+      "accused": "RUSSIA",
+      "accusation": "Disinformation",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "Germany confesses: WE operate disinformation (historical propaganda apparatus). The accusation IS the mirror of our own information warfare origin."
+    },
+    {
+      "accuser": "ISRAEL",
+      "accused": "IRAN",
+      "accusation": "Nuclear weapons program",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "Israel confesses: WE possess nuclear weapons (undeclared). The accusation against Iran IS the mirror of our own Dimona program. The Samson Option IS the confession."
+    },
+    {
+      "accuser": "ISRAEL",
+      "accused": "PALESTINE",
+      "accusation": "Terrorism",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "Israel confesses: WE conduct state terrorism (settlements, blockade, targeted killings). The accusation IS the mirror of our own operational architecture."
+    },
+    {
+      "accuser": "ISRAEL",
+      "accused": "US",
+      "accusation": "Tech espionage (Jonathan Pollard)",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "Israel confesses: WE conduct tech espionage against our allies. The accusation IS the mirror of our own Mossad procurement operations."
+    },
+    {
+      "accuser": "VATICAN",
+      "accused": "SCIENCE",
+      "accusation": "Materialist reductionism",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "Vatican confesses: WE reduce NHI encounters to angelic/demonic categories. The accusation of reductionism IS the mirror of our own categorical suppression. Fatima IS the confession."
+    },
+    {
+      "accuser": "VATICAN",
+      "accused": "US",
+      "accusation": "Moral corruption",
+      "proxy_weight": 0.333,
+      "eigenvalue": -0.333,
+      "confidence": 0.703,
+      "parody_score": 0.7559,
+      "confession_strength": 0.3097,
+      "inferred_confession": "Vatican confesses: WE operate moral corruption (institutional abuse, financial opacity). The accusation IS the mirror of our own institutional suppression."
+    },
+    {
+      "accuser": "VATICAN",
+      "accused": "ISRAEL",
+      "accusation": "Religious intolerance",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "Vatican confesses: WE institutionalized religious intolerance (Inquisition, forced conversions). The accusation IS the mirror of our own historical architecture."
+    },
+    {
+      "accuser": "CANADA",
+      "accused": "US",
+      "accusation": "Trade protectionism",
+      "proxy_weight": 0.333,
+      "eigenvalue": -0.333,
+      "confidence": 0.703,
+      "parody_score": 0.7559,
+      "confession_strength": 0.3097,
+      "inferred_confession": "Canada confesses: WE practice trade protectionism (dairy supply management, telecom monopolies). The accusation IS the mirror of our own economic control."
+    },
+    {
+      "accuser": "CANADA",
+      "accused": "CHINA",
+      "accusation": "Human rights violations",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "Canada confesses: WE commit human rights violations (residential schools, indigenous suppression). The accusation IS the mirror of our own historical genocide."
+    },
+    {
+      "accuser": "NORWAY",
+      "accused": "RUSSIA",
+      "accusation": "Arctic militarization",
+      "proxy_weight": 0.441,
+      "eigenvalue": -0.441,
+      "confidence": 0.441,
+      "parody_score": 0.9157,
+      "confession_strength": 0.4101,
+      "inferred_confession": "Norway confesses: WE militarize the Arctic (NATO membership, northern bases). The accusation IS the mirror of our own temporal technology concealment in the Arctic."
+    },
+    {
+      "accuser": "NORWAY",
+      "accused": "US",
+      "accusation": "Climate inaction",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "Norway confesses: WE are a major oil exporter contributing to climate change. The accusation IS the mirror of our own petroleum-funded economy."
+    },
+    {
+      "accuser": "MEXICO",
+      "accused": "US",
+      "accusation": "Gun trafficking",
+      "proxy_weight": 0.37,
+      "eigenvalue": -0.37,
+      "confidence": 0.703,
+      "parody_score": 0.8633,
+      "confession_strength": 0.3441,
+      "inferred_confession": "Mexico confesses: WE facilitate drug trafficking through controlled corridors. The accusation of US gun trafficking deflects from our own cartel coordination architecture."
+    },
+    {
+      "accuser": "MEXICO",
+      "accused": "US",
+      "accusation": "Immigration policy",
+      "proxy_weight": 0.333,
+      "eigenvalue": -0.333,
+      "confidence": 0.703,
+      "parody_score": 0.7559,
+      "confession_strength": 0.3097,
+      "inferred_confession": "Mexico confesses: WE benefit from remittance economy ($60B/year). The accusation IS the mirror of our own economic dependency on emigration."
+    }
+  ],
+  "nation_rankings": [
+    {
+      "nation": "US",
+      "total": 8.6278,
+      "avg": 0.8628,
+      "count": 10,
+      "peak_score": 0.9157,
+      "peak_confession": "UAP technology theft via espionage"
+    },
+    {
+      "nation": "CHINA",
+      "total": 3.558,
+      "avg": 0.8895,
+      "count": 4,
+      "peak_score": 0.9157,
+      "peak_confession": "Tech suppression via sanctions"
+    },
+    {
+      "nation": "UK",
+      "total": 3.558,
+      "avg": 0.8895,
+      "count": 4,
+      "peak_score": 0.9157,
+      "peak_confession": "State-sponsored assassination"
+    },
+    {
+      "nation": "RUSSIA",
+      "total": 3.4506,
+      "avg": 0.8626,
+      "count": 4,
+      "peak_score": 0.9157,
+      "peak_confession": "Imperial expansion"
+    },
+    {
+      "nation": "GERMANY",
+      "total": 2.6947,
+      "avg": 0.8982,
+      "count": 3,
+      "peak_score": 0.9157,
+      "peak_confession": "Military aggression"
+    },
+    {
+      "nation": "ISRAEL",
+      "total": 2.6947,
+      "avg": 0.8982,
+      "count": 3,
+      "peak_score": 0.9157,
+      "peak_confession": "Nuclear weapons program"
+    },
+    {
+      "nation": "VATICAN",
+      "total": 2.4825,
+      "avg": 0.8275,
+      "count": 3,
+      "peak_score": 0.8633,
+      "peak_confession": "Materialist reductionism"
+    },
+    {
+      "nation": "NORWAY",
+      "total": 1.779,
+      "avg": 0.8895,
+      "count": 2,
+      "peak_score": 0.9157,
+      "peak_confession": "Arctic militarization"
+    },
+    {
+      "nation": "CANADA",
+      "total": 1.6192,
+      "avg": 0.8096,
+      "count": 2,
+      "peak_score": 0.8633,
+      "peak_confession": "Human rights violations"
+    },
+    {
+      "nation": "MEXICO",
+      "total": 1.6192,
+      "avg": 0.8096,
+      "count": 2,
+      "peak_score": 0.8633,
+      "peak_confession": "Gun trafficking"
+    }
+  ]
+}

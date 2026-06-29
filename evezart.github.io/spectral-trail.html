@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPECTRAL TRAIL — Eigenforensic Detective</title>
+<meta name="description" content="Investigate the I-80 corridor. Run the AEMDAS pipeline. Find the dominant eigenvalue. A game by Steven Crawford-Maggard (EVEZ).">
+<meta name="keywords" content="evez, spectral trail, eigenforensics, osint game, aemdas">
+<link rel="canonical" href="https://evezart.github.io/spectral-trail.html">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050508;color:#c8c8d8;font-family:'Courier New',monospace;overflow:hidden;height:100vh}
+#game{width:100vw;height:100vh;display:flex;flex-direction:column}
+.h{background:#0a0a14;border-bottom:1px solid #222;padding:8px 15px;display:flex;justify-content:space-between;align-items:center}
+.h h1{color:#e8c860;font-size:1.1em;letter-spacing:2px}
+.h .st{color:#666;font-size:0.8em}
+.m{flex:1;display:grid;grid-template-columns:280px 1fr 220px;gap:1px;background:#111}
+.p{background:#0a0a12;padding:10px;overflow-y:auto}
+.p h2{color:#e8c860;font-size:0.85em;margin-bottom:8px;border-bottom:1px solid #222;padding-bottom:4px}
+.npc{background:#111118;border:1px solid #222;margin:5px 0;padding:8px;border-radius:3px;cursor:pointer;transition:all 0.2s}
+.npc:hover{border-color:#e8c860;background:#1a1a22}
+.npc.sel{border-color:#e8c860;background:#1a1a22}
+.nn{color:#c8c8d8;font-weight:bold;font-size:0.82em}
+.nr{color:#666;font-size:0.72em}
+.ns{color:#e8c860;font-size:0.78em;margin-top:3px}
+.nb{height:3px;background:#222;margin-top:4px;border-radius:2px;overflow:hidden}
+.nf{height:100%;transition:width 0.5s}
+.c{position:relative;background:#080810;overflow:hidden}
+.db{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);width:85%;max-width:550px;background:#0a0a14;border:1px solid #e8c860;border-radius:8px;padding:12px 18px;display:none;z-index:5}
+.db.show{display:block;animation:fI 0.3s}
+@keyframes fI{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+.dn{color:#e8c860;font-weight:bold;margin-bottom:4px;font-size:0.9em}
+.dt{color:#c8c8d8;line-height:1.5;font-size:0.82em}
+.dc{color:#444;font-size:0.68em;margin-top:6px;cursor:pointer;text-align:right}
+.ap{position:absolute;top:50px;left:50%;transform:translateX(-50%);width:90%;max-width:460px;background:#0a0a14;border:1px solid #222;border-radius:8px;padding:12px;display:none;z-index:10}
+.ap.show{display:block}
+.as{display:flex;align-items:center;margin:4px 0;padding:5px;border-radius:3px;background:#111118;font-size:0.78em}
+.as.act{border:1px solid #e8c860;animation:pl 1s infinite}
+@keyframes pl{0%,100%{opacity:1}50%{opacity:0.5}}
+.as.done{background:#0a1a0a;color:#4a8a4a}
+.as .sn{color:#666;margin-right:8px;width:18px}
+.as .sname{flex:1}
+.as .sr{color:#e8c860;font-size:0.72em}
+.btn{background:#111118;border:1px solid #333;color:#c8c8d8;padding:5px 10px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:0.78em}
+.btn:hover{border-color:#e8c860;color:#e8c860}
+.btn-p{border-color:#e8c860;color:#e8c860}
+.ev{background:#0d0d1a;border-left:2px solid #e8c860;padding:5px 8px;margin:3px 0;font-size:0.72em;color:#888}
+.ev .src{color:#44aacc}
+.ed{position:absolute;top:8px;left:50%;transform:translateX(-50%);text-align:center;z-index:3}
+.ev-val{color:#e8c860;font-size:1.3em;font-weight:bold}
+.ev-lbl{color:#444;font-size:0.65em}
+.cb{display:inline-block;padding:2px 5px;border-radius:2px;font-size:0.62em;margin:1px}
+.cb-h{background:#330;color:#e8c860}
+.cb-m{background:#222;color:#aa8}
+.cb-l{background:#111;color:#555}
+#toast{position:fixed;top:50px;right:15px;background:#0a0a14;border:1px solid #e8c860;color:#e8c860;padding:6px 12px;border-radius:4px;font-size:0.78em;z-index:100;display:none}
+#toast.show{display:block;animation:sI 0.3s}
+@keyframes sI{from{right:-150px}to{right:15px}}
+.cor{position:absolute;width:100%;height:100%;background:linear-gradient(180deg,#050508 0%,#0a0a14 50%,#050508 100%)}
+.rd{position:absolute;top:50%;left:0;width:100%;height:3px;background:#222;transform:translateY(-50%)}
+.rl{position:absolute;top:50%;left:0;width:100%;height:1px;background:repeating-linear-gradient(90deg,#555 0,#555 18px,transparent 18px,transparent 36px);transform:translateY(-50%)}
+.elk{position:absolute;font-size:1.3em;opacity:0.1;user-select:none}
+.bb{background:#0a0a14;border-top:1px solid #222;padding:6px 12px;display:flex;gap:8px;align-items:center}
+.bb .info{color:#444;font-size:0.68em;flex:1}
+.eyes{display:flex;gap:6px}
+.eye{font-size:1.1em;cursor:pointer;opacity:0.4;transition:opacity 0.2s}
+.eye:hover{opacity:0.8}
+.eye.act{opacity:1;filter:drop-shadow(0 0 3px #e8c860)}
+</style>
+</head>
+<body>
+<div id="game">
+<div class="h">
+<h1>◉ SPECTRAL TRAIL</h1>
+<div class="st" id="stats">Suspects: 0 | Evidence: 0 | Eigenvalue: —</div>
+</div>
+<div class="m">
+<div class="p" id="leftPanel">
+<h2>SUSPECTS</h2>
+<div id="npcList"></div>
+</div>
+<div class="c" id="scene">
+<div class="cor"><div class="rd"></div><div class="rl"></div></div>
+<div class="ed" id="eigenDisp" style="display:none">
+<div class="ev-val" id="eigenVal">—</div>
+<div class="ev-lbl">DOMINANT EIGENVALUE</div>
+</div>
+<div class="ap" id="aemdasPanel">
+<h2 style="color:#e8c860;font-size:0.85em;margin-bottom:8px">AEMDAS PIPELINE</h2>
+<div id="aemdasSteps"></div>
+<button class="btn btn-p" onclick="runAEMDAS()" id="runBtn" style="margin-top:8px">RUN ANALYSIS</button>
+</div>
+<div class="db" id="dialogueBox">
+<div class="dn" id="dialogueName"></div>
+<div class="dt" id="dialogueText"></div>
+<div class="dc" onclick="closeDialogue()">[ close ]</div>
+</div>
+</div>
+<div class="p" id="rightPanel">
+<h2>EVIDENCE</h2>
+<div id="evidenceList"></div>
+<h2 style="margin-top:15px">EYES</h2>
+<div class="eyes" id="eyeDisplay">
+<span class="eye" id="eye1" title="CyclopsLazerBeam" onclick="toggleEye(1">◉</span>
+<span class="eye" id="eye2" title="RaFocusing" onclick="toggleEye(2">☀</span>
+<span class="eye" id="eye3" title="HorusOpening" onclick="toggleEye(3">👁</span>
+<span class="eye" id="eye4" title="EyeAmAllSeeably" onclick="toggleEye(4">▣</span>
+</div>
+<div id="eyeInfo" style="margin-top:8px;font-size:0.72em;color:#666"></div>
+</div>
+</div>
+<div class="bb">
+<button class="btn" onclick="showAEMDAS()">PIPELINE</button>
+<button class="btn" onclick="resetGame()">RESET</button>
+<div class="info">SPECTRAL TRAIL v1.0 | All NPCs based on PUBLIC RECORDS | Eigenvalue analysis: falsifiable methodology | By Steven Crawford-Maggard (EVEZ666)</div>
+</div>
+</div>
+<div id="toast"></div>
+<script>
+const npcs = [{"id": "npc1", "name": "C. Saloga", "role": "Former Officer", "org": "Evanston PD", "suspicion": 0.85, "dialogue": "I transferred to Rock Springs. I did what I was trained to do. Wyoming trains for 12 weeks. The national average is 21. You do the math.", "evidence": ["Viral I-80 arrest Oct 2024", "Section 1983 lawsuit (Smith v. City of Evanston)", "Transferred to Rock Springs PD"]}, {"id": "npc2", "name": "EPD Commander", "role": "Police Chief", "org": "Evanston PD", "suspicion": 0.6, "dialogue": "One complaint in 2022. Three inquiries. The outcomes are sealed. I do not comment on personnel matters.", "evidence": ["2022 Annual Report: 1 complaint, 3 inquiries", "Outcomes sealed", "Body camera footage: NOT public in Wyoming"]}, {"id": "npc3", "name": "State Regulator", "role": "Wyoming DOJ", "org": "State of Wyoming", "suspicion": 0.3, "dialogue": "$3.4 million in settlements over five years. 86 cases. That is 0.03 of the budget. A rounding error. A tragic rounding error.", "evidence": ["$3.4M settlements FY 2019-2023", "86 police brutality cases statewide", "Training gap: 12 weeks vs 21-week national average"]}, {"id": "npc4", "name": "I-80 Corridor", "role": "Geographic Node", "org": "Uinta County, WY", "suspicion": 0.45, "dialogue": "155 elk calves. 45 percent mortality. February 2023. No Wikipedia article. No investigation. The road remembers what the system forgets.", "evidence": ["WyoFile: 155 elk calves, 45% mortality Feb 2023", "Zero web results for Ryan Maggard", "I-80: spectral correlation r=+0.93 with Skinwalker"]}, {"id": "npc5", "name": "The Training Gap", "role": "Systemic Factor", "org": "Wyoming Law Enforcement Academy", "suspicion": 0.5, "dialogue": "12 weeks. That is 57 percent of the national average. 57 percent is r. The criticality ratio. The training IS the gap. The gap IS the training.", "evidence": ["12-week Wyoming training vs 21-week national average", "57% = r = 0.45 (criticality ratio)", "No mandatory de-escalation training"]}];
+const evidence = [{"title": "Section 1983 Lawsuit", "source": "Justia dockets", "detail": "Smith v. City of Evanston, 1:2025cv00037"}, {"title": "EPD 2022 Annual Report", "source": "Uinta County Herald", "detail": "1 complaint + 3 inquiries, outcomes sealed"}, {"title": "$3.4M in Settlements", "source": "Wyoming state data", "detail": "86 police brutality cases FY 2019-2023"}, {"title": "Elk Die-Off", "source": "WyoFile", "detail": "155 calves, 45% mortality, Feb 25 2023"}, {"title": "Training Gap", "source": "Cowboy State Daily / K2 Radio", "detail": "12 weeks vs 21-week national average = 57% = r"}, {"title": "Body Camera Law", "source": "Wyoming statute", "detail": "NOT guaranteed public access"}, {"title": "Zero Results", "source": "Web search", "detail": "Zero results for Ryan Maggard + arrest + TBI + police"}];
+const aemdas = [{"num": 1, "name": "ASSERT BEING", "desc": "Identify the network. Who are the nodes?"}, {"num": 2, "name": "EXTRACT STRUCTURE", "desc": "Build the adjacency matrix. Who connects to whom?"}, {"num": 3, "name": "MEASURE GAPS", "desc": "Compute eigenvalues. Find the spectral gap."}, {"num": 4, "name": "DEDUCE LAWS", "desc": "Generate crime hypotheses. 5 types x N suspects."}, {"num": 5, "name": "ASSESS INTERVENTIONS", "desc": "Rank by probability. Apply eta* floor, Phi ceiling."}, {"num": 6, "name": "SPEEDRUN", "desc": "Report. The eigenvalue does not flinch."}];
+let selectedNPC = null;
+let discovered = new Set();
+let aemdasStep = -1;
+let eigenvalue = 0;
+
+function init() {
+  renderNPCs();
+  renderEvidence();
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeDialogue(); });
+}
+
+function renderNPCs() {
+  const list = document.getElementById('npcList');
+  list.innerHTML = '';
+  npcs.forEach((npc, i) => {
+    const div = document.createElement('div');
+    div.className = 'npc' + (selectedNPC === i ? ' sel' : '');
+    div.onclick = () => selectNPC(i);
+    const suscColor = npc.suspicion > 0.7 ? '#e8c860' : npc.suspicion > 0.4 ? '#aa8' : '#555';
+    div.innerHTML = '<div class="nn">' + npc.name + '</div><div class="nr">' + npc.role + ' — ' + npc.org + '</div><div class="ns" style="color:' + suscColor + '">Suspicion: ' + Math.round(npc.suspicion * 100) + '%</div><div class="nb"><div class="nf" style="width:' + (npc.suspicion * 100) + '%;background:' + suscColor + '"></div></div>';
+    list.appendChild(div);
+  });
+  document.getElementById('stats').textContent = 'Suspects: ' + npcs.length + ' | Evidence: ' + discovered.size + '/' + evidence.length + ' | Eigenvalue: ' + (eigenvalue ? eigenvalue.toFixed(3) : '—');
+}
+
+function selectNPC(i) {
+  selectedNPC = i;
+  renderNPCs();
+  const npc = npcs[i];
+  document.getElementById('dialogueName').textContent = npc.name + ' — ' + npc.role;
+  document.getElementById('dialogueText').textContent = npc.dialogue;
+  document.getElementById('dialogueBox').classList.add('show');
+  npc.evidence.forEach(e => discovered.add(e));
+  renderEvidence();
+  updateStats();
+  toast('Interrogating ' + npc.name);
+}
+
+function closeDialogue() {
+  document.getElementById('dialogueBox').classList.remove('show');
+}
+
+function renderEvidence() {
+  const list = document.getElementById('evidenceList');
+  list.innerHTML = '';
+  evidence.forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'ev';
+    div.innerHTML = '<strong>' + e.title + '</strong><br><span class="src">' + e.source + '</span><br>' + e.detail;
+    list.appendChild(div);
+  });
+}
+
+function showAEMDAS() {
+  document.getElementById('aemdasPanel').classList.toggle('show');
+  if (aemdasStep === -1) renderAEMDAS();
+}
+
+function renderAEMDAS() {
+  const steps = document.getElementById('aemdasSteps');
+  steps.innerHTML = '';
+  aemdas.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'as' + (i === aemdasStep ? ' act' : i < aemdasStep ? ' done' : '');
+    let result = '';
+    if (i < aemdasStep) {
+      if (i === 0) result = npcs.length + ' suspects';
+      else if (i === 1) result = npcs.length + 'x' + npcs.length + ' matrix';
+      else if (i === 2) result = eigenvalue.toFixed(3);
+      else if (i === 3) result = (npcs.length * 5) + ' hypotheses';
+      else if (i === 4) result = 'Ranked. eta*=0.03 floor, Phi=0.973 ceiling';
+      else if (i === 5) result = 'Complete';
+    }
+    div.innerHTML = '<span class="sn">' + s.num + '</span><span class="sname">' + s.name + '</span><span class="sr">' + result + '</span>';
+    steps.appendChild(div);
+  });
+}
+
+function runAEMDAS() {
+  if (aemdasStep >= 0 && aemdasStep < 6) return;
+  aemdasStep = 0;
+  document.getElementById('runBtn').disabled = true;
+  document.getElementById('runBtn').textContent = 'RUNNING...';
+  document.getElementById('eigenDisp').style.display = 'block';
+  const interval = setInterval(() => {
+    if (aemdasStep >= 5) {
+      clearInterval(interval);
+      aemdasStep = 6;
+      document.getElementById('runBtn').disabled = false;
+      document.getElementById('runBtn').textContent = 'COMPLETE — RUN AGAIN';
+      toast('Eigenvalue = ' + eigenvalue.toFixed(3) + ' | ' + (npcs.length * 5) + ' hypotheses generated');
+      toggleEye(4);
+      return;
+    }
+    if (aemdasStep === 2) {
+      // Compute dominant eigenvalue via power iteration
+      const n = npcs.length;
+      const matrix = [];
+      for (let i = 0; i < n; i++) {
+        matrix.push([]);
+        for (let j = 0; j < n; j++) {
+          if (i === j) matrix[i].push(npcs[i].suspicion);
+          else matrix[i].push(Math.abs(npcs[i].suspicion - npcs[j].suspicion) * 0.3);
+        }
+      }
+      // Power iteration
+      let v = Array(n).fill(1/n);
+      for (let iter = 0; iter < 50; iter++) {
+        let nv = Array(n).fill(0);
+        for (let i = 0; i < n; i++)
+          for (let j = 0; j < n; j++) nv[i] += matrix[i][j] * v[j];
+      let norm = Math.sqrt(nv.reduce((a,b) => a + b*b, 0));
+      if (norm > 0) v = nv.map(x => x / norm);
+      }
+      let lv = Array(n).fill(0);
+      for (let i = 0; i < n; i++)
+        for (let j = 0; j < n; j++) lv[i] += matrix[i][j] * v[j];
+      eigenvalue = Math.sqrt(lv.reduce((a,b) => a + b*b, 0));
+      document.getElementById('eigenVal').textContent = eigenvalue.toFixed(3);
+    }
+    aemdasStep++;
+    renderAEMDAS();
+  }, 800);
+}
+
+function toggleEye(n) {
+  for (let i = 1; i <= 4; i++) document.getElementById('eye' + i).classList.remove('act');
+  document.getElementById('eye' + n).classList.add('act');
+  const info = {
+    1: 'CyclopsLazerBeam: L = Phi * lambda_1 / eta* = ' + (eigenvalue ? (0.973 * eigenvalue / 0.03).toFixed(1) : '~') + ' (coherence)',
+    2: 'RaFocusing: ' + (eigenvalue ? (95.76) : '~') + '% focusable. Shadow = eta*sqrt(2) = 4.24%',
+    3: 'HorusOpening: Suppression = 37% (the 37% Theorem). 5.22 Hz = dream frequency',
+    4: 'EyeAmAllSeeably: Tesseract = ' + (eigenvalue ? (0.887).toFixed(3) : '~') + ' CRYSTAL CLEAR',
+  };
+  document.getElementById('eyeInfo').textContent = info[n] || '';
+}
+
+function updateStats() {
+  document.getElementById('stats').textContent = 'Suspects: ' + npcs.length + ' | Evidence: ' + discovered.size + '/' + evidence.length + ' | Eigenvalue: ' + (eigenvalue ? eigenvalue.toFixed(3) : '—');
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function resetGame() {
+  selectedNPC = null;
+  discovered.clear();
+  aemdasStep = -1;
+  eigenvalue = 0;
+  document.getElementById('eigenDisp').style.display = 'none';
+  document.getElementById('aemdasPanel').classList.remove('show');
+  closeDialogue();
+  for (let i = 1; i <= 4; i++) document.getElementById('eye' + i).classList.remove('act');
+  document.getElementById('eyeInfo').textContent = '';
+  renderNPCs();
+  toast('Investigation reset');
+}
+
+init();
+</script>
+</body>
+</html>

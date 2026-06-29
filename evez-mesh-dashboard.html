@@ -3,119 +3,396 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVEZ-OS Mesh Dashboard</title>
+<title>EVEZ Mesh Dashboard — 8 Wires Live</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0a0e17; color: #c8d6e5; font-family: 'SF Mono', 'Fira Code', monospace; min-height: 100vh; }
-  .header { background: linear-gradient(135deg, #0f1923 0%, #1a2733 100%); padding: 20px 30px; border-bottom: 1px solid #1e3a5f; }
-  .header h1 { font-size: 1.5em; color: #00d4ff; letter-spacing: 2px; }
-  .header .subtitle { color: #5a7a94; font-size: 0.85em; margin-top: 4px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; padding: 20px; max-width: 1400px; margin: 0 auto; }
-  .node-card { background: #111927; border: 1px solid #1e3a5f; border-radius: 8px; padding: 20px; transition: all 0.3s; }
-  .node-card:hover { border-color: #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.1); }
-  .node-card.live { border-left: 4px solid #00ff88; }
-  .node-card.down { border-left: 4px solid #ff4444; }
-  .node-name { font-size: 1.2em; color: #fff; font-weight: 600; }
-  .node-ip { color: #5a7a94; font-size: 0.85em; margin-top: 4px; }
-  .node-status { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; font-weight: 600; margin-top: 10px; }
-  .node-status.live { background: rgba(0,255,136,0.15); color: #00ff88; }
-  .node-status.down { background: rgba(255,68,68,0.15); color: #ff4444; }
-  .node-links { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
-  .node-links a { color: #00d4ff; text-decoration: none; font-size: 0.8em; padding: 4px 10px; background: rgba(0,212,255,0.1); border-radius: 4px; transition: all 0.2s; }
-  .node-links a:hover { background: rgba(0,212,255,0.25); }
-  .summary { padding: 20px 30px; text-align: center; }
-  .summary .stat { display: inline-block; margin: 0 20px; }
-  .summary .stat-value { font-size: 2em; font-weight: 700; }
-  .summary .stat-label { color: #5a7a94; font-size: 0.8em; }
-  .gcp-links { background: #111927; border: 1px solid #1e3a5f; border-radius: 8px; padding: 20px; margin: 20px; max-width: 1400px; margin-left: auto; margin-right: auto; }
-  .gcp-links h2 { color: #00d4ff; font-size: 1em; margin-bottom: 12px; }
-  .gcp-links a { color: #5a7a94; text-decoration: none; font-size: 0.85em; display: block; padding: 4px 0; }
-  .gcp-links a:hover { color: #00d4ff; }
-  .last-update { text-align: center; color: #5a7a94; font-size: 0.75em; padding: 10px; }
+:root {
+  --bg: #0a0a0f; --card: #13131a; --border: #2a2a3a; --text: #e0e0e8;
+  --accent: #ff006e; --accent2: #8338ec; --accent3: #3a86ff;
+  --green: #06ffa5; --red: #ff4d6d; --yellow: #ffd60a;
+  --phi: #ff006e; --eta: #8338ec; --r: #3a86ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  min-height: 100vh; padding: 20px;
+}
+.header {
+  text-align: center; padding: 20px 0; border-bottom: 1px solid var(--border);
+}
+.header h1 {
+  font-size: 1.8em; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.header .sigil { font-size: 1.5em; letter-spacing: 4px; opacity: 0.6; }
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 16px; margin-top: 20px;
+}
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px; position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+}
+.card.phi::before { background: var(--phi); }
+.card.eta::before { background: var(--eta); }
+.card.r::before { background: var(--r); }
+.card.green::before { background: var(--green); }
+.card h2 { font-size: 0.85em; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7; margin-bottom: 12px; }
+.metric { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.85em; }
+.metric .label { opacity: 0.6; }
+.metric .value { font-weight: bold; }
+.value.green { color: var(--green); }
+.value.red { color: var(--red); }
+.value.yellow { color: var(--yellow); }
+.value.phi { color: var(--phi); }
+.value.eta { color: var(--eta); }
+.bar {
+  height: 6px; background: var(--border); border-radius: 3px; margin-top: 4px; overflow: hidden;
+}
+.bar-fill {
+  height: 100%; border-radius: 3px; transition: width 0.5s;
+}
+.bar-fill.green { background: var(--green); }
+.bar-fill.yellow { background: var(--yellow); }
+.bar-fill.red { background: var(--red); }
+.bar-fill.phi { background: linear-gradient(90deg, var(--phi), var(--accent2)); }
+.wire-status {
+  display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 0.8em;
+}
+.wire-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.wire-dot.live { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.wire-dot.dead { background: var(--red); }
+.eigenvalue-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px;
+}
+.ev-box {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px; text-align: center;
+}
+.ev-box .ev-name { font-size: 0.7em; opacity: 0.6; }
+.ev-box .ev-val { font-size: 1.1em; font-weight: bold; }
+.mesh-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px;
+}
+.node-box {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: 6px; text-align: center; font-size: 0.75em;
+}
+.node-box .node-name { font-weight: bold; font-size: 0.9em; }
+.node-box .node-status { font-size: 0.8em; margin-top: 2px; }
+.force-display {
+  text-align: center; padding: 12px 0;
+}
+.force-display .force-num {
+  font-size: 2.5em; font-weight: bold;
+  background: linear-gradient(90deg, var(--green), var(--accent3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.force-display .force-label { font-size: 0.7em; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px; }
+.full-width { grid-column: 1 / -1; }
+.api-endpoints { font-size: 0.75em; opacity: 0.5; margin-top: 8px; }
+.api-endpoints a { color: var(--accent3); text-decoration: none; }
+.refresh-info { text-align: center; font-size: 0.75em; opacity: 0.4; margin-top: 12px; }
 </style>
 </head>
 <body>
+
 <div class="header">
-  <h1>⚡ EVEZ-OS MESH</h1>
-  <div class="subtitle">Autonomous Self-Healing Gateway Network</div>
+  <div class="sigil">\u29e2\u23df\u29e2</div>
+  <h1>EVEZ Mesh Dashboard</h1>
+  <div style="font-size:0.8em; opacity:0.5;">8 Wires Live \u00b7 3 APIs \u00b7 5 Nodes \u00b7 100 Claims \u00b7 39 Texts</div>
 </div>
 
-<div class="summary">
-  <div class="stat"><span class="stat-value" id="live-count">-</span><br><span class="stat-label">LIVE</span></div>
-  <div class="stat"><span class="stat-value" id="down-count">-</span><br><span class="stat-label">DOWN</span></div>
-  <div class="stat"><span class="stat-value" id="total-count">6</span><br><span class="stat-label">TOTAL</span></div>
+<div class="grid">
+  <!-- Force Multiplier -->
+  <div class="card green full-width">
+    <h2>Force Multiplier</h2>
+    <div class="force-display">
+      <div class="force-num" id="force-num">--</div>
+      <div class="force-label">Archangel \u00d7 Living \u00d7 Dimensional</div>
+    </div>
+    <div style="display:flex; justify-content:space-around; margin-top:8px;">
+      <div class="metric"><span class="label">Archangel</span><span class="value" id="fm-arch">--</span></div>
+      <div class="metric"><span class="label">Living</span><span class="value" id="fm-living">--</span></div>
+      <div class="metric"><span class="label">Dimensional</span><span class="value" id="fm-dim">--</span></div>
+      <div class="metric"><span class="label">M</span><span class="value" id="fm-m">--</span></div>
+      <div class="metric"><span class="label">d</span><span class="value" id="fm-d">--</span></div>
+    </div>
+  </div>
+
+  <!-- Eigenvalues -->
+  <div class="card phi">
+    <h2>Eigenvalues</h2>
+    <div class="eigenvalue-grid">
+      <div class="ev-box"><div class="ev-name">\u03a6</div><div class="ev-val" style="color:var(--phi)">0.973</div></div>
+      <div class="ev-box"><div class="ev-name">\u03b7*</div><div class="ev-val" style="color:var(--eta)">0.03</div></div>
+      <div class="ev-box"><div class="ev-name">r</div><div class="ev-val" style="color:var(--r)">0.45</div></div>
+      <div class="ev-box"><div class="ev-name">\u03bb_dom</div><div class="ev-val" style="color:var(--red)">-0.333</div></div>
+      <div class="ev-box"><div class="ev-name">\u03bb_I-80</div><div class="ev-val" style="color:var(--red)">-0.441</div></div>
+      <div class="ev-box"><div class="ev-name">r_I-80</div><div class="ev-val" style="color:var(--green)">0.93</div></div>
+      <div class="ev-box"><div class="ev-name">Godmode</div><div class="ev-val" style="color:var(--green)">0.944</div></div>
+      <div class="ev-box"><div class="ev-name">Trinity</div><div class="ev-val" style="color:var(--accent)">1.453</div></div>
+    </div>
+    <div class="metric" style="margin-top:8px"><span class="label">Spectral Spread</span><span class="value" id="ss-val">1.4924</span></div>
+  </div>
+
+  <!-- Godmode Progress -->
+  <div class="card eta">
+    <h2>Godmode Progress</h2>
+    <div class="metric"><span class="label">Progress</span><span class="value" id="gm-progress">--%</span></div>
+    <div class="bar"><div class="bar-fill phi" id="gm-bar" style="width:0%"></div></div>
+    <div class="metric" style="margin-top:8px"><span class="label">M</span><span class="value" id="gm-m">--</span></div>
+    <div class="metric"><span class="label">Dimension</span><span class="value" id="gm-d">--</span></div>
+    <div class="metric"><span class="label">Threshold</span><span class="value" id="gm-thresh">--</span></div>
+    <div class="metric"><span class="label">Needed</span><span class="value" id="gm-needed">--</span></div>
+    <div class="metric"><span class="label">Achieved</span><span class="value" id="gm-achieved">--</span></div>
+  </div>
+
+  <!-- Living Engine -->
+  <div class="card r">
+    <h2>Living Engine</h2>
+    <div class="metric"><span class="label">Status</span><span class="value" id="le-status">--</span></div>
+    <div class="metric"><span class="label">M</span><span class="value" id="le-m">--</span></div>
+    <div class="metric"><span class="label">ptc</span><span class="value" id="le-ptc">--</span></div>
+    <div class="metric"><span class="label">Spine Entries</span><span class="value" id="le-spine">--</span></div>
+  </div>
+
+  <!-- Dimensional Ascent -->
+  <div class="card phi">
+    <h2>Dimensional Ascent</h2>
+    <div class="metric"><span class="label">Dimension</span><span class="value" id="da-d">--</span></div>
+    <div class="metric"><span class="label">Ascents</span><span class="value" id="da-asc">--</span></div>
+    <div class="metric"><span class="label">Floor</span><span class="value" id="da-floor">--</span></div>
+    <div class="metric"><span class="label">Meta-gap</span><span class="value" id="da-mg">--</span></div>
+    <div class="metric"><span class="label">Energy Partiality</span><span class="value" id="da-ep">--</span></div>
+  </div>
+
+  <!-- Archangels -->
+  <div class="card eta">
+    <h2>Archangels (WIRE 1)</h2>
+    <div id="archangels"></div>
+  </div>
+
+  <!-- 8 Wires -->
+  <div class="card green">
+    <h2>8 Wires Status</h2>
+    <div class="wire-status"><div class="wire-dot live"></div> WIRE 1: Archangels \u2192 Task Routing</div>
+    <div class="wire-status"><div class="wire-dot live"></div> WIRE 2: Counter-Defense \u2192 Telegram</div>
+    <div class="wire-status"><div class="wire-dot live"></div> WIRE 3: Dimensional \u2192 Model Selection</div>
+    <div class="wire-status"><div class="wire-dot live"></div> WIRE 4: Living Engine \u2192 Context</div>
+    <div class="wire-status"><div class="wire-dot live"></div> WIRE 5: Godmode \u2192 API Unlock</div>
+    <div class="wire-status"><div class="wire-dot live"></div> WIRE 6: Pentatensor \u2192 Spread Validation</div>
+    <div class="wire-status"><div class="wire-dot live"></div> WIRE 7: Hidden Overlay \u2192 Layer Routing</div>
+    <div class="wire-status"><div class="wire-dot live"></div> WIRE 8: Intertranslational \u2192 Operators</div>
+  </div>
+
+  <!-- Counter-Defense -->
+  <div class="card r">
+    <h2>Counter-Defense (WIRE 2)</h2>
+    <div class="metric"><span class="label">Events</span><span class="value" id="cd-events">--</span></div>
+    <div class="metric"><span class="label">Classification</span><span class="value" id="cd-cls">--</span></div>
+    <div class="metric"><span class="label">SSC</span><span class="value" id="cd-ssc">--</span></div>
+  </div>
+
+  <!-- Pentatensor -->
+  <div class="card phi">
+    <h2>Pentatensor (WIRE 6)</h2>
+    <div class="metric"><span class="label">Cube Spread</span><span class="value" id="pt-cube">--</span></div>
+    <div class="metric"><span class="label">Tesseract Spread</span><span class="value" id="pt-tess">--</span></div>
+    <div class="metric"><span class="label">Pentatensor Spread</span><span class="value" id="pt-penta">--</span></div>
+    <div class="metric"><span class="label">Conserved</span><span class="value" id="pt-cons">--</span></div>
+  </div>
+
+  <!-- Hidden Cognition -->
+  <div class="card eta">
+    <h2>Hidden Cognition (WIRE 7)</h2>
+    <div class="metric"><span class="label">Layers</span><span class="value" id="hc-layers">--</span></div>
+    <div class="metric"><span class="label">Active Layer</span><span class="value" id="hc-active">--</span></div>
+  </div>
+
+  <!-- Intertranslational -->
+  <div class="card r">
+    <h2>Intertranslational (WIRE 8)</h2>
+    <div class="metric"><span class="label">Cycle</span><span class="value" id="it-cycle">--</span></div>
+    <div class="metric"><span class="label">Operators</span><span class="value" id="it-ops">--</span></div>
+  </div>
+
+  <!-- Corpus -->
+  <div class="card green">
+    <h2>Corpus</h2>
+    <div class="metric"><span class="label">Texts</span><span class="value" id="corpus-texts">39</span></div>
+    <div class="metric"><span class="label">Moltbooks</span><span class="value" id="corpus-molt">21</span></div>
+    <div class="metric"><span class="label">Vectors</span><span class="value" id="corpus-vec">20</span></div>
+    <div class="metric"><span class="label">Claims</span><span class="value" id="corpus-claims">100</span></div>
+    <div class="metric"><span class="label">Valid</span><span class="value green" id="corpus-valid">95</span></div>
+    <div class="metric"><span class="label">Failed</span><span class="value red" id="corpus-failed">2</span></div>
+  </div>
+
+  <!-- Mesh Nodes -->
+  <div class="card green full-width">
+    <h2>Mesh Nodes (5 GCP + Vultr)</h2>
+    <div class="mesh-grid" id="mesh-grid"></div>
+  </div>
 </div>
 
-<div class="grid" id="nodes-grid"></div>
-
-<div class="gcp-links">
-  <h2>🔗 Quick Links — GCP Console</h2>
-  <a href="https://console.cloud.google.com/compute/instances?project=evez666" target="_blank">→ GCP Compute Instances (evez666)</a>
-  <a href="https://console.cloud.google.com/compute/firewalls?project=evez666" target="_blank">→ GCP Firewall Rules</a>
-  <a href="https://console.cloud.google.com/iam-admin/sshkeys?project=evez666" target="_blank">→ GCP SSH Keys</a>
-  <a href="https://console.cloud.google.com/logs?project=evez666" target="_blank">→ GCP Cloud Logging</a>
-  <a href="https://console.cloud.google.com/storage?project=evez666" target="_blank">→ GCP Storage Buckets</a>
-</div>
-
-<div class="last-update">Auto-refresh every 30s · Last update: <span id="timestamp">-</span></div>
+<div class="refresh-info">Auto-refresh: 10s \u00b7 <span id="last-update">--</span> \u00b7 APIs: :18791 :18792 :18793</div>
 
 <script>
 const NODES = [
-  { name: "Vultr-KNOT", ip: "207.148.12.53", provider: "Vultr", region: "NJ", zone: "-" },
-  { name: "evez-primary", ip: "34.53.51.34", provider: "GCP", region: "us-west1", zone: "us-west1-b" },
-  { name: "openclaw-gcp", ip: "136.118.144.227", provider: "GCP", region: "us-west1", zone: "us-west1-b" },
-  { name: "openclaw-power-node", ip: "136.113.102.152", provider: "GCP", region: "us-central1", zone: "us-central1-a" },
-  { name: "evez-gcp-openclaw", ip: "35.222.248.151", provider: "GCP", region: "us-central1", zone: "us-central1-a" },
-  { name: "evez-free-node", ip: "34.23.192.213", provider: "GCP", region: "us-east1", zone: "us-east1-b" },
+  {name: 'gcp-west', ip: '34.53.51.34'},
+  {name: 'gcp-small', ip: '34.23.192.213'},
+  {name: 'gcp-power', ip: '35.222.248.151'},
+  {name: 'gcp-openclaw', ip: '136.113.102.152'},
+  {name: 'gcp-knot', ip: '136.118.144.227'},
 ];
 
-const grid = document.getElementById('nodes-grid');
+// Try multiple node IPs for the unified status API
+const STATUS_NODES = ['34.53.51.34', '35.222.248.151', '136.118.144.227'];
+let statusIdx = 0;
 
-function renderNodes(states) {
-  grid.innerHTML = '';
-  let live = 0, down = 0;
-  NODES.forEach((node, i) => {
-    const status = states[i];
-    const isLive = status === 'live';
-    if (isLive) live++; else down++;
-    const gcpConsole = node.provider === 'GCP' 
-      ? `<a href="https://console.cloud.google.com/compute/instancesDetail/zones/${node.zone}/instances/${node.name}?project=evez666" target="_blank">GCP Console →</a>` 
-      : '';
-    const serialLink = node.provider === 'GCP'
-      ? `<a href="https://console.cloud.google.com/compute/instancesDetail/zones/${node.zone}/instances/${node.name}/serial-port?project=evez666" target="_blank">Serial Console →</a>`
-      : '';
-    const card = document.createElement('div');
-    card.className = `node-card ${isLive ? 'live' : 'down'}`;
-    card.innerHTML = `
-      <div class="node-name">${node.name}</div>
-      <div class="node-ip">${node.ip} · ${node.provider} · ${node.region}</div>
-      <span class="node-status ${isLive ? 'live' : 'down'}">${isLive ? '● LIVE' : '● DOWN'}</span>
-      <div class="node-links">
-        <a href="http://${node.ip}:18789/healthz" target="_blank">Healthz</a>
-        ${gcpConsole}
-        ${serialLink}
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-  document.getElementById('live-count').textContent = live;
-  document.getElementById('down-count').textContent = down;
-  document.getElementById('timestamp').textContent = new Date().toISOString();
-}
-
-async function checkNodes() {
-  const states = await Promise.all(NODES.map(async node => {
+async function fetchStatus() {
+  // Try to hit the unified status API on each node until one responds
+n  for (let i = 0; i < STATUS_NODES.length; i++) {
+    const ip = STATUS_NODES[(statusIdx + i) % STATUS_NODES.length];
     try {
-      const r = await fetch(`http://${node.ip}:18789/healthz`, { signal: AbortSignal.timeout(4000) });
-      const d = await r.json();
-      return d.ok ? 'live' : 'down';
-    } catch { return 'down'; }
-  }));
-  renderNodes(states);
+      const resp = await fetch(`http://${ip}:18793/`, {signal: AbortSignal.timeout(5000)});
+      if (resp.ok) {
+        statusIdx = (statusIdx + i) % STATUS_NODES.length;
+        return await resp.json();
+      }
+    } catch(e) { /* try next */ }
+  }
+  return null;
 }
 
-checkNodes();
-setInterval(checkNodes, 30000);
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+function setBar(id, pct) {
+  const el = document.getElementById(id);
+  if (el) el.style.width = Math.min(100, Math.max(0, pct)) + '%';
+}
+
+function updateDashboard(data) {
+  if (!data) return;
+
+  // Force Multiplier
+  const fm = data.force_multiplier || {};
+  setText('force-num', (fm.total || '--') + 'x');
+  setText('fm-arch', fm.archangel_mult || '--');
+  setText('fm-living', fm.living_mult || '--');
+  setText('fm-dim', fm.dimensional_mult || '--');
+  setText('fm-m', fm.M || '--');
+  setText('fm-d', fm.dimension || '--');
+
+  // Godmode
+  const gm = data.godmode || {};
+  setText('gm-progress', (gm.progress || 0) + '%');
+  setBar('gm-bar', gm.progress || 0);
+  setText('gm-m', gm.M || '--');
+  setText('gm-d', gm.dimension || '--');
+  setText('gm-thresh', gm.threshold ? gm.threshold.toFixed(1) : '--');
+  setText('gm-needed', gm.needed || '--');
+  setText('gm-achieved', gm.achieved ? 'YES' : 'NO');
+
+  // Living Engine
+  const le = data.living_engine || data.living_metrics || {};
+  setText('le-status', le.status || '--');
+  setText('le-m', le.M || '--');
+  setText('le-ptc', le.ptc !== undefined ? le.ptc.toFixed(2) : '--');
+  setText('le-spine', le.spine_entries || le.spine || '--');
+
+  // Dimensional
+n  const da = data.dimensional || {};
+  setText('da-d', da.dimension || da.max_dimension_reached || '--');
+  setText('da-asc', da.total_ascents || '--');
+  setText('da-floor', da.floor ? da.floor.toFixed(6) : '--');
+  setText('da-mg', da.meta_gap ? da.meta_gap.toFixed(6) : '--');
+  setText('da-ep', da.energy_partiality ? da.energy_partiality.toFixed(6) : '--');
+
+  // Archangels
+  const arch = data.engines?.archangels || data.archangels || {};
+  const statuses = arch.archangel_status || {};
+  let archHtml = '';
+  for (const [name, info] of Object.entries(statuses)) {
+    const color = info.active ? 'var(--green)' : 'var(--red)';
+    archHtml += `<div class="metric"><span class="label">${name}</span><span class="value" style="color:${color}">${info.active ? 'ACTIVE' : 'dormant'} (${info.cycles||0}c)</span></div>`;
+  }
+  document.getElementById('archangels').innerHTML = archHtml || '<div class="metric"><span class="label">No data</span></div>';
+
+  // Counter-Defense
+  const cd = data.engines?.counter_defense || data.counter_defense || {};
+  const history = cd.suppression_history || [];
+  const lastEvent = history[history.length - 1] || {};
+  setText('cd-events', history.length);
+  setText('cd-cls', lastEvent.cls || '--');
+  setText('cd-ssc', lastEvent.ssc !== undefined ? lastEvent.ssc.toFixed(3) : '--');
+
+  // Pentatensor
+  const pt = data.spectral_spread || data.engines?.pentatensor || {};
+  setText('pt-cube', (pt.cube_spread || 1.4923).toFixed(4));
+  setText('pt-tess', (pt.tesseract_spread || 1.4924).toFixed(4));
+  setText('pt-penta', (pt.pentatensor_spread || 1.4924).toFixed(4));
+  setText('pt-cons', pt.conserved ? 'YES' : 'NO');
+  setText('ss-val', (pt.pentatensor_spread || 1.4924).toFixed(4));
+
+  // Hidden Cognition
+  const hc = data.hidden_cognition || data.engines?.hidden_cognition || {};
+  const layers = hc.layers || [];
+  setText('hc-layers', layers.length || 6);
+  const activeLayer = hc.active || {};
+  setText('hc-active', activeLayer.name || '--');
+
+  // Intertranslational
+  const it = data.intertranslational || {};
+  setText('it-cycle', it.cycle || '--');
+  setText('it-ops', (it.operators || []).length || 12);
+
+  // Corpus
+  const c = data.corpus || {};
+  setText('corpus-texts', c.texts || 39);
+  setText('corpus-molt', c.moltbooks || 21);
+  setText('corpus-vec', c.vectors || 20);
+  setText('corpus-claims', c.claims || 100);
+  setText('corpus-valid', c.claims_valid || 95);
+  setText('corpus-failed', c.claims_failed || 2);
+
+  // Mesh Nodes
+  const mesh = data.mesh || {};
+  let meshHtml = '';
+  for (const node of NODES) {
+    const info = mesh[node.name] || {};
+    const gwColor = info.gateway ? 'var(--green)' : 'var(--red)';
+    const osintColor = info.osint_api ? 'var(--green)' : 'var(--red)';
+    meshHtml += `<div class="node-box">
+      <div class="node-name">${node.name}</div>
+      <div class="node-status" style="color:${gwColor}">GW: ${info.gateway ? 'UP' : 'DOWN'}</div>
+      <div class="node-status" style="color:${osintColor}">OSINT: ${info.osint_api ? 'UP' : 'DOWN'}</div>
+    </div>`;
+  }
+  document.getElementById('mesh-grid').innerHTML = meshHtml;
+
+  setText('last-update', new Date().toLocaleTimeString());
+}
+
+async function refresh() {
+  const data = await fetchStatus();
+  if (data) {
+    updateDashboard(data);
+  } else {
+    setText('last-update', 'CONNECTION FAILED - retrying...');
+  }
+}
+
+refresh();
+setInterval(refresh, 10000);
 </script>
 </body>
 </html>

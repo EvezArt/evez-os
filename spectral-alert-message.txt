@@ -1,0 +1,30 @@
+🚨 EVEZ SPECTRAL ALERT
+
+🚨 sudan_darfur_2024: 0.816 — CRITICAL
+🚨 myanmar_2024: 0.744 — CRITICAL
+🚨 gaza_2024: 0.818 — CRITICAL
+🚨 tigray_2024: 0.626 — CRITICAL
+🚨 ukraine_2024: 0.732 — CRITICAL
+🚨 drc_2024: 0.664 — CRITICAL
+🚨 sahel_2024: 0.617 — CRITICAL
+🚨 north_korea: 0.696 — CRITICAL
+🚨 sudan_2024: 0.794 — CRITICAL
+🚨 gaza_2024: 0.805 — CRITICAL
+🚨 drc_2024: 0.608 — CRITICAL
+🚨 haiti_2024: 0.726 — CRITICAL
+🚨 afghanistan_2024: 0.678 — CRITICAL
+🚨 somalia_2024: 0.684 — CRITICAL
+🚨 yemen_2024: 0.701 — CRITICAL
+🚨 sahel_2024: 0.679 — CRITICAL
+⚠️ georgia_2024: 0.460 — ELEVATED
+⚠️ tunisia_2024: 0.505 — ELEVATED
+⚠️ russia_ukraine_2024: 0.585 — ELEVATED
+⚠️ taiwan_strait_2024: 0.435 — ELEVATED
+⚠️ korea_2024: 0.501 — ELEVATED
+⚠️ india_pakistan_2024: 0.403 — ELEVATED
+⚠️ iran_israel_2024: 0.430 — ELEVATED
+⚠️ russia_nato_2024: 0.528 — ELEVATED
+⚠️ north_korea_us_2024: 0.540 — ELEVATED
+
+16 critical, 9 elevated
+11 spectrometers · 105/105 checks passed

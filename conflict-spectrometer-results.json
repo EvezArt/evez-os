@@ -1,0 +1,151 @@
+{
+  "results": {
+    "wwii_1939": {
+      "severity": 0.8955,
+      "eigenvalue": 2.686418,
+      "Phi": 0.601459,
+      "lambda_dom": 0,
+      "class": "Catastrophic \u2014 total war",
+      "recommendations": [
+        "Diplomatic engagement / dialogue",
+        "Resource sharing agreements",
+        "Humanitarian intervention",
+        "Alliance mediation"
+      ]
+    },
+    "wwi_1914": {
+      "severity": 0.6328,
+      "eigenvalue": 1.898361,
+      "Phi": 0.626987,
+      "lambda_dom": 0,
+      "class": "Severe conflict",
+      "recommendations": [
+        "Resource sharing agreements",
+        "Alliance mediation"
+      ]
+    },
+    "vietnam_1965": {
+      "severity": 0.604,
+      "eigenvalue": 1.812094,
+      "Phi": 0.5559,
+      "lambda_dom": 0,
+      "class": "Severe conflict",
+      "recommendations": [
+        "Diplomatic engagement / dialogue",
+        "Nuclear de-escalation protocols"
+      ]
+    },
+    "gulf_war_1991": {
+      "severity": 0.543,
+      "eigenvalue": 1.629072,
+      "Phi": 0.628137,
+      "lambda_dom": 0,
+      "class": "Severe conflict",
+      "recommendations": [
+        "Resource sharing agreements",
+        "Alliance mediation"
+      ]
+    },
+    "falklands_1982": {
+      "severity": 0.1274,
+      "eigenvalue": 0.382094,
+      "Phi": 0.512878,
+      "lambda_dom": 0,
+      "class": "Low tension",
+      "recommendations": []
+    },
+    "ukraine_2022": {
+      "severity": 0.6925,
+      "eigenvalue": 2.077525,
+      "Phi": 0.537071,
+      "lambda_dom": 0,
+      "class": "Severe conflict",
+      "recommendations": [
+        "Diplomatic engagement / dialogue",
+        "Nuclear de-escalation protocols",
+        "Alliance mediation"
+      ]
+    },
+    "syria_2011": {
+      "severity": 0.6855,
+      "eigenvalue": 2.056572,
+      "Phi": 0.651845,
+      "lambda_dom": 0,
+      "class": "Severe conflict",
+      "recommendations": [
+        "Diplomatic engagement / dialogue",
+        "Humanitarian intervention",
+        "Alliance mediation"
+      ]
+    },
+    "korea_1950": {
+      "severity": 0.6205,
+      "eigenvalue": 1.86152,
+      "Phi": 0.648726,
+      "lambda_dom": 0,
+      "class": "Severe conflict",
+      "recommendations": [
+        "Diplomatic engagement / dialogue",
+        "Alliance mediation"
+      ]
+    },
+    "yugoslavia_1991": {
+      "severity": 0.6686,
+      "eigenvalue": 2.005892,
+      "Phi": 0.648422,
+      "lambda_dom": 0,
+      "class": "Severe conflict",
+      "recommendations": [
+        "Diplomatic engagement / dialogue",
+        "Humanitarian intervention"
+      ]
+    },
+    "rwanda_1994": {
+      "severity": 0.7059,
+      "eigenvalue": 2.117761,
+      "Phi": 0.706097,
+      "lambda_dom": 0,
+      "class": "Severe conflict",
+      "recommendations": [
+        "Diplomatic engagement / dialogue",
+        "Humanitarian intervention"
+      ]
+    }
+  },
+  "checks": [
+    [
+      "WWII > WWI",
+      "True"
+    ],
+    [
+      "WWI > Vietnam",
+      "True"
+    ],
+    [
+      "Vietnam > Gulf War",
+      "True"
+    ],
+    [
+      "Gulf War > Falklands",
+      "True"
+    ],
+    [
+      "Ukraine high",
+      "True"
+    ],
+    [
+      "Rwanda internal",
+      "True"
+    ],
+    [
+      "Syria high instability",
+      "True"
+    ],
+    [
+      "Falklands lowest",
+      "True"
+    ]
+  ],
+  "passed": 8,
+  "total": 8
+}

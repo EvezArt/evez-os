@@ -1,0 +1,154 @@
+{
+  "results": {
+    "spanish_flu_1918": {
+      "r0_effective": 7.774,
+      "eigenvalue": 1.943475,
+      "Phi": 0.833912,
+      "lambda_dom": -0.0,
+      "class": "Pandemic",
+      "recommendations": [
+        "Mass vaccination",
+        "Treatment deployment",
+        "Variant surveillance",
+        "NPIs: masks, distancing"
+      ]
+    },
+    "covid_19_2020": {
+      "r0_effective": 6.747,
+      "eigenvalue": 1.686708,
+      "Phi": 0.58298,
+      "lambda_dom": -0.0,
+      "class": "Pandemic",
+      "recommendations": [
+        "Mass vaccination",
+        "Travel restrictions",
+        "Variant surveillance"
+      ]
+    },
+    "h1n1_2009": {
+      "r0_effective": 4.834,
+      "eigenvalue": 1.208442,
+      "Phi": 0.563048,
+      "lambda_dom": 0,
+      "class": "Epidemic",
+      "recommendations": [
+        "Mass vaccination",
+        "Travel restrictions"
+      ]
+    },
+    "ebola_2014": {
+      "r0_effective": 3.015,
+      "eigenvalue": 0.75364,
+      "Phi": 0.809712,
+      "lambda_dom": -0.0,
+      "class": "Epidemic",
+      "recommendations": [
+        "Mass vaccination",
+        "Treatment deployment",
+        "Variant surveillance"
+      ]
+    },
+    "seasonal_flu": {
+      "r0_effective": 4.462,
+      "eigenvalue": 1.115622,
+      "Phi": 0.509242,
+      "lambda_dom": 0,
+      "class": "Epidemic",
+      "recommendations": [
+        "Travel restrictions"
+      ]
+    },
+    "measles": {
+      "r0_effective": 6.218,
+      "eigenvalue": 1.554435,
+      "Phi": 0.548948,
+      "lambda_dom": 0,
+      "class": "Pandemic",
+      "recommendations": [
+        "NPIs: masks, distancing"
+      ]
+    },
+    "common_cold": {
+      "r0_effective": 4.454,
+      "eigenvalue": 1.113387,
+      "Phi": 0.591362,
+      "lambda_dom": -0.0,
+      "class": "Epidemic",
+      "recommendations": [
+        "Mass vaccination",
+        "Travel restrictions"
+      ]
+    },
+    "black_death_1347": {
+      "r0_effective": 6.767,
+      "eigenvalue": 1.691814,
+      "Phi": 0.867485,
+      "lambda_dom": 0,
+      "class": "Pandemic",
+      "recommendations": [
+        "Mass vaccination",
+        "Treatment deployment",
+        "Variant surveillance",
+        "NPIs: masks, distancing"
+      ]
+    },
+    "smallpox": {
+      "r0_effective": 4.377,
+      "eigenvalue": 1.094181,
+      "Phi": 0.75234,
+      "lambda_dom": 0,
+      "class": "Epidemic",
+      "recommendations": [
+        "Mass vaccination",
+        "Treatment deployment",
+        "NPIs: masks, distancing"
+      ]
+    },
+    "mers_2012": {
+      "r0_effective": 2.878,
+      "eigenvalue": 0.719604,
+      "Phi": 0.587792,
+      "lambda_dom": 0,
+      "class": "Epidemic",
+      "recommendations": [
+        "Mass vaccination"
+      ]
+    }
+  },
+  "checks": [
+    [
+      "Spanish Flu > COVID-19",
+      "True"
+    ],
+    [
+      "COVID-19 > H1N1",
+      "True"
+    ],
+    [
+      "H1N1 > Ebola",
+      "True"
+    ],
+    [
+      "Seasonal flu > Ebola (R0)",
+      "True"
+    ],
+    [
+      "Measles high R0",
+      "True"
+    ],
+    [
+      "Common cold low R0",
+      "True"
+    ],
+    [
+      "Black Death catastrophic",
+      "True"
+    ],
+    [
+      "Smallpox > MERS",
+      "True"
+    ]
+  ],
+  "passed": 8,
+  "total": 8
+}

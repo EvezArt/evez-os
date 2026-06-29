@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEZ Meta-Spectrometer — Civilization Risk Index</title>
+<style>
+:root{--bg:#0a0a0f;--fg:#e0e0e8;--crit:#ff0044;--hi:#ff4444;--med:#ff8800;--low:#4488ff;--ok:#00ff88;--card:#1a1a2e;--border:#333}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:'SF Mono',Monaco,monospace;padding:20px;line-height:1.6}
+h1{color:var(--med);font-size:2em;margin-bottom:.3em}
+.sub{opacity:.6;margin-bottom:2em;font-size:.85em}
+.index-box{text-align:center;padding:30px;border:2px solid var(--med);border-radius:16px;background:var(--card);margin-bottom:2em}
+.index-num{font-size:4em;font-weight:bold;color:var(--med)}
+.index-level{font-size:1.2em;margin-top:8px;letter-spacing:3px}
+.domains{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:2em}
+.domain{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.domain h3{font-size:1em;margin-bottom:6px}
+.bar{height:8px;background:#222;border-radius:4px;overflow:hidden;margin:6px 0}
+.fill{height:100%;border-radius:4px}
+.delta{font-size:.75em;opacity:.7}
+.gap{text-align:center;padding:20px;border:1px solid var(--crit);border-radius:12px;background:var(--card);margin:2em 0}
+footer{opacity:.4;text-align:center;margin-top:3em;font-size:.75em}
+</style>
+</head>
+<body>
+<h1>META-SPECTROMETER</h1>
+<div class="sub">Unified Civilization Risk Index — 11 spectrometers × 11 domains × 175 crime categories</div>
+
+<div class="index-box">
+<div class="index-num">49.1</div>
+<div class="index-level" style="color:var(--med)">ELEVATED</div>
+<div style="opacity:.5;margin-top:8px">4 critical · 4 elevated · 8 rising</div>
+</div>
+
+<div class="domains">
+<div class="domain"><h3>💀 Genocide <span style="float:right;color:var(--crit)">0.818 ↗</span></h3><div class="bar"><div class="fill" style="width:81.8%;background:var(--crit)"></div></div><div class="delta">Δ +0.218 | Gaza 0.818, Sudan 0.816, Myanmar 0.744</div></div>
+<div class="domain"><h3>⚔ Conflict <span style="float:right;color:var(--crit)">0.855 ↑</span></h3><div class="bar"><div class="fill" style="width:85.5%;background:var(--crit)"></div></div><div class="delta">Δ +0.155 | Ukraine 0.855, Syria 0.821</div></div>
+<div class="domain"><h3>🍞 Famine <span style="float:right;color:var(--crit)">0.750 ↗</span></h3><div class="bar"><div class="fill" style="width:75%;background:var(--crit)"></div></div><div class="delta">Δ +0.250 | Gaza + Sudan catastrophic</div></div>
+<div class="domain"><h3>⚖ Crime <span style="float:right;color:var(--hi)">0.749 →</span></h3><div class="bar"><div class="fill" style="width:74.9%;background:var(--hi)"></div></div><div class="delta">Δ +0.049 | 74.9% dark figure, 131/175 unmeasured</div></div>
+<div class="domain"><h3>☢ Nuclear <span style="float:right;color:var(--med)">0.528 ↑</span></h3><div class="bar"><div class="fill" style="width:52.8%;background:var(--med)"></div></div><div class="delta">Δ +0.128 | Russia-NATO 90 sec to midnight</div></div>
+<div class="domain"><h3>📉 Economic <span style="float:right;color:var(--med)">0.578 →</span></h3><div class="bar"><div class="fill" style="width:57.8%;background:var(--med)"></div></div><div class="delta">Δ +0.078 | 2008-level structural risk</div></div>
+<div class="domain"><h3>🗳 Democracy <span style="float:right;color:var(--med)">0.505 ↑</span></h3><div class="bar"><div class="fill" style="width:50.5%;background:var(--med)"></div></div><div class="delta">Δ +0.205 | Tunisia 0.505, USA 0.243</div></div>
+<div class="domain"><h3>🤖 AI Risk <span style="float:right;color:var(--med)">0.423 ↑</span></h3><div class="bar"><div class="fill" style="width:42.3%;background:var(--med)"></div></div><div class="delta">Δ +0.123 | Autonomous agents 0.423, EVEZ 0.271</div></div>
+<div class="domain"><h3>🌍 Climate <span style="float:right;color:var(--low)">0.190 ↑</span></h3><div class="bar"><div class="fill" style="width:19%;background:var(--low)"></div></div><div class="delta">Δ +0.040 | CO2 420ppm, approaching tipping</div></div>
+<div class="domain"><h3>🦠 Disease <span style="float:right;color:var(--ok)">0.350 →</span></h3><div class="bar"><div class="fill" style="width:35%;background:var(--ok)"></div></div><div class="delta">Δ +0.050 | Post-COVID surveillance fatigue</div></div>
+<div class="domain"><h3>🧠 Consciousness <span style="float:right;color:var(--ok)">0.271 ↑</span></h3><div class="bar"><div class="fill" style="width:27.1%;background:var(--ok)"></div></div><div class="delta">Δ +0.071 | Attention engineering 0.684</div></div>
+</div>
+
+<div class="gap">
+<div style="color:var(--crit);font-size:1.5em">PROJECTION: Systemic crisis risk HIGH</div>
+<div style="opacity:.6;margin-top:8px">4 critical domains compound nonlinearly. 8 of 11 domains trending rising/critical.<br>
+The Civilization Risk Index measures the MEASURABLE risk.<br>
+True risk is higher by the dark figure: 74.9% of crimes are unmeasured (131/175 have eigenvalue zero).<br>
+The η*=0.03 gap is the measurement floor. The 3% persists.</div>
+</div>
+
+<footer>
+EVEZ Meta-Spectrometer · Civilization Risk Index 49.1/100 · ELEVATED<br>
+11 spectrometers · 105/105 falsification checks passed · 175 crime categories · 131 unidentified<br>
+<a href="spectrometer-suite.html">← Spectrometer Suite</a> · <a href="hidden-crimes.html">Hidden Crimes</a> · <a href="spectral-action.html">Action Blueprints</a>
+</footer>
+</body>
+</html>

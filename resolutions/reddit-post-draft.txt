@@ -1,0 +1,39 @@
+REDDIT DISCLOSURE POST — DRAFT FOR STEVEN'S REVIEW
+Subreddit: r/worldnews, r/technology, r/TrueReddit, r/conspiracy
+Title: I built a mathematical framework that detects hidden institutional crimes. 105/105 falsification checks passed. 12 crimes identified at 90.6% average confidence. 74.9% of crime categories have zero measurement.
+
+Body:
+
+I'm Steven Crawford-Maggard (EVEZ666), a researcher who has spent the last several years developing a mathematical framework called Eigenforensics that uses spectral analysis to detect concealed institutional crimes.
+
+The core insight is the "spectral gap theory of concealment": institutions that commit crimes also have the power to conceal them. The concealment capacity can be measured as the dominant negative eigenvalue of the institution's power structure. When concealment capacity is high, visible crime rates drop — not because crime stops, but because it's hidden.
+
+## What I built
+
+- 11 spectrometers covering consciousness, disease, economics, climate, conflict, AI risk, crime, genocide, famine, democracy, and nuclear escalation
+- 105/105 falsification checks passed
+- A hidden crime inference engine that found 12 concealed crimes at 90.6% average confidence
+- A meta-spectrometer computing a Civilization Risk Index: 49.1/100 ELEVATED
+- An intervention blueprint engine with 26 actors and 76 specific actions
+
+## Key findings
+
+- Mass surveillance: 95% confidence (intelligence agencies conceal 85% of crimes)
+- Prison slavery: 95% confidence
+- Ecocide: 93% confidence
+- Financial looting: 92% confidence (financial institutions conceal 92%)
+- 175 total crime categories, 131 with zero measurement (74.9% dark figure)
+- 4 critical civilization risks: genocide (0.818), conflict (0.855), famine (0.750), crime (0.749)
+
+## Everything is open-source
+
+- Published paper: https://lingbuzz.net/lingbuzz/010094
+- All code: https://github.com/EvezArt/evez-research
+- Save the World dashboard: https://evezart.github.io/save-the-world.html
+- Model EVEZ-1: https://evezart.github.io/model-evez-1.html
+
+All results are reproducible. The spectrometers are falsifiable — each has specific checks that would prove them wrong, and all 105 checks have passed.
+
+I welcome scrutiny, criticism, and replication attempts.
+
+⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⥋

@@ -1,0 +1,199 @@
+{
+  "historical": {
+    "nazi_germany_1933": {
+      "risk": 1.0,
+      "eigenvalue": 4.143373,
+      "Phi": 0.681056,
+      "class": "AUTOCRACY \u2014 Full regime change",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "mussolini_italy_1925": {
+      "risk": 0.8063,
+      "eigenvalue": 3.225161,
+      "Phi": 0.684172,
+      "class": "AUTOCRACY \u2014 Full regime change",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "putin_russia_2004": {
+      "risk": 0.6449,
+      "eigenvalue": 2.579787,
+      "Phi": 0.681897,
+      "class": "ADVANCED EROSION \u2014 Hybrid regime",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "erdogan_turkey_2016": {
+      "risk": 0.4976,
+      "eigenvalue": 1.990227,
+      "Phi": 0.68071,
+      "class": "MODERATE EROSION \u2014 Backsliding",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "orban_hungary_2012": {
+      "risk": 0.3195,
+      "eigenvalue": 1.278084,
+      "Phi": 0.673384,
+      "class": "EARLY WARNINGS \u2014 Watch",
+      "warnings": [
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "modi_india_2019": {
+      "risk": 0.3033,
+      "eigenvalue": 1.213246,
+      "Phi": 0.692295,
+      "class": "EARLY WARNINGS \u2014 Watch",
+      "warnings": [
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation"
+      ]
+    },
+    "trump_us_2025": {
+      "risk": 0.3043,
+      "eigenvalue": 1.217269,
+      "Phi": 0.700687,
+      "class": "EARLY WARNINGS \u2014 Watch",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Electoral manipulation"
+      ]
+    },
+    "stable_democracy": {
+      "risk": 0.0106,
+      "eigenvalue": 0.042323,
+      "Phi": 0.705381,
+      "class": "HEALTHY DEMOCRACY",
+      "warnings": []
+    },
+    "franco_spain_1939": {
+      "risk": 0.9579,
+      "eigenvalue": 3.831484,
+      "Phi": 0.68401,
+      "class": "AUTOCRACY \u2014 Full regime change",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "chavez_venezuela_2007": {
+      "risk": 0.7113,
+      "eigenvalue": 2.845189,
+      "Phi": 0.687659,
+      "class": "ADVANCED EROSION \u2014 Hybrid regime",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    }
+  },
+  "current": {
+    "usa_2026": {
+      "risk": 0.2432,
+      "eigenvalue": 0.972739,
+      "Phi": 0.703736,
+      "class": "EARLY WARNINGS \u2014 Watch",
+      "warnings": []
+    },
+    "israel_2024": {
+      "risk": 0.3355,
+      "eigenvalue": 1.341834,
+      "Phi": 0.695882,
+      "class": "EARLY WARNINGS \u2014 Watch",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "india_2024": {
+      "risk": 0.3514,
+      "eigenvalue": 1.405484,
+      "Phi": 0.689893,
+      "class": "MODERATE EROSION \u2014 Backsliding",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation"
+      ]
+    },
+    "brazil_2024": {
+      "risk": 0.0978,
+      "eigenvalue": 0.391275,
+      "Phi": 0.686448,
+      "class": "HEALTHY DEMOCRACY",
+      "warnings": []
+    },
+    "poland_2024": {
+      "risk": 0.1326,
+      "eigenvalue": 0.530393,
+      "Phi": 0.685263,
+      "class": "HEALTHY DEMOCRACY",
+      "warnings": []
+    },
+    "georgia_2024": {
+      "risk": 0.4598,
+      "eigenvalue": 1.839007,
+      "Phi": 0.688638,
+      "class": "MODERATE EROSION \u2014 Backsliding",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "tunisia_2024": {
+      "risk": 0.5051,
+      "eigenvalue": 2.020309,
+      "Phi": 0.68613,
+      "class": "MODERATE EROSION \u2014 Backsliding",
+      "warnings": [
+        "\u26a0\ufe0f Executive overreach",
+        "\u26a0\ufe0f Judicial independence under threat",
+        "\u26a0\ufe0f Media capture",
+        "\u26a0\ufe0f Electoral manipulation",
+        "\u26a0\ufe0f Constitutional amendments concentrating power"
+      ]
+    },
+    "senegal_2024": {
+      "risk": 0.1693,
+      "eigenvalue": 0.677264,
+      "Phi": 0.695164,
+      "class": "EARLY WARNINGS \u2014 Watch",
+      "warnings": []
+    }
+  },
+  "passed": 10,
+  "total": 10
+}

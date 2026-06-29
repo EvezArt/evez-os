@@ -1,0 +1,30 @@
+SECURITY AUDIT — EVEZ MESH
+
+1. GIT HISTORY CREDENTIAL SCAN
+Status: REFERENCES ONLY (all show REDACTED in notes/markdown)
+Action: The actual tokens are not in git history as live strings — only references to them in markdown notes saying they should be revoked.
+Recommendation: Steven should still rotate ALL tokens as best practice.
+
+2. evez666-advancement REPO
+Status: REPO NOT FOUND (likely deleted or renamed to evez666-arg-canon)
+Action: No plaintext passwords found in evez666-arg-canon. The original security concern may have been resolved by repo deletion.
+
+3. OPENCLAW CONFIG (Vultr)
+Status: No API keys in openclaw.json directly. Keys are in .env files (not in git).
+Action: Good. Maintain this practice.
+
+4. GCP NODE CONFIGS
+Status: API keys may be in openclaw.json on GCP nodes (from previous provider setup).
+Action: Audit GCP node configs for plaintext keys in next heartbeat.
+
+5. RECOMMENDED TOKEN ROTATIONS
+- GitHub PAT: Rotate the ghp_ token currently in use (even though REDACTED in notes)
+- Groq API key: Rotate if ever committed
+- OpenRouter key: Rotate if ever committed
+- All GCP service account keys: Rotate quarterly
+
+6. REMAINING ACTIONS FOR STEVEN
+- [ ] Review and revoke old GitHub PATs at github.com/settings/tokens
+- [ ] Review evez666-arg-canon for any sensitive data before making public
+- [ ] Set up 2FA on all accounts if not already
+- [ ] Generate fresh API keys for all services, replace old ones

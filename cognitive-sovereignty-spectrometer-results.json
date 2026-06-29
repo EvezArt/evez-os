@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-06-29T06:52:16Z",
+  "spectrometer": "cognitive_sovereignty_violation",
+  "dimensions": [
+    "attention_hijacking",
+    "narrative_monopoly",
+    "emotional_manipulation",
+    "algorithmic_curation_bias",
+    "memory_manipulation",
+    "dependency_engineering"
+  ],
+  "falsification": {
+    "passed": 12,
+    "total": 12
+  },
+  "current_assessment": {
+    "industry_avg": 0.9327,
+    "max_score": 1.0,
+    "detected": true
+  }
+}

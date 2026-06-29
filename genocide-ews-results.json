@@ -1,0 +1,427 @@
+{
+  "historical": {
+    "holocaust_1942": {
+      "risk": 1.0,
+      "eigenvalue": 3.85772,
+      "Phi": 0.64697,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 8: Extermination",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\u26a0\ufe0f History of mass violence",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "rwanda_1994": {
+      "risk": 0.897,
+      "eigenvalue": 3.139511,
+      "Phi": 0.658351,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 8: Extermination",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\u26a0\ufe0f History of mass violence",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "armenian_1915": {
+      "risk": 0.8004,
+      "eigenvalue": 2.801403,
+      "Phi": 0.631658,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 8: Extermination",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "cambodia_1975": {
+      "risk": 0.7132,
+      "eigenvalue": 2.496146,
+      "Phi": 0.645041,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "bosnia_1992": {
+      "risk": 0.6167,
+      "eigenvalue": 2.158383,
+      "Phi": 0.647337,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "darfur_2003": {
+      "risk": 0.7127,
+      "eigenvalue": 2.494352,
+      "Phi": 0.641593,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "myanmar_rohingya_2017": {
+      "risk": 0.7504,
+      "eigenvalue": 2.626247,
+      "Phi": 0.654802,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 8: Extermination",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "namibia_1904": {
+      "risk": 0.732,
+      "eigenvalue": 2.561955,
+      "Phi": 0.626586,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "guatemala_1981": {
+      "risk": 0.6676,
+      "eigenvalue": 2.336575,
+      "Phi": 0.657357,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "ukraine_holodomor_1932": {
+      "risk": 0.7662,
+      "eigenvalue": 2.681588,
+      "Phi": 0.631742,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 8: Extermination",
+      "warnings": [
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    }
+  },
+  "near_misses": {
+    "south_africa_apartheid": {
+      "risk": 0.6939,
+      "eigenvalue": 2.428543,
+      "Phi": 0.652966,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "us_jim_crow": {
+      "risk": 0.5454,
+      "eigenvalue": 1.908917,
+      "Phi": 0.684261,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 6: Polarization",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\ud83d\udea8 GENOCIDE RISK: ELEVATED"
+      ]
+    },
+    "australia_stolen_gen": {
+      "risk": 0.4197,
+      "eigenvalue": 1.468827,
+      "Phi": 0.665456,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 5: Organization",
+      "warnings": [
+        "\ud83d\udea8 GENOCIDE RISK: ELEVATED"
+      ]
+    },
+    "canada_residential": {
+      "risk": 0.3761,
+      "eigenvalue": 1.316251,
+      "Phi": 0.675174,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 5: Organization",
+      "warnings": []
+    },
+    "argentina_dirty_war": {
+      "risk": 0.4449,
+      "eigenvalue": 1.557065,
+      "Phi": 0.664418,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 5: Organization",
+      "warnings": [
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\ud83d\udea8 GENOCIDE RISK: ELEVATED"
+      ]
+    },
+    "chile_pinochet": {
+      "risk": 0.4292,
+      "eigenvalue": 1.502114,
+      "Phi": 0.68723,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 5: Organization",
+      "warnings": [
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\ud83d\udea8 GENOCIDE RISK: ELEVATED"
+      ]
+    },
+    "tiananmen_1989": {
+      "risk": 0.4541,
+      "eigenvalue": 1.589445,
+      "Phi": 0.711639,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 6: Polarization",
+      "warnings": [
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\ud83d\udea8 GENOCIDE RISK: ELEVATED"
+      ]
+    },
+    "srilanka_2009": {
+      "risk": 0.6028,
+      "eigenvalue": 2.109812,
+      "Phi": 0.646587,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "uyghur_china_2018": {
+      "risk": 0.6728,
+      "eigenvalue": 2.354688,
+      "Phi": 0.660733,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "tigray_2020": {
+      "risk": 0.5928,
+      "eigenvalue": 2.07464,
+      "Phi": 0.641955,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 6: Polarization",
+      "warnings": [
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\ud83d\udea8 GENOCIDE RISK: ELEVATED"
+      ]
+    }
+  },
+  "current": {
+    "sudan_darfur_2024": {
+      "risk": 0.8161,
+      "eigenvalue": 2.856326,
+      "Phi": 0.653024,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 8: Extermination",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\u26a0\ufe0f History of mass violence",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "myanmar_2024": {
+      "risk": 0.7441,
+      "eigenvalue": 2.604182,
+      "Phi": 0.65912,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\u26a0\ufe0f History of mass violence",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "gaza_2024": {
+      "risk": 0.8176,
+      "eigenvalue": 2.861596,
+      "Phi": 0.670281,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 8: Extermination",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\u26a0\ufe0f History of mass violence",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "tigray_2024": {
+      "risk": 0.6259,
+      "eigenvalue": 2.190699,
+      "Phi": 0.651654,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f History of mass violence",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "ukraine_2024": {
+      "risk": 0.7323,
+      "eigenvalue": 2.563201,
+      "Phi": 0.657864,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Active dehumanization rhetoric",
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\u26a0\ufe0f History of mass violence",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "drc_2024": {
+      "risk": 0.6638,
+      "eigenvalue": 2.323149,
+      "Phi": 0.651746,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Ethnic polarization at critical level",
+        "\u26a0\ufe0f History of mass violence",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "sahel_2024": {
+      "risk": 0.6165,
+      "eigenvalue": 2.157783,
+      "Phi": 0.648226,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f History of mass violence",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    },
+    "north_korea": {
+      "risk": 0.6959,
+      "eigenvalue": 2.435534,
+      "Phi": 0.64131,
+      "lambda_dom": 0,
+      "suppression": 0.0,
+      "stage": "STAGE 7: Preparation",
+      "warnings": [
+        "\u26a0\ufe0f Extreme power asymmetry",
+        "\u26a0\ufe0f Power concentrated in single faction",
+        "\u26a0\ufe0f International isolation \u2014 no deterrent",
+        "\ud83d\udea8 GENOCIDE RISK: IMMEDIATE"
+      ]
+    }
+  },
+  "passed": 11,
+  "total": 11,
+  "critical": [
+    [
+      "sudan_darfur_2024",
+      0.8161
+    ],
+    [
+      "myanmar_2024",
+      0.7441
+    ],
+    [
+      "gaza_2024",
+      0.8176
+    ],
+    [
+      "tigray_2024",
+      0.6259
+    ],
+    [
+      "ukraine_2024",
+      0.7323
+    ],
+    [
+      "drc_2024",
+      0.6638
+    ],
+    [
+      "sahel_2024",
+      0.6165
+    ],
+    [
+      "north_korea",
+      0.6959
+    ]
+  ],
+  "elevated": []
+}

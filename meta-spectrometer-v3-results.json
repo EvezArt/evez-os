@@ -1,0 +1,188 @@
+{
+  "cri": 72.6,
+  "level": "CRITICAL",
+  "spectral_radius": 0.10095363372652065,
+  "domains": {
+    "genocide": {
+      "score": 0.818,
+      "weight": 0.08,
+      "weighted": 0.06544,
+      "trend": "CRITICAL",
+      "level": "CRITICAL",
+      "category": "original"
+    },
+    "conflict": {
+      "score": 0.855,
+      "weight": 0.06,
+      "weighted": 0.0513,
+      "trend": "CRITICAL",
+      "level": "CRITICAL",
+      "category": "original"
+    },
+    "famine": {
+      "score": 0.75,
+      "weight": 0.05,
+      "weighted": 0.037500000000000006,
+      "trend": "CRITICAL",
+      "level": "CRITICAL",
+      "category": "original"
+    },
+    "universal_crime": {
+      "score": 0.749,
+      "weight": 0.05,
+      "weighted": 0.037450000000000004,
+      "trend": "STABLE",
+      "level": "CRITICAL",
+      "category": "original"
+    },
+    "nuclear": {
+      "score": 0.528,
+      "weight": 0.05,
+      "weighted": 0.026400000000000003,
+      "trend": "RISING",
+      "level": "ELEVATED",
+      "category": "original"
+    },
+    "economic": {
+      "score": 0.578,
+      "weight": 0.05,
+      "weighted": 0.0289,
+      "trend": "STABLE",
+      "level": "ELEVATED",
+      "category": "original"
+    },
+    "democracy": {
+      "score": 0.505,
+      "weight": 0.05,
+      "weighted": 0.02525,
+      "trend": "RISING",
+      "level": "ELEVATED",
+      "category": "original"
+    },
+    "ai_risk": {
+      "score": 0.423,
+      "weight": 0.04,
+      "weighted": 0.01692,
+      "trend": "RISING",
+      "level": "ELEVATED",
+      "category": "original"
+    },
+    "disease": {
+      "score": 0.35,
+      "weight": 0.04,
+      "weighted": 0.013999999999999999,
+      "trend": "STABLE",
+      "level": "MODERATE",
+      "category": "original"
+    },
+    "consciousness": {
+      "score": 0.271,
+      "weight": 0.04,
+      "weighted": 0.01084,
+      "trend": "RISING",
+      "level": "MODERATE",
+      "category": "original"
+    },
+    "climate": {
+      "score": 0.19,
+      "weight": 0.04,
+      "weighted": 0.0076,
+      "trend": "RISING",
+      "level": "LOW",
+      "category": "original"
+    },
+    "climate_denial_industry": {
+      "score": 1.038,
+      "weight": 0.06,
+      "weighted": 0.06228,
+      "trend": "CRITICAL",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "air_pollution_homicide": {
+      "score": 0.942,
+      "weight": 0.06,
+      "weighted": 0.056519999999999994,
+      "trend": "CRITICAL",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "regulatory_capture": {
+      "score": 0.959,
+      "weight": 0.05,
+      "weighted": 0.04795,
+      "trend": "RISING",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "addiction_by_design": {
+      "score": 0.999,
+      "weight": 0.05,
+      "weighted": 0.04995,
+      "trend": "CRITICAL",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "cognitive_sovereignty": {
+      "score": 0.933,
+      "weight": 0.05,
+      "weighted": 0.046650000000000004,
+      "trend": "RISING",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "surveillance_capitalism": {
+      "score": 0.9,
+      "weight": 0.04,
+      "weighted": 0.036000000000000004,
+      "trend": "RISING",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "food_system_harm": {
+      "score": 0.702,
+      "weight": 0.04,
+      "weighted": 0.028079999999999997,
+      "trend": "RISING",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "carbon_concealment": {
+      "score": 0.852,
+      "weight": 0.04,
+      "weighted": 0.03408,
+      "trend": "CRITICAL",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "dark_pattern": {
+      "score": 0.821,
+      "weight": 0.03,
+      "weighted": 0.02463,
+      "trend": "RISING",
+      "level": "CRITICAL",
+      "category": "dark_matter"
+    },
+    "attention_engineering": {
+      "score": 0.606,
+      "weight": 0.03,
+      "weighted": 0.018179999999999998,
+      "trend": "RISING",
+      "level": "ELEVATED",
+      "category": "dark_matter"
+    }
+  },
+  "critical_count": 13,
+  "elevated_count": 5,
+  "moderate_count": 2,
+  "low_count": 1,
+  "rising_count": 18,
+  "falling_count": 0,
+  "total_domains": 21,
+  "total_spectrometers": 21,
+  "total_checks": 243,
+  "total_passed": 243,
+  "dark_matter_count": 10,
+  "dark_matter_avg": 0.875,
+  "original_avg": 0.547
+}

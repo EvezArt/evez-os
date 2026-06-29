@@ -1,0 +1,193 @@
+{
+  "gaza_2024": {
+    "spectrometer": "genocide",
+    "risk": 0.8176,
+    "actors": {
+      "UN Security Council": [
+        "Enforce binding ceasefire resolution (Article 25 UN Charter)",
+        "Authorize protective force under Chapter VII",
+        "Impose sanctions on settlement expansion"
+      ],
+      "USA": [
+        "Condition military aid on ceasefire compliance",
+        "Appoint special envoy for Gaza reconstruction",
+        "Fund UNRWA at $1B emergency appropriation"
+      ],
+      "Egypt": [
+        "Open Rafah crossing permanently for humanitarian aid",
+        "Coordinate medical evacuation for wounded civilians",
+        "Host ceasefire negotiations"
+      ],
+      "ICC": [
+        "Issue arrest warrants for war crimes perpetrators",
+        "Investigate siege tactics as collective punishment",
+        "Document evidence of deliberate civilian targeting"
+      ],
+      "WHO": [
+        "Deploy field hospitals and surgical teams",
+        "Airlift critically injured children",
+        "Restore dialysis and neonatal care capacity"
+      ]
+    },
+    "deadline": "IMMEDIATE \u2014 hours",
+    "spectrometer_check": "genocide_risk > 0.5 AND famine_risk > 0.5",
+    "urgency": "\ud83d\udea8 CRITICAL"
+  },
+  "sudan_darfur_2024": {
+    "spectrometer": "genocide",
+    "risk": 0.8161,
+    "actors": {
+      "UN Security Council": [
+        "Pass binding resolution authorizing Chapter VII intervention",
+        "Impose arms embargo on RSF and SAF",
+        "Refer to ICC for crimes against humanity"
+      ],
+      "African Union": [
+        "Deploy AU Standby Force to Darfur",
+        "Mediate ceasefire between SAF and RSF",
+        "Open humanitarian corridors from Chad"
+      ],
+      "USA": [
+        "Sanction gold exports funding RSF (Algold Ltd)",
+        "Sanction SAF arms suppliers (Egypt, Iran)",
+        "Deploy USAID Disaster Assistance Response Team"
+      ],
+      "ICRC": [
+        "Establish safe zones in El Fasher and Nyala",
+        "Negotiate access for food/medical convoys",
+        "Deploy mobile clinics in displacement camps"
+      ]
+    },
+    "deadline": "IMMEDIATE \u2014 hours/days",
+    "spectrometer_check": "genocide_risk > 0.6",
+    "urgency": "\ud83d\udea8 CRITICAL"
+  },
+  "myanmar_2024": {
+    "spectrometer": "genocide",
+    "risk": 0.7441,
+    "actors": {
+      "ASEAN": [
+        "Implement Five-Point Consensus with binding timeline",
+        "Sanction jet fuel exports to junta",
+        "Coordinate cross-border aid from Thailand"
+      ],
+      "USA": [
+        "Sanction Myanma Oil and Gas Enterprise (MOGE)",
+        "Recognize NUG as legitimate government",
+        "Fund civil society resistance networks"
+      ],
+      "Bangladesh": [
+        "Maintain Rohingya refugee protection",
+        "Coordinate with UNHCR for safe repatriation conditions",
+        "Deploy border monitors"
+      ]
+    },
+    "deadline": "URGENT \u2014 days/weeks",
+    "spectrometer_check": "genocide_risk > 0.5",
+    "urgency": "\ud83d\udea8 CRITICAL"
+  },
+  "russia_nato_2024": {
+    "spectrometer": "nuclear",
+    "risk": 0.5279,
+    "actors": {
+      "UN Security Council": [
+        "Convene emergency P5 meeting on de-escalation",
+        "Reaffirm Reagan-Gorbachev declaration: nuclear war cannot be won"
+      ],
+      "USA": [
+        "Open direct military-to-military deconfliction line",
+        "State publicly: no first use of nuclear weapons",
+        "Offer reciprocal verification of NATO exercises"
+      ],
+      "Russia": [
+        "Reverse statements on nuclear first use doctrine",
+        "Resume New Start Treaty compliance",
+        "Participate in P5 dialogue"
+      ],
+      "China": [
+        "Mediate Russia-NATO de-escalation",
+        "State publicly: nuclear use in Ukraine unacceptable",
+        "Leverage economic ties to deter escalation"
+      ],
+      "ICRC": [
+        "Maintain nuclear emergency response teams",
+        "Pre-position medical supplies in potential target zones"
+      ]
+    },
+    "deadline": "IMMEDIATE \u2014 continuous monitoring",
+    "spectrometer_check": "nuclear_risk > 0.5",
+    "urgency": "\u26a0\ufe0f URGENT"
+  },
+  "tunisia_2024": {
+    "spectrometer": "democracy",
+    "risk": 0.5051,
+    "actors": {
+      "EU": [
+        "Condition trade preferences on democratic reforms",
+        "Fund independent media and civil society",
+        "Offer migration partnerships tied to governance improvements"
+      ],
+      "Tunisian Civil Society": [
+        "Mobilize UGTT labor federation for general strike if constitution suspended",
+        "Document political prisoners for ICC/UN HRC",
+        "Coordinate opposition coalition for next elections"
+      ]
+    },
+    "deadline": "URGENT \u2014 months",
+    "spectrometer_check": "democracy_risk > 0.4",
+    "urgency": "\u26a0\ufe0f URGENT"
+  },
+  "usa_2026": {
+    "spectrometer": "democracy",
+    "risk": 0.2432,
+    "actors": {
+      "Congress": [
+        "Pass voting rights legislation (John Lewis Act)",
+        "Reform Electoral Count Act loopholes",
+        "Establish independent ethics commission for Supreme Court"
+      ],
+      "Civil Society": [
+        "Deploy 100K election monitors in swing states",
+        "Launch media literacy programs targeting disinformation",
+        "Build coalition for constitutional reform (term limits, SC expansion)"
+      ],
+      "Media": [
+        "Reject false equivalence in election coverage",
+        "Fact-check in real-time, not post-hoc",
+        "Platform election officials over politicians"
+      ],
+      "Judiciary": [
+        "Enforce Section 3 of 14th Amendment where applicable",
+        "Reject gerrymandering that violates voting rights",
+        "Maintain judicial independence against executive pressure"
+      ]
+    },
+    "deadline": "2026 midterm elections",
+    "spectrometer_check": "democracy_risk > 0.15",
+    "urgency": "\ud83d\udccb MONITOR"
+  },
+  "sudan_famine_2024": {
+    "spectrometer": "famine",
+    "risk": 0.0,
+    "actors": {
+      "WFP": [
+        "Pre-position 50K tons of food in Chad border crossings",
+        "Deploy air bridges to El Fasher if roads blocked",
+        "Scale up to 5M beneficiaries from current 1.5M"
+      ],
+      "UNICEF": [
+        "Treat 500K children for severe acute malnutrition",
+        "Deploy therapeutic feeding centers in camps",
+        "Immunize against measles/cholera outbreaks"
+      ],
+      "NGOs": [
+        "MSF: expand surgical capacity in conflict zones",
+        "Oxfam: restore water/sanitation in displacement camps",
+        "Save the Children: establish child-friendly spaces"
+      ]
+    },
+    "deadline": "IMMEDIATE \u2014 weeks",
+    "spectrometer_check": "famine_risk > 0.4",
+    "urgency": "\u2705 STABLE"
+  }
+}

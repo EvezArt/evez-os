@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-06-29T06:51:37Z",
+  "spectrometer": "dark_pattern_deception",
+  "dimensions": [
+    "misdirection",
+    "forced_action",
+    "hidden_costs",
+    "roach_motel",
+    "confirm_shaming",
+    "data_grabbing"
+  ],
+  "falsification": {
+    "passed": 12,
+    "total": 12
+  },
+  "current_assessment": {
+    "industry_avg": 0.821,
+    "max_score": 1.0,
+    "detected": true
+  }
+}

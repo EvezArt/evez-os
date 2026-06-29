@@ -1,0 +1,444 @@
+{
+  "i80_aggregate_gap_vector": {
+    "missing_records": 0.825,
+    "temporal_anomaly": 0.09,
+    "location_displacement": 0.14,
+    "suppression_signature": 0.6,
+    "content_contradiction": 0.095,
+    "causal_break": 0.405
+  },
+  "correlations": {
+    "carbon_concealment": {
+      "correlation_with_i80_aggregate": 0.7318,
+      "mean_gap_correlation": 0.5323,
+      "top_matching_gaps": [
+        [
+          "G018_no_fra_full",
+          0.794
+        ],
+        [
+          "G002_no_fire_logs",
+          0.781
+        ],
+        [
+          "G001_no_911",
+          0.77
+        ],
+        [
+          "G014_no_police_brother",
+          0.77
+        ],
+        [
+          "G005_no_wgfd",
+          0.744
+        ]
+      ],
+      "dm_profile": [
+        0.8,
+        0.3,
+        0.5,
+        0.9,
+        0.7,
+        0.6
+      ]
+    },
+    "surveillance_capitalism": {
+      "correlation_with_i80_aggregate": 0.5418,
+      "mean_gap_correlation": 0.3957,
+      "top_matching_gaps": [
+        [
+          "G018_no_fra_full",
+          0.619
+        ],
+        [
+          "G002_no_fire_logs",
+          0.602
+        ],
+        [
+          "G001_no_911",
+          0.584
+        ],
+        [
+          "G014_no_police_brother",
+          0.584
+        ],
+        [
+          "G005_no_wgfd",
+          0.568
+        ]
+      ],
+      "dm_profile": [
+        0.7,
+        0.0,
+        0.3,
+        0.9,
+        0.8,
+        0.4
+      ]
+    },
+    "addiction_by_design": {
+      "correlation_with_i80_aggregate": 0.4263,
+      "mean_gap_correlation": 0.3157,
+      "top_matching_gaps": [
+        [
+          "G016_wikipedia_silence",
+          0.617
+        ],
+        [
+          "G018_no_fra_full",
+          0.549
+        ],
+        [
+          "G002_no_fire_logs",
+          0.523
+        ],
+        [
+          "G001_no_911",
+          0.507
+        ],
+        [
+          "G014_no_police_brother",
+          0.507
+        ]
+      ],
+      "dm_profile": [
+        0.5,
+        0.0,
+        0.0,
+        0.9,
+        0.8,
+        0.3
+      ]
+    },
+    "cognitive_sovereignty": {
+      "correlation_with_i80_aggregate": 0.3596,
+      "mean_gap_correlation": 0.2661,
+      "top_matching_gaps": [
+        [
+          "G016_wikipedia_silence",
+          0.608
+        ],
+        [
+          "G018_no_fra_full",
+          0.471
+        ],
+        [
+          "G002_no_fire_logs",
+          0.447
+        ],
+        [
+          "G001_no_911",
+          0.435
+        ],
+        [
+          "G014_no_police_brother",
+          0.435
+        ]
+      ],
+      "dm_profile": [
+        0.6,
+        0.2,
+        0.3,
+        0.9,
+        0.9,
+        0.5
+      ]
+    },
+    "regulatory_capture": {
+      "correlation_with_i80_aggregate": 0.864,
+      "mean_gap_correlation": 0.6279,
+      "top_matching_gaps": [
+        [
+          "G001_no_911",
+          0.887
+        ],
+        [
+          "G014_no_police_brother",
+          0.887
+        ],
+        [
+          "G002_no_fire_logs",
+          0.879
+        ],
+        [
+          "G018_no_fra_full",
+          0.879
+        ],
+        [
+          "G015_no_911_brother",
+          0.869
+        ]
+      ],
+      "dm_profile": [
+        0.9,
+        0.2,
+        0.4,
+        0.9,
+        0.6,
+        0.7
+      ]
+    },
+    "dark_pattern": {
+      "correlation_with_i80_aggregate": 0.3409,
+      "mean_gap_correlation": 0.2541,
+      "top_matching_gaps": [
+        [
+          "G016_wikipedia_silence",
+          0.645
+        ],
+        [
+          "G018_no_fra_full",
+          0.443
+        ],
+        [
+          "G002_no_fire_logs",
+          0.423
+        ],
+        [
+          "G001_no_911",
+          0.408
+        ],
+        [
+          "G014_no_police_brother",
+          0.408
+        ]
+      ],
+      "dm_profile": [
+        0.5,
+        0.0,
+        0.0,
+        0.8,
+        0.9,
+        0.3
+      ]
+    },
+    "attention_engineering": {
+      "correlation_with_i80_aggregate": 0.3353,
+      "mean_gap_correlation": 0.2495,
+      "top_matching_gaps": [
+        [
+          "G016_wikipedia_silence",
+          0.678
+        ],
+        [
+          "G018_no_fra_full",
+          0.479
+        ],
+        [
+          "G002_no_fire_logs",
+          0.447
+        ],
+        [
+          "G001_no_911",
+          0.424
+        ],
+        [
+          "G014_no_police_brother",
+          0.424
+        ]
+      ],
+      "dm_profile": [
+        0.4,
+        0.0,
+        0.0,
+        0.9,
+        0.8,
+        0.2
+      ]
+    },
+    "air_pollution_homicide": {
+      "correlation_with_i80_aggregate": 0.5528,
+      "mean_gap_correlation": 0.3983,
+      "top_matching_gaps": [
+        [
+          "G001_no_911",
+          0.579
+        ],
+        [
+          "G014_no_police_brother",
+          0.579
+        ],
+        [
+          "G018_no_fra_full",
+          0.573
+        ],
+        [
+          "G002_no_fire_logs",
+          0.565
+        ],
+        [
+          "G003_no_emt",
+          0.56
+        ]
+      ],
+      "dm_profile": [
+        0.8,
+        0.3,
+        0.7,
+        0.9,
+        0.8,
+        0.8
+      ]
+    },
+    "food_system_harm": {
+      "correlation_with_i80_aggregate": 0.4663,
+      "mean_gap_correlation": 0.3416,
+      "top_matching_gaps": [
+        [
+          "G018_no_fra_full",
+          0.542
+        ],
+        [
+          "G002_no_fire_logs",
+          0.526
+        ],
+        [
+          "G001_no_911",
+          0.507
+        ],
+        [
+          "G014_no_police_brother",
+          0.507
+        ],
+        [
+          "G005_no_wgfd",
+          0.496
+        ]
+      ],
+      "dm_profile": [
+        0.7,
+        0.0,
+        0.3,
+        0.9,
+        0.9,
+        0.4
+      ]
+    },
+    "climate_denial_industry": {
+      "correlation_with_i80_aggregate": 0.5021,
+      "mean_gap_correlation": 0.3729,
+      "top_matching_gaps": [
+        [
+          "G001_no_911",
+          0.574
+        ],
+        [
+          "G014_no_police_brother",
+          0.574
+        ],
+        [
+          "G018_no_fra_full",
+          0.567
+        ],
+        [
+          "G002_no_fire_logs",
+          0.56
+        ],
+        [
+          "G016_wikipedia_silence",
+          0.554
+        ]
+      ],
+      "dm_profile": [
+        0.8,
+        0.5,
+        0.3,
+        0.9,
+        0.9,
+        0.8
+      ]
+    }
+  },
+  "cross_matrix_shape": [
+    10,
+    20
+  ],
+  "singular_values": [
+    6.2079,
+    1.5096,
+    0.8043,
+    0.2206,
+    0.1784
+  ],
+  "dominant_singular_value": 6.2079,
+  "secondary_singular_value": 1.5096,
+  "dm_loadings_dominant": {
+    "carbon_concealment": -0.4278,
+    "surveillance_capitalism": -0.3235,
+    "addiction_by_design": -0.2582,
+    "cognitive_sovereignty": -0.2198,
+    "regulatory_capture": -0.495,
+    "dark_pattern": -0.2094,
+    "attention_engineering": -0.2089,
+    "air_pollution_homicide": -0.3192,
+    "food_system_harm": -0.2812,
+    "climate_denial_industry": -0.2898
+  },
+  "gap_loadings_dominant": {
+    "G001_no_911": -0.2983,
+    "G002_no_fire_logs": -0.3011,
+    "G003_no_emt": -0.1506,
+    "G004_no_er": -0.1506,
+    "G005_no_wgfd": -0.2811,
+    "G006_no_deq": -0.2811,
+    "G007_no_whp": -0.2811,
+    "G008_no_police_elk": -0.2482,
+    "G009_no_emt_brother": -0.1097,
+    "G010_no_er_brother": -0.1097,
+    "G011_no_phone_logs": -0.119,
+    "G012_no_ntsb": -0.2018,
+    "G013_temporal_anomaly": 0.0788,
+    "G014_no_police_brother": -0.2983,
+    "G015_no_911_brother": -0.2755,
+    "G016_wikipedia_silence": -0.1703,
+    "G017_medical_displacement": -0.1004,
+    "G018_no_fra_full": -0.3081,
+    "G019_no_ogden_fire": -0.2796,
+    "G020_no_phone_steven": -0.119
+  },
+  "prediction_accuracy": 0.9964,
+  "top_dm_predictors": [
+    [
+      "regulatory_capture",
+      -0.495
+    ],
+    [
+      "carbon_concealment",
+      -0.4278
+    ],
+    [
+      "surveillance_capitalism",
+      -0.3235
+    ],
+    [
+      "air_pollution_homicide",
+      -0.3192
+    ],
+    [
+      "climate_denial_industry",
+      -0.2898
+    ]
+  ],
+  "top_i80_gaps_predicted": [
+    [
+      "G018_no_fra_full",
+      -0.3081
+    ],
+    [
+      "G002_no_fire_logs",
+      -0.3011
+    ],
+    [
+      "G001_no_911",
+      -0.2983
+    ],
+    [
+      "G014_no_police_brother",
+      -0.2983
+    ],
+    [
+      "G005_no_wgfd",
+      -0.2811
+    ]
+  ]
+}

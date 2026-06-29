@@ -1,0 +1,10 @@
+{
+  "name": "EVEZ-OS",
+  "short_name": "EVEZ",
+  "description": "Autonomous AI mesh \u2014 civilization risk measurement and intervention",
+  "start_url": "https://evezart.github.io/save-the-world.html",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#00ff88",
+  "icons": []
+}

@@ -1,0 +1,156 @@
+{
+  "timestamp": "2026-06-29T06:46:30Z",
+  "spectrometer": "addiction_by_design",
+  "dimensions": [
+    "reward_schedule_engineering",
+    "friction_removal",
+    "tolerance_building",
+    "social_pressure_injection",
+    "withdrawal_engineering",
+    "data_driven_optimization"
+  ],
+  "calibration": {
+    "Slot Machines (Vegas)": {
+      "score": 1.0,
+      "vector": [
+        0.95,
+        0.9,
+        0.85,
+        0.6,
+        0.8,
+        0.7
+      ]
+    },
+    "Mobile Games (gacha)": {
+      "score": 1.0,
+      "vector": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.85
+      ]
+    },
+    "TikTok": {
+      "score": 1.0,
+      "vector": [
+        0.85,
+        0.95,
+        0.75,
+        0.8,
+        0.65,
+        0.95
+      ]
+    },
+    "Instagram": {
+      "score": 1.0,
+      "vector": [
+        0.75,
+        0.85,
+        0.7,
+        0.9,
+        0.6,
+        0.85
+      ]
+    },
+    "Facebook": {
+      "score": 1.0,
+      "vector": [
+        0.7,
+        0.8,
+        0.65,
+        0.85,
+        0.55,
+        0.8
+      ]
+    },
+    "YouTube": {
+      "score": 1.0,
+      "vector": [
+        0.8,
+        0.85,
+        0.7,
+        0.6,
+        0.5,
+        0.9
+      ]
+    },
+    "Twitter/X": {
+      "score": 0.9988425113723336,
+      "vector": [
+        0.65,
+        0.75,
+        0.6,
+        0.85,
+        0.55,
+        0.75
+      ]
+    },
+    "Cigarettes (designed)": {
+      "score": 1.0,
+      "vector": [
+        0.85,
+        0.7,
+        0.9,
+        0.5,
+        0.85,
+        0.6
+      ]
+    },
+    "Junk Food (engineered)": {
+      "score": 0.990789797316542,
+      "vector": [
+        0.75,
+        0.8,
+        0.75,
+        0.45,
+        0.65,
+        0.7
+      ]
+    },
+    "Casino Apps": {
+      "score": 1.0,
+      "vector": [
+        0.9,
+        0.9,
+        0.8,
+        0.7,
+        0.8,
+        0.8
+      ]
+    },
+    "Pornography Platforms": {
+      "score": 1.0,
+      "vector": [
+        0.8,
+        0.85,
+        0.7,
+        0.55,
+        0.7,
+        0.75
+      ]
+    },
+    "Library (control)": {
+      "score": 0.026559740202361366,
+      "vector": [
+        0.05,
+        0.1,
+        0.02,
+        0.05,
+        0.01,
+        0.05
+      ]
+    }
+  },
+  "falsification": {
+    "passed": 12,
+    "total": 12
+  },
+  "current_assessment": {
+    "industry_avg": 0.9991,
+    "max_score": 1.0,
+    "max_entity": "Slot Machines (Vegas)",
+    "detected": true
+  }
+}

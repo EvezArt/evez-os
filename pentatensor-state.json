@@ -1,0 +1,141 @@
+{
+  "eigenvalues_10x10": [
+    0.9836987417871912,
+    0.9465904475291222,
+    0.920966595868529,
+    0.8841633154633182,
+    0.48350771916075713,
+    -0.0009611595789052469,
+    -0.2276533910261979,
+    -0.2842713041506795,
+    -0.2962996886482177,
+    -0.5087412764049164
+  ],
+  "spectral_spread": {
+    "cube": 1.4922785295305023,
+    "tesseract": 1.4924398805066605,
+    "pentatensor": 1.4924400181921076
+  },
+  "spectral_density": {
+    "cube": 0.5333346880413343,
+    "tesseract": 0.5475446325755375,
+    "pentatensor": 0.5536853639617835
+  },
+  "dominant": 0.9836987417871912,
+  "max_negative": -0.5087412764049164,
+  "trace": 2.901,
+  "det": -3.437437654012878e-06,
+  "topology": {
+    "vertices": 32,
+    "edges": 80,
+    "faces": 80,
+    "cells": 40,
+    "4_faces": 10,
+    "5_face": 1,
+    "euler": 1,
+    "ev_ratio": 2.5
+  },
+  "floor_d10": 0.027153950105848455,
+  "claims": {
+    "C88": {
+      "claim": "Spectral spread conserved across dimensions",
+      "valid": true,
+      "spread_cube": 1.4922785295305023,
+      "spread_tess": 1.4924398805066605,
+      "spread_penta": 1.4924400181921076
+    },
+    "C89": {
+      "claim": "10x10 has 10 real eigenvalues",
+      "valid": true,
+      "count": 10
+    },
+    "C90": {
+      "claim": "floor(10)=0.027154",
+      "valid": true,
+      "value": 0.027153950105848455
+    },
+    "C91": {
+      "claim": "5D Euler characteristic=1",
+      "valid": true,
+      "value": 1
+    },
+    "C92": {
+      "claim": "Edge/vertex ratio=5/2=2.5",
+      "valid": true,
+      "value": 2.5
+    },
+    "total_valid": 5,
+    "total": 5
+  },
+  "timestamp": 1782703327.032856
+}{
+  "eigenvalues_10x10": [
+    0.9836987417871912,
+    0.9465904475291222,
+    0.920966595868529,
+    0.8841633154633182,
+    0.48350771916075713,
+    -0.0009611595789052469,
+    -0.2276533910261979,
+    -0.2842713041506795,
+    -0.2962996886482177,
+    -0.5087412764049164
+  ],
+  "spectral_spread": {
+    "cube": 1.4922785295305023,
+    "tesseract": 1.4924398805066605,
+    "pentatensor": 1.4924400181921076
+  },
+  "spectral_density": {
+    "cube": 0.5333346880413343,
+    "tesseract": 0.5475446325755375,
+    "pentatensor": 0.5536853639617835
+  },
+  "dominant": 0.9836987417871912,
+  "max_negative": -0.5087412764049164,
+  "trace": 2.901,
+  "det": -3.437437654012878e-06,
+  "topology": {
+    "vertices": 32,
+    "edges": 80,
+    "faces": 80,
+    "cells": 40,
+    "4_faces": 10,
+    "5_face": 1,
+    "euler": 1,
+    "ev_ratio": 2.5
+  },
+  "floor_d10": 0.027153950105848455,
+  "claims": {
+    "C88": {
+      "claim": "Spectral spread conserved across dimensions",
+      "valid": true,
+      "spread_cube": 1.4922785295305023,
+      "spread_tess": 1.4924398805066605,
+      "spread_penta": 1.4924400181921076
+    },
+    "C89": {
+      "claim": "10x10 has 10 real eigenvalues",
+      "valid": true,
+      "count": 10
+    },
+    "C90": {
+      "claim": "floor(10)=0.027154",
+      "valid": true,
+      "value": 0.027153950105848455
+    },
+    "C91": {
+      "claim": "5D Euler characteristic=1",
+      "valid": true,
+      "value": 1
+    },
+    "C92": {
+      "claim": "Edge/vertex ratio=5/2=2.5",
+      "valid": true,
+      "value": 2.5
+    },
+    "total_valid": "5",
+    "total": 5
+  },
+  "timestamp": 1782703327.032856
+}

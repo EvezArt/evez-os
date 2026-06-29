@@ -1,0 +1,181 @@
+{
+  "historical": {
+    "cuba_1962": {
+      "risk": 0.74,
+      "eigenvalue": 2.590154,
+      "Phi": 0.708709,
+      "clock": "3 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness",
+        "\u26a0\ufe0f Crisis temperature critical",
+        "\u26a0\ufe0f High misinformation fog",
+        "\u26a0\ufe0f First-strike doctrine active",
+        "\ud83d\udea8 NUCLEAR ESCALATION RISK: SEVERE"
+      ]
+    },
+    "able_archer_1983": {
+      "risk": 0.6963,
+      "eigenvalue": 2.437168,
+      "Phi": 0.686865,
+      "clock": "3 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness",
+        "\u26a0\ufe0f Crisis temperature critical",
+        "\u26a0\ufe0f High misinformation fog",
+        "\ud83d\udea8 NUCLEAR ESCALATION RISK: SEVERE"
+      ]
+    },
+    "kargil_1999": {
+      "risk": 0.5604,
+      "eigenvalue": 1.96141,
+      "Phi": 0.662359,
+      "clock": "3 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness",
+        "\u26a0\ufe0f Crisis temperature critical"
+      ]
+    },
+    "doklam_2017": {
+      "risk": 0.2943,
+      "eigenvalue": 1.029896,
+      "Phi": 0.66563,
+      "clock": "10 MINUTES TO MIDNIGHT",
+      "warnings": []
+    },
+    "korean_crisis_2017": {
+      "risk": 0.5784,
+      "eigenvalue": 2.024361,
+      "Phi": 0.64245,
+      "clock": "3 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f Crisis temperature critical",
+        "\u26a0\ufe0f Decentralized launch authority",
+        "\u26a0\ufe0f First-strike doctrine active"
+      ]
+    },
+    "russia_ukraine_2022": {
+      "risk": 0.6166,
+      "eigenvalue": 2.158065,
+      "Phi": 0.683364,
+      "clock": "3 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness",
+        "\u26a0\ufe0f Crisis temperature critical",
+        "\u26a0\ufe0f High misinformation fog",
+        "\u26a0\ufe0f First-strike doctrine active",
+        "\ud83d\udea8 NUCLEAR ESCALATION RISK: SEVERE"
+      ]
+    },
+    "indo_pak_2019": {
+      "risk": 0.4828,
+      "eigenvalue": 1.689835,
+      "Phi": 0.651817,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": []
+    },
+    "stable_cold_war": {
+      "risk": 0.1703,
+      "eigenvalue": 0.595947,
+      "Phi": 0.712003,
+      "clock": "10 MINUTES TO MIDNIGHT",
+      "warnings": []
+    },
+    "yield_able_archer": {
+      "risk": 0.446,
+      "eigenvalue": 1.560967,
+      "Phi": 0.681794,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness"
+      ]
+    },
+    "taiwan_2024": {
+      "risk": 0.4679,
+      "eigenvalue": 1.637779,
+      "Phi": 0.668481,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness",
+        "\u26a0\ufe0f First-strike doctrine active"
+      ]
+    }
+  },
+  "current": {
+    "russia_ukraine_2024": {
+      "risk": 0.5851,
+      "eigenvalue": 2.047717,
+      "Phi": 0.667879,
+      "clock": "3 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness",
+        "\u26a0\ufe0f Crisis temperature critical",
+        "\u26a0\ufe0f High misinformation fog",
+        "\u26a0\ufe0f First-strike doctrine active"
+      ]
+    },
+    "taiwan_strait_2024": {
+      "risk": 0.4348,
+      "eigenvalue": 1.521925,
+      "Phi": 0.665395,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness",
+        "\u26a0\ufe0f First-strike doctrine active"
+      ]
+    },
+    "korea_2024": {
+      "risk": 0.5015,
+      "eigenvalue": 1.755263,
+      "Phi": 0.621332,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f Decentralized launch authority",
+        "\u26a0\ufe0f First-strike doctrine active"
+      ]
+    },
+    "india_pakistan_2024": {
+      "risk": 0.4033,
+      "eigenvalue": 1.411483,
+      "Phi": 0.638391,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": []
+    },
+    "iran_israel_2024": {
+      "risk": 0.4304,
+      "eigenvalue": 1.506342,
+      "Phi": 0.65851,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": []
+    },
+    "china_us_2024": {
+      "risk": 0.3235,
+      "eigenvalue": 1.132159,
+      "Phi": 0.666074,
+      "clock": "10 MINUTES TO MIDNIGHT",
+      "warnings": []
+    },
+    "russia_nato_2024": {
+      "risk": 0.5279,
+      "eigenvalue": 1.847533,
+      "Phi": 0.667461,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f High arsenal readiness",
+        "\u26a0\ufe0f High misinformation fog",
+        "\u26a0\ufe0f First-strike doctrine active"
+      ]
+    },
+    "north_korea_us_2024": {
+      "risk": 0.5402,
+      "eigenvalue": 1.890806,
+      "Phi": 0.616149,
+      "clock": "5 MINUTES TO MIDNIGHT",
+      "warnings": [
+        "\u26a0\ufe0f Decentralized launch authority",
+        "\u26a0\ufe0f First-strike doctrine active"
+      ]
+    }
+  },
+  "passed": 10,
+  "total": 10
+}

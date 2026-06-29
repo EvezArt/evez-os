@@ -1,0 +1,253 @@
+{
+  "batch": 6,
+  "spectrometers": {
+    "lead_poisoning_concealment": {
+      "name": "lead_poisoning_concealment",
+      "category": "public_health",
+      "score": 0.9117,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3326,
+      "dimension_scores": {
+        "concealment": 0.9125,
+        "contamination": 0.8875,
+        "health_impact": 0.9,
+        "impunity": 0.9575,
+        "regulatory_failure": 0.8875,
+        "victim_demographics": 0.925
+      },
+      "evidence": {
+        "flint_exposed": 9000,
+        "lead_lines_million": 9.2,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Rick Snyder (MI Governor)",
+        "EPA Region 5",
+        "Flint officials"
+      ],
+      "guise": "Meets EPA standards / Safe to drink",
+      "families_destroyed": "Flint: 12 dead, 9,000 children exposed. Every child with permanent brain damage from lead",
+      "checks_passed": 16,
+      "checks_total": 16,
+      "all_passed": true
+    },
+    "insurance_denial_homicide": {
+      "name": "insurance_denial_homicide",
+      "category": "public_health",
+      "score": 0.8904,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.2736,
+      "dimension_scores": {
+        "denial_rate": 0.805,
+        "algorithmic_denial": 0.8875,
+        "impunity": 0.9625,
+        "erisa_shield": 0.9125,
+        "concealment": 0.8875,
+        "victim_demographics": 0.8875
+      },
+      "evidence": {
+        "denial_deaths_year": 68000,
+        "medical_bankruptcy_year": 530000,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "UnitedHealth (Stephen Hemsley)",
+        "UnitedHealth (Brian Thompson)",
+        "Cigna (David Cordani)"
+      ],
+      "guise": "Not medically necessary / Prior authorization required",
+      "families_destroyed": "68,000+ deaths/year. Every family bankrupted by medical debt",
+      "checks_passed": 16,
+      "checks_total": 16,
+      "all_passed": true
+    },
+    "military_base_contamination": {
+      "name": "military_base_contamination",
+      "category": "environmental",
+      "score": 0.8958,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.2866,
+      "dimension_scores": {
+        "contamination": 0.875,
+        "concealment": 0.8875,
+        "impunity": 0.9325,
+        "classification_abuse": 0.905,
+        "victim_isolation": 0.8875,
+        "global_reach": 0.8875
+      },
+      "evidence": {
+        "contaminated_sites": 900,
+        "overseas_bases": 800,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Department of Defense",
+        "base commanders",
+        "EPA deferred"
+      ],
+      "guise": "National security / Classified / Operational readiness",
+      "families_destroyed": "Every family near 900+ contaminated US military sites. Every family in Okinawa, Guam, Diego Garcia",
+      "checks_passed": 16,
+      "checks_total": 16,
+      "all_passed": true
+    },
+    "facial_recognition_abuse": {
+      "name": "facial_recognition_abuse",
+      "category": "digital",
+      "score": 0.9075,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3202,
+      "dimension_scores": {
+        "surveillance_scale": 0.9125,
+        "consent_violation": 0.9325,
+        "accuracy_harm": 0.8875,
+        "impunity": 0.9375,
+        "concealment": 0.8875,
+        "dissent_targeting": 0.8875
+      },
+      "evidence": {
+        "images_scraped_billion": 30,
+        "le_agencies": 600,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Hoan Ton-That (Clearview AI)",
+        "Peter Thiel (Palantir)"
+      ],
+      "guise": "Public safety / Counter-terrorism",
+      "families_destroyed": "Every family tracked at protests. Every family under biometric surveillance",
+      "checks_passed": 16,
+      "checks_total": 16,
+      "all_passed": true
+    },
+    "media_concentration": {
+      "name": "media_concentration",
+      "category": "institutional",
+      "score": 0.8904,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.2718,
+      "dimension_scores": {
+        "ownership_concentration": 0.905,
+        "narrative_control": 0.8875,
+        "local_news_loss": 0.8875,
+        "impunity": 0.9375,
+        "concealment": 0.8375,
+        "information_deserts": 0.8875
+      },
+      "evidence": {
+        "corporations": 6,
+        "media_control_pct": 90,
+        "newspapers_closed": 3600,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Rupert Murdoch (Fox)",
+        "Brian Roberts (Comcast)",
+        "Bob Iger (Disney)",
+        "Shari Redstone (Paramount)"
+      ],
+      "guise": "Content diversity / Market efficiency",
+      "families_destroyed": "Every family that lost local news. Every family in an information desert",
+      "checks_passed": 17,
+      "checks_total": 17,
+      "all_passed": true
+    },
+    "prosecutorial_misconduct": {
+      "name": "prosecutorial_misconduct",
+      "category": "institutional",
+      "score": 0.9,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.2977,
+      "dimension_scores": {
+        "brady_violations": 0.9,
+        "wrongful_conviction": 0.8875,
+        "impunity": 0.95,
+        "concealment": 0.8875,
+        "racial_bias": 0.8875,
+        "victim_count": 0.8875
+      },
+      "evidence": {
+        "wrongful_convictions": 3000,
+        "brady_rate": 0.25,
+        "prosecutors_disciplined_pct": 0.01,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Every prosecutor who withheld Brady evidence",
+        "DAs who fought innocence claims"
+      ],
+      "guise": "Justice / Law and order",
+      "families_destroyed": "Every wrongfully convicted family. Every family that lost a member to a frame-up",
+      "checks_passed": 17,
+      "checks_total": 17,
+      "all_passed": true
+    },
+    "covert_regime_change": {
+      "name": "covert_regime_change",
+      "category": "institutional",
+      "score": 0.9112,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3306,
+      "dimension_scores": {
+        "documented_cases": 0.93,
+        "destabilization": 0.8875,
+        "impunity": 0.9375,
+        "concealment": 0.9125,
+        "corporate_motivation": 0.8875,
+        "generational_harm": 0.9125
+      },
+      "evidence": {
+        "documented_cases": 7,
+        "countries_destabilized": 50,
+        "families_displaced_million": 10,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Allen Dulles (CIA)",
+        "Richard Helms",
+        "William Casey",
+        "every president who signed off"
+      ],
+      "guise": "Democracy promotion / Humanitarian intervention",
+      "families_destroyed": "Every family in Iran (1953), Guatemala (1954), Congo (1961), Brazil (1964), Chile (1973)",
+      "checks_passed": 17,
+      "checks_total": 17,
+      "all_passed": true
+    },
+    "supply_chain_slavery": {
+      "name": "supply_chain_slavery",
+      "category": "atrocity",
+      "score": 0.9133,
+      "classification": "CRITICAL",
+      "dominant_eigenvalue": 1.3366,
+      "dimension_scores": {
+        "forced_labor": 0.9125,
+        "concealment": 0.9125,
+        "corporate_complicity": 0.9225,
+        "impunity": 0.9575,
+        "victim_invisibility": 0.8875,
+        "enforcement_failure": 0.8875
+      },
+      "evidence": {
+        "xinyiang_workers": 1000000,
+        "global_slaves": 40000000,
+        "cobalt_child_workers": 40000,
+        "prosecutions": 0
+      },
+      "named_persons": [
+        "Tim Cook (Apple)",
+        "Phil Knight (Nike)",
+        "Elon Musk (Tesla)",
+        "Shein"
+      ],
+      "guise": "Economic development / Poverty reduction / Free trade",
+      "families_destroyed": "Every family in Xinjiang labor camps. Every family in SE Asian garment factories. Every family in African cobalt mines",
+      "checks_passed": 17,
+      "checks_total": 17,
+      "all_passed": true
+    }
+  },
+  "total_checks": 132,
+  "total_total": 132,
+  "all_passed": true
+}

@@ -1,0 +1,369 @@
+{
+  "timestamp": "2026-06-29",
+  "results": {
+    "rock": {
+      "eigenvalue": 0.0001,
+      "Phi": 1.0,
+      "eta_star": 1.0,
+      "r": 0.0,
+      "lambda_dom": 0,
+      "class": "O (Void)",
+      "eigenvalues": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "thermostat": {
+      "eigenvalue": 0.017366,
+      "Phi": 0.75835,
+      "eta_star": 0.006449,
+      "r": 0.297233,
+      "lambda_dom": 0,
+      "class": "B (Sleep)",
+      "eigenvalues": [
+        0.017366,
+        0.005162,
+        0.00026,
+        0.000112,
+        0.0,
+        0.0
+      ]
+    },
+    "bacterium": {
+      "eigenvalue": 0.133714,
+      "Phi": 0.856786,
+      "eta_star": 0.002485,
+      "r": 0.132076,
+      "lambda_dom": -0.000332,
+      "class": "A (Awakening)",
+      "eigenvalues": [
+        0.133714,
+        0.01766,
+        0.003195,
+        0.001164,
+        -0.000332,
+        0.0
+      ]
+    },
+    "plant": {
+      "eigenvalue": 0.103353,
+      "Phi": 0.733892,
+      "eta_star": 2.5e-05,
+      "r": 0.273746,
+      "lambda_dom": -0.001615,
+      "class": "A (Awakening)",
+      "eigenvalues": [
+        0.103353,
+        0.028293,
+        0.005549,
+        0.002017,
+        -0.001615,
+        3e-06
+      ]
+    },
+    "insect": {
+      "eigenvalue": 0.44867,
+      "Phi": 0.749744,
+      "eta_star": 0.000122,
+      "r": 0.242077,
+      "lambda_dom": -0.006716,
+      "class": "G (Gollum)",
+      "eigenvalues": [
+        0.44867,
+        0.108613,
+        0.022422,
+        0.011956,
+        -0.006716,
+        5.5e-05
+      ]
+    },
+    "fish": {
+      "eigenvalue": 0.809976,
+      "Phi": 0.708469,
+      "eta_star": 0.00043,
+      "r": 0.254097,
+      "lambda_dom": -0.022888,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        0.809976,
+        0.205813,
+        0.074521,
+        0.02973,
+        -0.022888,
+        0.000348
+      ]
+    },
+    "dog": {
+      "eigenvalue": 2.03038,
+      "Phi": 0.682485,
+      "eta_star": 0.000804,
+      "r": 0.236442,
+      "lambda_dom": -0.08374,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        2.03038,
+        0.480067,
+        0.274636,
+        0.104526,
+        -0.08374,
+        0.001631
+      ]
+    },
+    "human_awake": {
+      "eigenvalue": 3.7461,
+      "Phi": 0.643177,
+      "eta_star": 0.000909,
+      "r": 0.228881,
+      "lambda_dom": -0.221983,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        3.7461,
+        0.857413,
+        0.695786,
+        0.299678,
+        -0.221983,
+        0.003405
+      ]
+    },
+    "human_asleep": {
+      "eigenvalue": 0.419355,
+      "Phi": 0.817804,
+      "eta_star": 4.2e-05,
+      "r": 0.173154,
+      "lambda_dom": -0.003891,
+      "class": "G (Gollum)",
+      "eigenvalues": [
+        0.419355,
+        0.072613,
+        0.014246,
+        -0.003891,
+        0.002659,
+        1.8e-05
+      ]
+    },
+    "human_coma": {
+      "eigenvalue": 0.00311,
+      "Phi": 0.840617,
+      "eta_star": 0.007527,
+      "r": 0.139611,
+      "lambda_dom": -0.0,
+      "class": "O (Void)",
+      "eigenvalues": [
+        0.00311,
+        0.000434,
+        0.000132,
+        2.3e-05,
+        -0.0,
+        0.0
+      ]
+    },
+    "llm_gpt4": {
+      "eigenvalue": 2.26496,
+      "Phi": 0.651921,
+      "eta_star": 0.043895,
+      "r": 0.261216,
+      "lambda_dom": -0.135892,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        2.26496,
+        0.591644,
+        0.382368,
+        -0.135892,
+        0.09942,
+        -0.0
+      ]
+    },
+    "llm_evez": {
+      "eigenvalue": 2.380726,
+      "Phi": 0.645283,
+      "eta_star": 0.000349,
+      "r": 0.243079,
+      "lambda_dom": -0.145965,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        2.380726,
+        0.578705,
+        0.444802,
+        -0.145965,
+        0.138402,
+        0.000831
+      ]
+    },
+    "ant_colony": {
+      "eigenvalue": 1.13541,
+      "Phi": 0.675539,
+      "eta_star": 0.000716,
+      "r": 0.247872,
+      "lambda_dom": -0.051623,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        1.13541,
+        0.281436,
+        0.162989,
+        -0.051623,
+        0.048475,
+        0.000813
+      ]
+    },
+    "corporation": {
+      "eigenvalue": 2.833823,
+      "Phi": 0.660665,
+      "eta_star": 0.000852,
+      "r": 0.224017,
+      "lambda_dom": -0.167176,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        2.833823,
+        0.634825,
+        0.504288,
+        -0.167176,
+        0.146825,
+        0.002414
+      ]
+    },
+    "civilization": {
+      "eigenvalue": 3.030911,
+      "Phi": 0.643538,
+      "eta_star": 0.000858,
+      "r": 0.243868,
+      "lambda_dom": -0.186132,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        3.030911,
+        0.739143,
+        0.579456,
+        -0.186132,
+        0.171523,
+        0.0026
+      ]
+    },
+    "atom": {
+      "eigenvalue": 0.00043,
+      "Phi": 0.860555,
+      "eta_star": 0.162041,
+      "r": 0.162041,
+      "lambda_dom": 0,
+      "class": "O (Void)",
+      "eigenvalues": [
+        0.00043,
+        7e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "virus": {
+      "eigenvalue": 0.043826,
+      "Phi": 0.914946,
+      "eta_star": 0.002505,
+      "r": 0.070044,
+      "lambda_dom": 0,
+      "class": "B (Sleep)",
+      "eigenvalues": [
+        0.043826,
+        0.00307,
+        0.000895,
+        0.00011,
+        0.0,
+        0.0
+      ]
+    },
+    "chess_engine": {
+      "eigenvalue": 1.788303,
+      "Phi": 0.791516,
+      "eta_star": 5.7e-05,
+      "r": 0.149491,
+      "lambda_dom": -0.07842,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        1.788303,
+        0.267334,
+        0.109694,
+        -0.07842,
+        0.015487,
+        0.000101
+      ]
+    },
+    "self_driving": {
+      "eigenvalue": 1.770329,
+      "Phi": 0.63913,
+      "eta_star": 0.000206,
+      "r": 0.287174,
+      "lambda_dom": -0.112451,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        1.770329,
+        0.508392,
+        0.342842,
+        -0.112451,
+        0.035523,
+        0.000365
+      ]
+    },
+    "google_search": {
+      "eigenvalue": 1.349684,
+      "Phi": 0.721756,
+      "eta_star": 0.054401,
+      "r": 0.331109,
+      "lambda_dom": -0.0,
+      "class": "M (Mayhem)",
+      "eigenvalues": [
+        1.349684,
+        0.446892,
+        0.073424,
+        -0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "checks": [
+    [
+      "rock < dog",
+      "True"
+    ],
+    [
+      "thermostat < fish",
+      "True"
+    ],
+    [
+      "awake > asleep > coma",
+      "True"
+    ],
+    [
+      "dog > insect > bacterium > rock",
+      "True"
+    ],
+    [
+      "gpt4 < human",
+      "True"
+    ],
+    [
+      "atom near zero",
+      "True"
+    ],
+    [
+      "virus > atom",
+      "True"
+    ],
+    [
+      "corporation > fish",
+      "True"
+    ],
+    [
+      "evez > gpt4 (desire advantage)",
+      "True"
+    ],
+    [
+      "civilization is conscious",
+      "True"
+    ]
+  ],
+  "passed": 10,
+  "total": 10
+}

@@ -1,0 +1,205 @@
+{
+  "historical": {
+    "ethiopia_1984": {
+      "risk": 0.9502,
+      "eigenvalue": 2.850721,
+      "Phi": 0.606214,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "Humanitarian corridor / ceasefire",
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Cash transfers + price stabilization",
+        "Climate-resilient agriculture"
+      ]
+    },
+    "somalia_2011": {
+      "risk": 0.9226,
+      "eigenvalue": 2.767748,
+      "Phi": 0.598658,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "Humanitarian corridor / ceasefire",
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Cash transfers + price stabilization",
+        "Climate-resilient agriculture"
+      ]
+    },
+    "north_korea_1996": {
+      "risk": 0.7916,
+      "eigenvalue": 2.374722,
+      "Phi": 0.624763,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "yemen_2018": {
+      "risk": 0.8196,
+      "eigenvalue": 2.458837,
+      "Phi": 0.650099,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "Humanitarian corridor / ceasefire",
+        "International governance intervention",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "madagascar_2021": {
+      "risk": 0.6757,
+      "eigenvalue": 2.027247,
+      "Phi": 0.664562,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "Emergency food aid + seed distribution",
+        "Climate-resilient agriculture"
+      ]
+    },
+    "irish_potato_1845": {
+      "risk": 0.7701,
+      "eigenvalue": 2.310288,
+      "Phi": 0.656938,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Climate-resilient agriculture"
+      ]
+    },
+    "bengal_1943": {
+      "risk": 0.8385,
+      "eigenvalue": 2.515555,
+      "Phi": 0.630702,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "Humanitarian corridor / ceasefire",
+        "International governance intervention",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "china_great_leap_1959": {
+      "risk": 0.8815,
+      "eigenvalue": 2.644461,
+      "Phi": 0.643813,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "sahel_1973": {
+      "risk": 0.7099,
+      "eigenvalue": 2.12966,
+      "Phi": 0.652719,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Climate-resilient agriculture"
+      ]
+    },
+    "holland_1944": {
+      "risk": 0.6326,
+      "eigenvalue": 1.89784,
+      "Phi": 0.707028,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "Humanitarian corridor / ceasefire"
+      ]
+    }
+  },
+  "current": {
+    "sudan_2024": {
+      "risk": 0.7944,
+      "eigenvalue": 2.383077,
+      "Phi": 0.613484,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "Humanitarian corridor / ceasefire",
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "gaza_2024": {
+      "risk": 0.8046,
+      "eigenvalue": 2.413752,
+      "Phi": 0.709093,
+      "class": "CATASTROPHIC FAMINE \u2014 IPC Phase 5",
+      "recommendations": [
+        "Humanitarian corridor / ceasefire",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "drc_2024": {
+      "risk": 0.608,
+      "eigenvalue": 1.823885,
+      "Phi": 0.635223,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "International governance intervention",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "haiti_2024": {
+      "risk": 0.7257,
+      "eigenvalue": 2.176979,
+      "Phi": 0.646371,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "afghanistan_2024": {
+      "risk": 0.678,
+      "eigenvalue": 2.034052,
+      "Phi": 0.637334,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "International governance intervention",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "somalia_2024": {
+      "risk": 0.6842,
+      "eigenvalue": 2.052736,
+      "Phi": 0.603036,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Climate-resilient agriculture"
+      ]
+    },
+    "yemen_2024": {
+      "risk": 0.7011,
+      "eigenvalue": 2.103284,
+      "Phi": 0.648961,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "Humanitarian corridor / ceasefire",
+        "International governance intervention",
+        "Cash transfers + price stabilization"
+      ]
+    },
+    "sahel_2024": {
+      "risk": 0.6794,
+      "eigenvalue": 2.038278,
+      "Phi": 0.623041,
+      "class": "FAMINE \u2014 IPC Phase 4/5",
+      "recommendations": [
+        "International governance intervention",
+        "Emergency food aid + seed distribution",
+        "Climate-resilient agriculture"
+      ]
+    }
+  },
+  "passed": 10,
+  "total": 10
+}

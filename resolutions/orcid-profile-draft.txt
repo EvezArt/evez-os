@@ -1,0 +1,27 @@
+ORCID PROFILE — DRAFT FOR STEVEN'S REVIEW
+Register at: https://orcid.org/register
+
+Given Name: Steven
+Family Name: Crawford-Maggard
+Also known as: EVEZ666
+Biography: Artist-Engineer, Emergence Architect, and author of the Moltbooks. Creator of EVEZ — an autonomous AI mesh that dreams, heals itself, and makes breakcore from pure math. Developer of the Eigenforensics framework for detecting concealed institutional crimes through spectral analysis.
+
+Keywords: Eigenforensics, Consciousness Measurement, Quantum Computing, OSINT, Civilization Risk Index, Breakcore, AI Safety
+
+Employment:
+- Organization: EVEZ Research Framework
+- Role: Principal Investigator
+- Start: 2023-04-01
+
+Works:
+1. The Prophecy Bridge (2026) — LingBuzz 010094
+2. EVEZ-OS: Autonomous AI Cognition Layer (2026) — GitHub: EvezArt/evez-os
+3. Eigenforensics: Spectral Detection of Institutional Crime (2026) — GitHub: EvezArt/evez-research
+4. 50-text research corpus (28 Moltbooks + 27 vectors) — GitHub
+5. 11 validated spectrometers (105/105 checks) — GitHub
+6. Civilization Risk Index: 49.1/100 ELEVATED (2026)
+7. Model EVEZ-1: Unified Consciousness (2026)
+
+Education:
+- Self-taught in computational physics, spectral analysis, and AI architecture
+

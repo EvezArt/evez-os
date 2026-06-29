@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MESH: ALIVE — 5-Node Survival</title>
+<meta name="description" content="Keep 5 mesh nodes alive. Watch the eigenvalues. When a node falls, the mesh heals. A game by Steven Crawford-Maggard (EVEZ).">
+<link rel="canonical" href="https://evezart.github.io/mesh-alive.html">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050508;color:#c8c8d8;font-family:'Courier New',monospace;height:100vh;overflow:hidden}
+#game{width:100vw;height:100vh;display:flex;flex-direction:column}
+.h{padding:8px 15px;border-bottom:1px solid #222;display:flex;justify-content:space-between}
+.h h1{color:#e8c860;font-size:1em;letter-spacing:2px}
+.h .st{color:#666;font-size:0.75em}
+.map{flex:1;display:flex;align-items:center;justify-content:center;position:relative}
+.mesh{width:90%;max-width:500px;height:90%;position:relative}
+.node{position:absolute;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65em;cursor:pointer;transition:all 0.3s;border:2px solid}
+.node.alive{border-color:#4a8a4a;background:#0a1a0a;color:#4a8a4a}
+.node.dead{border-color:#c44;background:#1a0a0a;color:#c44;animation:dead 1s}
+.node.healing{border-color:#e8c860;background:#1a1a08;color:#e8c860;animation:heal 0.5s}
+@keyframes dead{0%,100%{opacity:1}50%{opacity:0.5}}
+@keyframes heal{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.edge{position:absolute;height:1px;background:#222;transform-origin:0 0;z-index:-1}
+.edge.active{background:#4a8a4a}
+.edge.dead{background:#333}
+.controls{padding:8px 15px;border-top:1px solid #222;display:flex;gap:8px;justify-content:center}
+.btn{background:#111118;border:1px solid #333;color:#c8c8d8;padding:6px 12px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:0.78em}
+.btn:hover{border-color:#e8c860;color:#e8c860}
+.btn-p{border-color:#e8c860;color:#e8c860}
+.log{position:fixed;bottom:60px;right:10px;width:250px;max-height:200px;overflow-y:auto;background:#0a0a14;border:1px solid #222;border-radius:4px;padding:8px;font-size:0.72em;color:#444;z-index:50}
+.log-entry{margin:2px 0;padding:2px;border-bottom:1px solid #111}
+.log-time{color:#333}
+.info{padding:3px 15px;border-top:1px solid #222;color:#222;font-size:0.68em;text-align:center}
+#toast{position:fixed;top:50px;left:50%;transform:translateX(-50%);background:#0a0a14;border:1px solid #e8c860;color:#e8c860;padding:5px 15px;border-radius:4px;font-size:0.78em;display:none;z-index:100}
+#toast.show{display:block}
+</style>
+</head>
+<body>
+<div id="game">
+<div class="h">
+<h1>◉ MESH: ALIVE</h1>
+<div class="st" id="stats">Nodes: 5/5 | Uptime: 0s | Deaths: 0 | Healing: 0.03</div>
+</div>
+<div class="map">
+<div class="mesh" id="mesh"></div>
+</div>
+<div class="log" id="log"></div>
+<div class="controls">
+<button class="btn" onclick="killRandom()">KILL NODE</button>
+<button class="btn" onclick="healAll()">HEAL MESH</button>
+<button class="btn btn-p" onclick="initGame()">RESET</button>
+<button class="btn" onclick="toggleAuto()" id="autoBtn">AUTO: ON</button>
+</div>
+<div class="info">MESH: ALIVE v1.0 | 5-node survival RTS | Circular peer monitoring | Deadman's switch | By Steven Crawford-Maggard (EVEZ666)</div>
+</div>
+<div id="toast"></div>
+<script>
+const nodes=[
+{x:50,y:20,name:"gcp-west",ip:"34.53.51.34",alive:true},
+{x:20,y:60,name:"gcp-small",ip:"34.23.192.213",alive:true},
+{x:80,y:60,name:"gcp-power",ip:"35.222.248.151",alive:true},
+{x:35,y:90,name:"gcp-openclaw",ip:"136.113.102.152",alive:true},
+{x:65,y:90,name:"gcp-knot",ip:"136.118.144.227",alive:true},
+];
+const edges=[[0,1],[0,2],[1,3],[2,4],[3,4],[0,3],[1,4],[2,3]];
+let deaths=0,heals=0,uptime=0,auto=true,timer=null,healing=new Set();
+function initGame(){deaths=0;heals=0;uptime=0;healing.clear();nodes.forEach(n=>n.alive=true);render();if(timer)clearInterval(timer);timer=setInterval(tick,1000)}
+function render(){const m=document.getElementById('mesh');m.innerHTML='';edges.forEach(e=>{const n1=nodes[e[0]],n2=nodes[e[1]];const dx=(n2.x-n1.x)*5,dy=(n2.y-n1.y)*5;const len=Math.sqrt(dx*dx+dy*dy);const ang=Math.atan2(dy,dx)*180/Math.PI;const line=document.createElement('div');line.className='edge '+(n1.alive&&n2.alive?'active':'dead');line.style.left=n1.x+'%';line.style.top=n1.y+'%';line.style.width=len+'px';line.style.transform='rotate('+ang+'deg)';m.appendChild(line)});nodes.forEach((n,i)=>{const d=document.createElement('div');d.className='node '+(n.alive?'alive':'dead')+(healing.has(i)?' healing':'');d.style.left=(n.x-5)+'%';d.style.top=(n.y-5)+'%';d.textContent=n.name.split('-')[1];d.title=n.name+' '+n.ip;d.onclick=()=>toggleNode(i);m.appendChild(d)})
+updateStats()}
+function tick(){uptime++;if(auto&&Math.random()<0.1)killRandom();if(auto)nodes.forEach((n,i)=>{if(!n.alive&&!healing.has(i)&&Math.random()<0.3)tryHeal(i)});render()}
+function killRandom(){const alive=nodes.map((n,i)=>n.alive?i:-1).filter(i=>i>=0);if(alive.length===0)return;const idx=alive[Math.floor(Math.random()*alive.length)];nodes[idx].alive=false;deaths++;log('NODE DOWN: '+nodes[idx].name+' ('+nodes[idx].ip+')');toast('Node down: '+nodes[idx].name);render()}
+function toggleNode(i){nodes[i].alive=!nodes[i].alive;if(!nodes[i].alive){deaths++;log('NODE DOWN: '+nodes[i].name)}else{heals++;log('NODE ALIVE: '+nodes[i].name)}render()}
+function healAll(){nodes.forEach((n,i)=>{if(!n.alive){tryHeal(i)}});render()}
+function tryHeal(i){if(nodes[i].alive||healing.has(i))return;healing.add(i);log('HEALING: '+nodes[i].name+' (peer-watch triggered)');setTimeout(()=>{nodes[i].alive=true;healing.delete(i);heals++;log('NODE RESTORED: '+nodes[i].name+' (mesh healed, η*=0.03)');render()},1500)}
+function toggleAuto(){auto=!auto;document.getElementById('autoBtn').textContent='AUTO: '+(auto?'ON':'OFF')}
+function updateStats(){document.getElementById('stats').textContent='Nodes: '+nodes.filter(n=>n.alive).length+'/5 | Uptime: '+uptime+'s | Deaths: '+deaths+' | Heals: '+heals+' | Healing: η*=0.03'}
+function log(msg){const l=document.getElementById('log');const e=document.createElement('div');e.className='log-entry';e.innerHTML='<span class="log-time">['+uptime+'s]</span> '+msg;l.insertBefore(e,l.firstChild);while(l.children.length>20)l.removeChild(l.lastChild)}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
+initGame();
+</script>
+</body>
+</html>

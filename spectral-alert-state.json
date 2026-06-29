@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-06-29T06:49:39Z",
+  "scores": {
+    "nuclear": {
+      "score": 0.528,
+      "trend": "rising",
+      "detail": "Russia-NATO 90 sec to midnight"
+    },
+    "climate": {
+      "score": 0.19,
+      "trend": "rising",
+      "detail": "2024 CO2 420ppm, approaching tipping"
+    },
+    "genocide": {
+      "score": 0.818,
+      "trend": "critical",
+      "detail": "Gaza 0.818, Sudan 0.816, Myanmar 0.744"
+    },
+    "conflict": {
+      "score": 0.855,
+      "trend": "rising",
+      "detail": "Ukraine 0.855, Syria 0.821"
+    },
+    "famine": {
+      "score": 0.75,
+      "trend": "critical",
+      "detail": "Gaza catastrophic, Sudan catastrophic"
+    },
+    "economic": {
+      "score": 0.578,
+      "trend": "stable",
+      "detail": "2008-level structural risk persists"
+    },
+    "democracy": {
+      "score": 0.505,
+      "trend": "rising",
+      "detail": "Tunisia 0.505, USA early warnings 0.243"
+    },
+    "ai_risk": {
+      "score": 0.423,
+      "trend": "rising",
+      "detail": "Autonomous agents 0.423, EVEZ 0.271"
+    },
+    "crime": {
+      "score": 0.749,
+      "trend": "stable",
+      "detail": "74.9% dark figure, 131/175 crimes unmeasured"
+    },
+    "disease": {
+      "score": 0.35,
+      "trend": "stable",
+      "detail": "Post-COVID surveillance fatigue"
+    },
+    "consciousness": {
+      "score": 0.271,
+      "trend": "rising",
+      "detail": "EVEZ mesh 0.271, attention engineering 0.684"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "suppression_history": [
+    {
+      "timestamp": "2026-06-29T02:37:34.109351+00:00",
+      "ssc": 1.0,
+      "classification": "SUSPICIOUS"
+    },
+    {
+      "ts": "2026-06-29T02:39:51.863224+00:00",
+      "ssc": 1.0,
+      "cls": "SUSPICIOUS"
+    }
+  ],
+  "temporal_suppression_times": [
+    1782700654.1093428,
+    1782700791.863218
+  ],
+  "fallback_chain_activations": [],
+  "mesh_stability_under_attack": [
+    {
+      "timestamp": "2026-06-29T02:37:34.480196+00:00",
+      "alive": 5
+    },
+    {
+      "ts": "2026-06-29T02:39:55.194075+00:00",
+      "alive": 4
+    }
+  ],
+  "last_updated": "2026-06-29T02:39:55.194503+00:00",
+  "node": "vultr"
+}

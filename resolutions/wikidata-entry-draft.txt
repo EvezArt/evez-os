@@ -1,0 +1,22 @@
+WIKIDATA ENTRY — DRAFT FOR STEVEN'S REVIEW
+Create at: https://www.wikidata.org/wiki/Special:NewItem
+
+Label: EVEZ Research Framework
+Description: Open-source research framework for civilization risk measurement and hidden crime detection using spectral analysis
+
+Statements:
+- instance of: research project
+- author: Steven Crawford-Maggard
+- official website: https://evezart.github.io
+- GitHub: https://github.com/EvezArt/evez-research
+- published in: LingBuzz 010094
+- inception: 2023-04-01
+- main subject: eigenforensics, consciousness measurement, civilization risk index
+- has parts: 11 spectrometers, meta-spectrometer, hidden crime inference engine, intervention blueprint engine
+- license: open source
+- metric: Φ=0.973, η*=0.03, r=0.45, CRI=49.1
+
+Also create entries for:
+- Eigenforensics (instance of: scientific method)
+- Civilization Risk Index (instance of: metric)
+- Spectral gap theory of concealment (instance of: scientific theory)

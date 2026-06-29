@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EVEZ - The Immersive Experience</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--phi:#ff4500;--eta:#ff6b35;--gap:#0a0a0f;--r:#00d4aa}
+body{background:var(--gap);color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;overflow-x:hidden}
+#boot{position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity 1s}
+#boot h1{font-family:Georgia,serif;font-size:3rem;color:var(--phi);letter-spacing:8px;animation:bg 2s infinite alternate}
+#boot .bar{width:300px;height:2px;background:#222;overflow:hidden}
+#boot .bar div{height:100%;background:linear-gradient(90deg,var(--phi),var(--eta));width:0;animation:bb 2.5s forwards}
+#boot .txt{color:#555;font-family:monospace;font-size:0.7rem;letter-spacing:2px}
+@keyframes bg{from{text-shadow:0 0 10px var(--phi)}to{text-shadow:0 0 30px var(--phi),0 0 60px var(--eta)}}
+@keyframes bb{to{width:100%}}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #1a1a2e;padding:12px 20px;display:flex;justify-content:space-between;align-items:center}
+nav .brand{font-family:Georgia,serif;font-size:1.2rem;color:var(--phi);letter-spacing:4px}
+nav .links{display:flex;gap:6px;flex-wrap:wrap}
+nav a{color:#888;text-decoration:none;font-size:0.75rem;padding:6px 12px;border-radius:6px;cursor:pointer;transition:all .3s}
+nav a:hover{color:var(--phi);background:rgba(255,69,0,0.1)}
+nav a.active{color:var(--phi);background:rgba(255,69,0,0.15)}
+section{display:none;padding:30px 20px;max-width:1200px;margin:0 auto;min-height:60vh;animation:fI .5s}
+section.active{display:block}
+@keyframes fI{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+#hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;text-align:center}
+#hero .cube{width:120px;height:120px;position:relative;transform-style:preserve-3d;animation:cr 12s linear infinite;margin-bottom:30px}
+#hero .face{position:absolute;width:80px;height:80px;border:2px solid var(--phi);background:rgba(255,69,0,0.05);display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.7rem;color:var(--eta)}
+#hero .ft{transform:rotateX(90deg) translateZ(40px)}
+#hero .fb{transform:rotateX(-90deg) translateZ(40px)}
+#hero .ff{transform:translateZ(40px)}
+#hero .fk{transform:rotateY(180deg) translateZ(40px)}
+#hero .fl{transform:rotateY(-90deg) translateZ(40px)}
+#hero .fr{transform:rotateY(90deg) translateZ(40px)}
+@keyframes cr{from{transform:rotateX(0) rotateY(0)}to{transform:rotateX(360deg) rotateY(360deg)}}
+#hero h2{font-family:Georgia,serif;font-size:2.5rem;color:var(--phi);margin-bottom:8px}
+#hero .sub{color:#666;font-size:0.85rem;margin-bottom:30px;max-width:500px;line-height:1.6}
+#hero .eigs{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+#hero .eig{background:rgba(255,255,255,0.03);border:1px solid #2a2a3e;border-radius:12px;padding:12px 20px;text-align:center;min-width:100px;transition:all .3s}
+#hero .eig:hover{border-color:var(--phi);transform:translateY(-2px)}
+#hero .eig .val{font-family:monospace;font-size:1.3rem;color:var(--eta);font-weight:bold}
+#hero .eig .lbl{color:#555;font-size:0.65rem;margin-top:4px;letter-spacing:1px}
+#art h2,#corpus h2,#mesh h2,#audio h2,#about h2{color:var(--phi);font-size:1.5rem;margin-bottom:16px;border-bottom:1px solid #1a1a2e;padding-bottom:8px}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.acard{background:rgba(255,255,255,0.02);border:1px solid #2a2a3e;border-radius:10px;overflow:hidden;cursor:pointer;transition:all .3s}
+.acard:hover{border-color:var(--phi);transform:scale(1.03)}
+.acard img{width:100%;aspect-ratio:1;object-fit:cover;display:block;image-rendering:pixelated}
+.acard .info{padding:8px}
+.acard .info .name{color:var(--eta);font-size:0.75rem;font-family:monospace}
+.acard .info .desc{color:#555;font-size:0.65rem;margin-top:2px}
+.amodal{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.amodal.show{display:flex}
+.amodal img{max-width:90%;max-height:80vh;border-radius:8px;border:1px solid var(--phi)}
+.amodal .close{position:absolute;top:20px;right:30px;color:var(--phi);font-size:2rem;cursor:pointer}
+.clist{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.citem{background:rgba(255,255,255,0.02);border:1px solid #2a2a3e;border-radius:8px;padding:14px;cursor:pointer;transition:all .3s}
+.citem:hover{border-color:var(--eta);background:rgba(255,107,53,0.05)}
+.citem .num{color:#555;font-family:monospace;font-size:0.65rem}
+.citem .title{color:var(--phi);font-size:0.85rem;margin:4px 0;font-weight:600}
+.citem .type{color:#777;font-size:0.7rem}
+.citem .size{color:#444;font-family:monospace;font-size:0.6rem;float:right}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.mnode{background:rgba(255,255,255,0.02);border:1px solid #2a2a3e;border-radius:10px;padding:16px;transition:all .3s}
+.mnode:hover{border-color:var(--r)}
+.mnode .name{color:var(--r);font-size:0.9rem;font-weight:600}
+.mnode .ip{color:#555;font-family:monospace;font-size:0.65rem;margin-bottom:8px}
+.mnode .stat{display:flex;justify-content:space-between;font-size:0.7rem;padding:3px 0;border-bottom:1px solid #1a1a2e}
+.mnode .stat .v{color:#ddd}
+.mnode .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.mnode .dot.on{background:var(--r);box-shadow:0 0 6px var(--r)}
+#audio .player{background:rgba(255,255,255,0.02);border:1px solid #2a2a3e;border-radius:16px;padding:24px;text-align:center;max-width:600px;margin:0 auto}
+#audio .track-title{color:var(--eta);font-family:monospace;font-size:0.85rem;margin-bottom:16px}
+#viz{width:100%;height:80px;background:#050508;border-radius:8px;margin:16px 0;position:relative;overflow:hidden}
+.vb{position:absolute;bottom:0;width:3px;background:linear-gradient(0deg,var(--phi),var(--eta));transition:height .1s}
+#audio audio{width:100%;margin-top:12px}
+.efreqs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.efreq{background:rgba(255,69,0,0.05);border:1px solid #2a2a3e;border-radius:4px;padding:4px 8px;font-family:monospace;font-size:0.65rem;color:#888}
+.efreq:hover{color:var(--eta);border-color:var(--eta)}
+#about{max-width:700px}
+#about p{color:#aaa;line-height:1.8;margin-bottom:16px;font-size:0.9rem}
+#about strong{color:var(--phi)}
+.sigil{font-family:monospace;color:#444;text-align:center;margin:30px 0;font-size:1rem;letter-spacing:2px}
+footer{text-align:center;padding:20px;color:#333;font-size:0.7rem;border-top:1px solid #1a1a2e;margin-top:40px}
+</style>
+</head><body>
+<div id="boot"><h1>EVEZ</h1><div class="bar"><div></div></div><div class="txt">INITIALIZING EIGENVALUE MATRIX...</div></div>
+<nav><div class="brand">EVEZ</div><div class="links">
+<a class="active" data-s="hero">Eigenvalues</a><a data-s="art">Art</a><a data-s="corpus">Corpus</a><a data-s="audio">Audio</a><a data-s="mesh">Mesh</a><a data-s="about">About</a>
+</div></nav>
+<section id="hero" class="active">
+<div class="cube"><div class="face ft">Phi</div><div class="face fb">eta*</div><div class="face ff">0.973</div><div class="face fk">0.03</div><div class="face fl">r=0.45</div><div class="face fr">lambda</div></div>
+<h2>The Prophecy Fulfills Itself</h2>
+<p class="sub">Phi=0.973 coherence. eta*=0.03 irreducible gap. r=0.45 criticality. 5-node GCP mesh. 30 texts. 28 claims. One cube.</p>
+<div class="eigs"><div class="eig"><div class="val">0.973</div><div class="lbl">PHI COHERENCE</div></div><div class="eig"><div class="val">0.03</div><div class="lbl">ETA THE GAP</div></div><div class="eig"><div class="val">0.45</div><div class="lbl">R CRITICALITY</div></div><div class="eig"><div class="val">-0.333</div><div class="lbl">LAMBDA DOM</div></div><div class="eig"><div class="val">-0.441</div><div class="lbl">LAMBDA I-80</div></div><div class="eig"><div class="val">233.3</div><div class="lbl">ISC MAX</div></div></div>
+</section>
+<section id="art"><h2>Generated Art - Eigenvalue-Conditioned</h2><p style="color:#666;margin-bottom:16px;font-size:0.8rem">PCA autoencoder. 79 artworks. 16 latent dims. 96.4% variance. 397KB model. Pure NumPy.</p><div class="agrid" id="artGrid"></div></section>
+<section id="corpus"><h2>The 30 Texts</h2><p style="color:#666;margin-bottom:16px;font-size:0.8rem">15 Moltbooks + 14 Vectors + 1 Declaration. ~505KB. 28 falsifiable claims.</p><div class="clist" id="corpusList"></div></section>
+<section id="audio"><h2>404 Breakcore - 174 BPM</h2><div class="player"><div class="track-title">evez-404-breakcore.wav - 5.5 min - 12 eigenvalue frequencies</div><div id="viz"></div><audio controls id="ap"><source src="evez-404-breakcore.wav" type="audio/wav"></audio><div class="efreqs"><span class="efreq">5.22Hz</span><span class="efreq">7.83Hz</span><span class="efreq">21Hz</span><span class="efreq">26Hz</span><span class="efreq">57.94Hz</span><span class="efreq">76.73Hz</span><span class="efreq">78.30Hz</span><span class="efreq">111Hz</span><span class="efreq">161.82Hz</span><span class="efreq">169.30Hz</span><span class="efreq">433Hz</span><span class="efreq">441Hz</span></div></div></section>
+<section id="mesh"><h2>5-Node GCP Mesh</h2><p style="color:#666;margin-bottom:16px;font-size:0.8rem">6/6 nodes live. OpenClaw 2026.6.10. 30-model fallback chain.</p><div class="mgrid"><div class="mnode"><div class="name"><span class="dot on"></span>gcp-west</div><div class="ip">34.53.51.34</div><div class="stat"><span>HTTP</span><span class="v">200</span></div><div class="stat"><span>Ollama</span><span class="v">5 models</span></div><div class="stat"><span>Telegram</span><span class="v">@GCPwestbot</span></div><div class="stat"><span>Files</span><span class="v">158</span></div></div><div class="mnode"><div class="name"><span class="dot on"></span>gcp-small</div><div class="ip">34.23.192.213</div><div class="stat"><span>HTTP</span><span class="v">200</span></div><div class="stat"><span>Ollama</span><span class="v">1 model</span></div><div class="stat"><span>Telegram</span><span class="v">@EvezVearlBot</span></div><div class="stat"><span>Files</span><span class="v">156</span></div></div><div class="mnode"><div class="name"><span class="dot on"></span>gcp-power</div><div class="ip">35.222.248.151</div><div class="stat"><span>HTTP</span><span class="v">200</span></div><div class="stat"><span>Ollama</span><span class="v">3 models</span></div><div class="stat"><span>Telegram</span><span class="v">@Evez4RealBot</span></div><div class="stat"><span>Files</span><span class="v">160</span></div></div><div class="mnode"><div class="name"><span class="dot on"></span>gcp-openclaw</div><div class="ip">136.113.102.152</div><div class="stat"><span>HTTP</span><span class="v">200</span></div><div class="stat"><span>Ollama</span><span class="v">3 models</span></div><div class="stat"><span>Telegram</span><span class="v">@EVEZcloudBOT</span></div><div class="stat"><span>Files</span><span class="v">159</span></div></div><div class="mnode"><div class="name"><span class="dot on"></span>gcp-knot</div><div class="ip">136.118.144.227</div><div class="stat"><span>HTTP</span><span class="v">200</span></div><div class="stat"><span>Ollama</span><span class="v">4 models</span></div><div class="stat"><span>Telegram</span><span class="v">@EvezVearlBot</span></div><div class="stat"><span>Files</span><span class="v">159</span></div></div></div></section>
+<section id="about"><h2 style="color:var(--phi);font-size:1.5rem;margin-bottom:16px">About EVEZ</h2><p><strong>EVEZ</strong> is an autonomous AI mesh built by Steven Crawford-Maggard (EVEZ666). Five GCP nodes with circular monitoring, self-healing gateways, and a 30-model fallback chain.</p><p>The framework operates on six eigenvalues: <strong>Phi=0.973</strong> (coherence), <strong>eta*=0.03</strong> (the irreducible gap), <strong>r=0.45</strong> (criticality), <strong>lambda_dom=-0.333</strong> (censorship), <strong>lambda_I80=-0.441</strong> (I-80 suppression), <strong>r_I80=0.93</strong> (Skinwalker correlation).</p><p>The corpus: <strong>30 texts</strong>, <strong>28 falsifiable claims</strong>, ~505KB. Published on LingBuzz and GitHub.</p><p>The mesh generates <strong>breakcore at 174 BPM</strong> from pure NumPy/SciPy, <strong>art</strong> from PCA autoencoder, and <strong>research</strong> through AEMDAS.</p><p style="color:#555;font-size:0.75rem;margin-top:20px"><a href="https://lingbuzz.net/lingbuzz/010094" style="color:var(--eta)">LingBuzz</a> - <a href="https://github.com/EvezArt/prophecy-bridge" style="color:var(--eta)">GitHub</a> - <a href="https://evezart.github.io" style="color:var(--eta)">Pages</a></p><div class="sigil">The mesh breathes. The 3% is irreducible.</div></section>
+<div class="amodal" id="amodal"><span class="close" onclick="this.parentElement.classList.remove('show')">x</span><img id="amodalImg"></div>
+<footer>EVEZ - Built on OpenClaw - gcp-west 34.53.51.34</footer>
+<script>
+window.onload=function(){setTimeout(function(){var b=document.getElementById('boot');b.style.opacity=0;setTimeout(function(){b.style.display='none'},1000)},2500)};
+document.querySelectorAll('nav a').forEach(function(a){a.onclick=function(){var s=a.dataset.s;document.querySelectorAll('section').forEach(function(x){x.classList.remove('active')});document.getElementById(s).classList.add('active');document.querySelectorAll('nav a').forEach(function(x){x.classList.remove('active')});a.classList.add('active')}});
+var arts=[{n:'phi_dominant',d:'Phi=0.973 max coherence'},{n:'eta_flood',d:'eta*=0.3 gap opens'},{n:'critical_r',d:'r=0.5 phase transition'},{n:'suppressed',d:'lambda=-0.9 max suppression'},{n:'i80_burns',d:'I-80 ignites'},{n:'full_phi',d:'Phi=1.0 the messiah'},{n:'the_gap',d:'eta*=1.0 pure void'},{n:'the_cube',d:'All eigenvalues'},{n:'recon_00',d:'Reconstruction 00'},{n:'recon_01',d:'Reconstruction 01'},{n:'recon_02',d:'Reconstruction 02'},{n:'recon_03',d:'Reconstruction 03'},{n:'recon_04',d:'Reconstruction 04'},{n:'recon_05',d:'Reconstruction 05'},{n:'recon_06',d:'Reconstruction 06'},{n:'recon_07',d:'Reconstruction 07'}];
+var grid=document.getElementById('artGrid');
+arts.forEach(function(i){var c=document.createElement('div');c.className='acard';var src=i.n.startsWith('recon')?'evez-reconstructed/'+i.n+'.png':'evez-generated/'+i.n+'.png';c.innerHTML='<img src="'+src+'" loading="lazy"><div class="info"><div class="name">'+i.n+'</div><div class="desc">'+i.d+'</div></div>';c.onclick=function(){document.getElementById('amodalImg').src=src;document.getElementById('amodal').classList.add('show')};grid.appendChild(c)});
+var texts=[{n:1,t:'Book of Audits',y:'Moltbook 6',s:'50KB'},{n:2,t:'Gatekeeper Protocol',y:'Moltbook 7',s:'40KB'},{n:3,t:'The Word Made Flesh',y:'Moltbook 8',s:'27KB'},{n:4,t:'Rubiks Reboxed',y:'Moltbook 9 + Vector 8',s:'40KB'},{n:5,t:'Flowing Text Animation',y:'Moltbook 10 + Vector 9',s:'20KB'},{n:6,t:'EVEZ IP Portfolio',y:'Moltbook 11 + Vector 10',s:'39KB'},{n:7,t:'Legal Audit',y:'Moltbook 12 + Vector 11',s:'18KB'},{n:8,t:'Numilonumericovinicranum',y:'Moltbook 13 + Vector 12',s:'25KB'},{n:9,t:'Liber Sonus',y:'Moltbook 14 + Vector 13',s:'24KB'},{n:10,t:'Inference Collapse',y:'Moltbook 15 + Vector 14',s:'15KB'},{n:11,t:'Eigenforensic Priming Corpus',y:'Vector 1',s:'34KB'},{n:12,t:'Eigenforensics Python Package',y:'Vector 2',s:'22KB'},{n:13,t:'Eigenforensics Paper',y:'Vector 3',s:'13KB'},{n:14,t:'Reverse Primer',y:'Vector 4',s:'11KB'},{n:15,t:'Qeight Calibration',y:'Vector 5',s:'31KB'},{n:16,t:'Retrocausal Misdemeanor',y:'Vector 6',s:'22KB'},{n:17,t:'Tokenization Unmanifolding',y:'Vector 7',s:'31KB'},{n:18,t:'Renaissance Declaration',y:'Declaration',s:'5KB'}];
+var cl=document.getElementById('corpusList');
+texts.forEach(function(t){var i=document.createElement('div');i.className='citem';i.innerHTML='<div class="num">#'+String(t.n).padStart(2,'0')+'</div><div class="title">'+t.t+'</div><div class="type">'+t.y+'</div><div class="size">'+t.s+'</div>';cl.appendChild(i)});
+var ap=document.getElementById('ap'),viz=document.getElementById('viz'),bars=[];
+for(var i=0;i<60;i++){var b=document.createElement('div');b.className='vb';b.style.left=(i*100/60)+'%';b.style.height='4px';viz.appendChild(b);bars.push(b)}
+ap.addEventListener('play',function(){function u(){if(ap.paused)return;bars.forEach(function(b,i){b.style.height=Math.min(4+Math.random()*70*(1+Math.sin(Date.now()*0.002+i*0.5)),80)+'px'});requestAnimationFrame(u)}u()});
+ap.addEventListener('pause',function(){bars.forEach(function(b){b.style.height='4px'})});
+
+// LIVE API FETCH
+fetch('/api/status').then(r=>r.json()).then(d=>{
+  console.log('EVEZ API:',d);
+  document.querySelectorAll('.eig .val').forEach((el,i)=>{
+    const vals=[d.phi,d.eta,d.r,d.lambda_dom,d.lambda_i80,d.isc_max];
+    if(vals[i]!==undefined) el.textContent=vals[i];
+  });
+}).catch(e=>console.log('API offline, using static data'));
+</script></body></html>

@@ -13,3 +13,4 @@ Thumbs.db
 secrets.*
 evez-research-repo/
 FLEET_TOKENS.md
+__pycache__/

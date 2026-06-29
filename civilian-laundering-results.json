@@ -1,0 +1,51 @@
+{
+  "engine_version": 1,
+  "timestamp": "2026-06-29T08:21:15Z",
+  "stages": 9,
+  "shock_rankings": [
+    [
+      "child",
+      4000.0
+    ],
+    [
+      "immigrant",
+      137.2
+    ],
+    [
+      "single_mother",
+      96.0
+    ],
+    [
+      "factory_worker",
+      54.25
+    ],
+    [
+      "veteran",
+      44.33
+    ],
+    [
+      "indigenous_person",
+      38.8
+    ],
+    [
+      "college_student",
+      34.22
+    ],
+    [
+      "small_business_owner",
+      30.6
+    ],
+    [
+      "police_officer",
+      24.0
+    ],
+    [
+      "journalist",
+      16.4
+    ]
+  ],
+  "dominant_eigenvalue": 0.0176,
+  "avg_awareness": 0.17,
+  "avg_extraction": 0.92,
+  "avg_exit_cost": 0.91
+}

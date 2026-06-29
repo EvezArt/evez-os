@@ -1,0 +1,105 @@
+{
+  "scanner_version": 2,
+  "timestamp": "2026-06-29T08:14:07Z",
+  "entities": 45,
+  "relationships": 37,
+  "graph_nodes": 49,
+  "graph_density": 0.028738025822573926,
+  "dominant_eigenvalue": 1.3420711025805356,
+  "spectral_gap": 0.2184089047716813,
+  "negative_eigenvalue_sum": -10.199461063912267,
+  "communities": 5,
+  "hidden_clusters": 6,
+  "named_persons": 16,
+  "prosecuted": 0,
+  "impunity_rate": 1.0,
+  "top_centralities": [
+    [
+      "3M",
+      0.20055140510944042
+    ],
+    [
+      "DuPont",
+      0.18792506689789373
+    ],
+    [
+      "EPA",
+      0.12526219464566013
+    ],
+    [
+      "DOD",
+      0.09427042391680569
+    ],
+    [
+      "Mike Roman",
+      0.08073265881992328
+    ],
+    [
+      "Ed Breen",
+      0.0756498828881289
+    ],
+    [
+      "Palantir",
+      0.0641065580598389
+    ],
+    [
+      "Dow Chemical",
+      0.05951111925294733
+    ],
+    [
+      "Clearview AI",
+      0.037661892251453034
+    ],
+    [
+      "Peter Thiel",
+      0.02580631572808135
+    ]
+  ],
+  "family_crimes": {
+    "Every US taxpayer family": [
+      "tax_haven",
+      "revolving_door",
+      "media_concentration"
+    ],
+    "Every contaminated-water family": [
+      "PFAS",
+      "lead_poisoning",
+      "water_contamination"
+    ],
+    "Every Global South family": [
+      "digital_colonialism",
+      "supply_chain_slavery",
+      "land_grab"
+    ],
+    "Every refugee/detained family": [
+      "refugee_violation",
+      "family_separation"
+    ],
+    "Every family with chronic illness": [
+      "healthcare_denial",
+      "insulin_gouging",
+      "algorithmic_discrimination"
+    ],
+    "Every family of color": [
+      "algorithmic_discrimination",
+      "prosecutorial_misconduct",
+      "facial_recognition"
+    ],
+    "Every Indigenous family": [
+      "treaty_violation",
+      "military_contamination",
+      "land_grab"
+    ],
+    "Every working-class family": [
+      "supply_chain_slavery",
+      "worker_safety",
+      "eviction_violence"
+    ]
+  },
+  "tensor_eigenvalues": [
+    0.0867,
+    0.0,
+    -0.0,
+    -0.0
+  ]
+}

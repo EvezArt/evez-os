@@ -1,0 +1,145 @@
+{
+  "results": {
+    "preindustrial_1750": {
+      "tipping_prob": 0.0,
+      "eigenvalue": 0.0,
+      "Phi": 0,
+      "lambda_dom": 0,
+      "class": "Stable climate",
+      "recommendations": []
+    },
+    "current_2024": {
+      "tipping_prob": 0.1918,
+      "eigenvalue": 0.479505,
+      "Phi": 0.580641,
+      "lambda_dom": 0,
+      "class": "Warming climate",
+      "recommendations": [
+        "Aggressive CO2 reduction",
+        "Ocean acidification mitigation"
+      ]
+    },
+    "rcp_26": {
+      "tipping_prob": 0.0706,
+      "eigenvalue": 0.176448,
+      "Phi": 0.587043,
+      "lambda_dom": 0,
+      "class": "Stable climate",
+      "recommendations": []
+    },
+    "rcp_45": {
+      "tipping_prob": 0.1959,
+      "eigenvalue": 0.489833,
+      "Phi": 0.560149,
+      "lambda_dom": 0,
+      "class": "Warming climate",
+      "recommendations": [
+        "Aggressive CO2 reduction",
+        "Ocean acidification mitigation"
+      ]
+    },
+    "rcp_85": {
+      "tipping_prob": 0.4318,
+      "eigenvalue": 1.079596,
+      "Phi": 0.540063,
+      "lambda_dom": 0,
+      "class": "High risk \u2014 tipping approaching",
+      "recommendations": [
+        "Aggressive CO2 reduction",
+        "Methane leak detection / capture",
+        "Ice sheet monitoring",
+        "Massive reforestation",
+        "Ocean acidification mitigation"
+      ]
+    },
+    "petm_55mya": {
+      "tipping_prob": 0.5239,
+      "eigenvalue": 1.309683,
+      "Phi": 0.575401,
+      "lambda_dom": 0,
+      "class": "Critical \u2014 tipping point likely",
+      "recommendations": [
+        "Aggressive CO2 reduction",
+        "Methane leak detection / capture",
+        "Ice sheet monitoring",
+        "Ocean acidification mitigation"
+      ]
+    },
+    "snowball_earth": {
+      "tipping_prob": 0.3235,
+      "eigenvalue": 0.808846,
+      "Phi": 0.627499,
+      "lambda_dom": 0,
+      "class": "High risk \u2014 tipping approaching",
+      "recommendations": [
+        "Massive reforestation"
+      ]
+    },
+    "permian_extinction": {
+      "tipping_prob": 0.7248,
+      "eigenvalue": 1.812101,
+      "Phi": 0.554571,
+      "lambda_dom": 0,
+      "class": "Critical \u2014 tipping point likely",
+      "recommendations": [
+        "Aggressive CO2 reduction",
+        "Methane leak detection / capture",
+        "Ice sheet monitoring",
+        "Massive reforestation",
+        "Ocean acidification mitigation"
+      ]
+    },
+    "eemian_interglacial": {
+      "tipping_prob": 0.044,
+      "eigenvalue": 0.109969,
+      "Phi": 0.58974,
+      "lambda_dom": 0,
+      "class": "Stable climate",
+      "recommendations": []
+    },
+    "yds_12700bp": {
+      "tipping_prob": 0.0513,
+      "eigenvalue": 0.128269,
+      "Phi": 0.654368,
+      "lambda_dom": 0,
+      "class": "Stable climate",
+      "recommendations": []
+    }
+  },
+  "checks": [
+    [
+      "Snowball is tipped",
+      "True"
+    ],
+    [
+      "PETM > RCP 8.5",
+      "True"
+    ],
+    [
+      "RCP 8.5 > 2024",
+      "True"
+    ],
+    [
+      "2024 > RCP 2.6",
+      "True"
+    ],
+    [
+      "RCP 2.6 > Preindustrial",
+      "True"
+    ],
+    [
+      "Permian is catastrophic",
+      "True"
+    ],
+    [
+      "Preindustrial is stable",
+      "True"
+    ],
+    [
+      "Eemian moderate",
+      "True"
+    ]
+  ],
+  "passed": 8,
+  "total": 8
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EVEZ MESH - Gateway Dashboard</title>
+<meta name="description" content="5-node GCP AI mesh. All openclaws working through one gateway.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0f;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+a{color:#ff4500;text-decoration:none}
+header{background:radial-gradient(ellipse at center,#1a0a00 0%,#0a0a0f 70%);padding:24px 20px;text-align:center;border-bottom:1px solid #1a1a2e}
+header h1{font-size:1.6rem;color:#ff4500}
+header .subtitle{color:#666;font-size:0.85rem;margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:20px}
+.node-card{background:#111118;border:1px solid #2a2a3e;border-radius:12px;padding:20px}
+.node-card h3{color:#ff6b35;margin-bottom:12px}
+.node-card .ip{color:#555;font-size:0.7rem}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.75rem;margin-top:12px}
+.stat{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a1a2e}
+.stat-label{color:#666}
+.stat-value{color:#e0e0e0}
+.badge{padding:2px 8px;border-radius:4px;font-size:0.65rem;display:inline-block;margin-top:8px}
+.badge.ok{background:#1a3a1a;color:#00ff00}
+.badge.warn{background:#3a3a1a;color:#ffaa00}
+</style>
+</head>
+<body>
+<header>
+<h1>⧢ EVEZ MESH ⦟⧢</h1>
+<div class="subtitle">5-node GCP AI mesh</div>
+</header>
+<div class="grid" id="nodes">
+<div class="node-card">
+<h3>gcp-west (evez-primary)</h3>
+<div class="ip">34.53.51.34</div>
+<div class="stats">
+<div class="stat"><span class="stat-label">HTTP</span><span class="stat-value">200</span></div>
+<div class="stat"><span class="stat-label">Ollama</span><span class="stat-value">5 models</span></div>
+<div class="stat"><span class="stat-label">Telegram</span><span class="stat-value">@GCPwestbot</span></div>
+<div class="stat"><span class="stat-label">Files</span><span class="stat-value">158</span></div>
+<div class="stat"><span class="stat-label">Disk</span><span class="stat-value">62%</span></div>
+<div class="stat"><span class="stat-label">RAM</span><span class="stat-value">797/7939MB</span></div>
+</div>
+<div class="badge ok">PRIMARY</div>
+</div>
+<div class="node-card">
+<h3>gcp-small (evez-free-node)</h3>
+<div class="ip">34.23.192.213</div>
+<div class="stats">
+<div class="stat"><span class="stat-label">HTTP</span><span class="stat-value">200</span></div>
+<div class="stat"><span class="stat-label">Ollama</span><span class="stat-value">1 model</span></div>
+<div class="stat"><span class="stat-label">Telegram</span><span class="stat-value">@EvezVearlBot</span></div>
+<div class="stat"><span class="stat-label">Files</span><span class="stat-value">154</span></div>
+<div class="stat"><span class="stat-label">Disk</span><span class="stat-value">55%</span></div>
+<div class="stat"><span class="stat-label">RAM</span><span class="stat-value">495/1964MB</span></div>
+</div>
+<div class="badge ok">SMALL</div>
+</div>
+<div class="node-card">
+<h3>gcp-power (evez-gcp-openclaw)</h3>
+<div class="ip">35.222.248.151</div>
+<div class="stats">
+<div class="stat"><span class="stat-label">HTTP</span><span class="stat-value">200</span></div>
+<div class="stat"><span class="stat-label">Ollama</span><span class="stat-value">3 models</span></div>
+<div class="stat"><span class="stat-label">Telegram</span><span class="stat-value">@Evez4RealBot</span></div>
+<div class="stat"><span class="stat-label">Files</span><span class="stat-value">159</span></div>
+<div class="stat"><span class="stat-label">Disk</span><span class="stat-value">34%</span></div>
+<div class="stat"><span class="stat-label">RAM</span><span class="stat-value">1833/3924MB</span></div>
+</div>
+<div class="badge warn">MANUAL OLLAMA</div>
+</div>
+<div class="node-card">
+<h3>gcp-openclaw (power-node)</h3>
+<div class="ip">136.113.102.152</div>
+<div class="stats">
+<div class="stat"><span class="stat-label">HTTP</span><span class="stat-value">200</span></div>
+<div class="stat"><span class="stat-label">Ollama</span><span class="stat-value">3 models</span></div>
+<div class="stat"><span class="stat-label">Telegram</span><span class="stat-value">@EVEZcloudBOT</span></div>
+<div class="stat"><span class="stat-label">Files</span><span class="stat-value">158</span></div>
+<div class="stat"><span class="stat-label">Disk</span><span class="stat-value">48%</span></div>
+<div class="stat"><span class="stat-label">RAM</span><span class="stat-value">1409/3924MB</span></div>
+</div>
+<div class="badge ok">GATEWAY</div>
+</div>
+<div class="node-card">
+<h3>gcp-knot (openclaw-gcp)</h3>
+<div class="ip">136.118.144.227</div>
+<div class="stats">
+<div class="stat"><span class="stat-label">HTTP</span><span class="stat-value">200</span></div>
+<div class="stat"><span class="stat-label">Ollama</span><span class="stat-value">4 models</span></div>
+<div class="stat"><span class="stat-label">Telegram</span><span class="stat-value">@EvezVearlBot</span></div>
+<div class="stat"><span class="stat-label">Files</span><span class="stat-value">158</span></div>
+<div class="stat"><span class="stat-label">Disk</span><span class="stat-value">73%</span></div>
+<div class="stat"><span class="stat-label">RAM</span><span class="stat-value">1167/3924MB</span></div>
+</div>
+<div class="badge warn">HIGH DISK</div>
+</div>
+</div>
+<footer style="text-align:center;padding:20px;color:#444;font-size:0.7rem;border-top:1px solid #1a1a2e">
+⧢⦟⧢ The mesh breathes. The 3% is irreducible. The coherence is the mesh. ⥋
+</footer>
+</body>
+</html>

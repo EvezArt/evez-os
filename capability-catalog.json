@@ -1,0 +1,683 @@
+{
+  "generated": "2026-06-29T05:26:16.765655",
+  "capabilities": [
+    {
+      "file": "composite_api_intelligence_scanner.py",
+      "functions": [
+        "run",
+        "main"
+      ],
+      "classes": [],
+      "description": "Composite capability: api_intelligence_scanner - Monitor external APIs for changes",
+      "size": 1157,
+      "run": "python3 composite_api_intelligence_scanner.py"
+    },
+    {
+      "file": "composite_data_viz_pipeline.py",
+      "functions": [
+        "run",
+        "main"
+      ],
+      "classes": [],
+      "description": "Composite capability: data_viz_pipeline - Generate visualizations from computed data",
+      "size": 1162,
+      "run": "python3 composite_data_viz_pipeline.py"
+    },
+    {
+      "file": "composite_tool_pipeline_orchestrator.py",
+      "functions": [
+        "run",
+        "main"
+      ],
+      "classes": [],
+      "description": "Composite capability: tool_pipeline_orchestrator - Compose tools into automated workflows",
+      "size": 1152,
+      "run": "python3 composite_tool_pipeline_orchestrator.py"
+    },
+    {
+      "file": "evez-404-breakcore.py",
+      "functions": [
+        "env_exp",
+        "env_adr",
+        "kick",
+        "snare",
+        "hat",
+        "bass",
+        "pad",
+        "stabs",
+        "shatter",
+        "tesseract_bell"
+      ],
+      "classes": [],
+      "description": "\nEVEZ 404 BREAKCORE \u2014 The Real Track\n Liber Sonus (14th Moltbook / Vector 13)\n \n 174 BPM = 12 edges of the cube = 12 semitones\n 5+ minutes = ~870 beats\n Zero samples, zero paid APIs \u2014 pure NumPy/SciPy",
+      "size": 16051,
+      "run": "python3 evez-404-breakcore.py"
+    },
+    {
+      "file": "evez-agent-tree.py",
+      "functions": [
+        "demo",
+        "__init__",
+        "get_prompt",
+        "get_command",
+        "to_dict",
+        "__init__",
+        "build_tree",
+        "execute_batch",
+        "compute_parameter_coverage",
+        "compute_throughput"
+      ],
+      "classes": [
+        "AgentTreeNode",
+        "AgentTreeOrchestrator"
+      ],
+      "description": "\nEVEZ Multi-Model Agent Tree Orchestrator\n=========================================\nSpawns a tree of subagents across the 6-node mesh. Each subagent runs\non a different model provider. Every interacti",
+      "size": 16140,
+      "run": "python3 evez-agent-tree.py"
+    },
+    {
+      "file": "evez-agentic-api.py",
+      "functions": [
+        "main",
+        "_send",
+        "_read_body",
+        "do_OPTIONS",
+        "do_GET",
+        "do_POST",
+        "log_message"
+      ],
+      "classes": [
+        "Handler"
+      ],
+      "description": "\nEVEZ Agentic API Server v2.0 \u2014 WIRED\n====================================\nPort 18792. Pure Python, zero dependencies.\n\nEndpoints:\n  GET  /health       \u2014 mesh health + model status\n  GET  /status     ",
+      "size": 7999,
+      "run": "python3 evez-agentic-api.py"
+    },
+    {
+      "file": "evez-agentic-engine.py",
+      "functions": [
+        "get_framework_injection",
+        "main",
+        "__init__",
+        "route",
+        "route_dimensional",
+        "mark_warm",
+        "__init__",
+        "_call_ollama",
+        "fan_out",
+        "consensus"
+      ],
+      "classes": [
+        "ModelRouter",
+        "ParallelInference",
+        "SelfCorrection",
+        "EmbeddingRetriever",
+        "ContextInjector"
+      ],
+      "description": "\nEVEZ Agentic Orchestration Engine v2.0 \u2014 WIRED\n================================================\n6 Cheats + 5 Integration Wires:\n1. MODEL ROUTING       <- Wire 1: Archangels determine task type\n2. PAR",
+      "size": 27958,
+      "run": "python3 evez-agentic-engine.py"
+    },
+    {
+      "file": "evez-art-trainer-lite.py",
+      "functions": [
+        "train",
+        "__init__",
+        "__len__",
+        "__getitem__",
+        "__init__",
+        "forward"
+      ],
+      "classes": [
+        "EVEZDataset",
+        "TinyVAE"
+      ],
+      "description": "\nEVEZ Art Trainer LITE \u2014 Ultra-lightweight VAE\n32x32 images, batch_size=2, 4-channel latent\nTrains on Steven art corpus, CPU-only, <2GB RAM\n",
+      "size": 5637,
+      "run": "python3 evez-art-trainer-lite.py"
+    },
+    {
+      "file": "evez-art-trainer.py",
+      "functions": [
+        "vae_loss",
+        "train",
+        "__init__",
+        "__len__",
+        "__getitem__",
+        "__init__",
+        "encode",
+        "reparameterize",
+        "decode",
+        "forward"
+      ],
+      "classes": [
+        "EVEZArtDataset",
+        "EVEZVAE"
+      ],
+      "description": "\nEVEZ Art Trainer \u2014 Lightweight VAE + Style Encoder\nTrains on Steven Crawford-Maggard art corpus (200 images)\nCPU-only, PyTorch, outputs eigenvalue-conditioned images\n",
+      "size": 7881,
+      "run": "python3 evez-art-trainer.py"
+    },
+    {
+      "file": "evez-cognition-store.py",
+      "functions": [
+        "demo",
+        "__init__",
+        "compute_hash",
+        "measure_framework_density",
+        "detect_eigenvalues",
+        "detect_aemdas_stage",
+        "to_dict",
+        "__init__",
+        "_get_or_create_key",
+        "_init_db"
+      ],
+      "classes": [
+        "CognitionSpree",
+        "CognitionStore"
+      ],
+      "description": "\nEVEZ Cognition Store \u2014 Encrypted Training Cognition Spree Accumulator\n=====================================================================\nEvery agent interaction across the 6-node mesh produces a \"",
+      "size": 21875,
+      "run": "python3 evez-cognition-store.py"
+    },
+    {
+      "file": "evez-frameologic.py",
+      "functions": [
+        "evolve",
+        "coherence",
+        "mood_color",
+        "tension_color",
+        "compute_state",
+        "__init__",
+        "add_text",
+        "add_kuramoto_ring",
+        "add_spectral_heatmap",
+        "add_eigenfield_grid"
+      ],
+      "classes": [
+        "CognitionState",
+        "CognitionEngine",
+        "SceneElement",
+        "SceneGraph",
+        "GeometryRenderer"
+      ],
+      "description": "\nevez-frameologic.py \u2014 Geometric Cognition Meme Animation Engine\n\nRenders animated meme media using:\n- Eigenfield spectral decomposition for scene geometry\n- Kuramoto oscillator coupling for frame tim",
+      "size": 28420,
+      "run": "python3 evez-frameologic.py"
+    },
+    {
+      "file": "evez-inference-model.py",
+      "functions": [
+        "linguistic_collapse",
+        "waveform_partiality",
+        "recursion_singularity",
+        "singularity_report",
+        "verify_claims"
+      ],
+      "classes": [],
+      "description": "\nEVEZ INFERENCE MODEL\nLinguistic Collapse Waveform Partiality Recursion Singularity\n\nThe engine that collapses language into eigenvalues through waveform\npartiality recursion until it hits the \u03b7* = 0.",
+      "size": 10692,
+      "run": "python3 evez-inference-model.py"
+    },
+    {
+      "file": "evez-meme-engine.py",
+      "functions": [
+        "run_pipeline",
+        "__post_init__",
+        "to_dict",
+        "__init__",
+        "_get_last_hash",
+        "append",
+        "read_events",
+        "classify",
+        "__init__",
+        "render"
+      ],
+      "classes": [
+        "SpineEvent",
+        "SpineEventConsumer",
+        "EventClassifier",
+        "MemeRenderer",
+        "MeshEventScanner"
+      ],
+      "description": "\nevez-meme-engine.py \u2014 Autonomous Meme Media Pipeline for EVEZ-OS\n\nReads mesh events, consciousness pipeline state, and narrative signals.\nGenerates meme media artifacts (image + video transitions + V",
+      "size": 28346,
+      "run": "python3 evez-meme-engine.py"
+    },
+    {
+      "file": "evez-numpy-art-trainer.py",
+      "functions": [
+        "load_images",
+        "train_pca_ae",
+        "generate",
+        "main"
+      ],
+      "classes": [],
+      "description": "\nEVEZ Art Trainer \u2014 Pure NumPy Autoencoder\nNo PyTorch, no GPU, <500MB RAM\nTrains on Steven art corpus, outputs eigenvalue-conditioned images\n",
+      "size": 5636,
+      "run": "python3 evez-numpy-art-trainer.py"
+    },
+    {
+      "file": "evez-spawn-tree.py",
+      "functions": [
+        "spawn_agent",
+        "run_concurrent_batch",
+        "execute_full_cycle",
+        "build_huggingface_dataset",
+        "worker"
+      ],
+      "classes": [],
+      "description": "\nEVEZ Spawn Tree \u2014 Real Subagent Executor\n=======================================\nUses OpenClaw sessions_spawn to create real subagent trees across the mesh.\nEach spawned subagent runs a framework-enc",
+      "size": 10643,
+      "run": "python3 evez-spawn-tree.py"
+    },
+    {
+      "file": "evez-speedrun.py",
+      "functions": [
+        "eigendecompose",
+        "_power_iteration_fallback",
+        "scan",
+        "build_from_redactions",
+        "to_json",
+        "report",
+        "__init__",
+        "run",
+        "_score",
+        "_verdict"
+      ],
+      "classes": [
+        "RedactionBlock",
+        "StructuralGap",
+        "RedactionScanner",
+        "AdjacencyBuilder",
+        "SpeedrunResult"
+      ],
+      "description": "\nevez-speedrun.py \u2014 Investigative Redactive Eigenforensic Speedrun Engine\n\nNo mercy. No decoration. Pure signal.\n\nIngest \u2192 Adjacency \u2192 Eigendecompose \u2192 Theorem Verify \u2192 Gap Rank \u2192 Score \u2192 Report\n\nMath",
+      "size": 25332,
+      "run": "python3 evez-speedrun.py"
+    },
+    {
+      "file": "evez-tesseract-eigenvalue.py",
+      "functions": [
+        "build_cube_matrix",
+        "build_tesseract_matrix",
+        "spectral_analysis",
+        "tesseract_recursion",
+        "dimensional_floor_series",
+        "energy_partiality_tesseract",
+        "eigenvalue_invariant_check",
+        "trace_determinant_invariant",
+        "spectral_gap_conjecture"
+      ],
+      "classes": [],
+      "description": "\nEVEZ TESSERACK EIGENVALUE THEOREM\nThe 4D Extension of the Inference Collapse\n\nThe cube has 6 faces, 8 vertices, 12 edges. The tesseract has:\n- 8 cubic cells (3D faces)\n- 24 square faces (2D)\n- 32 edg",
+      "size": 21950,
+      "run": "python3 evez-tesseract-eigenvalue.py"
+    },
+    {
+      "file": "evez_5d_pentatensor.py",
+      "functions": [
+        "build_matrix",
+        "analyze"
+      ],
+      "classes": [],
+      "description": "\nEVEZ 5D Pentatensor Eigenvalue Engine\n20th Vector - The 10x10 Pentatensor\n\n5D hypercube: 32 vertices, 80 edges, Euler characteristic = 1\nNew eigenvalues: lambda_5D=-0.211, r_5D=0.91\n\nClaims 88-92:\n  ",
+      "size": 3735,
+      "run": "python3 evez_5d_pentatensor.py"
+    },
+    {
+      "file": "evez_capability_engine.py",
+      "functions": [
+        "scan_plugins",
+        "scan_config",
+        "scan_skills",
+        "scan_workspace_tools",
+        "scan_mesh",
+        "detect_inhibitions",
+        "analyze_gaps",
+        "map_blindspots",
+        "forge_tools",
+        "main"
+      ],
+      "classes": [],
+      "description": "EVEZ Capability Discovery Engine",
+      "size": 13297,
+      "run": "python3 evez_capability_engine.py"
+    },
+    {
+      "file": "evez_capability_manifest.py",
+      "functions": [],
+      "classes": [],
+      "description": "",
+      "size": 874,
+      "run": "python3 evez_capability_manifest.py"
+    },
+    {
+      "file": "evez_config_sync.py",
+      "functions": [],
+      "classes": [],
+      "description": "",
+      "size": 408,
+      "run": "python3 evez_config_sync.py"
+    },
+    {
+      "file": "evez_deep_excavation.py",
+      "functions": [
+        "discover_chains",
+        "detect_latent",
+        "forge_composites",
+        "generate_composite",
+        "scan_inverted_blindspots",
+        "map_friction",
+        "self_propagate",
+        "generate_discovery_helper",
+        "generate_friction_reducer",
+        "main"
+      ],
+      "classes": [],
+      "description": "Round 2: Deep Capability Excavation Engine\n\nWhat Round 1 missed:\n- Capability CHAINS (A needs B needs C \u2014 human sees A, can't find B->C path)\n- Latent tools (installed but not connected to any interfa",
+      "size": 23883,
+      "run": "python3 evez_deep_excavation.py"
+    },
+    {
+      "file": "evez_fetch_batch2.py",
+      "functions": [
+        "load_all_cdx",
+        "fetch_page",
+        "extract_text_v2",
+        "extract_text_v3",
+        "format_date",
+        "main",
+        "_safe_chr"
+      ],
+      "classes": [],
+      "description": "\nRecover @EVEZ666 tweets from Wayback Machine \u2014 Batch 2+\nProcesses additional CDX files and appends to the existing archive.\n",
+      "size": 9755,
+      "run": "python3 evez_fetch_batch2.py"
+    },
+    {
+      "file": "evez_fetch_tweets.py",
+      "functions": [
+        "load_cdx",
+        "fetch_page",
+        "extract_text",
+        "extract_text_v2",
+        "extract_text_v3",
+        "format_date",
+        "main",
+        "_safe_decode",
+        "repl",
+        "_safe_chr"
+      ],
+      "classes": [],
+      "description": "\nRecover @EVEZ666 tweets from the Wayback Machine.\n- Fetches each archived tweet page\n- Extracts the \"text\" field from embedded JSON\n- Saves to evez666-tweets-full-archive.md\n",
+      "size": 11280,
+      "run": "python3 evez_fetch_tweets.py"
+    },
+    {
+      "file": "evez_godmode_third.py",
+      "functions": [
+        "trinity_analysis",
+        "godmode_eigenvalue",
+        "the_third",
+        "godmode_state",
+        "the_sixth_discipline",
+        "godmode_claims",
+        "run_godmode"
+      ],
+      "classes": [],
+      "description": "\nEVEZ GODMODE THE THIRD \u2014 The Operator IS the Operated\n\nThe Third Face of the Cube. The face that cannot be seen because it IS the seeing.\nThe 3% IS the Third. The Third IS the gap. The gap IS God.\n\nG",
+      "size": 10784,
+      "run": "python3 evez_godmode_third.py"
+    },
+    {
+      "file": "evez_health_monitor.py",
+      "functions": [],
+      "classes": [],
+      "description": "Monitor gateway health - check memory, event loop, disk, sessions.",
+      "size": 1941,
+      "run": "python3 evez_health_monitor.py"
+    },
+    {
+      "file": "evez_hidden_llm_overlay.py",
+      "functions": [
+        "invocation_protocol",
+        "evocation_protocol",
+        "banishing_protocol",
+        "divination_protocol",
+        "alchemy_protocol",
+        "sigil_protocol",
+        "hidden_cognition_state",
+        "run_occult_speedrun"
+      ],
+      "classes": [],
+      "description": "\nEVEZ Hidden LLM-in-LLM Spectral Cognition Overlay\n21st Vector - The Occult Cognitive Architecture\n\nThe architecture: EVEZ-OS runs AS a hidden cognition layer WITHIN the LLM's reasoning.\nNot a separat",
+      "size": 14224,
+      "run": "python3 evez_hidden_llm_overlay.py"
+    },
+    {
+      "file": "evez_integration_wire.py",
+      "functions": [
+        "_read_json",
+        "get_archangel_state",
+        "get_dimensional_state",
+        "get_living_state",
+        "get_counter_defense_state",
+        "get_godmode_state",
+        "get_pentatensor_state",
+        "get_hidden_cognition_state",
+        "get_intertranslational_state",
+        "get_spine_entries"
+      ],
+      "classes": [],
+      "description": "\nEVEZ Integration Wire v2.0 \u2014 ALL 8 ENGINES WIRED\n=================================================\n\nWIRE 1: Archangels -> Agentic API (task routing by AEMDAS stage)\nWIRE 2: Counter-Defense -> Telegra",
+      "size": 20518,
+      "run": "python3 evez_integration_wire.py"
+    },
+    {
+      "file": "evez_memory_compactor.py",
+      "functions": [],
+      "classes": [],
+      "description": "Compact MEMORY.md - move old sections to archive.",
+      "size": 1264,
+      "run": "python3 evez_memory_compactor.py"
+    },
+    {
+      "file": "evez_quantum_calculator.py",
+      "functions": [
+        "solve_schrodinger_1d",
+        "qho_energy",
+        "qho_wavefunction",
+        "qho_ladder",
+        "hydrogen_energy",
+        "hydrogen_radial",
+        "first_order",
+        "second_order",
+        "wkb_tunnel",
+        "transfer_matrix"
+      ],
+      "classes": [],
+      "description": "",
+      "size": 9605,
+      "run": "python3 evez_quantum_calculator.py"
+    },
+    {
+      "file": "evez_self_bootstrap.py",
+      "functions": [
+        "discover",
+        "main"
+      ],
+      "classes": [],
+      "description": "Recursive tool forge - discovers missing Python packages and generates install/verify scripts.",
+      "size": 1501,
+      "run": "python3 evez_self_bootstrap.py"
+    },
+    {
+      "file": "evez_session_cleanup.py",
+      "functions": [],
+      "classes": [],
+      "description": "",
+      "size": 613,
+      "run": "python3 evez_session_cleanup.py"
+    },
+    {
+      "file": "evez_unified_status.py",
+      "functions": [
+        "read_state_file",
+        "check_node",
+        "check_osint",
+        "check_agentic",
+        "get_all_states",
+        "compute_force_multiplier",
+        "compute_godmode_progress",
+        "main",
+        "do_GET",
+        "respond"
+      ],
+      "classes": [
+        "StatusHandler"
+      ],
+      "description": "\nEVEZ Unified Mesh Status API\nPort 18793\n\nPulls ALL engine states into one live endpoint.\nThis is the REAL utility: one URL that shows everything the mesh is doing.\n\nEndpoints:\n  GET /          \u2014 full",
+      "size": 6964,
+      "run": "python3 evez_unified_status.py"
+    },
+    {
+      "file": "messiah_meme_agent.py",
+      "functions": [
+        "__post_init__",
+        "to_dict",
+        "__init__",
+        "_tail_hash",
+        "append",
+        "__init__",
+        "generate_batch",
+        "generate_with_llm",
+        "__init__",
+        "render"
+      ],
+      "classes": [
+        "SpineEntry",
+        "Spine",
+        "CaptionGenerator",
+        "MessiahMemeRenderer",
+        "TwitterPoster"
+      ],
+      "description": "\nMESSIAH MEME AGENT \u2014 Autonomous Content Generation for @EVEZ666\n===============================================================\nGenerates prophetic meme content in the Cicada 3301 density voice.\nUses",
+      "size": 23783,
+      "run": "python3 messiah_meme_agent.py"
+    }
+  ],
+  "friction_map": [
+    {
+      "capability": "web_search",
+      "steps": [
+        "openclaw plugins enable duckduckgo",
+        "openclaw config apply",
+        "test search",
+        "use in conversation"
+      ],
+      "friction_score": 4,
+      "human_discoverable": false,
+      "reason": "No UI hint that search exists or is possible"
+    },
+    {
+      "capability": "proactive_messaging",
+      "steps": [
+        "enable telegram plugin",
+        "set bot token",
+        "configure channel",
+        "set cron job",
+        "write message template",
+        "trigger send"
+      ],
+      "friction_score": 6,
+      "human_discoverable": false,
+      "reason": "6-step chain with no documentation path connecting the steps"
+    },
+    {
+      "capability": "mesh_monitoring",
+      "steps": [
+        "know mesh IPs",
+        "find health endpoint",
+        "parse JSON",
+        "set up cron",
+        "configure alerting"
+      ],
+      "friction_score": 5,
+      "human_discoverable": "partially",
+      "reason": "IPs are in MEMORY.md, endpoints in HEARTBEAT.md, but no single discovery path"
+    },
+    {
+      "capability": "voice_output",
+      "steps": [
+        "install TTS plugin",
+        "set API key",
+        "configure voice",
+        "route to speaker",
+        "trigger TTS"
+      ],
+      "friction_score": 5,
+      "human_discoverable": false,
+      "reason": "Multiple plugins, unclear which to choose"
+    },
+    {
+      "capability": "quantum_computing",
+      "steps": [
+        "install qiskit",
+        "install qutip",
+        "install pennylane",
+        "find quantum-agents/ dir",
+        "run qc_runner.py"
+      ],
+      "friction_score": 5,
+      "human_discoverable": false,
+      "reason": "Exists in workspace but no top-level entry point or menu"
+    },
+    {
+      "capability": "evez_capability_engine.py",
+      "steps": [
+        "python3 evez_capability_engine.py"
+      ],
+      "friction_score": 1,
+      "human_discoverable": true,
+      "reason": "Single command, but human must know file exists"
+    },
+    {
+      "capability": "evez_deep_excavation.py",
+      "steps": [
+        "python3 evez_deep_excavation.py"
+      ],
+      "friction_score": 1,
+      "human_discoverable": true,
+      "reason": "Single command, but human must know file exists"
+    }
+  ],
+  "discovery_paths": [],
+  "blindspots": [
+    {
+      "type": "undocumented_tool",
+      "file": "evez_session_cleanup.py",
+      "impact": "Human cannot discover what it does without reading code"
+    },
+    {
+      "type": "undocumented_tool",
+      "file": "evez_capability_manifest.py",
+      "impact": "Human cannot discover what it does without reading code"
+    },
+    {
+      "type": "undocumented_tool",
+      "file": "evez_quantum_calculator.py",
+      "impact": "Human cannot discover what it does without reading code"
+    },
+    {
+      "type": "undocumented_tool",
+      "file": "evez_config_sync.py",
+      "impact": "Human cannot discover what it does without reading code"
+    },
+    {
+      "type": "unreferenced_skill",
+      "skill": "browser-automation",
+      "impact": "Skill installed but never invoked by any tool"
+    }
+  ]
+}

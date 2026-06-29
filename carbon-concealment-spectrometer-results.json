@@ -1,0 +1,155 @@
+{
+  "timestamp": "2026-06-29T06:46:29Z",
+  "spectrometer": "carbon_concealment",
+  "dimensions": [
+    "science_suppression",
+    "lobbying_against_action",
+    "greenwashing_disinformation",
+    "policy_sabotage",
+    "evidence_destruction",
+    "narrative_control"
+  ],
+  "calibration": {
+    "ExxonMobil 1980s": {
+      "score": 1.0,
+      "vector": [
+        0.9,
+        0.85,
+        0.7,
+        0.75,
+        0.8,
+        0.85
+      ]
+    },
+    "Koch Network": {
+      "score": 1.0,
+      "vector": [
+        0.6,
+        0.95,
+        0.8,
+        0.85,
+        0.5,
+        0.9
+      ]
+    },
+    "Heartland Institute": {
+      "score": 0.7007464677082114,
+      "vector": [
+        0.4,
+        0.5,
+        0.9,
+        0.55,
+        0.3,
+        0.85
+      ]
+    },
+    "API (American Petroleum Institute)": {
+      "score": 0.9841483448629762,
+      "vector": [
+        0.7,
+        0.9,
+        0.75,
+        0.8,
+        0.65,
+        0.8
+      ]
+    },
+    "Shell 1990s": {
+      "score": 0.7959255758080716,
+      "vector": [
+        0.75,
+        0.7,
+        0.65,
+        0.6,
+        0.7,
+        0.7
+      ]
+    },
+    "Coal Industry Association": {
+      "score": 0.8897307130312253,
+      "vector": [
+        0.65,
+        0.8,
+        0.85,
+        0.7,
+        0.55,
+        0.75
+      ]
+    },
+    "BP Beyond Petroleum": {
+      "score": 0.6422807914564541,
+      "vector": [
+        0.3,
+        0.5,
+        0.95,
+        0.4,
+        0.35,
+        0.8
+      ]
+    },
+    "Tobacco-Climate Crossover": {
+      "score": 0.9929458016885124,
+      "vector": [
+        0.8,
+        0.75,
+        0.85,
+        0.65,
+        0.9,
+        0.8
+      ]
+    },
+    "China Coal Lobby": {
+      "score": 0.8360517764598658,
+      "vector": [
+        0.55,
+        0.85,
+        0.6,
+        0.9,
+        0.45,
+        0.7
+      ]
+    },
+    "Saudi Aramco": {
+      "score": 0.8293551139200648,
+      "vector": [
+        0.5,
+        0.8,
+        0.65,
+        0.85,
+        0.5,
+        0.75
+      ]
+    },
+    "Russian Gas Interests": {
+      "score": 0.6976896293268442,
+      "vector": [
+        0.45,
+        0.75,
+        0.55,
+        0.8,
+        0.4,
+        0.65
+      ]
+    },
+    "Clean Company (control)": {
+      "score": 0.03335583074791765,
+      "vector": [
+        0.05,
+        0.05,
+        0.1,
+        0.05,
+        0.02,
+        0.08
+      ]
+    }
+  },
+  "falsification": {
+    "passed": 12,
+    "total": 12
+  },
+  "current_assessment": {
+    "industry_avg": 0.8517,
+    "max_score": 1.0,
+    "detected": true
+  }
+}

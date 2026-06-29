@@ -1,0 +1,8 @@
+{
+  "schema_version": "v1",
+  "name": "EVEZ",
+  "description": "Steven Crawford-Maggard (EVEZ666) — Artist-Engineer, Emergence Architect, Author of The Moltbooks. Creator of EVEZ-OS autonomous AI mesh. Published researcher in eigenforensics and spectral consciousness.",
+  "contact_email": "fiersteity@gmail.com",
+  "legal_info_url": "https://evezart.github.io",
+  "manifest_url": "https://evezart.github.io/.well-known/ai-plugin.json"
+}

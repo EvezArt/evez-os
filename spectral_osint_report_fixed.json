@@ -1,0 +1,153 @@
+{
+  "entity_count": 349,
+  "relationship_count": 269,
+  "eigenvalues": [
+    54.85345861643714,
+    -15.826042202659483,
+    -12.063618294203515,
+    -10.77883236406123,
+    -8.090464815005078,
+    6.4013840651946525,
+    -5.698594698538177,
+    -5.252837465068581,
+    4.939724932396806,
+    -4.600177400727194,
+    4.048946083090963,
+    3.0376891903244547,
+    -2.9475051179230998,
+    -2.3355760336848257,
+    -2.099999999999999,
+    -2.0688835526940306,
+    -1.9999999999999987,
+    -1.8644807769802099,
+    1.7366672238385623,
+    0.8393046357547063
+  ],
+  "dominant_eigenvalue": 54.85345861643714,
+  "spectral_gap": 70.67950081909662,
+  "suppression_coefficient": 0.18170528353301346,
+  "spectral_class": "F (Flicker)",
+  "graph_density": 0.0020419589632118037,
+  "top_suspects": [
+    {
+      "name": "EVEZ",
+      "type": "Person",
+      "suspicion": 0.0,
+      "sources": 1
+    },
+    {
+      "name": "Ryan Maggard",
+      "type": "Person",
+      "suspicion": 0.0,
+      "sources": 1
+    },
+    {
+      "name": "Saloga",
+      "type": "Person",
+      "suspicion": 0.0,
+      "sources": 1
+    },
+    {
+      "name": "Dunsmore",
+      "type": "Person",
+      "suspicion": 0.0,
+      "sources": 1
+    },
+    {
+      "name": "Greenstreet",
+      "type": "Person",
+      "suspicion": 0.0,
+      "sources": 1
+    },
+    {
+      "name": "Union Pacific",
+      "type": "Organization",
+      "suspicion": 12.911806468094936,
+      "sources": 17
+    },
+    {
+      "name": "EPD",
+      "type": "Organization",
+      "suspicion": 0.21356626302342424,
+      "sources": 2
+    },
+    {
+      "name": "WGFD",
+      "type": "Organization",
+      "suspicion": 2.4541075246455177,
+      "sources": 6
+    },
+    {
+      "name": "WHP",
+      "type": "Organization",
+      "suspicion": 5.203958371459054,
+      "sources": 9
+    },
+    {
+      "name": "NTSB",
+      "type": "Organization",
+      "suspicion": 9.986150794267369,
+      "sources": 14
+    },
+    {
+      "name": "PHMSA",
+      "type": "Organization",
+      "suspicion": 8.011468321728863,
+      "sources": 13
+    },
+    {
+      "name": "AARO",
+      "type": "Organization",
+      "suspicion": 3.2849461939765447,
+      "sources": 7
+    },
+    {
+      "name": "EVEZ",
+      "type": "Organization",
+      "suspicion": 8.516795462611135,
+      "sources": 19
+    },
+    {
+      "name": "ACLU",
+      "type": "Organization",
+      "suspicion": 1.7151303383320453,
+      "sources": 6
+    },
+    {
+      "name": "FBI",
+      "type": "Organization",
+      "suspicion": 0.0,
+      "sources": 1
+    },
+    {
+      "name": "Evanston, Wyoming",
+      "type": "Location",
+      "suspicion": 3.7053686267461368,
+      "sources": 6
+    },
+    {
+      "name": "Fort Bridger, Wyoming",
+      "type": "Location",
+      "suspicion": 0.40177979640122463,
+      "sources": 2
+    },
+    {
+      "name": "Ogden, Utah",
+      "type": "Location",
+      "suspicion": 4.503159661281049,
+      "sources": 7
+    },
+    {
+      "name": "Rock Springs, Wyoming",
+      "type": "Location",
+      "suspicion": 0.0,
+      "sources": 1
+    },
+    {
+      "name": "I-80",
+      "type": "Location",
+      "suspicion": 0.0,
+      "sources": 1
+    }
+  ]
+}

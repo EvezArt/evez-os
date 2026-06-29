@@ -1,0 +1,1332 @@
+{
+  "nodes": [
+    {
+      "name": "composite_api_intelligence_scanner.py",
+      "imports": [
+        "subprocess",
+        "json",
+        "sys",
+        "hashlib",
+        "time",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "run",
+        "all",
+        "main",
+        "print",
+        "print",
+        "print",
+        "str"
+      ],
+      "local_imports": [],
+      "size": 1157
+    },
+    {
+      "name": "composite_data_viz_pipeline.py",
+      "imports": [
+        "subprocess",
+        "json",
+        "sys",
+        "hashlib",
+        "time",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "run",
+        "all",
+        "main",
+        "print",
+        "print",
+        "print",
+        "str"
+      ],
+      "local_imports": [],
+      "size": 1162
+    },
+    {
+      "name": "composite_tool_pipeline_orchestrator.py",
+      "imports": [
+        "subprocess",
+        "json",
+        "sys",
+        "hashlib",
+        "time",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "run",
+        "all",
+        "main",
+        "print",
+        "print",
+        "print",
+        "str"
+      ],
+      "local_imports": [],
+      "size": 1152
+    },
+    {
+      "name": "evez-404-breakcore.py",
+      "imports": [
+        "numpy",
+        "scipy.io",
+        "scipy.signal",
+        "json",
+        "os"
+      ],
+      "calls": [
+        "int",
+        "int",
+        "range",
+        "range",
+        "enumerate",
+        "range",
+        "range",
+        "range",
+        "range",
+        "range"
+      ],
+      "local_imports": [],
+      "size": 16051
+    },
+    {
+      "name": "evez-agent-tree.py",
+      "imports": [
+        "json",
+        "time",
+        "hashlib",
+        "subprocess",
+        "os",
+        "pathlib",
+        "datetime"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "print",
+        "AgentTreeOrchestrator",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 16140
+    },
+    {
+      "name": "evez-agentic-api.py",
+      "imports": [
+        "json",
+        "os",
+        "sys",
+        "time",
+        "threading",
+        "http.server",
+        "urllib.parse",
+        "importlib.util"
+      ],
+      "calls": [
+        "EVEZOrchestrator",
+        "EmbeddingRetriever",
+        "HTTPServer",
+        "print",
+        "print",
+        "print",
+        "main",
+        "int",
+        "urlparse",
+        "urlparse"
+      ],
+      "local_imports": [],
+      "size": 7999
+    },
+    {
+      "name": "evez-agentic-engine.py",
+      "imports": [
+        "json",
+        "urllib.request",
+        "time",
+        "hashlib",
+        "sys",
+        "os",
+        "concurrent.futures",
+        "importlib.util",
+        "argparse",
+        "subprocess"
+      ],
+      "calls": [
+        "EVEZOrchestrator",
+        "print",
+        "main",
+        "ModelRouter",
+        "set",
+        "set",
+        "sum",
+        "range",
+        "sum",
+        "len"
+      ],
+      "local_imports": [],
+      "size": 27958
+    },
+    {
+      "name": "evez-art-trainer-lite.py",
+      "imports": [
+        "os",
+        "sys",
+        "json",
+        "glob",
+        "random",
+        "numpy",
+        "PIL",
+        "torch",
+        "torch.nn",
+        "torch.optim"
+      ],
+      "calls": [
+        "EVEZDataset",
+        "DataLoader",
+        "TinyVAE",
+        "sum",
+        "print",
+        "print",
+        "float",
+        "range",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 5637
+    },
+    {
+      "name": "evez-art-trainer.py",
+      "imports": [
+        "os",
+        "sys",
+        "json",
+        "glob",
+        "random",
+        "numpy",
+        "PIL",
+        "torch",
+        "torch.nn",
+        "torch.optim"
+      ],
+      "calls": [
+        "print",
+        "EVEZArtDataset",
+        "DataLoader",
+        "print",
+        "print",
+        "float",
+        "range",
+        "print",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 7881
+    },
+    {
+      "name": "evez-cognition-store.py",
+      "imports": [
+        "os",
+        "json",
+        "time",
+        "hashlib",
+        "sqlite3",
+        "base64",
+        "pathlib",
+        "datetime",
+        "cryptography.fernet"
+      ],
+      "calls": [
+        "CognitionStore",
+        "enumerate",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print",
+        "demo"
+      ],
+      "local_imports": [],
+      "size": 21875
+    },
+    {
+      "name": "evez-frameologic.py",
+      "imports": [
+        "json",
+        "math",
+        "hashlib",
+        "os",
+        "subprocess",
+        "time",
+        "dataclasses",
+        "typing",
+        "pathlib",
+        "datetime"
+      ],
+      "calls": [
+        "field",
+        "field",
+        "MemeSceneFactory",
+        "len",
+        "enumerate",
+        "len",
+        "int",
+        "int",
+        "int",
+        "min"
+      ],
+      "local_imports": [],
+      "size": 28420
+    },
+    {
+      "name": "evez-inference-model.py",
+      "imports": [
+        "numpy",
+        "scipy.signal",
+        "json"
+      ],
+      "calls": [
+        "list",
+        "range",
+        "print",
+        "print",
+        "print",
+        "print",
+        "linguistic_collapse",
+        "print",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 10692
+    },
+    {
+      "name": "evez-meme-engine.py",
+      "imports": [
+        "json",
+        "os",
+        "hashlib",
+        "time",
+        "subprocess",
+        "textwrap",
+        "dataclasses",
+        "typing",
+        "pathlib",
+        "datetime"
+      ],
+      "calls": [
+        "field",
+        "MemeRenderer",
+        "MeshEventScanner",
+        "NarrativeArcGenerator",
+        "print",
+        "run_pipeline",
+        "Path",
+        "Path",
+        "SpineEventConsumer",
+        "SpineEvent"
+      ],
+      "local_imports": [],
+      "size": 28346
+    },
+    {
+      "name": "evez-numpy-art-trainer.py",
+      "imports": [
+        "os",
+        "sys",
+        "json",
+        "random",
+        "numpy",
+        "PIL"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "print",
+        "range",
+        "load_images",
+        "print",
+        "train_pca_ae",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 5636
+    },
+    {
+      "name": "evez-spawn-tree.py",
+      "imports": [
+        "json",
+        "time",
+        "subprocess",
+        "hashlib",
+        "os",
+        "pathlib",
+        "datetime",
+        "threading",
+        "importlib.util",
+        "sys"
+      ],
+      "calls": [
+        "chr",
+        "chr",
+        "enumerate",
+        "print",
+        "print",
+        "print",
+        "print",
+        "len",
+        "sum",
+        "sum"
+      ],
+      "local_imports": [],
+      "size": 10643
+    },
+    {
+      "name": "evez-speedrun.py",
+      "imports": [
+        "hashlib",
+        "json",
+        "math",
+        "re",
+        "time",
+        "dataclasses",
+        "pathlib",
+        "typing",
+        "numpy",
+        "scipy"
+      ],
+      "calls": [
+        "sorted",
+        "len",
+        "range",
+        "sum",
+        "field",
+        "field",
+        "field",
+        "field",
+        "SpeedrunEngine",
+        "SpeedrunRenderer"
+      ],
+      "local_imports": [],
+      "size": 25332
+    },
+    {
+      "name": "evez-tesseract-eigenvalue.py",
+      "imports": [
+        "numpy",
+        "scipy.signal",
+        "json"
+      ],
+      "calls": [
+        "sorted",
+        "sum",
+        "max",
+        "abs",
+        "list",
+        "range",
+        "range",
+        "range",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 21950
+    },
+    {
+      "name": "evez_5d_pentatensor.py",
+      "imports": [
+        "numpy",
+        "json",
+        "time",
+        "os",
+        "json"
+      ],
+      "calls": [
+        "range",
+        "build_matrix",
+        "build_matrix",
+        "build_matrix",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "local_imports": [],
+      "size": 3735
+    },
+    {
+      "name": "evez_capability_engine.py",
+      "imports": [
+        "json",
+        "os",
+        "sys",
+        "subprocess",
+        "importlib",
+        "pkgutil",
+        "ast",
+        "re",
+        "hashlib",
+        "time"
+      ],
+      "calls": [
+        "Path",
+        "print",
+        "print",
+        "scan_plugins",
+        "scan_config",
+        "scan_skills",
+        "scan_workspace_tools",
+        "scan_mesh",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 13297
+    },
+    {
+      "name": "evez_capability_manifest.py",
+      "imports": [
+        "json",
+        "subprocess",
+        "importlib",
+        "pkgutil",
+        "time",
+        "pathlib"
+      ],
+      "calls": [
+        "sorted",
+        "Path",
+        "sorted",
+        "print",
+        "getattr",
+        "len"
+      ],
+      "local_imports": [],
+      "size": 874
+    },
+    {
+      "name": "evez_config_sync.py",
+      "imports": [
+        "json",
+        "shutil",
+        "hashlib",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "exit",
+        "open",
+        "open"
+      ],
+      "local_imports": [],
+      "size": 408
+    },
+    {
+      "name": "evez_deep_excavation.py",
+      "imports": [
+        "json",
+        "os",
+        "sys",
+        "subprocess",
+        "importlib",
+        "pkgutil",
+        "ast",
+        "re",
+        "hashlib",
+        "time"
+      ],
+      "calls": [
+        "Path",
+        "set",
+        "set",
+        "any",
+        "any",
+        "any",
+        "chr",
+        "sorted",
+        "generate_discovery_helper",
+        "chr"
+      ],
+      "local_imports": [],
+      "size": 23883
+    },
+    {
+      "name": "evez_fetch_batch2.py",
+      "imports": [
+        "json",
+        "re",
+        "time",
+        "urllib.request",
+        "urllib.error",
+        "socket",
+        "os",
+        "glob"
+      ],
+      "calls": [
+        "set",
+        "sorted",
+        "list",
+        "range",
+        "load_all_cdx",
+        "print",
+        "print",
+        "print",
+        "len",
+        "len"
+      ],
+      "local_imports": [],
+      "size": 9755
+    },
+    {
+      "name": "evez_fetch_tweets.py",
+      "imports": [
+        "json",
+        "re",
+        "time",
+        "urllib.request",
+        "urllib.error",
+        "socket",
+        "os",
+        "sys"
+      ],
+      "calls": [
+        "range",
+        "load_cdx",
+        "print",
+        "print",
+        "len",
+        "len",
+        "enumerate",
+        "print",
+        "main",
+        "open"
+      ],
+      "local_imports": [],
+      "size": 11280
+    },
+    {
+      "name": "evez_godmode_third.py",
+      "imports": [
+        "numpy",
+        "json",
+        "time",
+        "os",
+        "math"
+      ],
+      "calls": [
+        "trinity_analysis",
+        "godmode_eigenvalue",
+        "the_third",
+        "the_sixth_discipline",
+        "trinity_analysis",
+        "godmode_eigenvalue",
+        "the_third",
+        "the_sixth_discipline",
+        "godmode_claims",
+        "godmode_state"
+      ],
+      "local_imports": [],
+      "size": 10784
+    },
+    {
+      "name": "evez_health_monitor.py",
+      "imports": [
+        "json",
+        "subprocess",
+        "re",
+        "time",
+        "pathlib",
+        "psutil",
+        "psutil"
+      ],
+      "calls": [
+        "Path",
+        "print",
+        "round",
+        "round",
+        "round",
+        "print",
+        "round",
+        "int",
+        "int",
+        "float"
+      ],
+      "local_imports": [],
+      "size": 1941
+    },
+    {
+      "name": "evez_hidden_llm_overlay.py",
+      "imports": [
+        "json",
+        "os",
+        "time",
+        "math",
+        "random",
+        "hashlib",
+        "numpy"
+      ],
+      "calls": [
+        "sum",
+        "len",
+        "sum",
+        "set",
+        "len",
+        "invocation_protocol",
+        "banishing_protocol",
+        "alchemy_protocol",
+        "sigil_protocol",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 14224
+    },
+    {
+      "name": "evez_integration_wire.py",
+      "imports": [
+        "json",
+        "os",
+        "time",
+        "urllib.request",
+        "hashlib",
+        "sys"
+      ],
+      "calls": [
+        "get_archangel_state",
+        "get_active_archangel",
+        "get_counter_defense_state",
+        "all",
+        "sum",
+        "get_dimensional_state",
+        "get_dimensional_state",
+        "get_spine_entries",
+        "get_living_state",
+        "get_archangel_state"
+      ],
+      "local_imports": [],
+      "size": 20518
+    },
+    {
+      "name": "evez_memory_compactor.py",
+      "imports": [
+        "pathlib",
+        "re",
+        "time"
+      ],
+      "calls": [
+        "Path",
+        "Path",
+        "next",
+        "print",
+        "exit",
+        "open",
+        "open",
+        "enumerate",
+        "len",
+        "len"
+      ],
+      "local_imports": [],
+      "size": 1264
+    },
+    {
+      "name": "evez_meta_cognitive.py",
+      "imports": [
+        "json",
+        "os",
+        "sys",
+        "subprocess",
+        "importlib",
+        "pkgutil",
+        "ast",
+        "re",
+        "hashlib",
+        "time"
+      ],
+      "calls": [
+        "Path",
+        "sorted",
+        "chr",
+        "print",
+        "print",
+        "build_graph",
+        "print",
+        "print",
+        "auto_activate",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 19671
+    },
+    {
+      "name": "evez_quantum_calculator.py",
+      "imports": [
+        "numpy",
+        "scipy.linalg",
+        "scipy.special",
+        "scipy.constants",
+        "warnings",
+        "sympy.physics.wigner",
+        "sympy",
+        "math"
+      ],
+      "calls": [
+        "V_func",
+        "eigh",
+        "range",
+        "range",
+        "range",
+        "V_func",
+        "min",
+        "V_func",
+        "range",
+        "min"
+      ],
+      "local_imports": [],
+      "size": 9605
+    },
+    {
+      "name": "evez_self_bootstrap.py",
+      "imports": [
+        "importlib",
+        "subprocess",
+        "sys",
+        "pathlib"
+      ],
+      "calls": [
+        "Path",
+        "discover",
+        "print",
+        "print",
+        "main",
+        "print",
+        "print",
+        "len",
+        "chr",
+        "len"
+      ],
+      "local_imports": [],
+      "size": 1501
+    },
+    {
+      "name": "evez_session_cleanup.py",
+      "imports": [
+        "json",
+        "time",
+        "pathlib"
+      ],
+      "calls": [
+        "isinstance",
+        "print",
+        "exit",
+        "open",
+        "isinstance",
+        "open",
+        "any",
+        "len",
+        "sorted",
+        "len"
+      ],
+      "local_imports": [],
+      "size": 613
+    },
+    {
+      "name": "evez_unified_status.py",
+      "imports": [
+        "json",
+        "os",
+        "time",
+        "socket",
+        "urllib.request",
+        "subprocess",
+        "http.server",
+        "urllib.parse"
+      ],
+      "calls": [
+        "HTTPServer",
+        "print",
+        "print",
+        "main",
+        "read_state_file",
+        "read_state_file",
+        "read_state_file",
+        "read_state_file",
+        "read_state_file",
+        "read_state_file"
+      ],
+      "local_imports": [],
+      "size": 6964
+    },
+    {
+      "name": "messiah_meme_agent.py",
+      "imports": [
+        "json",
+        "os",
+        "sys",
+        "hashlib",
+        "time",
+        "random",
+        "subprocess",
+        "textwrap",
+        "re",
+        "datetime"
+      ],
+      "calls": [
+        "Path",
+        "field",
+        "MessiahMemeAgent",
+        "Path",
+        "Spine",
+        "Path",
+        "enumerate",
+        "enumerate",
+        "Path",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 23783
+    },
+    {
+      "name": "reduce_friction_mesh_monitoring.py",
+      "imports": [
+        "subprocess",
+        "sys",
+        "json",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "print",
+        "enumerate",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 873
+    },
+    {
+      "name": "reduce_friction_proactive_messaging.py",
+      "imports": [
+        "subprocess",
+        "sys",
+        "json",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "print",
+        "enumerate",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 894
+    },
+    {
+      "name": "reduce_friction_quantum_computing.py",
+      "imports": [
+        "subprocess",
+        "sys",
+        "json",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "print",
+        "enumerate",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 868
+    },
+    {
+      "name": "reduce_friction_voice_output.py",
+      "imports": [
+        "subprocess",
+        "sys",
+        "json",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "print",
+        "enumerate",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 830
+    },
+    {
+      "name": "reduce_friction_web_search.py",
+      "imports": [
+        "subprocess",
+        "sys",
+        "json",
+        "pathlib"
+      ],
+      "calls": [
+        "print",
+        "print",
+        "print",
+        "print",
+        "enumerate",
+        "print",
+        "print",
+        "print",
+        "print",
+        "print"
+      ],
+      "local_imports": [],
+      "size": 839
+    }
+  ],
+  "edges": [
+    {
+      "source": "evez_session_cleanup.py",
+      "target": "evez_health_monitor.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_session_cleanup.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_session_cleanup.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_session_cleanup.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_health_monitor.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_health_monitor.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_health_monitor.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_capability_engine.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_capability_engine.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_capability_engine.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "sessions.json"
+    },
+    {
+      "source": "evez_meta_cognitive.py",
+      "target": "evez_meta_cognitive.py",
+      "type": "shared_data",
+      "file": "capability-catalog.json"
+    },
+    {
+      "source": "evez_meta_cognitive.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "capability-catalog.json"
+    },
+    {
+      "source": "evez_meta_cognitive.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "capability-catalog.json"
+    },
+    {
+      "source": "evez_meta_cognitive.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "capability-catalog.json"
+    },
+    {
+      "source": "evez_meta_cognitive.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "capability-catalog.json"
+    },
+    {
+      "source": "evez_deep_excavation.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "capability-catalog.json"
+    },
+    {
+      "source": "evez_meta_cognitive.py",
+      "target": "evez_meta_cognitive.py",
+      "type": "shared_data",
+      "file": "capability-graph.json"
+    },
+    {
+      "source": "evez_meta_cognitive.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "capability-report-r2.json"
+    },
+    {
+      "source": "evez_discovery_helper.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "/home/openclaw/.openclaw/workspace/capability-catalog.json"
+    },
+    {
+      "source": "evez_integration_wire.py",
+      "target": "evez_unified_status.py",
+      "type": "shared_data",
+      "file": "archangels-state.json"
+    },
+    {
+      "source": "evez_integration_wire.py",
+      "target": "evez_unified_status.py",
+      "type": "shared_data",
+      "file": "spine-dimensional.json"
+    },
+    {
+      "source": "evez_integration_wire.py",
+      "target": "evez_unified_status.py",
+      "type": "shared_data",
+      "file": "evez_living_engine_state.json"
+    },
+    {
+      "source": "evez_integration_wire.py",
+      "target": "evez_unified_status.py",
+      "type": "shared_data",
+      "file": "counter-defense-state.json"
+    },
+    {
+      "source": "evez_integration_wire.py",
+      "target": "evez_unified_status.py",
+      "type": "shared_data",
+      "file": "godmode-state.json"
+    },
+    {
+      "source": "evez_integration_wire.py",
+      "target": "evez_unified_status.py",
+      "type": "shared_data",
+      "file": "pentatensor-state.json"
+    },
+    {
+      "source": "evez_integration_wire.py",
+      "target": "evez_unified_status.py",
+      "type": "shared_data",
+      "file": "evez_hidden_cognition_state.json"
+    },
+    {
+      "source": "evez_capability_engine.py",
+      "target": "evez_capability_engine.py",
+      "type": "shared_data",
+      "file": "openclaw.json"
+    },
+    {
+      "source": "evez_capability_engine.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "openclaw.json"
+    },
+    {
+      "source": "evez_capability_engine.py",
+      "target": "evez_config_sync.py",
+      "type": "shared_data",
+      "file": "openclaw.json"
+    },
+    {
+      "source": "evez_capability_engine.py",
+      "target": "evez_deep_excavation.py",
+      "type": "shared_data",
+      "file": "openclaw.json"
+    },
+    {
+      "source": "evez_capability_engine.py",
+      "target": "evez_config_sync.py",
+      "type": "shared_data",
+      "file": "openclaw.json"
+    },
+    {
+      "source": "evez_deep_excavation.py",
+      "target": "evez_config_sync.py",
+      "type": "shared_data",
+      "file": "openclaw.json"
+    }
+  ],
+  "shared_data": {
+    "/home/openclaw/.openclaw/workspace/spawn-tree-results.json": [
+      "evez-spawn-tree.py"
+    ],
+    "~/.openclaw/workspace/evez_hidden_cognition_state.json": [
+      "evez_hidden_llm_overlay.py"
+    ],
+    "sessions.json": [
+      "evez_session_cleanup.py",
+      "evez_health_monitor.py",
+      "evez_capability_engine.py",
+      "evez_capability_engine.py",
+      "evez_capability_engine.py"
+    ],
+    "~/.openclaw/workspace/godmode-state.json": [
+      "evez_godmode_third.py"
+    ],
+    "~/.openclaw/workspace/pentatensor-state.json": [
+      "evez_5d_pentatensor.py"
+    ],
+    "{name}-speedrun.json": [
+      "evez-speedrun.py"
+    ],
+    "\\nJSON: {out}/{name}-speedrun.json": [
+      "evez-speedrun.py"
+    ],
+    "mesh-speedrun.json": [
+      "evez-speedrun.py"
+    ],
+    "capability-catalog.json": [
+      "evez_meta_cognitive.py",
+      "evez_meta_cognitive.py",
+      "evez_deep_excavation.py",
+      "evez_deep_excavation.py"
+    ],
+    "capability-graph.json": [
+      "evez_meta_cognitive.py",
+      "evez_meta_cognitive.py"
+    ],
+    "capability-report-r2.json": [
+      "evez_meta_cognitive.py",
+      "evez_deep_excavation.py"
+    ],
+    "capability-*.json": [
+      "evez_meta_cognitive.py"
+    ],
+    "capability-report-r3.json": [
+      "evez_meta_cognitive.py"
+    ],
+    "/home/openclaw/.openclaw/workspace/capability-catalog.json": [
+      "evez_discovery_helper.py",
+      "evez_deep_excavation.py"
+    ],
+    "archangels-state.json": [
+      "evez_integration_wire.py",
+      "evez_unified_status.py"
+    ],
+    "spine-dimensional.json": [
+      "evez_integration_wire.py",
+      "evez_unified_status.py"
+    ],
+    "evez_living_engine_state.json": [
+      "evez_integration_wire.py",
+      "evez_unified_status.py"
+    ],
+    "counter-defense-state.json": [
+      "evez_integration_wire.py",
+      "evez_unified_status.py"
+    ],
+    "godmode-state.json": [
+      "evez_integration_wire.py",
+      "evez_unified_status.py"
+    ],
+    "pentatensor-state.json": [
+      "evez_integration_wire.py",
+      "evez_unified_status.py"
+    ],
+    "evez_hidden_cognition_state.json": [
+      "evez_integration_wire.py",
+      "evez_unified_status.py"
+    ],
+    "intertranslational-state.json": [
+      "evez_integration_wire.py"
+    ],
+    "integration-wire-log.json": [
+      "evez_integration_wire.py"
+    ],
+    "openclaw.json": [
+      "evez_capability_engine.py",
+      "evez_capability_engine.py",
+      "evez_deep_excavation.py",
+      "evez_config_sync.py"
+    ],
+    "capability-report.json": [
+      "evez_capability_engine.py"
+    ],
+    "cdx_results*.json": [
+      "evez_fetch_batch2.py"
+    ],
+    "cdx_results.json": [
+      "evez_fetch_batch2.py"
+    ],
+    "/home/openclaw/.openclaw/workspace/agent-tree-topology.json": [
+      "evez-agent-tree.py"
+    ],
+    "/home/openclaw/.openclaw/workspace/cdx_results.json": [
+      "evez_fetch_tweets.py"
+    ],
+    "/home/openclaw/.openclaw/workspace/meme-media/evez-transition-{ts}.json": [
+      "evez-meme-engine.py"
+    ]
+  },
+  "ts": 1782710805.5578363
+}
