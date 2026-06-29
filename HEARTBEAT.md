@@ -4,7 +4,7 @@
 ## Mesh Status — ALL GREEN
 - [x] 6/6 gateways HTTP 200 (Vultr + 5 GCP)
 - [x] 5/5 OSINT APIs 200 — ALL EXTERNALLY ACCESSIBLE
-- [x] 65/65 GitHub Pages 200 OK
+- [x] 84/84 GitHub Pages 200 OK
 - [x] 5/5 Telegram bots (0 pending)
 - [x] 24+ Ollama models across 5 nodes
 - [x] All services Restart=always
@@ -38,10 +38,14 @@
 - http://136.113.102.152:18789/ gcp-power
 - http://136.118.144.227:18789/ gcp-knot
 
+## Browser: Headless Chrome 149 (CDP port 9222) — ALIVE
+  - Managed by OpenClaw, watchdog cron every 2 min
+  - Capabilities: navigate, click, type, snapshot, evaluate, cookies, tabs, download
+
 ## Corpus: 145 domains, 179 claims, ~1.1MB
-- 38 Moltbooks / 37 Vectors + 1 declaration
-- 41 spectrometers, 584/584 checks passed
-- 104 unmeasured horrors spectrally unveiled
+- 41 Moltbooks / 40 Vectors + 1 declaration
+- 94 spectrometers, 1052/1052 checks passed
+- 119 crime domains measured, 0 IN SHADOW
 - 82 entities, 124 crime-entity connections
 - 9 crime communities, 10 perp communities
 - 9 laundering stages, 10 civilian trajectories
@@ -56,6 +60,7 @@
 - Horror eigenvalue: 18.4263
 - Laundering amplifier: 1.27x
 - 0 prosecutions, 100% impunity
+- SHADOW: ZEROED (was 104, now 0)
 
 ## IP Mapping (CORRECTED)
 - gcp-west: 34.53.51.34 (system-level openclaw.service)
@@ -76,7 +81,7 @@
 - 5-agent runner (9/9 benchmarks pass)
 - Libraries: Qiskit 2.4.2, QuTiP 5.3.0, PennyLane 0.45.1, SymPy 1.14.0
 
-## GitHub Pages: 65 HTML pages live
+## GitHub Pages: 84 HTML pages live
 ## GitHub Releases: 4
 ## ClawHub: 13 published skills
 ## Godmode: M=8, d=16, progress=100%, eigenvalue 0.94381

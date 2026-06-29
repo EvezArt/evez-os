@@ -159,3 +159,5 @@ evez-consciousness-engine, evez-machine-voice, evez-api-gateway, evez-daw-agent,
 - gh auth switch --user EvezArt for EvezArt repo pushes
 
 ⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⧢⦟⧢⥋
+[Living v2 2026-06-29T11:15:51] L0C969: Critical eta=0.1797 enc=4 ptc=0.101 sig=('error', 'failed', 'service u
+[Living v2 2026-06-29T11:15:52] L0C969: Critical eta=0.1797 enc=4 ptc=0.101 sig=('error', 'failed', 'service u
