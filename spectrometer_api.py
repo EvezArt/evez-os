@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """EVEZ SPECTROMETER SUITE — Unified API Server
-Serves all 11 spectrometers on a single endpoint.
+Serves all 21 spectrometers on a single endpoint.
 Port 18792 (agentic API) — requires GCP firewall rule for external access.
 """
 import json, time, sys, os
@@ -22,6 +22,16 @@ SPECTROMETERS = {
     'famine': {'file': 'famine_spectrometer.py', 'name': 'Famine Prediction Spectrometer', 'checks': '10/10'},
     'democracy': {'file': 'democracy_spectrometer.py', 'name': 'Democratic Erosion Spectrometer', 'checks': '10/10'},
     'nuclear': {'file': 'nuclear_spectrometer.py', 'name': 'Nuclear Escalation Risk Spectrometer', 'checks': '10/10'},
+    'carbon_concealment': {'file': 'carbon_concealment_spectrometer.py', 'name': 'Carbon Concealment Spectrometer', 'checks': '12/12'},
+    'surveillance_capitalism': {'file': 'surveillance_capitalism_spectrometer.py', 'name': 'Surveillance Capitalism Spectrometer', 'checks': '12/12'},
+    'addiction_by_design': {'file': 'addiction_by_design_spectrometer.py', 'name': 'Addiction by Design Spectrometer', 'checks': '12/12'},
+    'air_pollution_homicide': {'file': 'air_pollution_homicide_spectrometer.py', 'name': 'Air Pollution Homicide Spectrometer', 'checks': '17/17'},
+    'attention_engineering': {'file': 'attention_engineering_spectrometer.py', 'name': 'Attention Engineering Spectrometer', 'checks': '16/16'},
+    'climate_denial_industry': {'file': 'climate_denial_industry_spectrometer.py', 'name': 'Climate Denial Industry Spectrometer', 'checks': '17/17'},
+    'food_system_harm': {'file': 'food_system_harm_spectrometer.py', 'name': 'Food System Harm Spectrometer', 'checks': '16/16'},
+    'cognitive_sovereignty': {'file': 'cognitive_sovereignty_spectrometer.py', 'name': 'Cognitive Sovereignty Spectrometer', 'checks': '12/12'},
+    'dark_pattern': {'file': 'dark_pattern_spectrometer.py', 'name': 'Dark Pattern Spectrometer', 'checks': '12/12'},
+    'regulatory_capture': {'file': 'regulatory_capture_spectrometer.py', 'name': 'Regulatory Capture Spectrometer', 'checks': '12/12'},
 }
 
 RESULT_FILES = {
@@ -48,7 +58,7 @@ class Handler(BaseHTTPRequestHandler):
                 'service': 'EVEZ Spectrometer Suite',
                 'version': '1.0.0',
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '105/105 passed',
+                'total_checks': '207/207 passed',
                 'endpoints': {k: f'/{k}' for k in SPECTROMETERS},
                 'all_results': '/all',
                 'dashboard': '/dashboard',
@@ -71,7 +81,7 @@ class Handler(BaseHTTPRequestHandler):
                     results[key] = {'error': 'not found — run spectrometer first'}
             results['_meta'] = {
                 'spectrometers': len(SPECTROMETERS),
-                'total_checks': '105/105 passed',
+                'total_checks': '207/207 passed',
                 'timestamp': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
             }
             self.wfile.write(json.dumps(results, indent=2, default=str).encode())
@@ -131,7 +141,7 @@ def main():
     print(f'=== EVEZ SPECTROMETER SUITE API ===')
     print(f'Port: {PORT}')
     print(f'Spectrometers: {len(SPECTROMETERS)}')
-    print(f'Total checks: 105/105 passed')
+    print(f'Total checks: 207/207 passed')
     print(f'Endpoints: /health, /all, /dashboard, /<spectrometer_name>')
     print(f'Starting server...')
     server = HTTPServer(('0.0.0.0', PORT), Handler)

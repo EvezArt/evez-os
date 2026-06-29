@@ -1,0 +1,169 @@
+{
+  "version": 3,
+  "timestamp": "2026-06-29T08:52:57Z",
+  "total_entities": 82,
+  "total_crimes": 124,
+  "dominant_perp_eigenvalue": 18.4263,
+  "dominant_crime_eigenvalue": 18.4263,
+  "top_entities": [
+    [
+      "state_actors",
+      0.3229
+    ],
+    [
+      "corps",
+      0.243
+    ],
+    [
+      "military",
+      0.0752
+    ],
+    [
+      "intel",
+      0.0629
+    ],
+    [
+      "banks",
+      0.0612
+    ],
+    [
+      "tech",
+      0.047
+    ],
+    [
+      "agricultural",
+      0.0302
+    ],
+    [
+      "criminals",
+      0.0251
+    ],
+    [
+      "pharma",
+      0.0182
+    ],
+    [
+      "religious",
+      0.0115
+    ],
+    [
+      "food_industry",
+      0.0087
+    ],
+    [
+      "sovereign_wealth",
+      0.008
+    ],
+    [
+      "mining",
+      0.0079
+    ],
+    [
+      "cartels",
+      0.007
+    ],
+    [
+      "colonial_powers",
+      0.0066
+    ],
+    [
+      "tech_companies",
+      0.0058
+    ],
+    [
+      "law_enforcement",
+      0.0052
+    ],
+    [
+      "medical",
+      0.0046
+    ],
+    [
+      "chemical",
+      0.0043
+    ],
+    [
+      "hedge_funds",
+      0.0042
+    ]
+  ],
+  "named_persons": [
+    [
+      "Mike Roman",
+      0.0
+    ],
+    [
+      "Ed Breen",
+      0.0
+    ],
+    [
+      "Stephen Hemsley",
+      0.0
+    ],
+    [
+      "Brian Thompson",
+      0.0
+    ],
+    [
+      "David Cordani",
+      0.0
+    ],
+    [
+      "Tim Cook",
+      0.0
+    ],
+    [
+      "Phil Knight",
+      0.0
+    ],
+    [
+      "Elon Musk",
+      0.0
+    ],
+    [
+      "Hoan Ton-That",
+      0.0
+    ],
+    [
+      "Peter Thiel",
+      0.0
+    ],
+    [
+      "Rupert Murdoch",
+      0.0
+    ],
+    [
+      "Rick Snyder",
+      0.0
+    ]
+  ],
+  "crime_communities": 9,
+  "perp_communities": 10,
+  "top_crime_eigenvalues": [
+    18.4263,
+    8.0288,
+    7.5003,
+    6.507,
+    5.5627,
+    3.7864,
+    3.4795,
+    2.8657,
+    2.1524,
+    2.0677
+  ],
+  "top_perp_eigenvalues": [
+    18.4263,
+    8.0288,
+    7.5003,
+    6.507,
+    5.5627,
+    3.7864,
+    3.4795,
+    2.8657,
+    2.1524,
+    2.0677
+  ],
+  "negative_eigenvalue_sum": -0.0,
+  "prosecuted": 0,
+  "impunity_rate": 100.0
+}

@@ -63,7 +63,8 @@ if __name__ == "__main__":
     passed = sum(1 for _,ok,_ in checks if ok)
     print(f"Climate Denial Industry Spectrometer: {passed}/{len(checks)} checks passed")
     for name, ok, desc in checks:
-        print(f"  {'\u2713' if ok else '\u2717'} {name}: {desc}")
+        check = 'PASS' if ok else 'FAIL'
+        print(f'  {check} {name}: {desc}')
     scores = {k: v["score"] for k,v in sorted(results.items(), key=lambda x:-x[1]["score"])}
     print(f"\nRankings:")
     for k,v in scores.items():

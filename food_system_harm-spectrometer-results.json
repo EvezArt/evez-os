@@ -1,0 +1,112 @@
+{
+  "ultra_processed_food": {
+    "score": 1.0074730770903364,
+    "dims": {
+      "processing": 0.95,
+      "chemical_additives": 0.92,
+      "marketing_deception": 0.88,
+      "health_impact": 0.9,
+      "regulatory_capture": 0.78,
+      "access_manipulation": 0.72
+    }
+  },
+  "seed_oil_industry": {
+    "score": 0.6748132620939218,
+    "dims": {
+      "processing": 0.8,
+      "chemical_additives": 0.75,
+      "marketing_deception": 0.82,
+      "health_impact": 0.65,
+      "regulatory_capture": 0.7,
+      "access_manipulation": 0.5
+    }
+  },
+  "sugar_lobby_1960s": {
+    "score": 0.7860098775821301,
+    "dims": {
+      "processing": 0.6,
+      "chemical_additives": 0.55,
+      "marketing_deception": 0.95,
+      "health_impact": 0.85,
+      "regulatory_capture": 0.92,
+      "access_manipulation": 0.6
+    }
+  },
+  "monsanto_roundup": {
+    "score": 0.7545941536093784,
+    "dims": {
+      "processing": 0.7,
+      "chemical_additives": 0.85,
+      "marketing_deception": 0.8,
+      "health_impact": 0.72,
+      "regulatory_capture": 0.75,
+      "access_manipulation": 0.65
+    }
+  },
+  "factory_farming": {
+    "score": 0.6897175199507518,
+    "dims": {
+      "processing": 0.82,
+      "chemical_additives": 0.78,
+      "marketing_deception": 0.7,
+      "health_impact": 0.75,
+      "regulatory_capture": 0.65,
+      "access_manipulation": 0.55
+    }
+  },
+  "food_deserts_chicago": {
+    "score": 0.3691788235963239,
+    "dims": {
+      "processing": 0.4,
+      "chemical_additives": 0.3,
+      "marketing_deception": 0.2,
+      "health_impact": 0.7,
+      "regulatory_capture": 0.5,
+      "access_manipulation": 0.92
+    }
+  },
+  "corn_subsidy_system": {
+    "score": 0.5576652939531896,
+    "dims": {
+      "processing": 0.65,
+      "chemical_additives": 0.5,
+      "marketing_deception": 0.6,
+      "health_impact": 0.55,
+      "regulatory_capture": 0.85,
+      "access_manipulation": 0.68
+    }
+  },
+  "infant_formula_nestle": {
+    "score": 0.7731990381203395,
+    "dims": {
+      "processing": 0.75,
+      "chemical_additives": 0.65,
+      "marketing_deception": 0.9,
+      "health_impact": 0.8,
+      "regulatory_capture": 0.55,
+      "access_manipulation": 0.85
+    }
+  },
+  "whole_foods_organic": {
+    "score": 0.008952973451486563,
+    "dims": {
+      "processing": 0.1,
+      "chemical_additives": 0.05,
+      "marketing_deception": 0.15,
+      "health_impact": 0.02,
+      "regulatory_capture": 0.05,
+      "access_manipulation": 0.1
+    }
+  },
+  "farmers_market": {
+    "score": 0.00012752971668985078,
+    "dims": {
+      "processing": 0.02,
+      "chemical_additives": 0.0,
+      "marketing_deception": 0.01,
+      "health_impact": 0.0,
+      "regulatory_capture": 0.0,
+      "access_manipulation": 0.02
+    }
+  }
+}

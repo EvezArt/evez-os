@@ -1,0 +1,192 @@
+{
+  "tiktok_algorithm": {
+    "score": 1.2088442005472677,
+    "dims": {
+      "capture": 0.95,
+      "retention": 0.98,
+      "exploitation": 0.92,
+      "addiction": 0.96,
+      "monopolization": 0.88,
+      "concealment": 0.9
+    },
+    "eigenvalues": [
+      -0.49952971506063476,
+      -0.3718990496937693,
+      -0.27639008529391174,
+      -0.18924743492896987,
+      0.12822208443001695,
+      1.2088442005472677
+    ]
+  },
+  "facebook_news_feed": {
+    "score": 0.9484472209347563,
+    "dims": {
+      "capture": 0.85,
+      "retention": 0.88,
+      "exploitation": 0.82,
+      "addiction": 0.78,
+      "monopolization": 0.82,
+      "concealment": 0.85
+    },
+    "eigenvalues": [
+      -0.3773642234346886,
+      -0.2936448734158501,
+      -0.2254399901190803,
+      -0.1576924547748982,
+      0.10569432080976054,
+      0.9484472209347563
+    ]
+  },
+  "youtube_autoplay": {
+    "score": 0.8528035428169636,
+    "dims": {
+      "capture": 0.8,
+      "retention": 0.85,
+      "exploitation": 0.75,
+      "addiction": 0.82,
+      "monopolization": 0.7,
+      "concealment": 0.75
+    },
+    "eigenvalues": [
+      -0.36613117537610923,
+      -0.25523763213179484,
+      -0.19600088770176527,
+      -0.12389452657911536,
+      0.08846067897182129,
+      0.8528035428169636
+    ]
+  },
+  "twitter_infinite_scroll": {
+    "score": 0.65358127212143,
+    "dims": {
+      "capture": 0.75,
+      "retention": 0.72,
+      "exploitation": 0.68,
+      "addiction": 0.7,
+      "monopolization": 0.6,
+      "concealment": 0.65
+    },
+    "eigenvalues": [
+      -0.26905999026854105,
+      -0.20041449571970335,
+      -0.15654297500955106,
+      -0.09538298278378878,
+      0.06781917166015426,
+      0.65358127212143
+    ]
+  },
+  "google_search_ranking": {
+    "score": 0.723417786015651,
+    "dims": {
+      "capture": 0.9,
+      "retention": 0.6,
+      "exploitation": 0.85,
+      "addiction": 0.3,
+      "monopolization": 0.92,
+      "concealment": 0.88
+    },
+    "eigenvalues": [
+      -0.34699918732574453,
+      -0.20790957290285733,
+      -0.15607103663653693,
+      -0.08009334500549914,
+      0.06765535585498696,
+      0.723417786015651
+    ]
+  },
+  "instagram_explore": {
+    "score": 0.814372897086876,
+    "dims": {
+      "capture": 0.82,
+      "retention": 0.85,
+      "exploitation": 0.72,
+      "addiction": 0.8,
+      "monopolization": 0.65,
+      "concealment": 0.7
+    },
+    "eigenvalues": [
+      -0.35554280666801513,
+      -0.23697308518797125,
+      -0.1921507487408065,
+      -0.11081661279638963,
+      0.08111035630630695,
+      0.814372897086876
+    ]
+  },
+  "tv_advertising_1960s": {
+    "score": 0.19583568177564678,
+    "dims": {
+      "capture": 0.5,
+      "retention": 0.3,
+      "exploitation": 0.6,
+      "addiction": 0.2,
+      "monopolization": 0.4,
+      "concealment": 0.3
+    },
+    "eigenvalues": [
+      -0.09504707063814877,
+      -0.049451320677844746,
+      -0.03949002859109873,
+      -0.028080636877933923,
+      0.016233375009379363,
+      0.19583568177564678
+    ]
+  },
+  "billboard_advertising": {
+    "score": 0.012088609150944427,
+    "dims": {
+      "capture": 0.15,
+      "retention": 0.05,
+      "exploitation": 0.2,
+      "addiction": 0.02,
+      "monopolization": 0.1,
+      "concealment": 0.05
+    },
+    "eigenvalues": [
+      -0.007596419755779058,
+      -0.0027976453227905136,
+      -0.0017057400979074051,
+      -0.00042145841235667115,
+      0.0004326544378892191,
+      0.012088609150944427
+    ]
+  },
+  "newspaper_1900s": {
+    "score": 0.04135857888444592,
+    "dims": {
+      "capture": 0.25,
+      "retention": 0.15,
+      "exploitation": 0.3,
+      "addiction": 0.05,
+      "monopolization": 0.2,
+      "concealment": 0.1
+    },
+    "eigenvalues": [
+      -0.02122536801563285,
+      -0.011518780635456909,
+      -0.008130197994557605,
+      -0.0025928647311166684,
+      0.002108632492318098,
+      0.04135857888444592
+    ]
+  },
+  "no_manipulation": {
+    "score": 0.0,
+    "dims": {
+      "capture": 0.0,
+      "retention": 0.0,
+      "exploitation": 0.0,
+      "addiction": 0.0,
+      "monopolization": 0.0,
+      "concealment": 0.0
+    },
+    "eigenvalues": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+}

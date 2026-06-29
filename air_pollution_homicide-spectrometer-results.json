@@ -1,0 +1,112 @@
+{
+  "vw_dieselgate": {
+    "score": 0.8476645689595911,
+    "dims": {
+      "emission": 0.85,
+      "concealment": 0.95,
+      "health_impact": 0.7,
+      "regulatory_capture": 0.65,
+      "denial_campaign": 0.9,
+      "mortality": 0.55
+    }
+  },
+  "big_tobacco_smoking": {
+    "score": 1.096339484229238,
+    "dims": {
+      "emission": 0.6,
+      "concealment": 0.98,
+      "health_impact": 0.95,
+      "regulatory_capture": 0.8,
+      "denial_campaign": 0.98,
+      "mortality": 0.92
+    }
+  },
+  "exxonmobil_climate": {
+    "score": 1.0273545138064177,
+    "dims": {
+      "emission": 0.92,
+      "concealment": 0.95,
+      "health_impact": 0.85,
+      "regulatory_capture": 0.75,
+      "denial_campaign": 0.95,
+      "mortality": 0.7
+    }
+  },
+  "tetraethyl_lead": {
+    "score": 1.0639144073538955,
+    "dims": {
+      "emission": 0.88,
+      "concealment": 0.92,
+      "health_impact": 0.9,
+      "regulatory_capture": 0.85,
+      "denial_campaign": 0.88,
+      "mortality": 0.82
+    }
+  },
+  "pfas_forever": {
+    "score": 0.8300679836121433,
+    "dims": {
+      "emission": 0.78,
+      "concealment": 0.88,
+      "health_impact": 0.82,
+      "regulatory_capture": 0.7,
+      "denial_campaign": 0.75,
+      "mortality": 0.65
+    }
+  },
+  "asbestos_industry": {
+    "score": 1.0264084338385184,
+    "dims": {
+      "emission": 0.65,
+      "concealment": 0.95,
+      "health_impact": 0.92,
+      "regulatory_capture": 0.78,
+      "denial_campaign": 0.9,
+      "mortality": 0.88
+    }
+  },
+  "coal_lobby_pm25": {
+    "score": 0.9054404531739013,
+    "dims": {
+      "emission": 0.9,
+      "concealment": 0.8,
+      "health_impact": 0.85,
+      "regulatory_capture": 0.72,
+      "denial_campaign": 0.82,
+      "mortality": 0.75
+    }
+  },
+  "roundup_glyphosate": {
+    "score": 0.742504970934448,
+    "dims": {
+      "emission": 0.7,
+      "concealment": 0.85,
+      "health_impact": 0.72,
+      "regulatory_capture": 0.68,
+      "denial_campaign": 0.8,
+      "mortality": 0.58
+    }
+  },
+  "clean_industry": {
+    "score": 0.0004565523427193668,
+    "dims": {
+      "emission": 0.05,
+      "concealment": 0.02,
+      "health_impact": 0.01,
+      "regulatory_capture": 0.01,
+      "denial_campaign": 0.01,
+      "mortality": 0.01
+    }
+  },
+  "natural_pollution": {
+    "score": 0.016155328314617363,
+    "dims": {
+      "emission": 0.2,
+      "concealment": 0.0,
+      "health_impact": 0.15,
+      "regulatory_capture": 0.0,
+      "denial_campaign": 0.0,
+      "mortality": 0.1
+    }
+  }
+}

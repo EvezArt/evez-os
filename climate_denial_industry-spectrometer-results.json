@@ -1,0 +1,112 @@
+{
+  "exxon_internal_1977": {
+    "score": 1.1902806136585926,
+    "dims": {
+      "funding": 0.9,
+      "fake_science": 0.85,
+      "media_manipulation": 0.82,
+      "political_lobbying": 0.92,
+      "public_confusion": 0.88,
+      "delay_caused": 0.95
+    }
+  },
+  "koch_brothers_network": {
+    "score": 1.206595902921511,
+    "dims": {
+      "funding": 0.95,
+      "fake_science": 0.8,
+      "media_manipulation": 0.85,
+      "political_lobbying": 0.95,
+      "public_confusion": 0.9,
+      "delay_caused": 0.88
+    }
+  },
+  "heartland_institute": {
+    "score": 0.9766501578242284,
+    "dims": {
+      "funding": 0.75,
+      "fake_science": 0.92,
+      "media_manipulation": 0.78,
+      "political_lobbying": 0.7,
+      "public_confusion": 0.85,
+      "delay_caused": 0.8
+    }
+  },
+  "api_climate_campaign": {
+    "score": 1.0959855054838958,
+    "dims": {
+      "funding": 0.85,
+      "fake_science": 0.78,
+      "media_manipulation": 0.88,
+      "political_lobbying": 0.9,
+      "public_confusion": 0.82,
+      "delay_caused": 0.85
+    }
+  },
+  "shell_internal_1988": {
+    "score": 0.7684516975249331,
+    "dims": {
+      "funding": 0.7,
+      "fake_science": 0.72,
+      "media_manipulation": 0.65,
+      "political_lobbying": 0.75,
+      "public_confusion": 0.68,
+      "delay_caused": 0.78
+    }
+  },
+  "coal_industry_pr": {
+    "score": 0.993181482771391,
+    "dims": {
+      "funding": 0.8,
+      "fake_science": 0.75,
+      "media_manipulation": 0.82,
+      "political_lobbying": 0.85,
+      "public_confusion": 0.8,
+      "delay_caused": 0.82
+    }
+  },
+  "merchants_of_doubt": {
+    "score": 1.0373658890356792,
+    "dims": {
+      "funding": 0.78,
+      "fake_science": 0.88,
+      "media_manipulation": 0.8,
+      "political_lobbying": 0.72,
+      "public_confusion": 0.92,
+      "delay_caused": 0.85
+    }
+  },
+  "ipcc_science": {
+    "score": 0.0,
+    "dims": {
+      "funding": 0.0,
+      "fake_science": 0.0,
+      "media_manipulation": 0.0,
+      "political_lobbying": 0.0,
+      "public_confusion": 0.0,
+      "delay_caused": 0.0
+    }
+  },
+  "greta_thunberg": {
+    "score": 0.0,
+    "dims": {
+      "funding": 0.0,
+      "fake_science": 0.0,
+      "media_manipulation": 0.0,
+      "political_lobbying": 0.02,
+      "public_confusion": 0.0,
+      "delay_caused": 0.0
+    }
+  },
+  "renewable_energy": {
+    "score": 0.008801147167108767,
+    "dims": {
+      "funding": 0.05,
+      "fake_science": 0.02,
+      "media_manipulation": 0.05,
+      "political_lobbying": 0.3,
+      "public_confusion": 0.02,
+      "delay_caused": 0.0
+    }
+  }
+}
