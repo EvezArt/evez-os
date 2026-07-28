@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-07-28T11:05:35Z",
+  "orchestrator": {
+    "round": 106,
+    "status": "complete",
+    "next_round_in_seconds": 1800
+  },
+  "scanner": {
+    "signals_this_cycle": 35,
+    "total_lines": 4260
+  },
+  "predictor": {
+    "predictions_this_cycle": 5,
+    "total_lines": 530
+  },
+  "shipper": {
+    "drafts_shipped": 3,
+    "total_lines": 318,
+    "revenue_this_cycle": "$0.00",
+    "cumulative_revenue": "$0.00"
+  },
+  "agent_reputations": {
+    "scanner": {"rep": 1.0, "streak": 106},
+    "predictor": {"rep": 1.0, "streak": 106},
+    "generator": {"rep": 1.0, "streak": 106},
+    "shipper": {"rep": 1.0, "streak": 106},
+    "maes": {"rep": 1.0, "streak": 105}
+  },
+  "drafts": [
+    {"type": "gumroad_report", "topic": "Will Marco Rubio win the 2028 Republican president"},
+    {"type": "github_post", "topic": "codecrafters-io/build-your-own-x"},
+    {"type": "github_post", "topic": "sindresorhus/awesome"}
+  ],
+  "blockers": ["OpenClaw run_id KeyError — OpenClaw integration skipped this round"],
+  "repos_ahead_of_origin": 6,
+  "vps_ssh": "BLOCKED — Contabo password rejected",
+  "groq_api": "EXPIRED (401)",
+  "github_pat": "MISSING",
+  "email_configured": false
+}
