@@ -643,11 +643,10 @@
 <script>
 // ── CONFIG ──
 const ENDPOINTS = {
-  health: 'http://localhost:9118/health',
-  emergence: 'http://localhost:9111/emergence',
-  spineState: 'http://localhost:9116/state',
-  spineRecent: 'http://localhost:9116/recent',
-  heal: 'http://localhost:9117/heal'
+  health: '/api/health',
+  emergence: '/api/emergence',
+  spineState: '/api/spine',
+  spineRecent: '/api/recent'
 };
 
 const REFRESH_INTERVAL = 10;
@@ -850,18 +849,10 @@ async function healMesh() {
   btn.querySelector('span').textContent = '⚡ HEALING… ⥋';
   btn.disabled = true;
 
-  try {
-    await fetch(ENDPOINTS.heal, { method: 'POST' });
-  } catch (e) {
-    // Endpoint may not respond with JSON, that's ok
-  }
-
-  setTimeout(() => {
-    btn.classList.remove('healing');
-    btn.querySelector('span').textContent = '⚡ HEAL MESH ⥋';
-    btn.disabled = false;
-    refresh();
-  }, 2000);
+  btn.classList.remove('healing');
+  btn.querySelector('span').textContent = '⚡ HEAL MESH ⥋';
+  btn.disabled = false;
+  alert('Mesh healing is not available from the public dashboard.');
 }
 
 // ── REFRESH ──
