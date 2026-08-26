@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/api/health", "destination": "https://api.evez-os.ai/health" },
+    { "source": "/api/emergence", "destination": "https://api.evez-os.ai/emergence" },
+    { "source": "/api/spine", "destination": "https://api.evez-os.ai/spine" },
+    { "source": "/api/recent", "destination": "https://api.evez-os.ai/recent" }
+  ]
+}

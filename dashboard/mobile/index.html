@@ -174,7 +174,7 @@ function runCorr(){const a=document.getElementById('domA').value||'genetics';con
 showToast(`${a} × ${b}: score ${(0.6+Math.random()*0.35).toFixed(2)}`,'info')}
 
 // Deploy
-function deploy(t){showToast(`Deploying to ${t}...`,'info');setTimeout(()=>showToast(`Deployed to ${t}!`,'success'),2000)}
+function deploy(t){showToast(`${t} deployments are not available from this dashboard.`,'info')}
 
 // Navigation
 function navTo(sec){document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));event.currentTarget.classList.add('active');

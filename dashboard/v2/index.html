@@ -243,8 +243,7 @@ document.getElementById('corrDet').innerHTML=`Novel intersection: <b>${a}</b> ×
 el.classList.add('vis')}
 
 // Deploy
-function doDeploy(target){const el=document.getElementById('depSt');el.textContent=`⏳ Deploying to ${target}...`;el.classList.add('vis');
-setTimeout(()=>{el.textContent=`✅ Deployed to ${target} successfully!`},2000)}
+function doDeploy(target){const el=document.getElementById('depSt');el.textContent=`${target} deployments are not available from this dashboard.`;el.classList.add('vis')}
 
 // Particles
 const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
