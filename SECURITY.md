@@ -2,8 +2,8 @@
 
 ## Reporting a Vulnerability
 **DO NOT** create a public GitHub issue. Email:
-- security@evez666.com
-- steven@evez666.com
+- Rubikspubes69@gmail.com
+- Rubikspubes70@gmail.com
 
 Include: Repository, description, steps to reproduce, impact.
 
