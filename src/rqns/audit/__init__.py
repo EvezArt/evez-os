@@ -1,5 +1,11 @@
 """Evidence-bound recursive measurement, allocation, and model-divergence auditing."""
 
+from .consequence_provenance import (
+    ConsequenceLedger,
+    ConsequenceOutcome,
+    ConsequencePrediction,
+    consequence_delta,
+)
 from .evidence_boundary import (
     EvidenceBoundary,
     contradict_boundary,
@@ -33,6 +39,9 @@ __all__ = [
     "AllocationLedger",
     "AuditSeal",
     "CausalType",
+    "ConsequenceLedger",
+    "ConsequenceOutcome",
+    "ConsequencePrediction",
     "Discrepancy",
     "EvidenceBoundary",
     "EvidenceState",
@@ -48,6 +57,7 @@ __all__ = [
     "SemanticTransition",
     "build_tomograph",
     "compare_frame_predictions",
+    "consequence_delta",
     "contradict_boundary",
     "observe_boundary",
     "require_testable_transition",
