@@ -19,6 +19,7 @@ def make_boundary() -> EvidenceBoundary:
         independent_domain="external-test",
         required_transition="learning_update -> changed_policy",
         observed_transition=None,
+        independent_observation_ref=None,
         failure_mode=None,
         falsifier="disable update and reproduce the same improvement",
     )
@@ -35,13 +36,19 @@ def test_observation_without_independence_is_supported():
     assert boundary.state == EvidenceState.SUPPORTED
 
 
+def test_independent_observation_requires_a_reference():
+    boundary = observe_boundary(make_boundary(), "policy threshold changed")
+    assert boundary.state != EvidenceState.VERIFIED
+
+
 def test_independent_observation_promotes_to_verified():
     boundary = observe_boundary(
         make_boundary(),
         "policy threshold changed",
-        independently_observed=True,
+        independent_observation_ref="external-run-001",
     )
     assert boundary.state == EvidenceState.VERIFIED
+    assert boundary.independent_observation_ref == "external-run-001"
     assert len(boundary.content_hash()) == 64
 
 
@@ -62,6 +69,7 @@ def test_empty_falsifier_is_rejected():
         independent_domain=boundary.independent_domain,
         required_transition=boundary.required_transition,
         observed_transition=None,
+        independent_observation_ref=None,
         failure_mode=None,
         falsifier="",
     )
