@@ -1,5 +1,6 @@
 """Evidence-bound recursive measurement, allocation, and model-divergence auditing."""
 
+from .benchmark import BenchmarkCase, BenchmarkResult, aggregate, evaluate_outcome
 from .consequence_provenance import (
     ConsequenceLedger,
     ConsequenceOutcome,
@@ -38,6 +39,8 @@ from .semantic_atomography import (
 __all__ = [
     "AllocationLedger",
     "AuditSeal",
+    "BenchmarkCase",
+    "BenchmarkResult",
     "CausalType",
     "ConsequenceLedger",
     "ConsequenceOutcome",
@@ -55,10 +58,12 @@ __all__ = [
     "SemanticAtom",
     "SemanticTomograph",
     "SemanticTransition",
+    "aggregate",
     "build_tomograph",
     "compare_frame_predictions",
     "consequence_delta",
     "contradict_boundary",
+    "evaluate_outcome",
     "observe_boundary",
     "require_testable_transition",
     "validate_boundary",
