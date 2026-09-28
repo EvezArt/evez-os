@@ -1,6 +1,7 @@
 """Evidence-bound recursive measurement and model-divergence auditing."""
 
 from .recursive_measurement import (
+    AuditSeal,
     CausalType,
     Discrepancy,
     EvidenceState,
@@ -11,6 +12,7 @@ from .recursive_measurement import (
 )
 
 __all__ = [
+    "AuditSeal",
     "CausalType",
     "Discrepancy",
     "EvidenceState",
