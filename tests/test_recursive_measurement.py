@@ -83,3 +83,46 @@ def test_contradiction_survives_missing_reproducibility():
 
     assert auditor.latest.discrepancies[0].state == EvidenceState.CONTRADICTED
     assert auditor.latest.residuals[0].state == EvidenceState.UNKNOWN
+
+
+def test_audit_seal_detects_last_record_tampering():
+    auditor = RecursiveAuditor()
+    auditor.add_generation(
+        generation="G0",
+        intention="record evidence",
+        artifact="audit trace",
+        execution="append",
+        observation="record exists",
+        source_refs=["E-002"],
+    )
+    seal = auditor.seal()
+    assert auditor.verify_seal(seal)
+
+    auditor.generations[0].observation = "rewritten after sealing"
+    assert not auditor.verify_seal(seal)
+
+
+def test_sealed_auditor_rejects_append():
+    auditor = RecursiveAuditor()
+    auditor.add_generation(
+        generation="G0",
+        intention="record evidence",
+        artifact="audit trace",
+        execution="append",
+        observation="record exists",
+        source_refs=["E-003"],
+    )
+    auditor.seal()
+
+    try:
+        auditor.add_generation(
+            generation="G1",
+            intention="continue",
+            artifact="audit trace",
+            execution="append",
+            observation="new record",
+            source_refs=["E-004"],
+        )
+    except RuntimeError:
+        return
+    raise AssertionError("sealed auditor accepted a new generation")
