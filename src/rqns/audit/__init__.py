@@ -22,6 +22,12 @@ from .recursive_measurement import (
     RecursiveAuditor,
     Residual,
 )
+from .semantic_atomography import (
+    SemanticAtom,
+    SemanticTomograph,
+    SemanticTransition,
+    build_tomograph,
+)
 
 __all__ = [
     "AllocationLedger",
@@ -37,6 +43,10 @@ __all__ = [
     "RecursiveAuditor",
     "RepresentationTransition",
     "Residual",
+    "SemanticAtom",
+    "SemanticTomograph",
+    "SemanticTransition",
+    "build_tomograph",
     "compare_frame_predictions",
     "contradict_boundary",
     "observe_boundary",
