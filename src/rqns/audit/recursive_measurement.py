@@ -1,10 +1,4 @@
-"""Evidence-bound recursive measurement.
-
-This module does not infer truth from labels. It records what was intended,
-materialized, executed, observed, and revised, then preserves the residuals
-that remain unexplained. It is deliberately dependency-free so it can audit
-RQNS components without changing their execution semantics.
-"""
+"""Evidence-bound recursive measurement and audit-of-auditor controls."""
 
 from __future__ import annotations
 
@@ -12,7 +6,7 @@ from dataclasses import asdict, dataclass, field
 from enum import Enum
 from hashlib import sha256
 import json
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 
 
 class EvidenceState(str, Enum):
@@ -87,16 +81,25 @@ class ModelDivergence:
     changed_dimensions: Tuple[str, ...] = ()
 
 
+@dataclass(frozen=True)
+class AuditSeal:
+    generation_count: int
+    head_hash: Optional[str]
+    manifest_hash: str
+
+
 class RecursiveAuditor:
     """Build a hash-linked genealogy of model/system discrepancies.
 
-    The auditor never promotes an unsupported explanation. A discrepancy or
-    residual without an observational reference remains UNKNOWN.
+    The audit seal makes the auditor itself auditable. Without an external
+    commitment, a mutable last record could be rewritten while the chain still
+    appears internally consistent.
     """
 
     def __init__(self) -> None:
         self.generations: List[GenerationTrace] = []
         self.divergence_history: List[ModelDivergence] = []
+        self._seal: Optional[AuditSeal] = None
 
     @property
     def latest(self) -> Optional[GenerationTrace]:
@@ -116,6 +119,8 @@ class RecursiveAuditor:
         residuals: Optional[Iterable[Residual]] = None,
         model_revision: Optional[str] = None,
     ) -> GenerationTrace:
+        if self._seal is not None:
+            raise RuntimeError("audit is sealed; append a new auditor instance for a new epoch")
         parent = self.latest
         trace = GenerationTrace(
             generation=generation,
@@ -174,6 +179,35 @@ class RecursiveAuditor:
             previous_hash = trace.content_hash()
         return True
 
+    def _manifest_bytes(self) -> bytes:
+        payload = {
+            "generations": [asdict(trace) for trace in self.generations],
+            "divergence_history": [asdict(item) for item in self.divergence_history],
+        }
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str).encode()
+
+    def seal(self) -> AuditSeal:
+        if not self.verify_chain():
+            raise ValueError("cannot seal an invalid generation chain")
+        seal = AuditSeal(
+            generation_count=len(self.generations),
+            head_hash=self.latest.content_hash() if self.latest else None,
+            manifest_hash=sha256(self._manifest_bytes()).hexdigest(),
+        )
+        self._seal = seal
+        return seal
+
+    def verify_seal(self, seal: Optional[AuditSeal] = None) -> bool:
+        expected = seal or self._seal
+        if expected is None or not self.verify_chain():
+            return False
+        current_head = self.latest.content_hash() if self.latest else None
+        return (
+            expected.generation_count == len(self.generations)
+            and expected.head_hash == current_head
+            and expected.manifest_hash == sha256(self._manifest_bytes()).hexdigest()
+        )
+
     def export_jsonl(self) -> str:
         return "\n".join(
             json.dumps(asdict(trace), sort_keys=True, default=str)
@@ -182,6 +216,7 @@ class RecursiveAuditor:
 
 
 __all__ = [
+    "AuditSeal",
     "CausalType",
     "Discrepancy",
     "EvidenceState",
