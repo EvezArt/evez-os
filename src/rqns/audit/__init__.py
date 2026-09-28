@@ -1,5 +1,10 @@
-"""Evidence-bound recursive measurement and model-divergence auditing."""
+"""Evidence-bound recursive measurement, allocation, and model-divergence auditing."""
 
+from .metacognitive_allocator import (
+    AllocationLedger,
+    Investigation,
+    RepresentationTransition,
+)
 from .recursive_measurement import (
     AuditSeal,
     CausalType,
@@ -12,12 +17,15 @@ from .recursive_measurement import (
 )
 
 __all__ = [
+    "AllocationLedger",
     "AuditSeal",
     "CausalType",
     "Discrepancy",
     "EvidenceState",
     "GenerationTrace",
+    "Investigation",
     "ModelDivergence",
     "RecursiveAuditor",
+    "RepresentationTransition",
     "Residual",
 ]
