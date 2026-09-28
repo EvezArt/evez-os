@@ -1,10 +1,17 @@
 """Evidence-bound recursive measurement, allocation, and model-divergence auditing."""
 
+from .evidence_boundary import (
+    EvidenceBoundary,
+    contradict_boundary,
+    observe_boundary,
+    validate_boundary,
+)
 from .metacognitive_allocator import (
     AllocationLedger,
     Investigation,
     RepresentationTransition,
 )
+from .metamordia import MetamordiaTransition, compare_frame_predictions, require_testable_transition
 from .recursive_measurement import (
     AuditSeal,
     CausalType,
@@ -21,11 +28,18 @@ __all__ = [
     "AuditSeal",
     "CausalType",
     "Discrepancy",
+    "EvidenceBoundary",
     "EvidenceState",
     "GenerationTrace",
     "Investigation",
+    "MetamordiaTransition",
     "ModelDivergence",
     "RecursiveAuditor",
     "RepresentationTransition",
     "Residual",
+    "compare_frame_predictions",
+    "contradict_boundary",
+    "observe_boundary",
+    "require_testable_transition",
+    "validate_boundary",
 ]
