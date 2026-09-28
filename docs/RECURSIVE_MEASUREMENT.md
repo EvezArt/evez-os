@@ -29,6 +29,10 @@ The intended and behavior-inferred models are kept separately. `compare_models()
 
 Discrepancies are classified as intention/artifact, artifact/execution, execution/observation, measurement/interpretation, temporal, provenance, causal, observer-effect, self-model, or unknown.
 
+## Audit the auditor
+
+A recursive audit is incomplete if the auditor itself can rewrite its latest record without detection. `RecursiveAuditor.seal()` creates an externalizable commitment containing generation count, head hash, and a manifest hash over the complete generation and model-divergence state. `verify_seal()` detects mutation, and a sealed auditor rejects further appends. The seal is a commitment, not a signature or proof of truth. It must be stored outside the mutable auditor state to provide meaningful independent anchoring.
+
 ## Current EVEZ-OS residuals identified during the initial audit
 
 - `PERSISTENCE_INTEGRITY`: the inspected EventSpine stores events in process memory; durable restart survival is not established.
