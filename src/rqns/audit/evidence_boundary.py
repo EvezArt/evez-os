@@ -1,7 +1,8 @@
 """Explicit boundaries between claims, execution, observation, and independence.
 
-The boundary is deliberately stricter than a provenance record: a claim cannot
-be promoted to VERIFIED merely because its own software produced an artifact.
+A boundary is stricter than a provenance record: a claim cannot be promoted to
+VERIFIED merely because its own software produced an artifact or because a
+caller asserted that an observation was independent.
 """
 
 from dataclasses import dataclass, replace
@@ -22,6 +23,7 @@ class EvidenceBoundary:
     independent_domain: str
     required_transition: str
     observed_transition: Optional[str]
+    independent_observation_ref: Optional[str]
     failure_mode: Optional[str]
     falsifier: str
     state: EvidenceState = EvidenceState.PROPOSED
@@ -36,6 +38,7 @@ class EvidenceBoundary:
             "independent_domain": self.independent_domain,
             "required_transition": self.required_transition,
             "observed_transition": self.observed_transition,
+            "independent_observation_ref": self.independent_observation_ref,
             "failure_mode": self.failure_mode,
             "falsifier": self.falsifier,
             "state": self.state.value,
@@ -60,8 +63,8 @@ def validate_boundary(boundary: EvidenceBoundary) -> str:
     if not all(required):
         raise ValueError("evidence boundary is incomplete")
     if boundary.state == EvidenceState.VERIFIED:
-        if not boundary.observed_transition or not boundary.independent_domain:
-            raise ValueError("VERIFIED requires observation and independent domain")
+        if not boundary.observed_transition or not boundary.independent_observation_ref:
+            raise ValueError("VERIFIED requires an observation and independent evidence reference")
     return boundary.content_hash()
 
 
@@ -69,18 +72,19 @@ def observe_boundary(
     boundary: EvidenceBoundary,
     observed_transition: str,
     *,
-    independently_observed: bool = False,
+    independent_observation_ref: Optional[str] = None,
 ) -> EvidenceBoundary:
     if not observed_transition:
         raise ValueError("observed transition is required")
     state = (
         EvidenceState.VERIFIED
-        if independently_observed
+        if independent_observation_ref
         else EvidenceState.SUPPORTED
     )
     updated = replace(
         boundary,
         observed_transition=observed_transition,
+        independent_observation_ref=independent_observation_ref,
         state=state,
     )
     validate_boundary(updated)
