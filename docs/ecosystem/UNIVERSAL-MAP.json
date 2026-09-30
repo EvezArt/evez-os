@@ -2,33 +2,158 @@
   "schema": "evez.universal-map.v1",
   "invariant": "every mapped surface uses the same observe-classify-decide-recover-witness-verify loop",
   "authority": "none-by-default",
-  "states": ["VERIFIED","SUPPORTED","INFERRED","PROPOSED","UNKNOWN","STALE","CONTRADICTED","RETRACTED","EVIDENCE_PENDING"],
+  "states": [
+    "VERIFIED",
+    "SUPPORTED",
+    "INFERRED",
+    "PROPOSED",
+    "UNKNOWN",
+    "STALE",
+    "CONTRADICTED",
+    "RETRACTED",
+    "EVIDENCE_PENDING"
+  ],
   "maps": [
-    {"map_id":"evez-os","kind":"repository","target":"EvezArt/evez-os"},
-    {"map_id":"evez-game","kind":"repository","target":"EvezArt/evez-game"},
-    {"map_id":"openclaw","kind":"agent","target":"OpenClaw"},
-    {"map_id":"evez-agentnet","kind":"repository","target":"EvezArt/evez-agentnet"},
-    {"map_id":"evez-vcl","kind":"service","target":"EvezArt/evez-vcl"},
-    {"map_id":"evez-api","kind":"service","target":"EvezArt/evez-api"},
-    {"map_id":"evez-store","kind":"service","target":"EvezArt/evez-store"},
-    {"map_id":"evez-meshnet","kind":"repository","target":"EvezArt/evez-meshnet"},
-    {"map_id":"evez-witness","kind":"repository","target":"EvezArt/evez-witness"},
-    {"map_id":"evez-guard","kind":"repository","target":"EvezArt/evez-guard"},
-    {"map_id":"evez-skills","kind":"repository","target":"EvezArt/evez-skills"},
-    {"map_id":"evez-net","kind":"repository","target":"EvezArt/evez-net"},
-    {"map_id":"evez-site","kind":"ui","target":"EvezArt/evez-site"},
-    {"map_id":"evez-vercel","kind":"deployment","target":"EvezArt/evez-vercel"},
-    {"map_id":"supabase","kind":"data","target":"connected EVEZ Supabase project"},
-    {"map_id":"n8n","kind":"workflow","target":"EVEZ n8n workflows"},
-    {"map_id":"figma","kind":"ui","target":"EVEZ Crossover Command Atlas"},
-    {"map_id":"manus","kind":"integration","target":"Manus"},
-    {"map_id":"hugging-face","kind":"integration","target":"Hugging Face"},
-    {"map_id":"linkedin","kind":"integration","target":"LinkedIn"},
-    {"map_id":"netlify","kind":"deployment","target":"Netlify EVEZ projects"},
-    {"map_id":"nvidia-bionemo","kind":"integration","target":"NVIDIA BioNeMo Agent Toolkit"},
-    {"map_id":"tailscale","kind":"integration","target":"Tailscale"},
-    {"map_id":"openai-platform","kind":"integration","target":"OpenAI Platform"},
-    {"map_id":"evidence-spine","kind":"data","target":"EVEZ append-only evidence spine"},
-    {"map_id":"carets-alienware","kind":"research","target":"CARET/Alienware evidence map"}
-  ]
+    {
+      "map_id": "evez-os",
+      "kind": "repository",
+      "target": "EvezArt/evez-os"
+    },
+    {
+      "map_id": "evez-game",
+      "kind": "repository",
+      "target": "EvezArt/evez-game"
+    },
+    {
+      "map_id": "openclaw",
+      "kind": "agent",
+      "target": "OpenClaw"
+    },
+    {
+      "map_id": "evez-agentnet",
+      "kind": "repository",
+      "target": "EvezArt/evez-agentnet"
+    },
+    {
+      "map_id": "evez-vcl",
+      "kind": "service",
+      "target": "EvezArt/evez-vcl"
+    },
+    {
+      "map_id": "evez-api",
+      "kind": "service",
+      "target": "EvezArt/evez-api"
+    },
+    {
+      "map_id": "evez-store",
+      "kind": "service",
+      "target": "EvezArt/evez-store"
+    },
+    {
+      "map_id": "evez-meshnet",
+      "kind": "repository",
+      "target": "EvezArt/evez-meshnet"
+    },
+    {
+      "map_id": "evez-witness",
+      "kind": "repository",
+      "target": "EvezArt/evez-witness"
+    },
+    {
+      "map_id": "evez-guard",
+      "kind": "repository",
+      "target": "EvezArt/evez-guard"
+    },
+    {
+      "map_id": "evez-skills",
+      "kind": "repository",
+      "target": "EvezArt/evez-skills"
+    },
+    {
+      "map_id": "evez-net",
+      "kind": "repository",
+      "target": "EvezArt/evez-net"
+    },
+    {
+      "map_id": "evez-site",
+      "kind": "ui",
+      "target": "EvezArt/evez-site"
+    },
+    {
+      "map_id": "evez-vercel",
+      "kind": "deployment",
+      "target": "EvezArt/evez-vercel"
+    },
+    {
+      "map_id": "supabase",
+      "kind": "data",
+      "target": "connected EVEZ Supabase project"
+    },
+    {
+      "map_id": "n8n",
+      "kind": "workflow",
+      "target": "EVEZ n8n workflows"
+    },
+    {
+      "map_id": "figma",
+      "kind": "ui",
+      "target": "EVEZ Crossover Command Atlas"
+    },
+    {
+      "map_id": "manus",
+      "kind": "integration",
+      "target": "Manus"
+    },
+    {
+      "map_id": "hugging-face",
+      "kind": "integration",
+      "target": "Hugging Face"
+    },
+    {
+      "map_id": "linkedin",
+      "kind": "integration",
+      "target": "LinkedIn"
+    },
+    {
+      "map_id": "netlify",
+      "kind": "deployment",
+      "target": "Netlify EVEZ projects"
+    },
+    {
+      "map_id": "nvidia-bionemo",
+      "kind": "integration",
+      "target": "NVIDIA BioNeMo Agent Toolkit"
+    },
+    {
+      "map_id": "tailscale",
+      "kind": "integration",
+      "target": "Tailscale"
+    },
+    {
+      "map_id": "openai-platform",
+      "kind": "integration",
+      "target": "OpenAI Platform"
+    },
+    {
+      "map_id": "evidence-spine",
+      "kind": "data",
+      "target": "EVEZ append-only evidence spine"
+    },
+    {
+      "map_id": "carets-alienware",
+      "kind": "research",
+      "target": "CARET/Alienware evidence map"
+    }
+  ],
+  "reconciliation": {
+    "contract": "MAP → OBSERVATION → EVIDENCE → FAILURE_CLASS → NEXT_ACTION → WITNESS → VERIFY → RECONCILE",
+    "states": [
+      "UNKNOWN",
+      "EVIDENCE_PENDING",
+      "ACTIONABLE",
+      "VERIFIED",
+      "CONTRADICTED"
+    ],
+    "rule": "registration is not health; supplied evidence is required for state promotion"
+  }
 }
