@@ -5,6 +5,7 @@ Executable epistemic/adversarial harness for bounded synthetic testing.
 
 from .compiler import ClaimCompiler
 from .dependencies import DependencyGraph
+from .decision import NextAction, OperationalDecision, OperationalPlanner
 from .epistemics import ClaimLineage, Falsifier, PromotionResult, promote
 from .federation import WitnessFederation
 from .integration_bridge import EvidenceBridge
@@ -23,6 +24,7 @@ from .witness import WitnessEnvelope, witness
 __all__ = [
     "CandidateTest", "ClaimCompiler", "ClaimLineage", "DependencyGraph",
     "EpistemicState", "EvidenceBridge", "EvidenceRuntime", "EvidenceSpine",
+    "NextAction", "OperationalDecision", "OperationalPlanner",
     "FailureSurface", "FailureClass", "Falsifier", "Invariant", "InvariantBattery", "Mutation",
     "MutationRegistry", "OptimizationDecision", "PromotionResult", "Relation",
     "RecoveryAlternative", "RecoveryBudget", "RecoveryCatalog", "RecoveryCoordinator",
