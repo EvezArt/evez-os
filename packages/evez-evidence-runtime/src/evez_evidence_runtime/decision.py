@@ -56,7 +56,7 @@ class OperationalPlanner:
         lineage: ClaimLineage,
         failure_class: FailureClass | None = None,
         tests: Iterable[CandidateTest] = (),
-        recoveries: Iterable[RecoveryAlternative] = (),
+        recoveries: Iterable[RecoveryAlternative] | None = None,
         allow_human: bool = False,
     ) -> OperationalDecision:
         if lineage.contradictions:
@@ -65,6 +65,23 @@ class OperationalPlanner:
                 None,
                 EpistemicState.CONTRADICTED,
                 "Unresolved contradiction blocks ordinary execution.",
+            )
+
+        if failure_class == FailureClass.UNKNOWN:
+            tests_result = self.test_selector.select(tests)
+            if tests_result.selected is not None:
+                return OperationalDecision(
+                    NextAction.TEST,
+                    tests_result.selected,
+                    lineage.state,
+                    "Unknown operational state requires discriminating evidence before recovery is selected.",
+                    test_decision=tests_result,
+                )
+            return OperationalDecision(
+                NextAction.EVIDENCE_PENDING,
+                None,
+                lineage.state,
+                "Unknown state has no admissible discriminating test.",
             )
 
         if failure_class is not None:
@@ -82,10 +99,11 @@ class OperationalPlanner:
                     lineage.state,
                     "Authorization failure cannot self-authorize its own recovery.",
                 )
+            candidates = tuple(recoveries) if recoveries is not None else RecoveryCatalog.for_failure(failure_class)
             recovery = self.recovery_engine.plan(
                 failure_id=lineage.claim_id,
                 failure_class=failure_class,
-                alternatives=recoveries,
+                alternatives=candidates,
                 allow_human=allow_human,
             )
             if recovery.selected is not None:
