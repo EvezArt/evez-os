@@ -210,3 +210,166 @@ class RecoveryEngine:
             compensation=compensation,
             evidence_pending=state in {RecoveryState.EVIDENCE_PENDING, RecoveryState.CAIN},
         )
+
+
+class RecoveryCatalog:
+    """Generate conservative standard alternatives without granting execution authority."""
+
+    @staticmethod
+    def for_failure(failure_class: FailureClass) -> tuple[RecoveryAlternative, ...]:
+        common = {
+            "safe": True, "authorized": True, "observable": True, "reversible": True,
+            "idempotent": True, "compensatable": False, "cost": 1.0, "risk": 0.1,
+            "information_gain": 1.0, "blast_radius": 0.1,
+        }
+        if failure_class == FailureClass.TRANSIENT:
+            return (
+                RecoveryAlternative(
+                    action_id="bounded-retry", description="Retry within a finite budget.",
+                    failure_classes=frozenset({failure_class}), retryable=True,
+                    expected_observation="same dependency succeeds", **common
+                ),
+                RecoveryAlternative(
+                    action_id="half-open-probe", description="Probe dependency recovery before reopening traffic.",
+                    failure_classes=frozenset({failure_class}), expected_observation="probe succeeds",
+                    cost=0.5, information_gain=2.0, **{k: v for k, v in common.items() if k not in {"cost", "information_gain"}}
+                ),
+                RecoveryAlternative(
+                    action_id="defer", description="Defer execution without asserting recovery.",
+                    failure_classes=frozenset({failure_class}), reversible=True,
+                    expected_observation="work remains queued", cost=0.2, risk=0.0,
+                    information_gain=1.0, blast_radius=0.0, safe=True, authorized=True,
+                    observable=True, idempotent=True, compensatable=False
+                ),
+            )
+        if failure_class == FailureClass.CAPACITY:
+            return (
+                RecoveryAlternative(
+                    action_id="backpressure", description="Reduce intake and preserve bounded work.",
+                    failure_classes=frozenset({failure_class}), expected_observation="load decreases",
+                    **common
+                ),
+                RecoveryAlternative(
+                    action_id="defer", description="Defer work instead of exceeding capacity.",
+                    failure_classes=frozenset({failure_class}), expected_observation="work remains queued",
+                    cost=0.2, risk=0.0, information_gain=1.0, blast_radius=0.0,
+                    safe=True, authorized=True, observable=True, reversible=True,
+                    idempotent=True, compensatable=False
+                ),
+            )
+        if failure_class == FailureClass.INTEGRITY:
+            return (
+                RecoveryAlternative(
+                    action_id="quarantine", description="Isolate suspect state while preserving evidence.",
+                    failure_classes=frozenset({failure_class}), expected_observation="suspect state isolated",
+                    reversible=True, idempotent=True, compensatable=False, safe=True, authorized=True,
+                    observable=True, cost=1.0, risk=0.0, information_gain=4.0, blast_radius=0.0
+                ),
+                RecoveryAlternative(
+                    action_id="reconcile", description="Reconcile conflicting state against preserved evidence.",
+                    failure_classes=frozenset({failure_class}), expected_observation="conflict resolved or remains explicit",
+                    reversible=True, idempotent=True, compensatable=True, compensation="restore prior known-good state",
+                    safe=True, authorized=True, observable=True, cost=3.0, risk=0.2,
+                    information_gain=5.0, blast_radius=0.2
+                ),
+            )
+        if failure_class == FailureClass.AUTHORIZATION:
+            return (
+                RecoveryAlternative(
+                    action_id="deny-and-witness", description="Deny the unauthorized action and preserve the attempt as evidence.",
+                    failure_classes=frozenset({failure_class}), expected_observation="unauthorized action blocked",
+                    reversible=True, idempotent=True, compensatable=False, safe=True, authorized=True,
+                    observable=True, cost=0.1, risk=0.0, information_gain=3.0, blast_radius=0.0
+                ),
+                RecoveryAlternative(
+                    action_id="human-review", description="Escalate for explicit authority adjudication.",
+                    failure_classes=frozenset({failure_class}), requires_human=True,
+                    expected_observation="human authority decision recorded",
+                    reversible=True, idempotent=True, compensatable=False, safe=True, authorized=True,
+                    observable=True, cost=2.0, risk=0.1, information_gain=4.0, blast_radius=0.1
+                ),
+            )
+        if failure_class == FailureClass.UNKNOWN:
+            return (
+                RecoveryAlternative(
+                    action_id="discriminating-probe", description="Collect evidence that separates competing failure hypotheses.",
+                    failure_classes=frozenset({FailureClass.UNKNOWN}), expected_observation="hypothesis set narrows",
+                    reversible=True, idempotent=True, compensatable=False, safe=True, authorized=True,
+                    observable=True, cost=1.0, risk=0.0, information_gain=5.0, blast_radius=0.0
+                ),
+            )
+        return (
+            RecoveryAlternative(
+                action_id="quarantine", description="Isolate the failure without claiming recovery.",
+                failure_classes=frozenset({failure_class}), expected_observation="failure isolated",
+                reversible=True, idempotent=True, compensatable=False, safe=True, authorized=True,
+                observable=True, cost=1.0, risk=0.0, information_gain=2.0, blast_radius=0.0
+            ),
+        )
+
+
+@dataclass(frozen=True)
+class RecoveryWitness:
+    failure_id: str
+    decision: RecoveryDecision
+    selected_alternative: RecoveryAlternative | None
+
+
+class RecoveryCoordinator:
+    """Plans and witnesses recovery transitions; it never executes external effects."""
+
+    def __init__(self, *, engine: RecoveryEngine | None = None, spine=None) -> None:
+        self.engine = engine or RecoveryEngine()
+        self.spine = spine
+
+    def plan(self, *, failure_id: str, failure_class: FailureClass, alternatives: Iterable[RecoveryAlternative] | None = None, allow_human: bool = False) -> RecoveryWitness:
+        candidates = tuple(alternatives) if alternatives is not None else RecoveryCatalog.for_failure(failure_class)
+        decision = self.engine.plan(
+            failure_id=failure_id,
+            failure_class=failure_class,
+            alternatives=candidates,
+            allow_human=allow_human,
+        )
+        selected = next((a for a in candidates if a.action_id == decision.selected), None)
+        if self.spine is not None:
+            self.spine.append("recovery_planned", {
+                "failure_id": failure_id,
+                "failure_class": failure_class.value,
+                "selected": decision.selected,
+                "ranked": list(decision.ranked),
+                "rejected": decision.rejected,
+                "state": decision.state.value,
+            })
+        return RecoveryWitness(failure_id, decision, selected)
+
+    def attempt(self, *, witness: RecoveryWitness) -> bool:
+        allowed = witness.decision.selected is not None and self.engine.begin_attempt()
+        if self.spine is not None:
+            self.spine.append("recovery_attempt", {
+                "failure_id": witness.failure_id,
+                "action_id": witness.decision.selected,
+                "allowed": allowed,
+            })
+        return allowed
+
+    def observe(self, *, witness: RecoveryWitness, expected: bool, observed: bool, contradictory: bool = False, observation: str = "") -> RecoveryReceipt:
+        state = self.engine.classify_observation(expected=expected, observed=observed, contradictory=contradictory)
+        receipt = self.engine.receipt(
+            failure_id=witness.failure_id,
+            action_id=witness.decision.selected,
+            failure_class=witness.selected_alternative.failure_classes.pop() if witness.selected_alternative else FailureClass.UNKNOWN,
+            state=state,
+            observation=observation,
+            compensation=witness.selected_alternative.compensation if witness.selected_alternative else None,
+        )
+        if self.spine is not None:
+            self.spine.append("recovery_outcome", {
+                "failure_id": receipt.failure_id,
+                "action_id": receipt.action_id,
+                "failure_class": receipt.failure_class.value,
+                "state": receipt.state.value,
+                "observation": receipt.observation,
+                "compensation": receipt.compensation,
+                "evidence_pending": receipt.evidence_pending,
+            })
+        return receipt
