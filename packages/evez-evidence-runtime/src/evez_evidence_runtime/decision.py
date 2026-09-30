@@ -9,6 +9,7 @@ from enum import Enum
 from typing import Iterable
 
 from .epistemics import ClaimLineage
+from .failure import FailureClassifier, FailureObservation
 from .optimizer import CandidateTest, OptimizationDecision, TestSelector
 from .ontology import EpistemicState
 from .recovery import (
@@ -49,6 +50,24 @@ class OperationalPlanner:
     ) -> None:
         self.test_selector = test_selector or TestSelector()
         self.recovery_engine = recovery_engine or RecoveryEngine()
+
+    def decide_from_observation(
+        self,
+        *,
+        lineage: ClaimLineage,
+        observation: FailureObservation,
+        tests: Iterable[CandidateTest] = (),
+        recoveries: Iterable[RecoveryAlternative] | None = None,
+        allow_human: bool = False,
+    ) -> OperationalDecision:
+        classification = FailureClassifier().classify(observation)
+        return self.decide(
+            lineage=lineage,
+            failure_class=classification.failure_class,
+            tests=tests,
+            recoveries=recoveries,
+            allow_human=allow_human,
+        )
 
     def decide(
         self,
