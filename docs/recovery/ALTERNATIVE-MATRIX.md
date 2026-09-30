@@ -36,3 +36,12 @@ A runtime failure does not authorize the next action. Evidence about the failure
 - UNKNOWN means evidence is insufficient to establish success or failure.
 - CONTRADICTION means relevant observations disagree.
 - A recovery receipt proves that a recovery decision was recorded. It does not prove the underlying system recovered.
+
+
+## Recovery ladder
+
+A failed recovery attempt is retained as evidence and excluded from immediate reselection. The coordinator can advance to the next admissible alternative without silently resetting the failure history:
+
+`ATTEMPT → OBSERVE → NEXT_ALTERNATIVE → FILTER(ALREADY_ATTEMPTED) → SELECT`
+
+This creates bounded fallback depth rather than an unbounded retry storm. A later candidate is not interpreted as proof that the prior candidate was safe, correct, or successful.
