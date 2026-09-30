@@ -60,3 +60,26 @@ A receipt establishes that this runtime executed a bounded test and recorded its
 An optimization result establishes only a selected experiment under the current candidate set, constraints, budget, and evaluator. It does not establish a global optimum.
 
 A VERIFIED promotion requires preserved observations, tests, falsifiers, no unresolved contradiction in the lineage, and new evidence. Otherwise the promotion is blocked.
+
+## Recovery optimization
+
+Recovery is a separate optimization problem from experiment selection. The recovery engine classifies a failure, generates admissible alternatives, applies safety/authority/observability/budget gates, removes dominated actions, and selects a bounded candidate without executing it.
+
+Supported recovery states include `OBSERVED_FAILURE → CLASSIFIED → ALTERNATIVES_GENERATED → ALTERNATIVES_FILTERED → RECOVERY_SELECTED → EXECUTING → VERIFIED_RECOVERY / NEXT_ALTERNATIVE / CAIN / EVIDENCE_PENDING / QUARANTINED`.
+
+Hard recovery rules include:
+
+- unsafe actions are rejected;
+- unauthorized actions are rejected;
+- non-observable actions are rejected;
+- retries require idempotency or explicit compensation;
+- risk and blast radius are budgeted;
+- dominated alternatives are pruned;
+- integrity failures route toward CAIN/quarantine rather than fabricated recovery;
+- a recovery decision is not evidence that recovery occurred.
+
+Run the synthetic recovery planner with:
+
+```bash
+PYTHONPATH=src python -m evez_evidence_runtime.cli recover
+```
