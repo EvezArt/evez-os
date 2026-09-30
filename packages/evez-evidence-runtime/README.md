@@ -83,3 +83,22 @@ Run the synthetic recovery planner with:
 ```bash
 PYTHONPATH=src python -m evez_evidence_runtime.cli recover
 ```
+
+
+## Unified operational planner
+
+The runtime now has a planner that arbitrates between evidence collection and recovery instead of treating every failure as a retry problem:
+
+`CLAIM STATE + FAILURE CLASS + CANDIDATES → NEXT ACTION`
+
+Possible outputs are:
+
+- `TEST`: gather discriminating evidence;
+- `RECOVER`: select a bounded recovery alternative;
+- `QUARANTINE`: preserve a contradiction or unsafe authority boundary;
+- `HUMAN_REVIEW`: require explicit authority adjudication;
+- `EVIDENCE_PENDING`: refuse to manufacture an answer;
+- `NO_ACTION`: no bounded action is required.
+
+The planner applies contradiction and authorization gates before ordinary recovery selection. A system therefore cannot use "recovery" as a backdoor for authority escalation.
+
