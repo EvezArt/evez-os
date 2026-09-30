@@ -5,6 +5,7 @@ Executable epistemic/adversarial harness for bounded synthetic testing.
 
 from .compiler import ClaimCompiler
 from .dependencies import DependencyGraph
+from .epistemics import ClaimLineage, Falsifier, PromotionResult, promote
 from .federation import WitnessFederation
 from .integration_bridge import EvidenceBridge
 from .invariants import Invariant, InvariantBattery
@@ -19,12 +20,13 @@ from .threat import ThreatCase, ThreatEngine
 from .witness import WitnessEnvelope, witness
 
 __all__ = [
-    "CandidateTest", "ClaimCompiler", "DependencyGraph", "EpistemicState",
-    "EvidenceBridge", "EvidenceRuntime", "EvidenceSpine", "FailureSurface",
-    "Invariant", "InvariantBattery", "Mutation", "MutationRegistry",
-    "OptimizationDecision", "Relation", "RuntimeResult", "SelfAuditor",
-    "SurfaceMapper", "TestSelector", "ThreatCase", "ThreatEngine",
-    "WitnessEnvelope", "WitnessFederation", "witness",
+    "CandidateTest", "ClaimCompiler", "ClaimLineage", "DependencyGraph",
+    "EpistemicState", "EvidenceBridge", "EvidenceRuntime", "EvidenceSpine",
+    "FailureSurface", "Falsifier", "Invariant", "InvariantBattery", "Mutation",
+    "MutationRegistry", "OptimizationDecision", "PromotionResult", "Relation",
+    "RuntimeResult", "SelfAuditor", "SurfaceMapper", "TestSelector",
+    "ThreatCase", "ThreatEngine", "WitnessEnvelope", "WitnessFederation",
+    "promote", "witness",
 ]
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
