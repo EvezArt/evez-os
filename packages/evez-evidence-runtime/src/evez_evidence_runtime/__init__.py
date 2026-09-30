@@ -5,6 +5,7 @@ Executable epistemic/adversarial harness for bounded synthetic testing.
 
 from .compiler import ClaimCompiler
 from .dependencies import DependencyGraph
+from .failure import FailureClassification, FailureClassifier, FailureObservation, FailureSignal
 from .decision import NextAction, OperationalDecision, OperationalPlanner
 from .epistemics import ClaimLineage, Falsifier, PromotionResult, promote
 from .federation import WitnessFederation
@@ -34,4 +35,4 @@ __all__ = [
     "promote", "witness",
 ]
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
