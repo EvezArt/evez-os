@@ -7,6 +7,7 @@ from .invariants import InvariantBattery, InvariantResult
 from .observer import Observation, observe
 from .registry import MutationRegistry, default_registry
 from .rollback import RollbackController
+from .recovery import FailureClass, RecoveryAlternative, RecoveryCoordinator, RecoveryReceipt, RecoveryWitness
 from .spine import EvidenceSpine
 from .surface import FailureSurface, SurfaceMapper
 from .threat import ThreatEngine
@@ -31,6 +32,45 @@ class EvidenceRuntime:
         self.mutations = mutations or default_registry()
         self.rollback_controller = rollback or RollbackController()
         self.compiler = ClaimCompiler()
+        self.recovery = RecoveryCoordinator(spine=spine)
+
+    def plan_recovery(
+        self,
+        *,
+        failure_id: str,
+        failure_class: FailureClass,
+        alternatives: list[RecoveryAlternative] | None = None,
+        allow_human: bool = False,
+    ) -> RecoveryWitness:
+        """Create an evidence-backed recovery plan without executing the action."""
+        return self.recovery.plan(
+            failure_id=failure_id,
+            failure_class=failure_class,
+            alternatives=alternatives,
+            allow_human=allow_human,
+        )
+
+    def begin_recovery(self, *, witness: RecoveryWitness) -> bool:
+        """Consume a bounded recovery attempt and witness the authorization gate."""
+        return self.recovery.attempt(witness=witness)
+
+    def observe_recovery(
+        self,
+        *,
+        witness: RecoveryWitness,
+        expected: bool,
+        observed: bool,
+        contradictory: bool = False,
+        observation: str = "",
+    ) -> RecoveryReceipt:
+        """Classify recovery evidence without promoting a broader claim."""
+        return self.recovery.observe(
+            witness=witness,
+            expected=expected,
+            observed=observed,
+            contradictory=contradictory,
+            observation=observation,
+        )
 
     def run(self, *, run_id: str, claim: str, surface: FailureSurface, mutation_name: str, target_state: dict[str, Any], invariant_battery: InvariantBattery, required_evidence: list[str] | None = None) -> RuntimeResult:
         plan: TestPlan = self.compiler.compile(claim, observables=list(surface.observables), required_evidence=list(required_evidence or surface.observables))
