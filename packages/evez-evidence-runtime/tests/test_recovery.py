@@ -72,3 +72,43 @@ def test_unknown_is_not_success():
     assert RecoveryEngine.classify_observation(expected=True, observed=False) == RecoveryState.NEXT_ALTERNATIVE
     assert RecoveryEngine.classify_observation(expected=True, observed=True, contradictory=True) == RecoveryState.CAIN
     assert RecoveryEngine.classify_observation(expected=False, observed=True) == RecoveryState.EVIDENCE_PENDING
+
+
+def test_catalog_generates_conservative_unknown_probe():
+    from evez_evidence_runtime.recovery import RecoveryCatalog
+    items = RecoveryCatalog.for_failure(FailureClass.UNKNOWN)
+    assert [x.action_id for x in items] == ["discriminating-probe"]
+    assert items[0].safe and items[0].authorized and items[0].observable
+
+
+def test_coordinator_witnesses_plan_attempt_and_outcome():
+    import tempfile
+    from evez_evidence_runtime.recovery import RecoveryCoordinator
+    from evez_evidence_runtime.spine import EvidenceSpine
+
+    with tempfile.TemporaryDirectory() as tmp:
+        spine = EvidenceSpine(f"{tmp}/chain.jsonl")
+        coordinator = RecoveryCoordinator(spine=spine)
+        witness = coordinator.plan(
+            failure_id="coord-1",
+            failure_class=FailureClass.TRANSIENT,
+        )
+        assert witness.decision.selected is not None
+        assert coordinator.attempt(witness)
+        receipt = coordinator.observe(
+            witness=witness,
+            expected=True,
+            observed=False,
+            observation="synthetic dependency remained unavailable",
+        )
+        assert receipt.state == RecoveryState.NEXT_ALTERNATIVE
+        verification = spine.verify()
+        assert verification["valid"] is True
+        assert verification["events"] == 3
+
+
+def test_integrity_catalog_isolates_without_external_effects():
+    from evez_evidence_runtime.recovery import RecoveryCatalog
+    items = RecoveryCatalog.for_failure(FailureClass.INTEGRITY)
+    assert {x.action_id for x in items} == {"quarantine", "reconcile"}
+    assert all(x.safe and x.authorized and x.observable for x in items)
