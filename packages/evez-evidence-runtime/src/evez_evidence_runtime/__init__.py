@@ -9,6 +9,7 @@ from .federation import WitnessFederation
 from .integration_bridge import EvidenceBridge
 from .invariants import Invariant, InvariantBattery
 from .ontology import EpistemicState, Relation
+from .optimizer import CandidateTest, OptimizationDecision, TestSelector
 from .registry import Mutation, MutationRegistry
 from .runtime import EvidenceRuntime, RuntimeResult
 from .self_audit import SelfAuditor
@@ -18,11 +19,12 @@ from .threat import ThreatCase, ThreatEngine
 from .witness import WitnessEnvelope, witness
 
 __all__ = [
-    "ClaimCompiler", "DependencyGraph", "EpistemicState", "EvidenceBridge",
-    "EvidenceRuntime", "EvidenceSpine", "FailureSurface", "Invariant",
-    "InvariantBattery", "Mutation", "MutationRegistry", "Relation",
-    "RuntimeResult", "SelfAuditor", "SurfaceMapper", "ThreatCase",
-    "ThreatEngine", "WitnessEnvelope", "WitnessFederation", "witness",
+    "CandidateTest", "ClaimCompiler", "DependencyGraph", "EpistemicState",
+    "EvidenceBridge", "EvidenceRuntime", "EvidenceSpine", "FailureSurface",
+    "Invariant", "InvariantBattery", "Mutation", "MutationRegistry",
+    "OptimizationDecision", "Relation", "RuntimeResult", "SelfAuditor",
+    "SurfaceMapper", "TestSelector", "ThreatCase", "ThreatEngine",
+    "WitnessEnvelope", "WitnessFederation", "witness",
 ]
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
