@@ -61,3 +61,18 @@ def test_authorization_may_escalate_only_with_explicit_human_gate():
         allow_human=True,
     )
     assert decision.action == NextAction.HUMAN_REVIEW
+
+
+def test_planner_classifies_structured_observation_before_recovery():
+    from evez_evidence_runtime.failure import FailureObservation, FailureSignal
+
+    lineage = ClaimLineage("c6", "dependency claim", state=EpistemicState.SUPPORTED)
+    decision = OperationalPlanner().decide_from_observation(
+        lineage=lineage,
+        observation=FailureObservation(
+            signals=frozenset({FailureSignal.DEPENDENCY_UNAVAILABLE}),
+            dependency_name="synthetic-dependency",
+        ),
+    )
+    assert decision.action == NextAction.RECOVER
+    assert decision.selected_id is not None
