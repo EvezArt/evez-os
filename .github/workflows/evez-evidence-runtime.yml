@@ -41,3 +41,8 @@ jobs:
         run: pytest -q packages/evez-evidence-runtime/tests
       - name: Run self-audit
         run: python -m evez_evidence_runtime.cli self-audit
+      - name: Run optimizer contract
+        run: |
+          python -m evez_evidence_runtime.cli optimize
+          python -m evez_evidence_runtime.cli optimize | grep -F '"selected": "direct_boundary_probe"'
+          python -m evez_evidence_runtime.cli optimize | grep -F '"unsafe_external_mutation": "unsafe"'
