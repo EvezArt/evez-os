@@ -15,6 +15,7 @@ from .ontology import EpistemicState, Relation
 from .optimizer import CandidateTest, OptimizationDecision, TestSelector
 from .maps import MapKind, MapSpec, UniversalMapRegistry
 from .reconcile import MapReconciliation, MapReconciler, ReconciliationState
+from .invention import CrossMapInventionEngine, Invention, InventionState, Transformation, CompatibilityResult
 from .registry import Mutation, MutationRegistry
 from .recovery import FailureClass, RecoveryAlternative, RecoveryBudget, RecoveryCatalog, RecoveryCoordinator, RecoveryDecision, RecoveryEngine, RecoveryReceipt, RecoveryState, RecoveryWitness
 from .runtime import EvidenceRuntime, RuntimeResult
