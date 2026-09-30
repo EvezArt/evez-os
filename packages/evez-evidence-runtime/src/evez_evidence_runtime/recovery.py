@@ -357,7 +357,7 @@ class RecoveryCoordinator:
         receipt = self.engine.receipt(
             failure_id=witness.failure_id,
             action_id=witness.decision.selected,
-            failure_class=witness.selected_alternative.failure_classes.pop() if witness.selected_alternative else FailureClass.UNKNOWN,
+            failure_class=next(iter(witness.selected_alternative.failure_classes)) if witness.selected_alternative else FailureClass.UNKNOWN,
             state=state,
             observation=observation,
             compensation=witness.selected_alternative.compensation if witness.selected_alternative else None,
