@@ -112,3 +112,34 @@ def test_integrity_catalog_isolates_without_external_effects():
     items = RecoveryCatalog.for_failure(FailureClass.INTEGRITY)
     assert {x.action_id for x in items} == {"quarantine", "reconcile"}
     assert all(x.safe and x.authorized and x.observable for x in items)
+
+
+def test_coordinator_advances_to_next_alternative_after_failed_attempt():
+    from evez_evidence_runtime.recovery import RecoveryCoordinator, RecoveryCatalog
+    engine = RecoveryEngine(budget=RecoveryBudget(max_attempts=3))
+    coordinator = RecoveryCoordinator(engine=engine)
+    candidates = RecoveryCatalog.for_failure(FailureClass.TRANSIENT)
+
+    first = coordinator.plan(
+        failure_id="ladder-1",
+        failure_class=FailureClass.TRANSIENT,
+        alternatives=candidates,
+    )
+    assert first.decision.selected == "half-open-probe"
+    assert coordinator.attempt(first)
+    failed = coordinator.observe(
+        witness=first,
+        expected=True,
+        observed=False,
+        observation="probe did not recover dependency",
+    )
+    assert failed.state == RecoveryState.NEXT_ALTERNATIVE
+
+    second = coordinator.next_alternative(
+        failure_id="ladder-1",
+        failure_class=FailureClass.TRANSIENT,
+        alternatives=candidates,
+    )
+    assert second.decision.selected != first.decision.selected
+    assert first.decision.selected in second.decision.rejected
+    assert second.decision.rejected[first.decision.selected] == "already-attempted"
