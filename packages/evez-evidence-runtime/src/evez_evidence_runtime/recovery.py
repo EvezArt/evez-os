@@ -137,11 +137,15 @@ class RecoveryEngine:
         failure_class: FailureClass,
         alternatives: Iterable[RecoveryAlternative],
         allow_human: bool = False,
+        excluded_action_ids: frozenset[str] = frozenset(),
     ) -> RecoveryDecision:
         items = list(alternatives)
         rejected: dict[str, str] = {}
         eligible: list[RecoveryAlternative] = []
         for a in items:
+            if a.action_id in excluded_action_ids:
+                rejected[a.action_id] = "already-attempted"
+                continue
             ok, reason = self._eligible(a, failure_class, allow_human=allow_human)
             if ok and (a.risk > self.budget.max_risk or a.blast_radius > self.budget.max_blast_radius):
                 ok, reason = False, "budget-exceeded"
@@ -321,14 +325,17 @@ class RecoveryCoordinator:
     def __init__(self, *, engine: RecoveryEngine | None = None, spine=None) -> None:
         self.engine = engine or RecoveryEngine()
         self.spine = spine
+        self._attempted: dict[str, set[str]] = {}
 
     def plan(self, *, failure_id: str, failure_class: FailureClass, alternatives: Iterable[RecoveryAlternative] | None = None, allow_human: bool = False) -> RecoveryWitness:
         candidates = tuple(alternatives) if alternatives is not None else RecoveryCatalog.for_failure(failure_class)
+        excluded = frozenset(self._attempted.get(failure_id, set()))
         decision = self.engine.plan(
             failure_id=failure_id,
             failure_class=failure_class,
             alternatives=candidates,
             allow_human=allow_human,
+            excluded_action_ids=excluded,
         )
         selected = next((a for a in candidates if a.action_id == decision.selected), None)
         if self.spine is not None:
@@ -344,13 +351,40 @@ class RecoveryCoordinator:
 
     def attempt(self, *, witness: RecoveryWitness) -> bool:
         allowed = witness.decision.selected is not None and self.engine.begin_attempt()
+        if allowed and witness.decision.selected is not None:
+            self._attempted.setdefault(witness.failure_id, set()).add(witness.decision.selected)
         if self.spine is not None:
             self.spine.append("recovery_attempt", {
                 "failure_id": witness.failure_id,
                 "action_id": witness.decision.selected,
                 "allowed": allowed,
+                "attempt_index": len(self._attempted.get(witness.failure_id, set())),
             })
         return allowed
+
+    def next_alternative(
+        self,
+        *,
+        failure_id: str,
+        failure_class: FailureClass,
+        alternatives: Iterable[RecoveryAlternative] | None = None,
+        allow_human: bool = False,
+    ) -> RecoveryWitness:
+        """Select the next admissible alternative without pretending the prior one succeeded."""
+        witness = self.plan(
+            failure_id=failure_id,
+            failure_class=failure_class,
+            alternatives=alternatives,
+            allow_human=allow_human,
+        )
+        if self.spine is not None:
+            self.spine.append("recovery_transition", {
+                "failure_id": failure_id,
+                "from_state": RecoveryState.NEXT_ALTERNATIVE.value,
+                "to_action": witness.decision.selected,
+                "attempted": sorted(self._attempted.get(failure_id, set())),
+            })
+        return witness
 
     def observe(self, *, witness: RecoveryWitness, expected: bool, observed: bool, contradictory: bool = False, observation: str = "") -> RecoveryReceipt:
         state = self.engine.classify_observation(expected=expected, observed=observed, contradictory=contradictory)
