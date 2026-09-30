@@ -12,6 +12,7 @@ from .invariants import Invariant, InvariantBattery
 from .ontology import EpistemicState, Relation
 from .optimizer import CandidateTest, OptimizationDecision, TestSelector
 from .registry import Mutation, MutationRegistry
+from .recovery import FailureClass, RecoveryAlternative, RecoveryBudget, RecoveryDecision, RecoveryEngine, RecoveryReceipt, RecoveryState
 from .runtime import EvidenceRuntime, RuntimeResult
 from .self_audit import SelfAuditor
 from .spine import EvidenceSpine
@@ -24,6 +25,8 @@ __all__ = [
     "EpistemicState", "EvidenceBridge", "EvidenceRuntime", "EvidenceSpine",
     "FailureSurface", "Falsifier", "Invariant", "InvariantBattery", "Mutation",
     "MutationRegistry", "OptimizationDecision", "PromotionResult", "Relation",
+    "FailureClass", "RecoveryAlternative", "RecoveryBudget", "RecoveryDecision",
+    "RecoveryEngine", "RecoveryReceipt", "RecoveryState",
     "RuntimeResult", "SelfAuditor", "SurfaceMapper", "TestSelector",
     "ThreatCase", "ThreatEngine", "WitnessEnvelope", "WitnessFederation",
     "promote", "witness",
