@@ -9,7 +9,7 @@ def test_arena_competes_on_experiments_not_truth():
         ExperimentProposal(
             "p-a", "i-a",
             CandidateTest("t-a", "a", 10, 2, 1, 2, .1, True, True, True, True,
-                          dependency_unlock=2, reversibility=1),
+                          dependency_unlock=1, reversibility=1),
         ),
         ExperimentProposal(
             "p-b", "i-b",
