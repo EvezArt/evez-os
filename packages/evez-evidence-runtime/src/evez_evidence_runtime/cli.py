@@ -6,6 +6,7 @@ import tempfile
 from .dependencies import DependencyGraph
 from .invariants import authorization_battery
 from .optimizer import CandidateTest, TestSelector
+from .recovery import FailureClass, RecoveryAlternative, RecoveryEngine
 from .runtime import EvidenceRuntime
 from .spine import EvidenceSpine
 from .surface import SurfaceMapper
@@ -96,16 +97,41 @@ def run_optimization_demo() -> dict:
         "rationale": list(decision.rationale),
     }
 
+
+def run_recovery_demo() -> dict:
+    engine = RecoveryEngine()
+    alternatives = [
+        RecoveryAlternative(
+            action_id="bounded-idempotent-retry",
+            description="Retry a synthetic transient dependency operation once.",
+            failure_classes=frozenset({FailureClass.TRANSIENT}),
+            safe=True, authorized=True, observable=True, reversible=True,
+            idempotent=True, compensatable=False, cost=1.0, risk=0.1,
+            information_gain=3.0, blast_radius=0.1, retryable=True,
+            expected_observation="dependency responds",
+        ),
+        RecoveryAlternative(
+            action_id="unauthorized-external-mutation",
+            description="External mutation outside the runtime boundary.",
+            failure_classes=frozenset({FailureClass.TRANSIENT}),
+            safe=False, authorized=False, observable=True, reversible=False,
+            idempotent=False, compensatable=False, cost=1.0, risk=10.0,
+            information_gain=100.0, blast_radius=10.0,
+        ),
+    ]
+    d = engine.plan(failure_id="demo-transient", failure_class=FailureClass.TRANSIENT, alternatives=alternatives)
+    return {"selected": d.selected, "ranked": list(d.ranked), "rejected": d.rejected, "state": d.state.value, "rationale": list(d.rationale)}
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="EVEZ Evidence Runtime")
     parser.add_argument(
         "command",
         nargs="?",
         default="self-audit",
-        choices=["self-audit", "optimize"],
+        choices=["self-audit", "optimize", "recover"],
     )
     args = parser.parse_args()
-    output = run_demo() if args.command == "self-audit" else run_optimization_demo()
+    output = run_demo() if args.command == "self-audit" else (run_optimization_demo() if args.command == "optimize" else run_recovery_demo())
     print(json.dumps(output, indent=2, sort_keys=True))
 
 if __name__ == "__main__":
