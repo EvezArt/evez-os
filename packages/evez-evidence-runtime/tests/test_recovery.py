@@ -125,7 +125,7 @@ def test_coordinator_advances_to_next_alternative_after_failed_attempt():
         failure_class=FailureClass.TRANSIENT,
         alternatives=candidates,
     )
-    assert first.decision.selected == "half-open-probe"
+    assert first.decision.selected == "defer"
     assert coordinator.attempt(first)
     failed = coordinator.observe(
         witness=first,
