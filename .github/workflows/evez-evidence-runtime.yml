@@ -46,3 +46,8 @@ jobs:
           python -m evez_evidence_runtime.cli optimize
           python -m evez_evidence_runtime.cli optimize | grep -F '"selected": "direct_boundary_probe"'
           python -m evez_evidence_runtime.cli optimize | grep -F '"unsafe_external_mutation": "unsafe"'
+      - name: Run recovery contract
+        run: |
+          python -m evez_evidence_runtime.cli recover
+          python -m evez_evidence_runtime.cli recover | grep -F '"selected": "bounded-idempotent-retry"'
+          python -m evez_evidence_runtime.cli recover | grep -F '"unauthorized-external-mutation": "unsafe"'
