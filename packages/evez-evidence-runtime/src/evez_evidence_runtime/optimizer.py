@@ -25,6 +25,21 @@ class CandidateTest:
     affects_claim: bool
     dependencies: frozenset[str] = frozenset()
     falsifiers: frozenset[str] = frozenset()
+    # Optional planning terms. These are not measurements of truth.
+    dependency_unlock: float = 1.0
+    reversibility: float = 1.0
+
+    def heuristic_value(self) -> float:
+        """Decision heuristic only; it never establishes epistemic truth."""
+        if self.cost < 0 or self.dependency_unlock < 0 or self.reversibility < 0:
+            return 0.0
+        return (
+            self.information_gain
+            * self.contradiction_resolution
+            * self.dependency_unlock
+            * self.reversibility
+            / max(self.cost, 1e-12)
+        )
 
 @dataclass(frozen=True)
 class OptimizationDecision:
@@ -104,11 +119,10 @@ class TestSelector:
                 survivors.append(item)
 
         def key(t: CandidateTest) -> tuple[float, float, float, float, float, str]:
-            ratio = t.information_gain / max(t.cost, 1e-12)
             return (
+                t.heuristic_value(),
                 t.contradiction_resolution,
-                ratio,
-                t.information_gain,
+                t.information_gain / max(t.cost, 1e-12),
                 t.reproducibility,
                 -t.risk,
                 t.test_id,

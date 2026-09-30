@@ -13,6 +13,10 @@ from .integration_bridge import EvidenceBridge
 from .invariants import Invariant, InvariantBattery
 from .ontology import EpistemicState, Relation
 from .optimizer import CandidateTest, OptimizationDecision, TestSelector
+from .maps import MapKind, MapSpec, UniversalMapRegistry
+from .reconcile import MapReconciliation, MapReconciler, ReconciliationState
+from .invention import CrossMapInventionEngine, Invention, InventionState, Transformation, CompatibilityResult
+from .evolution import ArenaDecision, EvolutionArena, ExperimentProposal, NegativeKnowledge
 from .registry import Mutation, MutationRegistry
 from .recovery import FailureClass, RecoveryAlternative, RecoveryBudget, RecoveryCatalog, RecoveryCoordinator, RecoveryDecision, RecoveryEngine, RecoveryReceipt, RecoveryState, RecoveryWitness
 from .runtime import EvidenceRuntime, RuntimeResult
@@ -27,11 +31,13 @@ __all__ = [
     "EpistemicState", "EvidenceBridge", "EvidenceRuntime", "EvidenceSpine",
     "NextAction", "OperationalDecision", "OperationalPlanner",
     "FailureSurface", "FailureClass", "Falsifier", "Invariant", "InvariantBattery", "Mutation",
-    "MutationRegistry", "OptimizationDecision", "PromotionResult", "Relation",
+    "MutationRegistry", "MapKind", "MapSpec", "UniversalMapRegistry", "OptimizationDecision", "PromotionResult", "Relation",
     "RecoveryAlternative", "RecoveryBudget", "RecoveryCatalog", "RecoveryCoordinator",
     "RecoveryDecision", "RecoveryEngine", "RecoveryReceipt", "RecoveryState", "RecoveryWitness",
     "RuntimeResult", "SelfAuditor", "SurfaceMapper", "TestSelector",
     "ThreatCase", "ThreatEngine", "WitnessEnvelope", "WitnessFederation",
+    "ArenaDecision", "EvolutionArena", "ExperimentProposal", "NegativeKnowledge",
+    "Invention", "InventionState", "Transformation", "CompatibilityResult", "CrossMapInventionEngine",
     "promote", "witness",
 ]
 
