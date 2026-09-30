@@ -26,6 +26,15 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e packages/evez-evidence-runtime
           python -m pip install pytest
+      - name: Repository security gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -RIn --exclude-dir=.git --exclude="*.md" "shell=True" src skills
+          ! grep -RIn --exclude-dir=.git --exclude="*.md" "eval(" src/services skills/evez-firmament/services
+          ! grep -RIn --exclude-dir=.git --exclude="*.md" "exec(" src/services skills/evez-firmament/services
+          grep -F "CLAIMED != MEASURED != REPLICATED != EXPLAINED" README.md
+          grep -F "PROVENANCE != TRUTH" README.md
       - name: Compile sources
         run: python -m compileall -q packages/evez-evidence-runtime/src
       - name: Run tests
