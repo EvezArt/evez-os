@@ -3,7 +3,7 @@
   "canonical_runtime": {
     "repository": "EvezArt/evez-os",
     "branch": "feat/evez-evidence-runtime",
-    "head_sha": "e25e1d49660d4b4989daa2f0728154450a04807c",
+    "head_sha": "2297c344785689b6701a0361ff755c984b33ccfa",
     "pull_request": "https://github.com/EvezArt/evez-os/pull/86"
   },
   "design": {
@@ -118,6 +118,96 @@
       "surface": "Tailscale",
       "state": "CAPABILITY_ONLY",
       "reason": "network management tooling, not generic artifact publication"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-api",
+      "state": "PUBLISHED",
+      "receipt": "88fa8a6f87072d83a4c8321272bea2adba06ce29"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-store",
+      "state": "PUBLISHED",
+      "receipt": "88fa8a6f87072d83a4c8321272bea2adba06ce29"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-outreach",
+      "state": "PUBLISHED",
+      "receipt": "88fa8a6f87072d83a4c8321272bea2adba06ce29"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-sentinel",
+      "state": "PUBLISHED",
+      "receipt": "88fa8a6f87072d83a4c8321272bea2adba06ce29"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-profit",
+      "state": "PUBLISHED",
+      "receipt": "88fa8a6f87072d83a4c8321272bea2adba06ce29"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez666-arg-canon",
+      "state": "PUBLISHED",
+      "receipt": "e8247adb355e8f507dfd835be297d26f4d0b7626"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-services",
+      "state": "PUBLISHED",
+      "receipt": "4ee83887ed675157a3def88c47ed12a30bdae52f"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-claw-deploy",
+      "state": "PUBLISHED",
+      "receipt": "fbae01d7657bc3a0373c36a1a201767bf5708b54"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-cli",
+      "state": "PUBLISHED",
+      "receipt": "d466a3fd356d3b59d959dd77fd29b163f0e9fca3"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-status",
+      "state": "PUBLISHED",
+      "receipt": "bbc6fedd4c564dea73192ac257983dab53565234"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-glitch",
+      "state": "PUBLISHED",
+      "receipt": "8cac4bb2cd0bf7cb04781faf14da5897161e1d22"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-trunk-automation",
+      "state": "PUBLISHED",
+      "receipt": "50a0012efe4289cf9d6c208a28460c49758e8895"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-witness",
+      "state": "PUBLISHED",
+      "receipt": "30f5c5e75f64779bab1f952925422dc77872a909"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-guard",
+      "state": "PUBLISHED",
+      "receipt": "79f3378102518883eba890091fff8d59a1638326"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/clawbreak",
+      "state": "PUBLISHED",
+      "receipt": "64a6799f51a798ee665a913dc6420995882797d5"
     }
   ],
   "_ci": {
