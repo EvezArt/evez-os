@@ -38,3 +38,28 @@ def test_spine_detects_tampering(tmp_path):
     raw = path.read_text(encoding="utf-8").replace('"x":2', '"x":9')
     path.write_text(raw, encoding="utf-8")
     assert spine.verify()["valid"] is False
+
+from evez_evidence_runtime.recovery import FailureClass, RecoveryState
+from evez_evidence_runtime.runtime import EvidenceRuntime
+from evez_evidence_runtime.spine import EvidenceSpine
+
+def test_runtime_facade_witnesses_recovery_cycle():
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        spine = EvidenceSpine(f"{tmp}/chain.jsonl")
+        runtime = EvidenceRuntime(spine=spine)
+        witness = runtime.plan_recovery(
+            failure_id="runtime-recovery-1",
+            failure_class=FailureClass.TRANSIENT,
+        )
+        assert witness.decision.selected is not None
+        assert runtime.begin_recovery(witness=witness)
+        receipt = runtime.observe_recovery(
+            witness=witness,
+            expected=True,
+            observed=True,
+            observation="synthetic dependency recovered",
+        )
+        assert receipt.state == RecoveryState.VERIFIED_RECOVERY
+        assert spine.verify()["valid"] is True
