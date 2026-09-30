@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "canonical_runtime": {
+    "repository": "EvezArt/evez-os",
+    "branch": "feat/evez-evidence-runtime",
+    "head_sha": "e25e1d49660d4b4989daa2f0728154450a04807c",
+    "pull_request": "https://github.com/EvezArt/evez-os/pull/86"
+  },
+  "design": {
+    "figma_file_key": "qwvBuY9QjnNNjckU2gkGEL",
+    "file_url": "https://www.figma.com/design/qwvBuY9QjnNNjckU2gkGEL"
+  },
+  "publication_receipts": [
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-os",
+      "state": "PUBLISHED",
+      "receipt": "e25e1d49660d4b4989daa2f0728154450a04807c"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-meshnet",
+      "state": "PUBLISHED",
+      "receipt": "27fac78bc9fbc85f86b7acca15a61028f33fcf5a"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-bridge",
+      "state": "PUBLISHED",
+      "receipt": "c1d2edff63ab381b5d9acbf83dd04acfa3b49962"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/awesome-evez",
+      "state": "PUBLISHED",
+      "receipt": "eb85371c8508e048c19b67c9778c9b5cd2dd903a"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-ai",
+      "state": "PUBLISHED",
+      "receipt": "77ae575873911c18c02c62a61f748dee65499824"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-federation",
+      "state": "PUBLISHED",
+      "receipt": "78d0d1ba5d4831a85f89287cac8be04fc44df244"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-search",
+      "state": "PUBLISHED",
+      "receipt": "9d3ce9020feb5fc9bbf4634ed2aded09b43cd772"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-site",
+      "state": "PUBLISHED",
+      "receipt": "6ba2d483ff68c79078734f3eb47a3e502605265e"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-vercel",
+      "state": "PUBLISHED",
+      "receipt": "ae69d6a072b766c3ac962fab422cc802be125965"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-agentnet#99",
+      "state": "OPEN_PR",
+      "receipt": "https://github.com/EvezArt/evez-agentnet/pull/99"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-net#6",
+      "state": "OPEN_PR",
+      "receipt": "https://github.com/EvezArt/evez-net/pull/6"
+    },
+    {
+      "surface": "GitHub",
+      "target": "EvezArt/evez-skills#11",
+      "state": "OPEN_PR",
+      "receipt": "https://github.com/EvezArt/evez-skills/pull/11"
+    },
+    {
+      "surface": "Manus",
+      "state": "BLOCKED",
+      "reason": "HTTP 429 credit limit exceeded"
+    },
+    {
+      "surface": "Supabase",
+      "state": "BLOCKED",
+      "reason": "public-schema table inspection timed out; no blind mutation"
+    },
+    {
+      "surface": "Netlify",
+      "state": "INSPECTED",
+      "project": "evez-spatial-network-ops",
+      "reason": "existing project identified; no deploy triggered without confirmed source linkage"
+    },
+    {
+      "surface": "Hugging Face",
+      "state": "LIMITED",
+      "reason": "connected inspection/search capability, no generic repository upload writer exposed"
+    },
+    {
+      "surface": "LinkedIn",
+      "state": "LIMITED",
+      "reason": "connected lookup capability, no publishing writer exposed"
+    },
+    {
+      "surface": "NVIDIA BioNeMo Agent Toolkit",
+      "state": "CAPABILITY_ONLY",
+      "reason": "technical tooling, not generic artifact publication"
+    },
+    {
+      "surface": "Tailscale",
+      "state": "CAPABILITY_ONLY",
+      "reason": "network management tooling, not generic artifact publication"
+    }
+  ],
+  "_ci": {
+    "run_id": 36686859815,
+    "workflow": "EVEZ Evidence Runtime",
+    "conclusion": "failure",
+    "note": "rerun requested; connector exposed no executable step logs. Do not treat as green."
+  },
+  "epistemic_rules": [
+    "DECLARED != EFFECTIVE",
+    "CLAIMED != MEASURED != REPLICATED != EXPLAINED",
+    "PROVENANCE != TRUTH"
+  ]
+}
