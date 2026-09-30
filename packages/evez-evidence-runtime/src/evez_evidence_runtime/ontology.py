@@ -1,8 +1,8 @@
 """Epistemic states and explicit status transitions."""
 from __future__ import annotations
-from enum import StrEnum
+from enum import Enum
 
-class EpistemicState(StrEnum):
+class EpistemicState(str, Enum):
     UNKNOWN = "UNKNOWN"
     PROPOSED = "PROPOSED"
     INFERRED = "INFERRED"
@@ -12,7 +12,7 @@ class EpistemicState(StrEnum):
     CONTRADICTED = "CONTRADICTED"
     RETRACTED = "RETRACTED"
 
-class Relation(StrEnum):
+class Relation(str, Enum):
     SUPPORTS = "SUPPORTS"
     CONTRADICTS = "CONTRADICTS"
     DEPENDS_ON = "DEPENDS_ON"
