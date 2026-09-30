@@ -315,6 +315,7 @@ class RecoveryCatalog:
 @dataclass(frozen=True)
 class RecoveryWitness:
     failure_id: str
+    failure_class: FailureClass
     decision: RecoveryDecision
     selected_alternative: RecoveryAlternative | None
 
@@ -347,7 +348,7 @@ class RecoveryCoordinator:
                 "rejected": decision.rejected,
                 "state": decision.state.value,
             })
-        return RecoveryWitness(failure_id, decision, selected)
+        return RecoveryWitness(failure_id, failure_class, decision, selected)
 
     def attempt(self, *, witness: RecoveryWitness) -> bool:
         allowed = witness.decision.selected is not None and self.engine.begin_attempt()
@@ -391,7 +392,7 @@ class RecoveryCoordinator:
         receipt = self.engine.receipt(
             failure_id=witness.failure_id,
             action_id=witness.decision.selected,
-            failure_class=next(iter(witness.selected_alternative.failure_classes)) if witness.selected_alternative else FailureClass.UNKNOWN,
+            failure_class=witness.failure_class,
             state=state,
             observation=observation,
             compensation=witness.selected_alternative.compensation if witness.selected_alternative else None,
