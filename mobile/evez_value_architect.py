@@ -27,12 +27,16 @@ from typing import Any
 
 try:
     from evez_architect import discover, polycentric_frontier
+    from evez_indivifluence import run as swarm_run
     from evez_toroid import run as toroidal_run
     from evez_unlock import calculate_unlocks, result_payload
+    from evez_yhwh import judge_context
 except ImportError:
     from mobile.evez_architect import discover, polycentric_frontier
+    from mobile.evez_indivifluence import run as swarm_run
     from mobile.evez_toroid import run as toroidal_run
     from mobile.evez_unlock import calculate_unlocks, result_payload
+    from mobile.evez_yhwh import judge_context
 
 
 VERSION = "evez-recursive-value-architect/v1"
@@ -602,6 +606,12 @@ def run(
     unlock_payload = result_payload(calculate_unlocks(context))
     system_discovery = discover(context)
     polycentric = polycentric_frontier(context, generations=max(1, generations))
+    swarm = swarm_run(
+        context,
+        generations=max(1, generations),
+        size=int(context.get("swarm", {}).get("size", 8)) if isinstance(context.get("swarm"), dict) else 8,
+    )
+    sovereign = judge_context(context)
     toroidal = toroidal_run(
         context,
         generations=max(1, toroidal_generations),
@@ -620,7 +630,9 @@ def run(
     parent_ids: tuple[str, ...] = ()
     architecture_sources = (
         polycentric["meta_architecture_sha256"],
+        swarm["swarm_architecture_sha256"],
         toroidal["toroidal_architecture_sha256"],
+        sovereign["sovereign_judgment_sha256"],
     )
 
     for generation in range(max(1, generations)):
@@ -650,6 +662,8 @@ def run(
         ("unlock_calculated", unlock_payload),
         ("reverse_engineering_observed", {"items": reverse_engineering}),
         ("polycentric_frontier_generated", {"meta_sha256": polycentric["meta_architecture_sha256"]}),
+        ("rogue_indivifluence_swarm_generated", {"sha256": swarm["swarm_architecture_sha256"]}),
+        ("sovereign_judgment_calculated", {"sha256": sovereign["sovereign_judgment_sha256"]}),
         ("toroidal_frontier_generated", {"sha256": toroidal["toroidal_architecture_sha256"]}),
         ("pareto_frontier_selected", {"candidate_ids": [x.candidate_id for x in frontier]}),
         ("lawful_acquisition_filtered", {"route_ids": [x.route_id for x in route_plan]}),
@@ -669,6 +683,8 @@ def run(
         "unlock": unlock_payload,
         "system_discovery": system_discovery,
         "polycentric_frontier": polycentric,
+        "rogue_indivifluence_swarm": swarm,
+        "sovereign_judge": sovereign,
         "toroidal_frontier": toroidal,
         "reverse_engineering": reverse_engineering,
         "candidates": [asdict(candidate) for candidate in candidates],
@@ -687,6 +703,11 @@ def run(
             "acquisition plan != acquisition execution",
             "proposal != activation",
             "bounded recursion != infinite execution",
+            "INFLUENCE != EVIDENCE",
+            "CONSENSUS != TRUTH",
+            "ROGUE_GENERATION != EXECUTION_AUTHORITY",
+            "INDIVIDUAL_IDENTITY != COLLECTIVE_OWNERSHIP",
+            "the sovereign judge persona is not execution authority",
         ],
     }
     digest_material = dict(result)
