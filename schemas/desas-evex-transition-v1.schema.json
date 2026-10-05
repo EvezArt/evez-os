@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evez.art/schemas/desas-evex-transition-v1.schema.json",
+  "title": "DESA-S EVEX Accountable Transition v1",
+  "allOf": [
+    {
+      "$ref": "https://evez.art/schemas/evex-state-transition-v1.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "transition": {
+          "type": "object",
+          "required": ["adaptation"],
+          "properties": {
+            "adaptation": {
+              "type": "object",
+              "required": [
+                "profile",
+                "domain_state_hash",
+                "sme_profile_hash",
+                "selection_receipt_hash",
+                "question_id",
+                "target_id"
+              ],
+              "properties": {
+                "profile": {"const": "desas-s.v1"},
+                "domain_state_hash": {"type": "string", "minLength": 1},
+                "sme_profile_hash": {"type": "string", "minLength": 1},
+                "selection_receipt_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "question_id": {"type": "string", "minLength": 1},
+                "target_id": {"type": "string", "minLength": 1}
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
