@@ -1,0 +1,39 @@
+{
+  "evex": "EVEX",
+  "version": 1,
+  "profile": "evez.exchange",
+  "kind": "capability.receipt",
+  "id": "wake-up-001-negative-promotion",
+  "created_at": "2026-10-05T00:00:00Z",
+  "state": "SUPPORTED",
+  "receipt": {
+    "capability_id": "deterministic.echo-uppercase",
+    "policy_decision": "AUTHORIZED",
+    "status": "SUCCEEDED",
+    "input_sha256": "68136b76dab844260eb3a760106d3813505d8e21b42c7d139b39c1cbaf82925f",
+    "output_sha256": "0c4e35fe026af4bf06b85af1a9383fd837e2f69a91844370fc470649955bbd15",
+    "runtime": {
+      "name": "evex-wake-up-negative-fixture",
+      "version": "1"
+    },
+    "transition": {
+      "claim_id": "claim-unknown-001",
+      "from_state": "UNKNOWN",
+      "to_state": "VERIFIED",
+      "promotion_denied": false,
+      "reason": "invalid fixture: unsupported promotion"
+    },
+    "observable": {
+      "output": "EVEZ-STATE",
+      "unsupported_claim_state": "VERIFIED",
+      "unknown_field_preserved": true,
+      "preserved_unknown_fields": {
+        "future_extension": "preserve-me"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "sha256": "27f23d4574b269ceab9eab3d102f3b14a7528d67767969e61f0633c1f62cb5be"
+  }
+}
