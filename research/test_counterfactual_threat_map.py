@@ -29,6 +29,19 @@ class CounterfactualThreatMapTests(unittest.TestCase):
         self.assertEqual(out["observed"]["unique_actors"], 2)
         self.assertEqual(out["observed"]["unique_sources"], 2)
 
+
+    def test_supported_signal_requires_temporal_replication(self):
+        rows = []
+        for hour in (0, 2):
+            base = f"2026-10-05T{hour:02d}:00:01Z"
+            rows.extend([
+                {"ts": base, "actor": "A", "source": "x", "text": "same template"},
+                {"ts": f"2026-10-05T{hour:02d}:00:02Z", "actor": "B", "source": "y", "text": "same template"},
+            ])
+        out = analyze(rows, bucket_seconds=600, replication_window_seconds=3600, permutations=200)
+        self.assertGreaterEqual(out["derived"]["replication_windows"], 2)
+        self.assertEqual(out["evidence_grade"], "E3")
+
     def test_missing_source_prevents_coordination_claim(self):
         rows = [
             {"ts": "2026-10-05T00:00:01Z", "actor": "A", "source": "only", "text": "same words one"},
