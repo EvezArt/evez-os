@@ -52,7 +52,18 @@ Source of truth:
                            v
                        spine event
 
-A mobile-first system should degrade gracefully. Losing the phone must not lose the system. Losing the remote mesh must not erase the local evidence. Losing one service must not silently turn a failed run into a success.
+A mobile-first system should degrade gracefully. Losing the phone must not lose the system.
+
+### Offline evidence protocol
+
+The operator has four distinct local states:
+
+- **recorded**: an observation is present in the hash chain
+- **queued**: the observation is waiting for remote delivery
+- **delivered**: the remote endpoint returned a 2xx response
+- **verified**: the local chain recomputes without a parent or digest mismatch
+
+The outbox is deliberately at-least-once. A network failure never deletes an event. Remote delivery uses an `Idempotency-Key` based on the local event UUID, but actual server-side idempotency depends on the receiver. Losing the remote mesh must not erase the local evidence. Losing one service must not silently turn a failed run into a success.
 
 ## Evidence rule
 
