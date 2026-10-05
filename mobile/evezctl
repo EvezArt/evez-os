@@ -166,6 +166,25 @@ authority_break_glass_cmd() {
     python "$(authority_py)" break-glass "$1" "$2"
   fi
 }
+candidate_py() {
+  printf '%s/mobile/evez_candidate.py' "$EVEZ_ROOT"
+}
+
+candidate_evaluate_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl candidate-evaluate CLAIMS_JSON\n' >&2
+    return 2
+  }
+  python "$(candidate_py)" evaluate "$1"
+}
+
+candidate_promote_cmd() {
+  [ "$#" -eq 4 ] || {
+    printf 'usage: evezctl candidate-promote CANDIDATE_ID EVALUATION_JSON REVIEWER_OPERATION REVIEWER_PUBLIC\n' >&2
+    return 2
+  }
+  python "$(candidate_py)" promote "$1" "$2" "$3" "$4"
+}
 
 status_cmd() {
   log "status endpoint=$EVEZ_ENDPOINT"
@@ -272,6 +291,8 @@ Commands:
   authority-quorum OPERATOR_FILE REVIEWER_FILE OPERATOR_PUBLIC REVIEWER_PUBLIC
   authority-epoch
   break-glass ACTION REASON [TTL_MINUTES]
+  candidate-evaluate CLAIMS_JSON
+  candidate-promote CANDIDATE_ID EVALUATION_JSON REVIEWER_OPERATION REVIEWER_PUBLIC
   pull
   deploy
   logs
@@ -303,6 +324,8 @@ case "$cmd" in
   authority-quorum) authority_quorum_cmd "$@" ;;
   authority-epoch) authority_epoch_cmd "$@" ;;
   break-glass) authority_break_glass_cmd "$@" ;;
+  candidate-evaluate) candidate_evaluate_cmd "$@" ;;
+  candidate-promote) candidate_promote_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
