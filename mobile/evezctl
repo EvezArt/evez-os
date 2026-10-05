@@ -337,6 +337,26 @@ survival_run_cmd() {
   python "$(survival_py)" "$@"
 }
 
+value_architect_py() {
+  printf '%s/mobile/evez_value_architect.py' "$EVEZ_ROOT"
+}
+
+value_scan_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl value-scan CONTEXT_JSON\n' >&2
+    return 2
+  }
+  python "$(value_architect_py)" "$1" --mode scan
+}
+
+value_evolve_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl value-evolve CONTEXT_JSON [--generations N] [--toroidal-generations N] [--poles N] [--output FILE] [--ledger FILE]\n' >&2
+    return 2
+  }
+  python "$(value_architect_py)" "$@"
+}
+
 status_cmd() {
   log "status endpoint=$EVEZ_ENDPOINT"
 
@@ -451,6 +471,8 @@ Commands:
   capsule-verify FILE
   epistemic-evaluate PACKET.json
   survival-run [--min-score SCORE]
+  value-scan CONTEXT_JSON
+  value-evolve CONTEXT_JSON [--generations N] [--toroidal-generations N] [--poles N] [--output FILE] [--ledger FILE]
   pull
   deploy
   logs
@@ -491,6 +513,8 @@ case "$cmd" in
   capsule-verify) capsule_verify_cmd "$@" ;;
   epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
   survival-run) survival_run_cmd "$@" ;;
+  value-scan) value_scan_cmd "$@" ;;
+  value-evolve) value_evolve_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;

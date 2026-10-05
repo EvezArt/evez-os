@@ -1,0 +1,154 @@
+{
+  "device": {
+    "present": true
+  },
+  "storage": {
+    "writable": true
+  },
+  "network": {
+    "available": true
+  },
+  "sync": {
+    "endpoint_configured": false
+  },
+  "runtime": {
+    "healthy": true
+  },
+  "evidence": {
+    "chain_status": "UNKNOWN"
+  },
+  "authorization": {
+    "state": "UNKNOWN"
+  },
+  "rollback": {
+    "available": true
+  },
+  "tests": {
+    "passed": false
+  },
+  "artifact": {
+    "provenance_complete": false
+  },
+  "voice": {
+    "model_available": false
+  },
+  "music": {
+    "engine_available": true
+  },
+  "policy": {
+    "explicit_allow": false
+  },
+  "execution": {
+    "mode": "NORMAL"
+  },
+  "assets": [
+    {
+      "asset_id": "asset-001",
+      "name": "Local EVEZ evidence corpus",
+      "kind": "dataset",
+      "evidence_state": "OBSERVED",
+      "provenance": [
+        "local://evez-os"
+      ],
+      "capabilities": [
+        "research",
+        "testing"
+      ],
+      "dependencies": []
+    },
+    {
+      "asset_id": "asset-002",
+      "name": "Public technical documentation",
+      "kind": "documentation",
+      "evidence_state": "OBSERVED",
+      "provenance": [
+        "public://operator-supplied-source"
+      ],
+      "capabilities": [
+        "research",
+        "implementation"
+      ],
+      "dependencies": []
+    }
+  ],
+  "acquisition_routes": [
+    {
+      "route_id": "route-001",
+      "asset_id": "asset-001",
+      "method": "local-access",
+      "state": "AUTHORIZED",
+      "authorization_required": true,
+      "authorization_state": "AUTHORIZED",
+      "source": "local-filesystem",
+      "constraints": [
+        "read-only unless separately authorized"
+      ]
+    },
+    {
+      "route_id": "route-002",
+      "asset_id": "asset-002",
+      "method": "public-source",
+      "state": "PUBLIC",
+      "authorization_required": false,
+      "authorization_state": "NOT_REQUIRED",
+      "source": "operator-supplied-public-source",
+      "constraints": [
+        "retain provenance"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "transformation_id": "transform-001",
+      "source_asset_ids": [
+        "asset-001",
+        "asset-002"
+      ],
+      "output_kind": "research-packet",
+      "output_name": "Provenance-preserving research packet",
+      "operation": "normalize claims, evidence, tests, and contradictions",
+      "state": "PROPOSED",
+      "prerequisites": [
+        "preserve source provenance",
+        "separate observation from explanation"
+      ]
+    },
+    {
+      "transformation_id": "transform-002",
+      "source_asset_ids": [
+        "asset-001"
+      ],
+      "output_kind": "test-harness",
+      "output_name": "Deterministic evidence test harness",
+      "operation": "generate replayable tests from observed structure",
+      "state": "PROPOSED",
+      "prerequisites": [
+        "local corpus access",
+        "hash-stable inputs"
+      ]
+    }
+  ],
+  "objective_measurements": {
+    "utility": {
+      "value": 0.7,
+      "state": "MODELED",
+      "source": "operator planning input"
+    },
+    "reusability": {
+      "value": 0.9,
+      "state": "MODELED",
+      "source": "operator planning input"
+    },
+    "provenance": {
+      "value": 0.8,
+      "state": "MODELED",
+      "source": "operator planning input"
+    }
+  },
+  "constraints": {
+    "execution_boundary": "PROPOSAL_ONLY",
+    "lawful_acquisition_only": true,
+    "preserve_contradictions": true,
+    "no_credential_bypass": true
+  }
+}
