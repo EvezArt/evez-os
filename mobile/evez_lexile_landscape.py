@@ -31,7 +31,7 @@ def sha256(v: Any) -> str:
 def tokens(text: str) -> list[str]:
     return list(dict.fromkeys(re.findall(r"[A-Za-z][A-Za-z0-9_-]{2,}", text.lower())))
 
-def amplify(text: str, rounds: int = 3, max_nodes: int = 96) -> dict[str, Any]:
+def amplify(text: str, rounds: int = 3, max_nodes: int = 512) -> dict[str, Any]:
     seeds = tokens(text)
     nodes: list[dict[str, Any]] = []
     seen: set[str] = set()
@@ -99,7 +99,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Amplify explicit lexical input.")
     parser.add_argument("text", help="Text or @FILE")
     parser.add_argument("--rounds", type=int, default=3)
-    parser.add_argument("--max-nodes", type=int, default=96)
+    parser.add_argument("--max-nodes", type=int, default=512)
     parser.add_argument("--output")
     args = parser.parse_args()
     text = Path(args.text[1:]).read_text(encoding="utf-8") if args.text.startswith("@") else args.text
