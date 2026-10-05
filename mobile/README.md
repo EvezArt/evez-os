@@ -45,4 +45,6 @@ Then:
 
 The local witness command creates a SHA-256 chained JSONL record under the mobile operator state directory, so observations can be retained even while the remote mesh is unavailable.
 
+The offline path adds `queue`, `verify`, `outbox`, and `sync`. Queueing records an event locally first. Sync sends queued events only after the local chain is intact and removes them from the outbox only after a successful 2xx response. `EVEZ_AUTH_TOKEN` may be exported at runtime when the remote endpoint requires bearer authentication; it is never written to the repository.
+
 The command intentionally does not contain credentials or provider-specific deployment tokens. Put only the endpoint and local paths in the generated config file; keep service credentials in the remote runtime or an external secret manager.
