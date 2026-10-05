@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "default": "deny",
+  "actions": {
+    "READ_STATUS": {
+      "effect": "allow",
+      "max_payload_bytes": 8192
+    },
+    "QUEUE_EVENT": {
+      "effect": "allow",
+      "max_payload_bytes": 65536
+    },
+    "SYNC_EVENTS": {
+      "effect": "allow",
+      "max_payload_bytes": 8192
+    },
+    "DEPLOY": {
+      "effect": "allow",
+      "max_payload_bytes": 16384,
+      "required_env": ["EVEZ_SECOND_FACTOR"]
+    }
+  }
+}
