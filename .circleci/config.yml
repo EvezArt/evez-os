@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  verify:
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - run:
+          name: Validate EVEZ mobile runtime
+          command: |
+            python -m py_compile               mobile/evez_state.py               mobile/evez_guard.py               mobile/evez_authority.py               mobile/evez_identity.py
+            bash -n mobile/evezctl
+            python mobile/test_mobile.py
+            python mobile/test_guard.py
+            python mobile/test_authority.py
+            python mobile/test_evez_identity.py
+            python mobile/test_candidate.py
+
+workflows:
+  verification:
+    jobs:
+      - verify
