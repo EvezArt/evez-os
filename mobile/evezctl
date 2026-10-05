@@ -50,6 +50,10 @@ guard_py() {
   printf '%s/mobile/evez_guard.py' "$EVEZ_ROOT"
 }
 
+authority_py() {
+  printf '%s/mobile/evez_authority.py' "$EVEZ_ROOT"
+}
+
 local_witness() {
   [ "$#" -eq 2 ] || {
     printf 'usage: evezctl witness TYPE JSON\\n' >&2
@@ -108,11 +112,59 @@ authorize_cmd() {
 
 verify_operation_cmd() {
   [ "$#" -eq 1 ] || {
-    printf 'usage: evezctl verify-operation FILE
-' >&2
+    printf 'usage: evezctl verify-operation FILE\n' >&2
     return 2
   }
   python "$(guard_py)" verify-operation "$1"
+}
+
+authority_init_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl authority-init ROLE\n' >&2
+    return 2
+  }
+  python "$(authority_py)" init-role "$1"
+}
+
+authority_sign_cmd() {
+  [ "$#" -ge 3 ] || {
+    printf 'usage: evezctl authority-sign ROLE ACTION JSON [OPERATION_ID]\n' >&2
+    return 2
+  }
+  local op_id
+  op_id=""
+  if [ "$#" -eq 4 ]; then
+    op_id="$4"
+  fi
+  if [ -n "$op_id" ]; then
+    python "$(authority_py)" sign "$1" "$2" "$3" --operation-id "$op_id"
+  else
+    python "$(authority_py)" sign "$1" "$2" "$3"
+  fi
+}
+
+authority_quorum_cmd() {
+  [ "$#" -eq 4 ] || {
+    printf 'usage: evezctl authority-quorum OPERATOR_FILE REVIEWER_FILE OPERATOR_PUBLIC REVIEWER_PUBLIC\n' >&2
+    return 2
+  }
+  python "$(authority_py)" quorum "$@"
+}
+
+authority_epoch_cmd() {
+  python "$(authority_py)" advance-epoch
+}
+
+authority_break_glass_cmd() {
+  [ "$#" -ge 2 ] || {
+    printf 'usage: evezctl break-glass ACTION REASON [TTL_MINUTES]\n' >&2
+    return 2
+  }
+  if [ "$#" -eq 3 ]; then
+    python "$(authority_py)" break-glass "$1" "$2" --ttl-minutes "$3"
+  else
+    python "$(authority_py)" break-glass "$1" "$2"
+  fi
 }
 
 status_cmd() {
@@ -215,6 +267,11 @@ Commands:
   security-init
   authorize ACTION JSON
   verify-operation FILE
+  authority-init ROLE
+  authority-sign ROLE ACTION JSON [OPERATION_ID]
+  authority-quorum OPERATOR_FILE REVIEWER_FILE OPERATOR_PUBLIC REVIEWER_PUBLIC
+  authority-epoch
+  break-glass ACTION REASON [TTL_MINUTES]
   pull
   deploy
   logs
@@ -241,6 +298,11 @@ case "$cmd" in
   security-init) security_init_cmd "$@" ;;
   authorize) authorize_cmd "$@" ;;
   verify-operation) verify_operation_cmd "$@" ;;
+  authority-init) authority_init_cmd "$@" ;;
+  authority-sign) authority_sign_cmd "$@" ;;
+  authority-quorum) authority_quorum_cmd "$@" ;;
+  authority-epoch) authority_epoch_cmd "$@" ;;
+  break-glass) authority_break_glass_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;

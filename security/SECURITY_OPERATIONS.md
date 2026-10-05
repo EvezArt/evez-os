@@ -32,3 +32,41 @@ Never commit the private key.
 ## Supply chain
 
 Dependencies and Actions are inputs to the trust boundary. Prefer pinned immutable references and explicit provenance over floating tags.
+
+
+## Command authority
+
+High-impact actions use dual control. The two approvals must:
+- refer to the same operation ID
+- contain the same action
+- contain byte-equivalent canonical payloads
+- use distinct operator and reviewer roles
+- use the current security epoch
+- remain unexpired
+- verify against the expected public-key fingerprints
+
+Bootstrap separate roles:
+
+    evezctl authority-init operator
+    evezctl authority-init reviewer
+
+Create two approvals for one operation identity:
+
+    evezctl authority-sign operator DEPLOY '{"commit":"<git-sha>"}' <operation-id>
+    evezctl authority-sign reviewer DEPLOY '{"commit":"<git-sha>"}' <operation-id>
+
+Then verify the quorum:
+
+    evezctl authority-quorum <operator-file> <reviewer-file> <operator-public> <reviewer-public>
+
+Advancing the security epoch invalidates older operation envelopes:
+
+    evezctl authority-epoch
+
+### Break-glass
+
+Break-glass is exceptional, bounded, and recorded:
+
+    evezctl break-glass READ_STATUS "operator recovery drill" 5
+
+It is not an invisible bypass. The record includes the reason, actor, issue time, expiry, and security epoch.

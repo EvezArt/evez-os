@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "default": "deny",
   "actions": {
     "READ_STATUS": {
@@ -15,9 +15,24 @@
       "max_payload_bytes": 8192
     },
     "DEPLOY": {
-      "effect": "allow",
+      "effect": "dual_control",
+      "roles": [
+        "operator",
+        "reviewer"
+      ],
       "max_payload_bytes": 16384,
-      "required_env": ["EVEZ_SECOND_FACTOR"]
+      "requires_current_epoch": true,
+      "requires_unexpired_envelopes": true
+    },
+    "ROLLBACK": {
+      "effect": "dual_control",
+      "roles": [
+        "operator",
+        "reviewer"
+      ],
+      "max_payload_bytes": 16384,
+      "requires_current_epoch": true,
+      "requires_unexpired_envelopes": true
     }
   }
 }
