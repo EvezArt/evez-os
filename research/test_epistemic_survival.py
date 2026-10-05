@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from epistemic_survival import run
+# Activation smoke: this file is also the deterministic CI sentinel.
 result = run()
 assert result["scenario_count"] == 7
 assert result["all_expected_outcomes_match"] is True
