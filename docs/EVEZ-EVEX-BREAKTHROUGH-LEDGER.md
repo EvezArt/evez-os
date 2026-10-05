@@ -189,6 +189,57 @@ CAN ANOTHER SYSTEM TAKE THIS EVEX, DO THE WORK, AND RETURN A VERIFIABLE EVEX WIT
 
 If yes, the protocol crossed the boundary from documentation into interoperability.
 
+
+## B19. Domain Emergence Becomes Runtime State
+
+Realization: an adaptive agent does not have to assume that its problem domain is fully known before acting. It can construct a temporary domain representation from observed entities, relations, terminology, contradictions, and unresolved boundaries.
+
+DOMAIN_STATE = TERMS + RELATIONS + UNKNOWN_REGIONS + CONTRADICTIONS + PROVENANCE
+
+This turns domain identification from a precondition into an observable, revisable runtime artifact.
+
+## B20. SME Becomes Demonstrated Competence State
+
+Realization: subject-matter expertise can be represented as a bounded competence profile instead of a permanent label.
+
+SME = REGION COMPETENCE + DEMONSTRATIONS + FAILURES + CALIBRATION + UNKNOWN SCOPE
+
+The profile is explicitly non-credentialing. A successful demonstration can raise bounded competence in one region without making the system an expert in the domain as a whole.
+
+## B21. Socratic Questioning Becomes an Adaptive Control Policy
+
+Realization: Socratic questioning can be treated as a control problem rather than a dialogue style.
+
+QUESTION_SCORE = INFORMATION_GAIN + CONTRADICTION_GAIN + ENTITY_RESOLUTION + DOMAIN_RESOLUTION + SME_TEST_VALUE - COST - RISK
+
+The question policy becomes inspectable, replayable, challengeable, and itself targetable.
+
+## B22. Semantic Error-Correction Code For AI Entities
+
+Realization: error-correction can operate above bytes and tokens by treating an entity as an evidence-bound codeword containing identity, attributes, relations, observations, and provenance.
+
+ENTITY_SYNDROME = IDENTITY_COLLISION + ATTRIBUTE_CONFLICT + CONTRADICTION + PROVENANCE_GAP
+
+The correction output is a proposal or unresolved state. It is never silently promoted to truth.
+
+## B23. The Targeter Becomes Part Of Its Own Error Surface
+
+Realization: a witness targeter that cannot target itself cannot distinguish target selection from an unobserved selection failure.
+
+Therefore:
+
+TARGET_SPACE = WORLD_TARGETS + WITNESSES + TARGETER + QUESTION_POLICY
+
+A selection receipt must preserve both selected and rejected candidates and explicitly witness whether the targeter was in the candidate space.
+
+## B24. Domain Adaptation And Self-Witnessing Can Share One Loop
+
+Realization: domain discovery, SME induction, question selection, entity error correction, and self-witnessing can operate as a single replayable cycle:
+
+OBSERVE -> CORRECT -> INDUCE DOMAIN -> UPDATE SME -> TARGET -> QUESTION -> OBSERVE
+
+This creates a protocol-level adaptation layer that is independent of any particular model family or domain plugin.
+
 ## Non-claims
 
 This ledger does not establish:
