@@ -58,3 +58,25 @@ Device authorization uses a passphrase-protected Ed25519 key. The public key can
 The offline path adds `queue`, `verify`, `outbox`, and `sync`. Queueing records an event locally first. Sync sends queued events only after the local chain is intact and removes them from the outbox only after a successful 2xx response. `EVEZ_AUTH_TOKEN` may be exported at runtime when the remote endpoint requires bearer authentication; it is never written to the repository.
 
 The command intentionally does not contain credentials or provider-specific deployment tokens. Put only the endpoint and local paths in the generated config file; keep service credentials in the remote runtime or an external secret manager.
+
+
+### High-impact command authority
+
+For DEPLOY and ROLLBACK, the security policy is dual-control:
+
+    evezctl authority-init operator
+    evezctl authority-init reviewer
+
+Both roles sign the same operation ID and canonical payload, then a verifier checks the quorum:
+
+    evezctl authority-sign operator DEPLOY '{"commit":"<sha>"}' <operation-id>
+    evezctl authority-sign reviewer DEPLOY '{"commit":"<sha>"}' <operation-id>
+    evezctl authority-quorum <operator-file> <reviewer-file> <operator-public> <reviewer-public>
+
+A monotonic security epoch invalidates older approvals:
+
+    evezctl authority-epoch
+
+Break-glass is explicit and time-bounded:
+
+    evezctl break-glass READ_STATUS "operator recovery drill" 5
