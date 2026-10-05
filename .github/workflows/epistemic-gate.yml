@@ -1,6 +1,16 @@
 name: epistemic-gate
 
 on:
+  push:
+    branches:
+      - main
+      - evidence/capsule-epistemic-survival
+    paths:
+      - "evidence/**"
+      - "research/epistemic_*.py"
+      - "research/test_epistemic_*.py"
+      - "mobile/evezctl"
+      - ".github/workflows/epistemic-gate.yml"
   pull_request:
     paths:
       - "evidence/**"
