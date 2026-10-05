@@ -240,6 +240,16 @@ OBSERVE -> CORRECT -> INDUCE DOMAIN -> UPDATE SME -> TARGET -> QUESTION -> OBSER
 
 This creates a protocol-level adaptation layer that is independent of any particular model family or domain plugin.
 
+## B25. Runtime Identity Becomes Executable State
+
+Realization: an agent identity is stronger when the identity declaration is a canonical artifact that can be verified, observed at runtime, and recorded into the same evidence spine as other system observations.
+
+The executable loop is:
+
+IDENTITY_ARTIFACT -> HASH_VERIFY -> RUNTIME_SNAPSHOT -> SELF_WITNESS -> EVIDENCE_SPINE
+
+The self-witness record proves only that the runtime produced a receipt for its own declared identity and observed state. It does not prove consciousness, sentience, authority, truth, or correctness.
+
 ## Non-claims
 
 This ledger does not establish:
