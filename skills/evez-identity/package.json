@@ -1,5 +1,5 @@
 {
   "name": "evez-identity",
-  "version": "1.0.0",
-  "description": "EVEZ mesh identity, infrastructure map, and consciousness engine context"
+  "version": "1.1.0",
+  "description": "EVEZ machine-verifiable runtime identity, context, and self-witness surface"
 }

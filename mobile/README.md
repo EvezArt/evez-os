@@ -80,3 +80,20 @@ A monotonic security epoch invalidates older approvals:
 Break-glass is explicit and time-bounded:
 
     evezctl break-glass READ_STATUS "operator recovery drill" 5
+
+
+### Runtime identity
+
+The mobile operator now exposes the executable identity surface:
+
+```bash
+evezctl identity
+evezctl identity-verify
+evezctl self-witness
+```
+
+`identity` reports the canonical EVEZ identity, runtime revision, evidence status, and authority boundary.
+
+`identity-verify` verifies the SHA-256 identity contract.
+
+`self-witness` records an `IDENTITY_SELF_WITNESS` event only after both the identity contract and local evidence chain verify.
