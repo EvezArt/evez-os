@@ -1,0 +1,39 @@
+{
+  "created_at": "2026-10-05T00:00:00Z",
+  "id": "desas-state:example-v1",
+  "integrity": {
+    "algorithm": "sha256",
+    "sha256": "c22d9321e53e0668d113ff72d7dd29b3cea6d4dd94f85cb539e479f4a1bd9525"
+  },
+  "kind": "desas.adaptive.state",
+  "payload": {
+    "domain": {
+      "domain_id": "domain:emergent",
+      "novelty_score": 0.2,
+      "relations": [
+        {"relation": "feeds", "target": "entity:nyx"},
+        {"relation": "accepts", "target": "entity:vela"}
+      ],
+      "terms": ["nyx", "phase-b", "zorq"]
+    },
+    "profile": "desas-s.v1",
+    "question": {
+      "epistemic_state": "PROPOSED",
+      "question_id": "question:3:1",
+      "target_id": "domain:emergent"
+    },
+    "selection_receipt_ref": "a2ddad0c18f7e8b9c0d1e2f3a4b5c6d7e8f90123456789abcdef0123456789ab",
+    "sme": {
+      "calibration": 1.0,
+      "scope_unknown": [],
+      "sme_id": "sme:emergent-1"
+    },
+    "targeter": {
+      "id": "targeter:desas-1",
+      "self_targetable": true
+    }
+  },
+  "state": "PROPOSED",
+  "version": 1,
+  "evez": "EVEZ"
+}
