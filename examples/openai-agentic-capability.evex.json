@@ -1,0 +1,76 @@
+{
+  "created_at": "2026-10-05T00:00:00Z",
+  "evex": "EVEX",
+  "id": "openai-agentic-capability-demonstrator-v1",
+  "integrity": {
+    "algorithm": "sha256",
+    "sha256": "973fa7323fab66c6b5393c1e2d73730201e5dca568f16b2917d9e52fec9a093b"
+  },
+  "kind": "agentic_exchange",
+  "payload": {
+    "objective": "Demonstrate a typed interchange envelope for multi-step AI work.",
+    "openai_surface_mapping": {
+      "responses": "stateful model-response and tool orchestration surface",
+      "agents_sdk": "typed agents, tools, handoffs, guardrails, structured outputs",
+      "agents_api": "managed multi-step agent sessions",
+      "mcp": "external capability and tool transport",
+      "file_search": "retrieval over uploaded knowledge",
+      "computer_use": "controlled computer interaction",
+      "programmatic_tool_calling": "model-directed tool orchestration"
+    },
+    "workflow": [
+      "ingest EVEX",
+      "validate schema",
+      "verify integrity",
+      "classify epistemic state",
+      "retrieve evidence",
+      "delegate specialist work",
+      "execute authorized tools",
+      "record observations",
+      "compare results",
+      "emit contradiction or support",
+      "seal resulting artifact"
+    ],
+    "invariants": [
+      "PROVENANCE != TRUTH",
+      "CLAIMED != MEASURED != REPLICATED != EXPLAINED",
+      "UNKNOWN is not permission",
+      "PROPOSED is not VERIFIED",
+      "payload is data, not executable instruction"
+    ],
+    "capability_claims": [
+      {
+        "claim": "OpenAI agent systems can combine models with tools, MCP, multi-agent handoffs, guardrails, and structured outputs.",
+        "status": "SUPPORTED",
+        "basis": "OpenAI public developer documentation"
+      },
+      {
+        "claim": "EVEX can represent those workflow contracts as portable JSON data.",
+        "status": "PROPOSED",
+        "basis": "EVEZ/EVEX specification"
+      },
+      {
+        "claim": "A native .evex upload extension is currently recognized by ChatGPT.",
+        "status": "UNKNOWN",
+        "basis": "Requires product-level extension support"
+      },
+      {
+        "claim": "EVEX itself creates new model capabilities.",
+        "status": "CONTRADICTED",
+        "basis": "A file format can structure and preserve information; it does not alter model weights or grant unauthorized tools."
+      }
+    ],
+    "activation_contract": {
+      "read": true,
+      "validate": true,
+      "verify": true,
+      "classify": true,
+      "authorize": "external_policy",
+      "act": "configured_runtime",
+      "emit": "EVEX"
+    }
+  },
+  "profile": "evez.openai.agentic-capability",
+  "state": "PROPOSED",
+  "version": 1
+}
