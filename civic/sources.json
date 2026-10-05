@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "usaspending",
+      "name": "USAspending API",
+      "purpose": "Federal awards, obligations, recipients, agencies, transactions",
+      "uri": "https://api.usaspending.gov/",
+      "documentation": "https://api.usaspending.gov/docs/endpoints",
+      "official": true
+    },
+    {
+      "id": "sam-contracting",
+      "name": "SAM.gov Contracting",
+      "purpose": "Federal contract opportunities, awards, and subcontract-report context",
+      "uri": "https://sam.gov/contracting",
+      "official": true
+    },
+    {
+      "id": "fara",
+      "name": "DOJ FARA",
+      "purpose": "Foreign-agent registration and disclosure records",
+      "uri": "https://www.fara.gov/",
+      "official": true
+    },
+    {
+      "id": "fec",
+      "name": "Federal Election Commission",
+      "purpose": "Federal campaign-finance receipts, spending, committees, and filings",
+      "uri": "https://www.fec.gov/data/",
+      "official": true
+    }
+  ],
+  "rules": {
+    "public_source_preferred": true,
+    "preserve_input_sha256": true,
+    "preserve_row_sha256": true,
+    "signal_requires_underlying_records": true,
+    "no_criminality_inference": true
+  }
+}
