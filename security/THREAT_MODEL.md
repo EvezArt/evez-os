@@ -44,3 +44,20 @@ A hash chain establishes tamper evidence, not factual truth. Provenance establis
 
 The epistemic boundary remains:
 DECLARED != MEASURED != REPLICATED != EXPLAINED
+
+
+## Command-authority attacks
+
+The system treats a valid signature as necessary but not sufficient for a high-impact action.
+
+For deployment or rollback, the decision record must survive:
+1. signer substitution
+2. replay of an old approval
+3. payload drift between reviewers
+4. role confusion
+5. expired approvals
+6. single-signer compromise
+
+The security epoch is a local monotonic replay fence. It invalidates all prior authority envelopes when advanced. Dual control requires distinct operator and reviewer keys over the same operation identity and canonical payload.
+
+Break-glass is deliberately not an implicit bypass. It creates an exceptional record with an explicit reason and expiry so the exception itself becomes observable.
