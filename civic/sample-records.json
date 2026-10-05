@@ -1,0 +1,26 @@
+[
+  {
+    "kind": "award",
+    "recipient": "Example Defense Supplier A",
+    "agency": "Example Agency",
+    "amount": 60000000,
+    "date": "2026-01-10",
+    "award_id": "A-001"
+  },
+  {
+    "kind": "award",
+    "recipient": "Example Defense Supplier B",
+    "agency": "Example Agency",
+    "amount": 30000000,
+    "date": "2026-02-10",
+    "award_id": "A-002"
+  },
+  {
+    "kind": "award",
+    "recipient": "Example Defense Supplier C",
+    "agency": "Example Agency",
+    "amount": 10000000,
+    "date": "2026-03-10",
+    "award_id": "A-003"
+  }
+]

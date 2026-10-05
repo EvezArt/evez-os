@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "principles": {
+    "signal_is_not_allegation": true,
+    "source_provenance_required": true,
+    "reproducible_normalization": true,
+    "public_sources_only_by_default": true
+  },
+  "sources": [
+    {
+      "name": "USAspending",
+      "role": "federal award and spending records",
+      "uri": "https://api.usaspending.gov/",
+      "official": true
+    },
+    {
+      "name": "SAM.gov Contracting",
+      "role": "contract opportunities and award data",
+      "uri": "https://sam.gov/contracting",
+      "official": true
+    },
+    {
+      "name": "DOJ FARA",
+      "role": "foreign-agent registration disclosures",
+      "uri": "https://www.fara.gov/",
+      "official": true
+    },
+    {
+      "name": "FEC",
+      "role": "federal campaign-finance disclosures",
+      "uri": "https://www.fec.gov/data/",
+      "official": true
+    }
+  ],
+  "record_types": [
+    "award",
+    "transaction",
+    "contract",
+    "subaward",
+    "fara_registration",
+    "campaign_finance"
+  ]
+}

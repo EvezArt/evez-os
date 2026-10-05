@@ -170,6 +170,31 @@ candidate_py() {
   printf '%s/mobile/evez_candidate.py' "$EVEZ_ROOT"
 }
 
+arsenal_py() {
+  printf '%s/civic/arsenal_ledger.py' "$EVEZ_ROOT"
+}
+
+arsenal_analyze_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl arsenal-analyze INPUT [SOURCE_NAME] [SOURCE_URI] [OUTPUT]\n' >&2
+    return 2
+  }
+
+  local source_name
+  local source_uri
+  source_name="operator-input"
+  source_uri="local://operator-input"
+
+  if [ "$#" -ge 2 ]; then source_name="$2"; fi
+  if [ "$#" -ge 3 ]; then source_uri="$3"; fi
+
+  if [ "$#" -ge 4 ]; then
+    python "$(arsenal_py)" "$1" --source-name "$source_name" --source-uri "$source_uri" --output "$4"
+  else
+    python "$(arsenal_py)" "$1" --source-name "$source_name" --source-uri "$source_uri"
+  fi
+}
+
 candidate_evaluate_cmd() {
   [ "$#" -eq 1 ] || {
     printf 'usage: evezctl candidate-evaluate CLAIMS_JSON\n' >&2
@@ -293,6 +318,7 @@ Commands:
   break-glass ACTION REASON [TTL_MINUTES]
   candidate-evaluate CLAIMS_JSON
   candidate-promote CANDIDATE_ID EVALUATION_JSON REVIEWER_OPERATION REVIEWER_PUBLIC
+  arsenal-analyze INPUT [SOURCE_NAME] [SOURCE_URI] [OUTPUT]
   pull
   deploy
   logs
@@ -326,6 +352,7 @@ case "$cmd" in
   break-glass) authority_break_glass_cmd "$@" ;;
   candidate-evaluate) candidate_evaluate_cmd "$@" ;;
   candidate-promote) candidate_promote_cmd "$@" ;;
+  arsenal-analyze) arsenal_analyze_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
