@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+import argparse,json,pathlib,sys
+from evez_file import EVEZFormatError,load,dump
+def main():
+ p=argparse.ArgumentParser(prog="evez"); s=p.add_subparsers(dest="cmd",required=True)
+ for n in ("inspect","verify","seal","convert-json","detect"): s.add_parser(n).add_argument("file")
+ a=p.parse_args(); path=pathlib.Path(a.file)
+ try:
+  if a.cmd=="detect":
+   b=path.read_bytes()[:4096]; print("evez-v1" if b.lstrip().startswith(b"{") and b'"evez"' in b else "unknown"); return 0
+  d=load(path,verify_integrity=a.cmd=="verify")
+  if a.cmd=="verify": print("VERIFIED")
+  elif a.cmd=="inspect": print(json.dumps(d,ensure_ascii=False,sort_keys=True,indent=2))
+  elif a.cmd=="seal": dump(d,path); print(path)
+  else: print(json.dumps(d,ensure_ascii=False,sort_keys=True,indent=2))
+  return 0
+ except (OSError,EVEZFormatError) as e: print("evez:",e,file=sys.stderr); return 2
+if __name__=="__main__": raise SystemExit(main())
