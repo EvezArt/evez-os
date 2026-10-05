@@ -24,6 +24,7 @@ jobs:
           python mobile/test_mobile.py
           python mobile/test_guard.py
           python mobile/test_authority.py
+          python mobile/test_evez_identity.py
 
       - name: Run repository secret audit
         run: |
