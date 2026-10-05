@@ -39,3 +39,26 @@ def dumps(document:dict[str,Any],seal_document=True)->str:
     obj=seal(document) if seal_document else document; validate(obj); return json.dumps(obj,ensure_ascii=False,sort_keys=True,indent=2)+"\n"
 def load(path:str|Path,verify_integrity=False): return loads(Path(path).read_text(encoding="utf-8"),verify_integrity)
 def dump(document,path): Path(path).write_text(dumps(document),encoding="utf-8")
+
+
+def cli():
+    import argparse, json
+    p=argparse.ArgumentParser(prog="evez")
+    s=p.add_subparsers(dest="command", required=True)
+    for name in ("inspect","verify","seal","convert-json","detect"):
+        sub=s.add_parser(name); sub.add_argument("file")
+    a=p.parse_args(); path=Path(a.file)
+    try:
+        if a.command=="detect":
+            data=path.read_bytes()[:4096]
+            print("evez-v1" if b'"evez"' in data and b'"EVEZ"' in data else "unknown")
+            return 0
+        doc=load(path, verify_integrity=a.command=="verify")
+        if a.command=="verify": print("VERIFIED")
+        elif a.command=="inspect": print(json.dumps(doc,ensure_ascii=False,sort_keys=True,indent=2))
+        elif a.command=="seal": dump(doc,path); print(path)
+        else: print(json.dumps(doc,ensure_ascii=False,sort_keys=True,indent=2))
+        return 0
+    except (OSError,EVEZFormatError) as exc:
+        print(f"evez: {exc}")
+        return 2
