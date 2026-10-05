@@ -25,4 +25,25 @@ with tempfile.TemporaryDirectory() as temp:
     assert (Path(temp) / "ed25519-private.pem").exists()
     assert (Path(temp) / "ed25519-public.pem").exists()
 
-print("mobile guard bootstrap test: PASS")
+    env["EVEZ_SECOND_FACTOR"] = "1"
+    auth = subprocess.run(
+        [sys.executable, str(GUARD), "authorize", "DEPLOY", '{"commit":"abc123"}'],
+        input="test-passphrase\n",
+        text=True,
+        capture_output=True,
+        env=env,
+    )
+    assert auth.returncode == 0, auth.stderr
+    import json
+    operation = json.loads(auth.stdout)["saved_to"]
+
+    verified = subprocess.run(
+        [sys.executable, str(GUARD), "verify-operation", operation],
+        text=True,
+        capture_output=True,
+        env=env,
+    )
+    assert verified.returncode == 0, verified.stdout + verified.stderr
+    assert json.loads(verified.stdout)["verified"] is True
+
+print("mobile guard bootstrap + signature test: PASS")
