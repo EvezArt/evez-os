@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evez.art/schemas/evez-file-v1.schema.json",
+  "title": "EVEZ File Format v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["evez", "version", "kind", "id", "created_at", "state", "payload", "integrity"],
+  "properties": {
+    "evez": {"const": "EVEZ"},
+    "version": {"const": 1},
+    "kind": {"type": "string", "minLength": 1},
+    "id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "state": {
+      "type": "string",
+      "enum": ["VERIFIED", "SUPPORTED", "INFERRED", "PROPOSED", "UNKNOWN", "STALE", "CONTRADICTED", "RETRACTED"]
+    },
+    "payload": {"type": "object"},
+    "evidence": {"type": "array", "items": {"type": "object", "additionalProperties": true}},
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "sha256"],
+      "properties": {
+        "algorithm": {"const": "sha256"},
+        "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

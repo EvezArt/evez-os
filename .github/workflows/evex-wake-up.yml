@@ -1,0 +1,18 @@
+name: EVEX Wake-Up
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  wake-up:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Verify reference receipt
+        run: python3 benchmarks/evex-wake-up/verify.py
+      - name: Verify negative promotion is rejected
+        run: python3 benchmarks/evex-wake-up/self_test.py

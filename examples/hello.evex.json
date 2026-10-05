@@ -1,0 +1,49 @@
+{
+  "created_at": "2026-10-05T00:00:00Z",
+  "evex": "EVEX",
+  "id": "evex-proof-001",
+  "integrity": {
+    "algorithm": "sha256",
+    "sha256": "f1fdd26255ba9d3a2e7a14280eb61289e8d7e77f1b15b976ffe325b3ef6e3d17"
+  },
+  "kind": "exchange",
+  "payload": {
+    "exchange": {
+      "allowed_operations": [
+        "read",
+        "validate",
+        "verify",
+        "classify",
+        "transform",
+        "emit"
+      ],
+      "inputs": [
+        {
+          "id": "source-001",
+          "required": true,
+          "type": "evez.document"
+        }
+      ],
+      "intent": "Move a typed, evidence-bearing artifact between AI systems.",
+      "outputs": [
+        {
+          "required": true,
+          "type": "evez.document"
+        }
+      ],
+      "prohibited_operations": [
+        "execute-payload",
+        "implicit-authorize",
+        "upgrade-epistemic-state"
+      ],
+      "protocol": "READ -> VALIDATE -> VERIFY -> CLASSIFY -> AUTHORIZE -> ACT"
+    },
+    "proof": {
+      "claim": "EVEX is JSON-native and can be consumed through a JSON upload surface.",
+      "status": "PROPOSED"
+    }
+  },
+  "profile": "evez.exchange",
+  "state": "PROPOSED",
+  "version": 1
+}

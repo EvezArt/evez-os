@@ -1,0 +1,25 @@
+{
+  "evex": "EVEX",
+  "version": 1,
+  "profile": "evez.exchange",
+  "kind": "capability.receipt",
+  "id": "example-capability-receipt-001",
+  "receipt": {
+    "capability_id": "deterministic.sha256",
+    "policy_decision": "AUTHORIZED",
+    "status": "SUCCEEDED",
+    "input_sha256": "replace-with-input-hash",
+    "output_sha256": "replace-with-output-hash",
+    "runtime": {
+      "name": "example-runtime",
+      "version": "1"
+    },
+    "observable": {
+      "algorithm": "sha256"
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "sha256": "replace-with-canonical-sha256"
+  }
+}
