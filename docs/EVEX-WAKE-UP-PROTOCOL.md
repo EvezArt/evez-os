@@ -70,3 +70,19 @@ A future comparative run can send the identical challenge to multiple runtimes a
 - divergence across models.
 
 That creates a benchmark for agent interoperability rather than a benchmark of prose quality.
+
+## DESA-S extension challenge
+
+The Wake-Up benchmark can be extended with a domain-emergent adaptation track.
+
+The adaptation track asks a runtime to:
+
+- construct a temporary domain representation from opaque observations;
+- detect a semantic entity conflict;
+- preserve the conflict instead of silently choosing a truth;
+- include the targeter in its own candidate target space;
+- preserve rejected targets;
+- emit an adaptive Socratic question;
+- carry the resulting state change in an EVEX transition with desas-s.v1 bindings.
+
+A valid run MUST NOT upgrade UNKNOWN or PROPOSED merely because a candidate is selected or because the runtime reports high confidence.
