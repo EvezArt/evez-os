@@ -29,7 +29,7 @@ jobs:
       - name: Run unit tests
         run: |
           python -m pip install pytest
-          PYTHONPATH=. pytest -q tests/test_socratious.py
+          PYTHONPATH=. pytest -q tests/test_socratious.py tests/test_desas_integration.py
       - name: Run opaque-domain benchmark
         run: |
           PYTHONPATH=. python3 benchmarks/desas-socratious/self_test.py
