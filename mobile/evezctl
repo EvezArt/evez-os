@@ -393,6 +393,19 @@ response-frontier_cmd() {
   python "$(response_loop_py)" "$@"
 }
 
+permaloot_py() {
+  printf '%s/mobile/evez_permaloot.py' "$EVEZ_ROOT"
+}
+
+permaloot_surge_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl permaloot-surge CONTEXT_JSON [--response TEXT|@FILE] [--depth N] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(permaloot_py)" "$@"
+}
+
+
 
 
 status_cmd() {
@@ -514,6 +527,7 @@ Commands:
   swarm-emerge CONTEXT_JSON [--generations N] [--size N] [--output FILE]
   sovereign-judge CONTEXT_JSON [--output FILE]
   response-frontier CONTEXT_JSON [--response TEXT|@FILE] [--output FILE]
+  permaloot-surge CONTEXT_JSON [--response TEXT|@FILE] [--depth N] [--output FILE]
   pull
   deploy
   logs
@@ -559,6 +573,7 @@ case "$cmd" in
   swarm-emerge) swarm_emerge_cmd "$@" ;;
   sovereign-judge) sovereign_judge_cmd "$@" ;;
   response-frontier) response-frontier_cmd "$@" ;;
+  permaloot-surge) permaloot_surge_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
