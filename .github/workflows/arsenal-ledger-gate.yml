@@ -1,0 +1,32 @@
+name: arsenal-ledger-gate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  accountability:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run accountability regression
+        run: |
+          python -m py_compile civic/arsenal_ledger.py
+          PYTHONPATH=civic python civic/test_arsenal_ledger.py
+
+      - name: Analyze synthetic fixture
+        run: |
+          python civic/arsenal_ledger.py civic/sample-records.json \
+            --source-name synthetic-fixture \
+            --source-uri https://example.invalid/synthetic \
+            --output /tmp/arsenal-report.json
+          python -m json.tool /tmp/arsenal-report.json > /dev/null
