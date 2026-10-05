@@ -97,18 +97,21 @@ def init_role(role: str) -> dict:
     fingerprint = hashlib.sha256(public_bytes).hexdigest()
     return {"initialized": True, "role": role, "public_key": str(public), "fingerprint": fingerprint}
 
-def sign(role: str, action: str, payload: Any, ttl_minutes: int) -> dict:
+def sign(role: str, action: str, payload: Any, ttl_minutes: int, operation_id: str | None = None, epoch: int | None = None) -> dict:
     private, public = role_paths(role)
     if not private.exists() or not public.exists():
         raise SystemExit(f"DENY: initialize {role} key first")
 
-    epoch = current_epoch()
+    current = current_epoch()
+    epoch = current if epoch is None else epoch
+    if epoch != current:
+        raise SystemExit(f"DENY: stale security epoch: current={current} supplied={epoch}")
     issued = now()
     expires = issued + timedelta(minutes=max(1, min(ttl_minutes, 30)))
 
     envelope = {
         "version": 1,
-        "operation_id": str(uuid.uuid4()),
+        "operation_id": operation_id or str(uuid.uuid4()),
         "action": action,
         "role": role,
         "epoch": epoch,
@@ -263,6 +266,8 @@ def main() -> int:
     p_sign.add_argument("action")
     p_sign.add_argument("payload")
     p_sign.add_argument("--ttl-minutes", type=int, default=10)
+    p_sign.add_argument("--operation-id", default=None)
+    p_sign.add_argument("--epoch", type=int, default=None)
 
     p_verify = sub.add_parser("verify")
     p_verify.add_argument("operation")
@@ -286,7 +291,7 @@ def main() -> int:
     if args.command == "init-role":
         print(json.dumps(init_role(args.role), sort_keys=True))
     elif args.command == "sign":
-        print(json.dumps(sign(args.role, args.action, json.loads(args.payload), args.ttl_minutes), sort_keys=True))
+        print(json.dumps(sign(args.role, args.action, json.loads(args.payload), args.ttl_minutes, args.operation_id, args.epoch), sort_keys=True))
     elif args.command == "verify":
         result = verify(args.operation, args.trusted_public)
         print(json.dumps(result, sort_keys=True))
