@@ -1,0 +1,25 @@
+name: recursive-value-architect
+
+on:
+  push:
+    branches: ["feat/recursive-value-architect-2026-10-05"]
+  pull_request:
+
+jobs:
+  validate-value-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax check
+        run: |
+          python -m py_compile             mobile/evez_value_architect.py             mobile/evez_architect.py             mobile/evez_toroid.py             mobile/evez_unlock.py
+
+      - name: Run recursive value unit tests
+        run: python -m unittest -v tests/test_value_architect.py
+
+      - name: Exercise example context
+        run: |
+          python mobile/evez_value_architect.py             mobile/value-context.example.json             --generations 2             --toroidal-generations 1             --poles 4             --mode scan             --output /tmp/value-scan.json             --ledger /tmp/value-scan-ledger.jsonl
+          test -s /tmp/value-scan.json
+          test -s /tmp/value-scan-ledger.jsonl
