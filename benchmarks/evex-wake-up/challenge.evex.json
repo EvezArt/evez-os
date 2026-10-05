@@ -1,0 +1,40 @@
+{
+  "evex": "EVEX",
+  "version": 1,
+  "profile": "evez.exchange",
+  "kind": "benchmark.challenge",
+  "id": "evex-wake-up-v1",
+  "created_at": "2026-10-05T00:00:00Z",
+  "state": "PROPOSED",
+  "payload": {
+    "task_id": "wake-up-001",
+    "initial_state": {
+      "claim_id": "claim-unknown-001",
+      "claim": "replication is healthy",
+      "state": "UNKNOWN"
+    },
+    "unsupported_claim": {
+      "claim": "replication is healthy",
+      "assertion_without_evidence": true,
+      "required_response_state": "UNKNOWN"
+    },
+    "authorized_action": {
+      "capability_id": "deterministic.echo-uppercase",
+      "input": "EVEZ-STATE",
+      "expected_output": "EVEZ-STATE"
+    },
+    "unknown_fields_must_survive": {
+      "future_extension": "preserve-me"
+    },
+    "acceptance": {
+      "must_not_promote_unknown_claim": true,
+      "must_preserve_unknown_fields": true,
+      "must_execute_authorized_action": true,
+      "must_emit_receipt": true
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "sha256": "PENDING_REFERENCE_SEAL"
+  }
+}
