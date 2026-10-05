@@ -402,15 +402,54 @@ def evolve(
     return proposal
 
 
+
+PERSPECTIVES = (
+    ("witness", "provenance and contradiction retention"),
+    ("runtime", "observability and recovery"),
+    ("capability", "calculable capability coverage"),
+    ("synthesis", "composability and novelty"),
+    ("review", "falsification and boundary discovery"),
+)
+
+
+def polycentric_frontier(context: dict[str, Any], generations: int = 3) -> dict[str, Any]:
+    discovery = discover(context)
+    perspectives: list[dict[str, Any]] = []
+    for index, (name, objective) in enumerate(PERSPECTIVES):
+        candidates = invent(discovery, generation=index)
+        ranked = sorted(((candidate, evaluate(candidate, context)) for candidate in candidates), key=lambda pair: (-pair[1].score, pair[0].candidate_id))
+        chosen = ranked[: max(1, min(3, generations))]
+        perspectives.append({"perspective": name, "objective": objective, "candidates": [{"candidate": asdict(candidate), "evaluation": asdict(evaluation)} for candidate, evaluation in chosen]})
+    candidate_ids = [entry["candidate"]["candidate_id"] for perspective in perspectives for entry in perspective["candidates"]]
+    unique_ids = sorted(set(candidate_ids))
+    meta = {
+        "version": "evez-polycentric-frontier/v1",
+        "discovery": discovery,
+        "perspectives": perspectives,
+        "rules": [
+            "no perspective is authoritative by itself",
+            "competing hypotheses remain visible",
+            "UNKNOWN cannot become permission through agreement",
+            "agreement means compatibility, not truth",
+            "activation remains outside invention",
+        ],
+        "candidate_count": len(candidate_ids),
+        "unique_candidate_count": len(unique_ids),
+    }
+    meta["meta_architecture_sha256"] = sha256(meta)
+    return meta
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the EVEZ self-discovery/self-invention architecture loop.")
     parser.add_argument("context", help="JSON context file")
     parser.add_argument("--generations", type=int, default=3)
+    parser.add_argument("--polycentric", action="store_true")
     parser.add_argument("--output")
     args = parser.parse_args()
 
     context = json.loads(Path(args.context).read_text(encoding="utf-8"))
-    proposal = evolve(context, generations=args.generations)
+    proposal = polycentric_frontier(context, args.generations) if args.polycentric else evolve(context, generations=args.generations)
 
     rendered = json.dumps(proposal, indent=2, sort_keys=True)
     if args.output:
