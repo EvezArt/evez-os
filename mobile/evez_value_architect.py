@@ -111,6 +111,7 @@ class ValueCandidate:
     candidate_id: str
     generation: int
     parent_ids: tuple[str, ...]
+    focus: str
     kind: str
     title: str
     description: str
