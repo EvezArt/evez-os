@@ -665,7 +665,9 @@ def run(
             "bounded recursion != infinite execution",
         ],
     }
-    result["recursive_value_architecture_sha256"] = sha256(result)
+    digest_material = dict(result)
+    digest_material.pop("generated_at", None)
+    result["recursive_value_architecture_sha256"] = sha256(digest_material)
     return result
 
 
