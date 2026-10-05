@@ -1,4 +1,4 @@
-.PHONY: start stop restart health test logs status spine replay
+.PHONY: start stop restart health test desas-test socratious logs status spine replay
 
 # EVEZ-OS — The Firmament
 # SENSE → DESIRE → THINK → PLAN → ACT → LEARN → MODIFY → REFLECT → BECOME
@@ -30,6 +30,16 @@ health:
 test:
 	@echo "⚡ Running integration tests..."
 	@python3 scripts/test_firmament.py
+	@$(MAKE) desas-test
+
+desas-test:
+	@python3 -m py_compile evez_adaptive_socratious.py desas_evex.py
+	@python3 -m pytest -q tests/test_socratious.py
+	@python3 benchmarks/desas-socratious/self_test.py
+	@python3 benchmarks/desas-socratious/verify_evex.py
+
+socratious:
+	@python3 evez_adaptive_socratious.py --compact
 
 logs:
 	docker-compose logs -f
