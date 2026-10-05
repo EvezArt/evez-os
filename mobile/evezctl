@@ -32,11 +32,44 @@ need() {
 }
 
 json_or_text() {
-  if jq -e . >/dev/null 2>&1; then
-    jq .
+  local data
+  data="$(cat)"
+  if printf '%s' "$data" | jq . >/dev/null 2>&1; then
+    printf '%s' "$data" | jq .
   else
-    cat
+    printf '%s\n' "$data"
   fi
+}
+
+local_witness() {
+  [ "$#" -eq 2 ] || {
+    printf 'usage: evezctl witness TYPE JSON\n' >&2
+    return 2
+  }
+
+  local event_type="$1"
+  local payload="$2"
+  local spine="$LOG_DIR/spine.jsonl"
+  local previous_hash="GENESIS"
+  local ts event_json hash
+
+  printf '%s' "$payload" | jq -e . >/dev/null || {
+    log "invalid JSON payload"
+    return 2
+  }
+
+  if [ -s "$spine" ]; then
+    previous_hash="$(tail -n 1 "$spine" | jq -r '.hash // "GENESIS"')"
+  fi
+
+  ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  event_json="$(jq -cn     --arg ts "$ts"     --arg type "$event_type"     --arg parent_hash "$previous_hash"     --argjson payload "$payload"     '{timestamp:$ts,type:$type,parent_hash:$parent_hash,payload:$payload}')"
+
+  hash="$(printf '%s' "$event_json" | openssl dgst -sha256 -r | awk '{print $1}')"
+
+  jq -cn     --argjson event "$event_json"     --arg hash "$hash"     '$event + {hash:$hash}' >> "$spine"
+
+  jq -n     --arg event_type "$event_type"     --arg timestamp "$ts"     --arg parent_hash "$previous_hash"     --arg hash "$hash"     --arg file "$spine"     '{recorded:true,event_type:$event_type,timestamp:$timestamp,parent_hash:$parent_hash,hash:$hash,file:$file}'
 }
 
 doctor() {
@@ -148,6 +181,7 @@ Commands:
   status
   pipeline
   spine-event TYPE JSON
+  witness TYPE JSON
   pull
   deploy
   logs
@@ -164,6 +198,7 @@ case "$cmd" in
   spine-event) spine_event "$@" ;;
   pull) pull_cmd "$@" ;;
   deploy) deploy_cmd "$@" ;;
+  witness) local_witness "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
