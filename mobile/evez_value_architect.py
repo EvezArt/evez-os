@@ -28,12 +28,14 @@ from typing import Any
 try:
     from evez_architect import discover, polycentric_frontier
     from evez_indivifluence import run as swarm_run
+    from evez_response_loop import run as response_loop_run
     from evez_toroid import run as toroidal_run
     from evez_unlock import calculate_unlocks, result_payload
     from evez_yhwh import judge_context
 except ImportError:
     from mobile.evez_architect import discover, polycentric_frontier
     from mobile.evez_indivifluence import run as swarm_run
+    from mobile.evez_response_loop import run as response_loop_run
     from mobile.evez_toroid import run as toroidal_run
     from mobile.evez_unlock import calculate_unlocks, result_payload
     from mobile.evez_yhwh import judge_context
@@ -612,6 +614,10 @@ def run(
         size=int(context.get("swarm", {}).get("size", 8)) if isinstance(context.get("swarm"), dict) else 8,
     )
     sovereign = judge_context(context)
+    response_loop = response_loop_run(
+        context,
+        str(context.get("current_response", "")),
+    )
     toroidal = toroidal_run(
         context,
         generations=max(1, toroidal_generations),
@@ -631,6 +637,7 @@ def run(
     architecture_sources = (
         polycentric["meta_architecture_sha256"],
         swarm["swarm_architecture_sha256"],
+        response_loop["response_loop_sha256"],
         toroidal["toroidal_architecture_sha256"],
         sovereign["sovereign_judgment_sha256"],
     )
@@ -663,6 +670,7 @@ def run(
         ("reverse_engineering_observed", {"items": reverse_engineering}),
         ("polycentric_frontier_generated", {"meta_sha256": polycentric["meta_architecture_sha256"]}),
         ("rogue_indivifluence_swarm_generated", {"sha256": swarm["swarm_architecture_sha256"]}),
+        ("recursive_response_frontier_generated", {"sha256": response_loop["response_loop_sha256"]}),
         ("sovereign_judgment_calculated", {"sha256": sovereign["sovereign_judgment_sha256"]}),
         ("toroidal_frontier_generated", {"sha256": toroidal["toroidal_architecture_sha256"]}),
         ("pareto_frontier_selected", {"candidate_ids": [x.candidate_id for x in frontier]}),
@@ -684,6 +692,7 @@ def run(
         "system_discovery": system_discovery,
         "polycentric_frontier": polycentric,
         "rogue_indivifluence_swarm": swarm,
+        "recursive_response_frontier": response_loop,
         "sovereign_judge": sovereign,
         "toroidal_frontier": toroidal,
         "reverse_engineering": reverse_engineering,
