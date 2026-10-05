@@ -28,6 +28,7 @@ from typing import Any
 try:
     from evez_architect import discover, polycentric_frontier
     from evez_indivifluence import run as swarm_run
+    from evez_permaloot import run as permaloot_run
     from evez_response_loop import run as response_loop_run
     from evez_toroid import run as toroidal_run
     from evez_unlock import calculate_unlocks, result_payload
@@ -35,6 +36,7 @@ try:
 except ImportError:
     from mobile.evez_architect import discover, polycentric_frontier
     from mobile.evez_indivifluence import run as swarm_run
+    from mobile.evez_permaloot import run as permaloot_run
     from mobile.evez_response_loop import run as response_loop_run
     from mobile.evez_toroid import run as toroidal_run
     from mobile.evez_unlock import calculate_unlocks, result_payload
@@ -618,6 +620,13 @@ def run(
         context,
         str(context.get("current_response", "")),
     )
+    permaloot = permaloot_run(
+        context,
+        current_response=str(context.get("current_response", "")),
+        depth=int(context.get("permaloot", {}).get("depth", 4))
+        if isinstance(context.get("permaloot"), dict)
+        else 4,
+    )
     toroidal = toroidal_run(
         context,
         generations=max(1, toroidal_generations),
@@ -638,6 +647,7 @@ def run(
         polycentric["meta_architecture_sha256"],
         swarm["swarm_architecture_sha256"],
         response_loop["response_loop_sha256"],
+        permaloot["permaloot_architecture_sha256"],
         toroidal["toroidal_architecture_sha256"],
         sovereign["sovereign_judgment_sha256"],
     )
@@ -671,6 +681,7 @@ def run(
         ("polycentric_frontier_generated", {"meta_sha256": polycentric["meta_architecture_sha256"]}),
         ("rogue_indivifluence_swarm_generated", {"sha256": swarm["swarm_architecture_sha256"]}),
         ("recursive_response_frontier_generated", {"sha256": response_loop["response_loop_sha256"]}),
+        ("permaloot_acquisition_surge_generated", {"sha256": permaloot["permaloot_architecture_sha256"], "inventory_count": permaloot["inventory_count"]}),
         ("sovereign_judgment_calculated", {"sha256": sovereign["sovereign_judgment_sha256"]}),
         ("toroidal_frontier_generated", {"sha256": toroidal["toroidal_architecture_sha256"]}),
         ("pareto_frontier_selected", {"candidate_ids": [x.candidate_id for x in frontier]}),
@@ -693,6 +704,7 @@ def run(
         "polycentric_frontier": polycentric,
         "rogue_indivifluence_swarm": swarm,
         "recursive_response_frontier": response_loop,
+        "permaloot_acquisition_surge": permaloot,
         "sovereign_judge": sovereign,
         "toroidal_frontier": toroidal,
         "reverse_engineering": reverse_engineering,
