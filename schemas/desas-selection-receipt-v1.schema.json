@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evez.art/schemas/desas-selection-receipt-v1.schema.json",
+  "title": "DESA-S Selection Receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["receipt_id", "targeter_id", "selected_target_id", "selected_target_type", "ranking", "rejected_target_ids", "basis", "observer_state_before", "observer_state_after", "self_observation", "integrity_sha256"],
+  "properties": {
+    "receipt_id": {"type": "string", "minLength": 1},
+    "targeter_id": {"type": "string", "minLength": 1},
+    "selected_target_id": {"type": "string", "minLength": 1},
+    "selected_target_type": {"type": "string", "minLength": 1},
+    "ranking": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "rejected_target_ids": {"type": "array", "items": {"type": "string"}},
+    "basis": {"type": "object"},
+    "observer_state_before": {"type": "string"},
+    "observer_state_after": {"type": "string"},
+    "self_observation": {
+      "type": "object",
+      "required": ["targeter_in_candidate_space", "selected_self", "blind_spots"],
+      "properties": {
+        "targeter_in_candidate_space": {"const": true},
+        "selected_self": {"type": "boolean"},
+        "blind_spots": {"type": "array"}
+      }
+    },
+    "integrity_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
