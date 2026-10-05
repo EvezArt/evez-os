@@ -1,0 +1,6 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="${EVEZ_ROOT:-$HOME/evez-os}"
+CONTEXT="${1:--}"
+exec python "$ROOT/mobile/evez_unlock.py" "$CONTEXT"
