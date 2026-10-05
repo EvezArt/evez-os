@@ -30,6 +30,7 @@ def candidate(candidate_id, vector):
         generation=0,
         parent_ids=(),
         focus="test",
+        architecture_sources=(),
         kind="test",
         title=candidate_id,
         description="test candidate",
