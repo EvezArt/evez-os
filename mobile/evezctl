@@ -417,6 +417,19 @@ memetic_meta_loot_cmd() {
   python "$(memetic_meta_loot_py)" "$@"
 }
 
+lexile_live_py() {
+  printf '%s/mobile/evez_lexile_landscape.py' "$EVEZ_ROOT"
+}
+
+lexile_live_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl lexile-live TEXT|@FILE [--rounds N] [--max-nodes N] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(lexile_live_py)" "$@"
+}
+
+
 
 
 
@@ -542,6 +555,7 @@ Commands:
   response-frontier CONTEXT_JSON [--response TEXT|@FILE] [--output FILE]
   permaloot-surge CONTEXT_JSON [--response TEXT|@FILE] [--depth N] [--output FILE]
   memetic-meta-loot PERMALOOT_JSON [--max-memes N] [--output FILE]
+  lexile-live TEXT|@FILE [--rounds N] [--max-nodes N] [--output FILE]
   pull
   deploy
   logs
@@ -589,6 +603,7 @@ case "$cmd" in
   response-frontier) response-frontier_cmd "$@" ;;
   permaloot-surge) permaloot_surge_cmd "$@" ;;
   memetic-meta-loot) memetic_meta_loot_cmd "$@" ;;
+  lexile-live) lexile_live_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
