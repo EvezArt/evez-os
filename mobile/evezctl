@@ -174,6 +174,44 @@ arsenal_py() {
   printf '%s/civic/arsenal_ledger.py' "$EVEZ_ROOT"
 }
 
+fusion_py() {
+  printf '%s/civic/civic_fusion.py' "$EVEZ_ROOT"
+}
+
+civic_fuse_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl civic-fuse NAME=REPORT.json [...] [--output FILE]\n' >&2
+    return 2
+  }
+
+  local args=()
+  local output=
+  local item
+
+  while [ "$#" -gt 0 ]; do
+    if [ "$1" = "--output" ]; then
+      shift
+      [ "$#" -eq 1 ] || {
+        printf 'usage: evezctl civic-fuse NAME=REPORT.json [...] [--output FILE]\n' >&2
+        return 2
+      }
+      output="$1"
+      shift
+      continue
+    fi
+    args+=("$1")
+    shift
+  done
+
+  [ "$#" -eq 0 ] || true
+
+  if [ -n "$output" ]; then
+    python "$(fusion_py)" "${args[@]}" --output "$output"
+  else
+    python "$(fusion_py)" "${args[@]}"
+  fi
+}
+
 arsenal_analyze_cmd() {
   [ "$#" -ge 1 ] || {
     printf 'usage: evezctl arsenal-analyze INPUT [SOURCE_NAME] [SOURCE_URI] [OUTPUT]\n' >&2
@@ -319,6 +357,7 @@ Commands:
   candidate-evaluate CLAIMS_JSON
   candidate-promote CANDIDATE_ID EVALUATION_JSON REVIEWER_OPERATION REVIEWER_PUBLIC
   arsenal-analyze INPUT [SOURCE_NAME] [SOURCE_URI] [OUTPUT]
+  civic-fuse NAME=REPORT.json [...] [--output FILE]
   pull
   deploy
   logs
@@ -353,6 +392,7 @@ case "$cmd" in
   candidate-evaluate) candidate_evaluate_cmd "$@" ;;
   candidate-promote) candidate_promote_cmd "$@" ;;
   arsenal-analyze) arsenal_analyze_cmd "$@" ;;
+  civic-fuse) civic_fuse_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
