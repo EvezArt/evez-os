@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+# The evaluator is intentionally local and deterministic for CI and phone use.
 ALLOWED_STATUS = {
     "OBSERVED", "SUPPORTED", "INFERRED", "PROPOSED",
     "UNKNOWN", "CONTRADICTED", "RETRACTED",
