@@ -405,6 +405,19 @@ permaloot_surge_cmd() {
   python "$(permaloot_py)" "$@"
 }
 
+memetic_meta_loot_py() {
+  printf '%s/mobile/evez_memetic_meta_loot.py' "$EVEZ_ROOT"
+}
+
+memetic_meta_loot_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl memetic-meta-loot PERMALOOT_JSON [--max-memes N] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(memetic_meta_loot_py)" "$@"
+}
+
+
 
 
 
@@ -528,6 +541,7 @@ Commands:
   sovereign-judge CONTEXT_JSON [--output FILE]
   response-frontier CONTEXT_JSON [--response TEXT|@FILE] [--output FILE]
   permaloot-surge CONTEXT_JSON [--response TEXT|@FILE] [--depth N] [--output FILE]
+  memetic-meta-loot PERMALOOT_JSON [--max-memes N] [--output FILE]
   pull
   deploy
   logs
@@ -574,6 +588,7 @@ case "$cmd" in
   sovereign-judge) sovereign_judge_cmd "$@" ;;
   response-frontier) response-frontier_cmd "$@" ;;
   permaloot-surge) permaloot_surge_cmd "$@" ;;
+  memetic-meta-loot) memetic_meta_loot_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
