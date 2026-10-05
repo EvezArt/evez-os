@@ -1,0 +1,47 @@
+{
+  "evex": "EVEX",
+  "version": 1,
+  "profile": "evez.exchange",
+  "kind": "state.transition",
+  "id": "desas-transition:example-v1",
+  "transition": {
+    "parent_state_hash": "42f8ef78e13dc7f8b7cf55c3f6e0c7bd6e0f1a2c4f9e3b6d7a8c9b0e1f2a3b4c",
+    "classification": {
+      "state": "PROPOSED",
+      "basis": ["selection:3:example000001", "question:3:1"]
+    },
+    "authority": {
+      "capability": "desas.socratious.reference",
+      "policy": "desas-v1-local"
+    },
+    "action": {
+      "type": "desas.propose_question",
+      "input_hash": "42f8ef78e13dc7f8b7cf55c3f6e0c7bd6e0f1a2c4f9e3b6d7a8c9b0e1f2a3b4c"
+    },
+    "acceptance": {
+      "tests": [
+        "self-target-present",
+        "rejected-targets-preserved",
+        "epistemic-no-promotion",
+        "deterministic-selection-receipt"
+      ]
+    },
+    "result": {
+      "status": "SUCCEEDED",
+      "observations": ["question:3:1", "domain:emergent"]
+    },
+    "new_state_hash": "6c10a6f96718d6394b2df48f92d5f2ebd1d8a1b0c4f6e7d8a9b0c1d2e3f4a5b6",
+    "adaptation": {
+      "profile": "desas-s.v1",
+      "domain_state_hash": "03b5f3f1d42d6a9e6a1fb7aeb8c0e6c5b0c7d0cb2e1f1f4a3c6f0d3c4d9f1e2a",
+      "sme_profile_hash": "7ce0b8ef7f0ab7a4d5a3a51fc9c7a9b8c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9",
+      "selection_receipt_hash": "a2ddad0c18f7e8b9c0d1e2f3a4b5c6d7e8f90123456789abcdef0123456789ab",
+      "question_id": "question:3:1",
+      "target_id": "domain:emergent"
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "sha256": "07a21df00770014cded776b57ddaf159fe2c0bad8b6d522e9e9d5377413f741c"
+  }
+}
