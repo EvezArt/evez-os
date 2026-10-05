@@ -43,4 +43,6 @@ Then:
     evezctl deploy
     evezctl logs
 
+The local witness command creates a SHA-256 chained JSONL record under the mobile operator state directory, so observations can be retained even while the remote mesh is unavailable.
+
 The command intentionally does not contain credentials or provider-specific deployment tokens. Put only the endpoint and local paths in the generated config file; keep service credentials in the remote runtime or an external secret manager.
