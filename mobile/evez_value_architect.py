@@ -433,6 +433,16 @@ def authority_gate(
     }
 
 
+FOCUS_ROTATION = (
+    "measurement_reduction",
+    "capability_unlock",
+    "provenance_strengthening",
+    "lawful_acquisition",
+    "transformation_composition",
+    "automation_reuse",
+)
+
+
 def make_candidate(
     context: dict[str, Any],
     graph: dict[str, Any],
@@ -466,10 +476,11 @@ def make_candidate(
         if route["asset_id"] in asset_ids
     )
 
+    focus = FOCUS_ROTATION[generation % len(FOCUS_ROTATION)]
     title = (
         "Recursive Value Acquisition and Transformation Plan"
         if generation == 0
-        else f"Generation {generation}: Recursive Frontier Recomposition"
+        else f"Generation {generation}: Recursive Frontier Recomposition [{focus}]"
     )
     description = (
         "Compose only evidence-backed or explicitly labeled proposed assets, "
@@ -495,6 +506,7 @@ def make_candidate(
     payload = {
         "generation": generation,
         "parent_ids": parent_ids,
+        "focus": focus,
         "title": title,
         "unlock_targets": unlock_targets,
         "routes": routes,
@@ -506,6 +518,7 @@ def make_candidate(
         candidate_id=candidate_id,
         generation=generation,
         parent_ids=parent_ids,
+        focus=focus,
         kind="value_architecture",
         title=title,
         description=description,
