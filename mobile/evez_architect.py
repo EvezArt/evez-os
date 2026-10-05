@@ -182,7 +182,7 @@ def invent(discovery: dict[str, Any], *, generation: int = 0, parent_id: str | N
 
         if mutation == "add_feedback_loop":
             nodes.append(Node("feedback", "controller", "learn-from-evaluation", ("tests",), ("invent",)))
-            edges.append(("tests", "feedback"))
+            edges.append(("falsify", "feedback"))
             edges.append(("feedback", "invent"))
         elif mutation == "split_observe_and_explain":
             nodes.append(Node("explain", "model", "explain-after-observation", ("observations",), ("explanations",)))
