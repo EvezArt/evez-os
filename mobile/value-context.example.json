@@ -145,6 +145,16 @@
       "source": "operator planning input"
     }
   },
+  "permaloot": {
+    "depth": 4
+  },
+  "claims": [
+    {
+      "claim_id": "claim-recursive-value",
+      "statement": "The recursive value architecture can produce a higher-value next frontier from observable state.",
+      "evidence_state": "PROPOSED"
+    }
+  ],
   "constraints": {
     "execution_boundary": "PROPOSAL_ONLY",
     "lawful_acquisition_only": true,
