@@ -1,0 +1,24 @@
+name: defensive-candidate-gate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Candidate qualification regression
+        run: |
+          python -m py_compile mobile/evez_candidate.py
+          python mobile/test_candidate.py
