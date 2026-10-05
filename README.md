@@ -145,6 +145,26 @@ curl -X POST http://localhost:9113/transform \
 
 ---
 
+## Accountable Adaptive Runtime
+
+The repository now includes a vendor-neutral reference controller for domain-emergent SME-adaptive Socratious operation. DESA-S (Domain-Emergent SME-Adaptive Socratious) constructs a temporary domain model from observations, maintains bounded demonstrated-competence profiles, selects questions as an explicit control policy, detects semantic entity error syndromes, and recursively witnesses its own target-selection process.
+
+It is deliberately conservative: UNKNOWN and PROPOSED remain distinct from VERIFIED; correction proposals are not truth; an SME profile is not a credential; and self-witnessing is an auditable control/data path, not evidence of consciousness.
+
+```bash
+# Run the deterministic opaque-domain demonstration
+evez-socratious
+
+# Emit the same state as an EVEX accountable transition
+evez-socratious --evex
+
+# Run the DESA-S benchmark
+make desas-test
+```
+
+See [DESA-S integration](docs/DESA-S-INTEGRATION.md), [DESA-S runtime](evez_adaptive_socratious.py), [EVEX transition schema](schemas/evex-state-transition-v1.schema.json), and [opaque-domain benchmark](benchmarks/desas-socratious/).
+
+---
 ## 🏗️ Infrastructure
 
 ### Current: Vultr (Evez666 — 64.176.221.16)
@@ -201,6 +221,7 @@ See [**awesome-evez.md**](awesome-evez.md) for the full curated list.
 | [Invariance Battery](packages/invariance-battery/) | 🛡️ Safety | Runtime assertion + falsification for AI agents |
 | [RQNS Pipeline](packages/evez-rqns/) | 🧬 Neuromorphic | LIF neuron + contextual bandit anomaly detection |
 | [EVEZ Client](packages/evez-client/) | 📡 SDK | Python + JavaScript SDK for the mesh |
+| [DESA-S](evez_adaptive_socratious.py) | 🔬 Epistemic Runtime | Domain-emergent SME adaptation, adaptive questioning, entity ECC, and self-witness targeting |
 
 ---
 

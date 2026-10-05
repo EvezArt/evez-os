@@ -67,3 +67,9 @@ Proof-carrying does not mean cryptographic truth.
 Cryptographic integrity can establish that bytes or canonical records were not changed after sealing. It cannot establish that an external observation was honest or that an inference is scientifically correct.
 
 Applications requiring stronger guarantees must bind evidence to appropriate authorities, sensors, logs, signatures, attestations, or independent tests.
+
+## DESA-S handoff
+
+A DESA-S handoff can carry the current domain-state hash, SME-profile hash, selection-receipt hash, proposed question, selected target, and rejected target set alongside the normal EVEX context and authority fields.
+
+The receiver should validate the handoff without assuming that the sender's inferred domain or expertise profile is correct. The adaptation artifacts are evidence about the sender's runtime state, not automatic evidence about the external world.

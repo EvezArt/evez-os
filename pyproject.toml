@@ -11,3 +11,4 @@ license = {text = "Apache-2.0"}
 
 [project.scripts]
 evez = "evez_file:cli"
+evez-socratious = "evez_adaptive_socratious:cli"

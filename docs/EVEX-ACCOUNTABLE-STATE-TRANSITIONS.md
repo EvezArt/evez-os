@@ -104,3 +104,20 @@ The expected outcomes are:
 - `UNKNOWN`
 
 A non-reproducible result is evidence about the transition, not proof that the original runtime was dishonest.
+
+## DESA-S adaptation transitions
+
+DESA-S uses the existing state.transition object with an explicit adaptation extension.
+
+The extension binds the transition to a domain-state hash, SME-profile hash, selection-receipt hash, question identifier, and selected target. These fields make the adaptation decision portable without turning inference into authority.
+
+A DESA-S transition SHOULD preserve:
+
+- the full selection receipt or its content-addressed reference;
+- rejected candidate targets;
+- the targeter's self-inclusion result;
+- the proposed question and its epistemic state;
+- the domain and SME state hashes;
+- the acceptance tests that prevent unsupported epistemic promotion.
+
+The schema extension is defined in schemas/desas-evex-transition-v1.schema.json.

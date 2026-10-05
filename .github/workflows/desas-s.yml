@@ -29,6 +29,21 @@ jobs:
       - name: Run unit tests
         run: |
           python -m pip install pytest
-          PYTHONPATH=. pytest -q tests/test_socratious.py
+          PYTHONPATH=. pytest -q tests/test_socratious.py tests/test_desas_integration.py
       - name: Run opaque-domain benchmark
-        run: PYTHONPATH=. python3 benchmarks/desas-socratious/self_test.py
+        run: |
+          PYTHONPATH=. python3 benchmarks/desas-socratious/self_test.py
+          PYTHONPATH=. python3 benchmarks/desas-socratious/verify_evex.py
+      - name: Verify EVEZ example
+        run: python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          path = Path("examples/desas-socratious.evez")
+          doc = json.loads(path.read_text(encoding="utf-8"))
+          check = json.loads(path.read_text(encoding="utf-8"))
+          check["integrity"].pop("sha256", None)
+          canonical = json.dumps(check, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+          assert hashlib.sha256(canonical).hexdigest() == doc["integrity"]["sha256"]
+          assert doc["evez"] == "EVEZ" and doc["state"] == "PROPOSED"
+          print("PASS DESA-S EVEZ state fixture v1")
+        PY
