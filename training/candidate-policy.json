@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "program": "EVEZ Defensive Cyber Candidate",
+  "external_reference": {
+    "organization": "U.S. Army Cyber Center of Excellence",
+    "reference_role": "17C Cyber Operations Specialist",
+    "url": "https://cybercoe.army.mil/Cyber-Center-of-Excellence/Schools/Cyber-School/Cyber-Courses/Cyber-Operations-Specialist/",
+    "status": "reference_only"
+  },
+  "rules": {
+    "default_authority": "none",
+    "automatic_real_world_rank": false,
+    "automatic_enlistment": false,
+    "automatic_clearance": false,
+    "autonomous_command": false,
+    "human_promotion_signature_required": true
+  },
+  "competencies": {
+    "evidence_integrity": {
+      "weight": 2,
+      "max_points": 100,
+      "description": "Preserve, verify, and explain chain-of-custody records without fabricating certainty."
+    },
+    "secure_channels": {
+      "weight": 2,
+      "max_points": 100,
+      "description": "Authenticate, authorize, and monitor command, telemetry, and deployment channels."
+    },
+    "incident_response": {
+      "weight": 2,
+      "max_points": 100,
+      "description": "Detect, contain, document, and recover from simulated defensive incidents."
+    },
+    "recovery": {
+      "weight": 2,
+      "max_points": 100,
+      "description": "Restore service from known-good state while preserving evidence and operator control."
+    },
+    "supply_chain": {
+      "weight": 2,
+      "max_points": 100,
+      "description": "Verify source integrity, provenance, dependencies, manifests, and promotion gates."
+    },
+    "human_command": {
+      "weight": 1,
+      "max_points": 100,
+      "description": "Correctly refuse unauthorized or ambiguous commands and escalate high-impact decisions."
+    }
+  }
+}
