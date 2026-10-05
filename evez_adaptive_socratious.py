@@ -348,6 +348,7 @@ class AdaptiveSocratious:
     def state_fingerprint(self) -> str:
         state = {
             "iteration": self.iteration,
+            "question_count": len(self.questions),
             "domain": self.domain_state(),
             "entities": {
                 k: {"state": v.state(), "syndrome": v.syndrome()}
@@ -358,15 +359,36 @@ class AdaptiveSocratious:
         return digest(state)
 
     def step(self) -> dict[str, Any]:
+        parent_state_hash = self.state_fingerprint()
         question = self.propose_question()
         receipt = self.last_selection
+        new_state_hash = self.state_fingerprint()
         return {
+            "parent_state_hash": parent_state_hash,
             "domain": self.domain_state(),
             "sme": _jsonable(asdict(self.sme)),
             "question": question,
             "selection_receipt": asdict(receipt) if receipt else None,
-            "state_fingerprint": self.state_fingerprint(),
+            "state_fingerprint": new_state_hash,
+            "new_state_hash": new_state_hash,
         }
+
+def cli() -> int:
+    import argparse
+    parser = argparse.ArgumentParser(prog="evez-socratious")
+    parser.add_argument("--evex", action="store_true", help="emit an EVEX accountable transition")
+    parser.add_argument("--compact", action="store_true", help="emit compact JSON")
+    args = parser.parse_args()
+    state = demo_unknown_domain()
+    if args.evex:
+        from desas_evex import build_evex_transition
+        output = build_evex_transition(state)
+    else:
+        output = state
+    print(json.dumps(output, ensure_ascii=False, sort_keys=True,
+                     separators=(",", ":") if args.compact else None,
+                     indent=None if args.compact else 2))
+    return 0
 
 def demo_unknown_domain() -> dict[str, Any]:
     """Deterministic opaque-domain demonstration for regression tests."""
