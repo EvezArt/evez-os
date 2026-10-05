@@ -59,3 +59,13 @@ The falsifiable claim is narrower:
 > A generic runtime can use machine-readable EVEX artifacts to exchange state transitions with explicit evidence, authority boundaries, and verifiable receipts, reducing ambiguity compared with answer-only handoffs.
 
 The wake-up benchmark in `benchmarks/evex-wake-up` is the initial executable test of that claim.
+
+### Domain-emergent adaptation
+
+DESA-S adds a concrete adaptation layer to the interoperability thesis:
+
+unknown problem -> observation -> entity error correction -> domain induction -> SME induction -> witness-target selection -> Socratic question -> accountable transition.
+
+The protocol boundary stays model-independent. A receiving runtime need not share the same model, domain ontology, or questioning policy to validate the artifact, inspect the evidence references, reject unsupported promotion, or reproduce the bounded transition.
+
+The resulting interoperability unit is therefore not just an answer or tool call. It is an evidence-linked adaptation state plus an accountable transition receipt.
