@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EVEZ Evidence Capsule",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "capsule_type",
+    "created_at",
+    "artifact_count",
+    "manifest",
+    "artifacts",
+    "epistemic_rule",
+    "capsule_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "capsule_type": { "const": "EVEZ_EVIDENCE_CAPSULE" },
+    "created_at": { "type": "string" },
+    "artifact_count": { "type": "integer", "minimum": 1 },
+    "manifest": { "type": "array" },
+    "artifacts": { "type": "array" },
+    "epistemic_rule": { "type": "string" },
+    "capsule_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}
