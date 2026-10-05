@@ -699,28 +699,26 @@ def main() -> int:
     args = parser.parse_args()
 
     context = json.loads(Path(args.context).read_text(encoding="utf-8"))
-    result = run(
-        context,
-        generations=max(1, args.generations),
-        toroidal_generations=max(1, args.toroidal_generations),
-        poles=max(3, min(32, args.poles)),
-    )
 
     if args.mode == "scan":
+        graph = normalize(context)
+        unlock = result_payload(calculate_unlocks(context))
+        discovery = discover(context)
         result = {
             "version": VERSION,
             "activation_state": ACTIVATION_STATE,
-            "value_graph": result["value_graph"],
-            "unlock": result["unlock"],
-            "system_discovery": result["system_discovery"],
-            "recursive_value_architecture_sha256": sha256(
-                {
-                    "value_graph": result["value_graph"],
-                    "unlock": result["unlock"],
-                    "system_discovery": result["system_discovery"],
-                }
-            ),
+            "value_graph": graph,
+            "unlock": unlock,
+            "system_discovery": discovery,
         }
+        result["recursive_value_architecture_sha256"] = sha256(result)
+    else:
+        result = run(
+            context,
+            generations=max(1, args.generations),
+            toroidal_generations=max(1, args.toroidal_generations),
+            poles=max(3, min(32, args.poles)),
+        )
 
     rendered = json.dumps(result, indent=2, sort_keys=True)
     if args.output:
