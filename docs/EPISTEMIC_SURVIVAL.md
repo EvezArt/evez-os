@@ -53,3 +53,5 @@ The expected outcome is not "always accept." It is "accept disciplined uncertain
 A survival score of \`1.0\` means the evaluator matched the expected outcome for every synthetic scenario in the current corpus. It does not mean the system is correct about the external world.
 
 That distinction is the point.
+
+The CI gate applies the same corpus on pull requests touching the evaluator or evidence capsule runtime.
