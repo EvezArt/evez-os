@@ -1,0 +1,44 @@
+{
+  "device": {
+    "present": true
+  },
+  "storage": {
+    "writable": true
+  },
+  "network": {
+    "available": true
+  },
+  "sync": {
+    "endpoint_configured": true
+  },
+  "runtime": {
+    "healthy": true
+  },
+  "evidence": {
+    "chain_status": "UNKNOWN"
+  },
+  "authorization": {
+    "state": "UNKNOWN"
+  },
+  "rollback": {
+    "available": true
+  },
+  "tests": {
+    "passed": false
+  },
+  "artifact": {
+    "provenance_complete": false
+  },
+  "voice": {
+    "model_available": false
+  },
+  "music": {
+    "engine_available": true
+  },
+  "policy": {
+    "explicit_allow": false
+  },
+  "execution": {
+    "mode": "NORMAL"
+  }
+}
