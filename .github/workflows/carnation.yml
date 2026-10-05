@@ -6,6 +6,7 @@ on:
       - "src/cognition/carnation.py"
       - "schema/carnation_tag_v1.schema.json"
       - "docs/CRYSTALINFORMERGENCE.md"
+      - "docs/LLM_WITNESS_PROTOCOL.md"
       - "tests/test_carnation.py"
       - ".github/workflows/carnation.yml"
   workflow_dispatch:
@@ -32,5 +33,4 @@ jobs:
         run: python -m json.tool schema/carnation_tag_v1.schema.json >/dev/null
 
       - name: Run focused tests
-        run: |
-          python -m pytest -q tests/test_carnation.py
+        run: PYTHONPATH=. python -m unittest -v tests.test_carnation
