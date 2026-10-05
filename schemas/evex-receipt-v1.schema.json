@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evez.art/schemas/evex-receipt-v1.schema.json",
+  "title": "EVEX Capability Receipt v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["evex", "version", "profile", "kind", "id", "receipt", "integrity"],
+  "properties": {
+    "evex": {"const": "EVEX"},
+    "version": {"const": 1},
+    "profile": {"const": "evez.exchange"},
+    "kind": {"const": "capability.receipt"},
+    "id": {"type": "string", "minLength": 1},
+    "receipt": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["capability_id", "policy_decision", "status", "input_sha256", "output_sha256"],
+      "properties": {
+        "capability_id": {"type": "string", "minLength": 1},
+        "policy_decision": {"type": "string", "enum": ["AUTHORIZED", "DENIED", "UNKNOWN"]},
+        "status": {"type": "string", "enum": ["SUCCEEDED", "FAILED", "REJECTED", "INACCESSIBLE", "UNKNOWN", "DIVERGED", "REPRODUCED"]},
+        "input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "output_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "runtime": {"type": "object", "additionalProperties": true},
+        "observable": {"type": "object", "additionalProperties": true},
+        "error": {"type": "object", "additionalProperties": true}
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["algorithm", "sha256"],
+      "properties": {
+        "algorithm": {"const": "sha256"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}
