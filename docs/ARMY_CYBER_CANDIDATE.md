@@ -60,3 +60,25 @@ It does not create:
 - military system access
 
 Those remain human and institutional processes.
+
+
+## Promotion is not self-certification
+
+A qualification evaluation is always provisional.
+
+Higher grades require a separate reviewer authority envelope whose action is PROMOTE_CANDIDATE. That envelope must:
+- use the reviewer role
+- be current in the security epoch
+- be unexpired
+- bind the exact candidate identifier
+- bind the exact SHA-256 digest of the evaluation
+- verify against the reviewer's trusted public key
+
+The agent cannot manufacture its own promotion approval.
+
+The workflow therefore has two distinct phases:
+
+1. Evaluate measurable evidence.
+2. Obtain signed human review before promotion.
+
+This mirrors the larger EVEZ command-authority model, where authority is a separate fact from capability.
