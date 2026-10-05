@@ -112,6 +112,7 @@ class ValueCandidate:
     generation: int
     parent_ids: tuple[str, ...]
     focus: str
+    architecture_sources: tuple[str, ...]
     kind: str
     title: str
     description: str
@@ -451,6 +452,7 @@ def make_candidate(
     *,
     generation: int,
     parent_ids: tuple[str, ...] = (),
+    architecture_sources: tuple[str, ...] = (),
 ) -> ValueCandidate:
     unlocked = set(unlock_payload["unlocked"])
     unknown = set(unlock_payload["unknown"])
@@ -508,6 +510,7 @@ def make_candidate(
         "generation": generation,
         "parent_ids": parent_ids,
         "focus": focus,
+        "architecture_sources": architecture_sources,
         "title": title,
         "unlock_targets": unlock_targets,
         "routes": routes,
@@ -520,6 +523,7 @@ def make_candidate(
         generation=generation,
         parent_ids=parent_ids,
         focus=focus,
+        architecture_sources=architecture_sources,
         kind="value_architecture",
         title=title,
         description=description,
@@ -614,6 +618,11 @@ def run(
 
     candidates: list[ValueCandidate] = []
     parent_ids: tuple[str, ...] = ()
+    architecture_sources = (
+        polycentric["meta_architecture_sha256"],
+        toroidal["toroidal_architecture_sha256"],
+    )
+
     for generation in range(max(1, generations)):
         candidate = make_candidate(
             context,
@@ -621,6 +630,7 @@ def run(
             unlock_payload,
             generation=generation,
             parent_ids=parent_ids,
+            architecture_sources=architecture_sources,
         )
         candidates.append(candidate)
         parent_ids = (candidate.candidate_id,)
