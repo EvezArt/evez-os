@@ -22,6 +22,8 @@ jobs:
         run: |
           python -m py_compile civic/arsenal_ledger.py
           PYTHONPATH=civic python civic/test_arsenal_ledger.py
+          PYTHONPATH=civic python civic/test_civic_fusion.py
+          python -m py_compile civic/civic_fusion.py
 
       - name: Analyze synthetic fixture
         run: |
