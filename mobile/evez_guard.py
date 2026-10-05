@@ -16,6 +16,7 @@ hardware-backed attestation.
 from __future__ import annotations
 
 import argparse
+import getpass
 import hashlib
 import json
 import os
@@ -73,11 +74,24 @@ def init_device() -> dict:
     if private.exists() or public.exists():
         return {"initialized": False, "reason": "device key already exists", "public_key": str(public)}
 
-    generated = run(["openssl", "genpkey", "-algorithm", "ED25519", "-out", str(private)])
+    password = getpass.getpass("Create device signing passphrase: ")
+    confirm = getpass.getpass("Repeat device signing passphrase: ")
+    if not password or password != confirm:
+        raise SystemExit("DENY: passphrases do not match or are empty")
+
+    generated = run(
+        ["openssl", "genpkey", "-algorithm", "ED25519", "-aes-256-cbc",
+         "-pass", "stdin", "-out", str(private)],
+        input_bytes=(password + "\n").encode(),
+    )
     if generated.returncode != 0:
         raise SystemExit(generated.stderr.decode("utf-8", "replace"))
 
-    exported = run(["openssl", "pkey", "-in", str(private), "-pubout", "-out", str(public)])
+    exported = run(
+        ["openssl", "pkey", "-passin", "stdin", "-in", str(private),
+         "-pubout", "-out", str(public)],
+        input_bytes=(password + "\n").encode(),
+    )
     if exported.returncode != 0:
         private.unlink(missing_ok=True)
         raise SystemExit(exported.stderr.decode("utf-8", "replace"))
@@ -88,7 +102,7 @@ def init_device() -> dict:
         "initialized": True,
         "public_key": str(public),
         "private_key": str(private),
-        "note": "File-backed identity; not hardware-backed attestation.",
+        "note": "Passphrase-protected file-backed identity; not hardware-backed attestation.",
     }
 
 def authorize(action: str, payload_text: str) -> dict:
@@ -122,6 +136,7 @@ def authorize(action: str, payload_text: str) -> dict:
     }
     message = canonical(envelope)
 
+    password = getpass.getpass("Device signing passphrase: ")
     with tempfile.TemporaryDirectory() as tmp:
         message_path = Path(tmp) / "message.bin"
         signature_path = Path(tmp) / "signature.bin"
@@ -129,10 +144,11 @@ def authorize(action: str, payload_text: str) -> dict:
 
         signed = run([
             "openssl", "pkeyutl", "-sign", "-inkey", str(private),
-            "-rawin", "-in", str(message_path), "-out", str(signature_path)
-        ])
+            "-passin", "stdin", "-rawin", "-in", str(message_path),
+            "-out", str(signature_path)
+        ], input_bytes=(password + "\n").encode())
         if signed.returncode != 0:
-            raise SystemExit(signed.stderr.decode("utf-8", "replace"))
+            raise SystemExit("DENY: signing failed; wrong passphrase or key error")
 
         signature = signature_path.read_bytes().hex()
 
