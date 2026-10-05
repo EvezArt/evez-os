@@ -16,6 +16,7 @@ jobs:
           bash -n mobile/evezctl
           bash -n mobile/install.sh
           test -s mobile/evezctl
+          python mobile/test_mobile.py
           test -s mobile/install.sh
           test -s mobile/README.md
           test -s docs/MOBILE_FIRST.md
