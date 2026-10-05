@@ -279,8 +279,9 @@ def main() -> int:
         return 0
 
     if args.command == "sync":
-        print(json.dumps(sync(args.endpoint, args.path, max(1, args.limit)), sort_keys=True))
-        return 0
+        result = sync(args.endpoint, args.path, max(1, args.limit))
+        print(json.dumps(result, sort_keys=True))
+        return 1 if result["failed"] else 0
 
     return 2
 
