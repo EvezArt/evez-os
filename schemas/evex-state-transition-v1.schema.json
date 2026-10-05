@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evez.art/schemas/evex-state-transition-v1.schema.json",
+  "title": "EVEX Accountable State Transition v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["evex", "version", "profile", "kind", "id", "transition", "integrity"],
+  "properties": {
+    "evex": {"const": "EVEX"},
+    "version": {"const": 1},
+    "profile": {"const": "evez.exchange"},
+    "kind": {"const": "state.transition"},
+    "id": {"type": "string", "minLength": 1},
+    "transition": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["parent_state_hash", "classification", "authority", "action", "acceptance", "result"],
+      "properties": {
+        "parent_state_hash": {"type": "string", "minLength": 1},
+        "classification": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["state", "basis"],
+          "properties": {
+            "state": {
+              "type": "string",
+              "enum": ["VERIFIED", "SUPPORTED", "INFERRED", "PROPOSED", "UNKNOWN", "STALE", "CONTRADICTED", "RETRACTED"]
+            },
+            "basis": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "authority": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["capability", "policy"],
+          "properties": {
+            "capability": {"type": "string"},
+            "policy": {"type": "string"}
+          }
+        },
+        "action": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["type", "input_hash"],
+          "properties": {
+            "type": {"type": "string"},
+            "input_hash": {"type": "string"}
+          }
+        },
+        "acceptance": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["tests"],
+          "properties": {
+            "tests": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["status", "observations"],
+          "properties": {
+            "status": {"type": "string", "enum": ["SUCCEEDED", "FAILED", "REJECTED", "INACCESSIBLE", "UNKNOWN", "DIVERGED", "REPRODUCED"]},
+            "observations": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "new_state_hash": {"type": "string"}
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["algorithm", "sha256"],
+      "properties": {
+        "algorithm": {"const": "sha256"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}
