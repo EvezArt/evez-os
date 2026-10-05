@@ -34,7 +34,7 @@ test:
 
 desas-test:
 	@python3 -m py_compile evez_adaptive_socratious.py desas_evex.py
-	@python3 -m pytest -q tests/test_socratious.py
+	@python3 -m pytest -q tests/test_socratious.py tests/test_desas_integration.py
 	@python3 benchmarks/desas-socratious/self_test.py
 	@python3 benchmarks/desas-socratious/verify_evex.py
 
