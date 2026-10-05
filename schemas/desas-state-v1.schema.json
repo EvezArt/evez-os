@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evez.art/schemas/desas-state-v1.schema.json",
+  "title": "DESA-S State v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["desa_s", "version", "kind", "id", "domain", "sme", "targeter", "epistemic_state"],
+  "properties": {
+    "desa_s": {"const": "DESA-S"},
+    "version": {"const": 1},
+    "kind": {"const": "adaptive.state"},
+    "id": {"type": "string", "minLength": 1},
+    "epistemic_state": {"enum": ["VERIFIED", "SUPPORTED", "INFERRED", "PROPOSED", "UNKNOWN", "STALE", "CONTRADICTED", "RETRACTED"]},
+    "domain": {
+      "type": "object",
+      "required": ["domain_id", "terms", "relations", "novelty_score"],
+      "properties": {
+        "domain_id": {"type": "string"},
+        "terms": {"type": "array", "items": {"type": "string"}},
+        "relations": {"type": "array"},
+        "novelty_score": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "sme": {"type": "object"},
+    "targeter": {
+      "type": "object",
+      "required": ["id", "self_targetable"],
+      "properties": {
+        "id": {"type": "string"},
+        "self_targetable": {"const": true}
+      }
+    }
+  }
+}
