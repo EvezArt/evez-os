@@ -248,6 +248,13 @@ candidate_promote_cmd() {
   }
   python "$(candidate_py)" promote "$1" "$2" "$3" "$4"
 }
+swarm_py() {
+  printf '%s/research/anomaly_swarm_lab.py' "$EVEZ_ROOT"
+}
+
+swarm_run_cmd() {
+  python "$(swarm_py)" "$@"
+}
 
 status_cmd() {
   log "status endpoint=$EVEZ_ENDPOINT"
@@ -399,11 +406,3 @@ case "$cmd" in
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
 esac
-
-swarm_py() {
-  printf '%s/research/anomaly_swarm_lab.py' "$EVEZ_ROOT"
-}
-
-swarm_run_cmd() {
-  python "$(swarm_py)" "$@"
-}
