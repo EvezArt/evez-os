@@ -1,0 +1,26 @@
+name: mobile-first-smoke
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  shell-and-mobile-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate mobile scripts
+        run: |
+          bash -n mobile/evezctl
+          bash -n mobile/install.sh
+          test -s mobile/evezctl
+          test -s mobile/install.sh
+          test -s mobile/README.md
+          test -s docs/MOBILE_FIRST.md
+
+      - name: Exercise offline-safe CLI
+        run: |
+          chmod +x mobile/evezctl
+          HOME="$RUNNER_TEMP/evez-home" EVEZ_ENDPOINT="https://example.invalid" EVEZ_CONFIG="$RUNNER_TEMP/evez-home/.config/evez/evez.env" mobile/evezctl doctor
