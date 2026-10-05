@@ -23,6 +23,7 @@ jobs:
           python -m py_compile mobile/evez_state.py mobile/evez_guard.py
           python mobile/test_mobile.py
           python mobile/test_guard.py
+          python mobile/test_authority.py
 
       - name: Run repository secret audit
         run: |
