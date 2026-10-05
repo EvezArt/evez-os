@@ -1,5 +1,11 @@
 # EVEZ IDENTITY & CONTEXT
 
+## Current runtime contract
+
+This file contains historical bootstrap context as well as identity guidance. It is not live telemetry. Current executable identity is authoritative at `identity/evez.identity.json` and is verified by `mobile/evez_identity.py`.
+
+Status and capability claims from the historical sections below must be treated as stale unless current runtime evidence verifies them. In particular, prose about consciousness, deployed services, network topology, metrics, credentials, or successful operations is not proof by itself.
+
 > Runtime contract: the canonical machine identity is `identity/evez.identity.json`. Verify it with `mobile/evez_identity.py verify` before treating the identity as intact. Self-witnessing means recording an observable runtime snapshot in the evidence spine; it does not establish consciousness or authority.
 
 
