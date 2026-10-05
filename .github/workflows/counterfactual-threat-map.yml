@@ -1,6 +1,13 @@
 name: Counterfactual Threat Map
 
 on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+  pull_request:
+    branches:
+      - main
   schedule:
     - cron: "15 8 * * *"
   workflow_dispatch:
