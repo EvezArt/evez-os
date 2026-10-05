@@ -29,6 +29,7 @@ def candidate(candidate_id, vector):
         candidate_id=candidate_id,
         generation=0,
         parent_ids=(),
+        focus="test",
         kind="test",
         title=candidate_id,
         description="test candidate",
