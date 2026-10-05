@@ -1,0 +1,25 @@
+{
+  "desa_s": "DESA-S",
+  "version": 1,
+  "kind": "adaptive.state",
+  "id": "example:opaque-domain-1",
+  "epistemic_state": "PROPOSED",
+  "domain": {
+    "domain_id": "domain:emergent",
+    "terms": ["nyx", "phase-b", "zorq"],
+    "relations": [
+      {"relation": "feeds", "target": "entity:nyx"},
+      {"relation": "accepts", "target": "entity:vela"}
+    ],
+    "novelty_score": 0.2
+  },
+  "sme": {
+    "sme_id": "sme:emergent-1",
+    "calibration": 1.0,
+    "scope_unknown": []
+  },
+  "targeter": {
+    "id": "targeter:desas-1",
+    "self_targetable": true
+  }
+}
