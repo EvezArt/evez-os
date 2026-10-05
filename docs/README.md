@@ -36,3 +36,13 @@ evez health
 - **Publications:** https://github.com/EvezArt/evez-publications
 
 ⚡ Built by Steven Crawford-Maggard
+
+## Accountable adaptation
+
+DESA-S is the domain-emergent SME-adaptive runtime layer for the EVEZ/EVEX protocol stack.
+
+- Runtime: evez_adaptive_socratious.py
+- EVEZ state fixture: examples/desas-socratious.evez
+- EVEX transition fixture: examples/desas-socratious.evex.json
+- Integration map: docs/DESA-S-INTEGRATION.md
+- Benchmark: benchmarks/desas-socratious/
