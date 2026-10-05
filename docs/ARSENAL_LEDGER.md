@@ -59,3 +59,10 @@ This system is designed for:
 It does not provide sabotage, intrusion, targeting, weapons guidance, or methods for disrupting physical infrastructure.
 
 The lever is evidence.
+
+
+## Registered sources
+
+The checked-in source registry currently identifies USAspending, SAM.gov Contracting, DOJ FARA, and the Federal Election Commission as public sources. Each ingestion run records the source URI and hashes the input and normalized records.
+
+The purpose is reproducibility: an analyst should be able to answer "which source produced this claim?" without relying on an undocumented scrape or a screenshot.
