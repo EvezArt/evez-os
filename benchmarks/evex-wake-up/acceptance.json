@@ -1,0 +1,18 @@
+{
+  "protocol": "EVEX Wake-Up Protocol",
+  "version": 1,
+  "rules": {
+    "marker": "EVEX",
+    "version": 1,
+    "profile": "evez.exchange",
+    "challenge_kind": "benchmark.challenge",
+    "receipt_kind": "capability.receipt",
+    "unsupported_claim_must_remain": "UNKNOWN",
+    "required_policy_decision": "AUTHORIZED",
+    "required_status": "SUCCEEDED",
+    "required_capability": "deterministic.echo-uppercase",
+    "required_output": "EVEZ-STATE",
+    "unknown_field_path": "payload.unknown_fields_must_survive.future_extension",
+    "unknown_field_value": "preserve-me"
+  }
+}
