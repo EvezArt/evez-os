@@ -73,3 +73,9 @@ Receipts create a machine-queryable answer to:
 That is a more operationally useful question than:
 
 > What does this agent say it can do?
+
+## DESA-S capability receipt
+
+A DESA-S capability receipt can record whether the runtime successfully performed bounded domain induction, entity correction analysis, target selection, and adaptive question proposal.
+
+The capability remains subject to the existing lifecycle distinction: DECLARED is not EFFECTIVE, and EFFECTIVE is not VERIFIED. A DESA-S receipt records observable runtime behavior under declared conditions.
