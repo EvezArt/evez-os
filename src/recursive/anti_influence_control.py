@@ -261,9 +261,13 @@ class InfluenceLockdown:
         *,
         consecutive_high_threshold: int = 3,
         score_threshold: float = 0.60,
+        trusted_witnesses: Iterable[str] = (),
     ) -> None:
         self.consecutive_high_threshold = max(1, consecutive_high_threshold)
         self.score_threshold = score_threshold
+        self._trusted_witnesses = frozenset(
+            x for x in trusted_witnesses if x
+        )
         self._streak = 0
         self._locked = False
 
@@ -290,11 +294,15 @@ class InfluenceLockdown:
         return LockdownDecision(False, "lockdown threshold not reached")
 
     def reset_by_independent_witness(self, witness_id: str) -> LockdownDecision:
-        if not witness_id.strip():
-            raise ValueError("witness_id is required")
+        if witness_id not in self._trusted_witnesses:
+            raise PermissionError(
+                "only explicitly trusted witnesses may reset lockdown"
+            )
         self._streak = 0
         self._locked = False
-        return LockdownDecision(False, "lockdown reset by named independent witness")
+        return LockdownDecision(
+            False, "lockdown reset by named independent witness"
+        )
 
 
 @dataclass(frozen=True)
@@ -329,6 +337,7 @@ class AntiInfluenceController:
         agreement_ratio: float = 1.0,
         prediction_drift: float = 0.0,
         contradiction_count: int = 0,
+        evidence: Sequence[EvidenceEnvelope] = (),
     ) -> ContainmentSnapshot:
         decision = self.exposure.admit(source_id, assessment)
         lockdown = self.lockdown.observe(assessment)
@@ -354,7 +363,7 @@ class AntiInfluenceController:
             else ContainmentState.OPEN
         )
 
-        independence = assess_source_independence(())
+        independence = assess_source_independence(evidence)
         return ContainmentSnapshot(
             self.state,
             self.exposure.total,
