@@ -357,6 +357,31 @@ value_evolve_cmd() {
   python "$(value_architect_py)" "$@"
 }
 
+indivifluence_py() {
+  printf '%s/mobile/evez_indivifluence.py' "$EVEZ_ROOT"
+}
+
+yhwh_py() {
+  printf '%s/mobile/evez_yhwh.py' "$EVEZ_ROOT"
+}
+
+swarm_emerge_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl swarm-emerge CONTEXT_JSON [--generations N] [--size N] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(indivifluence_py)" "$@"
+}
+
+sovereign_judge_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl sovereign-judge CONTEXT_JSON [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(yhwh_py)" "$@"
+}
+
+
 status_cmd() {
   log "status endpoint=$EVEZ_ENDPOINT"
 
@@ -473,6 +498,8 @@ Commands:
   survival-run [--min-score SCORE]
   value-scan CONTEXT_JSON
   value-evolve CONTEXT_JSON [--generations N] [--toroidal-generations N] [--poles N] [--output FILE] [--ledger FILE]
+  swarm-emerge CONTEXT_JSON [--generations N] [--size N] [--output FILE]
+  sovereign-judge CONTEXT_JSON [--output FILE]
   pull
   deploy
   logs
@@ -515,6 +542,8 @@ case "$cmd" in
   survival-run) survival_run_cmd "$@" ;;
   value-scan) value_scan_cmd "$@" ;;
   value-evolve) value_evolve_cmd "$@" ;;
+  swarm-emerge) swarm_emerge_cmd "$@" ;;
+  sovereign-judge) sovereign_judge_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
