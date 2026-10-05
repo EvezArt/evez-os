@@ -103,6 +103,24 @@ def _permutation_pvalue(observed: int, null: list[int]) -> float:
         return 1.0
     return (1 + sum(x >= observed for x in null)) / (len(null) + 1)
 
+def _replication_windows(events: list[Event], window_seconds: int) -> int:
+    """Count disjoint windows that independently exhibit multi-actor/multi-source structure."""
+    if window_seconds <= 0:
+        return 0
+    windows: dict[int, list[Event]] = defaultdict(list)
+    for event in events:
+        windows[int(event.ts // window_seconds)].append(event)
+
+    replicated = 0
+    for bucket in windows.values():
+        actors = {e.actor for e in bucket}
+        sources = {e.source for e in bucket}
+        if len(actors) < 2 or len(sources) < 2:
+            continue
+        if _burst_stat(bucket, min(window_seconds, 600)) > 0 or _shape_stat(bucket) > 0:
+            replicated += 1
+    return replicated
+
 
 def analyze(
     rows: Iterable[dict[str, Any]],
@@ -111,6 +129,7 @@ def analyze(
     permutations: int = 500,
     seed: int = 7,
     shape_threshold: float = 0.82,
+    replication_window_seconds: int = 3600,
 ) -> dict[str, Any]:
     events = parse_events(rows)
     if not events:
@@ -143,7 +162,12 @@ def analyze(
 
     independent_axes = len(actors) >= 2 and len(sources) >= 2
     survives_null = p_burst < 0.01 and p_shape < 0.05
-    coordination_supported = independent_axes and survives_null
+    replication_windows = _replication_windows(events, replication_window_seconds)
+    coordination_supported = (
+        independent_axes
+        and survives_null
+        and replication_windows >= 2
+    )
 
     if coordination_supported:
         state = "SUPPORTED_COORDINATION_SIGNAL"
@@ -181,6 +205,17 @@ def analyze(
         "derived": {
             "independent_axes": independent_axes,
             "survives_null": survives_null,
+            "replication_windows": replication_windows,
+            "replication_required_for_supported_signal": 2,
             "coordination_supported": coordination_supported,
         },
+        "evidence_grade": (
+            "E3"
+            if coordination_supported
+            else "E2"
+            if independent_axes and survives_null
+            else "E1"
+            if independent_axes
+            else "E0"
+        ),
     }
