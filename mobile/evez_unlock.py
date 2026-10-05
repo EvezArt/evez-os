@@ -86,6 +86,8 @@ def _calculate(predicate: dict[str, Any], ctx: dict[str, Any], prefix: str) -> C
     elif operator in {"eq", "neq", "gt", "gte", "lt", "lte", "in"}:
         if not inputs or any(v is None for v in values):
             result, reason = Truth.UNKNOWN, "one or more calculation inputs are unknown"
+        elif any(v == "UNKNOWN" for v in values) and predicate.get("value") != "UNKNOWN":
+            result, reason = Truth.UNKNOWN, "one or more inputs explicitly declare UNKNOWN"
         else:
             left = values[0]
             target = predicate.get("value")
