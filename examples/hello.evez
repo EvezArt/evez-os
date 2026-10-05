@@ -4,12 +4,12 @@
   "id": "hello-evez-v1",
   "integrity": {
     "algorithm": "sha256",
-    "sha256": "3f5c4c8d89b2f6f8f1b3f7f9f2a8f4c5d5f7e0d1a8b2b7f8c7f4a8c5e9d8a2b1"
+    "sha256": "e1026a09576c7dd7be0d680fbb7b4821d49daa1e7d729c46733ccc4cb7e3a7ab"
   },
   "kind": "example",
   "payload": {
     "message": "EVEZ is a file format.",
-    "note": "Example integrity value is illustrative; run the reference implementation to seal this document."
+    "note": "Sealed with the EVEZ v1 reference implementation."
   },
   "state": "PROPOSED",
   "version": 1
