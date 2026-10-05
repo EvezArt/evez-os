@@ -1,0 +1,42 @@
+name: security-gate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  defensive-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout at pinned action commit
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Validate Python
+        run: |
+          python -m py_compile mobile/evez_state.py mobile/evez_guard.py
+          python mobile/test_mobile.py
+          python mobile/test_guard.py
+
+      - name: Run repository secret audit
+        run: |
+          python mobile/evez_guard.py secret-audit
+
+      - name: Build deterministic source manifest
+        run: |
+          mkdir -p security/artifacts
+          python mobile/evez_guard.py manifest > security/artifacts/source-manifest.json
+          python -m json.tool security/artifacts/source-manifest.json > /dev/null
+
+      - name: Upload source manifest
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: evez-source-manifest
+          path: security/artifacts/source-manifest.json
+          if-no-files-found: error

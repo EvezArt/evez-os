@@ -46,6 +46,10 @@ state_py() {
   printf '%s/mobile/evez_state.py' "$EVEZ_ROOT"
 }
 
+guard_py() {
+  printf '%s/mobile/evez_guard.py' "$EVEZ_ROOT"
+}
+
 local_witness() {
   [ "$#" -eq 2 ] || {
     printf 'usage: evezctl witness TYPE JSON\\n' >&2
@@ -79,6 +83,36 @@ sync_cmd() {
   }
 
   EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" sync "$EVEZ_ENDPOINT" "$EVEZ_SPINE_EVENT_PATH"
+}
+
+security_audit_cmd() {
+  python "$(guard_py)" secret-audit
+}
+
+security_manifest_cmd() {
+  python "$(guard_py)" manifest
+}
+
+security_init_cmd() {
+  python "$(guard_py)" init-device
+}
+
+authorize_cmd() {
+  [ "$#" -eq 2 ] || {
+    printf 'usage: evezctl authorize ACTION JSON
+' >&2
+    return 2
+  }
+  python "$(guard_py)" authorize "$1" "$2"
+}
+
+verify_operation_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl verify-operation FILE
+' >&2
+    return 2
+  }
+  python "$(guard_py)" verify-operation "$1"
 }
 
 status_cmd() {
@@ -176,6 +210,11 @@ Commands:
   verify
   outbox
   sync
+  security-audit
+  security-manifest
+  security-init
+  authorize ACTION JSON
+  verify-operation FILE
   pull
   deploy
   logs
@@ -197,6 +236,11 @@ case "$cmd" in
   verify) verify_cmd "$@" ;;
   outbox) outbox_cmd "$@" ;;
   sync) sync_cmd "$@" ;;
+  security-audit) security_audit_cmd "$@" ;;
+  security-manifest) security_manifest_cmd "$@" ;;
+  security-init) security_init_cmd "$@" ;;
+  authorize) authorize_cmd "$@" ;;
+  verify-operation) verify_operation_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
