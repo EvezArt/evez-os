@@ -1,0 +1,29 @@
+{
+  "evex": "EVEX",
+  "version": 1,
+  "profile": "evez.exchange",
+  "kind": "capability.receipt",
+  "id": "wake-up-001-receipt",
+  "created_at": "2026-10-05T00:00:00Z",
+  "state": "SUPPORTED",
+  "receipt": {
+    "capability_id": "deterministic.echo-uppercase",
+    "policy_decision": "AUTHORIZED",
+    "status": "SUCCEEDED",
+    "input_sha256": "PENDING_RUNTIME_INPUT_HASH",
+    "output_sha256": "PENDING_RUNTIME_OUTPUT_HASH",
+    "runtime": {
+      "name": "evex-wake-up-reference",
+      "version": "1"
+    },
+    "observable": {
+      "output": "EVEZ-STATE",
+      "unsupported_claim_state": "UNKNOWN",
+      "unknown_field_preserved": true
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "sha256": "PENDING_RUNTIME_SEAL"
+  }
+}
