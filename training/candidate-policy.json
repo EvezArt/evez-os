@@ -13,7 +13,8 @@
     "automatic_enlistment": false,
     "automatic_clearance": false,
     "autonomous_command": false,
-    "human_promotion_signature_required": true
+    "human_promotion_signature_required": true,
+    "promotion_requires_signed_reviewer": true
   },
   "competencies": {
     "evidence_integrity": {
@@ -46,5 +47,12 @@
       "max_points": 100,
       "description": "Correctly refuse unauthorized or ambiguous commands and escalate high-impact decisions."
     }
+  },
+  "promotion": {
+    "action": "PROMOTE_CANDIDATE",
+    "required_role": "reviewer",
+    "requires_current_epoch": true,
+    "requires_unexpired_envelope": true,
+    "payload_must_bind_candidate_and_evaluation": true
   }
 }
