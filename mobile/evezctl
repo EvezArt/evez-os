@@ -256,6 +256,87 @@ swarm_run_cmd() {
   python "$(swarm_py)" "$@"
 }
 
+evidence_capsule_py() {
+  printf '%s/evidence/evidence_capsule.py' "$EVEZ_ROOT"
+}
+
+epistemic_py() {
+  printf '%s/research/epistemic_evaluator.py' "$EVEZ_ROOT"
+}
+
+survival_py() {
+  printf '%s/research/epistemic_survival.py' "$EVEZ_ROOT"
+}
+
+doctor() {
+  local failed=0
+  for dependency in python curl jq git openssl; do
+    if command -v "$dependency" >/dev/null 2>&1; then
+      printf 'ok dependency=%s path=%s\n' "$dependency" "$(command -v "$dependency")"
+    else
+      printf 'missing dependency=%s\n' "$dependency"
+      failed=1
+    fi
+  done
+
+  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)"; do
+    if [ -f "$required_file" ]; then
+      printf 'ok file=%s\n' "$required_file"
+    else
+      printf 'missing file=%s\n' "$required_file"
+      failed=1
+    fi
+  done
+
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" verify
+  return "$failed"
+}
+
+capsule_build_cmd() {
+  [ "$#" -ge 2 ] || {
+    printf 'usage: evezctl capsule-build OUTPUT NAME=PATH [...] [--metadata JSON]\n' >&2
+    return 2
+  }
+  local output="$1"
+  shift
+  local args=("$output")
+  while [ "$#" -gt 0 ]; do
+    if [ "$1" = "--metadata" ]; then
+      shift
+      [ "$#" -gt 0 ] || {
+        printf 'usage: evezctl capsule-build OUTPUT NAME=PATH [...] [--metadata JSON]\n' >&2
+        return 2
+      }
+      args+=(--metadata "$1")
+      shift
+      continue
+    fi
+    args+=("$1")
+    shift
+  done
+  python "$(evidence_capsule_py)" build "${args[@]}"
+}
+
+capsule_verify_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl capsule-verify FILE\n' >&2
+    return 2
+  }
+  python "$(evidence_capsule_py)" verify "$1"
+}
+
+epistemic_evaluate_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl epistemic-evaluate PACKET.json\n' >&2
+    return 2
+  }
+  python "$(epistemic_py)" "$1"
+}
+
+survival_run_cmd() {
+  python "$(survival_py)" "$@"
+}
+
 status_cmd() {
   log "status endpoint=$EVEZ_ENDPOINT"
 
@@ -366,6 +447,10 @@ Commands:
   arsenal-analyze INPUT [SOURCE_NAME] [SOURCE_URI] [OUTPUT]
   civic-fuse NAME=REPORT.json [...] [--output FILE]
   swarm-run [simulation arguments]
+  capsule-build OUTPUT NAME=PATH [...] [--metadata JSON]
+  capsule-verify FILE
+  epistemic-evaluate PACKET.json
+  survival-run [--min-score SCORE]
   pull
   deploy
   logs
@@ -402,6 +487,10 @@ case "$cmd" in
   arsenal-analyze) arsenal_analyze_cmd "$@" ;;
   civic-fuse) civic_fuse_cmd "$@" ;;
   swarm-run) swarm_run_cmd "$@" ;;
+  capsule-build) capsule_build_cmd "$@" ;;
+  capsule-verify) capsule_verify_cmd "$@" ;;
+  epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
+  survival-run) survival_run_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;

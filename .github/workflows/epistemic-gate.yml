@@ -1,0 +1,37 @@
+name: epistemic-gate
+
+on:
+  push:
+    branches:
+      - main
+      - evidence/capsule-epistemic-survival
+    paths:
+      - "evidence/**"
+      - "research/epistemic_*.py"
+      - "research/test_epistemic_*.py"
+      - "mobile/evezctl"
+      - ".github/workflows/epistemic-gate.yml"
+  pull_request:
+    paths:
+      - "evidence/**"
+      - "research/epistemic_*.py"
+      - "research/test_epistemic_*.py"
+      - "mobile/evezctl"
+      - ".github/workflows/epistemic-gate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  epistemic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8689f8e4a348a
+      - name: Run evidence capsule tests
+        run: python3 evidence/test_evidence_capsule.py
+      - name: Run epistemic evaluator tests
+        run: python3 research/test_epistemic_evaluator.py
+      - name: Run epistemic survival corpus
+        run: python3 research/test_epistemic_survival.py
+      - name: Execute survival gate
+        run: python3 research/epistemic_survival.py --min-score 1.0
