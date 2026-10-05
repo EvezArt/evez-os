@@ -1,0 +1,43 @@
+name: recursive-value-architect
+
+on:
+  push:
+    branches: ["feat/recursive-value-architect-2026-10-05"]
+  pull_request:
+
+jobs:
+  validate-value-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax check
+        run: |
+          python -m py_compile             mobile/evez_value_architect.py             mobile/evez_architect.py             mobile/evez_indivifluence.py             mobile/evez_permaloot.py             mobile/evez_memetic_meta_loot.py             mobile/evez_lexile_landscape.py             mobile/evez_response_loop.py             mobile/evez_toroid.py             mobile/evez_unlock.py             mobile/evez_yhwh.py
+
+      - name: Run recursive value unit tests
+        run: |
+          python -m unittest -v tests/test_value_architect.py
+          python -m unittest -v tests/test_sovereign_swarm.py
+          python -m unittest -v tests/test_response_loop.py
+          python -m unittest -v tests/test_permaloot.py
+          python -m unittest -v tests/test_memetic_meta_loot.py
+          python -m unittest -v tests/test_lexile_landscape.py
+
+      - name: Exercise example context
+        run: |
+          python mobile/evez_value_architect.py             mobile/value-context.example.json             --generations 2             --toroidal-generations 1             --poles 4             --mode scan             --output /tmp/value-scan.json             --ledger /tmp/value-scan-ledger.jsonl
+          test -s /tmp/value-scan.json
+          test -s /tmp/value-scan-ledger.jsonl
+
+      - name: Exercise PERMALOOT surge
+        run: |
+          python mobile/evez_permaloot.py mobile/value-context.example.json --depth 3 --output /tmp/permaloot.json
+          test -s /tmp/permaloot.json
+          python - <<'PY'
+          import json
+          data = json.load(open("/tmp/permaloot.json", encoding="utf-8"))
+          assert data["depth"] == 3
+          assert len(data["surges"]) == 3
+          assert "HIDDEN_PROMPT_NOT_ACQUIRED" in data["invariants"]
+          PY

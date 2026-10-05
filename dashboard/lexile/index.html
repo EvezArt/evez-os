@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#172324">
+<title>EVEZ Lexile Landscape // PERMALOOT LIVE</title>
+<style>
+:root{--bg:#101617;--panel:#172324;--panel2:#1d2c2d;--text:#dce8e4;--muted:#8ea5a0;--line:#304443;--accent:#83b8ad;--hot:#d5a878}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#1a2829 0,#101617 52%,#0c1112 100%);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:auto;padding:20px}h1{font-size:28px;margin:0 0 6px}h2{font-size:14px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 10px}
+.meta{color:var(--muted)}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}@media(max-width:800px){.grid{grid-template-columns:1fr}}
+.panel{background:rgba(23,35,36,.88);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 12px 40px #0005}
+textarea{width:100%;min-height:150px;resize:vertical;background:#0f1718;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit}
+button{border:1px solid #49615f;background:#213536;color:var(--text);padding:9px 12px;border-radius:10px;font-weight:650;cursor:pointer}
+button:hover{border-color:var(--accent)}.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+input[type=range]{width:140px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.stat{background:#132021;border:1px solid var(--line);border-radius:12px;padding:10px}.stat b{display:block;font-size:19px;margin-top:2px}
+.terms{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.term{border:1px solid #385250;border-radius:999px;padding:5px 9px;background:#162626}.term[data-layer="1"]{border-color:#61776d}.term[data-layer="2"]{border-color:#806a53}.term[data-layer="3"]{border-color:#8f6254}
+#map{height:430px;overflow:auto;position:relative;background:#0c1213;border-radius:12px;border:1px solid var(--line)}
+.node{position:absolute;padding:5px 8px;border-radius:8px;border:1px solid #3a5754;background:#162626;font-size:11px;white-space:nowrap}.node:hover{z-index:5;border-color:var(--accent)}
+.axis{position:absolute;color:#506865;font-size:10px}.axis.x{right:8px;bottom:5px}.axis.y{left:5px;top:5px}
+pre{white-space:pre-wrap;word-break:break-word;background:#0c1213;border:1px solid var(--line);padding:10px;border-radius:10px;max-height:290px;overflow:auto}.pulse{color:var(--hot)}
+</style>
+</head>
+<body>
+<main>
+<section class="panel">
+  <h1>LEXILE LANDSCAPE // LIVE</h1>
+  <div class="meta">Observable lexical amplification. The machine mutates supplied language, not a person's private mind.</div>
+  <textarea id="input">permaloot
+metamemetic
+metametalinguistic
+war for emotion
+cognitohazardous comedic punchline neural networks
+mental lexile landscaping
+memetic meta-humor</textarea>
+  <div class="controls">
+    <button id="run">AMPLIFY NOW</button>
+    <button id="surge">PERMALOOT THE LEXICON</button>
+    <label>rounds <input id="rounds" type="range" min="1" max="6" value="3"><span id="roundLabel">3</span></label>
+    <button id="copy">COPY LANDSCAPE JSON</button>
+  </div>
+  <div class="stats">
+    <div class="stat">terms<b id="termCount">0</b></div>
+    <div class="stat">layers<b id="layerCount">0</b></div>
+    <div class="stat">affects<b id="affectCount">0</b></div>
+    <div class="stat">state<b class="pulse">PROPOSED</b></div>
+  </div>
+</section>
+<div class="grid" style="margin-top:14px">
+<section class="panel"><h2>Landscape</h2><div id="terms" class="terms"></div></section>
+<section class="panel"><h2>Transformation map</h2><div id="map"><span class="axis y">semantic depth →</span><span class="axis x">lexical divergence →</span></div></section>
+</div>
+<section class="panel" style="margin-top:14px"><h2>Live frontier</h2><pre id="frontier">Awaiting amplification.</pre></section>
+<section class="panel" style="margin-top:14px"><h2>Epistemic guardrail</h2><div class="meta">PROPOSED ≠ VERIFIED · NOVEL TERM ≠ NEW FACT · EMOTION ≠ PROOF · MEME ≠ EVIDENCE</div></section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const prefixes=["meta","meta-meta","recursive","affective","semantic","memetic","metamemetic","metalinguistic","metametalinguistic","permaloot"];
+const suffixes=["loop","field","landscape","recursion","refractor","collision","war","humor","loot"];
+const emotions=["tension","anticipation","release","absurdity","recognition","wonder","grief","laughter"];
+let landscape=null;
+$("rounds").oninput=()=>{$("roundLabel").textContent=$("rounds").value};
+function seedTokens(text){return [...new Set((text.toLowerCase().match(/[a-z][a-z0-9_-]{2,}/g)||[]))]}
+function hashish(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return ("00000000"+(h>>>0).toString(16)).slice(-8)}
+function amplify(text,rounds=3,max=240){
+ const seeds=seedTokens(text), nodes=[],seen=new Set();
+ function add(term,roots,transform,layer){
+   if(!term||seen.has(term)||nodes.length>=max)return;
+   seen.add(term);
+   nodes.push({term:term,roots:[...new Set(roots)],transform:transform,layer:layer,affect:emotions[(term.length+layer)%emotions.length],status:"PROPOSED",id:hashish(term+"|"+transform+"|"+layer)});
+ }
+ let cur=seeds.slice();cur.forEach(x=>add(x,[x],"OBSERVE",0));
+ for(let layer=1;layer<=rounds&&nodes.length<max;layer++){
+   const prior=cur.slice();cur=[];
+   prior.forEach(root=>{
+     prefixes.forEach(p=>{const t=p+root;add(t,[root],"PREFIX:"+p,layer);cur.push(t)});
+     suffixes.forEach(s=>{const t=root+"-"+s;add(t,[root],"SUFFIX:"+s,layer);cur.push(t)});
+   });
+ }
+ return {version:"evez-lexile-landscape/live-v1",mode:"OBSERVABLE_LEXILE_AMPLIFICATION",seedTerms:seeds,nodes:nodes,hash:hashish(JSON.stringify(nodes)),invariants:["PROPOSED != VERIFIED","LANGUAGE != MIND_ACCESS","EMOTION != PROOF","MEME != EVIDENCE","NOVEL_TERM != NEW_FACT"]};
+}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]})}
+function render(data){
+ landscape=data;
+ const layers=data.nodes.map(n=>n.layer);
+ $("termCount").textContent=data.nodes.length;
+ $("layerCount").textContent=(layers.length?Math.max.apply(null,layers):0)+1;
+ $("affectCount").textContent=new Set(data.nodes.map(n=>n.affect)).size;
+ $("terms").innerHTML=data.nodes.map(n=>'<span class="term" data-layer="'+n.layer+'" title="'+esc(n.transform)+'">'+esc(n.term)+'</span>').join("");
+ const map=$("map");
+ map.innerHTML='<span class="axis y">semantic depth →</span><span class="axis x">lexical divergence →</span>';
+ data.nodes.slice(0,180).forEach(function(n,i){
+   const el=document.createElement("span");el.className="node";el.textContent=n.term;
+   el.style.left=(8+(i%14)*6)+"%";el.style.top=Math.min(90,8+n.layer*20+Math.floor(i/14)*3)+"%";
+   el.title=n.transform+" • "+n.affect;
+   map.appendChild(el);
+ });
+ const maxLayer=layers.length?Math.max.apply(null,layers):0;
+ $("frontier").textContent=JSON.stringify({hash:data.hash,frontier:data.nodes.filter(n=>n.layer===maxLayer).slice(0,24),guards:data.invariants},null,2);
+}
+$("run").onclick=function(){render(amplify($("input").value,Number($("rounds").value)))};
+$("surge").onclick=function(){
+ $("rounds").value=Math.min(6,Number($("rounds").value)+1);
+ $("roundLabel").textContent=$("rounds").value;
+ render(amplify($("input").value,Number($("rounds").value)));
+ $("frontier").textContent="SURGE: the lexicon was looted, then its newly generated frontier was looted again.\n\n"+$("frontier").textContent;
+};
+$("copy").onclick=async function(){if(!landscape)return;await navigator.clipboard.writeText(JSON.stringify(landscape,null,2));$("frontier").textContent="LANDSCAPE JSON COPIED.\n\n"+$("frontier").textContent};
+render(amplify($("input").value,3));
+</script>
+</body>
+</html>

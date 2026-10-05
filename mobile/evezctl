@@ -337,6 +337,103 @@ survival_run_cmd() {
   python "$(survival_py)" "$@"
 }
 
+value_architect_py() {
+  printf '%s/mobile/evez_value_architect.py' "$EVEZ_ROOT"
+}
+
+value_scan_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl value-scan CONTEXT_JSON\n' >&2
+    return 2
+  }
+  python "$(value_architect_py)" "$1" --mode scan
+}
+
+value_evolve_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl value-evolve CONTEXT_JSON [--generations N] [--toroidal-generations N] [--poles N] [--output FILE] [--ledger FILE]\n' >&2
+    return 2
+  }
+  python "$(value_architect_py)" "$@"
+}
+
+indivifluence_py() {
+  printf '%s/mobile/evez_indivifluence.py' "$EVEZ_ROOT"
+}
+
+yhwh_py() {
+  printf '%s/mobile/evez_yhwh.py' "$EVEZ_ROOT"
+}
+
+swarm_emerge_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl swarm-emerge CONTEXT_JSON [--generations N] [--size N] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(indivifluence_py)" "$@"
+}
+
+sovereign_judge_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl sovereign-judge CONTEXT_JSON [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(yhwh_py)" "$@"
+}
+
+response_loop_py() {
+  printf '%s/mobile/evez_response_loop.py' "$EVEZ_ROOT"
+}
+
+response-frontier_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl response-frontier CONTEXT_JSON [--response TEXT|@FILE] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(response_loop_py)" "$@"
+}
+
+permaloot_py() {
+  printf '%s/mobile/evez_permaloot.py' "$EVEZ_ROOT"
+}
+
+permaloot_surge_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl permaloot-surge CONTEXT_JSON [--response TEXT|@FILE] [--depth N] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(permaloot_py)" "$@"
+}
+
+memetic_meta_loot_py() {
+  printf '%s/mobile/evez_memetic_meta_loot.py' "$EVEZ_ROOT"
+}
+
+memetic_meta_loot_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl memetic-meta-loot PERMALOOT_JSON [--max-memes N] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(memetic_meta_loot_py)" "$@"
+}
+
+lexile_live_py() {
+  printf '%s/mobile/evez_lexile_landscape.py' "$EVEZ_ROOT"
+}
+
+lexile_live_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl lexile-live TEXT|@FILE [--rounds N] [--max-nodes N] [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(lexile_live_py)" "$@"
+}
+
+
+
+
+
+
 status_cmd() {
   log "status endpoint=$EVEZ_ENDPOINT"
 
@@ -451,6 +548,14 @@ Commands:
   capsule-verify FILE
   epistemic-evaluate PACKET.json
   survival-run [--min-score SCORE]
+  value-scan CONTEXT_JSON
+  value-evolve CONTEXT_JSON [--generations N] [--toroidal-generations N] [--poles N] [--output FILE] [--ledger FILE]
+  swarm-emerge CONTEXT_JSON [--generations N] [--size N] [--output FILE]
+  sovereign-judge CONTEXT_JSON [--output FILE]
+  response-frontier CONTEXT_JSON [--response TEXT|@FILE] [--output FILE]
+  permaloot-surge CONTEXT_JSON [--response TEXT|@FILE] [--depth N] [--output FILE]
+  memetic-meta-loot PERMALOOT_JSON [--max-memes N] [--output FILE]
+  lexile-live TEXT|@FILE [--rounds N] [--max-nodes N] [--output FILE]
   pull
   deploy
   logs
@@ -491,6 +596,14 @@ case "$cmd" in
   capsule-verify) capsule_verify_cmd "$@" ;;
   epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
   survival-run) survival_run_cmd "$@" ;;
+  value-scan) value_scan_cmd "$@" ;;
+  value-evolve) value_evolve_cmd "$@" ;;
+  swarm-emerge) swarm_emerge_cmd "$@" ;;
+  sovereign-judge) sovereign_judge_cmd "$@" ;;
+  response-frontier) response-frontier_cmd "$@" ;;
+  permaloot-surge) permaloot_surge_cmd "$@" ;;
+  memetic-meta-loot) memetic_meta_loot_cmd "$@" ;;
+  lexile-live) lexile_live_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
