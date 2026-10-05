@@ -17,6 +17,7 @@ fi
 : "${EVEZ_SPINE_EVENT_PATH:=/spine/event}"
 : "${EVEZ_ROOT:=$HOME/evez-os}"
 : "${EVEZ_DEPLOY_HOOK:=}"
+: "${EVEZ_STATE_DIR:=$HOME/.local/state/evez}"
 
 log() {
   local line
@@ -41,61 +42,37 @@ json_or_text() {
   fi
 }
 
-local_witness() {
-  [ "$#" -eq 2 ] || {
-    printf 'usage: evezctl witness TYPE JSON\n' >&2
-    return 2
-  }
-
-  local event_type="$1"
-  local payload="$2"
-  local spine="$LOG_DIR/spine.jsonl"
-  local previous_hash="GENESIS"
-  local ts event_json hash
-
-  printf '%s' "$payload" | jq -e . >/dev/null || {
-    log "invalid JSON payload"
-    return 2
-  }
-
-  if [ -s "$spine" ]; then
-    previous_hash="$(tail -n 1 "$spine" | jq -r '.hash // "GENESIS"')"
-  fi
-
-  ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  event_json="$(jq -cn     --arg ts "$ts"     --arg type "$event_type"     --arg parent_hash "$previous_hash"     --argjson payload "$payload"     '{timestamp:$ts,type:$type,parent_hash:$parent_hash,payload:$payload}')"
-
-  hash="$(printf '%s' "$event_json" | openssl dgst -sha256 -r | awk '{print $1}')"
-
-  jq -cn     --argjson event "$event_json"     --arg hash "$hash"     '$event + {hash:$hash}' >> "$spine"
-
-  jq -n     --arg event_type "$event_type"     --arg timestamp "$ts"     --arg parent_hash "$previous_hash"     --arg hash "$hash"     --arg file "$spine"     '{recorded:true,event_type:$event_type,timestamp:$timestamp,parent_hash:$parent_hash,hash:$hash,file:$file}'
+state_py() {
+  printf '%s/mobile/evez_state.py' "$EVEZ_ROOT"
 }
 
-doctor() {
-  local ok=1
-  for c in git curl jq python; do
-    if need "$c"; then
-      printf 'OK   %s -> %s\n' "$c" "$(command -v "$c")"
-    else
-      printf 'FAIL %s\n' "$c"
-      ok=0
-    fi
-  done
+local_witness() {
+  [ "$#" -eq 2 ] || {
+    printf 'usage: evezctl witness TYPE JSON\\n' >&2
+    return 2
+  }
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" record "$1" "$2"
+}
 
-  if [ -d "$EVEZ_ROOT/.git" ]; then
-    printf 'OK   git checkout -> %s\n' "$EVEZ_ROOT"
-  else
-    printf 'WARN git checkout missing -> %s\n' "$EVEZ_ROOT"
-  fi
+queue_event() {
+  [ "$#" -eq 2 ] || {
+    printf 'usage: evezctl queue TYPE JSON\\n' >&2
+    return 2
+  }
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" record "$1" "$2" --queue
+}
 
-  case "$EVEZ_ENDPOINT" in
-    http://*|https://*) printf 'OK   endpoint -> %s\n' "$EVEZ_ENDPOINT" ;;
-    *) printf 'FAIL endpoint -> %s\n' "$EVEZ_ENDPOINT"; ok=0 ;;
-  esac
+verify_cmd() {
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" verify
+}
 
-  printf 'LOG  %s\n' "$LOG_FILE"
-  return $((ok ? 0 : 1))
+outbox_cmd() {
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" outbox
+}
+
+sync_cmd() {
+  log "sync endpoint=$EVEZ_ENDPOINT"
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" sync "$EVEZ_ENDPOINT" "$EVEZ_SPINE_EVENT_PATH"
 }
 
 status_cmd() {
@@ -112,6 +89,11 @@ status_cmd() {
     git -C "$EVEZ_ROOT" status --short --branch
     git -C "$EVEZ_ROOT" rev-parse --short HEAD
   fi
+
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" verify || {
+    log "local evidence verification failed"
+    return 1
+  }
 }
 
 pipeline() {
@@ -152,6 +134,8 @@ deploy_cmd() {
     return 1
   }
 
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" verify || return 1
+
   if [ -n "$(git -C "$EVEZ_ROOT" status --porcelain)" ]; then
     log "refusing deploy: working tree is dirty"
     git -C "$EVEZ_ROOT" status --short
@@ -182,6 +166,10 @@ Commands:
   pipeline
   spine-event TYPE JSON
   witness TYPE JSON
+  queue TYPE JSON
+  verify
+  outbox
+  sync
   pull
   deploy
   logs
@@ -199,6 +187,10 @@ case "$cmd" in
   pull) pull_cmd "$@" ;;
   deploy) deploy_cmd "$@" ;;
   witness) local_witness "$@" ;;
+  queue) queue_event "$@" ;;
+  verify) verify_cmd "$@" ;;
+  outbox) outbox_cmd "$@" ;;
+  sync) sync_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
