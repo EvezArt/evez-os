@@ -13,7 +13,7 @@ die() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
 command -v pkg >/dev/null 2>&1 || die "This installer is intended for Termux."
 
 pkg update -y
-pkg install -y git curl jq openssh python
+pkg install -y git curl jq openssl openssh python
 
 mkdir -p "$CONFIG_DIR" "$BIN_DIR"
 
