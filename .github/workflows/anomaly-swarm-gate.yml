@@ -1,0 +1,24 @@
+name: anomaly-swarm-gate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  simulation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Validate deterministic anomaly/swarm lab
+        run: |
+          python -m py_compile research/anomaly_swarm_lab.py
+          python research/test_anomaly_swarm_lab.py

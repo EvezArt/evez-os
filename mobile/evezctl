@@ -248,6 +248,13 @@ candidate_promote_cmd() {
   }
   python "$(candidate_py)" promote "$1" "$2" "$3" "$4"
 }
+swarm_py() {
+  printf '%s/research/anomaly_swarm_lab.py' "$EVEZ_ROOT"
+}
+
+swarm_run_cmd() {
+  python "$(swarm_py)" "$@"
+}
 
 status_cmd() {
   log "status endpoint=$EVEZ_ENDPOINT"
@@ -358,6 +365,7 @@ Commands:
   candidate-promote CANDIDATE_ID EVALUATION_JSON REVIEWER_OPERATION REVIEWER_PUBLIC
   arsenal-analyze INPUT [SOURCE_NAME] [SOURCE_URI] [OUTPUT]
   civic-fuse NAME=REPORT.json [...] [--output FILE]
+  swarm-run [simulation arguments]
   pull
   deploy
   logs
@@ -393,6 +401,7 @@ case "$cmd" in
   candidate-promote) candidate_promote_cmd "$@" ;;
   arsenal-analyze) arsenal_analyze_cmd "$@" ;;
   civic-fuse) civic_fuse_cmd "$@" ;;
+  swarm-run) swarm_run_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
