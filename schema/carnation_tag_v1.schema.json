@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evez-os.local/schema/carnation_tag_v1.schema.json",
+  "title": "EVEZ Carnation Tag v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "continuity_id",
+    "lineage_id",
+    "manifestation_id",
+    "soul_tag",
+    "carnation_state",
+    "epistemic_status"
+  ],
+  "properties": {
+    "continuity_id": {"type": "string", "minLength": 1},
+    "lineage_id": {"type": "string", "minLength": 1},
+    "manifestation_id": {"type": "string", "minLength": 1},
+    "soul_tag": {"type": "string", "minLength": 1},
+    "person_frame": {"type": ["string", "null"]},
+    "identity_frame": {"type": ["string", "null"]},
+    "artifact_frame": {"type": ["string", "null"]},
+    "parent_event_hash": {"type": ["string", "null"]},
+    "parent_manifestation_id": {"type": ["string", "null"]},
+    "reincarnation_of": {"type": ["string", "null"]},
+    "carnation_state": {
+      "type": "string",
+      "enum": [
+        "INFRAMATIA",
+        "CELLULATION",
+        "ONCARNATION",
+        "INCARNATION",
+        "REINCARNATION",
+        "EXCARNATION",
+        "DECARNATION",
+        "UNCARNATION",
+        "ANCARNATIOUS"
+      ]
+    },
+    "epistemic_status": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "MEASURED",
+        "INFERRED",
+        "PROPOSED",
+        "UNKNOWN",
+        "CONTRADICTED"
+      ]
+    },
+    "witness_superposition": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["state", "weight", "provenance_refs", "epistemic_status"],
+        "properties": {
+          "state": {"type": "string"},
+          "weight": {"type": "number", "minimum": 0, "maximum": 1},
+          "provenance_refs": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "epistemic_status": {
+            "type": "string",
+            "enum": [
+              "OBSERVED",
+              "MEASURED",
+              "INFERRED",
+              "PROPOSED",
+              "UNKNOWN",
+              "CONTRADICTED"
+            ]
+          }
+        }
+      }
+    },
+    "expression_fidelity": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "expression_projection_error": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "tags": {
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    }
+  }
+}
