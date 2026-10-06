@@ -284,6 +284,10 @@ survival_py() {
   printf '%s/research/epistemic_survival.py' "$EVEZ_ROOT"
 }
 
+gate_py() {
+  printf '%s/research/epistemic_gate.py' "$EVEZ_ROOT"
+}
+
 doctor() {
   local failed=0
   for dependency in python curl jq git openssl; do
@@ -351,6 +355,14 @@ epistemic_evaluate_cmd() {
 
 survival_run_cmd() {
   python "$(survival_py)" "$@"
+}
+
+epistemic_gate_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl epistemic-gate PACKET.json\\n' >&2
+    return 2
+  }
+  python "$(gate_py)" "$1"
 }
 
 status_cmd() {
@@ -469,6 +481,7 @@ Commands:
   capsule-build OUTPUT NAME=PATH [...] [--metadata JSON]
   capsule-verify FILE
   epistemic-evaluate PACKET.json
+  epistemic-gate PACKET.json
   survival-run [--min-score SCORE]
   pull
   deploy
@@ -512,6 +525,7 @@ case "$cmd" in
   capsule-build) capsule_build_cmd "$@" ;;
   capsule-verify) capsule_verify_cmd "$@" ;;
   epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
+  epistemic-gate) epistemic_gate_cmd "$@" ;;
   survival-run) survival_run_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;

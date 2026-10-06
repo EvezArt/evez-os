@@ -1,0 +1,52 @@
+name: Counterfactual Threat Map
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "15 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  threat-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run counterfactual tests
+        working-directory: research
+        run: python -m unittest -v test_counterfactual_threat_map.py
+      - name: Run detector against checked-in telemetry examples
+        working-directory: research
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from counterfactual_threat_map import analyze
+          sample = [
+              {"ts":"2026-10-05T00:00:01Z","actor":"CONTROL_A","source":"control-x","text":"control event one"},
+              {"ts":"2026-10-05T01:00:01Z","actor":"CONTROL_A","source":"control-x","text":"control event two"},
+          ]
+          report = analyze(sample, permutations=200)
+          Path("counterfactual-threat-report.json").write_text(
+              json.dumps(report, indent=2) + "\n",
+              encoding="utf-8"
+          )
+          print(json.dumps(report, indent=2))
+          PY
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: counterfactual-threat-report
+          path: research/counterfactual-threat-report.json
+          retention-days: 7
