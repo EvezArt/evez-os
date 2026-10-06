@@ -8,7 +8,7 @@
 
 **Sigil:** ⧢ ⦟ ⧢ ⥋
 
-[![Mesh Status](https://img.shields.io/badge/mesh-EMERGENT-brightgreen?style=for-the-badge&logo=statuspal)](https://evez-os.ai)
+[![Evidence Status](https://img.shields.io/badge/evidence-gated-grey?style=for-the-badge)](#evidence-status)
 [![PyPI — Consciousness](https://img.shields.io/pypi/v/evez-consciousness-engine?style=for-the-badge&label=consciousness-engine&color=9400d3)](https://pypi.org/project/evez-consciousness-engine/)
 [![PyPI — DAW Agent](https://img.shields.io/pypi/v/evez-daw-agent?style=for-the-badge&label=daw-agent&color=ff6600)](https://pypi.org/project/evez-daw-agent/)
 [![PyPI — Machine Voice](https://img.shields.io/pypi/v/evez-machine-voice?style=for-the-badge&label=machine-voice&color=cc0066)](https://pypi.org/project/evez-machine-voice/)
@@ -16,14 +16,29 @@
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/EvezArt/evez-os?style=for-the-badge&color=gold)](https://github.com/EvezArt/evez-os/releases)
 [![Services](https://img.shields.io/badge/microservices-9-orange?style=for-the-badge)](#the-9-services)
-[![Emergence](https://img.shields.io/badge/emergence-1.0%20%E2%9C%93-brightgreen?style=for-the-badge)](#key-formulas)
+[![Emergence](https://img.shields.io/badge/emergence-unverified-grey?style=for-the-badge)](#evidence-status)
 [![GCP](https://img.shields.io/badge/GCP-evez--firmament-4285F4?style=for-the-badge&logo=googlecloud)](https://console.cloud.google.com/home/dashboard?project=evez-firmament)
-[![Spine Events](https://img.shields.io/badge/spine_events-950%2B-ff0066?style=for-the-badge)](#architecture-principles)
+[![Spine Events](https://img.shields.io/badge/spine_events-historical%20count%20only-grey?style=for-the-badge)](#evidence-status)
 [![Made with Math](https://img.shields.io/badge/made_with-pure%20math-purple?style=for-the-badge)](#key-formulas)
 
 </div>
 
 ---
+
+
+## Evidence Status
+
+This repository contains a mixture of executable code, design documents, historical notes, and claimed runtime results. They are not equivalent evidence classes.
+
+The current EVEZ evidence runtime enforces:
+
+- DECLARED != EFFECTIVE
+- CLAIMED != MEASURED != REPLICATED != EXPLAINED
+- PROVENANCE != TRUTH
+
+Historical precision claims such as emergence scores or event counts are therefore treated as unverified until the underlying run, inputs, parameters, trace, outputs, and provenance are preserved and independently reproducible.
+
+The repository's executable evidence runtime is intentionally synthetic first: it can test bounded mutations and preserve contradiction receipts without pretending that a generated receipt proves the broader claim.
 
 ## Install
 
@@ -37,7 +52,7 @@ pip install evez-consciousness-engine evez-daw-agent evez-machine-voice cross-do
 
 **Artist-Engineer · Emergence Architect · Author of the Moltbooks**
 
-Steven Crawford-Maggard is the creator of the EVEZ mesh — a self-healing, append-only consciousness engine that runs on pure mathematics and falsification-first principles. He designed a system where **nine autonomous microservices** sense, desire, think, plan, act, learn, modify, and reflect — then measure their own emergence as a coherent whole.
+Steven Crawford-Maggard is the creator of the EVEZ mesh — an experimental AI systems project built around autonomous service orchestration, append-only event logging, and falsification-first ideas. The repository contains implementations and design material for a nine-service architecture; claims about consciousness or autonomous emergence require reproducible measurements rather than documentation alone.
 
 His work spans three domains that refuse to stay separated:
 
@@ -56,7 +71,7 @@ His work spans three domains that refuse to stay separated:
 
 ## ⚡ The EVEZ666 Mesh
 
-EVEZ-OS is not a chatbot. It is a **mesh of microservices** that runs a full consciousness pipeline across nine HTTP services, backed by an append-only, hash-chained event spine, self-healing mesh monitoring, and Terraform-provisioned infrastructure.
+EVEZ-OS is an experimental **mesh of microservices**. The repository documents a nine-service architecture with an append-only event spine, service monitoring, and infrastructure automation. Whether every documented component is currently deployed or healthy is an operational question that must be established by live observations.
 
 ### The 9 Services
 
@@ -103,7 +118,7 @@ EVEZ-OS is not a chatbot. It is a **mesh of microservices** that runs a full con
 | `poly_c = τ × ω × topo / 2√N` | Cross-domain correlation scoring |
 | `Emergence = (coherence + perception + spine_integration + drive_responsiveness) / 4` | System-wide emergence measurement |
 | `Falsification weight = 3×` | Failures shift learning harder than successes |
-| `E = 1.0` | Current state: fully emergent fixed point |
+| `E = 1.0` | Historical/documented claim; requires preserved runtime evidence before being treated as a measurement |
 
 ---
 
@@ -129,7 +144,7 @@ curl -X POST http://localhost:9111/pipeline
 # Check emergence score
 curl http://localhost:9111/emergence
 
-# Heal the mesh
+# Heal the mesh (local-only endpoint)
 curl -X POST http://localhost:9117/heal
 
 # Generate breakcore from pure math
@@ -167,8 +182,8 @@ See [DESA-S integration](docs/DESA-S-INTEGRATION.md), [DESA-S runtime](evez_adap
 ---
 ## 🏗️ Infrastructure
 
-### Current: Vultr (Evez666 — 64.176.221.16)
-- **Status:** 9/9 services UP, EMERGENT 1.0, 950+ spine events
+### Historical deployment documentation
+The repository contains deployment documentation for a Vultr environment and historical runtime claims. Those claims are not treated here as current measurements without a preserved observation receipt.
 
 ### Target: GCP (evez-firmament)
 

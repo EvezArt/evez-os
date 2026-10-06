@@ -1,0 +1,53 @@
+name: EVEZ Evidence Runtime
+
+on:
+  push:
+    paths:
+      - "packages/evez-evidence-runtime/**"
+      - ".github/workflows/evez-evidence-runtime.yml"
+  pull_request:
+    paths:
+      - "packages/evez-evidence-runtime/**"
+      - ".github/workflows/evez-evidence-runtime.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install package and test tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e packages/evez-evidence-runtime
+          python -m pip install pytest
+      - name: Repository security gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -RIn --exclude-dir=.git --exclude="*.md" "shell=True" src skills
+          ! grep -RIn --exclude-dir=.git --exclude="*.md" "eval(" src/services skills/evez-firmament/services
+          ! grep -RIn --exclude-dir=.git --exclude="*.md" "exec(" src/services skills/evez-firmament/services
+          grep -F "CLAIMED != MEASURED != REPLICATED != EXPLAINED" README.md
+          grep -F "PROVENANCE != TRUTH" README.md
+      - name: Compile sources
+        run: python -m compileall -q packages/evez-evidence-runtime/src
+      - name: Run tests
+        run: pytest -q packages/evez-evidence-runtime/tests
+      - name: Run self-audit
+        run: python -m evez_evidence_runtime.cli self-audit
+      - name: Run optimizer contract
+        run: |
+          python -m evez_evidence_runtime.cli optimize
+          python -m evez_evidence_runtime.cli optimize | grep -F '"selected": "direct_boundary_probe"'
+          python -m evez_evidence_runtime.cli optimize | grep -F '"unsafe_external_mutation": "unsafe"'
+      - name: Run recovery contract
+        run: |
+          python -m evez_evidence_runtime.cli recover
+          python -m evez_evidence_runtime.cli recover | grep -F '"selected": "bounded-idempotent-retry"'
+          python -m evez_evidence_runtime.cli recover | grep -F '"unauthorized-external-mutation": "unsafe"'
