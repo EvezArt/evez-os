@@ -304,6 +304,14 @@ precision_py() {
   printf '%s/mobile/evez_precision.py' "$EVEZ_ROOT"
 }
 
+lexile_py() {
+  printf '%s/mobile/evez_lexile.py' "$EVEZ_ROOT"
+}
+
+rights_py() {
+  printf '%s/legal/license_opportunity.py' "$EVEZ_ROOT"
+}
+
 doctor() {
   local failed=0
   for dependency in python curl jq git openssl; do
@@ -315,7 +323,7 @@ doctor() {
     fi
   done
 
-  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)" "$(precision_py)"; do
+  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)" "$(precision_py)" "$(lexile_py)" "$(rights_py)"; do
     if [ -f "$required_file" ]; then
       printf 'ok file=%s\n' "$required_file"
     else
@@ -407,6 +415,26 @@ precision_cmd() {
     return 2
   }
   python "$(precision_py)" "$@"
+}
+
+lexile_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl lexile (--text TEXT | --file FILE)\n' >&2
+    return 2
+  }
+  python "$(lexile_py)" "$@"
+}
+
+rights_audit_cmd() {
+  local root="$EVEZ_ROOT"
+  if [ "$#" -gt 1 ]; then
+    printf 'usage: evezctl rights-audit [ROOT]\n' >&2
+    return 2
+  fi
+  if [ "$#" -eq 1 ]; then
+    root="$1"
+  fi
+  python "$(rights_py)" "$root"
 }
 
 status_cmd() {
@@ -531,6 +559,8 @@ Commands:
   kernel INTENT --budget FILE --requests FILE [--channels FILE]
   signal-capabilities [--consent-scope SCOPE]... [--output FILE]
   precision (--intent TEXT | --spec FILE)
+  lexile (--text TEXT | --file FILE)
+  rights-audit [ROOT]
   pull
   deploy
   logs
@@ -579,6 +609,8 @@ case "$cmd" in
   kernel) kernel_cmd "$@" ;;
   signal-capabilities) signal_capabilities_cmd "$@" ;;
   precision) precision_cmd "$@" ;;
+  lexile) lexile_cmd "$@" ;;
+  rights-audit) rights_audit_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
