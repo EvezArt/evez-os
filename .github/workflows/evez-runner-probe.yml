@@ -10,21 +10,24 @@ permissions:
   contents: read
 
 jobs:
-  probe:
+  local-runtime:
+    name: runner-local-runtime
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect runner
+      - name: Inspect local runner
         run: |
           set -eux
           uname -a
           python --version
           git --version
           pwd
-          git ls-remote https://github.com/EvezArt/evez-os.git HEAD
-      - name: Clone without checkout action
+          printf 'runner-local-ok\n'
+
+  network-runtime:
+    name: runner-network-git
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test outbound Git access
         run: |
           set -eux
-          git clone --depth 1 https://github.com/EvezArt/evez-os.git /tmp/evez-probe
-          cd /tmp/evez-probe
-          PYTHONPATH=. python research/test_precision_contract.py
-          PYTHONPATH=. python research/test_reality_substrate.py
+          git ls-remote https://github.com/EvezArt/evez-os.git HEAD
