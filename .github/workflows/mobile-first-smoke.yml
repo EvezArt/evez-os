@@ -18,9 +18,11 @@ jobs:
           test -s mobile/evezctl
           python mobile/test_mobile.py
           python mobile/test_evez_identity.py
+          python research/test_weather_mycelial_flux.py
           test -s mobile/install.sh
           test -s mobile/README.md
           test -s docs/MOBILE_FIRST.md
+          test -s docs/WEATHER_CHEMISTRY_MYCELIAL_FLUX.md
 
       - name: Exercise offline-safe CLI
         run: |
