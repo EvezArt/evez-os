@@ -82,5 +82,10 @@ def plan(
             "status": outcome["precision"]["status"],
             "finding_count": len(outcome["precision"]["vague_terms"]),
         },
+        "optimization": {
+            "status": outcome["optimization"]["status"],
+            "score": outcome["optimization"]["best"]["score"],
+            "margin": outcome["optimization"]["margin"],
+        },
         "status": status,
     }
