@@ -30,6 +30,8 @@ jobs:
         run: python -m py_compile mobile/evolution_receipt.py
       - name: Run adversarial receipt tests
         run: python mobile/test_evolution_receipt.py
+      - name: Run offline replay tests
+        run: python mobile/test_evolution_replay.py
       - name: Verify mobile CLI syntax
         run: bash -n mobile/evezctl
       - name: Verify receipt provenance gate
