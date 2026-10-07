@@ -292,6 +292,10 @@ signal_py() {
   printf '%s/mobile/evez_signal.py' "$EVEZ_ROOT"
 }
 
+kernel_py() {
+  printf '%s/mobile/evez_kernel.py' "$EVEZ_ROOT"
+}
+
 doctor() {
   local failed=0
   for dependency in python curl jq git openssl; do
@@ -303,7 +307,7 @@ doctor() {
     fi
   done
 
-  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)"; do
+  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)"; do
     if [ -f "$required_file" ]; then
       printf 'ok file=%s\n' "$required_file"
     else
@@ -375,6 +379,14 @@ signal_cmd() {
     return 2
   }
   python "$(signal_py)" "$@"
+}
+
+kernel_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl kernel INTENT --budget FILE --requests FILE [--channels FILE]\n' >&2
+    return 2
+  }
+  python "$(kernel_py)" "$@"
 }
 
 status_cmd() {
@@ -496,6 +508,7 @@ Commands:
   survival-run [--min-score SCORE]
   frontier PACKET [--output FILE]
   signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
+  kernel INTENT --budget FILE --requests FILE [--channels FILE]
   pull
   deploy
   logs
@@ -541,6 +554,7 @@ case "$cmd" in
   survival-run) survival_run_cmd "$@" ;;
   frontier) frontier_cmd "$@" ;;
   signal) signal_cmd "$@" ;;
+  kernel) kernel_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
