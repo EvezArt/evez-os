@@ -3,6 +3,10 @@
 
 The gate separates model output from measured and replicated evidence. It never
 performs deployment, merge, privilege changes, or secret handling.
+
+A CI assertion is accepted only when it is bound to the exact candidate commit.
+This prevents a valid result from one revision from accidentally promoting a
+different revision.
 """
 
 from __future__ import annotations
@@ -22,13 +26,18 @@ def evaluate(packet: dict[str, Any]) -> dict[str, Any]:
     if status not in ALLOWED:
         reasons.append("unknown status")
 
+    provenance = packet.get("provenance", {})
+    expected_commit = provenance.get("commit_sha")
+    if not expected_commit:
+        reasons.append("commit provenance is absent")
+
     ci = packet.get("ci", {})
     if ci.get("verified") is not True:
         reasons.append("independent CI verification is absent")
-
-    provenance = packet.get("provenance", {})
-    if not provenance.get("commit_sha"):
-        reasons.append("commit provenance is absent")
+    if ci.get("status") != "success":
+        reasons.append("CI status is not success")
+    if expected_commit and ci.get("commit_sha") != expected_commit:
+        reasons.append("CI result is not bound to the candidate commit")
 
     if packet.get("uncertainty") is None:
         reasons.append("uncertainty is absent")
