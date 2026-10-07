@@ -20,8 +20,10 @@ jobs:
           python mobile/test_evez_identity.py
           python mobile/evez_frontier.py --help
           python mobile/evez_signal.py --help
+          python mobile/evez_kernel.py --help
           python mobile/test_evez_signal.py
           python mobile/test_evez_signal_fallback.py
+          python mobile/test_evez_kernel.py
           python research/test_weather_mycelial_flux.py
           python research/test_weather_flux_theory.py
           python research/test_promotion_gate.py
@@ -31,6 +33,10 @@ jobs:
           python research/test_signal_domain.py
           python research/test_signal_negotiation.py
           python research/test_signal_delivery.py
+          python research/test_cognitive_continuity.py
+          python research/test_materium.py
+          python research/test_outcome_engine.py
+          python research/test_execution_kernel.py
           python research/test_anomaly_swarm_lab.py
           python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py research/ai_resistance_benchmark.py research/information_frontier.py research/signal_domain.py research/signal_negotiation.py research/signal_delivery.py mobile/evez_frontier.py mobile/evez_signal.py
           test -s mobile/install.sh
@@ -50,4 +56,4 @@ jobs:
       - name: Exercise offline-safe CLI
         run: |
           chmod +x mobile/evezctl
-          HOME="$RUNNER_TEMP/evez-home" EVEZ_ENDPOINT="https://example.invalid" EVEZ_CONFIG="$RUNNER_TEMP/evez-home/.config/evez/evez.env" mobile/evezctl doctor
+          HOME="$RUNNER_TEMP/evez-home" EVEZ_ROOT="$GITHUB_WORKSPACE" EVEZ_ENDPOINT="https://example.invalid" EVEZ_CONFIG="$RUNNER_TEMP/evez-home/.config/evez/evez.env" mobile/evezctl doctor
