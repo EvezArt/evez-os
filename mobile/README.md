@@ -12,6 +12,8 @@ The Galaxy A16 is treated as an operator console, not the production server:
             +-- multimodal signal adapters
             +-- bounded outcome kernel
             +-- precision gate
+            +-- semantic mapper
+            +-- rights audit
             |
             v
     EVEZ-OS gateway -> services -> append-only event spine
@@ -26,6 +28,7 @@ The Galaxy A16 is treated as an operator console, not the production server:
 6. Adapter discovery never creates consent.
 7. Planning never creates consequential authorization.
 8. Vague intent never silently becomes an executable interpretation.
+9. Missing licensing never becomes assumed permission.
 
 ## Install
 
@@ -71,6 +74,45 @@ evidence, acceptance criteria, time, and authority.
 The rule is:
 
     UNKNOWN > invented interpretation
+
+## Semantic and complexity mapping
+
+Map arbitrary text, words, phrases, concepts, and coined terms:
+
+    evezctl lexile --text "interoopticological inferenciology"
+
+or:
+
+    evezctl lexile --file prompt.txt
+
+The mapper returns deterministic token and n-gram atoms, abstraction density,
+syllable estimates, information proxy bits, semantic role classes, coined-term
+recognition, and an internal complexity proxy.
+
+It deliberately reports:
+
+    INTERNAL_PROXY_NOT_CERTIFIED_LEXILE
+
+It does not reproduce MetaMetrics proprietary scoring or treat the result as a
+certified Lexile measure.
+
+## Rights and licensing audit
+
+Audit the repository's declared rights and commercial opportunity classes:
+
+    evezctl rights-audit
+
+The audit distinguishes:
+
+    DECLARED
+    UNDECLARED
+    LICENSE_DOCUMENT
+
+and produces candidate pathways such as hosted service, support, enterprise
+integration, training, publication, media licensing, and commercial licensing
+of newly created rights.
+
+It never turns an undeclared asset into presumed permission.
 
 ## Information frontier
 
@@ -126,8 +168,6 @@ Consequential operations remain blocked without authorization.
     evezctl security-init
     evezctl security-audit
     evezctl security-manifest
-    evezctl authorize DEPLOY '{"commit":"<git-sha>"}'
-    evezctl verify-operation ~/.config/evez/device/operations/<operation-id>.json
 
 Device authorization uses a passphrase-protected Ed25519 key. The public key
 can be registered with the receiving control plane; the private key never
