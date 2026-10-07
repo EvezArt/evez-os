@@ -14,7 +14,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from typing import Any, Iterable
 
 
@@ -125,7 +125,11 @@ def choose_operations(
 
     for item in validated_items:
         uncertainty = 1.0 - item.confidence
-        staleness = _clamp((now_tick - item.last_seen) / 100.0) if item.last_seen else 1.0
+        staleness = (
+            _clamp((now_tick - item.last_seen) / 100.0)
+            if item.last_seen
+            else 1.0
+        )
         contradiction = 1.0 if item.contradiction_group else 0.0
 
         if item.status == "UNKNOWN":
@@ -149,9 +153,12 @@ def choose_operations(
             continue
 
         for source in matching_sources:
-            independence_bonus = (
-                0.15 if source.independence_group and source.independence_group != item.source_id else 0.0
+            independent_source = (
+                item.source_id is not None
+                and source.source_id != item.source_id
+                and source.independence_group is not None
             )
+            independence_bonus = 0.15 if independent_source else 0.0
             freshness_gain = (source.freshness + item.freshness) / 2.0
             expected_gain = _clamp(
                 uncertainty
@@ -234,7 +241,9 @@ def build_frontier(
         },
         "knowledge": {
             "items": len(items_list),
-            "unknown": sum(1 for item in items_list if item.status == "UNKNOWN"),
+            "unknown": sum(
+                1 for item in items_list if item.status == "UNKNOWN"
+            ),
             "contradiction_groups": contradiction_groups,
             "contradiction_count": sum(
                 1 for item in items_list if item.contradiction_group
@@ -254,7 +263,9 @@ def build_frontier(
     return frontier
 
 
-def load_packet(path: str) -> tuple[list[KnowledgeItem], list[SourceCapability], int, int]:
+def load_packet(
+    path: str,
+) -> tuple[list[KnowledgeItem], list[SourceCapability], int, int]:
     with open(path, "r", encoding="utf-8") as handle:
         packet = json.load(handle)
 
@@ -285,7 +296,12 @@ def main() -> int:
     args = parser.parse_args()
 
     items, sources, now_tick, limit = load_packet(args.packet)
-    result = build_frontier(items, sources, now_tick=now_tick, limit=limit)
+    result = build_frontier(
+        items,
+        sources,
+        now_tick=now_tick,
+        limit=limit,
+    )
     encoded = json.dumps(result, indent=2, sort_keys=True)
 
     if args.output:
