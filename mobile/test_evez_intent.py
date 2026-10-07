@@ -25,7 +25,7 @@ with tempfile.TemporaryDirectory() as temp:
     )
     assert result.returncode == 2, (result.stdout, result.stderr)
     payload = json.loads(result.stdout)
-    assert payload["status"] == "REQUIRES_SPECIFICATION"
+    assert payload["status"] == "EVIDENCE_GAP"
     assert payload["candidate_count"] == 2
 
 print("mobile intent optimizer tests: PASS")
