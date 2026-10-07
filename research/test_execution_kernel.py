@@ -25,6 +25,8 @@ assert ready["status"] == "READY_FOR_VERIFICATION"
 assert ready["authorization"]["consequential_execution_blocked"] is False
 assert ready["channel_plan"]["status"] == "READY"
 assert ready["precision"]["blocked"] is False
+assert ready["optimization"]["status"] in {"EVIDENCE_GAP", "OPTIMIZED_CANDIDATE"}
+assert 0.0 <= ready["optimization"]["score"] <= 1.0
 
 blocked = plan("merge and deploy the implementation", resources=budget, requests=requests, channels=channels)
 assert blocked["status"] == "AUTHORIZATION_REQUIRED"
