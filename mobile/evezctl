@@ -284,6 +284,10 @@ survival_py() {
   printf '%s/research/epistemic_survival.py' "$EVEZ_ROOT"
 }
 
+evolution_receipt_py() {
+  printf '%s/mobile/evolution_receipt.py' "$EVEZ_ROOT"
+}
+
 frontier_py() {
   printf '%s/mobile/evez_frontier.py' "$EVEZ_ROOT"
 }
@@ -383,6 +387,22 @@ epistemic_evaluate_cmd() {
 
 survival_run_cmd() {
   python "$(survival_py)" "$@"
+}
+
+evolution_build_cmd() {
+  [ "$#" -eq 2 ] || {
+    printf 'usage: evezctl evolution-build SPEC_JSON OUTPUT_JSON\\n' >&2
+    return 2
+  }
+  python "$(evolution_receipt_py)" build "$1" "$2"
+}
+
+evolution_verify_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl evolution-verify RECEIPT_JSON\\n' >&2
+    return 2
+  }
+  python "$(evolution_receipt_py)" verify "$1"
 }
 
 frontier_cmd() {
@@ -566,6 +586,8 @@ Commands:
   capsule-verify FILE
   epistemic-evaluate PACKET.json
   survival-run [--min-score SCORE]
+  evolution-build SPEC_JSON OUTPUT_JSON
+  evolution-verify RECEIPT_JSON
   frontier PACKET [--output FILE]
   signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
   kernel INTENT --budget FILE --requests FILE [--channels FILE]
@@ -617,6 +639,8 @@ case "$cmd" in
   capsule-verify) capsule_verify_cmd "$@" ;;
   epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
   survival-run) survival_run_cmd "$@" ;;
+  evolution-build) evolution_build_cmd "$@" ;;
+  evolution-verify) evolution_verify_cmd "$@" ;;
   frontier) frontier_cmd "$@" ;;
   signal) signal_cmd "$@" ;;
   kernel) kernel_cmd "$@" ;;
