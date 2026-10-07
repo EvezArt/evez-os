@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Bounded, deterministic receipts for EVEZ self-evolution experiments.
 
-The receipt records evidence and verification inputs but never promotes itself.
-Independent CI/human review remains the authority for VERIFIED state.
+Receipts are evidence containers, not truth claims. This module can capture
+provenance from a live git checkout and can verify a receipt against that
+checkout, but it never promotes or deploys anything.
 """
 
 from __future__ import annotations
@@ -11,6 +12,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -47,12 +49,13 @@ def digest(value: Any) -> str:
     return hashlib.sha256(canonical(value)).hexdigest()
 
 
+def bytes_digest(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
 def now() -> str:
-    return (
-        datetime.now(timezone.utc)
-        .replace(microsecond=0)
-        .isoformat()
-        .replace("+00:00", "Z")
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace(
+        "+00:00", "Z"
     )
 
 
@@ -61,6 +64,79 @@ def _require_hex(
 ) -> None:
     if not isinstance(value, str) or not pattern.fullmatch(value):
         errors.append(f"{name}: invalid digest")
+
+
+def _git(root: Path, *args: str) -> str:
+    result = subprocess.run(
+        ["git", "-C", str(root), *args],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise ValueError(
+            f"git {' '.join(args)} failed: {result.stderr.strip() or 'unknown error'}"
+        )
+    return result.stdout.strip()
+
+
+def _working_tree(root: Path) -> dict[str, Any]:
+    dirty_output = _git(
+        root, "status", "--porcelain", "--untracked-files=all"
+    )
+    return {"clean": not bool(dirty_output)}
+
+
+def _capture_files(root: Path, paths: list[str]) -> list[dict[str, str]]:
+    captured: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for relative in paths:
+        if not isinstance(relative, str) or not relative or Path(relative).is_absolute():
+            raise ValueError(f"invalid repository-relative path: {relative!r}")
+        normalized = Path(relative).as_posix()
+        if normalized in seen:
+            raise ValueError(f"duplicate repository path: {normalized}")
+        seen.add(normalized)
+        target = root / normalized
+        if not target.is_file():
+            raise ValueError(f"repository file not found: {normalized}")
+        captured.append(
+            {"path": normalized, "sha256": bytes_digest(target.read_bytes())}
+        )
+    return captured
+
+
+def capture_spec(spec: dict[str, Any], root: Path) -> dict[str, Any]:
+    root = root.resolve()
+    if not (root / ".git").exists():
+        raise ValueError(f"not a git checkout: {root}")
+
+    working = spec.get("working_tree_state")
+    if not isinstance(working, dict):
+        raise ValueError("working_tree_state must be an object in capture input")
+    paths = working.get("files")
+    if not isinstance(paths, list):
+        raise ValueError("working_tree_state.files must be a list in capture input")
+
+    relative_paths: list[str] = []
+    for item in paths:
+        if not isinstance(item, dict) or not isinstance(item.get("path"), str):
+            raise ValueError("capture input contains an invalid working-tree file entry")
+        relative_paths.append(item["path"])
+
+    captured = dict(spec)
+    captured["source_commit"] = _git(root, "rev-parse", "HEAD")
+    captured["working_tree_state"] = {
+        **_working_tree(root),
+        "files": _capture_files(root, relative_paths),
+    }
+    captured["verification_status"] = (
+        "PROPOSED"
+        if captured.get("verification_status") == "VERIFIED"
+        else captured.get("verification_status", "PROPOSED")
+    )
+    captured["verification_timestamp"] = now()
+    return captured
 
 
 def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
@@ -74,9 +150,7 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
         errors.append("unsupported schema_version")
 
     _require_hex("source_commit", receipt.get("source_commit"), GIT_SHA_RE, errors)
-    _require_hex(
-        "proposal_digest", receipt.get("proposal_digest"), SHA256_RE, errors
-    )
+    _require_hex("proposal_digest", receipt.get("proposal_digest"), SHA256_RE, errors)
     _require_hex("receipt_digest", receipt.get("receipt_digest"), SHA256_RE, errors)
 
     if receipt.get("verification_status") not in STATUSES:
@@ -94,9 +168,7 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
         else:
             seen: set[str] = set()
             for item in files:
-                if not isinstance(item, dict) or not isinstance(
-                    item.get("path"), str
-                ):
+                if not isinstance(item, dict) or not isinstance(item.get("path"), str):
                     errors.append("working_tree_state.files contains invalid entry")
                     continue
                 path = item["path"]
@@ -115,9 +187,7 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
         errors.append("evidence_input_digests must be an object")
     else:
         for label, value in evidence.items():
-            _require_hex(
-                f"evidence_input_digests[{label}]", value, SHA256_RE, errors
-            )
+            _require_hex(f"evidence_input_digests[{label}]", value, SHA256_RE, errors)
 
     tests = receipt.get("test_manifest")
     results = receipt.get("test_results")
@@ -141,9 +211,7 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
             or not command
             or not all(isinstance(part, str) for part in command)
         ):
-            errors.append(
-                f"test {test_id}: command must be a non-empty argv list"
-            )
+            errors.append(f"test {test_id}: command must be a non-empty argv list")
         if not isinstance(item.get("expected_exit_code"), int):
             errors.append(f"test {test_id}: expected_exit_code must be int")
 
@@ -190,17 +258,11 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
             if not isinstance(item.get(field), str) or not item[field].strip():
                 errors.append(f"contradiction_cases[{index}].{field} missing")
         if not isinstance(item.get("resolved"), bool):
-            errors.append(
-                f"contradiction_cases[{index}].resolved must be boolean"
-            )
+            errors.append(f"contradiction_cases[{index}].resolved must be boolean")
         elif not item["resolved"]:
             unresolved += 1
 
-    for field in (
-        "failed_attempts",
-        "uncertainties",
-        "dissenting_observations",
-    ):
+    for field in ("failed_attempts", "uncertainties", "dissenting_observations"):
         if not isinstance(receipt.get(field), list):
             errors.append(f"{field} must be a list")
 
@@ -211,9 +273,7 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
         errors.append("receipt_digest mismatch")
 
     test_failures = [
-        test_id
-        for test_id, item in result_by_id.items()
-        if item.get("status") != "PASS"
+        test_id for test_id, item in result_by_id.items() if item.get("status") != "PASS"
     ]
     claimed = receipt.get("verification_status")
     promotion_eligible = (
@@ -222,6 +282,7 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
         and not test_failures
         and unresolved == 0
         and len(result_by_id) == len(manifest_by_id)
+        and working.get("clean", False) is True
     )
 
     result = {
@@ -246,12 +307,55 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
     return not errors, result
 
 
+def verify_against(receipt: dict[str, Any], root: Path) -> tuple[bool, dict[str, Any]]:
+    ok, details = validate(receipt)
+    errors = list(details["errors"])
+    root = root.resolve()
+
+    try:
+        if not (root / ".git").exists():
+            raise ValueError(f"not a git checkout: {root}")
+
+        actual_commit = _git(root, "rev-parse", "HEAD")
+        actual_clean = _working_tree(root)["clean"]
+
+        if actual_commit != receipt.get("source_commit"):
+            errors.append(
+                f"source commit mismatch: receipt={receipt.get('source_commit')} actual={actual_commit}"
+            )
+
+        expected_clean = receipt.get("working_tree_state", {}).get("clean")
+        if isinstance(expected_clean, bool) and expected_clean != actual_clean:
+            errors.append(
+                f"working tree cleanliness mismatch: receipt={expected_clean} actual={actual_clean}"
+            )
+
+        for item in receipt.get("working_tree_state", {}).get("files", []):
+            relative = item.get("path")
+            if not isinstance(relative, str):
+                continue
+            target = root / relative
+            if not target.is_file():
+                errors.append(f"missing repository file: {relative}")
+                continue
+            actual_hash = bytes_digest(target.read_bytes())
+            if actual_hash != item.get("sha256"):
+                errors.append(
+                    f"file digest mismatch: {relative} receipt={item.get('sha256')} actual={actual_hash}"
+                )
+    except (OSError, ValueError) as exc:
+        errors.append(str(exc))
+
+    details = dict(details)
+    details["environment_match"] = not errors
+    details["errors"] = errors
+    details["integrity_verified"] = not errors
+    details["promotion_eligible"] = bool(details["promotion_eligible"] and not errors)
+    return not errors and ok, details
+
+
 def build(spec: dict[str, Any]) -> dict[str, Any]:
-    required = REQUIRED_FIELDS - {
-        "receipt_digest",
-        "verification_timestamp",
-        "schema_version",
-    }
+    required = REQUIRED_FIELDS - {"receipt_digest", "verification_timestamp", "schema_version"}
     missing = sorted(required - set(spec))
     if missing:
         raise ValueError("missing spec fields: " + ", ".join(missing))
@@ -269,8 +373,7 @@ def build(spec: dict[str, Any]) -> dict[str, Any]:
         **{
             key: spec[key]
             for key in REQUIRED_FIELDS
-            if key
-            not in {"schema_version", "verification_timestamp", "receipt_digest"}
+            if key not in {"schema_version", "verification_timestamp", "receipt_digest"}
         },
         "verification_timestamp": spec.get("verification_timestamp") or now(),
     }
@@ -278,8 +381,7 @@ def build(spec: dict[str, Any]) -> dict[str, Any]:
     ok, details = validate(receipt)
     if not ok:
         raise ValueError(
-            "generated receipt failed validation: "
-            + "; ".join(details["errors"])
+            "generated receipt failed validation: " + "; ".join(details["errors"])
         )
     return receipt
 
@@ -287,19 +389,37 @@ def build(spec: dict[str, Any]) -> dict[str, Any]:
 def load(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
-        raise ValueError("receipt must be a JSON object")
+        raise ValueError("receipt/spec must be a JSON object")
     return value
+
+
+def write_json(path: Path, value: dict[str, Any]) -> None:
+    path.write_text(
+        json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def cmd_capture(root: Path, input_path: Path, output_path: Path) -> int:
+    captured = capture_spec(load(input_path), root)
+    write_json(output_path, captured)
+    print(
+        json.dumps(
+            {
+                "captured": True,
+                "source_commit": captured["source_commit"],
+                "clean": captured["working_tree_state"]["clean"],
+                "files": len(captured["working_tree_state"]["files"]),
+            },
+            sort_keys=True,
+        )
+    )
+    return 0
 
 
 def cmd_build(input_path: Path, output_path: Path) -> int:
     receipt = build(load(input_path))
-    output_path.write_text(
-        json.dumps(
-            receipt, indent=2, sort_keys=True, ensure_ascii=False
-        )
-        + "\n",
-        encoding="utf-8",
-    )
+    write_json(output_path, receipt)
     print(
         json.dumps(
             {
@@ -320,28 +440,47 @@ def cmd_verify(path: Path) -> int:
     return 0 if details["integrity_verified"] else 1
 
 
+def cmd_verify_against(path: Path, root: Path) -> int:
+    receipt = load(path)
+    _, details = verify_against(receipt, root)
+    print(json.dumps(details, indent=2, sort_keys=True))
+    return 0 if details["integrity_verified"] else 1
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Build and verify bounded EVEZ evolution receipts."
+        description="Build, capture, and verify bounded EVEZ evolution receipts."
     )
     sub = parser.add_subparsers(dest="command", required=True)
+
+    capture_parser = sub.add_parser("capture")
+    capture_parser.add_argument("root")
+    capture_parser.add_argument("input")
+    capture_parser.add_argument("output")
+
     build_parser = sub.add_parser("build")
     build_parser.add_argument("input")
     build_parser.add_argument("output")
+
     verify_parser = sub.add_parser("verify")
     verify_parser.add_argument("receipt")
+
+    against_parser = sub.add_parser("verify-against")
+    against_parser.add_argument("receipt")
+    against_parser.add_argument("root")
+
     args = parser.parse_args()
 
     try:
+        if args.command == "capture":
+            return cmd_capture(Path(args.root), Path(args.input), Path(args.output))
         if args.command == "build":
             return cmd_build(Path(args.input), Path(args.output))
-        return cmd_verify(Path(args.receipt))
+        if args.command == "verify":
+            return cmd_verify(Path(args.receipt))
+        return cmd_verify_against(Path(args.receipt), Path(args.root))
     except (OSError, ValueError, json.JSONDecodeError) as exc:
-        print(
-            json.dumps(
-                {"verified": False, "error": str(exc)}, sort_keys=True
-            )
-        )
+        print(json.dumps({"verified": False, "error": str(exc)}, sort_keys=True))
         return 1
 
 
