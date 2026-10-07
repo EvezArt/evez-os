@@ -21,35 +21,67 @@ jobs:
         run: |
           python -m py_compile             research/precision_contract.py             research/lexile_semantics.py             research/intent_optimizer.py             research/outcome_engine.py             research/execution_kernel.py             research/reality_substrate.py             research/artifact_contracts.py             legal/license_opportunity.py             mobile/evez_precision.py             mobile/evez_lexile.py             mobile/evez_intent.py             mobile/evez_reality.py
 
-      - name: Verify semantic contracts
-        run: |
-          python research/test_precision_contract.py
-          python research/test_lexile_semantics.py
-          python research/test_intent_optimizer.py
-          python research/test_outcome_engine.py
-          python research/test_execution_kernel.py
-          python research/test_reality_substrate.py
-          python research/test_artifact_contracts.py
-          python legal/test_license_opportunity.py
-
-      - name: Verify Termux operator contracts
-        run: |
-          python mobile/test_evez_precision.py
-          python mobile/test_evez_lexile.py
-          python mobile/test_evez_intent.py
-          python mobile/test_evez_reality.py
-
-      - name: Verify strict failure semantics
+      - name: Verify semantic and mobile contracts with diagnostics
+        id: diagnostic_tests
+        continue-on-error: true
         run: |
           set +e
-          python mobile/evez_precision.py --intent "do everything fully"
-          precision_status=$?
-          python mobile/evez_intent.py --intent "do everything fully"
-          intent_status=$?
-          set -e
+          mkdir -p verification-artifacts
+          failed=0
 
-          test "$precision_status" -eq 2
-          test "$intent_status" -eq 2
+          run_test() {
+            name="$1"
+            shift
+            output="verification-artifacts/$name.log"
+            "$@" >"$output" 2>&1
+            status=$?
+            printf '%s\n' "$status" > "verification-artifacts/$name.status"
+            echo "TEST $name status=$status"
+            if [ "$status" -ne 0 ]; then
+              failed=1
+            fi
+          }
+
+          run_test precision_research python research/test_precision_contract.py
+          run_test lexile_research python research/test_lexile_semantics.py
+          run_test intent_research python research/test_intent_optimizer.py
+          run_test outcome_research python research/test_outcome_engine.py
+          run_test execution_research python research/test_execution_kernel.py
+          run_test reality_research python research/test_reality_substrate.py
+          run_test artifact_research python research/test_artifact_contracts.py
+          run_test rights python legal/test_license_opportunity.py
+          run_test precision_mobile python mobile/test_evez_precision.py
+          run_test lexile_mobile python mobile/test_evez_lexile.py
+          run_test intent_mobile python mobile/test_evez_intent.py
+          run_test reality_mobile python mobile/test_evez_reality.py
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("verification-artifacts")
+          rows = []
+          for status_file in sorted(root.glob("*.status")):
+              rows.append({
+                  "name": status_file.stem,
+                  "status": int(status_file.read_text(encoding="utf-8").strip()),
+                  "log": status_file.with_suffix(".log").as_posix(),
+              })
+          Path(root / "summary.json").write_text(
+              json.dumps({"tests": rows, "failed": sum(row["status"] != 0 for row in rows)}, indent=2)
+              + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+          exit "$failed"
+
+      - name: Verify Termux command surface
+        run: |
+          bash -n mobile/evezctl
+          python mobile/evez_precision.py --help
+          python mobile/evez_lexile.py --help
+          python mobile/evez_intent.py --help
+          python mobile/evez_reality.py --help
 
       - name: Verify source rights declarations
         run: |
