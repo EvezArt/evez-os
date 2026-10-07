@@ -9,6 +9,16 @@ assert atom.confidence > 0
 role = map_atom("classifier")
 assert role.role == "CLASSIFIER"
 
+plural = map_atom("recognizers")
+assert plural.role == "RECOGNIZER"
+
+phenomenon = map_atom("phenomenon")
+assert phenomenon.kind == "PHENOMENON"
+
+coined_role = map_atom("truth taxonimists")
+assert coined_role.coined is True
+assert coined_role.role == "TAXONOMIST"
+
 packet = map_text(
     "The truth taxonimists classify contradiction indicators and recognize "
     "temporal lineage breaks."
