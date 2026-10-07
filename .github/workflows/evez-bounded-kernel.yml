@@ -5,8 +5,12 @@ on:
     branches: ["**"]
   pull_request:
 
+
 permissions:
   contents: read
+
+env:
+  PYTHONPATH: .
 
 jobs:
   compile:
