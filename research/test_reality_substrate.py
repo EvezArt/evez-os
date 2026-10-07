@@ -12,6 +12,7 @@ from research.reality_substrate import (
     branch_counterfactual,
     choose_next_operation,
     compile_projection,
+    apply_event,
     evaluate_self,
     snapshot_digest,
     transmit_unit,
@@ -42,6 +43,18 @@ manifest = compile_projection(snapshot, spec)
 assert manifest.reproducible is True
 assert manifest.source_event_ids == ("evt:001",)
 assert manifest.epistemic_state == "PROPOSED"
+
+next_event = CausalEvent(
+    event_id="evt:002", timestamp="2026-10-07T20:03:00Z",
+    kind="STATE_TRANSITION", actor_id="operator", causes=("evt:001",),
+    effects=("mount:001",), payload={"weathered": True},
+    epistemic_state="OBSERVED",
+)
+next_snapshot = apply_event(snapshot, next_event)
+assert next_snapshot.parent_snapshot == snapshot.snapshot_id
+assert next_snapshot.events[-1].event_id == "evt:002"
+assert next_snapshot.entities[0].provenance[-1] == "evt:002"
+assert next_snapshot.snapshot_id != snapshot.snapshot_id
 
 ledger = AppendOnlyLedger()
 ledger.append({"type": "OBSERVED_FACT", "payload": {"value": 1}})
