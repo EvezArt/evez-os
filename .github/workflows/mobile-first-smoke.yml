@@ -21,6 +21,7 @@ jobs:
           python mobile/evez_frontier.py --help
           python mobile/evez_signal.py --help
           python mobile/test_evez_signal.py
+          python mobile/test_evez_signal_fallback.py
           python research/test_weather_mycelial_flux.py
           python research/test_weather_flux_theory.py
           python research/test_promotion_gate.py
@@ -42,6 +43,8 @@ jobs:
           test -s docs/SWARM_SELF_VISIBILITY.md
           test -s docs/SIGNAL_DOMAIN.md
           test -s docs/SIGNAL_NEGOTIATION.md
+          test -s docs/BOUNDED_CYCLE_SIGNAL_DOMAIN.md || test -s research/BOUNDED_CYCLE_SIGNAL_DOMAIN.md
+          test -s mobile/signal-capabilities.example.json
           test -s research/BOUNDED_CYCLE_SIGNAL_DOMAIN.md
 
       - name: Exercise offline-safe CLI
