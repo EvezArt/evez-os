@@ -296,6 +296,10 @@ kernel_py() {
   printf '%s/mobile/evez_kernel.py' "$EVEZ_ROOT"
 }
 
+signal_capabilities_py() {
+  printf '%s/mobile/evez_signal_capabilities.py' "$EVEZ_ROOT"
+}
+
 doctor() {
   local failed=0
   for dependency in python curl jq git openssl; do
@@ -307,7 +311,7 @@ doctor() {
     fi
   done
 
-  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)"; do
+  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)"; do
     if [ -f "$required_file" ]; then
       printf 'ok file=%s\n' "$required_file"
     else
@@ -387,6 +391,10 @@ kernel_cmd() {
     return 2
   }
   python "$(kernel_py)" "$@"
+}
+
+signal_capabilities_cmd() {
+  python "$(signal_capabilities_py)" "$@"
 }
 
 status_cmd() {
@@ -509,6 +517,7 @@ Commands:
   frontier PACKET [--output FILE]
   signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
   kernel INTENT --budget FILE --requests FILE [--channels FILE]
+  signal-capabilities [--consent-scope SCOPE]... [--output FILE]
   pull
   deploy
   logs
@@ -555,6 +564,7 @@ case "$cmd" in
   frontier) frontier_cmd "$@" ;;
   signal) signal_cmd "$@" ;;
   kernel) kernel_cmd "$@" ;;
+  signal-capabilities) signal_capabilities_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
