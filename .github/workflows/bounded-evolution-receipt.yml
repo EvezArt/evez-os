@@ -3,7 +3,7 @@ name: bounded-evolution-receipt
 on:
   push:
     branches:
-      - "evolution/receipt-boundary-001"
+      - "evolution/receipt-boundary-002"
     paths:
       - "mobile/evolution_receipt.py"
       - "mobile/test_evolution_receipt.py"
@@ -39,29 +39,63 @@ jobs:
           git -C "$tmp/repo" init
           git -C "$tmp/repo" config user.email "ci@example.invalid"
           git -C "$tmp/repo" config user.name "evez-ci"
-          printf 'fixture\\n' > "$tmp/repo/fixture.txt"
+          printf 'fixture\n' > "$tmp/repo/fixture.txt"
           git -C "$tmp/repo" add fixture.txt
           git -C "$tmp/repo" commit -m fixture
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          p = Path("$tmp/spec.json")
-          p.write_text(json.dumps({
-              "schema_version": 1,
-              "source_commit": "0" * 40,
-              "working_tree_state": {"clean": True, "files": [{"path": "fixture.txt", "sha256": "0" * 64}]},
-              "test_manifest": [{"id": "fixture", "command": ["python", "-c", "print('pass')"], "expected_exit_code": 0}],
-              "test_results": [{"id": "fixture", "exit_code": 0, "stdout_sha256": "0" * 64, "stderr_sha256": "0" * 64, "status": "PASS"}],
-              "evidence_input_digests": {"fixture": "0" * 64},
-              "proposal_digest": "0" * 64,
-              "contradiction_cases": [{"id": "c", "claim": "bind", "falsifier": "tamper", "resolution": "reject", "resolved": True}],
-              "failed_attempts": ["self-declared provenance"],
-              "uncertainties": ["external runner not implied"],
-              "dissenting_observations": ["integrity is not truth"],
-              "verification_status": "PROPOSED",
-              "verification_timestamp": "2026-10-07T00:00:00Z"
-          }, sort_keys=True))
-          PY
+          cat > "$tmp/spec.json" <<'EOF'
+          {
+            "schema_version": 1,
+            "source_commit": "0000000000000000000000000000000000000000",
+            "working_tree_state": {
+              "clean": true,
+              "files": [
+                {
+                  "path": "fixture.txt",
+                  "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+                }
+              ]
+            },
+            "test_manifest": [
+              {
+                "id": "fixture",
+                "command": ["python", "-c", "print('pass')"],
+                "expected_exit_code": 0
+              }
+            ],
+            "test_results": [
+              {
+                "id": "fixture",
+                "exit_code": 0,
+                "stdout_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                "stderr_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                "status": "PASS"
+              }
+            ],
+            "evidence_input_digests": {
+              "fixture": "0000000000000000000000000000000000000000000000000000000000000000"
+            },
+            "proposal_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "contradiction_cases": [
+              {
+                "id": "c",
+                "claim": "bind",
+                "falsifier": "tamper",
+                "resolution": "reject",
+                "resolved": true
+              }
+            ],
+            "failed_attempts": ["self-declared provenance"],
+            "uncertainties": ["external runner not implied"],
+            "dissenting_observations": ["integrity is not truth"],
+            "verification_status": "PROPOSED",
+            "verification_timestamp": "2026-10-07T00:00:00Z"
+          }
+          EOF
           python mobile/evolution_receipt.py capture "$tmp/repo" "$tmp/spec.json" "$tmp/captured.json"
           python mobile/evolution_receipt.py build "$tmp/captured.json" "$tmp/receipt.json"
           python mobile/evolution_receipt.py verify-against "$tmp/receipt.json" "$tmp/repo"
+          printf 'tampered\n' > "$tmp/repo/fixture.txt"
+          if python mobile/evolution_receipt.py verify-against "$tmp/receipt.json" "$tmp/repo"; then
+            echo "tamper check unexpectedly passed"
+            exit 1
+          fi
