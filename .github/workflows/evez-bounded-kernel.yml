@@ -1,0 +1,62 @@
+name: evez-bounded-kernel
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-kernel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pinned source
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Compile bounded kernel
+        run: |
+          python -m py_compile             research/precision_contract.py             research/lexile_semantics.py             research/intent_optimizer.py             research/outcome_engine.py             research/execution_kernel.py             legal/license_opportunity.py             mobile/evez_precision.py             mobile/evez_lexile.py             mobile/evez_intent.py
+
+      - name: Verify semantic contracts
+        run: |
+          python research/test_precision_contract.py
+          python research/test_lexile_semantics.py
+          python research/test_intent_optimizer.py
+          python research/test_outcome_engine.py
+          python research/test_execution_kernel.py
+          python legal/test_license_opportunity.py
+
+      - name: Verify Termux operator contracts
+        run: |
+          python mobile/test_evez_precision.py
+          python mobile/test_evez_lexile.py
+          python mobile/test_evez_intent.py
+
+      - name: Verify strict failure semantics
+        run: |
+          set +e
+          python mobile/evez_precision.py --intent "do everything fully"
+          precision_status=$?
+          python mobile/evez_intent.py --intent "do everything fully"
+          intent_status=$?
+          set -e
+
+          test "$precision_status" -eq 2
+          test "$intent_status" -eq 2
+
+      - name: Verify source rights declarations
+        run: |
+          test -s LICENSE
+          python legal/license_opportunity.py . > /tmp/evez-rights.json
+          python - <<'PY'
+          import json
+          payload = json.load(open("/tmp/evez-rights.json", encoding="utf-8"))
+          assert payload["schema"] == "evez-license-opportunity-v1"
+          assert len(payload["audit_sha256"]) == 64
+          assert payload["summary"]["assets"] > 0
+          print("rights audit: PASS")
+          PY
