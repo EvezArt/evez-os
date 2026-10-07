@@ -6,8 +6,12 @@ on:
   push:
     branches: ["evez-reality-substrate/2026-10"]
 
+
 permissions:
   contents: read
+
+env:
+  PYTHONPATH: .
 
 jobs:
   substrate:
