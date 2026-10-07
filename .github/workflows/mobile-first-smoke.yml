@@ -38,7 +38,7 @@ jobs:
           python research/test_outcome_engine.py
           python research/test_execution_kernel.py
           python research/test_anomaly_swarm_lab.py
-          python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py research/ai_resistance_benchmark.py research/information_frontier.py research/signal_domain.py research/signal_negotiation.py research/signal_delivery.py mobile/evez_frontier.py mobile/evez_signal.py
+          python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py research/ai_resistance_benchmark.py research/information_frontier.py research/signal_domain.py research/signal_negotiation.py research/signal_delivery.py research/cognitive_continuity.py research/materium.py research/outcome_engine.py research/execution_kernel.py mobile/evez_frontier.py mobile/evez_signal.py mobile/evez_kernel.py
           test -s mobile/install.sh
           test -s mobile/README.md
           test -s docs/MOBILE_FIRST.md
@@ -49,6 +49,9 @@ jobs:
           test -s docs/SWARM_SELF_VISIBILITY.md
           test -s docs/SIGNAL_DOMAIN.md
           test -s docs/SIGNAL_NEGOTIATION.md
+          test -s docs/COGNITIVE_CONTINUITY.md
+          test -s docs/MATERIUM_OUTCOME_KERNEL.md
+          test -s research/BOUNDED_CYCLE_2026-10-07_KERNEL.md
           test -s docs/BOUNDED_CYCLE_SIGNAL_DOMAIN.md || test -s research/BOUNDED_CYCLE_SIGNAL_DOMAIN.md
           test -s mobile/signal-capabilities.example.json
           test -s research/BOUNDED_CYCLE_SIGNAL_DOMAIN.md
