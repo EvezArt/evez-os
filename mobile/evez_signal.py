@@ -32,16 +32,6 @@ def available(command: str) -> bool:
     return shutil.which(command) is not None
 
 
-def adapter_for(channel: str) -> str | None:
-    return {
-        "text": "stdout",
-        "visual": "termux-notification",
-        "audio": "termux-tts-speak",
-        "haptic": "termux-vibrate",
-        "wearable": "termux-notification",
-    }.get(channel)
-
-
 def capability_from_row(row: dict) -> ChannelCapability:
     return ChannelCapability(
         channel=row["channel"],
@@ -68,42 +58,49 @@ def deliver(rendered: dict) -> dict:
     payload = rendered["payload"]
     body = json.dumps(payload, sort_keys=True, ensure_ascii=False)
 
-    if channel == "text":
-        print(f"{title}: {body}")
-        return {"delivered": True, "adapter": "stdout", "detail": "stdout rendering"}
+    try:
+        if channel == "text":
+            print(f"{title}: {body}")
+            return {"delivered": True, "adapter": "stdout", "detail": "stdout rendering"}
 
-    if channel == "visual":
-        command = "termux-notification"
-        if not available(command):
-            return {"delivered": False, "adapter": command, "detail": "adapter unavailable"}
-        subprocess.run([command, "--title", title, "--content", body], check=True)
-        return {"delivered": True, "adapter": command, "detail": "notification posted"}
+        if channel == "visual":
+            command = "termux-notification"
+            if not available(command):
+                return {"delivered": False, "adapter": command, "detail": "adapter unavailable"}
+            subprocess.run([command, "--title", title, "--content", body], check=True)
+            return {"delivered": True, "adapter": command, "detail": "notification posted"}
 
-    if channel == "audio":
-        command = "termux-tts-speak"
-        if not available(command):
-            return {"delivered": False, "adapter": command, "detail": "adapter unavailable"}
-        subprocess.run([command, f"{title}. {body}"], check=True)
-        return {"delivered": True, "adapter": command, "detail": "speech requested"}
+        if channel == "audio":
+            command = "termux-tts-speak"
+            if not available(command):
+                return {"delivered": False, "adapter": command, "detail": "adapter unavailable"}
+            subprocess.run([command, f"{title}. {body}"], check=True)
+            return {"delivered": True, "adapter": command, "detail": "speech requested"}
 
-    if channel == "haptic":
-        command = "termux-vibrate"
-        if not available(command):
-            return {"delivered": False, "adapter": command, "detail": "adapter unavailable"}
-        subprocess.run([command, "-d", "500"], check=True)
-        return {"delivered": True, "adapter": command, "detail": "vibration requested"}
+        if channel == "haptic":
+            command = "termux-vibrate"
+            if not available(command):
+                return {"delivered": False, "adapter": command, "detail": "adapter unavailable"}
+            subprocess.run([command, "-d", "500"], check=True)
+            return {"delivered": True, "adapter": command, "detail": "vibration requested"}
 
-    if channel == "wearable":
-        command = "termux-notification"
-        if not available(command):
-            return {"delivered": False, "adapter": command, "detail": "wearable notification unavailable"}
-        subprocess.run(
-            [command, "--title", title, "--content", body, "--priority", "high"],
-            check=True,
-        )
-        return {"delivered": True, "adapter": command, "detail": "wearable-compatible notification requested"}
+        if channel == "wearable":
+            command = "termux-notification"
+            if not available(command):
+                return {"delivered": False, "adapter": command, "detail": "wearable notification unavailable"}
+            subprocess.run(
+                [command, "--title", title, "--content", body, "--priority", "high"],
+                check=True,
+            )
+            return {"delivered": True, "adapter": command, "detail": "wearable-compatible notification requested"}
 
-    return {"delivered": False, "adapter": channel, "detail": "no adapter registered"}
+        return {"delivered": False, "adapter": channel, "detail": "no adapter registered"}
+    except (OSError, subprocess.CalledProcessError) as exc:
+        return {
+            "delivered": False,
+            "adapter": channel,
+            "detail": f"adapter execution failed: {type(exc).__name__}",
+        }
 
 
 def receipt_for(
@@ -165,7 +162,12 @@ def main() -> int:
         if plan["status"] == "NO_ELIGIBLE_CHANNEL":
             print(json.dumps({"delivered": False, "plan": plan}, indent=2, sort_keys=True))
             return 2
-        channels = [row["channel"] for row in plan["selected_channels"]]
+
+        preferred = [row["channel"] for row in plan["selected_channels"]]
+        if args.deliver:
+            channels = list(dict.fromkeys(preferred + plan["fallback_order"]))
+        else:
+            channels = preferred
     elif args.channel:
         channels = [args.channel]
     else:
@@ -212,6 +214,7 @@ def main() -> int:
         attempt.get("outcome", {}).get("delivered", False)
         for attempt in output["attempts"]
     )
+    output["state"] = "ACK" if output["delivered"] else ("RENDER" if not args.deliver else "FAILED")
     output["dry_run"] = not args.deliver
     print(json.dumps(output, indent=2, sort_keys=True))
 
