@@ -16,6 +16,7 @@ jobs:
             python mobile/test_authority.py
             python mobile/test_evez_identity.py
             python mobile/test_candidate.py
+            python mobile/test_evolution_receipt.py
 
 workflows:
   verification:
