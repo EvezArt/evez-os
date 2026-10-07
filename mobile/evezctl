@@ -288,6 +288,10 @@ evolution_receipt_py() {
   printf '%s/mobile/evolution_receipt.py' "$EVEZ_ROOT"
 }
 
+evolution_replay_py() {
+  printf '%s/mobile/evolution_replay.py' "$EVEZ_ROOT"
+}
+
 frontier_py() {
   printf '%s/mobile/evez_frontier.py' "$EVEZ_ROOT"
 }
@@ -590,6 +594,7 @@ Commands:
   evolution-build SPEC_JSON OUTPUT_JSON
   evolution-verify RECEIPT_JSON
   evolution-verify-against RECEIPT_JSON ROOT
+  evolution-replay RECEIPT_JSON ROOT [--max-output BYTES]
   frontier PACKET [--output FILE]
   signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
   kernel INTENT --budget FILE --requests FILE [--channels FILE]
@@ -645,6 +650,7 @@ case "$cmd" in
   evolution-build) evolution_build_cmd "$@" ;;
   evolution-verify) evolution_verify_cmd "$@" ;;
   evolution-verify-against) evolution_verify_against_cmd "$@" ;;
+  evolution-replay) evolution_replay_cmd "$@" ;;
   frontier) frontier_cmd "$@" ;;
   signal) signal_cmd "$@" ;;
   kernel) kernel_cmd "$@" ;;
