@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile natural-language intent into a bounded, testable outcome contract."""
+"""Compile natural-language intent into bounded, testable outcome contracts."""
 
 from __future__ import annotations
 
@@ -8,6 +8,8 @@ import json
 import re
 from dataclasses import asdict, dataclass
 from typing import Any
+
+from research.precision_contract import compile_from_intent
 
 
 @dataclass(frozen=True)
@@ -60,6 +62,7 @@ def classify_action(intent: str) -> str:
 
 def compile_outcome(text: str) -> dict[str, Any]:
     intent = normalize_intent(text)
+    precision = compile_from_intent(intent)
     action = classify_action(intent)
     objective = re.split(r"[.!?]\s+|\n+", intent)[0]
     stages = ("PARSE", "EXTRACT", "MAP", "DERIVE", "BUILD", "TEST", "VERIFY", "PACKAGE")
@@ -72,11 +75,13 @@ def compile_outcome(text: str) -> dict[str, Any]:
     )
     stop = (
         "required evidence is unavailable",
+        "the intent contains unresolved vague terms",
         "a consequential action lacks authorization",
         "verification fails",
     )
     result = {
         "schema": "evez-outcome-v1",
+        "precision": precision,
         "outcome": asdict(
             OutcomeSpec(
                 outcome_id=digest({"intent": intent})[:16],
