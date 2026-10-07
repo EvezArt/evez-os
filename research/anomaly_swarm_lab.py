@@ -2,8 +2,12 @@
 """EVEZ Anomaly + Adaptive Swarm Cognition Lab.
 
 Defensive simulation only. The simulator models distributed sensing, degraded
-communications, conflicting observations, unknown anomalies, and bounded
-coordination. It does not model real weapons, targeting, or attack procedures.
+communications, conflicting observations, unknown anomalies, bounded
+coordination, and read-only swarm self-observation. It does not model real
+weapons, targeting, or attack procedures.
+
+The self-view deliberately exposes shared operational state rather than hidden
+chain-of-thought or private credentials.
 """
 
 from __future__ import annotations
@@ -86,7 +90,6 @@ class Lab:
         phase = tick / max(1, self.ticks - 1)
 
         if self.degradation == "adversarial-noise":
-            # Synthetic decoy/noise pattern only. No physical tactics.
             base = 0.4 + 0.25 * math.sin(phase * math.pi * 4)
             return {
                 "signal": base + self.rng.uniform(-0.4, 0.4),
@@ -112,7 +115,10 @@ class Lab:
         signal = max(0.0, min(1.0, env["signal"] + role_bias + noise))
 
         if self.rng.random() < env["decoy_rate"]:
-            signal = max(0.0, min(1.0, 1.0 - signal + self.rng.uniform(-0.1, 0.1)))
+            signal = max(
+                0.0,
+                min(1.0, 1.0 - signal + self.rng.uniform(-0.1, 0.1)),
+            )
 
         confidence = max(0.05, min(0.99, 0.45 + 0.45 * quality - abs(noise)))
         agent.load = min(1.0, agent.load + 0.04)
@@ -132,9 +138,13 @@ class Lab:
 
         weighted = []
         for report in reports:
-            weighted.append(report.signal * report.confidence * report.channel_quality)
+            weighted.append(
+                report.signal * report.confidence * report.channel_quality
+            )
 
-        denominator = sum(r.confidence * r.channel_quality for r in reports)
+        denominator = sum(
+            r.confidence * r.channel_quality for r in reports
+        )
         posterior = sum(weighted) / denominator if denominator else 0.0
 
         spread = max(r.signal for r in reports) - min(r.signal for r in reports)
@@ -145,7 +155,6 @@ class Lab:
                 if any(r.agent_id == agent.agent_id for r in reports):
                     agent.contradictions += 1
 
-        # Epistemic rule: high posterior is still an observation, not an identity claim.
         status = "CORRELATED" if posterior >= 0.60 and not contradiction else "AMBIGUOUS"
 
         decision = {
@@ -165,8 +174,74 @@ class Lab:
             agent.load = max(0.0, agent.load - 0.07)
             agent.trust = max(
                 0.0,
-                min(1.0, agent.trust + (0.01 if agent.contradictions == 0 else -0.01)),
+                min(
+                    1.0,
+                    agent.trust + (0.01 if agent.contradictions == 0 else -0.01),
+                ),
             )
+
+    def build_swarm_view(
+        self,
+        *,
+        coherence: float,
+        resilience: float,
+        evidence_integrity: float,
+    ) -> dict[str, Any]:
+        """Return the shared read-only state that every swarm member may inspect.
+
+        This intentionally excludes credentials, execution handles, hidden
+        reasoning traces, and any autonomous authority channel.
+        """
+        last_decision = self.decisions[-1] if self.decisions else None
+
+        view = {
+            "schema": "evez-swarm-self-view-v1",
+            "visibility": "SWARM_SHARED_READONLY",
+            "world": {
+                "degradation": self.degradation,
+                "ticks_completed": self.ticks,
+                "unknown_entities": [
+                    {
+                        "id": self.unknown["id"],
+                        "classification": self.unknown["classification"],
+                    }
+                ],
+            },
+            "agents": [
+                {
+                    "agent_id": agent.agent_id,
+                    "role": agent.role,
+                    "trust": round(agent.trust, 6),
+                    "load": round(agent.load, 6),
+                    "reports": agent.reports,
+                    "contradictions": agent.contradictions,
+                }
+                for agent in self.agents
+            ],
+            "latest_decision": last_decision,
+            "uncertainty": {
+                "classification": self.unknown["classification"],
+                "identification_available": False,
+                "contradiction_present": any(
+                    decision["status"] == "AMBIGUOUS"
+                    for decision in self.decisions
+                ),
+            },
+            "metrics": {
+                "coherence": round(coherence, 6),
+                "resilience": round(resilience, 6),
+                "evidence_integrity": round(evidence_integrity, 6),
+            },
+            "authority": {
+                "self_granted": False,
+                "human_command_required": True,
+                "autonomous_physical_action": False,
+                "execution_handles_exposed": False,
+                "credentials_exposed": False,
+            },
+        }
+        view["view_sha256"] = sha(view)
+        return view
 
     def run(self) -> dict:
         for tick in range(self.ticks):
@@ -208,6 +283,12 @@ class Lab:
 
         emergence = (coherence + resilience + evidence_integrity) / 3
 
+        swarm_view = self.build_swarm_view(
+            coherence=coherence,
+            resilience=resilience,
+            evidence_integrity=evidence_integrity,
+        )
+
         summary = {
             "seed": self.seed,
             "ticks": self.ticks,
@@ -227,6 +308,7 @@ class Lab:
                 "human_command_required": True,
                 "autonomous_physical_action": False,
             },
+            "swarm_view": swarm_view,
             "result_sha256": None,
         }
 
