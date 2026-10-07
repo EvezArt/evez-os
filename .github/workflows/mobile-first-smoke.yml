@@ -11,18 +11,70 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate mobile scripts
+      - name: Validate mobile, research, and epistemic contracts
         run: |
           bash -n mobile/evezctl
           bash -n mobile/install.sh
           test -s mobile/evezctl
           python mobile/test_mobile.py
           python mobile/test_evez_identity.py
+          python mobile/evez_frontier.py --help
+          python mobile/evez_signal.py --help
+          python mobile/evez_kernel.py --help
+          python mobile/evez_signal_capabilities.py --help
+          python mobile/evez_precision.py --help
+          python mobile/evez_lexile.py --help
+          python mobile/evez_intent.py --help
+          python mobile/test_evez_signal.py
+          python mobile/test_evez_signal_fallback.py
+          python mobile/test_evez_kernel.py
+          python mobile/test_evez_signal_capabilities.py
+          python mobile/test_evez_precision.py
+          python mobile/test_evez_lexile.py
+          python mobile/test_evez_intent.py
+          python research/test_weather_mycelial_flux.py
+          python research/test_weather_flux_theory.py
+          python research/test_promotion_gate.py
+          python research/test_verification_receipt.py
+          python research/test_ai_resistance_benchmark.py
+          python research/test_information_frontier.py
+          python research/test_signal_domain.py
+          python research/test_signal_negotiation.py
+          python research/test_signal_delivery.py
+          python research/test_cognitive_continuity.py
+          python research/test_materium.py
+          python research/test_outcome_engine.py
+          python research/test_execution_kernel.py
+          python research/test_lexile_semantics.py
+          python research/test_intent_optimizer.py
+          python legal/test_license_opportunity.py
+          python research/test_anomaly_swarm_lab.py
+          python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py research/ai_resistance_benchmark.py research/information_frontier.py research/signal_domain.py research/signal_negotiation.py research/signal_delivery.py research/cognitive_continuity.py research/materium.py research/outcome_engine.py research/execution_kernel.py research/precision_contract.py research/lexile_semantics.py research/intent_optimizer.py legal/license_opportunity.py mobile/evez_frontier.py mobile/evez_signal.py mobile/evez_kernel.py mobile/evez_signal_capabilities.py mobile/evez_precision.py mobile/evez_intent.py
           test -s mobile/install.sh
           test -s mobile/README.md
           test -s docs/MOBILE_FIRST.md
+          test -s docs/WEATHER_CHEMISTRY_MYCELIAL_FLUX.md
+          test -s docs/WEATHER_FLUX_FORMALISM.md
+          test -s docs/AI_RHETORIC_RESISTANCE.md
+          test -s docs/INFORMATION_FRONTIER.md
+          test -s docs/SWARM_SELF_VISIBILITY.md
+          test -s docs/SIGNAL_DOMAIN.md
+          test -s docs/SIGNAL_NEGOTIATION.md
+          test -s docs/COGNITIVE_CONTINUITY.md
+          test -s docs/MATERIUM_OUTCOME_KERNEL.md
+          test -s docs/PRECISION_CONTRACT.md
+          test -s docs/SEMANTIC_INTENT_AND_RIGHTS.md
+          test -s legal/LICENSE_STRATEGY.md
+          test -s legal/README.md
+          test -s LICENSE
+          test -s research/BOUNDED_CYCLE_2026-10-07_KERNEL.md
+          test -s research/BOUNDED_CYCLE_2026-10-07_KERNEL.md
+          test -s docs/BOUNDED_CYCLE_SIGNAL_DOMAIN.md || test -s research/BOUNDED_CYCLE_SIGNAL_DOMAIN.md
+          test -s mobile/signal-capabilities.example.json
+          test -s docs/INTENT_OPTIMIZATION.md
+          test -s research/BOUNDED_CYCLE_SIGNAL_DOMAIN.md
 
       - name: Exercise offline-safe CLI
         run: |
           chmod +x mobile/evezctl
-          HOME="$RUNNER_TEMP/evez-home" EVEZ_ENDPOINT="https://example.invalid" EVEZ_CONFIG="$RUNNER_TEMP/evez-home/.config/evez/evez.env" mobile/evezctl doctor
+          HOME="$RUNNER_TEMP/evez-home" EVEZ_ROOT="$GITHUB_WORKSPACE" EVEZ_ENDPOINT="https://example.invalid" EVEZ_CONFIG="$RUNNER_TEMP/evez-home/.config/evez/evez.env" mobile/evezctl doctor
