@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 #!/usr/bin/env python3
 """Deterministic intent optimization without inventing hidden user intent.
 
