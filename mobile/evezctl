@@ -586,8 +586,10 @@ Commands:
   capsule-verify FILE
   epistemic-evaluate PACKET.json
   survival-run [--min-score SCORE]
+  evolution-capture ROOT SPEC_JSON OUTPUT_SPEC_JSON
   evolution-build SPEC_JSON OUTPUT_JSON
   evolution-verify RECEIPT_JSON
+  evolution-verify-against RECEIPT_JSON ROOT
   frontier PACKET [--output FILE]
   signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
   kernel INTENT --budget FILE --requests FILE [--channels FILE]
@@ -639,8 +641,10 @@ case "$cmd" in
   capsule-verify) capsule_verify_cmd "$@" ;;
   epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
   survival-run) survival_run_cmd "$@" ;;
+  evolution-capture) evolution_capture_cmd "$@" ;;
   evolution-build) evolution_build_cmd "$@" ;;
   evolution-verify) evolution_verify_cmd "$@" ;;
+  evolution-verify-against) evolution_verify_against_cmd "$@" ;;
   frontier) frontier_cmd "$@" ;;
   signal) signal_cmd "$@" ;;
   kernel) kernel_cmd "$@" ;;
