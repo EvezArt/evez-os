@@ -1,0 +1,46 @@
+{
+  "schema": "evez-signal-capabilities-v1",
+  "owner": "operator",
+  "channels": [
+    {
+      "channel": "visual",
+      "available": true,
+      "consent_scopes": ["operator-alerts", "operator-info"],
+      "attention": 0.95,
+      "reliability": 0.90,
+      "cost": 1.0,
+      "max_priority": 1.0,
+      "preferred_rank": 1
+    },
+    {
+      "channel": "audio",
+      "available": true,
+      "consent_scopes": ["operator-alerts"],
+      "attention": 0.90,
+      "reliability": 0.85,
+      "cost": 1.2,
+      "max_priority": 1.0,
+      "preferred_rank": 2
+    },
+    {
+      "channel": "haptic",
+      "available": true,
+      "consent_scopes": ["operator-alerts"],
+      "attention": 0.80,
+      "reliability": 0.80,
+      "cost": 0.5,
+      "max_priority": 1.0,
+      "preferred_rank": 3
+    },
+    {
+      "channel": "wearable",
+      "available": false,
+      "consent_scopes": ["operator-alerts"],
+      "attention": 1.0,
+      "reliability": 1.0,
+      "cost": 0.1,
+      "max_priority": 1.0,
+      "preferred_rank": 0
+    }
+  ]
+}
