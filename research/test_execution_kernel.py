@@ -24,9 +24,15 @@ ready = plan("build the missing capability", resources=budget, requests=requests
 assert ready["status"] == "READY_FOR_VERIFICATION"
 assert ready["authorization"]["consequential_execution_blocked"] is False
 assert ready["channel_plan"]["status"] == "READY"
+assert ready["precision"]["blocked"] is False
 
 blocked = plan("merge and deploy the implementation", resources=budget, requests=requests, channels=channels)
 assert blocked["status"] == "AUTHORIZATION_REQUIRED"
 assert blocked["authorization"]["consequential_execution_blocked"] is True
+
+vague = plan("do everything fully", resources=budget, requests=requests, channels=channels)
+assert vague["status"] == "REQUIRES_SPECIFICATION"
+assert vague["precision"]["blocked"] is True
+assert vague["precision"]["finding_count"] > 0
 
 print("execution kernel tests: PASS")
