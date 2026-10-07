@@ -18,18 +18,23 @@ jobs:
           test -s mobile/evezctl
           python mobile/test_mobile.py
           python mobile/test_evez_identity.py
+          python mobile/evez_frontier.py --help
           python research/test_weather_mycelial_flux.py
           python research/test_weather_flux_theory.py
           python research/test_promotion_gate.py
           python research/test_verification_receipt.py
           python research/test_ai_resistance_benchmark.py
-          python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py research/ai_resistance_benchmark.py
+          python research/test_information_frontier.py
+          python research/test_anomaly_swarm_lab.py
+          python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py research/ai_resistance_benchmark.py research/information_frontier.py mobile/evez_frontier.py
           test -s mobile/install.sh
           test -s mobile/README.md
           test -s docs/MOBILE_FIRST.md
           test -s docs/WEATHER_CHEMISTRY_MYCELIAL_FLUX.md
           test -s docs/WEATHER_FLUX_FORMALISM.md
           test -s docs/AI_RHETORIC_RESISTANCE.md
+          test -s docs/INFORMATION_FRONTIER.md
+          test -s docs/SWARM_SELF_VISIBILITY.md
 
       - name: Exercise offline-safe CLI
         run: |
