@@ -19,7 +19,9 @@ def plan(
     channels: Iterable[ChannelCapability] = (),
 ) -> dict[str, Any]:
     outcome = compile_outcome(intent)
+    precision_blocked = outcome["precision"]["status"] == "REQUIRES_SPECIFICATION"
     authorization_available = False
+
     allocation = allocate(
         resources,
         requests,
@@ -33,7 +35,11 @@ def plan(
         intent="INFO" if outcome["outcome"]["action_class"] != "CONSEQUENTIAL" else "CRITICAL",
         title="Outcome plan",
         payload=outcome,
-        provenance={"source": "execution_kernel", "state": "MODEL_ONLY"},
+        provenance={
+            "source": "execution_kernel",
+            "state": "MODEL_ONLY",
+            "precision_status": outcome["precision"]["status"],
+        },
         consent_scope="operator-info",
         priority=0.95 if outcome["outcome"]["requires_authorization"] else 0.5,
     )
@@ -50,6 +56,13 @@ def plan(
     )
 
     required = outcome["outcome"]["requires_authorization"]
+    if precision_blocked:
+        status = "REQUIRES_SPECIFICATION"
+    elif required:
+        status = "AUTHORIZATION_REQUIRED"
+    else:
+        status = "READY_FOR_VERIFICATION"
+
     return {
         "schema": "evez-execution-kernel-v1",
         "outcome": outcome,
@@ -64,5 +77,10 @@ def plan(
             "available": authorization_available,
             "consequential_execution_blocked": required and not authorization_available,
         },
-        "status": "AUTHORIZATION_REQUIRED" if required else "READY_FOR_VERIFICATION",
+        "precision": {
+            "blocked": precision_blocked,
+            "status": outcome["precision"]["status"],
+            "finding_count": len(outcome["precision"]["vague_terms"]),
+        },
+        "status": status,
     }
