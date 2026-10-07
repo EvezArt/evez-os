@@ -9,89 +9,83 @@ permissions:
   contents: read
 
 jobs:
-  bounded-kernel:
+  compile:
+    name: compile-kernel
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pinned source
-        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
         with:
           persist-credentials: false
-
       - name: Compile bounded kernel
         run: |
           python -m py_compile             research/precision_contract.py             research/lexile_semantics.py             research/intent_optimizer.py             research/outcome_engine.py             research/execution_kernel.py             research/reality_substrate.py             research/artifact_contracts.py             legal/license_opportunity.py             mobile/evez_precision.py             mobile/evez_lexile.py             mobile/evez_intent.py             mobile/evez_reality.py
+          bash -n mobile/evezctl
 
-      - name: Verify semantic and mobile contracts with diagnostics
-        id: diagnostic_tests
-        continue-on-error: true
+  unit:
+    name: test-${{ matrix.test }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        test:
+          - research/test_precision_contract.py
+          - research/test_lexile_semantics.py
+          - research/test_intent_optimizer.py
+          - research/test_outcome_engine.py
+          - research/test_execution_kernel.py
+          - research/test_reality_substrate.py
+          - research/test_artifact_contracts.py
+          - legal/test_license_opportunity.py
+          - mobile/test_evez_precision.py
+          - mobile/test_evez_lexile.py
+          - mobile/test_evez_intent.py
+          - mobile/test_evez_reality.py
+    steps:
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Run isolated contract
+        run: python ${{ matrix.test }}
+
+  strict-failure:
+    name: strict-failure-semantics
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Verify vague intent stays blocked
         run: |
           set +e
-          mkdir -p verification-artifacts
-          failed=0
+          python mobile/evez_precision.py --intent "do everything fully"
+          precision_status=$?
+          python mobile/evez_intent.py --intent "do everything fully"
+          intent_status=$?
+          set -e
+          test "$precision_status" -eq 2
+          test "$intent_status" -eq 2
 
-          run_test() {
-            name="$1"
-            shift
-            output="verification-artifacts/$name.log"
-            "$@" >"$output" 2>&1
-            status=$?
-            printf '%s\n' "$status" > "verification-artifacts/$name.status"
-            echo "TEST $name status=$status"
-            if [ "$status" -ne 0 ]; then
-              failed=1
-            fi
-          }
-
-          run_test precision_research python research/test_precision_contract.py
-          run_test lexile_research python research/test_lexile_semantics.py
-          run_test intent_research python research/test_intent_optimizer.py
-          run_test outcome_research python research/test_outcome_engine.py
-          run_test execution_research python research/test_execution_kernel.py
-          run_test reality_research python research/test_reality_substrate.py
-          run_test artifact_research python research/test_artifact_contracts.py
-          run_test rights python legal/test_license_opportunity.py
-          run_test precision_mobile python mobile/test_evez_precision.py
-          run_test lexile_mobile python mobile/test_evez_lexile.py
-          run_test intent_mobile python mobile/test_evez_intent.py
-          run_test reality_mobile python mobile/test_evez_reality.py
-
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          root = Path("verification-artifacts")
-          rows = []
-          for status_file in sorted(root.glob("*.status")):
-              rows.append({
-                  "name": status_file.stem,
-                  "status": int(status_file.read_text(encoding="utf-8").strip()),
-                  "log": status_file.with_suffix(".log").as_posix(),
-              })
-          Path(root / "summary.json").write_text(
-              json.dumps({"tests": rows, "failed": sum(row["status"] != 0 for row in rows)}, indent=2)
-              + "\n",
-              encoding="utf-8",
-          )
-          PY
-
-          exit "$failed"
-
-      - name: Verify Termux command surface
-        run: |
-          bash -n mobile/evezctl
+  command-surface:
+    name: mobile-command-surface
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          persist-credentials: false
+      - run: |
           python mobile/evez_precision.py --help
           python mobile/evez_lexile.py --help
           python mobile/evez_intent.py --help
           python mobile/evez_reality.py --help
 
-      - name: Upload bounded-kernel diagnostics
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+  rights-source:
+    name: rights-source-contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
         with:
-          name: evez-bounded-kernel-diagnostics
-          path: verification-artifacts
-          if-no-files-found: warn
-
-      - name: Verify source rights declarations
+          persist-credentials: false
+      - name: Verify license audit contract
         run: |
           test -s LICENSE
           python legal/license_opportunity.py . > /tmp/evez-rights.json
