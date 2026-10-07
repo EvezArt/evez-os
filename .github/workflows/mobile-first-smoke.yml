@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate mobile scripts
+      - name: Validate mobile and research contracts
         run: |
           bash -n mobile/evezctl
           bash -n mobile/install.sh
@@ -19,10 +19,13 @@ jobs:
           python mobile/test_mobile.py
           python mobile/test_evez_identity.py
           python research/test_weather_mycelial_flux.py
+          python research/test_weather_flux_theory.py
+          python -m py_compile research/promotion_gate.py research/weather_flux_theory.py
           test -s mobile/install.sh
           test -s mobile/README.md
           test -s docs/MOBILE_FIRST.md
           test -s docs/WEATHER_CHEMISTRY_MYCELIAL_FLUX.md
+          test -s docs/WEATHER_FLUX_FORMALISM.md
 
       - name: Exercise offline-safe CLI
         run: |
