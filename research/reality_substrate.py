@@ -213,6 +213,46 @@ class AppendOnlyLedger:
         return [dict(row["payload"]) for row in self.rows]
 
 
+def apply_event(snapshot: WorldSnapshot, event: CausalEvent) -> WorldSnapshot:
+    """Create the next deterministic snapshot from one validated event.
+
+    The function does not infer unprovided physics or causality. It records the
+    event and promotes only entities explicitly named in the event effects.
+    """
+    snapshot.validate()
+    event.validate()
+    if event.event_id in {row.event_id for row in snapshot.events}:
+        raise ValueError("event already exists in snapshot")
+
+    by_id = {entity.entity_id: entity for entity in snapshot.entities}
+    for entity_id in event.effects:
+        if entity_id not in by_id:
+            continue
+        entity = by_id[entity_id]
+        by_id[entity_id] = WorldEntity(
+            entity_id=entity.entity_id,
+            entity_type=entity.entity_type,
+            state=entity.state,
+            attributes=dict(entity.attributes),
+            provenance=tuple(dict.fromkeys((*entity.provenance, event.event_id))),
+            epistemic_state=entity.epistemic_state,
+        )
+
+    next_payload = {
+        "parent": snapshot.snapshot_id,
+        "event": event.event_id,
+        "entities": sorted(by_id),
+    }
+    next_id = f"snap:{digest(next_payload)[:24]}"
+    return WorldSnapshot(
+        snapshot_id=next_id,
+        timestamp=event.timestamp,
+        parent_snapshot=snapshot.snapshot_id,
+        entities=tuple(sorted(by_id.values(), key=lambda item: item.entity_id)),
+        events=tuple((*snapshot.events, event)),
+        branch=snapshot.branch,
+    )
+
 def snapshot_digest(snapshot: WorldSnapshot) -> str:
     snapshot.validate()
     return digest(asdict(snapshot))
