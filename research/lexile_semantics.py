@@ -12,8 +12,7 @@ import json
 import math
 import re
 from dataclasses import asdict, dataclass
-from typing import Any, Iterable
-
+from typing import Any
 
 STOPWORDS = {
     "a","an","the","and","or","but","if","then","for","to","of","in","on","at",
@@ -48,20 +47,6 @@ COINED_TERMS = {
     "materiumadulae",
 }
 
-CONCEPT_CLASSES = (
-    "WORD",
-    "PHRASE",
-    "CONCEPT",
-    "PHENOMENON",
-    "LABEL",
-    "CLASSIFIER",
-    "INDICATOR",
-    "RECOGNIZER",
-    "VINDICATOR",
-    "TAXONOMY",
-    "COINED_TERM",
-)
-
 
 @dataclass(frozen=True)
 class SemanticAtom:
@@ -78,7 +63,9 @@ class SemanticAtom:
 
 
 def canonical(value: Any) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return json.dumps(
+        value, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
 
 
 def digest(value: Any) -> str:
@@ -145,24 +132,27 @@ def complexity_proxy(text: str) -> dict[str, float]:
 
 def classify(surface: str) -> tuple[str, str | None, bool]:
     normalized = " ".join(surface.lower().split())
-    coined = normalized in COINED_TERMS
-    if coined:
+    if normalized in COINED_TERMS:
         return "COINED_TERM", None, True
     if normalized in ROLE_TERMS:
-        return ROLE_TERMS[normalized], ROLE_TERMS[normalized], False
+        role = ROLE_TERMS[normalized]
+        return role, role, False
     if len(tokenize(surface)) > 1:
         return "PHRASE", None, False
+    if normalized in ABSTRACTION_MARKERS:
+        return "CONCEPT", None, False
     return "WORD", None, False
 
 
 def map_atom(surface: str) -> SemanticAtom:
     normalized = " ".join(surface.lower().split())
     tokens = tokenize(surface)
+    if not tokens:
+        raise ValueError("semantic atom cannot be empty")
     kind, role, coined = classify(surface)
-    if kind == "WORD" and normalized in ABSTRACTION_MARKERS:
-        kind = "CONCEPT"
-    joined = " ".join(tokens)
-    abstraction = sum(token in ABSTRACTION_MARKERS for token in tokens) / max(1, len(tokens))
+    abstraction = sum(
+        token in ABSTRACTION_MARKERS for token in tokens
+    ) / max(1, len(tokens))
     syllable_total = sum(syllables(token) for token in tokens)
     information = sum(
         math.log2(max(1, len(token)) + 1) for token in tokens
@@ -183,8 +173,27 @@ def map_atom(surface: str) -> SemanticAtom:
 
 
 def map_text(text: str) -> dict[str, Any]:
-    chunks = re.findall(r"[A-Za-z][A-Za-z'-]*(?:\s+[A-Za-z][A-Za-z'-]*){0,3}", text)
-    atoms = [map_atom(chunk.strip()) for chunk in chunks if chunk.strip()]
+    tokens = tokenize(text)
+    normalized_text = " ".join(tokens)
+    candidates: set[str] = set(tokens)
+
+    for term in COINED_TERMS:
+        if term in normalized_text:
+            candidates.add(term)
+
+    for term in ROLE_TERMS:
+        if re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", normalized_text):
+            candidates.add(term)
+
+    for size in (2, 3, 4):
+        for index in range(max(0, len(tokens) - size + 1)):
+            candidates.add(" ".join(tokens[index:index + size]))
+
+    atoms = [
+        map_atom(candidate)
+        for candidate in sorted(candidates, key=lambda value: (len(tokenize(value)), value))
+    ]
+
     result = {
         "schema": "evez-lexile-semantic-v1",
         "measure_type": "INTERNAL_PROXY_NOT_CERTIFIED_LEXILE",
