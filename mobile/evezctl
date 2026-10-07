@@ -308,6 +308,10 @@ lexile_py() {
   printf '%s/mobile/evez_lexile.py' "$EVEZ_ROOT"
 }
 
+intent_py() {
+  printf '%s/mobile/evez_intent.py' "$EVEZ_ROOT"
+}
+
 rights_py() {
   printf '%s/legal/license_opportunity.py' "$EVEZ_ROOT"
 }
@@ -423,6 +427,14 @@ lexile_cmd() {
     return 2
   }
   python "$(lexile_py)" "$@"
+}
+
+intent_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl optimize-intent (--intent TEXT | --file FILE)\n' >&2
+    return 2
+  }
+  python "$(intent_py)" "$@"
 }
 
 rights_audit_cmd() {
@@ -560,6 +572,7 @@ Commands:
   signal-capabilities [--consent-scope SCOPE]... [--output FILE]
   precision (--intent TEXT | --spec FILE)
   lexile (--text TEXT | --file FILE)
+  optimize-intent (--intent TEXT | --file FILE)
   rights-audit [ROOT]
   pull
   deploy
@@ -610,6 +623,7 @@ case "$cmd" in
   signal-capabilities) signal_capabilities_cmd "$@" ;;
   precision) precision_cmd "$@" ;;
   lexile) lexile_cmd "$@" ;;
+  optimize-intent) intent_cmd "$@" ;;
   rights-audit) rights_audit_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
