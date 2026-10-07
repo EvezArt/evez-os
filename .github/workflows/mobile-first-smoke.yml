@@ -20,7 +20,9 @@ jobs:
           python mobile/test_evez_identity.py
           python research/test_weather_mycelial_flux.py
           python research/test_weather_flux_theory.py
-          python -m py_compile research/promotion_gate.py research/weather_flux_theory.py
+          python research/test_promotion_gate.py
+          python research/test_verification_receipt.py
+          python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py
           test -s mobile/install.sh
           test -s mobile/README.md
           test -s docs/MOBILE_FIRST.md
