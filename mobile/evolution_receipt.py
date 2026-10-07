@@ -97,7 +97,12 @@ def _capture_files(root: Path, paths: list[str]) -> list[dict[str, str]]:
         if normalized in seen:
             raise ValueError(f"duplicate repository path: {normalized}")
         seen.add(normalized)
-        target = root / normalized
+        target = (root / normalized).resolve()
+        root_resolved = root.resolve()
+        if root_resolved not in target.parents:
+            raise ValueError(f"path escapes checkout: {normalized}")
+        if target.is_symlink():
+            raise ValueError(f"symbolic links are not allowed in receipt capture: {normalized}")
         if not target.is_file():
             raise ValueError(f"repository file not found: {normalized}")
         captured.append(
@@ -276,13 +281,14 @@ def validate(receipt: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
         test_id for test_id, item in result_by_id.items() if item.get("status") != "PASS"
     ]
     claimed = receipt.get("verification_status")
+    working_clean = working.get("clean", False) if isinstance(working, dict) else False
     promotion_eligible = (
         claimed == "VERIFIED"
         and not errors
         and not test_failures
         and unresolved == 0
         and len(result_by_id) == len(manifest_by_id)
-        and working.get("clean", False) is True
+        and working_clean is True
     )
 
     result = {
@@ -324,13 +330,15 @@ def verify_against(receipt: dict[str, Any], root: Path) -> tuple[bool, dict[str,
                 f"source commit mismatch: receipt={receipt.get('source_commit')} actual={actual_commit}"
             )
 
-        expected_clean = receipt.get("working_tree_state", {}).get("clean")
+        expected_clean = working.get("clean") if isinstance(working, dict) else None
         if isinstance(expected_clean, bool) and expected_clean != actual_clean:
             errors.append(
                 f"working tree cleanliness mismatch: receipt={expected_clean} actual={actual_clean}"
             )
 
-        for item in receipt.get("working_tree_state", {}).get("files", []):
+        working = receipt.get("working_tree_state")
+        file_entries = working.get("files", []) if isinstance(working, dict) else []
+        for item in file_entries:
             relative = item.get("path")
             if not isinstance(relative, str):
                 continue
