@@ -9,6 +9,7 @@ import re
 from dataclasses import asdict, dataclass
 from typing import Any
 
+from research.intent_optimizer import optimize_intent
 from research.precision_contract import compile_from_intent
 
 
@@ -60,9 +61,10 @@ def classify_action(intent: str) -> str:
     return "READ"
 
 
-def compile_outcome(text: str) -> dict[str, Any]:
+def compile_outcome(text: str, candidate_intents: tuple[str, ...] = ()) -> dict[str, Any]:
     intent = normalize_intent(text)
     precision = compile_from_intent(intent)
+    optimization = optimize_intent(candidate_intents or (intent,))
     action = classify_action(intent)
     objective = re.split(r"[.!?]\s+|\n+", intent)[0]
     stages = ("PARSE", "EXTRACT", "MAP", "DERIVE", "BUILD", "TEST", "VERIFY", "PACKAGE")
@@ -82,6 +84,7 @@ def compile_outcome(text: str) -> dict[str, Any]:
     result = {
         "schema": "evez-outcome-v1",
         "precision": precision,
+        "optimization": optimization,
         "outcome": asdict(
             OutcomeSpec(
                 outcome_id=digest({"intent": intent})[:16],
