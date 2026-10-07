@@ -1,0 +1,33 @@
+name: evez-runner-probe
+
+on:
+  push:
+    branches: ["evez-reality-substrate/2026-10"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  local-runtime:
+    name: runner-local-runtime
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect local runner
+        run: |
+          set -eux
+          uname -a
+          python --version
+          git --version
+          pwd
+          printf 'runner-local-ok\n'
+
+  network-runtime:
+    name: runner-network-git
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test outbound Git access
+        run: |
+          set -eux
+          git ls-remote https://github.com/EvezArt/evez-os.git HEAD

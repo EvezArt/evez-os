@@ -312,6 +312,10 @@ intent_py() {
   printf '%s/mobile/evez_intent.py' "$EVEZ_ROOT"
 }
 
+reality_py() {
+  printf '%s/mobile/evez_reality.py' "$EVEZ_ROOT"
+}
+
 rights_py() {
   printf '%s/legal/license_opportunity.py' "$EVEZ_ROOT"
 }
@@ -327,7 +331,7 @@ doctor() {
     fi
   done
 
-  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)" "$(precision_py)" "$(lexile_py)" "$(intent_py)" "$(rights_py)"; do
+  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)" "$(precision_py)" "$(lexile_py)" "$(intent_py)" "$(reality_py)" "$(rights_py)"; do
     if [ -f "$required_file" ]; then
       printf 'ok file=%s\n' "$required_file"
     else
@@ -435,6 +439,14 @@ intent_cmd() {
     return 2
   }
   python "$(intent_py)" "$@"
+}
+
+reality_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl reality (project SNAPSHOT REPRESENTATION OBSERVER | choose CANDIDATES)\n' >&2
+    return 2
+  }
+  python "$(reality_py)" "$@"
 }
 
 rights_audit_cmd() {
@@ -573,6 +585,7 @@ Commands:
   precision (--intent TEXT | --spec FILE)
   lexile (--text TEXT | --file FILE)
   optimize-intent (--intent TEXT | --file FILE)
+  reality (project SNAPSHOT REPRESENTATION OBSERVER | choose CANDIDATES)
   rights-audit [ROOT]
   pull
   deploy
@@ -624,6 +637,7 @@ case "$cmd" in
   precision) precision_cmd "$@" ;;
   lexile) lexile_cmd "$@" ;;
   optimize-intent) intent_cmd "$@" ;;
+  reality) reality_cmd "$@" ;;
   rights-audit) rights_audit_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;

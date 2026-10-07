@@ -1,0 +1,30 @@
+name: evez-reality-substrate
+
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["evez-reality-substrate/2026-10"]
+
+
+permissions:
+  contents: read
+
+env:
+  PYTHONPATH: .
+
+jobs:
+  substrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Verify persistent substrate
+        run: |
+          python -m py_compile research/reality_substrate.py research/artifact_contracts.py
+          python research/test_reality_substrate.py
+          python research/test_artifact_contracts.py
+          python mobile/test_evez_reality.py
+          bash -n mobile/evezctl
+          python mobile/evez_reality.py --help
