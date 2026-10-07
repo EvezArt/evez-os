@@ -65,7 +65,12 @@ def main() -> int:
         channels=channels,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
-    return 0
+
+    return {
+        "REQUIRES_SPECIFICATION": 2,
+        "AUTHORIZATION_REQUIRED": 0,
+        "READY_FOR_VERIFICATION": 0,
+    }.get(result["status"], 1)
 
 
 if __name__ == "__main__":
