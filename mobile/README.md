@@ -11,6 +11,7 @@ The Galaxy A16 is treated as an operator console, not the production server:
             +-- local evidence + command history
             +-- multimodal signal adapters
             +-- bounded outcome kernel
+            +-- precision gate
             |
             v
     EVEZ-OS gateway -> services -> append-only event spine
@@ -24,6 +25,7 @@ The Galaxy A16 is treated as an operator console, not the production server:
 5. A command that cannot prove success reports failure instead of pretending it succeeded.
 6. Adapter discovery never creates consent.
 7. Planning never creates consequential authorization.
+8. Vague intent never silently becomes an executable interpretation.
 
 ## Install
 
@@ -51,6 +53,25 @@ The local witness command creates a SHA-256 chained JSONL record under the
 mobile operator state directory, so observations can be retained even while
 the remote mesh is unavailable.
 
+## Precision gate
+
+Before vague language becomes an executable plan:
+
+    evezctl precision --intent "do everything fully"
+
+This must reject unbounded wording.
+
+A complete specification can be checked as JSON:
+
+    evezctl precision --spec SPEC.json
+
+The required contract identifies subject, action, scope, inputs, constraints,
+evidence, acceptance criteria, time, and authority.
+
+The rule is:
+
+    UNKNOWN > invented interpretation
+
 ## Information frontier
 
     evezctl frontier PACKET
@@ -63,17 +84,21 @@ gain semantics.
 
 Discover actual local adapters:
 
-    evezctl signal-capabilities --consent-scope operator-info       --consent-scope operator-alerts       --output ~/.config/evez/signal-capabilities.json
+    evezctl signal-capabilities --consent-scope operator-info \
+      --consent-scope operator-alerts \
+      --output ~/.config/evez/signal-capabilities.json
 
 The detector probes installed Termux commands. It does not infer consent.
 
 Dry-run a negotiated signal:
 
-    evezctl signal SIGNAL.json --auto       --capabilities ~/.config/evez/signal-capabilities.json
+    evezctl signal SIGNAL.json --auto \
+      --capabilities ~/.config/evez/signal-capabilities.json
 
 Actual delivery is explicit:
 
-    evezctl signal SIGNAL.json --auto       --capabilities ~/.config/evez/signal-capabilities.json --deliver
+    evezctl signal SIGNAL.json --auto \
+      --capabilities ~/.config/evez/signal-capabilities.json --deliver
 
 Supported local delivery adapters include stdout text, Android notifications,
 Termux TTS, and Termux vibration. Failed adapters produce receipts and proceed
@@ -83,11 +108,16 @@ through the negotiated fallback order before failing closed.
 
 Prepare finite resources:
 
-    evezctl kernel "build the missing capability"       --budget budget.json       --requests requests.json       --channels ~/.config/evez/signal-capabilities.json
+    evezctl kernel "build the missing capability" \
+      --budget budget.json \
+      --requests requests.json \
+      --channels ~/.config/evez/signal-capabilities.json
 
-The kernel compiles the intent, allocates finite resources, prepares an
-operator signal, and exposes whether the operation is ready for verification or
-requires authorization.
+The kernel compiles the intent, applies the precision gate, allocates finite
+resources, prepares an operator signal, and exposes whether the operation is
+ready for verification or requires authorization.
+
+A vague intent stops with REQUIRES_SPECIFICATION.
 
 Consequential operations remain blocked without authorization.
 
@@ -117,19 +147,11 @@ For DEPLOY and ROLLBACK, the security policy is dual-control:
     evezctl authority-init reviewer
 
 Both roles sign the same operation ID and canonical payload, then a verifier
-checks the quorum:
+checks the quorum.
 
-    evezctl authority-sign operator DEPLOY '{"commit":"<sha>"}' <operation-id>
-    evezctl authority-sign reviewer DEPLOY '{"commit":"<sha>"}' <operation-id>
-    evezctl authority-quorum <operator-file> <reviewer-file> <operator-public> <reviewer-public>
+A monotonic security epoch invalidates older approvals.
 
-A monotonic security epoch invalidates older approvals:
-
-    evezctl authority-epoch
-
-Break-glass is explicit and time-bounded:
-
-    evezctl break-glass READ_STATUS "operator recovery drill" 5
+Break-glass is explicit and time-bounded.
 
 ## Runtime identity
 
