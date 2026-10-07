@@ -83,6 +83,14 @@ jobs:
           python mobile/evez_intent.py --help
           python mobile/evez_reality.py --help
 
+      - name: Upload bounded-kernel diagnostics
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: evez-bounded-kernel-diagnostics
+          path: verification-artifacts
+          if-no-files-found: warn
+
       - name: Verify source rights declarations
         run: |
           test -s LICENSE
