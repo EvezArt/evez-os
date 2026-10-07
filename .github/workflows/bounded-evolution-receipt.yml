@@ -1,0 +1,34 @@
+name: bounded-evolution-receipt
+
+on:
+  push:
+    branches:
+      - "evolution/receipt-boundary-001"
+    paths:
+      - "mobile/evolution_receipt.py"
+      - "mobile/test_evolution_receipt.py"
+      - ".github/workflows/bounded-evolution-receipt.yml"
+  pull_request:
+    paths:
+      - "mobile/evolution_receipt.py"
+      - "mobile/test_evolution_receipt.py"
+      - "mobile/evezctl"
+      - ".github/workflows/bounded-evolution-receipt.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  receipt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile receipt runtime
+        run: python -m py_compile mobile/evolution_receipt.py
+      - name: Run adversarial receipt tests
+        run: python mobile/test_evolution_receipt.py
+      - name: Verify mobile CLI syntax
+        run: bash -n mobile/evezctl
