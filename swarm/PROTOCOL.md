@@ -151,3 +151,45 @@ observe -> remember -> model -> doubt -> seek -> test -> update -> preserve
 
 and repeat this loop across as much of the reachable information space as
 authorization, infrastructure, time, cost, and evidence permit.
+
+
+## 10. Cognitive continuity
+
+Absence is preserved as structured state. Tombstoned, suppressed, substituted,
+contradicted, temporally orphaned, lineage-broken, and unresolved records are
+not silently collapsed into UNKNOWN.
+
+The continuity ledger distinguishes:
+
+    UNKNOWN              evidence currently unavailable
+    TOMBSTONED           prior object explicitly removed/superseded
+    TEMPORAL_ORPHAN      declared predecessor unavailable
+    LINEAGE_BREAK        expected continuity edge absent
+
+This prevents missing history from masquerading as uninterrupted history.
+
+## 11. Outcome kernel and finite resources
+
+Natural-language intent may be compiled into a bounded outcome contract with
+acceptance criteria and explicit stop conditions.
+
+Resource allocation is finite and deterministic across compute, memory, latency,
+energy, network, attention, and monetary budgets.
+
+Allocation priority may optimize expected value and information gain per cost,
+but authorization is never inferred from optimization score.
+
+Consequential actions remain gated independently from planning and verification.
+
+## 12. Cross-modal reachability
+
+Signal identity remains invariant across representation changes.
+
+Capability discovery observes installed adapters. It does not create consent.
+
+Negotiation selects only channels that are both available and consented. Delivery
+records deterministic receipts. Failed adapters fall through the negotiated
+fallback order, then fail closed.
+
+No unsupported sensory or communication capability is promoted from a claim into
+an observation.
