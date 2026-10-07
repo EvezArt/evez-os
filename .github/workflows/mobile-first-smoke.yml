@@ -28,8 +28,10 @@ jobs:
           python research/test_ai_resistance_benchmark.py
           python research/test_information_frontier.py
           python research/test_signal_domain.py
+          python research/test_signal_negotiation.py
+          python research/test_signal_delivery.py
           python research/test_anomaly_swarm_lab.py
-          python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py research/ai_resistance_benchmark.py research/information_frontier.py research/signal_domain.py mobile/evez_frontier.py mobile/evez_signal.py
+          python -m py_compile research/promotion_gate.py research/verification_receipt.py research/weather_flux_theory.py research/ai_resistance_benchmark.py research/information_frontier.py research/signal_domain.py research/signal_negotiation.py research/signal_delivery.py mobile/evez_frontier.py mobile/evez_signal.py
           test -s mobile/install.sh
           test -s mobile/README.md
           test -s docs/MOBILE_FIRST.md
@@ -39,6 +41,8 @@ jobs:
           test -s docs/INFORMATION_FRONTIER.md
           test -s docs/SWARM_SELF_VISIBILITY.md
           test -s docs/SIGNAL_DOMAIN.md
+          test -s docs/SIGNAL_NEGOTIATION.md
+          test -s research/BOUNDED_CYCLE_SIGNAL_DOMAIN.md
 
       - name: Exercise offline-safe CLI
         run: |
