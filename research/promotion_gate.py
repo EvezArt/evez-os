@@ -4,9 +4,8 @@
 The gate separates model output from measured and replicated evidence. It never
 performs deployment, merge, privilege changes, or secret handling.
 
-A CI assertion is accepted only when it is bound to the exact candidate commit.
-This prevents a valid result from one revision from accidentally promoting a
-different revision.
+CI verification is accepted only when a deterministic verification receipt binds
+the exact candidate commit to a successful run and its declared checks.
 """
 
 from __future__ import annotations
@@ -14,6 +13,8 @@ from __future__ import annotations
 import argparse
 import json
 from typing import Any
+
+from research.verification_receipt import verify_receipt
 
 
 ALLOWED = {"MODEL_ONLY", "MEASURED", "REPLICATED"}
@@ -38,6 +39,39 @@ def evaluate(packet: dict[str, Any]) -> dict[str, Any]:
         reasons.append("CI status is not success")
     if expected_commit and ci.get("commit_sha") != expected_commit:
         reasons.append("CI result is not bound to the candidate commit")
+
+    receipt = ci.get("receipt")
+    if not isinstance(receipt, dict):
+        reasons.append("verification receipt is absent")
+    else:
+        receipt_result = verify_receipt(receipt)
+        if not receipt_result["valid"]:
+            reasons.extend("receipt: " + reason for reason in receipt_result["reasons"])
+        if expected_commit and receipt.get("candidate_commit") != expected_commit:
+            reasons.append("receipt is not bound to the candidate commit")
+        if receipt.get("status") != "success":
+            reasons.append("receipt status is not success")
+        if not receipt.get("workflow"):
+            reasons.append("receipt workflow is absent")
+        if not receipt.get("run_id"):
+            reasons.append("receipt run_id is absent")
+        if not receipt.get("target_url"):
+            reasons.append("receipt target_url is absent")
+        required_checks = receipt.get("required_checks")
+        observed_checks = receipt.get("observed_checks")
+        if not isinstance(required_checks, list) or not required_checks:
+            reasons.append("receipt required_checks are absent")
+        if not isinstance(observed_checks, list):
+            reasons.append("receipt observed_checks are absent")
+        else:
+            observed = {
+                item.get("name"): item.get("status")
+                for item in observed_checks
+                if isinstance(item, dict)
+            }
+            for check in required_checks if isinstance(required_checks, list) else []:
+                if observed.get(check) != "success":
+                    reasons.append(f"required check is not successful: {check}")
 
     if packet.get("uncertainty") is None:
         reasons.append("uncertainty is absent")
