@@ -85,3 +85,29 @@ No benchmark score in this file establishes:
 - truth of arbitrary claims
 
 Those remain separate hypotheses requiring separate evidence.
+
+
+## Outcome efficiency
+
+A bounded swarm should also measure how efficiently it turns intent into verified
+outcome:
+
+    verified_useful_outcome
+    -----------------------
+    compute + latency + risk + human_attention
+
+This is an engineering benchmark, not a claim of universal intelligence.
+
+Resource allocation must remain auditable, deterministic, and authorization-aware.
+
+## Continuity sensitivity
+
+A capable swarm scores higher when it can detect missing lineage, tombstones,
+temporal gaps, substitutions, and contradictions instead of silently treating
+missing records as continuous history.
+
+## Reachability
+
+Multimodal reachability is measured through observed adapter capability,
+consent-compatible negotiation, delivery success, fallback reliability, and
+receipt completeness. Unsupported modalities remain UNKNOWN.
