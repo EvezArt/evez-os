@@ -284,6 +284,14 @@ survival_py() {
   printf '%s/research/epistemic_survival.py' "$EVEZ_ROOT"
 }
 
+frontier_py() {
+  printf '%s/mobile/evez_frontier.py' "$EVEZ_ROOT"
+}
+
+signal_py() {
+  printf '%s/mobile/evez_signal.py' "$EVEZ_ROOT"
+}
+
 doctor() {
   local failed=0
   for dependency in python curl jq git openssl; do
@@ -295,7 +303,7 @@ doctor() {
     fi
   done
 
-  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)"; do
+  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)"; do
     if [ -f "$required_file" ]; then
       printf 'ok file=%s\n' "$required_file"
     else
@@ -351,6 +359,22 @@ epistemic_evaluate_cmd() {
 
 survival_run_cmd() {
   python "$(survival_py)" "$@"
+}
+
+frontier_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl frontier PACKET [--output FILE]\n' >&2
+    return 2
+  }
+  python "$(frontier_py)" "$@"
+}
+
+signal_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]\n' >&2
+    return 2
+  }
+  python "$(signal_py)" "$@"
 }
 
 status_cmd() {
@@ -470,6 +494,8 @@ Commands:
   capsule-verify FILE
   epistemic-evaluate PACKET.json
   survival-run [--min-score SCORE]
+  frontier PACKET [--output FILE]
+  signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
   pull
   deploy
   logs
@@ -513,6 +539,8 @@ case "$cmd" in
   capsule-verify) capsule_verify_cmd "$@" ;;
   epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
   survival-run) survival_run_cmd "$@" ;;
+  frontier) frontier_cmd "$@" ;;
+  signal) signal_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
