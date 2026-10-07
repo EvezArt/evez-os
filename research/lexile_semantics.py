@@ -21,6 +21,11 @@ STOPWORDS = {
     "i","my","your","our","their","all","any","some","do","does","did",
 }
 
+PHENOMENON_TERMS = {
+    "phenomenon",
+    "phenomena",
+}
+
 ABSTRACTION_MARKERS = {
     "ontology","epistemology","inference","semantics","phenomenon","taxonomy",
     "classifier","recognizer","indicator","vindicator","concept","theory",
@@ -37,6 +42,12 @@ ROLE_TERMS = {
     "taxonomist": "TAXONOMIST",
     "inferenciology": "INFERENCE_DISCIPLINE",
     "ambidextrologer": "OPERATIVE_AGENT",
+}
+
+COINED_TERM_ROLES = {
+    "lexilic ambidextrologers": "OPERATIVE_AGENT",
+    "interoopticological inferenciology": "INFERENCE_DISCIPLINE",
+    "truth taxonimists": "TAXONOMIST",
 }
 
 COINED_TERMS = {
@@ -133,10 +144,15 @@ def complexity_proxy(text: str) -> dict[str, float]:
 def classify(surface: str) -> tuple[str, str | None, bool]:
     normalized = " ".join(surface.lower().split())
     if normalized in COINED_TERMS:
-        return "COINED_TERM", None, True
+        return "COINED_TERM", COINED_TERM_ROLES.get(normalized), True
     if normalized in ROLE_TERMS:
         role = ROLE_TERMS[normalized]
         return role, role, False
+    if normalized.endswith("s") and normalized[:-1] in ROLE_TERMS:
+        role = ROLE_TERMS[normalized[:-1]]
+        return role, role, False
+    if normalized in PHENOMENON_TERMS:
+        return "PHENOMENON", None, False
     if len(tokenize(surface)) > 1:
         return "PHRASE", None, False
     if normalized in ABSTRACTION_MARKERS:
