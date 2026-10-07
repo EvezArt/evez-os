@@ -19,7 +19,7 @@ jobs:
 
       - name: Compile bounded kernel
         run: |
-          python -m py_compile             research/precision_contract.py             research/lexile_semantics.py             research/intent_optimizer.py             research/outcome_engine.py             research/execution_kernel.py             legal/license_opportunity.py             mobile/evez_precision.py             mobile/evez_lexile.py             mobile/evez_intent.py
+          python -m py_compile             research/precision_contract.py             research/lexile_semantics.py             research/intent_optimizer.py             research/outcome_engine.py             research/execution_kernel.py             research/reality_substrate.py             legal/license_opportunity.py             mobile/evez_precision.py             mobile/evez_lexile.py             mobile/evez_intent.py             mobile/evez_reality.py
 
       - name: Verify semantic contracts
         run: |
@@ -28,6 +28,7 @@ jobs:
           python research/test_intent_optimizer.py
           python research/test_outcome_engine.py
           python research/test_execution_kernel.py
+          python research/test_reality_substrate.py
           python legal/test_license_opportunity.py
 
       - name: Verify Termux operator contracts
@@ -35,6 +36,7 @@ jobs:
           python mobile/test_evez_precision.py
           python mobile/test_evez_lexile.py
           python mobile/test_evez_intent.py
+          python mobile/test_evez_reality.py
 
       - name: Verify strict failure semantics
         run: |
