@@ -151,6 +151,21 @@ with tempfile.TemporaryDirectory() as temp:
     tampered["uncertainties"][0] = "changed"
     tampered_path = temp_path / "tampered.json"
     tampered_path.write_text(json.dumps(tampered), encoding="utf-8")
+    malformed = copy.deepcopy(json.loads(receipt_path.read_text(encoding="utf-8")))
+    malformed["working_tree_state"] = "not-an-object"
+    malformed_unsigned = copy.deepcopy(malformed)
+    malformed_unsigned["receipt_digest"] = sha(canonical({k: v for k, v in malformed_unsigned.items() if k != "receipt_digest"}))
+    malformed_path = temp_path / "malformed.json"
+    malformed_path.write_text(json.dumps(malformed_unsigned), encoding="utf-8")
+    malformed_result = subprocess.run(
+        [sys.executable, str(MODULE), "verify", str(malformed_path)],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert malformed_result.returncode != 0
+    assert "working_tree_state must be an object" in json.loads(malformed_result.stdout)["errors"]
+
     bad_receipt = subprocess.run(
         [sys.executable, str(MODULE), "verify", str(tampered_path)],
         text=True,
@@ -159,6 +174,21 @@ with tempfile.TemporaryDirectory() as temp:
     )
     assert bad_receipt.returncode != 0
     assert "receipt_digest mismatch" in json.loads(bad_receipt.stdout)["errors"]
+
+    outside = temp_path / "outside.txt"
+    outside.write_text("outside\n", encoding="utf-8")
+    traversal_spec = copy.deepcopy(captured_spec)
+    traversal_spec["working_tree_state"]["files"] = [{"path": "../outside.txt", "sha256": sha(outside.read_bytes())}]
+    traversal_path = temp_path / "traversal.json"
+    traversal_path.write_text(json.dumps(traversal_spec), encoding="utf-8")
+    traversal_result = subprocess.run(
+        [sys.executable, str(MODULE), "capture", str(repo), str(traversal_path), str(temp_path / "traversal-out.json")],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert traversal_result.returncode != 0
+    assert "path escapes checkout" in traversal_result.stdout
 
     verified_spec = copy.deepcopy(captured_spec)
     verified_spec["verification_status"] = "VERIFIED"
