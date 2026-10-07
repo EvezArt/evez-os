@@ -7,6 +7,8 @@ on:
     paths:
       - "mobile/evolution_receipt.py"
       - "mobile/test_evolution_receipt.py"
+      - "mobile/evolution_replay.py"
+      - "mobile/test_evolution_replay.py"
       - ".github/workflows/bounded-evolution-receipt.yml"
   pull_request:
     paths:
