@@ -292,6 +292,10 @@ evolution_replay_py() {
   printf '%s/mobile/evolution_replay.py' "$EVEZ_ROOT"
 }
 
+verification_state_py() {
+  printf '%s/mobile/verification_state.py' "$EVEZ_ROOT"
+}
+
 frontier_py() {
   printf '%s/mobile/evez_frontier.py' "$EVEZ_ROOT"
 }
@@ -335,7 +339,7 @@ doctor() {
     fi
   done
 
-  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(evolution_receipt_py)" "$(evolution_replay_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)" "$(precision_py)" "$(lexile_py)" "$(intent_py)" "$(rights_py)"; do
+  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(evolution_receipt_py)" "$(evolution_replay_py)" "$(verification_state_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)" "$(precision_py)" "$(lexile_py)" "$(intent_py)" "$(rights_py)"; do
     if [ -f "$required_file" ]; then
       printf 'ok file=%s\n' "$required_file"
     else
@@ -407,6 +411,14 @@ evolution_verify_cmd() {
     return 2
   }
   python "$(evolution_receipt_py)" verify "$1"
+}
+
+verification_classify_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl verification-classify EVIDENCE_JSON [OUTPUT_JSON]\\n' >&2
+    return 2
+  }
+  python "$(verification_state_py)" "$@"
 }
 
 frontier_cmd() {
@@ -595,6 +607,7 @@ Commands:
   evolution-verify RECEIPT_JSON
   evolution-verify-against RECEIPT_JSON ROOT
   evolution-replay RECEIPT_JSON ROOT [--max-output BYTES]
+  verification-classify EVIDENCE_JSON [OUTPUT_JSON]
   frontier PACKET [--output FILE]
   signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
   kernel INTENT --budget FILE --requests FILE [--channels FILE]
@@ -651,6 +664,7 @@ case "$cmd" in
   evolution-verify) evolution_verify_cmd "$@" ;;
   evolution-verify-against) evolution_verify_against_cmd "$@" ;;
   evolution-replay) evolution_replay_cmd "$@" ;;
+  verification-classify) verification_classify_cmd "$@" ;;
   frontier) frontier_cmd "$@" ;;
   signal) signal_cmd "$@" ;;
   kernel) kernel_cmd "$@" ;;
