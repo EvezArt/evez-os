@@ -57,6 +57,57 @@ def _errors_for_commit(candidate: Any, observed: Any) -> list[str]:
     return errors
 
 
+
+def normalize_github_job(
+    job: dict[str, Any],
+    *,
+    candidate_commit: str,
+    workflow_run_commit: str | None = None,
+    workflow_run: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Conservatively translate raw GitHub job/run observations."""
+    raw_steps = job.get("steps")
+    if raw_steps is None:
+        steps_observed = 0
+        execution_started = False
+    elif isinstance(raw_steps, list):
+        steps_observed = len(raw_steps)
+        execution_started = len(raw_steps) > 0
+    else:
+        raise ValueError("github job steps must be null or a list")
+
+    logs_available = job.get("logs_url") is not None
+    run_commit = workflow_run_commit
+    if run_commit is None and workflow_run:
+        run_commit = workflow_run.get("head_sha")
+
+    return {
+        "candidate_commit": candidate_commit,
+        "observed_commit": run_commit,
+        "execution_started": execution_started,
+        "steps_observed": steps_observed,
+        "steps_expected": len(raw_steps) if isinstance(raw_steps, list) else None,
+        "logs_available": logs_available,
+        "evidence_complete": (
+            isinstance(raw_steps, list)
+            and len(raw_steps) > 0
+            and logs_available
+        ),
+        "independent_verifier": True,
+        "test_result": None,
+        "conclusion": job.get("conclusion"),
+        "workflow": job.get("name"),
+        "workflow_run_id": job.get("run_id"),
+        "job_id": job.get("id"),
+        "raw_evidence": {
+            "status": job.get("status"),
+            "conclusion": job.get("conclusion"),
+            "steps_present": raw_steps is not None,
+            "logs_present": logs_available,
+            "workflow_run_commit": run_commit,
+        },
+    }
+
 def classify_attempt(evidence: dict[str, Any]) -> dict[str, Any]:
     required = ("candidate_commit", "execution_started", "steps_observed")
     missing = [key for key in required if key not in evidence]
@@ -101,7 +152,13 @@ def classify_attempt(evidence: dict[str, Any]) -> dict[str, Any]:
             and execution_started is False
         )
 
-        if zero_step_failure:
+        if result == "PASS" and conclusion not in {None, "success"}:
+            state = "VERIFIER_INCONCLUSIVE"
+            reasons = ["result_conclusion_conflict"]
+        elif result == "FAIL" and conclusion not in {None, "failure"}:
+            state = "VERIFIER_INCONCLUSIVE"
+            reasons = ["result_conclusion_conflict"]
+        elif zero_step_failure:
             state = "VERIFIER_UNAVAILABLE"
             reasons = ["no_executable_steps", "logs_unavailable"]
         elif conclusion == "failure" and steps_observed == 0:
@@ -124,6 +181,8 @@ def classify_attempt(evidence: dict[str, Any]) -> dict[str, Any]:
             and evidence_complete
             and independent
             and observed == candidate
+            and isinstance(steps_expected, int)
+            and steps_observed == steps_expected
         ):
             state = "VERIFIED"
             reasons = ["complete_independent_execution"]
@@ -158,6 +217,17 @@ def classify_attempt(evidence: dict[str, Any]) -> dict[str, Any]:
 
 
 def classify_cluster(jobs: list[dict[str, Any]]) -> dict[str, Any]:
+    if not jobs:
+        return {
+            "schema_version": SCHEMA_VERSION,
+            "state": "VERIFIER_INCONCLUSIVE",
+            "promotion_eligible": False,
+            "job_count": 0,
+            "common_failure_signature": "NO_JOBS_OBSERVED",
+            "jobs": [],
+            "evidence_digest": digest([]),
+        }
+
     results = [classify_attempt(job) for job in jobs]
     states = [result["state"] for result in results]
     empty_job_signature = (
@@ -208,6 +278,22 @@ def classify_payload(payload: dict[str, Any]) -> dict[str, Any]:
         if not isinstance(jobs, list) or not all(isinstance(job, dict) for job in jobs):
             raise ValueError("jobs must be a list of JSON objects")
         return classify_cluster(jobs)
+
+    if payload.get("source") == "github_actions_job":
+        candidate = payload.get("candidate_commit")
+        job = payload.get("job")
+        run = payload.get("workflow_run")
+        run_commit = payload.get("workflow_run_commit")
+        if not isinstance(candidate, str) or not isinstance(job, dict):
+            raise ValueError("github_actions_job requires candidate_commit and job")
+        normalized = normalize_github_job(
+            job,
+            candidate_commit=candidate,
+            workflow_run_commit=run_commit,
+            workflow_run=run if isinstance(run, dict) else None,
+        )
+        return classify_attempt(normalized)
+
     return classify_attempt(payload)
 
 
