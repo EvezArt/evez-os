@@ -330,13 +330,13 @@ def verify_against(receipt: dict[str, Any], root: Path) -> tuple[bool, dict[str,
                 f"source commit mismatch: receipt={receipt.get('source_commit')} actual={actual_commit}"
             )
 
+        working = receipt.get("working_tree_state")
         expected_clean = working.get("clean") if isinstance(working, dict) else None
         if isinstance(expected_clean, bool) and expected_clean != actual_clean:
             errors.append(
                 f"working tree cleanliness mismatch: receipt={expected_clean} actual={actual_clean}"
             )
 
-        working = receipt.get("working_tree_state")
         file_entries = working.get("files", []) if isinstance(working, dict) else []
         for item in file_entries:
             relative = item.get("path")
