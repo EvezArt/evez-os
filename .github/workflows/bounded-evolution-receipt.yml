@@ -4,11 +4,14 @@ on:
   push:
     branches:
       - "evolution/receipt-boundary-002"
+      - "evolution/verification-boundary-003"
     paths:
       - "mobile/evolution_receipt.py"
       - "mobile/test_evolution_receipt.py"
       - "mobile/evolution_replay.py"
       - "mobile/test_evolution_replay.py"
+      - "mobile/verification_state.py"
+      - "mobile/test_verification_state.py"
       - "mobile/evezctl"
       - ".github/workflows/bounded-evolution-receipt.yml"
   pull_request:
@@ -17,6 +20,8 @@ on:
       - "mobile/test_evolution_receipt.py"
       - "mobile/evolution_replay.py"
       - "mobile/test_evolution_replay.py"
+      - "mobile/verification_state.py"
+      - "mobile/test_verification_state.py"
       - "mobile/evezctl"
       - ".github/workflows/bounded-evolution-receipt.yml"
 
@@ -43,6 +48,8 @@ jobs:
         run: python mobile/test_evolution_receipt.py
       - name: Run offline replay tests
         run: python mobile/test_evolution_replay.py
+      - name: Run verification-state classifier tests
+        run: python mobile/test_verification_state.py
       - name: Verify mobile CLI syntax
         run: bash -n mobile/evezctl
       - name: Verify receipt provenance and replay gate
