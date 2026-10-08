@@ -284,6 +284,14 @@ survival_py() {
   printf '%s/research/epistemic_survival.py' "$EVEZ_ROOT"
 }
 
+evolution_receipt_py() {
+  printf '%s/mobile/evolution_receipt.py' "$EVEZ_ROOT"
+}
+
+evolution_replay_py() {
+  printf '%s/mobile/evolution_replay.py' "$EVEZ_ROOT"
+}
+
 frontier_py() {
   printf '%s/mobile/evez_frontier.py' "$EVEZ_ROOT"
 }
@@ -327,7 +335,7 @@ doctor() {
     fi
   done
 
-  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)" "$(precision_py)" "$(lexile_py)" "$(intent_py)" "$(rights_py)"; do
+  for required_file in "$(state_py)" "$(guard_py)" "$(authority_py)" "$(identity_py)" "${EVEZ_ROOT}/identity/evez.identity.json" "$(candidate_py)" "$(arsenal_py)" "$(fusion_py)" "$(swarm_py)" "$(evidence_capsule_py)" "$(epistemic_py)" "$(survival_py)" "$(evolution_receipt_py)" "$(evolution_replay_py)" "$(frontier_py)" "$(signal_py)" "$(kernel_py)" "$(signal_capabilities_py)" "$(precision_py)" "$(lexile_py)" "$(intent_py)" "$(rights_py)"; do
     if [ -f "$required_file" ]; then
       printf 'ok file=%s\n' "$required_file"
     else
@@ -383,6 +391,22 @@ epistemic_evaluate_cmd() {
 
 survival_run_cmd() {
   python "$(survival_py)" "$@"
+}
+
+evolution_build_cmd() {
+  [ "$#" -eq 2 ] || {
+    printf 'usage: evezctl evolution-build SPEC_JSON OUTPUT_JSON\\n' >&2
+    return 2
+  }
+  python "$(evolution_receipt_py)" build "$1" "$2"
+}
+
+evolution_verify_cmd() {
+  [ "$#" -eq 1 ] || {
+    printf 'usage: evezctl evolution-verify RECEIPT_JSON\\n' >&2
+    return 2
+  }
+  python "$(evolution_receipt_py)" verify "$1"
 }
 
 frontier_cmd() {
@@ -566,6 +590,11 @@ Commands:
   capsule-verify FILE
   epistemic-evaluate PACKET.json
   survival-run [--min-score SCORE]
+  evolution-capture ROOT SPEC_JSON OUTPUT_SPEC_JSON
+  evolution-build SPEC_JSON OUTPUT_JSON
+  evolution-verify RECEIPT_JSON
+  evolution-verify-against RECEIPT_JSON ROOT
+  evolution-replay RECEIPT_JSON ROOT [--max-output BYTES]
   frontier PACKET [--output FILE]
   signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
   kernel INTENT --budget FILE --requests FILE [--channels FILE]
@@ -617,6 +646,11 @@ case "$cmd" in
   capsule-verify) capsule_verify_cmd "$@" ;;
   epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
   survival-run) survival_run_cmd "$@" ;;
+  evolution-capture) evolution_capture_cmd "$@" ;;
+  evolution-build) evolution_build_cmd "$@" ;;
+  evolution-verify) evolution_verify_cmd "$@" ;;
+  evolution-verify-against) evolution_verify_against_cmd "$@" ;;
+  evolution-replay) evolution_replay_cmd "$@" ;;
   frontier) frontier_cmd "$@" ;;
   signal) signal_cmd "$@" ;;
   kernel) kernel_cmd "$@" ;;
