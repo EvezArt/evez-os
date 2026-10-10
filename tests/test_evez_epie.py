@@ -1,5 +1,7 @@
 import math, unittest
-from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score\nfrom evez_epie.retention import select_hot_index
+from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score
+from evez_epie.retention import select_hot_index
+from evez_epie.retention import select_hot_index
 
 class BayesianTests(unittest.TestCase):
     def test_temporal_overlap_example(self):
@@ -32,6 +34,28 @@ class RetentionTests(unittest.TestCase):
         base={"created_at_seconds":90,"content_hash":"same","decision_value":1,"reliability":1,"novelty":1,"half_life_seconds":None,"storage_bytes":100}
         rows=rank_retention([dict(base,id="a"),dict(base,id="b")],now_seconds=100)
         self.assertEqual(len(rows),2); self.assertTrue(all("KEEP_SOURCE_REFERENCE" in r["action"] for r in rows))
+
+class BudgetedRetentionTests(unittest.TestCase):
+    def test_knapsack_selects_max_utility_within_budget_and_dedupes_bytes(self):
+        items = [
+            {"id":"a", "content_hash":"ha", "created_at_seconds":100, "storage_bytes":6, "decision_value":8, "reliability":1, "novelty":1, "half_life_seconds":None},
+            {"id":"b", "content_hash":"hb", "created_at_seconds":100, "storage_bytes":5, "decision_value":6, "reliability":1, "novelty":1, "half_life_seconds":None},
+            {"id":"a-copy", "content_hash":"ha", "created_at_seconds":100, "storage_bytes":6, "decision_value":2, "reliability":1, "novelty":1, "half_life_seconds":None},
+        ]
+        result = select_hot_index(items, budget_bytes=11, now_seconds=100)
+        self.assertEqual(result["used_bytes"], 11)
+        self.assertEqual(result["retained_utility"], 14)
+        self.assertEqual(result["selected_source_ids"], ["a", "a-copy", "b"])
+        self.assertEqual(result["archival_only_source_ids"], [])
+
+    def test_unselected_artifact_is_archival_not_deleted(self):
+        items = [
+            {"id":"large", "created_at_seconds":0, "storage_bytes":10, "decision_value":1, "reliability":1, "novelty":1, "half_life_seconds":None},
+            {"id":"small", "created_at_seconds":0, "storage_bytes":2, "decision_value":2, "reliability":1, "novelty":1, "half_life_seconds":None},
+        ]
+        result = select_hot_index(items, budget_bytes=2, now_seconds=0)
+        self.assertEqual(result["selected_source_ids"], ["small"])
+        self.assertEqual(result["archival_only_source_ids"], ["large"])
 
 class LedgerTests(unittest.TestCase):
     def test_chain_and_replay(self):
