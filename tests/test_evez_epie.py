@@ -236,7 +236,7 @@ class AggregateResearchRewardTests(unittest.TestCase):
             self.cases(outcomes),
             search_cost=2.0,
             risk_cost=1.0,
-            projected_future_cases=100.0,
+            projected_future_cases=200.0,
             min_cases=1000,
             alpha=.05,
         )
@@ -250,7 +250,7 @@ class AggregateResearchRewardTests(unittest.TestCase):
         result = aggregate_research_reward(
             self.cases(outcomes, forecast_after={"yes": .5, "no": .5}),
             search_cost=2.0, risk_cost=1.0,
-            projected_future_cases=100.0, min_cases=500,
+            projected_future_cases=200.0, min_cases=500,
         )
         self.assertEqual(result["status"], "NO_REWARD_GAIN_NOT_PROVEN")
         self.assertEqual(result["gross_reward"], 0.0)
