@@ -245,6 +245,9 @@ class Handler(BaseHTTPRequestHandler):
                 "status": "alive",
                 "service": "event_spine",
                 "port": 9116,
+                "event_hash_version": 2,
+                "canonicalization": "RFC8785",
+                "idempotent_append": True,
                 "total_events": len(SPINE.events),
                 "chain_valid": SPINE.chain_valid,
             })
@@ -275,7 +278,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if self.path == "/health":
-            self._json(200, {"status": "alive", "service": "event_spine", "port": 9116})
+            self._json(200, {"status": "alive", "service": "event_spine", "port": 9116, "event_hash_version": 2, "canonicalization": "RFC8785", "idempotent_append": True})
             return
 
         body = self._read_body()
