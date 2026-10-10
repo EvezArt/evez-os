@@ -4,6 +4,7 @@ import json
 import math
 from pathlib import Path
 import unittest
+import rfc8785
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "src" / "services" / "event_spine.py"
 spec = importlib.util.spec_from_file_location("evez_event_spine_integrity_test", MODULE_PATH)
@@ -30,6 +31,9 @@ class EventSpineIntegrityTests(unittest.TestCase):
         spine = EventSpine()
         event = spine.append("epie", "OBSERVED_FACT", {"claim": "reported"}, timestamp=0.0)
         self.assertEqual(event["hash_version"], 2)
+        payload = {key: value for key, value in event.items() if key != "hash"}
+        expected_hash = hashlib.sha256(rfc8785.dumps(payload)).hexdigest()
+        self.assertEqual(event["hash"], expected_hash)
         self.assertTrue(spine.verify()["valid"])
         spine._events[0]["data"]["claim"] = "changed"
         result = spine.verify()
@@ -91,6 +95,14 @@ class EventSpineIntegrityTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             spine.append("epie", "OBSERVED_FACT", {"bad": math.inf})
         self.assertEqual(len(spine.events), 0)
+
+    def test_invalid_chain_refuses_additional_append(self):
+        spine = EventSpine()
+        spine.append("epie", "OBSERVED_FACT", {"x": 1})
+        spine._events[0]["data"]["x"] = 2
+        with self.assertRaisesRegex(ValueError, "invalid event chain"):
+            spine.append("epie", "EVIDENCE_COMMIT", {"x": 3})
+        self.assertEqual(len(spine.events), 1)
 
     def test_unsupported_hash_version_fails_closed(self):
         spine = EventSpine()
