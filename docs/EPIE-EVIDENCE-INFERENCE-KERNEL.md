@@ -6,19 +6,23 @@ Reference implementation using Python plus the hash-pinned, dependency-free `rfc
 
 ## Run
 
+    python -m pip install --require-hashes -r requirements-epie.txt
+
     python -m unittest discover -s tests -p 'test_evez_epie.py' -v
     python -m evez_epie demo
 
 ## Core contracts
 
 - Bayesian updates require explicit conditional-independence declarations and unique dependence groups. Repeated groups are rejected; dependent observations must be modeled jointly instead of multiplied as independent evidence.
-- Likelihoods must cover the prior hypothesis set and be in (0, 1]. Log weights reduce underflow.
+- Likelihoods must cover the prior hypothesis set and be in [0, 1]. Log weights reduce underflow.
 - Expected information gain validates a complete outcome distribution for every hypothesis and returns bits.
-- Information gain is computed in bits. `evez_epie.research.expected_value_of_sample_information` separately calculates EVSI: expected best decision utility after observing a test result, minus best decision utility before the test. EVSI prevents a high-entropy test from being mistaken for a useful test when it cannot change a consequential decision.\n- `rank_decision_tests` computes EVSI − weighted cost − weighted risk, requiring all terms to use compatible utility units. Tests not explicitly marked permitted are excluded. A positive score never grants authorization.\n- `choose_next_test` adds finite-step, affordability, and minimum-net-value stopping conditions so a self-improving loop has a real stop rule.
+- Information gain is computed in bits. `evez_epie.research.expected_value_of_sample_information` separately calculates EVSI: expected best decision utility after observing a test result, minus best decision utility before the test. EVSI prevents a high-entropy test from being mistaken for a useful test when it cannot change a consequential decision.
+- `rank_decision_tests` computes EVSI − weighted cost − weighted risk, requiring all terms to use compatible utility units. Tests not explicitly marked permitted are excluded. A positive score never grants authorization.
+- `choose_next_test` adds finite-step, affordability, and minimum-net-value stopping conditions so a self-improving loop has a real stop rule.
 - Retention score is decision_value × reliability × novelty × exp(−ln(2) × age / half_life). A missing half-life means no age-based decay. This score controls retrieval priority, not truth or permanent retention.
 - Identical content hashes can be deduplicated in a hot index, but source references and original artifacts remain preserved.
 - Ledger entries use existing EVEZ event names OBSERVED_FACT, EVIDENCE_COMMIT, and CHECKPOINT_ISSUED. This prototype is not yet a wire-compatible adapter for the live event-spine service.
-- Ledger hashes use an RFC 8785-style canonical JSON serializer for the supported JSON subset before SHA-256 hashing. Inputs outside that interoperable subset (including unsafe integers and unpaired surrogates) are rejected. SHA-256 chaining detects mutation relative to the chain but does not authenticate source identity or prove trustworthy time.
+- Ledger hashes use the hash-pinned `rfc8785` package to canonicalize JSON per RFC 8785 before SHA-256. Regression tests exercise the RFC's ECMAScript-compatible IEEE-754 number formatting and UTF-16 property ordering. SHA-256 chaining detects modification relative to the chain but does not authenticate source identity or prove trustworthy time.
 
 ## Information reformation with low decay
 
