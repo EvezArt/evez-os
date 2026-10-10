@@ -18,7 +18,7 @@ Reference implementation using the Python standard library. Likelihoods and prio
 - Retention score is decision_value × reliability × novelty × exp(−ln(2) × age / half_life). A missing half-life means no age-based decay. This score controls retrieval priority, not truth or permanent retention.
 - Identical content hashes can be deduplicated in a hot index, but source references and original artifacts remain preserved.
 - Ledger entries use existing EVEZ event names OBSERVED_FACT, EVIDENCE_COMMIT, and CHECKPOINT_ISSUED. This prototype is not yet a wire-compatible adapter for the live event-spine service.
-- SHA-256 chaining detects mutation relative to the chain but does not authenticate source identity or prove trustworthy time.
+- Ledger hashes use an RFC 8785-style canonical JSON serializer for the supported JSON subset before SHA-256 hashing. Inputs outside that interoperable subset (including unsafe integers and unpaired surrogates) are rejected. SHA-256 chaining detects mutation relative to the chain but does not authenticate source identity or prove trustworthy time.
 
 ## Information reformation with low decay
 
