@@ -54,6 +54,26 @@ class BayesianTests(unittest.TestCase):
     def test_duplicate_dependence_group_rejected(self):
         prior = {"H1": .2, "H0": .8}; base = {"independence_group":"same", "conditional_independence_asserted":True, "likelihoods":{"H1":.8,"H0":.2}}
         with self.assertRaisesRegex(ValueError, "Repeated dependence group"): bayesian_update(prior, [dict(base,id="a"),dict(base,id="b")])
+    def test_zero_likelihood_can_falsify_one_hypothesis(self):
+        prior = {"H1": .2, "H0": .8}
+        evidence = [{
+            "id": "decisive-evidence",
+            "independence_group": "source-x",
+            "conditional_independence_asserted": True,
+            "likelihoods": {"H1": 0.0, "H0": .5},
+        }]
+        got = bayesian_update(prior, evidence)
+        self.assertEqual(got, {"H0": 1.0, "H1": 0.0})
+
+    def test_zero_likelihood_for_every_hypothesis_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "zero posterior support"):
+            bayesian_update({"H1": .2, "H0": .8}, [{
+                "id": "impossible-evidence",
+                "independence_group": "source-x",
+                "conditional_independence_asserted": True,
+                "likelihoods": {"H1": 0.0, "H0": 0.0},
+            }])
+
     def test_independence_must_be_explicit(self):
         with self.assertRaisesRegex(ValueError, "not declared"): bayesian_update({"H":1.0}, [{"id":"e","independence_group":"g","conditional_independence_asserted":False,"likelihoods":{"H":.5}}])
     def test_entropy(self): self.assertAlmostEqual(entropy_bits({"H1":.2,"H0":.8}), .7219280948873623)
@@ -152,6 +172,17 @@ class LedgerTests(unittest.TestCase):
     def test_chain_and_replay(self):
         ledger=EventLedger(); ledger.append("OBSERVED_FACT",{"claim_status":"REPORTED"}); ledger.append("EVIDENCE_COMMIT",{"source_hash":"abc"})
         self.assertEqual(ledger.verify(),(True,"ok")); self.assertEqual(ledger.replay()["event_count"],2)
+    def test_returned_objects_cannot_mutate_internal_ledger(self):
+        ledger = EventLedger()
+        returned = ledger.append("OBSERVED_FACT", {"nested": {"values": [1]}})
+        returned["payload"]["nested"]["values"].append(2)
+        snapshot = ledger.events
+        snapshot[0]["payload"]["nested"]["values"].append(3)
+        replay = ledger.replay()
+        replay["committed_payloads"][0]["payload"]["nested"]["values"].append(4)
+        self.assertEqual(ledger.verify(), (True, "ok"))
+        self.assertEqual(ledger.events[0]["payload"]["nested"]["values"], [1])
+
     def test_mutation_detected(self):
         ledger=EventLedger(); ledger.append("OBSERVED_FACT",{"x":1}); events=[dict(e) for e in ledger.events]; events[0]["payload"]["x"]=2
         with self.assertRaisesRegex(ValueError,"Invalid initial ledger"): EventLedger(events)
