@@ -49,7 +49,7 @@ def _best_expected_utility(
             raise ValueError("Action utilities must be finite")
         scored.append((math.fsum(probabilities[h] * float(utilities[h]) for h in probabilities), str(action)))
     # Stable tie-breaking by action identifier makes replay deterministic.
-    return max(scored, key=lambda pair: (pair[0], tuple(-ord(c) for c in pair[1])))
+    return sorted(scored, key=lambda pair: (-pair[0], pair[1]))[0]
 
 
 def expected_value_of_sample_information(
