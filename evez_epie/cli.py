@@ -1,6 +1,7 @@
 """Small local CLI for the EPIE reference kernel."""
 import argparse, json
 from .kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_tests
+from .research import expected_value_of_sample_information, rank_decision_tests, choose_next_test
 
 def demo():
     prior = {"coordination": .10, "shared_cause": .65, "error": .25}
@@ -8,8 +9,22 @@ def demo():
     posterior = bayesian_update(prior, evidence)
     prior2 = {"H1": .20, "H0": .80}
     a = {"id": "test-A", "permitted": True, "value": 1, "cost": 0, "risk": 0, "outcomes": {"positive": {"H1": .80, "H0": .20}, "negative": {"H1": .20, "H0": .80}}}
-    b = {"id": "test-B", "permitted": True, "value": 1, "cost": 0, "risk": 0, "outcomes": {"positive": {"H1": .90, "H0": .05}, "negative": {"H1": .10, "H0": .95}}}
-    return {"warning": "Illustrative likelihoods only; not a real-world finding.", "posterior_after_temporal_overlap": posterior, "prior_entropy_bits": entropy_bits(prior2), "test_A_information_gain_bits": expected_information_gain(prior2, a), "test_B_information_gain_bits": expected_information_gain(prior2, b), "test_ranking": rank_tests(prior2, [a, b])}
+    b = {"id": "test-B", "permitted": True, "value": 1, "cost": .10, "risk": .20, "outcomes": {"positive": {"H1": .90, "H0": .05}, "negative": {"H1": .10, "H0": .95}}}
+    actions = {"act": {"H1": 10.0, "H0": -20.0}, "defer": {"H1": 0.0, "H0": 0.0}}
+    decision_rank = rank_decision_tests(prior2, [a, b], actions)
+    next_test = choose_next_test(prior2, [a, b], actions, remaining_budget=1.0, steps_completed=0, max_steps=5)
+    return {
+        "warning": "Illustrative likelihoods/utilities only; not a real-world finding.",
+        "posterior_after_temporal_overlap": posterior,
+        "prior_entropy_bits": entropy_bits(prior2),
+        "test_A_information_gain_bits": expected_information_gain(prior2, a),
+        "test_B_information_gain_bits": expected_information_gain(prior2, b),
+        "information_gain_test_ranking": rank_tests(prior2, [a, b]),
+        "test_A_EVSI": expected_value_of_sample_information(prior2, a, actions)["expected_value_of_sample_information"],
+        "test_B_EVSI": expected_value_of_sample_information(prior2, b, actions)["expected_value_of_sample_information"],
+        "decision_value_test_ranking": decision_rank,
+        "next_research_decision": {k: v for k, v in next_test.items() if k != "ranking"},
+    }
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m evez_epie")
