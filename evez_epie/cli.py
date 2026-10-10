@@ -1,0 +1,24 @@
+"""Small local CLI for the EPIE reference kernel."""
+import argparse, json
+from .kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_tests
+
+def demo():
+    prior = {"coordination": .10, "shared_cause": .65, "error": .25}
+    evidence = [{"id": "temporal-overlap", "independence_group": "timeline-source-A", "conditional_independence_asserted": True, "likelihoods": {"coordination": .70, "shared_cause": .40, "error": .50}}]
+    posterior = bayesian_update(prior, evidence)
+    prior2 = {"H1": .20, "H0": .80}
+    a = {"id": "test-A", "permitted": True, "value": 1, "cost": 0, "risk": 0, "outcomes": {"positive": {"H1": .80, "H0": .20}, "negative": {"H1": .20, "H0": .80}}}
+    b = {"id": "test-B", "permitted": True, "value": 1, "cost": 0, "risk": 0, "outcomes": {"positive": {"H1": .90, "H0": .05}, "negative": {"H1": .10, "H0": .95}}}
+    return {"warning": "Illustrative likelihoods only; not a real-world finding.", "posterior_after_temporal_overlap": posterior, "prior_entropy_bits": entropy_bits(prior2), "test_A_information_gain_bits": expected_information_gain(prior2, a), "test_B_information_gain_bits": expected_information_gain(prior2, b), "test_ranking": rank_tests(prior2, [a, b])}
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(prog="python -m evez_epie")
+    parser.add_argument("command", choices=("demo", "verify-ledger"))
+    parser.add_argument("--ledger", help="JSON file containing an array of ledger events")
+    args = parser.parse_args(argv)
+    if args.command == "demo":
+        print(json.dumps(demo(), indent=2, sort_keys=True)); return 0
+    if not args.ledger: parser.error("verify-ledger requires --ledger PATH")
+    with open(args.ledger, encoding="utf-8") as handle: events = json.load(handle)
+    ledger = EventLedger(events)
+    print(json.dumps({"valid": True, "replay": ledger.replay()}, indent=2, sort_keys=True)); return 0
