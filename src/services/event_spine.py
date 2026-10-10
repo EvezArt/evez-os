@@ -28,6 +28,7 @@ class EventSpine:
         self.lock = threading.RLock()
         self._events = []
         self.index = {}
+        self.idempotency_index = {}
         self.chain_valid = True
 
     @property
@@ -60,23 +61,58 @@ class EventSpine:
             return cls._v2_hash(event)
         raise ValueError(f"Unsupported event hash version: {version}")
 
-    def append(self, domain, action, data, timestamp=None):
+    def append(self, domain, action, data, timestamp=None, idempotency_key=None):
         if not isinstance(domain, str) or not domain:
             raise ValueError("domain must be a non-empty string")
         if not isinstance(action, str) or not action:
             raise ValueError("action must be a non-empty string")
+        if idempotency_key is not None:
+            if not isinstance(idempotency_key, str) or not idempotency_key or len(idempotency_key) > 256:
+                raise ValueError("idempotency_key must be a non-empty string up to 256 characters")
         ts = time.time() if timestamp is None else timestamp
         if isinstance(ts, bool) or not isinstance(ts, (int, float)) or not math.isfinite(ts):
             raise ValueError("timestamp must be a finite numeric epoch timestamp")
 
-        # Check JSON serializability before modifying the ledger.
+        # JCS validates the data as interoperable JSON before touching the ledger.
         data_copy = copy.deepcopy(data)
         rfc8785.dumps({"data": data_copy})
 
         with self.lock:
-            integrity = self.verify()
-            if not integrity["valid"]:
+            if not self.chain_valid:
                 raise ValueError("Refusing to append to an invalid event chain")
+            if self._events:
+                head = self._events[-1]
+                expected_previous = self._events[-2]["hash"] if len(self._events) > 1 else "0" * 64
+                try:
+                    head_ok = (
+                        type(head.get("seq")) is int
+                        and head.get("seq") == len(self._events) - 1
+                        and head.get("prev_hash") == expected_previous
+                        and head.get("hash") == self._compute_hash(head)
+                    )
+                except Exception:
+                    head_ok = False
+                if not head_ok:
+                    self.chain_valid = False
+                    raise ValueError("Refusing to append because the current chain head is invalid")
+
+            if idempotency_key is not None:
+                existing_seq = self.idempotency_index.get((domain, idempotency_key))
+                if existing_seq is not None:
+                    integrity = self.verify()
+                    if not integrity["valid"]:
+                        raise ValueError("Refusing to reuse an idempotency key on an invalid chain")
+                    existing = self._events[existing_seq]
+                    existing_fingerprint = hashlib.sha256(rfc8785.dumps({
+                        "domain": domain, "action": existing["action"], "data": existing["data"]
+                    })).hexdigest()
+                    new_fingerprint = hashlib.sha256(rfc8785.dumps({
+                        "domain": domain, "action": action, "data": data_copy
+                    })).hexdigest()
+                    if existing_fingerprint != new_fingerprint:
+                        raise ValueError("idempotency_key already exists for different event content")
+                    return copy.deepcopy(existing)
+
             prev_hash = self._events[-1]["hash"] if self._events else "0" * 64
             event = {
                 "seq": len(self._events),
@@ -87,9 +123,13 @@ class EventSpine:
                 "prev_hash": prev_hash,
                 "hash_version": 2,
             }
+            if idempotency_key is not None:
+                event["idempotency_key"] = idempotency_key
             event["hash"] = self._compute_hash(event)
             self._events.append(event)
             self.index.setdefault(domain, []).append(event["seq"])
+            if idempotency_key is not None:
+                self.idempotency_index[(domain, idempotency_key)] = event["seq"]
             self.chain_valid = True
             return copy.deepcopy(event)
 
@@ -245,7 +285,7 @@ class Handler(BaseHTTPRequestHandler):
             action = body.get("action", "event")
             data = body.get("data", {})
             timestamp = body.get("timestamp")
-            event = SPINE.append(domain, action, data, timestamp)
+            event = SPINE.append(domain, action, data, timestamp, body.get("idempotency_key"))
             self._json(201, event)
         elif self.path == "/append_batch":
             events = body.get("events", [])
@@ -256,6 +296,7 @@ class Handler(BaseHTTPRequestHandler):
                     ev.get("action", "event"),
                     ev.get("data", {}),
                     ev.get("timestamp"),
+                    ev.get("idempotency_key"),
                 )
                 results.append({"seq": event["seq"]})
             self._json(201, {"appended": len(results), "events": results})
