@@ -1,7 +1,8 @@
 """Budgeted information retention: optimize active-index utility without deleting evidence."""
 from __future__ import annotations
 
-import math\nfrom typing import Any, Iterable, Mapping
+import math
+from typing import Any, Iterable, Mapping
 from .kernel import retention_score
 
 
@@ -18,9 +19,19 @@ def select_hot_index(
     group remains represented as a source reference. Unselected originals are
     archival, not deleted. Runtime depends on the size of the Pareto frontier.
     """
-    if not isinstance(budget_bytes, int) or budget_bytes < 0:
+    if isinstance(budget_bytes, bool) or not isinstance(budget_bytes, int) or budget_bytes < 0:
         raise ValueError("budget_bytes must be a non-negative integer")
+    if not math.isfinite(now_seconds):
+        raise ValueError("now_seconds must be finite")
     items = list(items)
+    seen_ids = set()
+    for item in items:
+        item_id = str(item.get("id", ""))
+        if not item_id:
+            raise ValueError("Every item requires a non-empty id")
+        if item_id in seen_ids:
+            raise ValueError(f"Duplicate evidence item id: {item_id}")
+        seen_ids.add(item_id)
     groups: dict[str, list[Mapping[str, Any]]] = {}
     for item in items:
         item_id = str(item.get("id", ""))
