@@ -1,5 +1,5 @@
 import math, unittest
-from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score
+from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score\nfrom evez_epie.retention import select_hot_index
 
 class BayesianTests(unittest.TestCase):
     def test_temporal_overlap_example(self):
