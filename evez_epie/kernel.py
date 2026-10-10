@@ -131,25 +131,36 @@ def rank_retention(items: Iterable[Mapping[str, Any]], *, now_seconds: float | N
 class EventLedger:
     """Append-only SHA-256 chain using existing EVEZ event type names."""
     def __init__(self, events: Sequence[Mapping[str, Any]] | None = None):
-        self.events = copy.deepcopy(list(events or []))
+        self._events = copy.deepcopy(list(events or []))
         valid, reason = self.verify()
         if not valid: raise ValueError(f"Invalid initial ledger: {reason}")
+    @property
+    def events(self) -> list[dict[str, Any]]:
+        """Read-only snapshot; callers cannot mutate the internal chain by alias."""
+        return copy.deepcopy(self._events)
+
     @staticmethod
     def _hash_payload(event: Mapping[str, Any]) -> str:
         return canonical_hash({k: v for k, v in event.items() if k != "event_hash"})
     def append(self, event_type: str, payload: Mapping[str, Any]) -> dict[str, Any]:
         if event_type not in EVENT_TYPES: raise ValueError(f"Unsupported event type: {event_type}")
-        previous = self.events[-1]["event_hash"] if self.events else "0" * 64
-        event = {"sequence": len(self.events), "event_type": event_type, "previous_event_hash": previous, "payload": copy.deepcopy(dict(payload))}
-        event["event_hash"] = self._hash_payload(event); self.events.append(event)
+        previous = self._events[-1]["event_hash"] if self._events else "0" * 64
+        event = {"sequence": len(self._events), "event_type": event_type, "previous_event_hash": previous, "payload": copy.deepcopy(dict(payload))}
+        event["event_hash"] = self._hash_payload(event); self._events.append(event)
         return copy.deepcopy(event)
     def verify(self) -> tuple[bool, str]:
         previous = "0" * 64
-        for index, event in enumerate(self.events):
-            if event.get("sequence") != index: return False, f"sequence mismatch at index {index}"
+        for index, event in enumerate(self._events):
+            if not isinstance(event, Mapping): return False, f"event is not an object at index {index}"
+            if type(event.get("sequence")) is not int or event.get("sequence") != index: return False, f"sequence mismatch at index {index}"
             if event.get("event_type") not in EVENT_TYPES: return False, f"unsupported event type at index {index}"
+            if not isinstance(event.get("payload"), Mapping): return False, f"payload is not an object at index {index}"
             if event.get("previous_event_hash") != previous: return False, f"previous hash mismatch at index {index}"
-            expected = self._hash_payload(event)
+            if not isinstance(event.get("event_hash"), str) or len(event["event_hash"]) != 64: return False, f"invalid event hash format at index {index}"
+            try:
+                expected = self._hash_payload(event)
+            except Exception as exc:
+                return False, f"canonicalization failed at index {index}: {type(exc).__name__}"
             if event.get("event_hash") != expected: return False, f"event hash mismatch at index {index}"
             previous = expected
         return True, "ok"
@@ -157,7 +168,7 @@ class EventLedger:
         valid, reason = self.verify()
         if not valid: raise ValueError(f"Cannot replay invalid ledger: {reason}")
         counts = {}; payloads = []
-        for event in self.events:
+        for event in self._events:
             counts[event["event_type"]] = counts.get(event["event_type"], 0) + 1
             payloads.append({"sequence": event["sequence"], "event_type": event["event_type"], "payload": copy.deepcopy(event["payload"])})
-        return {"event_count": len(self.events), "counts": dict(sorted(counts.items())), "committed_payloads": payloads, "head_hash": self.events[-1]["event_hash"] if self.events else "0" * 64}
+        return {"event_count": len(self._events), "counts": dict(sorted(counts.items())), "committed_payloads": payloads, "head_hash": self._events[-1]["event_hash"] if self._events else "0" * 64}
