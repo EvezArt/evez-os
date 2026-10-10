@@ -8,6 +8,7 @@ Now also READABLE — consciousness reads the spine to sense history.
 import json
 import copy
 import math
+import rfc8785
 import time
 import hashlib
 import threading
@@ -19,8 +20,9 @@ class EventSpine:
     """Append-only event log with versioned, recomputable event hashes.
 
     v1 hashes preserve the historical formula and are verified for compatibility;
-    their timestamp is not covered by that legacy formula. New events use v2,
-    which hashes every stored field except the hash itself, including timestamp.
+    their timestamp is not covered by that legacy formula. New v2 events hash
+    all stored fields except the digest using RFC 8785 canonical JSON, including
+    the timestamp.
     """
     def __init__(self):
         self.lock = threading.RLock()
@@ -45,14 +47,7 @@ class EventSpine:
     @staticmethod
     def _v2_hash(event):
         payload = {key: value for key, value in event.items() if key != "hash"}
-        serialized = json.dumps(
-            payload,
-            sort_keys=True,
-            separators=(",", ":"),
-            ensure_ascii=False,
-            allow_nan=False,
-        )
-        return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+        return hashlib.sha256(rfc8785.dumps(payload)).hexdigest()
 
     @classmethod
     def _compute_hash(cls, event):
@@ -74,7 +69,7 @@ class EventSpine:
 
         # Check JSON serializability before modifying the ledger.
         data_copy = copy.deepcopy(data)
-        json.dumps(data_copy, ensure_ascii=False, allow_nan=False)
+        rfc8785.dumps({"data": data_copy})
 
         with self.lock:
             prev_hash = self._events[-1]["hash"] if self._events else "0" * 64
