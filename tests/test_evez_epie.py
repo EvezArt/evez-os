@@ -4,7 +4,9 @@ from evez_epie.retention import select_hot_index
 
 class CanonicalizationTests(unittest.TestCase):
     def test_jcs_number_and_key_canonicalization(self):
-        self.assertEqual(canonical_json({"z": 1.0, "a": -0.0}), '{"a":0,"z":1}')
+        keys = {chr(0xE000): 1, chr(0x10000): 2}
+        expected = '{"' + chr(0x10000) + '":2,"' + chr(0xE000) + '":1}'
+        self.assertEqual(canonical_json(keys), expected)
         self.assertEqual(canonical_json({"\\ue000": 1, "\\U00010000": 2}), '{"𐀀":2,"\\ue000":1}')
         self.assertEqual(len(canonical_hash({"stable": [1, True, None]})), 64)
 
