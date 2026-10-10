@@ -237,7 +237,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/health":
-            self._json(200, {"status": "alive", "service": "event_spine", "port": 9116})
+            self._json(200, {"status": "alive", "service": "event_spine", "port": 9116, "event_hash_version": 2, "canonicalization": "RFC8785", "idempotent_append": True})
         elif self.path == "/status":
             self._json(200, SPINE.stats())
         elif self.path == "/verify":
