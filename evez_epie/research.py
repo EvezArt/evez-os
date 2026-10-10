@@ -245,3 +245,162 @@ def realized_research_reward(
         "risk_cost": risk_cost,
         "net_reward": gross - expenditure,
     }
+
+
+def _strict_forecast_distribution(forecast: Mapping[str, float]) -> dict[str, float]:
+    """Validate a forecast distribution without silently repairing its sum."""
+    if not isinstance(forecast, Mapping) or not forecast:
+        raise ValueError("Forecast must be a non-empty outcome-probability mapping")
+    result = {}
+    for outcome, raw in forecast.items():
+        if not isinstance(outcome, str) or not outcome:
+            raise ValueError("Forecast outcome identifiers must be non-empty strings")
+        if isinstance(raw, bool) or not isinstance(raw, (int, float)):
+            raise ValueError("Forecast probabilities must be numeric, not booleans")
+        value = float(raw)
+        if not math.isfinite(value) or value < 0 or value > 1:
+            raise ValueError("Forecast probabilities must be finite and in [0, 1]")
+        result[outcome] = value
+    total = math.fsum(result.values())
+    if not math.isclose(total, 1.0, rel_tol=1e-9, abs_tol=1e-9):
+        raise ValueError(f"Forecast probabilities sum to {total}, not 1")
+    return dict(sorted(result.items()))
+
+
+def negative_brier_score(forecast: Mapping[str, float], observed_outcome: str) -> float:
+    """Bounded strictly proper categorical score; higher is better, range [-2, 0]."""
+    p = _strict_forecast_distribution(forecast)
+    if observed_outcome not in p:
+        raise ValueError("Observed outcome is absent from the forecast outcome space")
+    return -math.fsum((probability - (1.0 if outcome == observed_outcome else 0.0)) ** 2
+                      for outcome, probability in p.items())
+
+
+def aggregate_research_reward(
+    samples: Iterable[Mapping[str, Any]],
+    *,
+    search_cost: float,
+    risk_cost: float,
+    projected_future_cases: float = 1.0,
+    score_weight: float = 1.0,
+    min_cases: int = 30,
+    alpha: float = 0.05,
+) -> dict[str, Any]:
+    """Reward an investigation only when its held-out Brier-score gain clears a bound.
+
+    Each sample must be a distinct independent evaluation unit, with baseline and
+    updated forecasts frozen before the outcome. The paired negative-Brier score
+    delta lies in [-2, 2], so Hoeffding gives a conservative one-sided lower
+    confidence bound: mean_delta - 4*sqrt(log(1/alpha)/(2*n)).
+    Extrapolation is explicit via projected_future_cases. Costs are paid even
+    when evidence gates fail; unverified/duplicate/leaked samples cannot earn
+    positive reward. This function does not prove sample independence: the
+    caller/verifier must establish the declared gates.
+    """
+    scalars = (search_cost, risk_cost, projected_future_cases, score_weight, alpha)
+    if any(not math.isfinite(x) for x in scalars):
+        raise ValueError("Reward parameters must be finite")
+    if search_cost < 0 or risk_cost < 0 or projected_future_cases < 0 or score_weight < 0:
+        raise ValueError("Costs, projection, and score weight must be non-negative")
+    if not 0 < alpha < 1:
+        raise ValueError("alpha must lie strictly between 0 and 1")
+    if isinstance(min_cases, bool) or not isinstance(min_cases, int) or min_cases < 2:
+        raise ValueError("min_cases must be an integer >= 2")
+
+    rows = list(samples)
+    expenditure = search_cost + risk_cost
+    if len(rows) < min_cases:
+        return {
+            "status": "NO_REWARD_INSUFFICIENT_HOLDOUT",
+            "eligible": False,
+            "n_cases": len(rows),
+            "min_cases": min_cases,
+            "failed_gates": [],
+            "mean_score_delta": None,
+            "lower_confidence_bound": None,
+            "confidence_level": 1 - alpha,
+            "gross_reward": 0.0,
+            "search_cost": search_cost,
+            "risk_cost": risk_cost,
+            "net_reward": -expenditure,
+        }
+
+    seen_ids, seen_units = set(), set()
+    failed_gates = []
+    deltas = []
+    for index, sample in enumerate(rows):
+        sample_id = sample.get("id")
+        unit = sample.get("independence_key")
+        if not isinstance(sample_id, str) or not sample_id:
+            raise ValueError(f"Sample {index} requires a non-empty id")
+        if sample_id in seen_ids:
+            raise ValueError(f"Duplicate sample id: {sample_id}")
+        seen_ids.add(sample_id)
+        if not isinstance(unit, str) or not unit:
+            raise ValueError(f"Sample {sample_id} requires an independence_key")
+        if unit in seen_units:
+            raise ValueError(f"Repeated independence_key {unit!r}; evaluation units are not distinct")
+        seen_units.add(unit)
+
+        gates = {
+            "verifier_accepted": sample.get("verifier_accepted") is True,
+            "source_independence_verified": sample.get("source_independence_verified") is True,
+            "source_is_not_duplicate": sample.get("source_is_duplicate") is False,
+            "prediction_frozen_before_outcome": sample.get("prediction_frozen_before_outcome") is True,
+            "outcome_held_out": sample.get("outcome_held_out") is True,
+        }
+        failed_gates.extend(f"{sample_id}:{name}" for name, passed in gates.items() if not passed)
+        baseline = _strict_forecast_distribution(sample.get("baseline_forecast"))
+        updated = _strict_forecast_distribution(sample.get("updated_forecast"))
+        if set(baseline) != set(updated):
+            raise ValueError(f"Sample {sample_id}: baseline and updated outcome spaces differ")
+        outcome = sample.get("observed_outcome")
+        if outcome not in baseline:
+            raise ValueError(f"Sample {sample_id}: outcome absent from forecast distribution")
+        deltas.append(
+            negative_brier_score(updated, outcome) -
+            negative_brier_score(baseline, outcome)
+        )
+
+    if failed_gates:
+        return {
+            "status": "NO_REWARD_FAILED_EVIDENCE_GATES",
+            "eligible": False,
+            "n_cases": len(rows),
+            "min_cases": min_cases,
+            "failed_gates": failed_gates,
+            "mean_score_delta": None,
+            "lower_confidence_bound": None,
+            "confidence_level": 1 - alpha,
+            "gross_reward": 0.0,
+            "search_cost": search_cost,
+            "risk_cost": risk_cost,
+            "net_reward": -expenditure,
+        }
+
+    n = len(deltas)
+    mean_delta = math.fsum(deltas) / n
+    radius = 4.0 * math.sqrt(math.log(1.0 / alpha) / (2.0 * n))
+    lower_bound = mean_delta - radius
+    gross_reward = projected_future_cases * score_weight * max(0.0, lower_bound)
+    net_reward = gross_reward - expenditure
+    rewardable = lower_bound > 0 and net_reward > 0
+    return {
+        "status": "REWARD_SUPPORTED" if rewardable else "NO_REWARD_GAIN_NOT_PROVEN",
+        "eligible": True,
+        "rewardable": rewardable,
+        "n_cases": n,
+        "min_cases": min_cases,
+        "failed_gates": [],
+        "score": "negative_categorical_brier",
+        "mean_score_delta": mean_delta,
+        "confidence_radius": radius,
+        "lower_confidence_bound": lower_bound,
+        "confidence_level": 1 - alpha,
+        "projected_future_cases": projected_future_cases,
+        "score_weight": score_weight,
+        "gross_reward": gross_reward,
+        "search_cost": search_cost,
+        "risk_cost": risk_cost,
+        "net_reward": net_reward,
+    }
