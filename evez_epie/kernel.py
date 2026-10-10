@@ -48,8 +48,10 @@ def bayesian_update(prior: Mapping[str, float], evidence: Sequence[Mapping[str, 
         if not isinstance(likelihoods, Mapping) or set(likelihoods) != hypotheses: raise ValueError(f"{eid}: likelihoods must cover exactly the prior hypotheses")
         for h in hypotheses:
             likelihood = likelihoods[h]
-            if not isinstance(likelihood, (int, float)) or not math.isfinite(likelihood) or likelihood <= 0 or likelihood > 1:
-                raise ValueError(f"{eid}: likelihood for {h} must be in (0, 1]")
+            if not isinstance(likelihood, (int, float)) or not math.isfinite(likelihood) or likelihood < 0 or likelihood > 1:
+                raise ValueError(f"{eid}: likelihood for {h} must be in [0, 1]")
+            if logw[h] != -math.inf:
+                logw[h] = -math.inf if likelihood == 0 else logw[h] + math.log(likelihood)
             if logw[h] != -math.inf: logw[h] += math.log(likelihood)
     finite = [v for v in logw.values() if math.isfinite(v)]
     if not finite: raise ValueError("All hypotheses have zero posterior support")
