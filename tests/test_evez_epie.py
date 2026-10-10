@@ -1,14 +1,48 @@
-import math, unittest
+import math, struct, unittest
 from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score, canonical_json, canonical_hash
 from evez_epie.retention import select_hot_index
 
 class CanonicalizationTests(unittest.TestCase):
-    def test_jcs_number_and_key_canonicalization(self):
+    def test_jcs_number_and_utf16_key_canonicalization(self):
+        self.assertEqual(canonical_json({"z": 1.0, "a": -0.0}), '{"a":0,"z":1}')
         keys = {chr(0xE000): 1, chr(0x10000): 2}
         expected = '{"' + chr(0x10000) + '":2,"' + chr(0xE000) + '":1}'
         self.assertEqual(canonical_json(keys), expected)
-        self.assertEqual(canonical_json({"\\ue000": 1, "\\U00010000": 2}), '{"𐀀":2,"\\ue000":1}')
         self.assertEqual(len(canonical_hash({"stable": [1, True, None]})), 64)
+
+    def test_rfc8785_number_serialization_vectors(self):
+        # Selected IEEE-754 vectors from RFC 8785 Appendix B.
+        vectors = {
+            "0000000000000000": "0",
+            "8000000000000000": "0",
+            "0000000000000001": "5e-324",
+            "8000000000000001": "-5e-324",
+            "7fefffffffffffff": "1.7976931348623157e+308",
+            "ffefffffffffffff": "-1.7976931348623157e+308",
+            "4430000000000000": "295147905179352830000",
+            "44b52d02c7e14af5": "9.999999999999997e+22",
+            "44b52d02c7e14af6": "1e+23",
+            "44b52d02c7e14af7": "1.0000000000000001e+23",
+            "444b1ae4d6e2ef4e": "999999999999999700000",
+            "444b1ae4d6e2ef4f": "999999999999999900000",
+            "444b1ae4d6e2ef50": "1e+21",
+            "3eb0c6f7a0b5ed8c": "9.999999999999997e-7",
+            "3eb0c6f7a0b5ed8d": "0.000001",
+            "43143ff3c1cb0959": "1424953923781206.2",
+        }
+        for bits, expected in vectors.items():
+            value = struct.unpack(">d", bytes.fromhex(bits))[0]
+            with self.subTest(bits=bits):
+                self.assertEqual(canonical_json(value), expected)
+
+    def test_rfc8785_composite_example(self):
+        obj = {
+            "numbers": [333333333.33333329, 1e30, 4.50, 2e-3, 1e-27],
+            "string": "€$\\u000f\\nA'B\\\"\\\\\\\"/",
+            "literals": [None, True, False],
+        }
+        expected = '{"literals":[null,true,false],"numbers":[333333333.3333333,1e+30,4.5,0.002,1e-27],"string":"€$\\u000f\\nA\\'B\\\"\\\\\\\"/"}'
+        self.assertEqual(canonical_json(obj), expected)
 
 class BayesianTests(unittest.TestCase):
     def test_temporal_overlap_example(self):
