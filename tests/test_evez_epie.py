@@ -36,13 +36,12 @@ class CanonicalizationTests(unittest.TestCase):
                 self.assertEqual(canonical_json(value), expected)
 
     def test_rfc8785_composite_example(self):
-        obj = {
-            "numbers": [333333333.33333329, 1e30, 4.50, 2e-3, 1e-27],
-            "string": "€$\\u000f\\nA'B\\\"\\\\\\\"/",
-            "literals": [None, True, False],
-        }
-        expected = '{"literals":[null,true,false],"numbers":[333333333.3333333,1e+30,4.5,0.002,1e-27],"string":"€$\\u000f\\nA\\'B\\\"\\\\\\\"/"}'
+        value = "€$" + chr(0x0F) + "\nA'B" + '"' + "\\" + "\\" + '"' + "/"
+        expected_string = '"' + "€$" + r'\u000f' + r'\n' + "A'B" + r'\"' + r'\\\\' + r'\"' + "/" + '"'
+        obj = {"numbers": [333333333.33333329, 1e30, 4.50, 2e-3, 1e-27], "string": value, "literals": [None, True, False]}
+        expected = '{"literals":[null,true,false],"numbers":[333333333.3333333,1e+30,4.5,0.002,1e-27],"string":' + expected_string + '}'
         self.assertEqual(canonical_json(obj), expected)
+
 
 class BayesianTests(unittest.TestCase):
     def test_temporal_overlap_example(self):
