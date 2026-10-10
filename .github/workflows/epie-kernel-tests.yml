@@ -1,0 +1,26 @@
+name: EPIE kernel tests
+on:
+  push:
+    paths:
+      - 'evez_epie/**'
+      - 'tests/test_evez_epie.py'
+      - '.github/workflows/epie-kernel-tests.yml'
+  pull_request:
+    paths:
+      - 'evez_epie/**'
+      - 'tests/test_evez_epie.py'
+      - '.github/workflows/epie-kernel-tests.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run EPIE unit tests
+        run: python -m unittest discover -s tests -p 'test_evez_epie.py' -v
+      - name: Run deterministic demo
+        run: python -m evez_epie demo
