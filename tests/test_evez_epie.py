@@ -1,7 +1,7 @@
 import math, struct, unittest
 from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score, canonical_json, canonical_hash
 from evez_epie.retention import select_hot_index
-from evez_epie.research import expected_value_of_sample_information, rank_decision_tests, choose_next_test
+from evez_epie.research import expected_value_of_sample_information, rank_decision_tests, choose_next_test, prequential_log_score, realized_research_reward
 
 class CanonicalizationTests(unittest.TestCase):
     def test_jcs_number_and_utf16_key_canonicalization(self):
@@ -167,6 +167,46 @@ class DecisionValueResearchTests(unittest.TestCase):
         forbidden = dict(self.test_b, permitted=False)
         rows = rank_decision_tests(self.prior, [forbidden], self.actions)
         self.assertEqual(rows, [])
+
+class ResearchRewardTests(unittest.TestCase):
+    def test_reward_requires_verified_independent_holdout_improvement(self):
+        result = realized_research_reward(
+            {"yes": .5, "no": .5},
+            {"yes": .8, "no": .2},
+            "yes",
+            search_cost=.1,
+            risk_cost=.1,
+            verifier_accepted=True,
+            source_independence_verified=True,
+            source_is_duplicate=False,
+            prediction_frozen_before_outcome=True,
+            outcome_held_out=True,
+        )
+        self.assertTrue(result["eligible"])
+        self.assertAlmostEqual(result["score_delta"], math.log(1.6), places=12)
+        self.assertAlmostEqual(result["net_reward"], math.log(1.6) - .2, places=12)
+
+    def test_unverified_or_duplicate_search_cannot_earn_positive_reward(self):
+        result = realized_research_reward(
+            {"yes": .5, "no": .5},
+            {"yes": .99, "no": .01},
+            "yes",
+            search_cost=.1,
+            risk_cost=.2,
+            verifier_accepted=False,
+            source_independence_verified=False,
+            source_is_duplicate=True,
+            prediction_frozen_before_outcome=False,
+            outcome_held_out=False,
+        )
+        self.assertFalse(result["eligible"])
+        self.assertIsNone(result["score_delta"])
+        self.assertEqual(result["net_reward"], -.3)
+        self.assertIn("verifier_accepted", result["failed_gates"])
+        self.assertIn("source_is_not_duplicate", result["failed_gates"])
+
+    def test_log_score_uses_fixed_floor_for_zero_probability(self):
+        self.assertAlmostEqual(prequential_log_score({"yes": 0.0, "no": 1.0}, "yes"), math.log(1e-12), places=12)
 
 class LedgerTests(unittest.TestCase):
     def test_chain_and_replay(self):
