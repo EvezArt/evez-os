@@ -1,7 +1,7 @@
 """Budgeted information retention: optimize active-index utility without deleting evidence."""
 from __future__ import annotations
 
-from typing import Any, Iterable, Mapping
+import math\nfrom typing import Any, Iterable, Mapping
 from .kernel import retention_score
 
 
