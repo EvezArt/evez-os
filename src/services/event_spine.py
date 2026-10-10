@@ -52,6 +52,8 @@ class EventSpine:
     @classmethod
     def _compute_hash(cls, event):
         version = event.get("hash_version", 1)
+        if type(version) is not int:
+            raise ValueError("Event hash version must be an integer")
         if version == 1:
             return cls._legacy_hash(event)
         if version == 2:
@@ -72,6 +74,9 @@ class EventSpine:
         rfc8785.dumps({"data": data_copy})
 
         with self.lock:
+            integrity = self.verify()
+            if not integrity["valid"]:
+                raise ValueError("Refusing to append to an invalid event chain")
             prev_hash = self._events[-1]["hash"] if self._events else "0" * 64
             event = {
                 "seq": len(self._events),
