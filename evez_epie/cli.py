@@ -1,7 +1,7 @@
 """Small local CLI for the EPIE reference kernel."""
 import argparse, json
 from .kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_tests
-from .research import expected_value_of_sample_information, rank_decision_tests, choose_next_test, realized_research_reward
+from .research import expected_value_of_sample_information, rank_decision_tests, choose_next_test, aggregate_research_reward
 
 def demo():
     prior = {"coordination": .10, "shared_cause": .65, "error": .25}
@@ -13,17 +13,30 @@ def demo():
     actions = {"act": {"H1": 10.0, "H0": -20.0}, "defer": {"H1": 0.0, "H0": 0.0}}
     decision_rank = rank_decision_tests(prior2, [a, b], actions)
     next_test = choose_next_test(prior2, [a, b], actions, remaining_budget=1.0, steps_completed=0, max_steps=5)
-    reward_demo = realized_research_reward(
-        {"positive": .50, "negative": .50},
-        {"positive": .80, "negative": .20},
-        "positive",
+    # Synthetic, deterministic evaluation cohort: 80% positives, 20% negatives.
+    # This demonstrates the aggregate gate; it is not an empirical claim.
+    heldout_samples = [
+        {
+            "id": f"demo-case-{i}",
+            "independence_key": f"demo-unit-{i}",
+            "baseline_forecast": {"positive": .50, "negative": .50},
+            "updated_forecast": {"positive": .80, "negative": .20},
+            "observed_outcome": "positive" if i < 800 else "negative",
+            "verifier_accepted": True,
+            "source_independence_verified": True,
+            "source_is_duplicate": False,
+            "prediction_frozen_before_outcome": True,
+            "outcome_held_out": True,
+        }
+        for i in range(1000)
+    ]
+    aggregate_reward_demo = aggregate_research_reward(
+        heldout_samples,
         search_cost=.10,
         risk_cost=.10,
-        verifier_accepted=True,
-        source_independence_verified=True,
-        source_is_duplicate=False,
-        prediction_frozen_before_outcome=True,
-        outcome_held_out=True,
+        projected_future_cases=200.0,
+        min_cases=1000,
+        alpha=.05,
     )
     return {
         "warning": "Illustrative likelihoods/utilities only; not a real-world finding.",
@@ -36,7 +49,7 @@ def demo():
         "test_B_EVSI": expected_value_of_sample_information(prior2, b, actions)["expected_value_of_sample_information"],
         "decision_value_test_ranking": decision_rank,
         "next_research_decision": {k: v for k, v in next_test.items() if k != "ranking"},
-        "illustrative_post_search_reward": reward_demo,
+        "illustrative_aggregate_research_reward": aggregate_reward_demo,
     }
 
 def main(argv=None):
