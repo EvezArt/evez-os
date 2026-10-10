@@ -31,7 +31,7 @@ class RetentionTests(unittest.TestCase):
     def test_duplicate_hash_dedupes_index_only(self):
         base={"created_at_seconds":90,"content_hash":"same","decision_value":1,"reliability":1,"novelty":1,"half_life_seconds":None,"storage_bytes":100}
         rows=rank_retention([dict(base,id="a"),dict(base,id="b")],now_seconds=100)
-        self.assertEqual(len(rows),2); self.assertTrue(all("KEEP_SOURCE_REFERENCE" in r["action"] for r in rows)
+        self.assertEqual(len(rows),2); self.assertTrue(all("KEEP_SOURCE_REFERENCE" in r["action"] for r in rows))
 
 class LedgerTests(unittest.TestCase):
     def test_chain_and_replay(self):
