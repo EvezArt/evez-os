@@ -1,6 +1,12 @@
 import math, unittest
-from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score
+from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score, canonical_json, canonical_hash
 from evez_epie.retention import select_hot_index
+
+class CanonicalizationTests(unittest.TestCase):
+    def test_jcs_number_and_key_canonicalization(self):
+        self.assertEqual(canonical_json({"z": 1.0, "a": -0.0}), '{"a":0,"z":1}')
+        self.assertEqual(canonical_json({"\\ue000": 1, "\\U00010000": 2}), '{"𐀀":2,"\\ue000":1}')
+        self.assertEqual(len(canonical_hash({"stable": [1, True, None]})), 64)
 
 class BayesianTests(unittest.TestCase):
     def test_temporal_overlap_example(self):
