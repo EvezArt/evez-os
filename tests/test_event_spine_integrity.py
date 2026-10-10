@@ -104,6 +104,24 @@ class EventSpineIntegrityTests(unittest.TestCase):
             spine.append("epie", "EVIDENCE_COMMIT", {"x": 3})
         self.assertEqual(len(spine.events), 1)
 
+    def test_idempotent_retry_returns_same_event_without_duplicate(self):
+        spine = EventSpine()
+        first = spine.append("epie", "OBSERVED_FACT", {"x": 1},
+                             timestamp=10.0, idempotency_key="same-event")
+        retry = spine.append("epie", "OBSERVED_FACT", {"x": 1},
+                             timestamp=99.0, idempotency_key="same-event")
+        self.assertEqual(first["seq"], retry["seq"])
+        self.assertEqual(first["hash"], retry["hash"])
+        self.assertEqual(len(spine.events), 1)
+        self.assertTrue(spine.verify()["valid"])
+
+    def test_idempotency_key_cannot_be_reused_for_different_content(self):
+        spine = EventSpine()
+        spine.append("epie", "OBSERVED_FACT", {"x": 1}, idempotency_key="same-event")
+        with self.assertRaisesRegex(ValueError, "different event content"):
+            spine.append("epie", "OBSERVED_FACT", {"x": 2}, idempotency_key="same-event")
+        self.assertEqual(len(spine.events), 1)
+
     def test_unsupported_hash_version_fails_closed(self):
         spine = EventSpine()
         spine.append("epie", "OBSERVED_FACT", {})
