@@ -65,7 +65,7 @@ def expected_information_gain(prior: Mapping[str, float], test: Mapping[str, Any
     """Expected entropy reduction in bits for a complete finite-outcome table."""
     p = _normalise(prior); outcomes = test.get("outcomes")
     if not isinstance(outcomes, Mapping) or not outcomes: raise ValueError("Test requires an outcomes mapping")
-    if any(set(row) != set(p) for row in outcomes.values()): raise ValueError("Every outcome must specify every hypothesis")
+    if any(not isinstance(row, Mapping) or set(row) != set(p) for row in outcomes.values()): raise ValueError("Every outcome must specify every hypothesis")
     for h in p:
         vals = [float(outcomes[o][h]) for o in outcomes]
         if any(not math.isfinite(v) or v < 0 or v > 1 for v in vals): raise ValueError("Outcome likelihoods must be in [0, 1]")
@@ -153,7 +153,7 @@ class EventLedger:
         for index, event in enumerate(self._events):
             if not isinstance(event, Mapping): return False, f"event is not an object at index {index}"
             if type(event.get("sequence")) is not int or event.get("sequence") != index: return False, f"sequence mismatch at index {index}"
-            if event.get("event_type") not in EVENT_TYPES: return False, f"unsupported event type at index {index}"
+            if not isinstance(event.get("event_type"), str) or event.get("event_type") not in EVENT_TYPES: return False, f"unsupported event type at index {index}"
             if not isinstance(event.get("payload"), Mapping): return False, f"payload is not an object at index {index}"
             if event.get("previous_event_hash") != previous: return False, f"previous hash mismatch at index {index}"
             if not isinstance(event.get("event_hash"), str) or len(event["event_hash"]) != 64: return False, f"invalid event hash format at index {index}"
