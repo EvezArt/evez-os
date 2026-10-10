@@ -52,7 +52,6 @@ def bayesian_update(prior: Mapping[str, float], evidence: Sequence[Mapping[str, 
                 raise ValueError(f"{eid}: likelihood for {h} must be in [0, 1]")
             if logw[h] != -math.inf:
                 logw[h] = -math.inf if likelihood == 0 else logw[h] + math.log(likelihood)
-            if logw[h] != -math.inf: logw[h] += math.log(likelihood)
     finite = [v for v in logw.values() if math.isfinite(v)]
     if not finite: raise ValueError("All hypotheses have zero posterior support")
     peak = max(finite)
@@ -141,9 +140,9 @@ class EventLedger:
     def append(self, event_type: str, payload: Mapping[str, Any]) -> dict[str, Any]:
         if event_type not in EVENT_TYPES: raise ValueError(f"Unsupported event type: {event_type}")
         previous = self.events[-1]["event_hash"] if self.events else "0" * 64
-        event = {"sequence": len(self.events), "event_type": event_type, "previous_event_hash": previous, "payload": dict(payload)}
+        event = {"sequence": len(self.events), "event_type": event_type, "previous_event_hash": previous, "payload": copy.deepcopy(dict(payload))}
         event["event_hash"] = self._hash_payload(event); self.events.append(event)
-        return dict(event)
+        return copy.deepcopy(event)
     def verify(self) -> tuple[bool, str]:
         previous = "0" * 64
         for index, event in enumerate(self.events):
