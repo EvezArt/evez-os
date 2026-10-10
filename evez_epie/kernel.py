@@ -2,7 +2,7 @@
 
 This is a reference kernel, not a source-authentication system or an autonomous
 investigator. Probabilities and likelihoods are inputs that must be justified.
-Only Python's standard library is required.
+Uses the pinned, dependency-free rfc8785 package for standards-compatible JCS serialization.
 """
 from __future__ import annotations
 import hashlib, json, math, time\nimport rfc8785
