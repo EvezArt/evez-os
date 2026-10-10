@@ -20,6 +20,7 @@ def select_hot_index(
     """
     if not isinstance(budget_bytes, int) or budget_bytes < 0:
         raise ValueError("budget_bytes must be a non-negative integer")
+    items = list(items)
     groups: dict[str, list[Mapping[str, Any]]] = {}
     for item in items:
         item_id = str(item.get("id", ""))
