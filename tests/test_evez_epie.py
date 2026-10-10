@@ -1,6 +1,7 @@
 import math, struct, unittest
 from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score, canonical_json, canonical_hash
 from evez_epie.retention import select_hot_index
+from evez_epie.research import expected_value_of_sample_information, rank_decision_tests, choose_next_test
 
 class CanonicalizationTests(unittest.TestCase):
     def test_jcs_number_and_utf16_key_canonicalization(self):
@@ -96,6 +97,56 @@ class BudgetedRetentionTests(unittest.TestCase):
         result = select_hot_index(items, budget_bytes=2, now_seconds=0)
         self.assertEqual(result["selected_source_ids"], ["small"])
         self.assertEqual(result["archival_only_source_ids"], ["large"])
+
+class DecisionValueResearchTests(unittest.TestCase):
+    def setUp(self):
+        self.prior = {"H1": .20, "H0": .80}
+        self.actions = {
+            "act": {"H1": 10.0, "H0": -20.0},
+            "defer": {"H1": 0.0, "H0": 0.0},
+        }
+        self.test_a = {
+            "id": "A", "permitted": True, "cost": 0.0, "risk": 0.0,
+            "outcomes": {
+                "positive": {"H1": .80, "H0": .20},
+                "negative": {"H1": .20, "H0": .80},
+            },
+        }
+        self.test_b = {
+            "id": "B", "permitted": True, "cost": .10, "risk": .20,
+            "outcomes": {
+                "positive": {"H1": .90, "H0": .05},
+                "negative": {"H1": .10, "H0": .95},
+            },
+        }
+
+    def test_evsi_rewards_decision_improvement_not_entropy_alone(self):
+        result_a = expected_value_of_sample_information(self.prior, self.test_a, self.actions)
+        result_b = expected_value_of_sample_information(self.prior, self.test_b, self.actions)
+        self.assertAlmostEqual(result_a["expected_value_of_sample_information"], 0.0, places=12)
+        self.assertAlmostEqual(result_b["expected_value_of_sample_information"], 1.0, places=12)
+        self.assertEqual(result_a["best_action_before_test"], "defer")
+        self.assertEqual(result_b["best_action_before_test"], "defer")
+
+    def test_net_value_ranks_test_b_first(self):
+        rows = rank_decision_tests(self.prior, [self.test_a, self.test_b], self.actions)
+        self.assertEqual(rows[0]["id"], "B")
+        self.assertAlmostEqual(rows[0]["net_value"], .70, places=12)
+
+    def test_stop_gate_enforces_budget_and_finite_steps(self):
+        stopped = choose_next_test(self.prior, [self.test_b], self.actions,
+                                   remaining_budget=1.0, steps_completed=3, max_steps=3)
+        self.assertEqual(stopped["decision"], "STOP")
+        self.assertEqual(stopped["reason"], "MAX_STEPS_REACHED")
+        unaffordable = choose_next_test(self.prior, [self.test_b], self.actions,
+                                        remaining_budget=.05, steps_completed=0, max_steps=5)
+        self.assertEqual(unaffordable["decision"], "STOP")
+        self.assertEqual(unaffordable["reason"], "NO_PERMITTED_AFFORDABLE_TEST")
+
+    def test_unpermitted_test_is_never_ranked(self):
+        forbidden = dict(self.test_b, permitted=False)
+        rows = rank_decision_tests(self.prior, [forbidden], self.actions)
+        self.assertEqual(rows, [])
 
 class LedgerTests(unittest.TestCase):
     def test_chain_and_replay(self):
