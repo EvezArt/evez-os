@@ -1,7 +1,7 @@
 """Small local CLI for the EPIE reference kernel."""
 import argparse, json
 from .kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_tests
-from .research import expected_value_of_sample_information, rank_decision_tests, choose_next_test
+from .research import expected_value_of_sample_information, rank_decision_tests, choose_next_test, realized_research_reward
 
 def demo():
     prior = {"coordination": .10, "shared_cause": .65, "error": .25}
@@ -13,6 +13,18 @@ def demo():
     actions = {"act": {"H1": 10.0, "H0": -20.0}, "defer": {"H1": 0.0, "H0": 0.0}}
     decision_rank = rank_decision_tests(prior2, [a, b], actions)
     next_test = choose_next_test(prior2, [a, b], actions, remaining_budget=1.0, steps_completed=0, max_steps=5)
+    reward_demo = realized_research_reward(
+        {"positive": .50, "negative": .50},
+        {"positive": .80, "negative": .20},
+        "positive",
+        search_cost=.10,
+        risk_cost=.10,
+        verifier_accepted=True,
+        source_independence_verified=True,
+        source_is_duplicate=False,
+        prediction_frozen_before_outcome=True,
+        outcome_held_out=True,
+    )
     return {
         "warning": "Illustrative likelihoods/utilities only; not a real-world finding.",
         "posterior_after_temporal_overlap": posterior,
