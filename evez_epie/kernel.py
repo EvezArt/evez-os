@@ -5,7 +5,8 @@ investigator. Probabilities and likelihoods are inputs that must be justified.
 Uses the pinned, dependency-free rfc8785 package for standards-compatible JCS serialization.
 """
 from __future__ import annotations
-import hashlib, json, math, time\nimport rfc8785
+import hashlib, math, time
+import rfc8785
 from typing import Any, Iterable, Mapping, Sequence
 
 EVENT_TYPES = frozenset({"OBSERVED_FACT", "EVIDENCE_COMMIT", "CHECKPOINT_ISSUED"})
