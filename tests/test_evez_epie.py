@@ -1,7 +1,7 @@
 import math, struct, unittest
 from evez_epie.kernel import EventLedger, bayesian_update, entropy_bits, expected_information_gain, rank_retention, retention_score, canonical_json, canonical_hash
 from evez_epie.retention import select_hot_index
-from evez_epie.research import expected_value_of_sample_information, rank_decision_tests, choose_next_test, prequential_log_score, realized_research_reward
+from evez_epie.research import expected_value_of_sample_information, rank_decision_tests, choose_next_test, prequential_log_score, realized_research_reward, aggregate_research_reward
 
 class CanonicalizationTests(unittest.TestCase):
     def test_jcs_number_and_utf16_key_canonicalization(self):
@@ -207,6 +207,80 @@ class ResearchRewardTests(unittest.TestCase):
 
     def test_log_score_uses_fixed_floor_for_zero_probability(self):
         self.assertAlmostEqual(prequential_log_score({"yes": 0.0, "no": 1.0}, "yes"), math.log(1e-12), places=12)
+
+class AggregateResearchRewardTests(unittest.TestCase):
+    @staticmethod
+    def cases(outcomes, *, forecast_after=None, gate_override=None):
+        rows = []
+        for i, outcome in enumerate(outcomes):
+            row = {
+                "id": f"case-{i}",
+                "independence_key": f"unit-{i}",
+                "baseline_forecast": {"yes": .5, "no": .5},
+                "updated_forecast": forecast_after or {"yes": .8, "no": .2},
+                "observed_outcome": outcome,
+                "verifier_accepted": True,
+                "source_independence_verified": True,
+                "source_is_duplicate": False,
+                "prediction_frozen_before_outcome": True,
+                "outcome_held_out": True,
+            }
+            if gate_override and i == gate_override[0]:
+                row[gate_override[1]] = gate_override[2]
+            rows.append(row)
+        return rows
+
+    def test_reward_requires_positive_heldout_lower_bound_after_cost(self):
+        outcomes = ["yes"] * 800 + ["no"] * 200
+        result = aggregate_research_reward(
+            self.cases(outcomes),
+            search_cost=2.0,
+            risk_cost=1.0,
+            projected_future_cases=100.0,
+            min_cases=1000,
+            alpha=.05,
+        )
+        self.assertEqual(result["status"], "REWARD_SUPPORTED")
+        self.assertAlmostEqual(result["mean_score_delta"], .18, places=12)
+        self.assertGreater(result["lower_confidence_bound"], 0)
+        self.assertGreater(result["net_reward"], 0)
+
+    def test_no_holdout_improvement_receives_no_gross_reward(self):
+        outcomes = ["yes"] * 400 + ["no"] * 100
+        result = aggregate_research_reward(
+            self.cases(outcomes, forecast_after={"yes": .5, "no": .5}),
+            search_cost=2.0, risk_cost=1.0,
+            projected_future_cases=100.0, min_cases=500,
+        )
+        self.assertEqual(result["status"], "NO_REWARD_GAIN_NOT_PROVEN")
+        self.assertEqual(result["gross_reward"], 0.0)
+        self.assertEqual(result["net_reward"], -3.0)
+
+    def test_one_failed_evidence_gate_blocks_reward(self):
+        outcomes = ["yes"] * 800 + ["no"] * 200
+        result = aggregate_research_reward(
+            self.cases(outcomes, gate_override=(19, "source_is_duplicate", True)),
+            search_cost=1.0, risk_cost=2.0,
+            projected_future_cases=100.0, min_cases=1000,
+        )
+        self.assertEqual(result["status"], "NO_REWARD_FAILED_EVIDENCE_GATES")
+        self.assertEqual(result["gross_reward"], 0.0)
+        self.assertEqual(result["net_reward"], -3.0)
+        self.assertIn("case-19:source_is_not_duplicate", result["failed_gates"])
+
+    def test_repeated_independence_unit_is_rejected(self):
+        rows = self.cases(["yes"] * 30)
+        rows[1]["independence_key"] = rows[0]["independence_key"]
+        with self.assertRaisesRegex(ValueError, "Repeated independence_key"):
+            aggregate_research_reward(rows, search_cost=1.0, risk_cost=0.0, min_cases=30)
+
+    def test_too_few_cases_does_not_earn_reward(self):
+        result = aggregate_research_reward(
+            self.cases(["yes"] * 10),
+            search_cost=1.0, risk_cost=.5, min_cases=30,
+        )
+        self.assertEqual(result["status"], "NO_REWARD_INSUFFICIENT_HOLDOUT")
+        self.assertEqual(result["net_reward"], -1.5)
 
 class LedgerTests(unittest.TestCase):
     def test_chain_and_replay(self):
