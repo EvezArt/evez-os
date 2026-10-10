@@ -43,8 +43,15 @@ def select_hot_index(
 
     candidates = []
     for key, refs in sorted(groups.items()):
-        sizes = [max(0, int(ref.get("storage_bytes", 0))) for ref in refs]
-        cost = max(sizes, default=0)
+        sizes = []
+        for ref in refs:
+            raw_size = ref.get("storage_bytes", 0)
+            if isinstance(raw_size, bool) or not isinstance(raw_size, int) or raw_size < 0:
+                raise ValueError("storage_bytes must be a non-negative integer")
+            sizes.append(raw_size)
+        if len(set(sizes)) > 1:
+            raise ValueError(f"Identical content hash {key!r} has inconsistent storage_bytes")
+        cost = sizes[0] if sizes else 0
         scores = []
         for ref in refs:
             age = max(0.0, now_seconds - float(ref["created_at_seconds"]))
