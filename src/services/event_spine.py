@@ -13,6 +13,7 @@ import time
 import hashlib
 import threading
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from urllib.parse import urlsplit, parse_qs, unquote
 
 # ── Hash-Linked Event Log ──────────────────────────────────────────
 
@@ -240,7 +241,11 @@ class Handler(BaseHTTPRequestHandler):
         return {}
 
     def do_GET(self):
-        if self.path == "/health":
+        parsed = urlsplit(self.path)
+        path = parsed.path
+        query = parse_qs(parsed.query, keep_blank_values=True)
+
+        if path == "/health":
             self._json(200, {
                 "status": "alive",
                 "service": "event_spine",
@@ -251,27 +256,32 @@ class Handler(BaseHTTPRequestHandler):
                 "total_events": len(SPINE.events),
                 "chain_valid": SPINE.chain_valid,
             })
-        elif self.path == "/state":
+        elif path == "/state":
             self._json(200, SPINE.state_summary())
-        elif self.path == "/verify":
+        elif path == "/verify":
             self._json(200, SPINE.verify())
-        elif self.path == "/replay":
-            # Replay all events for a domain
-            domain = self.path.split("?domain=")[-1] if "?" in self.path else None
+        elif path == "/replay":
+            domain = query.get("domain", [None])[0]
             if domain:
                 self._json(200, SPINE.replay(domain))
             else:
                 self._json(200, SPINE.state_summary())
-        elif self.path == "/recent":
-            n = 20
-            if "?" in self.path:
-                try:
-                    n = int(self.path.split("?n=")[-1].split("&")[0])
-                except Exception:
-                    pass
-            self._json(200, {"events": SPINE.recent(n), "count": min(n, len(SPINE.events))})
-        elif self.path.startswith("/project/"):
-            domain = self.path.split("/")[-1]
+        elif path == "/recent":
+            try:
+                n = int(query.get("n", ["20"])[0])
+            except (TypeError, ValueError):
+                self._json(400, {"error": "n must be an integer"})
+                return
+            if n < 0 or n > 10000:
+                self._json(400, {"error": "n must be between 0 and 10000"})
+                return
+            events = SPINE.recent(n)
+            self._json(200, {"events": events, "count": len(events)})
+        elif path.startswith("/project/"):
+            domain = unquote(path[len("/project/"):])
+            if not domain or "/" in domain:
+                self._json(400, {"error": "invalid domain"})
+                return
             self._json(200, SPINE.replay(domain))
         else:
             self._json(404, {"error": "not found"})
