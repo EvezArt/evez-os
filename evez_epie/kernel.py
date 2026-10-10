@@ -5,69 +5,18 @@ investigator. Probabilities and likelihoods are inputs that must be justified.
 Only Python's standard library is required.
 """
 from __future__ import annotations
-import hashlib, json, math, time
+import hashlib, json, math, time\nimport rfc8785
 from typing import Any, Iterable, Mapping, Sequence
 
 EVENT_TYPES = frozenset({"OBSERVED_FACT", "EVIDENCE_COMMIT", "CHECKPOINT_ISSUED"})
 
-def _jcs_number(value: int | float) -> str:
-    """Serialize a JSON number using ECMAScript/JCS-compatible formatting."""
-    if isinstance(value, bool):
-        raise TypeError("Boolean is not a number here")
-    if isinstance(value, int):
-        if abs(value) > 9007199254740991:
-            raise ValueError("Integer outside interoperable IEEE-754 safe range")
-        return str(value)
-    if not math.isfinite(value):
-        raise ValueError("JCS does not permit NaN or Infinity")
-    if value == 0:
-        return "0"
-    absolute = abs(value)
-    raw = repr(value).lower()
-    from decimal import Decimal
-    dec = Decimal(raw)
-    if 1e-6 <= absolute < 1e21:
-        text = format(dec, "f")
-        if "." in text:
-            text = text.rstrip("0").rstrip(".")
-        return text
-    normalized = dec.normalize()
-    tup = normalized.as_tuple()
-    digits = "".join(str(d) for d in tup.digits)
-    exponent = tup.exponent + len(digits) - 1
-    mantissa = digits[0] + (("." + digits[1:].rstrip("0")) if digits[1:].rstrip("0") else "")
-    sign = "-" if tup.sign else ""
-    exp_sign = "+" if exponent >= 0 else ""
-    return f"{sign}{mantissa}e{exp_sign}{exponent}"
-
-def _jcs(value: Any) -> str:
-    if value is None:
-        return "null"
-    if value is True:
-        return "true"
-    if value is False:
-        return "false"
-    if isinstance(value, (int, float)):
-        return _jcs_number(value)
-    if isinstance(value, str):
-        if any(0xD800 <= ord(ch) <= 0xDFFF for ch in value):
-            raise ValueError("JCS strings must not contain unpaired surrogate code points")
-        return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
-    if isinstance(value, (list, tuple)):
-        return "[" + ",".join(_jcs(item) for item in value) + "]"
-    if isinstance(value, Mapping):
-        if not all(isinstance(key, str) for key in value):
-            raise TypeError("JCS object keys must be strings")
-        keys = sorted(value, key=lambda key: key.encode("utf-16-be"))
-        return "{" + ",".join(_jcs(key) + ":" + _jcs(value[key]) for key in keys) + "}"
-    raise TypeError(f"Unsupported JCS value type: {type(value).__name__}")
-
 def canonical_json(value: Any) -> str:
-    """RFC 8785-style canonical JSON for the supported interoperable JSON subset."""
-    return _jcs(value)
+    """Return RFC 8785 canonical JSON via the vetted rfc8785 implementation."""
+    return rfc8785.dumps(value).decode("utf-8")
+
 
 def canonical_hash(value: Any) -> str:
-    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+    return hashlib.sha256(rfc8785.dumps(value)).hexdigest()
 
 def _normalise(weights: Mapping[str, float]) -> dict[str, float]:
     if not weights: raise ValueError("At least one hypothesis is required")
