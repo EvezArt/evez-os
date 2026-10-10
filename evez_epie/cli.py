@@ -36,6 +36,7 @@ def demo():
         "test_B_EVSI": expected_value_of_sample_information(prior2, b, actions)["expected_value_of_sample_information"],
         "decision_value_test_ranking": decision_rank,
         "next_research_decision": {k: v for k, v in next_test.items() if k != "ranking"},
+        "illustrative_post_search_reward": reward_demo,
     }
 
 def main(argv=None):
