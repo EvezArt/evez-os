@@ -5,7 +5,7 @@ investigator. Probabilities and likelihoods are inputs that must be justified.
 Uses the pinned, dependency-free rfc8785 package for standards-compatible JCS serialization.
 """
 from __future__ import annotations
-import hashlib, math, time
+import copy, hashlib, math, time
 import rfc8785
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -86,7 +86,7 @@ def rank_tests(prior: Mapping[str, float], tests: Iterable[Mapping[str, Any]], *
     Cost/risk/value are dimensionless until the application calibrates them.
     This score never grants authorization; tests require permitted=True.
     """
-    if cost_weight < 0 or risk_weight < 0: raise ValueError("Weights must be non-negative")
+    if not math.isfinite(cost_weight) or not math.isfinite(risk_weight) or cost_weight < 0 or risk_weight < 0: raise ValueError("Weights must be finite and non-negative")
     ranked = []
     for test in tests:
         if test.get("permitted") is not True: continue
@@ -130,7 +130,7 @@ def rank_retention(items: Iterable[Mapping[str, Any]], *, now_seconds: float | N
 class EventLedger:
     """Append-only SHA-256 chain using existing EVEZ event type names."""
     def __init__(self, events: Sequence[Mapping[str, Any]] | None = None):
-        self.events = [dict(e) for e in (events or [])]
+        self.events = copy.deepcopy(list(events or []))
         valid, reason = self.verify()
         if not valid: raise ValueError(f"Invalid initial ledger: {reason}")
     @staticmethod
@@ -158,5 +158,5 @@ class EventLedger:
         counts = {}; payloads = []
         for event in self.events:
             counts[event["event_type"]] = counts.get(event["event_type"], 0) + 1
-            payloads.append({"sequence": event["sequence"], "event_type": event["event_type"], "payload": event["payload"]})
+            payloads.append({"sequence": event["sequence"], "event_type": event["event_type"], "payload": copy.deepcopy(event["payload"])})
         return {"event_count": len(self.events), "counts": dict(sorted(counts.items())), "committed_payloads": payloads, "head_hash": self.events[-1]["event_hash"] if self.events else "0" * 64}
