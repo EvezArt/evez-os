@@ -3,11 +3,17 @@ on:
   push:
     paths:
       - 'evez_epie/**'
+      - 'src/services/event_spine.py'
+      - 'skills/evez-firmament/services/event_spine.py'
+      - 'tests/test_event_spine_integrity.py'
       - 'tests/test_evez_epie.py'
       - '.github/workflows/epie-kernel-tests.yml'
   pull_request:
     paths:
       - 'evez_epie/**'
+      - 'tests/test_event_spine_integrity.py'
+      - 'skills/evez-firmament/services/event_spine.py'
+      - 'src/services/event_spine.py'
       - 'tests/test_evez_epie.py'
       - '.github/workflows/epie-kernel-tests.yml'
 permissions:
@@ -24,5 +30,7 @@ jobs:
         run: python -m pip install --require-hashes -r requirements-epie.txt
       - name: Run EPIE unit tests
         run: python -m unittest discover -s tests -p 'test_evez_epie.py' -v
+      - name: Verify event-spine integrity regressions
+        run: python -m unittest discover -s tests -p 'test_event_spine_integrity.py' -v
       - name: Run deterministic demo
         run: python -m evez_epie demo
