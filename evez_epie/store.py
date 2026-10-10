@@ -24,6 +24,8 @@ class JsonlLedgerStore:
             raise ValueError("Ledger path must not be empty")
         self.path = Path(path).expanduser().absolute()
         self.lock_path = self.path.with_name(self.path.name + ".lock")
+        self._cache: EventLedger | None = None
+        self._cached_signature = None
 
     def _open_no_follow(self, path: Path, flags: int, mode: int = 0o600) -> int:
         no_follow = getattr(os, "O_NOFOLLOW", 0)
