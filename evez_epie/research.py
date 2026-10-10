@@ -161,3 +161,87 @@ def choose_next_test(
     if best["net_value"] <= minimum_net_value:
         return {"decision": "STOP", "reason": "MARGINAL_VALUE_NOT_ABOVE_THRESHOLD", "selected_test": None, "ranking": ranked}
     return {"decision": "CONTINUE", "reason": "POSITIVE_EXPECTED_NET_VALUE", "selected_test": best, "ranking": ranked}
+
+
+def prequential_log_score(
+    forecast: Mapping[str, float],
+    observed_outcome: str,
+    *,
+    probability_floor: float = 1e-12,
+) -> float:
+    """Capped logarithmic score for an outcome not used to fit the forecast.
+
+    Higher is better. The probability floor prevents a zero-probability model
+    from producing negative infinity, but it must be kept fixed across runs.
+    """
+    p = _probabilities(forecast)
+    if observed_outcome not in p:
+        raise ValueError("Observed outcome is absent from the forecast outcome space")
+    if not math.isfinite(probability_floor) or not 0 < probability_floor < 1:
+        raise ValueError("probability_floor must be finite and in (0, 1)")
+    return math.log(max(p[observed_outcome], probability_floor))
+
+
+def realized_research_reward(
+    baseline_forecast: Mapping[str, float],
+    updated_forecast: Mapping[str, float],
+    observed_outcome: str,
+    *,
+    search_cost: float,
+    risk_cost: float,
+    verifier_accepted: bool,
+    source_independence_verified: bool,
+    source_is_duplicate: bool,
+    prediction_frozen_before_outcome: bool,
+    outcome_held_out: bool,
+    score_weight: float = 1.0,
+    probability_floor: float = 1e-12,
+) -> dict[str, Any]:
+    """Score realized research only against an independently verified holdout.
+
+    Reward = score_weight * (updated log score - baseline log score)
+             - search cost - risk cost.
+    If evidence is unverified, derivative, or leaked into model fitting, no
+    positive research reward is permitted; expenditure remains a cost.
+    """
+    numeric = (search_cost, risk_cost, score_weight)
+    if any(not math.isfinite(x) or x < 0 for x in numeric):
+        raise ValueError("Costs and score_weight must be finite and non-negative")
+    gates = {
+        "verifier_accepted": verifier_accepted is True,
+        "source_independence_verified": source_independence_verified is True,
+        "source_is_not_duplicate": source_is_duplicate is False,
+        "prediction_frozen_before_outcome": prediction_frozen_before_outcome is True,
+        "outcome_held_out": outcome_held_out is True,
+    }
+    expenditure = search_cost + risk_cost
+    failed = [name for name, passed in gates.items() if not passed]
+    if failed:
+        return {
+            "eligible": False,
+            "failed_gates": failed,
+            "baseline_log_score": None,
+            "updated_log_score": None,
+            "score_delta": None,
+            "gross_reward": 0.0,
+            "search_cost": search_cost,
+            "risk_cost": risk_cost,
+            "net_reward": -expenditure,
+        }
+    if set(baseline_forecast) != set(updated_forecast):
+        raise ValueError("Baseline and updated forecasts must use the same outcome space")
+    before = prequential_log_score(baseline_forecast, observed_outcome, probability_floor=probability_floor)
+    after = prequential_log_score(updated_forecast, observed_outcome, probability_floor=probability_floor)
+    delta = after - before
+    gross = score_weight * delta
+    return {
+        "eligible": True,
+        "failed_gates": [],
+        "baseline_log_score": before,
+        "updated_log_score": after,
+        "score_delta": delta,
+        "gross_reward": gross,
+        "search_cost": search_cost,
+        "risk_cost": risk_cost,
+        "net_reward": gross - expenditure,
+    }
