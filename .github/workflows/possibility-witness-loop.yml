@@ -1,0 +1,49 @@
+name: EVEZ Possibility-Witness Conformance
+
+on:
+  push:
+    paths:
+      - "evez_possibility_witness_loop.py"
+      - "scripts/run_possibility_witness_conformance.py"
+      - "tests/test_possibility_witness_loop.py"
+      - "examples/evez-handoff-v1.example.json"
+      - "examples/fixtures/possibility-witness-artifact.txt"
+      - "schemas/possibility-witness-loop-manifest-v1.json"
+      - ".github/workflows/possibility-witness-loop.yml"
+  pull_request:
+    paths:
+      - "evez_possibility_witness_loop.py"
+      - "scripts/run_possibility_witness_conformance.py"
+      - "tests/test_possibility_witness_loop.py"
+      - "examples/evez-handoff-v1.example.json"
+      - "examples/fixtures/possibility-witness-artifact.txt"
+      - "schemas/possibility-witness-loop-manifest-v1.json"
+      - ".github/workflows/possibility-witness-loop.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-conformance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile conformance module and runner
+        run: python -m py_compile evez_possibility_witness_loop.py scripts/run_possibility_witness_conformance.py
+      - name: Run unit tests (stdlib only)
+        run: python -m unittest discover -s tests -p 'test_possibility_witness_loop.py' -v
+      - name: Run deterministic fixture checks and emit witness
+        run: python scripts/run_possibility_witness_conformance.py --output possibility-witness-report.json
+      - name: Upload witness report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: possibility-witness-conformance-report
+          path: possibility-witness-report.json
+          if-no-files-found: warn
+          retention-days: 14
