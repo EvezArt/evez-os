@@ -1,0 +1,39 @@
+{
+  "schema_version": "evez.spacetime-lab.adapters.v1",
+  "mode": "offline-first",
+  "agent_runtime": {
+    "provider": "none",
+    "supported_external_runtimes": ["hermes", "openclaw"],
+    "enabled": false,
+    "policy": "read-only by default; proposed writes go through the lab CLI and append to the witness ledger"
+  },
+  "messaging": {
+    "provider": "telegram-bot-api",
+    "enabled": false,
+    "token_env": "TELEGRAM_BOT_TOKEN",
+    "allowlist_env": "TELEGRAM_ALLOWED_USER_IDS",
+    "chat_scope": "private-only",
+    "commands": ["/help", "/status", "/verify", "/proposal", "/observation"]
+  },
+  "network": {
+    "provider": "tailscale",
+    "private_access": "serve",
+    "public_funnel": false,
+    "inbound_ports_required_for_telegram_polling": false,
+    "note": "Telegram long polling is outbound HTTPS. Tailscale Serve is only for a future private dashboard."
+  },
+  "sensors": {
+    "provider": "ruview-csi-adapter-contract",
+    "enabled": false,
+    "accepted_modality": "ruview_csi",
+    "required_fields": ["source", "quantity", "value", "unit", "calibration_id", "observed_at"],
+    "privacy": "scalar summaries and optional artifact hashes only; no raw RF payloads or person-identifying labels by default"
+  },
+  "execution_policy": {
+    "arbitrary_shell": false,
+    "automatic_deployment": false,
+    "automatic_scientific_claim_promotion": false,
+    "hardware_control": false,
+    "require_operator_action_for_external_side_effects": true
+  }
+}
