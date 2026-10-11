@@ -59,6 +59,30 @@ class PossibilityWitnessLoopTests(unittest.TestCase):
         future["created_at"] = "2030-01-01T00:10:00Z"
         self.assertIn("handoff is not yet valid", validate_handoff(future, now=FIXTURE_NOW))
 
+    def test_non_object_authorization_input_fails_closed(self) -> None:
+        decision = authorize_handoff(
+            None, recipient=self.recipient, granted_capabilities=self.capabilities, now=FIXTURE_NOW,
+        )
+        self.assertEqual(decision["decision"], "DENY")
+        self.assertIn("invalid_handoff", decision["reasons"])
+        self.assertFalse(decision["execution_performed"])
+
+    def test_malformed_capability_shape_fails_closed_without_exception(self) -> None:
+        malformed = deepcopy(self.envelope)
+        malformed["requested_capabilities"] = {"unexpected": "mapping"}
+        decision = authorize_handoff(
+            malformed, recipient=self.recipient, granted_capabilities=self.capabilities, now=FIXTURE_NOW,
+        )
+        self.assertEqual(decision["decision"], "DENY")
+        self.assertIn("invalid_handoff", decision["reasons"])
+
+    def test_non_string_grants_are_denied(self) -> None:
+        decision = authorize_handoff(
+            self.envelope, recipient=self.recipient, granted_capabilities=[None], now=FIXTURE_NOW,
+        )
+        self.assertEqual(decision["decision"], "DENY")
+        self.assertIn("invalid_granted_capabilities", decision["reasons"])
+
     def test_wrong_recipient_is_denied(self) -> None:
         decision = authorize_handoff(
             self.envelope, recipient={"provider": "hermes", "agent_id": "different-agent"},
