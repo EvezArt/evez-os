@@ -64,8 +64,29 @@ jobs:
           Path("run-evidence/result.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
           print(json.dumps(result, indent=2))
           PY
+      - name: Publish diagnostic witness to job summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## EVEZ Possibility-Witness Conformance"
+            echo
+            if [ -f run-evidence/result.json ]; then
+              echo "### Exit summary"
+              cat run-evidence/result.json
+              echo
+            fi
+            for item in compile.log unit-tests.log runner.log; do
+              if [ -f "run-evidence/$item" ]; then
+                echo "### $item"
+                sed -n '1,240p' "run-evidence/$item"
+                echo
+              fi
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload conformance evidence, including failures
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: possibility-witness-conformance-evidence
