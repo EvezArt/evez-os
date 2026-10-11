@@ -166,7 +166,7 @@ with tempfile.TemporaryDirectory() as temp:
 
     broken = subprocess.run(
         [sys.executable, str(STATE), "verify"],
-        env=os.environ | {"EVEZ_STATE_DIR": temp},
+        env=os.environ | {"EVEZ_STATE_DIR": str(Path(temp) / "state")},
         text=True,
         capture_output=True,
     )
