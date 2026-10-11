@@ -13,6 +13,7 @@ from evez_possibility_witness_loop import (
     claim_satisfies_state,
     contradiction_record,
     evaluate_witness_receipt,
+    ReplayGuard,
     seal_witness,
     validate_handoff,
     verify_artifact_digest,
@@ -125,6 +126,15 @@ class PossibilityWitnessLoopTests(unittest.TestCase):
         )
         self.assertEqual(decision["decision"], "DENY")
         self.assertIn("risk_R4_denied", decision["reasons"])
+
+    def test_duplicate_idempotency_key_is_rejected_without_reexecution(self) -> None:
+        guard = ReplayGuard()
+        first = guard.accept_once(self.envelope, now=FIXTURE_NOW)
+        replay = guard.accept_once(self.envelope, now=FIXTURE_NOW)
+        self.assertEqual(first["decision"], "ALLOW")
+        self.assertEqual(replay["decision"], "DENY")
+        self.assertEqual(replay["reason"], "replay_detected")
+        self.assertFalse(replay["execution_performed"])
 
     def test_proposal_does_not_satisfy_verified_acceptance(self) -> None:
         self.assertFalse(claim_satisfies_state("PROPOSED", "VERIFIED"))
