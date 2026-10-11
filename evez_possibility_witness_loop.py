@@ -170,6 +170,24 @@ def authorize_handoff(
     }
 
 
+class ReplayGuard:
+    """Process-local duplicate detector for tests; production needs durable atomic storage."""
+
+    def __init__(self) -> None:
+        self._seen: set[tuple[str, str, str]] = set()
+
+    def accept_once(self, envelope: dict[str, Any], *, now: datetime | None = None) -> dict[str, Any]:
+        errors = validate_handoff(envelope, now=now)
+        if errors:
+            return {"decision": "DENY", "reason": "invalid_handoff", "errors": errors, "execution_performed": False}
+        origin = envelope["origin"]
+        key = (origin["provider"], origin["agent_id"], envelope["idempotency_key"])
+        if key in self._seen:
+            return {"decision": "DENY", "reason": "replay_detected", "execution_performed": False}
+        self._seen.add(key)
+        return {"decision": "ALLOW", "reason": "first_seen", "execution_performed": False}
+
+
 def verify_artifact_digest(expected_sha256: str, artifact_bytes: bytes) -> bool:
     if not isinstance(expected_sha256, str) or not HEX64.fullmatch(expected_sha256):
         return False
