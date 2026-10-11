@@ -20,14 +20,19 @@
     "private_access": "serve",
     "public_funnel": false,
     "inbound_ports_required_for_telegram_polling": false,
-    "note": "Telegram long polling is outbound HTTPS. Tailscale Serve is only for a future private dashboard."
+    "note": "Telegram long polling is outbound HTTPS. A loopback read-only dashboard is included; operators may configure tailnet-only Tailscale Serve. Public Funnel stays disabled."
   },
   "sensors": {
-    "provider": "ruview-csi-adapter-contract",
+    "provider": "ruview-websocket-scalar-summary-adapter",
+    "script": "integrations/ruview_sensing_bridge.py",
+    "optional_dependency_file": "requirements-ruview-bridge.txt",
+    "endpoint_env": "RUVIEW_WS_URL",
+    "token_env": "RUVIEW_API_TOKEN",
+    "calibration_env": "RUVIEW_CALIBRATION_ID",
     "enabled": false,
     "accepted_modality": "ruview_csi",
     "required_fields": ["source", "quantity", "value", "unit", "calibration_id", "observed_at"],
-    "privacy": "scalar summaries and optional artifact hashes only; no raw RF payloads or person-identifying labels by default"
+    "privacy": "allowlisted scalar RF features only; raw CSI arrays, node identifiers, presence/person classification and vital-sign fields are discarded; use TLS and authentication for remote endpoints"
   },
   "execution_policy": {
     "arbitrary_shell": false,
