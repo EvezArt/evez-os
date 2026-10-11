@@ -2,8 +2,8 @@
   "protocol": "EVEZ-Handoff/1",
   "task_id": "example-task-001",
   "correlation_id": "example-correlation-001",
-  "created_at": "2026-10-11T08:00:00Z",
-  "expires_at": "2026-10-11T08:15:00Z",
+  "created_at": "2030-01-01T00:00:00Z",
+  "expires_at": "2030-01-01T00:15:00Z",
   "origin": {
     "provider": "chatgpt",
     "agent_id": "configured-chatgpt-agent"
@@ -26,9 +26,9 @@
   "risk_class": "R1",
   "artifacts": [
     {
-      "uri": "https://example.invalid/artifact.diff",
+      "uri": "https://github.com/EvezArt/evez-os/blob/feat/possibility-witness-loop-v1/examples/fixtures/possibility-witness-artifact.txt",
       "media_type": "text/plain",
-      "sha256": "replace-with-actual-64-hex-digest"
+      "sha256": "4c28c67a229c5ff8662e2a63b7e9644f134296733541fab8e2bf7e8fb6d1d4d3"
     }
   ],
   "acceptance_criteria": [
