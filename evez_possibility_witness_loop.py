@@ -155,7 +155,16 @@ def authorize_handoff(
     if not isinstance(recipient, dict) or envelope.get("recipient") != recipient:
         reasons.append("recipient_mismatch")
     requested = envelope.get("requested_capabilities", [])
-    granted = list(granted_capabilities) if granted_capabilities is not None else []
+    try:
+        if granted_capabilities is None:
+            granted = []
+        elif isinstance(granted_capabilities, (str, bytes, dict)):
+            raise TypeError("capabilities must be an iterable of strings, not a scalar or mapping")
+        else:
+            granted = list(granted_capabilities)
+    except (TypeError, ValueError):
+        granted = []
+        reasons.append("invalid_granted_capabilities")
     if not isinstance(requested, list) or any(not isinstance(item, str) for item in requested):
         requested = []
         if "invalid_handoff" not in reasons:
