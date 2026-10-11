@@ -53,6 +53,11 @@ class PossibilityWitnessLoopTests(unittest.TestCase):
         after_expiry = datetime(2030, 1, 1, 0, 16, tzinfo=timezone.utc)
         self.assertIn("handoff is expired", validate_handoff(self.envelope, now=after_expiry))
 
+    def test_future_dated_handoff_is_rejected(self) -> None:
+        future = deepcopy(self.envelope)
+        future["created_at"] = "2030-01-01T00:10:00Z"
+        self.assertIn("handoff is not yet valid", validate_handoff(future, now=FIXTURE_NOW))
+
     def test_wrong_recipient_is_denied(self) -> None:
         decision = authorize_handoff(
             self.envelope, recipient={"provider": "hermes", "agent_id": "different-agent"},
@@ -87,6 +92,17 @@ class PossibilityWitnessLoopTests(unittest.TestCase):
         )
         self.assertEqual(decision["decision"], "DENY")
         self.assertIn("human_approval_missing", decision["reasons"])
+
+    def test_r3_cannot_bypass_explicit_approval_flag(self) -> None:
+        elevated = deepcopy(self.envelope)
+        elevated["risk_class"] = "R3"
+        elevated["approval_required"] = False
+        decision = authorize_handoff(
+            elevated, recipient=self.recipient, granted_capabilities=self.capabilities,
+            operation="write", read_only=False, approval_granted=True, now=FIXTURE_NOW,
+        )
+        self.assertEqual(decision["decision"], "DENY")
+        self.assertIn("risk_R3_approval_flag_missing", decision["reasons"])
 
     def test_approved_r3_operation_passes_policy_simulation_only(self) -> None:
         elevated = deepcopy(self.envelope)
