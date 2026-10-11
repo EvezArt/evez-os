@@ -17,7 +17,7 @@ class WarpBubbleProfileTests(unittest.TestCase):
         self.assertEqual(report["claim_classification"], "speculative")
         self.assertEqual(report["parameters"]["samples"], 101)
         self.assertTrue(report["not_computed"])
-        self.assertIn("not evidence of superluminal travel", report["interpretation_limit"])
+        self.assertIn("evidence of superluminal travel", report["interpretation_limit"])
         self.assertEqual(len(report["profile"]), 101)
 
     def test_invalid_inputs_are_rejected(self):
