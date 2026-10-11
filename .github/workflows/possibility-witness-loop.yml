@@ -34,7 +34,6 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run checks and preserve diagnostic receipts
-        id: conformance
         shell: bash
         run: |
           mkdir -p run-evidence
@@ -62,7 +61,7 @@ jobs:
               "fixture_runner_exit": runner_rc,
               "overall": "PASS" if (compile_rc == tests_rc == runner_rc == 0) else "FAIL",
           }
-          Path("run-evidence/result.json").write_text(json.dumps(result, indent=2) + "\\n", encoding="utf-8")
+          Path("run-evidence/result.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
           print(json.dumps(result, indent=2))
           PY
       - name: Upload conformance evidence, including failures
