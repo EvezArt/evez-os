@@ -55,3 +55,22 @@ For a bounded, explicitly nonphysical shape-profile diagnostic, run:
     python research/warp_bubble_profile.py --radius-m 10 --sigma-per-m 1 --samples 401
 
 Explain the metric signature, units, assumptions, and tolerance. A spacelike interval does not mean an object or signal can traverse it faster than light. The shape-profile tool does not solve the Einstein equations, derive required stress-energy, demonstrate stability, or establish a feasible bubble. Do not silently upgrade the claim class from speculative.
+
+## Optional dashboard
+
+Run the read-only dashboard on loopback:
+
+    python research/spacetime_dashboard.py --host 127.0.0.1 --port 8787
+
+If Tailscale is already installed and authorized, the operator may expose it privately with Tailscale Serve. Do not change ACLs or enable Funnel automatically. Do not bind the unauthenticated app to a public interface.
+
+## Optional RuView adapter
+
+A separate operator-managed process can ingest only allowlisted scalar RF features into a registered experiment:
+
+    pip install -r requirements-ruview-bridge.txt
+    export RUVIEW_WS_URL='ws://127.0.0.1:3001/ws/sensing'
+    export RUVIEW_CALIBRATION_ID='actual-calibration-or-protocol-version'
+    python integrations/ruview_sensing_bridge.py --every-seconds 5
+
+The endpoint depends on the installed RuView version. Remote connections must use wss:// with authentication and preferably tailnet-only reachability. Raw CSI, node identifiers, presence/person labels, and vitals are discarded. These features do not establish spacetime curvature.
