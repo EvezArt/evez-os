@@ -121,3 +121,16 @@ The lab includes two independent mathematical baselines.
        python research/warp_bubble_profile.py --radius-m 10 --sigma-per-m 1 --samples 401 --output /tmp/profile.json
 
 The bubble profile screen does **not** calculate the Einstein tensor, stress-energy tensor, energy-condition violations, negative-energy requirements, stability, causal control, or engineering feasibility. A profile function is an ansatz, not a complete spacetime solution. The next scientifically meaningful stage is independent symbolic derivation, explicit metric/signature conventions, an independently implemented Einstein-tensor calculation, numerical convergence checks, and a clearly described stress-energy/energy-condition analysis. A result should remain PROPOSED until independently reviewed; no single scalar score can establish a real breakthrough bubble.
+
+
+## Integrated mobile operator commands
+
+The existing EVEZ Termux operator now routes the lab tools directly:
+
+    evezctl spacetime verify --json
+    evezctl spacetime report
+    evezctl spacetime init --title 'Metric screen' --hypothesis '...' --model-name metric-screen-v1
+    evezctl spacetime-interval --delta-t-seconds 1e-9 --delta-x-meters 1
+    evezctl spacetime-profile --radius-m 10 --sigma-per-m 1 --samples 401
+
+These dispatch to local Python modules under EVEZ_ROOT. They do not call the remote model, turn on Telegram, establish a Tailscale tunnel, or control sensing hardware by themselves. The standalone launcher mobile/evez-spacetime works as well.
