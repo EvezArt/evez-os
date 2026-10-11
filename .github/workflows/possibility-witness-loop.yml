@@ -1,0 +1,98 @@
+name: EVEZ Possibility-Witness Conformance
+
+on:
+  push:
+    paths:
+      - "evez_possibility_witness_loop.py"
+      - "scripts/run_possibility_witness_conformance.py"
+      - "tests/test_possibility_witness_loop.py"
+      - "examples/evez-handoff-v1.example.json"
+      - "examples/fixtures/possibility-witness-artifact.txt"
+      - "schemas/possibility-witness-loop-manifest-v1.json"
+      - ".github/workflows/possibility-witness-loop.yml"
+  pull_request:
+    paths:
+      - "evez_possibility_witness_loop.py"
+      - "scripts/run_possibility_witness_conformance.py"
+      - "tests/test_possibility_witness_loop.py"
+      - "examples/evez-handoff-v1.example.json"
+      - "examples/fixtures/possibility-witness-artifact.txt"
+      - "schemas/possibility-witness-loop-manifest-v1.json"
+      - ".github/workflows/possibility-witness-loop.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-conformance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run checks and preserve diagnostic receipts
+        shell: bash
+        run: |
+          mkdir -p run-evidence
+          set +e
+          python -m py_compile evez_possibility_witness_loop.py scripts/run_possibility_witness_conformance.py > run-evidence/compile.log 2>&1
+          compile_rc=$?
+          echo "$compile_rc" > run-evidence/compile.exit
+          python -m unittest discover -s tests -p 'test_possibility_witness_loop.py' -v > run-evidence/unit-tests.log 2>&1
+          tests_rc=$?
+          echo "$tests_rc" > run-evidence/unit-tests.exit
+          python scripts/run_possibility_witness_conformance.py --output run-evidence/witness-report.json > run-evidence/runner.log 2>&1
+          runner_rc=$?
+          echo "$runner_rc" > run-evidence/runner.exit
+          cat run-evidence/compile.log
+          cat run-evidence/unit-tests.log
+          cat run-evidence/runner.log
+          python - "$compile_rc" "$tests_rc" "$runner_rc" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          compile_rc, tests_rc, runner_rc = (int(x) for x in sys.argv[1:])
+          result = {
+              "compile_exit": compile_rc,
+              "unit_tests_exit": tests_rc,
+              "fixture_runner_exit": runner_rc,
+              "overall": "PASS" if (compile_rc == tests_rc == runner_rc == 0) else "FAIL",
+          }
+          Path("run-evidence/result.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps(result, indent=2))
+          PY
+      - name: Publish diagnostic witness to job summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## EVEZ Possibility-Witness Conformance"
+            echo
+            if [ -f run-evidence/result.json ]; then
+              echo "### Exit summary"
+              cat run-evidence/result.json
+              echo
+            fi
+            for item in compile.log unit-tests.log runner.log; do
+              if [ -f "run-evidence/$item" ]; then
+                echo "### $item"
+                sed -n '1,240p' "run-evidence/$item"
+                echo
+              fi
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload conformance evidence, including failures
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: possibility-witness-conformance-evidence
+          path: run-evidence/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Enforce conformance result
+        if: always()
+        run: python -c "import json, pathlib, sys; p=pathlib.Path('run-evidence/result.json'); d=json.loads(p.read_text()) if p.exists() else {'overall':'FAIL'}; print(d); sys.exit(0 if d.get('overall') == 'PASS' else 1)"

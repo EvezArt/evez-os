@@ -97,7 +97,7 @@ with tempfile.TemporaryDirectory() as temp:
         check=False,
     )
     assert ctl.returncode == 0, (ctl.stdout, ctl.stderr)
-    ctl_payload = json.loads(ctl.stdout.splitlines()[-1])
+    ctl_payload = json.loads(ctl.stdout)
     assert ctl_payload["identity"]["verified"] is True
 
 print("EVEZ identity runtime tests: PASS")

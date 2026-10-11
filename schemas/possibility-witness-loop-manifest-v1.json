@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "name": "evez-possibility-witness-loop",
+  "title": "EVEZ Possibility–Witness Loop",
+  "version": "0.1.0",
+  "status_model": [
+    "VERIFIED",
+    "SUPPORTED",
+    "INFERRED",
+    "PROPOSED",
+    "UNKNOWN",
+    "STALE",
+    "CONTRADICTED",
+    "RETRACTED"
+  ],
+  "result_model": [
+    "SUCCEEDED",
+    "FAILED",
+    "REJECTED",
+    "INACCESSIBLE",
+    "UNKNOWN",
+    "DIVERGED",
+    "REPRODUCED"
+  ],
+  "report_status": [
+    "verified",
+    "partially_verified",
+    "blocked",
+    "not_run"
+  ],
+  "principles": [
+    "Possibility is not an observation.",
+    "Memory preserves versioned evidence and unresolved uncertainty.",
+    "State is a snapshot derived from an identified checkpoint or event stream.",
+    "Human goals and authorization remain distinct from model capability.",
+    "Symbols and claims must remain linked to an observation method and potential falsifier.",
+    "A witness reports actions and evidence actually observed.",
+    "The loop is bounded, replayable, and stoppable."
+  ],
+  "default_policy": {
+    "read_only_first": true,
+    "default_deny_capabilities": true,
+    "max_remediation_cycles": 3,
+    "max_parallel_tasks": 3,
+    "require_human_approval_for": [
+      "production_deploy",
+      "pull_request_merge",
+      "public_publish",
+      "permission_change",
+      "credential_rotation",
+      "external_message",
+      "billing_change",
+      "paid_ad_action",
+      "destructive_change"
+    ],
+    "stop_conditions": [
+      "authorization_denied",
+      "verification_failed_without_approved_recovery",
+      "artifact_hash_changed",
+      "budget_exhausted",
+      "credential_expired",
+      "cancelled",
+      "ambiguous_non_idempotent_outcome",
+      "missing_terminal_receipt"
+    ]
+  },
+  "audit_record_required_fields": [
+    "task_id",
+    "correlation_id",
+    "protocol_version",
+    "actor",
+    "target",
+    "capability",
+    "policy_decision",
+    "input_digest",
+    "start_time",
+    "end_time",
+    "result_status",
+    "artifact_refs",
+    "artifact_hashes",
+    "test_results",
+    "verifier",
+    "uncertainty",
+    "parent_state_hash",
+    "new_state_hash"
+  ],
+  "adapters": {
+    "github": {
+      "initial_mode": "read_only",
+      "verify": "inspect repo/PR/files and return exact references"
+    },
+    "tailscale": {
+      "initial_mode": "read_only",
+      "verify": "confirm documented authenticated status before claiming mesh connectivity"
+    },
+    "bionemo": {
+      "initial_mode": "preflight_only",
+      "verify": "record host/GPU/model/data prerequisites and run receipts; no default heavyweight jobs"
+    },
+    "product_design": {
+      "initial_mode": "audit_only",
+      "verify": "separate screenshots/evidence, heuristic findings, and recommendations"
+    },
+    "ads_manager": {
+      "initial_mode": "read_only",
+      "verify": "report metrics and conversion configuration; require approval for all account/campaign spend writes"
+    }
+  }
+}

@@ -95,14 +95,23 @@ outbox_cmd() {
 }
 
 sync_cmd() {
-  log "sync endpoint=$EVEZ_ENDPOINT"
+  if [ "$#" -gt 2 ]; then
+    printf 'usage: evezctl sync [ENDPOINT [PATH]]\\n' >&2
+    return 2
+  fi
+
+  # Explicit CLI arguments override configuration for deterministic local tests
+  # and deliberate endpoint selection; absent arguments retain configured defaults.
+  local endpoint="${1:-$EVEZ_ENDPOINT}"
+  local path="${2:-$EVEZ_SPINE_EVENT_PATH}"
+  log "sync endpoint=$endpoint path=$path"
 
   EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" verify || {
     log "refusing sync: local evidence chain is not verified"
     return 1
   }
 
-  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" sync "$EVEZ_ENDPOINT" "$EVEZ_SPINE_EVENT_PATH"
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" sync "$endpoint" "$path"
 }
 
 security_audit_cmd() {
