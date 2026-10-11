@@ -6,6 +6,9 @@ on:
       - 'research/spacetime_breakthrough_lab.py'
       - 'research/spacetime_interval.py'
       - 'research/warp_bubble_profile.py'
+      - 'research/spacetime_dashboard.py'
+      - 'integrations/ruview_sensing_bridge.py'
+      - 'requirements-ruview-bridge.txt'
       - 'integrations/spacetime_telegram_bridge.py'
       - 'mobile/evez-spacetime'
       - 'mobile/evezctl'
@@ -46,7 +49,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Compile lab modules
-        run: python -m py_compile research/spacetime_breakthrough_lab.py research/spacetime_interval.py research/warp_bubble_profile.py integrations/spacetime_telegram_bridge.py
+        run: python -m py_compile research/spacetime_breakthrough_lab.py research/spacetime_interval.py research/warp_bubble_profile.py research/spacetime_dashboard.py integrations/spacetime_telegram_bridge.py integrations/ruview_sensing_bridge.py
       - name: Check Termux launcher syntax
         run: |
           bash -n mobile/evez-spacetime
@@ -59,3 +62,4 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_spacetime_*.py' -v
           python -m unittest discover -s tests -p 'test_warp_bubble_profile.py' -v
+          python -m unittest discover -s tests -p 'test_ruview_sensing_bridge.py' -v
