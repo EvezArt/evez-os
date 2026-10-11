@@ -43,3 +43,15 @@ Allowed modalities: simulation, lab_instrument, ruview_csi, published_literature
 - Reproduction steps and unresolved uncertainties
 
 Never equate ordinary Wi-Fi changes with spacetime curvature. A proposed warp metric or passing symbolic test is not an operational breakthrough bubble.
+
+## Spacetime baselines
+
+For event-separation questions, run the flat-Minkowski interval calculator:
+
+    python research/spacetime_interval.py --delta-t-seconds 1e-9 --delta-x-meters 1
+
+For a bounded, explicitly nonphysical shape-profile diagnostic, run:
+
+    python research/warp_bubble_profile.py --radius-m 10 --sigma-per-m 1 --samples 401
+
+Explain the metric signature, units, assumptions, and tolerance. A spacelike interval does not mean an object or signal can traverse it faster than light. The shape-profile tool does not solve the Einstein equations, derive required stress-energy, demonstrate stability, or establish a feasible bubble. Do not silently upgrade the claim class from speculative.
