@@ -1,0 +1,2 @@
+# Optional only; the core lab runs on Python's standard library.
+websockets>=14.0,<16.0
