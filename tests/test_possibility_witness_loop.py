@@ -83,6 +83,14 @@ class PossibilityWitnessLoopTests(unittest.TestCase):
         self.assertEqual(decision["decision"], "DENY")
         self.assertIn("invalid_granted_capabilities", decision["reasons"])
 
+    def test_non_iterable_grants_are_denied_without_exception(self) -> None:
+        decision = authorize_handoff(
+            self.envelope, recipient=self.recipient, granted_capabilities=5, now=FIXTURE_NOW,
+        )
+        self.assertEqual(decision["decision"], "DENY")
+        self.assertIn("invalid_granted_capabilities", decision["reasons"])
+        self.assertFalse(decision["execution_performed"])
+
     def test_wrong_recipient_is_denied(self) -> None:
         decision = authorize_handoff(
             self.envelope, recipient={"provider": "hermes", "agent_id": "different-agent"},
