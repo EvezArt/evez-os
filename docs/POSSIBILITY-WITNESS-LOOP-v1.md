@@ -113,3 +113,7 @@ Use one overall status: `verified`, `partially_verified`, `blocked`, or `not_run
 ## 10. Non-claims
 
 This contract does not establish consciousness, sentience, autonomous authority, scientific truth, service availability, or successful interoperability. Those require separate, relevant evidence.
+
+## Executable reference limits
+
+The offline Python harness exercises strict fixture validation, policy-gate simulations, artifact hashing, witness promotion rules, a process-local duplicate-key guard, and bounded retry decisions. The replay guard is not durable or distributed; production must substitute an atomic persistent registry with expiry and concurrency handling. Policy simulation never invokes tools, and the fixture report remains partially_verified without an independent verifier. A successful local test run does not establish live adapter connectivity or production health.
