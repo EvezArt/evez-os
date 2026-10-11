@@ -33,17 +33,46 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Compile conformance module and runner
-        run: python -m py_compile evez_possibility_witness_loop.py scripts/run_possibility_witness_conformance.py
-      - name: Run unit tests (stdlib only)
-        run: python -m unittest discover -s tests -p 'test_possibility_witness_loop.py' -v
-      - name: Run deterministic fixture checks and emit witness
-        run: python scripts/run_possibility_witness_conformance.py --output possibility-witness-report.json
-      - name: Upload witness report
+      - name: Run checks and preserve diagnostic receipts
+        id: conformance
+        shell: bash
+        run: |
+          mkdir -p run-evidence
+          set +e
+          python -m py_compile evez_possibility_witness_loop.py scripts/run_possibility_witness_conformance.py > run-evidence/compile.log 2>&1
+          compile_rc=$?
+          echo "$compile_rc" > run-evidence/compile.exit
+          python -m unittest discover -s tests -p 'test_possibility_witness_loop.py' -v > run-evidence/unit-tests.log 2>&1
+          tests_rc=$?
+          echo "$tests_rc" > run-evidence/unit-tests.exit
+          python scripts/run_possibility_witness_conformance.py --output run-evidence/witness-report.json > run-evidence/runner.log 2>&1
+          runner_rc=$?
+          echo "$runner_rc" > run-evidence/runner.exit
+          cat run-evidence/compile.log
+          cat run-evidence/unit-tests.log
+          cat run-evidence/runner.log
+          python - "$compile_rc" "$tests_rc" "$runner_rc" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          compile_rc, tests_rc, runner_rc = (int(x) for x in sys.argv[1:])
+          result = {
+              "compile_exit": compile_rc,
+              "unit_tests_exit": tests_rc,
+              "fixture_runner_exit": runner_rc,
+              "overall": "PASS" if (compile_rc == tests_rc == runner_rc == 0) else "FAIL",
+          }
+          Path("run-evidence/result.json").write_text(json.dumps(result, indent=2) + "\\n", encoding="utf-8")
+          print(json.dumps(result, indent=2))
+          PY
+      - name: Upload conformance evidence, including failures
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: possibility-witness-conformance-report
-          path: possibility-witness-report.json
+          name: possibility-witness-conformance-evidence
+          path: run-evidence/
           if-no-files-found: warn
           retention-days: 14
+      - name: Enforce conformance result
+        if: always()
+        run: python -c "import json, pathlib, sys; p=pathlib.Path('run-evidence/result.json'); d=json.loads(p.read_text()) if p.exists() else {'overall':'FAIL'}; print(d); sys.exit(0 if d.get('overall') == 'PASS' else 1)"
