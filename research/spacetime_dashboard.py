@@ -12,6 +12,10 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from research.spacetime_breakthrough_lab import experiment_summary, DEFAULT_LEDGER
 from research.spacetime_interval import classify_interval
 from research.warp_bubble_profile import analyze_profile
