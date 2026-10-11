@@ -4,6 +4,7 @@ import unittest
 from http.server import ThreadingHTTPServer
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 from pathlib import Path
 import tempfile
 
@@ -24,8 +25,13 @@ class SpacetimeDashboardTests(unittest.TestCase):
         self.base = "http://127.0.0.1:%d" % self.server.server_port
 
     def get_json(self, path):
-        with urlopen(self.base + path, timeout=3) as response:
-            return json.loads(response.read().decode("utf-8")), response.status, response.headers
+        try:
+            with urlopen(self.base + path, timeout=3) as response:
+                return json.loads(response.read().decode("utf-8")), response.status, response.headers
+        except HTTPError as exc:
+            with exc:
+                body = json.loads(exc.read().decode("utf-8"))
+                return body, exc.code, exc.headers
 
     def test_health_discloses_readonly_loopback_scope(self):
         body, status, headers = self.get_json("/api/health")
@@ -67,6 +73,11 @@ class SpacetimeDashboardTests(unittest.TestCase):
         body, status, _ = self.get_json("/etc/passwd")
         self.assertEqual(status, 404)
         self.assertFalse(body["ok"])
+
+    def test_oversized_profile_is_rejected(self):
+        body, status, _ = self.get_json("/api/profile?radius=10&sigma=1&samples=50000")
+        self.assertEqual(status, 400)
+        self.assertIn("must not exceed", body["error"])
 
 
 if __name__ == "__main__":
