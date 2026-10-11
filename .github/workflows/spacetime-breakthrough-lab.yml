@@ -8,6 +8,7 @@ on:
       - 'research/warp_bubble_profile.py'
       - 'integrations/spacetime_telegram_bridge.py'
       - 'mobile/evez-spacetime'
+      - 'mobile/evezctl'
       - 'tests/test_spacetime_*.py'
       - 'tests/test_warp_bubble_profile.py'
       - 'schemas/spacetime-lab-experiment-v1.schema.json'
@@ -23,6 +24,7 @@ on:
       - 'research/warp_bubble_profile.py'
       - 'integrations/spacetime_telegram_bridge.py'
       - 'mobile/evez-spacetime'
+      - 'mobile/evezctl'
       - 'tests/test_spacetime_*.py'
       - 'tests/test_warp_bubble_profile.py'
       - 'schemas/spacetime-lab-experiment-v1.schema.json'
@@ -46,7 +48,9 @@ jobs:
       - name: Compile lab modules
         run: python -m py_compile research/spacetime_breakthrough_lab.py research/spacetime_interval.py research/warp_bubble_profile.py integrations/spacetime_telegram_bridge.py
       - name: Check Termux launcher syntax
-        run: bash -n mobile/evez-spacetime
+        run: |
+          bash -n mobile/evez-spacetime
+          bash -n mobile/evezctl
       - name: Validate JSON contracts
         run: |
           python -m json.tool schemas/spacetime-lab-experiment-v1.schema.json >/dev/null
