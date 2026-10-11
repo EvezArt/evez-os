@@ -84,7 +84,28 @@ The initial version does not include a web dashboard and requires no inbound ser
 
 ## RuView / RF sensing
 
-The schema accepts the ruview_csi modality for summary observations. No RuView driver, ESP32 firmware, live CSI ingest, calibration procedure, or health-monitoring claim is implemented here. Add a driver only after validating the installed RuView version, hardware, consent model, calibration data, and measurement uncertainty. Do not equate RF variations with gravitational or spacetime anomalies.
+An optional WebSocket client exists at integrations/ruview_sensing_bridge.py. It reads scalar feature summaries from a RuView-compatible /ws/sensing stream and appends them to a registered experiment's witness ledger. It does not bundle RuView, firmware, or sensing hardware. Confirm the installed version and stream schema before connecting. The adapter allowlists features.mean_rssi (dBm), features.variance (source_native), and features.motion_band_power (source_native). It discards raw CSI, node identifiers, location labels, presence/person classifications, and vital-sign fields. This measures radio environment features, not spacetime curvature.
+
+Install the optional client dependency:
+
+    pip install -r requirements-ruview-bridge.txt
+
+For a local RuView receiver (adjust port and path to match your installed version):
+
+    export EVEZ_SPACETIME_LEDGER="$HOME/.local/state/evez/spacetime-lab.jsonl"
+    export RUVIEW_WS_URL='ws://127.0.0.1:3001/ws/sensing'
+    export RUVIEW_CALIBRATION_ID='site-baseline-v1'
+    python integrations/ruview_sensing_bridge.py --every-seconds 5
+
+Register an experiment first; the bridge refuses an empty or invalid ledger. The calibration ID must identify a real documented calibration or source/protocol version, not imply accuracy without evidence.
+
+For a private remote endpoint, require TLS, authentication, and tailnet-only reachability:
+
+    export RUVIEW_WS_URL='wss://ruview-host.your-tailnet.ts.net/ws/sensing'
+    export RUVIEW_API_TOKEN='read-from-a-secret-manager-or-private-environment'
+    export RUVIEW_CALIBRATION_ID='site-baseline-v1'
+
+Do not embed credentials in URLs or place tokens in command history, logs, the ledger, or repository. Non-tailnet remote WSS requires the explicit RUVIEW_ALLOW_REMOTE_WSS=1 setting; remote unencrypted ws:// is refused. Ensure the upstream RuView endpoint itself enforces access control; do not expose a sensing WebSocket publicly.
 
 ## Hash chain: guarantees and limitations
 
@@ -134,3 +155,16 @@ The existing EVEZ Termux operator now routes the lab tools directly:
     evezctl spacetime-profile --radius-m 10 --sigma-per-m 1 --samples 401
 
 These dispatch to local Python modules under EVEZ_ROOT. They do not call the remote model, turn on Telegram, establish a Tailscale tunnel, or control sensing hardware by themselves. The standalone launcher mobile/evez-spacetime works as well.
+
+## Local dashboard and Tailscale
+
+Run the read-only dashboard on loopback:
+
+    python research/spacetime_dashboard.py --host 127.0.0.1 --port 8787 --ledger "$HOME/.local/state/evez/spacetime-lab.jsonl"
+
+It exposes experiment metadata/counts, interval classification, and bounded shape-profile diagnostics; it does not expose observation bodies or analysis-note text. It is read-only and returns 405 for write methods. It binds only to loopback. If Tailscale is already installed and authorized on the device, you may privately share the local dashboard to your tailnet:
+
+    tailscale serve --bg http://127.0.0.1:8787
+    tailscale serve status
+
+Use commands supported by your installed Tailscale version; reset Serve when no longer needed. This is not activated automatically: no sign-in, ACL change, firewall change, or public Funnel service was started. Never bind this unauthenticated dashboard directly to 0.0.0.0 or publish it via Funnel without a separate authenticated design.
