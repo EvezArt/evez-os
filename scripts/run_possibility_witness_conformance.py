@@ -15,6 +15,7 @@ from evez_possibility_witness_loop import (  # noqa: E402
     authorize_handoff,
     canonical_json_bytes,
     evaluate_witness_receipt,
+    ReplayGuard,
     validate_handoff,
     verify_artifact_digest,
 )
@@ -60,6 +61,12 @@ def main() -> int:
         )
         return decision["decision"] == "DENY" and "read_only_mode" in decision["reasons"] and not decision["execution_performed"]
 
+    def duplicate_request_not_reexecuted():
+        guard = ReplayGuard()
+        first = guard.accept_once(envelope, now=now)
+        replay = guard.accept_once(envelope, now=now)
+        return first["decision"] == "ALLOW" and replay["decision"] == "DENY" and replay["reason"] == "replay_detected" and not replay["execution_performed"]
+
     def unsealed_result_is_not_success():
         decision = evaluate_witness_receipt(
             {"terminal": False, "result_status": "SUCCEEDED", "checks": {"schema": "PASS"}},
@@ -71,6 +78,7 @@ def main() -> int:
         run_check("example_handoff_valid", handoff_valid),
         run_check("artifact_sha256_matches_fixture", artifact_digest_matches),
         run_check("read_only_gate_denies_write", readonly_gate_denies_write),
+        run_check("duplicate_idempotency_key_not_reexecuted", duplicate_request_not_reexecuted),
         run_check("missing_terminal_receipt_not_promoted", unsealed_result_is_not_success),
     ]
     failed = [item for item in checks if item["status"] != "PASS"]
