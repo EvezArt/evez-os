@@ -6,6 +6,7 @@ import ipaddress
 import json
 import os
 import sys
+import socket
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
@@ -174,7 +175,12 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("--host must be a loopback IP address (127.0.0.1 or ::1)")
         if not 1 <= args.port <= 65535:
             raise ValueError("port must be in [1, 65535]")
-        server = ThreadingHTTPServer((args.host, args.port), create_handler(args.ledger))
+        server_class = type(
+            "LoopbackHTTPServer",
+            (ThreadingHTTPServer,),
+            {"address_family": socket.AF_INET6 if host_ip.version == 6 else socket.AF_INET},
+        )
+        server = server_class((args.host, args.port), create_handler(args.ledger))
     except (ValueError, OSError) as exc:
         print(json.dumps({"ok": False, "error": str(exc)}, separators=(",", ":")), file=sys.stderr)
         return 2
