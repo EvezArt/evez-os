@@ -80,6 +80,8 @@ def validate_handoff(envelope: Any, *, now: datetime | None = None) -> list[str]
         current = now or datetime.now(timezone.utc)
         if current.tzinfo is None or current.utcoffset() is None:
             errors.append("validation clock must be timezone-aware")
+        elif created > current.astimezone(timezone.utc):
+            errors.append("handoff is not yet valid")
         elif expires <= current.astimezone(timezone.utc):
             errors.append("handoff is expired")
 
@@ -154,6 +156,8 @@ def authorize_handoff(
         reasons.append("risk_R4_denied")
     if envelope.get("approval_required") is True and not approval_granted:
         reasons.append("human_approval_missing")
+    if envelope.get("risk_class") == "R3" and envelope.get("approval_required") is not True:
+        reasons.append("risk_R3_approval_flag_missing")
     if envelope.get("risk_class") == "R3" and not approval_granted:
         reasons.append("risk_R3_requires_approval")
     allowed = not reasons
