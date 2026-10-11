@@ -143,9 +143,27 @@ def authorize_handoff(
     reasons: list[str] = []
     if errors:
         reasons.append("invalid_handoff")
-    if envelope.get("recipient") != recipient:
+    # Treat all caller-supplied structures as untrusted, even when type hints say dict.
+    if not isinstance(envelope, dict):
+        return {
+            "decision": "DENY",
+            "allowed": False,
+            "reasons": reasons,
+            "missing_capabilities": [],
+            "execution_performed": False,
+        }
+    if not isinstance(recipient, dict) or envelope.get("recipient") != recipient:
         reasons.append("recipient_mismatch")
-    missing_caps = sorted(set(envelope.get("requested_capabilities", [])) - set(granted_capabilities))
+    requested = envelope.get("requested_capabilities", [])
+    granted = list(granted_capabilities) if granted_capabilities is not None else []
+    if not isinstance(requested, list) or any(not isinstance(item, str) for item in requested):
+        requested = []
+        if "invalid_handoff" not in reasons:
+            reasons.append("invalid_handoff")
+    if any(not isinstance(item, str) for item in granted):
+        granted = []
+        reasons.append("invalid_granted_capabilities")
+    missing_caps = sorted(set(requested) - set(granted))
     if missing_caps:
         reasons.append("missing_capabilities:" + ",".join(missing_caps))
     if operation not in {"read", "write"}:
