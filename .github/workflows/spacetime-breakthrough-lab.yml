@@ -1,0 +1,49 @@
+name: Spacetime Breakthrough Lab
+
+on:
+  pull_request:
+    paths:
+      - 'research/spacetime_breakthrough_lab.py'
+      - 'integrations/spacetime_telegram_bridge.py'
+      - 'mobile/evez-spacetime'
+      - 'tests/test_spacetime_*.py'
+      - 'schemas/spacetime-lab-experiment-v1.schema.json'
+      - 'config/spacetime-adapters.example.json'
+      - 'skills/spacetime-breakthrough-lab/**'
+      - 'docs/SPACETIME-BREAKTHROUGH-LAB-v1.md'
+      - '.github/workflows/spacetime-breakthrough-lab.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'research/spacetime_breakthrough_lab.py'
+      - 'integrations/spacetime_telegram_bridge.py'
+      - 'mobile/evez-spacetime'
+      - 'tests/test_spacetime_*.py'
+      - 'schemas/spacetime-lab-experiment-v1.schema.json'
+      - 'config/spacetime-adapters.example.json'
+      - 'skills/spacetime-breakthrough-lab/**'
+      - 'docs/SPACETIME-BREAKTHROUGH-LAB-v1.md'
+      - '.github/workflows/spacetime-breakthrough-lab.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile lab modules
+        run: python -m py_compile research/spacetime_breakthrough_lab.py integrations/spacetime_telegram_bridge.py
+      - name: Check Termux launcher syntax
+        run: bash -n mobile/evez-spacetime
+      - name: Validate JSON contracts
+        run: |
+          python -m json.tool schemas/spacetime-lab-experiment-v1.schema.json >/dev/null
+          python -m json.tool config/spacetime-adapters.example.json >/dev/null
+      - name: Run offline tests
+        run: python -m unittest tests/test_spacetime_breakthrough_lab.py tests/test_spacetime_telegram_bridge.py -v
