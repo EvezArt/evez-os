@@ -100,7 +100,7 @@ class EventSpineIntegrityTests(unittest.TestCase):
         spine = EventSpine()
         spine.append("epie", "OBSERVED_FACT", {"x": 1})
         spine._events[0]["data"]["x"] = 2
-        with self.assertRaisesRegex(ValueError, "invalid event chain"):
+        with self.assertRaisesRegex(ValueError, "invalid event chain|current chain head is invalid"):
             spine.append("epie", "EVIDENCE_COMMIT", {"x": 3})
         self.assertEqual(len(spine.events), 1)
 

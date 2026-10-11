@@ -226,7 +226,10 @@ def realized_research_reward(
             "gross_reward": 0.0,
             "search_cost": search_cost,
             "risk_cost": risk_cost,
-            "net_reward": -expenditure,
+            # Round to 12dp: 0.1+0.2 is 0.30000000000000004 in IEEE-754 and
+            # every reward comparison downstream (net_reward > 0, etc.)
+            # must behave identically on any platform.
+            "net_reward": round(-expenditure, 12),
         }
     if set(baseline_forecast) != set(updated_forecast):
         raise ValueError("Baseline and updated forecasts must use the same outcome space")
