@@ -100,3 +100,24 @@ Hash integrity proves only that the log is internally consistent under this impl
 4. Add approval-gated Hermes/OpenClaw tool adapters; keep autonomous deployment and hardware control disabled.
 5. If a dashboard is added, bind it to private Tailscale Serve, add authentication and audit logging, and leave public Funnel disabled unless explicitly enabled by the operator.
 6. Add hardware-backed signatures and durable replay protection before multi-device or safety-critical use.
+
+
+## Spacelike intervals and bubble-profile screening
+
+The lab includes two independent mathematical baselines.
+
+1. `research/spacetime_interval.py` calculates the 1D flat-Minkowski interval `s^2 = c^2 * delta_t^2 - delta_x^2` under signature (+,−). Negative `s^2` classifies a pair of events as spacelike separated. That is a geometric relation between events, not a recipe for a signal or object to travel between them faster than light.
+
+   Example:
+
+       python research/spacetime_interval.py --delta-t-seconds 1e-9 --delta-x-meters 1
+
+   This is a numerical illustration only. It does not claim that an observer can send information over that separation.
+
+2. `research/warp_bubble_profile.py` samples an Alcubierre-style radial shape function `f(r) = [tanh(sigma*(r+R)) - tanh(sigma*(r-R))] / [2*tanh(sigma*R)]` and its analytic radial derivative. These diagnostics can catch sign, unit, parameter-range, or sampling errors before a more expensive symbolic/numerical model is attempted.
+
+   Example:
+
+       python research/warp_bubble_profile.py --radius-m 10 --sigma-per-m 1 --samples 401 --output /tmp/profile.json
+
+The bubble profile screen does **not** calculate the Einstein tensor, stress-energy tensor, energy-condition violations, negative-energy requirements, stability, causal control, or engineering feasibility. A profile function is an ansatz, not a complete spacetime solution. The next scientifically meaningful stage is independent symbolic derivation, explicit metric/signature conventions, an independently implemented Einstein-tensor calculation, numerical convergence checks, and a clearly described stress-energy/energy-condition analysis. A result should remain PROPOSED until independently reviewed; no single scalar score can establish a real breakthrough bubble.
