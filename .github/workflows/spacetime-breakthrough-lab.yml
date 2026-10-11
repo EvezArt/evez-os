@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'research/spacetime_breakthrough_lab.py'
+      - 'research/spacetime_interval.py'
       - 'integrations/spacetime_telegram_bridge.py'
       - 'mobile/evez-spacetime'
       - 'tests/test_spacetime_*.py'
@@ -16,6 +17,7 @@ on:
     branches: [main]
     paths:
       - 'research/spacetime_breakthrough_lab.py'
+      - 'research/spacetime_interval.py'
       - 'integrations/spacetime_telegram_bridge.py'
       - 'mobile/evez-spacetime'
       - 'tests/test_spacetime_*.py'
@@ -38,7 +40,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Compile lab modules
-        run: python -m py_compile research/spacetime_breakthrough_lab.py integrations/spacetime_telegram_bridge.py
+        run: python -m py_compile research/spacetime_breakthrough_lab.py research/spacetime_interval.py integrations/spacetime_telegram_bridge.py
       - name: Check Termux launcher syntax
         run: bash -n mobile/evez-spacetime
       - name: Validate JSON contracts
@@ -46,4 +48,4 @@ jobs:
           python -m json.tool schemas/spacetime-lab-experiment-v1.schema.json >/dev/null
           python -m json.tool config/spacetime-adapters.example.json >/dev/null
       - name: Run offline tests
-        run: python -m unittest tests/test_spacetime_breakthrough_lab.py tests/test_spacetime_telegram_bridge.py -v
+        run: python -m unittest discover -s tests -p 'test_spacetime_*.py' -v
