@@ -272,8 +272,11 @@ def _strict_forecast_distribution(forecast: Mapping[str, float]) -> dict[str, fl
         if isinstance(raw, bool) or not isinstance(raw, (int, float)):
             raise ValueError("Forecast probabilities must be numeric, not booleans")
         value = float(raw)
-        if not math.isfinite(value) or value < 0 or value > 1:
-            raise ValueError("Forecast probabilities must be finite and in [0, 1]")
+        # Per-element: only finite + non-negative here. Values above 1 are not
+        # rejected element-wise so the normalization check below reports the
+        # real failure mode ("sum to X, not 1") for unnormalized forecasts.
+        if not math.isfinite(value) or value < 0:
+            raise ValueError("Forecast probabilities must be finite and non-negative")
         result[outcome] = value
     total = math.fsum(result.values())
     if not math.isclose(total, 1.0, rel_tol=1e-9, abs_tol=1e-9):

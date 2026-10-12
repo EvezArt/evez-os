@@ -17,7 +17,32 @@ jobs:
             python mobile/test_evez_identity.py
             python mobile/test_candidate.py
 
+  epie-verify:
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - run:
+          name: Install pinned EPIE dependencies
+          command: python -m pip install --require-hashes -r requirements-epie.txt
+      - run:
+          name: Run EPIE unit tests
+          command: python -m unittest discover -s tests -p 'test_evez_epie.py' -v
+      - run:
+          name: Run EPIE store tests
+          command: python -m unittest discover -s tests -p 'test_evez_epie_store.py' -v
+      - run:
+          name: Verify event-spine integrity regressions
+          command: python -m unittest discover -s tests -p 'test_event_spine_integrity.py' -v
+      - run:
+          name: Test EPIE-to-spine adapter on loopback
+          command: python -m unittest discover -s tests -p 'test_evez_spine_adapter.py' -v
+      - run:
+          name: Run deterministic demo
+          command: python -m evez_epie demo
+
 workflows:
   verification:
     jobs:
       - verify
+      - epie-verify

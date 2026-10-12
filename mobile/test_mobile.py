@@ -17,7 +17,8 @@ CTL = ROOT / "evezctl"
 
 def run_state(temp: str, *args, expect: int = 0) -> dict:
     env = os.environ.copy()
-    env["EVEZ_STATE_DIR"] = temp
+    # canonical layout: evezctl keeps state under <root>/state — seed there too
+    env["EVEZ_STATE_DIR"] = str(Path(temp) / "state")
     result = subprocess.run(
         [sys.executable, str(STATE), *args],
         env=env,
@@ -166,7 +167,7 @@ with tempfile.TemporaryDirectory() as temp:
 
     broken = subprocess.run(
         [sys.executable, str(STATE), "verify"],
-        env=os.environ | {"EVEZ_STATE_DIR": temp},
+        env=os.environ | {"EVEZ_STATE_DIR": str(Path(temp) / "state")},
         text=True,
         capture_output=True,
     )

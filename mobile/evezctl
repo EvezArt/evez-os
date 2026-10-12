@@ -95,14 +95,16 @@ outbox_cmd() {
 }
 
 sync_cmd() {
-  log "sync endpoint=$EVEZ_ENDPOINT"
+  local endpoint="${1:-$EVEZ_ENDPOINT}"
+  local path="${2:-$EVEZ_SPINE_EVENT_PATH}"
+  log "sync endpoint=$endpoint"
 
   EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" verify || {
     log "refusing sync: local evidence chain is not verified"
     return 1
   }
 
-  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" sync "$EVEZ_ENDPOINT" "$EVEZ_SPINE_EVENT_PATH"
+  EVEZ_STATE_DIR="$EVEZ_STATE_DIR" python "$(state_py)" sync "$endpoint" "$path"
 }
 
 security_audit_cmd() {

@@ -159,7 +159,7 @@ def main() -> int:
             return 0 if verified else 1
 
         if args.command == "show":
-            print(json.dumps(snapshot(), indent=2, sort_keys=True))
+            print(json.dumps(snapshot(), sort_keys=True))
             return 0
 
         result = self_witness()
