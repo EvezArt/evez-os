@@ -21,6 +21,7 @@ Reference implementation using Python plus the hash-pinned, dependency-free `rfc
 - `choose_next_test` adds finite-step, affordability, and minimum-net-value stopping conditions so a self-improving loop has a real stop rule.
 - Retention score is decision_value × reliability × novelty × exp(−ln(2) × age / half_life). A missing half-life means no age-based decay. This score controls retrieval priority, not truth or permanent retention.
 - Identical content hashes can be deduplicated in a hot index, but source references and original artifacts remain preserved.
+- The Event Spine adapter defaults to loopback, requires explicit opt-in plus HTTPS for remote hosts, and rejects HTTP redirects so a validated target cannot silently redirect to a different host or downgrade transport.
 - Ledger entries use existing EVEZ event names OBSERVED_FACT, EVIDENCE_COMMIT, and CHECKPOINT_ISSUED. This prototype is not yet a wire-compatible adapter for the live event-spine service.
 - Ledger hashes use the hash-pinned `rfc8785` package to canonicalize JSON per RFC 8785 before SHA-256. Regression tests exercise the RFC's ECMAScript-compatible IEEE-754 number formatting and UTF-16 property ordering. SHA-256 chaining detects modification relative to the chain but does not authenticate source identity or prove trustworthy time.
 
