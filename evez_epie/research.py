@@ -6,14 +6,22 @@ from typing import Any, Iterable, Mapping
 
 
 def _probabilities(values: Mapping[str, float]) -> dict[str, float]:
-    if not values:
+    if not isinstance(values, Mapping) or not values:
         raise ValueError("At least one hypothesis is required")
-    if any(not math.isfinite(float(value)) or float(value) < 0 for value in values.values()):
-        raise ValueError("Probabilities must be finite and non-negative")
-    total = math.fsum(float(value) for value in values.values())
+    normalized = {}
+    for key, raw in values.items():
+        if not isinstance(key, str) or not key:
+            raise ValueError("Hypothesis identifiers must be non-empty strings")
+        if isinstance(raw, bool) or not isinstance(raw, (int, float)):
+            raise ValueError("Probabilities must be numeric, not booleans")
+        value = float(raw)
+        if not math.isfinite(value) or value < 0:
+            raise ValueError("Probabilities must be finite and non-negative")
+        normalized[key] = value
+    total = math.fsum(normalized.values())
     if total <= 0:
         raise ValueError("Probabilities sum to zero")
-    return {key: float(value) / total for key, value in sorted(values.items())}
+    return {key: normalized[key] / total for key in sorted(normalized)}
 
 
 def _validate_outcomes(prior: Mapping[str, float], outcomes: Mapping[str, Any]) -> dict[str, float]:
@@ -24,7 +32,10 @@ def _validate_outcomes(prior: Mapping[str, float], outcomes: Mapping[str, Any]) 
         if not isinstance(row, Mapping) or set(row) != set(p):
             raise ValueError(f"Outcome {outcome!r} must define likelihoods for every hypothesis")
     for hypothesis in p:
-        likelihoods = [float(outcomes[outcome][hypothesis]) for outcome in outcomes]
+        raw_likelihoods = [outcomes[outcome][hypothesis] for outcome in outcomes]
+        if any(isinstance(x, bool) or not isinstance(x, (int, float)) for x in raw_likelihoods):
+            raise ValueError("Outcome likelihoods must be numeric, not booleans")
+        likelihoods = [float(x) for x in raw_likelihoods]
         if any(not math.isfinite(x) or x < 0 or x > 1 for x in likelihoods):
             raise ValueError("Outcome likelihoods must be finite values in [0, 1]")
         total = math.fsum(likelihoods)
@@ -174,7 +185,7 @@ def prequential_log_score(
     Higher is better. The probability floor prevents a zero-probability model
     from producing negative infinity, but it must be kept fixed across runs.
     """
-    p = _probabilities(forecast)
+    p = _strict_forecast_distribution(forecast)
     if observed_outcome not in p:
         raise ValueError("Observed outcome is absent from the forecast outcome space")
     if not math.isfinite(probability_floor) or not 0 < probability_floor < 1:
