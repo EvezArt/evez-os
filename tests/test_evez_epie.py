@@ -76,6 +76,18 @@ class BayesianTests(unittest.TestCase):
 
     def test_independence_must_be_explicit(self):
         with self.assertRaisesRegex(ValueError, "not declared"): bayesian_update({"H":1.0}, [{"id":"e","independence_group":"g","conditional_independence_asserted":False,"likelihoods":{"H":.5}}])
+
+    def test_boolean_prior_weight_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "numeric, not booleans"):
+            bayesian_update({"H1": True, "H0": 0.0}, [])
+
+    def test_boolean_likelihood_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "numeric, not boolean"):
+            bayesian_update({"H1": .5, "H0": .5}, [{
+                "id": "e", "independence_group": "g",
+                "conditional_independence_asserted": True,
+                "likelihoods": {"H1": True, "H0": .5},
+            }])
     def test_entropy(self): self.assertAlmostEqual(entropy_bits({"H1":.2,"H0":.8}), .7219280948873623)
     def test_information_gain(self):
         p={"H1":.2,"H0":.8}
