@@ -1,5 +1,6 @@
 import importlib.util
 import json
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 import threading
 import unittest
@@ -8,6 +9,7 @@ from urllib.request import urlopen
 from evez_epie.kernel import EventLedger
 from evez_epie.spine_adapter import (
     _base_url,
+    _request_json,
     sync_ledger_to_spine,
     verify_spine,
 )
@@ -72,6 +74,28 @@ class SpineAdapterIntegrationTests(unittest.TestCase):
             replay = json.loads(response.read().decode("utf-8"))
         self.assertEqual(replay["count"], 1)
         self.assertEqual(replay["domain"], "epie")
+
+    def test_redirects_are_rejected(self):
+        class RedirectHandler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(302)
+                self.send_header("Location", "https://example.com/redirected")
+                self.end_headers()
+
+            def log_message(self, format, *args):
+                pass
+
+        server = HTTPServer(("127.0.0.1", 0), RedirectHandler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            url = f"http://127.0.0.1:{server.server_port}"
+            with self.assertRaisesRegex(RuntimeError, "HTTP 302"):
+                _request_json(url, "/health", timeout=2)
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
 
     def test_remote_http_target_is_blocked_by_default(self):
         with self.assertRaisesRegex(PermissionError, "allow_remote"):
