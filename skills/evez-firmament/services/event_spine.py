@@ -2,95 +2,219 @@
 """EVEZ-OS Event Spine — Append-only hash-linked event log on port 9116."""
 
 import json
+import copy
+import math
+import rfc8785
 import time
 import hashlib
 import threading
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from urllib.parse import urlsplit, parse_qs, unquote
 
 # ── Hash-Linked Event Log ──────────────────────────────────────────
 
 class EventSpine:
+    """Append-only event log with versioned, recomputable event hashes.
+
+    v1 hashes preserve the historical formula and are verified for compatibility;
+    their timestamp is not covered by that legacy formula. New v2 events hash
+    all stored fields except the digest using RFC 8785 canonical JSON, including
+    the timestamp.
+    """
     def __init__(self):
-        self.lock = threading.Lock()
-        self.events = []
-        self.index = {}        # domain → [event indices]
+        self.lock = threading.RLock()
+        self._events = []
+        self.index = {}
+        self.idempotency_index = {}
         self.chain_valid = True
 
-    def append(self, domain, action, data, timestamp=None):
+    @property
+    def events(self):
+        """Return a snapshot so callers cannot mutate stored history by alias."""
         with self.lock:
-            prev_hash = self.events[-1]["hash"] if self.events else "0" * 64
-            seq = len(self.events)
-            ts = timestamp or time.time()
-            # Build event
+            return copy.deepcopy(self._events)
+
+    @staticmethod
+    def _legacy_hash(event):
+        hash_input = (
+            f"{event['seq']}:{event['prev_hash']}:{event['domain']}:"
+            f"{event['action']}:{json.dumps(event['data'], sort_keys=True, default=str)}"
+        )
+        return hashlib.sha256(hash_input.encode()).hexdigest()
+
+    @staticmethod
+    def _v2_hash(event):
+        payload = {key: value for key, value in event.items() if key != "hash"}
+        return hashlib.sha256(rfc8785.dumps(payload)).hexdigest()
+
+    @classmethod
+    def _compute_hash(cls, event):
+        version = event.get("hash_version", 1)
+        if type(version) is not int:
+            raise ValueError("Event hash version must be an integer")
+        if version == 1:
+            return cls._legacy_hash(event)
+        if version == 2:
+            return cls._v2_hash(event)
+        raise ValueError(f"Unsupported event hash version: {version}")
+
+    def append(self, domain, action, data, timestamp=None, idempotency_key=None):
+        if not isinstance(domain, str) or not domain:
+            raise ValueError("domain must be a non-empty string")
+        if not isinstance(action, str) or not action:
+            raise ValueError("action must be a non-empty string")
+        if idempotency_key is not None:
+            if not isinstance(idempotency_key, str) or not idempotency_key or len(idempotency_key) > 256:
+                raise ValueError("idempotency_key must be a non-empty string up to 256 characters")
+        ts = time.time() if timestamp is None else timestamp
+        if isinstance(ts, bool) or not isinstance(ts, (int, float)) or not math.isfinite(ts):
+            raise ValueError("timestamp must be a finite numeric epoch timestamp")
+
+        # JCS validates the data as interoperable JSON before touching the ledger.
+        data_copy = copy.deepcopy(data)
+        rfc8785.dumps({"data": data_copy})
+
+        with self.lock:
+            if not self.chain_valid:
+                raise ValueError("Refusing to append to an invalid event chain")
+            if self._events:
+                head = self._events[-1]
+                expected_previous = self._events[-2]["hash"] if len(self._events) > 1 else "0" * 64
+                try:
+                    head_ok = (
+                        type(head.get("seq")) is int
+                        and head.get("seq") == len(self._events) - 1
+                        and head.get("prev_hash") == expected_previous
+                        and head.get("hash") == self._compute_hash(head)
+                    )
+                except Exception:
+                    head_ok = False
+                if not head_ok:
+                    self.chain_valid = False
+                    raise ValueError("Refusing to append because the current chain head is invalid")
+
+            if idempotency_key is not None:
+                existing_seq = self.idempotency_index.get((domain, idempotency_key))
+                if existing_seq is not None:
+                    integrity = self.verify()
+                    if not integrity["valid"]:
+                        raise ValueError("Refusing to reuse an idempotency key on an invalid chain")
+                    existing = self._events[existing_seq]
+                    existing_fingerprint = hashlib.sha256(rfc8785.dumps({
+                        "domain": domain, "action": existing["action"], "data": existing["data"]
+                    })).hexdigest()
+                    new_fingerprint = hashlib.sha256(rfc8785.dumps({
+                        "domain": domain, "action": action, "data": data_copy
+                    })).hexdigest()
+                    if existing_fingerprint != new_fingerprint:
+                        raise ValueError("idempotency_key already exists for different event content")
+                    return copy.deepcopy(existing)
+
+            prev_hash = self._events[-1]["hash"] if self._events else "0" * 64
             event = {
-                "seq": seq,
+                "seq": len(self._events),
                 "domain": domain,
                 "action": action,
-                "data": data,
+                "data": data_copy,
                 "timestamp": ts,
                 "prev_hash": prev_hash,
+                "hash_version": 2,
             }
-            # Compute hash: SHA-256 of (seq + prev_hash + domain + action + data_json)
-            hash_input = f"{seq}:{prev_hash}:{domain}:{action}:{json.dumps(data, sort_keys=True, default=str)}"
-            event["hash"] = hashlib.sha256(hash_input.encode()).hexdigest()
-            self.events.append(event)
-            # Index by domain
-            self.index.setdefault(domain, []).append(seq)
-        return event
+            if idempotency_key is not None:
+                event["idempotency_key"] = idempotency_key
+            event["hash"] = self._compute_hash(event)
+            self._events.append(event)
+            self.index.setdefault(domain, []).append(event["seq"])
+            if idempotency_key is not None:
+                self.idempotency_index[(domain, idempotency_key)] = event["seq"]
+            self.chain_valid = True
+            return copy.deepcopy(event)
 
     def project(self, domain):
         with self.lock:
             indices = self.index.get(domain, [])
-            return [self.events[i] for i in indices if i < len(self.events)]
+            return [copy.deepcopy(self._events[i]) for i in indices
+                    if isinstance(i, int) and 0 <= i < len(self._events)]
 
     def replay(self, domain):
         events = self.project(domain)
-        return {
-            "domain": domain,
-            "events": events,
-            "count": len(events),
-        }
+        return {"domain": domain, "events": events, "count": len(events)}
+
+    def recent(self, n=20):
+        """Return a defensive snapshot of the last N events."""
+        if isinstance(n, bool) or not isinstance(n, int):
+            raise ValueError("n must be an integer")
+        if n < 0:
+            raise ValueError("n must be non-negative")
+        with self.lock:
+            return copy.deepcopy(self._events[-n:] if n else [])
 
     def verify(self):
-        """Verify chain integrity — check all hash links."""
+        """Recompute each event digest and verify chain order and predecessor links."""
         with self.lock:
-            events = list(self.events)
-        
-        if not events:
-            return {"valid": True, "events_checked": 0, "errors": []}
+            events = copy.deepcopy(self._events)
 
         errors = []
-        for i, event in enumerate(events):
-            if i == 0:
-                if event["prev_hash"] != "0" * 64:
-                    errors.append({"seq": i, "error": "genesis prev_hash mismatch"})
+        warnings = []
+        previous = "0" * 64
+        for index, event in enumerate(events):
+            if not isinstance(event, dict):
+                errors.append({"seq": index, "error": "event is not an object"})
+                continue
+            if type(event.get("seq")) is not int or event.get("seq") != index:
+                errors.append({"seq": index, "error": "sequence mismatch"})
+            if event.get("prev_hash") != previous:
+                errors.append({"seq": index, "error": "hash chain broken"})
+            version = event.get("hash_version", 1)
+            if version == 1:
+                warnings.append({
+                    "seq": index,
+                    "warning": "legacy v1 hash does not cover timestamp or extra fields",
+                })
+            try:
+                expected = self._compute_hash(event)
+            except Exception as exc:
+                errors.append({
+                    "seq": index,
+                    "error": f"event hash recomputation failed: {type(exc).__name__}",
+                })
             else:
-                if event["prev_hash"] != events[i - 1]["hash"]:
-                    errors.append({"seq": i, "error": "chain link broken"})
+                if event.get("hash") != expected:
+                    errors.append({"seq": index, "error": "event content hash mismatch"})
+            recorded_hash = event.get("hash")
+            if isinstance(recorded_hash, str) and len(recorded_hash) == 64:
+                previous = recorded_hash
+            else:
+                errors.append({"seq": index, "error": "invalid event hash format"})
+                previous = "0" * 64
 
-            # Recompute hash
-            hash_input = f"{event['seq']}:{event['prev_hash']}:{event['domain']}:{event['action']}:{json.dumps(event['data'], sort_keys=True, default=str)}"
-            computed = hashlib.sha256(hash_input.encode()).hexdigest()
-            if computed != event["hash"]:
-                errors.append({"seq": i, "error": "hash mismatch", "expected": computed, "actual": event["hash"]})
-
+        valid = len(errors) == 0
+        with self.lock:
+            self.chain_valid = valid
         return {
-            "valid": len(errors) == 0,
+            "valid": valid,
             "events_checked": len(events),
-            "errors": errors,
-            "head_hash": events[-1]["hash"] if events else None,
+            "errors": errors[:10],
+            "total_events": len(events),
+            "warnings": warnings[:10],
+            "total_warnings": len(warnings),
         }
 
-    def stats(self):
+    def state_summary(self):
+        """Summary view; it does not expose mutable references to the ledger."""
         with self.lock:
-            domains = {d: len(idxs) for d, idxs in self.index.items()}
+            domains = {key: len(value) for key, value in self.index.items()}
+            events = self._events
             return {
-                "total_events": len(self.events),
+                "total_events": len(events),
                 "domains": domains,
-                "domain_count": len(domains),
-                "head_hash": self.events[-1]["hash"] if self.events else None,
-                "first_event": self.events[0]["timestamp"] if self.events else None,
-                "last_event": self.events[-1]["timestamp"] if self.events else None,
+                "first_event": events[0]["timestamp"] if events else None,
+                "last_event": events[-1]["timestamp"] if events else None,
+                "chain_valid": self.chain_valid,
+                "recent_events": [
+                    {"seq": e["seq"], "domain": e["domain"], "action": e["action"], "timestamp": e["timestamp"]}
+                    for e in events[-5:]
+                ],
             }
 
 SPINE = EventSpine()
@@ -113,23 +237,48 @@ class Handler(BaseHTTPRequestHandler):
         return {}
 
     def do_GET(self):
-        if self.path == "/health":
-            self._json(200, {"status": "alive", "service": "event_spine", "port": 9116})
-        elif self.path == "/status":
-            self._json(200, SPINE.stats())
-        elif self.path == "/verify":
+        parsed = urlsplit(self.path)
+        path = parsed.path
+        query = parse_qs(parsed.query, keep_blank_values=True)
+
+        if path == "/health":
+            self._json(200, {
+                "status": "alive",
+                "service": "event_spine",
+                "port": 9116,
+                "event_hash_version": 2,
+                "canonicalization": "RFC8785",
+                "idempotent_append": True,
+                "total_events": len(SPINE.events),
+                "chain_valid": SPINE.chain_valid,
+            })
+        elif path == "/state":
+            self._json(200, SPINE.state_summary())
+        elif path == "/verify":
             self._json(200, SPINE.verify())
-        elif self.path.startswith("/project/"):
-            domain = self.path.split("/project/", 1)[1]
-            self._json(200, {"domain": domain, "events": SPINE.project(domain)})
-        elif self.path.startswith("/replay/"):
-            domain = self.path.split("/replay/", 1)[1]
+        elif path == "/replay":
+            domain = query.get("domain", [None])[0]
+            if domain:
+                self._json(200, SPINE.replay(domain))
+            else:
+                self._json(200, SPINE.state_summary())
+        elif path == "/recent":
+            try:
+                n = int(query.get("n", ["20"])[0])
+            except (TypeError, ValueError):
+                self._json(400, {"error": "n must be an integer"})
+                return
+            if n < 0 or n > 10000:
+                self._json(400, {"error": "n must be between 0 and 10000"})
+                return
+            events = SPINE.recent(n)
+            self._json(200, {"events": events, "count": len(events)})
+        elif path.startswith("/project/"):
+            domain = unquote(path[len("/project/"):])
+            if not domain or "/" in domain:
+                self._json(400, {"error": "invalid domain"})
+                return
             self._json(200, SPINE.replay(domain))
-        elif self.path == "/events":
-            # Last 50 events
-            with SPINE.lock:
-                events = SPINE.events[-50:]
-            self._json(200, {"events": events, "showing": len(events)})
         else:
             self._json(404, {"error": "not found"})
 
@@ -145,7 +294,7 @@ class Handler(BaseHTTPRequestHandler):
             action = body.get("action", "event")
             data = body.get("data", {})
             timestamp = body.get("timestamp")
-            event = SPINE.append(domain, action, data, timestamp)
+            event = SPINE.append(domain, action, data, timestamp, body.get("idempotency_key"))
             self._json(201, event)
         elif self.path == "/project":
             domain = body.get("domain", "")
