@@ -32,8 +32,8 @@ def validate_ws_url(url: str, *, token_present: bool, allow_remote_wss: bool = F
     if not isinstance(url, str) or not url.strip():
         raise ValueError("RUVIEW_WS_URL must be set to a WebSocket URL")
     parsed = urlsplit(url.strip())
-    if parsed.scheme not in {"ws", "wss"} or not parsed.hostname or parsed.username or parsed.password or parsed.fragment:
-        raise ValueError("RuView endpoint must be a ws:// or wss:// URL without embedded credentials or fragments")
+    if parsed.scheme not in {"ws", "wss"} or not parsed.hostname or parsed.username or parsed.password or parsed.fragment or parsed.query:
+        raise ValueError("RuView endpoint must be a ws:// or wss:// URL without embedded credentials, query strings, or fragments")
     host = parsed.hostname.lower().rstrip(".")
     is_loopback = host == "localhost" or host.endswith(".localhost")
     try:
