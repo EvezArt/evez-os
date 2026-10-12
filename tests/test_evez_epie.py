@@ -208,6 +208,14 @@ class ResearchRewardTests(unittest.TestCase):
     def test_log_score_uses_fixed_floor_for_zero_probability(self):
         self.assertAlmostEqual(prequential_log_score({"yes": 0.0, "no": 1.0}, "yes"), math.log(1e-12), places=12)
 
+    def test_log_score_rejects_unnormalized_forecast(self):
+        with self.assertRaisesRegex(ValueError, "sum to"):
+            prequential_log_score({"yes": 2.0, "no": 2.0}, "yes")
+
+    def test_log_score_rejects_boolean_probability(self):
+        with self.assertRaisesRegex(ValueError, "numeric, not booleans"):
+            prequential_log_score({"yes": True, "no": 0.0}, "yes")
+
 class AggregateResearchRewardTests(unittest.TestCase):
     @staticmethod
     def cases(outcomes, *, forecast_after=None, gate_override=None):
