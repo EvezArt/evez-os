@@ -13,7 +13,7 @@ import math
 from typing import Any, Mapping
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 import rfc8785
 
@@ -21,6 +21,13 @@ from .kernel import EVENT_TYPES, EventLedger, canonical_hash
 
 DEFAULT_SPINE_URL = "http://127.0.0.1:9116"
 EPIE_ENVELOPE_SCHEMA = "evez.epie.event.v1"
+
+
+class _RejectRedirects(HTTPRedirectHandler):
+    """Do not let a validated service URL redirect requests to another target."""
+
+    def redirect_request(self, request, fp, code, message, headers, newurl):
+        return None
 
 
 def _base_url(base_url: str, *, allow_remote: bool) -> str:
@@ -64,7 +71,10 @@ def _request_json(
         headers={"Accept": "application/json", **({"Content-Type": "application/json"} if data is not None else {})},
     )
     try:
-        with urlopen(request, timeout=float(timeout)) as response:
+        # urlopen's default opener follows redirects. Refuse them so the
+        # validated loopback/HTTPS target remains the actual request target.
+        opener = build_opener(_RejectRedirects())
+        with opener.open(request, timeout=float(timeout)) as response:
             raw = response.read()
     except HTTPError as exc:
         raise RuntimeError(f"Event Spine returned HTTP {exc.code} for {method} {path}") from exc
