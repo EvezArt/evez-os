@@ -20,11 +20,22 @@ def canonical_hash(value: Any) -> str:
     return hashlib.sha256(rfc8785.dumps(value)).hexdigest()
 
 def _normalise(weights: Mapping[str, float]) -> dict[str, float]:
-    if not weights: raise ValueError("At least one hypothesis is required")
-    if any(not math.isfinite(v) or v < 0 for v in weights.values()): raise ValueError("Weights must be finite and non-negative")
-    total = math.fsum(weights.values())
-    if total <= 0: raise ValueError("Weights sum to zero")
-    return {k: v / total for k, v in sorted(weights.items())}
+    if not isinstance(weights, Mapping) or not weights:
+        raise ValueError("At least one hypothesis is required")
+    clean = {}
+    for key, raw in weights.items():
+        if not isinstance(key, str) or not key:
+            raise ValueError("Hypothesis identifiers must be non-empty strings")
+        if isinstance(raw, bool) or not isinstance(raw, (int, float)):
+            raise ValueError("Weights must be numeric, not booleans")
+        value = float(raw)
+        if not math.isfinite(value) or value < 0:
+            raise ValueError("Weights must be finite and non-negative")
+        clean[key] = value
+    total = math.fsum(clean.values())
+    if total <= 0:
+        raise ValueError("Weights sum to zero")
+    return {key: clean[key] / total for key in sorted(clean)}
 
 def bayesian_update(prior: Mapping[str, float], evidence: Sequence[Mapping[str, Any]]) -> dict[str, float]:
     """Update in log space; require explicit conditional independence.
@@ -48,7 +59,10 @@ def bayesian_update(prior: Mapping[str, float], evidence: Sequence[Mapping[str, 
         if not isinstance(likelihoods, Mapping) or set(likelihoods) != hypotheses: raise ValueError(f"{eid}: likelihoods must cover exactly the prior hypotheses")
         for h in hypotheses:
             likelihood = likelihoods[h]
-            if not isinstance(likelihood, (int, float)) or not math.isfinite(likelihood) or likelihood < 0 or likelihood > 1:
+            if isinstance(likelihood, bool) or not isinstance(likelihood, (int, float)):
+                raise ValueError(f"{eid}: likelihood for {h} must be numeric, not boolean")
+            likelihood = float(likelihood)
+            if not math.isfinite(likelihood) or likelihood < 0 or likelihood > 1:
                 raise ValueError(f"{eid}: likelihood for {h} must be in [0, 1]")
             if logw[h] != -math.inf:
                 logw[h] = -math.inf if likelihood == 0 else logw[h] + math.log(likelihood)
