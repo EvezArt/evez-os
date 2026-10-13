@@ -4,6 +4,8 @@ jobs:
   verify:
     docker:
       - image: cimg/python:3.12
+    environment:
+      PYTHONPATH: .
     steps:
       - checkout
       - run:

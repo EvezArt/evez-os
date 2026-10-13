@@ -5,6 +5,10 @@ on:
     branches: ["**"]
   pull_request:
 
+
+env:
+  PYTHONPATH: .
+
 jobs:
   shell-and-mobile-contract:
     runs-on: ubuntu-latest

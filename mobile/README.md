@@ -163,6 +163,17 @@ A vague intent stops with REQUIRES_SPECIFICATION.
 
 Consequential operations remain blocked without authorization.
 
+## Persistent reality substrate
+
+The world-model primitives are available from the phone through:
+
+    evezctl reality project SNAPSHOT.json IMAGE phone
+    evezctl reality choose CANDIDATES.json
+
+The substrate keeps world entities, causal events, projections, counterfactual
+branches, cultural lineage, and self-evaluation distinct. Rendered output is a
+projection of state, not a replacement for state.
+
 ## Security controls
 
     evezctl security-init
