@@ -1,0 +1,44 @@
+{
+  "schema_version": "evez.spacetime-lab.adapters.v1",
+  "mode": "offline-first",
+  "agent_runtime": {
+    "provider": "none",
+    "supported_external_runtimes": ["hermes", "openclaw"],
+    "enabled": false,
+    "policy": "read-only by default; proposed writes go through the lab CLI and append to the witness ledger"
+  },
+  "messaging": {
+    "provider": "telegram-bot-api",
+    "enabled": false,
+    "token_env": "TELEGRAM_BOT_TOKEN",
+    "allowlist_env": "TELEGRAM_ALLOWED_USER_IDS",
+    "chat_scope": "private-only",
+    "commands": ["/help", "/status", "/verify", "/proposal", "/observation"]
+  },
+  "network": {
+    "provider": "tailscale",
+    "private_access": "serve",
+    "public_funnel": false,
+    "inbound_ports_required_for_telegram_polling": false,
+    "note": "Telegram long polling is outbound HTTPS. A loopback read-only dashboard is included; operators may configure tailnet-only Tailscale Serve. Public Funnel stays disabled."
+  },
+  "sensors": {
+    "provider": "ruview-websocket-scalar-summary-adapter",
+    "script": "integrations/ruview_sensing_bridge.py",
+    "optional_dependency_file": "requirements-ruview-bridge.txt",
+    "endpoint_env": "RUVIEW_WS_URL",
+    "token_env": "RUVIEW_API_TOKEN",
+    "calibration_env": "RUVIEW_CALIBRATION_ID",
+    "enabled": false,
+    "accepted_modality": "ruview_csi",
+    "required_fields": ["source", "quantity", "value", "unit", "calibration_id", "observed_at"],
+    "privacy": "allowlisted scalar RF features only; raw CSI arrays, node identifiers, presence/person classification and vital-sign fields are discarded; use TLS and authentication for remote endpoints"
+  },
+  "execution_policy": {
+    "arbitrary_shell": false,
+    "automatic_deployment": false,
+    "automatic_scientific_claim_promotion": false,
+    "hardware_control": false,
+    "require_operator_action_for_external_side_effects": true
+  }
+}
