@@ -46,8 +46,19 @@ log() {
     echo "[$(date -Iseconds)] [$level] [spine] $*" >> "$LOG_FILE"
 }
 
+# --- Check Dependencies ---
+check_deps() {
+    for dep in jq sha256sum nc; do
+        if ! command -v "$dep" &>/dev/null; then
+            echo "Error: Required dependency '$dep' not found." >&2
+            exit 1
+        fi
+    done
+}
+
 # --- Initialize ---
 spine_init() {
+    check_deps
     if [[ -f "$META_FILE" ]]; then
         log "WARN" "Spine already initialized"
         return 0
@@ -82,6 +93,11 @@ EOF
 spine_append() {
     local event_data="$1"
     local event_hash prev_hash seq
+    local lock_file="${SPINE_DIR}/append.lock"
+
+    # Acquire lock
+    exec 200>"$lock_file"
+    flock -x 200
 
     prev_hash=$(jq -r '.last_hash' "$META_FILE")
     seq=$(jq -r '.event_count' "$META_FILE")
@@ -136,6 +152,9 @@ spine_append() {
 
     # Replicate to peers
     spine_replicate "$signed_event"
+
+    # Release lock
+    flock -u 200
 
     echo "$signed_event"
 }
