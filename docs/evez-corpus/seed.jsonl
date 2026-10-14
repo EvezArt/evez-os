@@ -1,0 +1,5 @@
+{"kind":"node","node_id":"claim-compiler-core","node_type":"CLAIM","label":"EVEZ uses a claim-to-evidence compilation pipeline","status":"INFERRED"}
+{"kind":"node","node_id":"obs-self-audit-pipeline","node_type":"OBSERVATION","label":"Self-audit pipeline is documented as OBSERVE → NORMALIZE → HASH → CLAIM → TEST → CONTRADICTION/SUPPORT → MEMO → LEDGER","status":"VERIFIED"}
+{"kind":"node","node_id":"obs-commercial-pipeline","node_type":"OBSERVATION","label":"Commercialization pipeline is documented as CLAIM → TERMS → OBSERVABLES → SOURCES → TRANSFORMS → TESTS → RESULT → CONTRADICTION → UPDATE","status":"VERIFIED"}
+{"kind":"edge","edge_id":"seed-1","edge_type":"SUPPORTS","from":"obs-self-audit-pipeline","to":"claim-compiler-core"}
+{"kind":"edge","edge_id":"seed-2","edge_type":"SUPPORTS","from":"obs-commercial-pipeline","to":"claim-compiler-core"}
