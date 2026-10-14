@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """EVEZ-OS Invariance Battery — Runtime invariant verification on port 9115."""
 
+import ast
+import operator
 import json
 import time
 import random
@@ -54,23 +56,94 @@ def add_invariant(name, expression, description=""):
     return inv
 
 def evaluate_expression(expression, state):
-    """Safely evaluate an invariant expression against state.
-    Expressions use Python syntax referencing `state` dict.
-    Examples: 'state.get(\"alive\", True)', 'len(state.get(\"errors\", [])) == 0'
-    """
+    """Evaluate a restricted invariant language without eval()/exec()."""
     try:
-        # Restricted eval: only allow access to state dict and builtins
-        safe_globals = {"__builtins__": {
+        if not isinstance(expression, str) or len(expression) > 2000:
+            raise ValueError("expression must be a string <= 2000 characters")
+        tree = ast.parse(expression, mode="eval")
+        calls = {
             "len": len, "abs": abs, "min": min, "max": max,
-            "sum": sum, "any": any, "all": all, "isinstance": isinstance,
-            "int": int, "float": float, "str": str, "bool": bool,
-            "list": list, "dict": dict, "True": True, "False": False,
-            "None": None, "round": round,
-        }}
-        safe_globals["state"] = state
-        result = eval(expression, safe_globals, {})
-        return bool(result), None
-    except Exception as e:
+            "sum": sum, "any": any, "all": all,
+            "isinstance": isinstance, "int": int, "float": float,
+            "str": str, "bool": bool, "list": list, "dict": dict,
+            "round": round,
+        }
+        binops = {
+            ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul,
+            ast.Div: operator.truediv, ast.FloorDiv: operator.floordiv,
+            ast.Mod: operator.mod, ast.Pow: operator.pow,
+        }
+        cmpops = {
+            ast.Eq: operator.eq, ast.NotEq: operator.ne, ast.Lt: operator.lt,
+            ast.LtE: operator.le, ast.Gt: operator.gt, ast.GtE: operator.ge,
+            ast.In: lambda a, b: a in b, ast.NotIn: lambda a, b: a not in b,
+            ast.Is: operator.is_, ast.IsNot: operator.is_not,
+        }
+        unops = {ast.Not: operator.not_, ast.USub: operator.neg, ast.UAdd: operator.pos}
+
+        def visit(node):
+            if isinstance(node, ast.Expression):
+                return visit(node.body)
+            if isinstance(node, ast.Constant):
+                if isinstance(node.value, (str, int, float, bool, type(None))):
+                    return node.value
+                raise ValueError("constant type not allowed")
+            if isinstance(node, ast.Name):
+                if node.id == "state":
+                    return state
+                if node.id in calls:
+                    return calls[node.id]
+                raise ValueError(f"name not allowed: {node.id}")
+            if isinstance(node, ast.Attribute):
+                base = visit(node.value)
+                if node.attr == "get" and isinstance(base, dict):
+                    return base.get
+                raise ValueError("only dict.get is allowed")
+            if isinstance(node, ast.Call):
+                fn = visit(node.func)
+                if fn not in calls.values() and fn != state.get:
+                    raise ValueError("call not allowed")
+                args = [visit(x) for x in node.args]
+                kwargs = {x.arg: visit(x.value) for x in node.keywords}
+                return fn(*args, **kwargs)
+            if isinstance(node, ast.Subscript):
+                return visit(node.value)[visit(node.slice)]
+            if isinstance(node, ast.List):
+                return [visit(x) for x in node.elts]
+            if isinstance(node, ast.Tuple):
+                return tuple(visit(x) for x in node.elts)
+            if isinstance(node, ast.Dict):
+                return {visit(k): visit(v) for k, v in zip(node.keys, node.values)}
+            if isinstance(node, ast.BoolOp):
+                if isinstance(node.op, ast.And):
+                    for x in node.values:
+                        if not visit(x):
+                            return False
+                    return True
+                if isinstance(node.op, ast.Or):
+                    for x in node.values:
+                        if visit(x):
+                            return True
+                    return False
+                raise ValueError("boolean operator not allowed")
+            if isinstance(node, ast.BinOp) and type(node.op) in binops:
+                return binops[type(node.op)](visit(node.left), visit(node.right))
+            if isinstance(node, ast.UnaryOp) and type(node.op) in unops:
+                return unops[type(node.op)](visit(node.operand))
+            if isinstance(node, ast.Compare):
+                left = visit(node.left)
+                for op_node, right_node in zip(node.ops, node.comparators):
+                    if type(op_node) not in cmpops:
+                        raise ValueError("comparison operator not allowed")
+                    right = visit(right_node)
+                    if not cmpops[type(op_node)](left, right):
+                        return False
+                    left = right
+                return True
+            raise ValueError(f"syntax not allowed: {type(node).__name__}")
+
+        return bool(visit(tree)), None
+    except (SyntaxError, ValueError, TypeError, KeyError, IndexError, ZeroDivisionError, OverflowError) as e:
         return False, str(e)
 
 def check_all():
