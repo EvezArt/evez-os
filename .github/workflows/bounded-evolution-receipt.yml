@@ -1,0 +1,118 @@
+name: bounded-evolution-receipt
+
+on:
+  push:
+    branches:
+      - "evolution/receipt-boundary-002"
+    paths:
+      - "mobile/evolution_receipt.py"
+      - "mobile/test_evolution_receipt.py"
+      - "mobile/evolution_replay.py"
+      - "mobile/test_evolution_replay.py"
+      - "mobile/evezctl"
+      - ".github/workflows/bounded-evolution-receipt.yml"
+  pull_request:
+    paths:
+      - "mobile/evolution_receipt.py"
+      - "mobile/test_evolution_receipt.py"
+      - "mobile/evolution_replay.py"
+      - "mobile/test_evolution_replay.py"
+      - "mobile/evezctl"
+      - ".github/workflows/bounded-evolution-receipt.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  receipt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runner preflight
+        run: |
+          printf 'runner=%s\n' "${RUNNER_NAME:-unknown}"
+          printf 'os=%s\n' "${RUNNER_OS:-unknown}"
+          printf 'arch=%s\n' "${RUNNER_ARCH:-unknown}"
+          printf 'steps_instantiated=true\n'
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile receipt runtime
+        run: python -m py_compile mobile/evolution_receipt.py mobile/evolution_replay.py
+      - name: Run adversarial receipt tests
+        run: python mobile/test_evolution_receipt.py
+      - name: Run offline replay tests
+        run: python mobile/test_evolution_replay.py
+      - name: Verify mobile CLI syntax
+        run: bash -n mobile/evezctl
+      - name: Verify receipt provenance and replay gate
+        run: |
+          tmp="$RUNNER_TEMP/evez-receipt"
+          mkdir -p "$tmp/repo"
+          git -C "$tmp/repo" init
+          git -C "$tmp/repo" config user.email "ci@example.invalid"
+          git -C "$tmp/repo" config user.name "evez-ci"
+          printf 'fixture\n' > "$tmp/repo/fixture.txt"
+          cat > "$tmp/repo/fixture.py" <<'PY'
+          print("pass")
+          PY
+          git -C "$tmp/repo" add fixture.txt fixture.py
+          git -C "$tmp/repo" commit -m fixture
+          cat > "$tmp/spec.json" <<'EOF'
+          {
+            "schema_version": 1,
+            "source_commit": "0000000000000000000000000000000000000000",
+            "working_tree_state": {
+              "clean": true,
+              "files": [
+                {
+                  "path": "fixture.txt",
+                  "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+                }
+              ]
+            },
+            "test_manifest": [
+              {
+                "id": "fixture",
+                "command": ["python", "fixture.py"],
+                "expected_exit_code": 0
+              }
+            ],
+            "test_results": [
+              {
+                "id": "fixture",
+                "exit_code": 0,
+                "stdout_sha256": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "status": "PASS"
+              }
+            ],
+            "evidence_input_digests": {
+              "fixture": "0000000000000000000000000000000000000000000000000000000000000000"
+            },
+            "proposal_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "contradiction_cases": [
+              {
+                "id": "c",
+                "claim": "bind",
+                "falsifier": "tamper",
+                "resolution": "reject",
+                "resolved": true
+              }
+            ],
+            "failed_attempts": ["self-declared provenance"],
+            "uncertainties": ["external runner not implied"],
+            "dissenting_observations": ["integrity is not truth"],
+            "verification_status": "PROPOSED",
+            "verification_timestamp": "2026-10-07T00:00:00Z"
+          }
+          EOF
+          python mobile/evolution_receipt.py capture "$tmp/repo" "$tmp/spec.json" "$tmp/captured.json"
+          python mobile/evolution_receipt.py build "$tmp/captured.json" "$tmp/receipt.json"
+          python mobile/evolution_receipt.py verify-against "$tmp/receipt.json" "$tmp/repo"
+          python mobile/evolution_replay.py "$tmp/receipt.json" "$tmp/repo"
+          printf 'tampered\n' > "$tmp/repo/fixture.txt"
+          if python mobile/evolution_receipt.py verify-against "$tmp/receipt.json" "$tmp/repo"; then
+            echo "tamper check unexpectedly passed"
+            exit 1
+          fi
