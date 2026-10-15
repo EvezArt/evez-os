@@ -13,6 +13,7 @@ from .research import (
 )
 from .spine_adapter import DEFAULT_SPINE_URL, sync_ledger_to_spine, verify_spine
 from .store import JsonlLedgerStore
+from .experiment_controller import ResearchExperimentController
 
 
 def demo():
@@ -79,13 +80,25 @@ def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m evez_epie")
     parser.add_argument(
         "command",
-        choices=("demo", "append-ledger", "verify-ledger", "sync-spine", "verify-spine"),
+        choices=("demo", "append-ledger", "verify-ledger", "sync-spine", "verify-spine",\n                 "research-status", "research-reserve", "research-settle"),
     )
     parser.add_argument("--ledger", help="Local append-only JSONL ledger path")
     parser.add_argument("--event-type", choices=sorted(EVENT_TYPES))
     parser.add_argument("--payload-json", default="{}", help="JSON object payload for append-ledger")
     parser.add_argument("--base-url", default=DEFAULT_SPINE_URL, help="Event Spine service root (loopback by default)")
     parser.add_argument("--allow-remote", action="store_true", help="Permit an HTTPS non-loopback Event Spine")
+    parser.add_argument("--budget-id", help="Stable research-budget identifier")
+    parser.add_argument("--initial-budget", type=float, help="Initial computation/utility budget")
+    parser.add_argument("--max-total-credit", type=float, help="Maximum lifetime earned research credit")
+    parser.add_argument("--max-credit-per-trial", type=float, help="Maximum research credit per trial")
+    parser.add_argument("--family-alpha", type=float, help="Total family-wise error budget across trials")
+    parser.add_argument("--credit-rate", type=float, help="Credit-to-budget conversion rate in [0, 1]")
+    parser.add_argument("--min-cases", type=int, help="Minimum independent holdout cases before credit is eligible")
+    parser.add_argument("--trial-id", help="Stable, idempotent research-trial identifier")
+    parser.add_argument("--search-cost", type=float, help="Declared search expenditure in budget units")
+    parser.add_argument("--risk-cost", type=float, help="Declared risk cost in budget units")
+    parser.add_argument("--records-json", help="JSON array of frozen forecast records, without outcomes")
+    parser.add_argument("--samples-json", help="JSON array of frozen forecasts plus held-out outcomes and verifier gates")
     args = parser.parse_args(argv)
 
     if args.command == "demo":
@@ -98,6 +111,62 @@ def main(argv=None):
     if not args.ledger:
         parser.error(f"{args.command} requires --ledger PATH")
     store = JsonlLedgerStore(args.ledger)
+
+    research_commands = {"research-status", "research-reserve", "research-settle"}
+    if args.command in research_commands:
+        policy_values = {
+            "--budget-id": args.budget_id,
+            "--initial-budget": args.initial_budget,
+            "--max-total-credit": args.max_total_credit,
+            "--max-credit-per-trial": args.max_credit_per_trial,
+            "--family-alpha": args.family_alpha,
+            "--credit-rate": args.credit_rate,
+            "--min-cases": args.min_cases,
+        }
+        missing = [name for name, value in policy_values.items() if value is None]
+        if missing:
+            parser.error(f"{args.command} requires " + ", ".join(missing) + " so the persisted budget policy cannot change implicitly")
+        controller = ResearchExperimentController(
+            store,
+            budget_id=args.budget_id,
+            initial_budget=args.initial_budget,
+            max_total_credit=args.max_total_credit,
+            max_credit_per_trial=args.max_credit_per_trial,
+            family_alpha=args.family_alpha,
+            credit_rate=args.credit_rate,
+            min_cases=args.min_cases,
+        )
+        if args.command == "research-status":
+            result = controller.status()
+        elif args.command == "research-reserve":
+            if not args.trial_id or not args.records_json or args.search_cost is None:
+                parser.error("research-reserve requires --trial-id, --records-json, and --search-cost")
+            try:
+                with open(args.records_json, "r", encoding="utf-8") as handle:
+                    forecast_records = json.load(handle)
+            except (OSError, json.JSONDecodeError) as exc:
+                parser.error(f"could not read --records-json: {exc}")
+            if not isinstance(forecast_records, list):
+                parser.error("--records-json must contain a JSON array")
+            result = controller.reserve(
+                trial_id=args.trial_id,
+                forecast_records=forecast_records,
+                search_cost=args.search_cost,
+                risk_cost=args.risk_cost or 0.0,
+            )
+        else:
+            if not args.trial_id or not args.samples_json:
+                parser.error("research-settle requires --trial-id and --samples-json")
+            try:
+                with open(args.samples_json, "r", encoding="utf-8") as handle:
+                    samples = json.load(handle)
+            except (OSError, json.JSONDecodeError) as exc:
+                parser.error(f"could not read --samples-json: {exc}")
+            if not isinstance(samples, list):
+                parser.error("--samples-json must contain a JSON array")
+            result = controller.settle(trial_id=args.trial_id, samples=samples)
+        print(json.dumps(result, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False))
+        return 0 if result.get("decision") != "STOP" else 2
 
     if args.command == "append-ledger":
         if not args.event_type:
