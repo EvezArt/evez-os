@@ -286,6 +286,18 @@ survival_py() {
   printf '%s/research/epistemic_survival.py' "$EVEZ_ROOT"
 }
 
+verification_ingest_py() {
+  printf '%s/mobile/github_verification_ingest.py' "$EVEZ_ROOT"
+}
+
+verification_ingest_cmd() {
+  [ "$#" -ge 1 ] || {
+    printf 'usage: evezctl verification-ingest BUNDLE.json [--output REPORT.json]\n' >&2
+    return 2
+  }
+  python "$(verification_ingest_py)" "$@"
+}
+
 frontier_py() {
   printf '%s/mobile/evez_frontier.py' "$EVEZ_ROOT"
 }
@@ -568,6 +580,7 @@ Commands:
   capsule-verify FILE
   epistemic-evaluate PACKET.json
   survival-run [--min-score SCORE]
+  verification-ingest BUNDLE.json [--output REPORT.json]
   frontier PACKET [--output FILE]
   signal PACKET (--channel CHANNEL | --auto --capabilities FILE) [--deliver]
   kernel INTENT --budget FILE --requests FILE [--channels FILE]
@@ -619,6 +632,7 @@ case "$cmd" in
   capsule-verify) capsule_verify_cmd "$@" ;;
   epistemic-evaluate) epistemic_evaluate_cmd "$@" ;;
   survival-run) survival_run_cmd "$@" ;;
+  verification-ingest) verification_ingest_cmd "$@" ;;
   frontier) frontier_cmd "$@" ;;
   signal) signal_cmd "$@" ;;
   kernel) kernel_cmd "$@" ;;
