@@ -15,6 +15,7 @@ import fcntl
 import math
 import os
 import re
+import stat
 import time
 from contextlib import contextmanager
 from typing import Any, Mapping, Sequence
@@ -24,9 +25,6 @@ from .research import aggregate_research_reward, _strict_forecast_distribution
 from .store import JsonlLedgerStore
 
 CONTROLLER_ID = "evez.epie.research-controller.v1"
-_HEX64 = re.compile(r"^[0-9a-f]{64}$")
-
-
 def _finite_nonnegative(name: str, value: Any) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise ValueError(f"{name} must be a number, not a boolean")
@@ -111,6 +109,8 @@ class ResearchExperimentController:
         self.max_total_credit = _finite_nonnegative("max_total_credit", max_total_credit)
         self.max_credit_per_trial = _finite_nonnegative("max_credit_per_trial", max_credit_per_trial)
         self.credit_rate = _finite_nonnegative("credit_rate", credit_rate)
+        if self.credit_rate > 1.0:
+            raise ValueError("credit_rate must be <= 1 to prevent positive-feedback budget amplification")
         if isinstance(family_alpha, bool) or not isinstance(family_alpha, (int, float)) or not math.isfinite(family_alpha) or not 0 < family_alpha < 1:
             raise ValueError("family_alpha must be finite and strictly between 0 and 1")
         self.family_alpha = float(family_alpha)
@@ -134,7 +134,7 @@ class ResearchExperimentController:
         flags = os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0)
         fd = os.open(str(self.lock_path), flags, 0o600)
         try:
-            if not os.path.isfile(self.lock_path):
+            if not stat.S_ISREG(os.fstat(fd).st_mode):
                 raise ValueError("Research lock path must be a regular file")
             os.fchmod(fd, 0o600)
             fcntl.flock(fd, fcntl.LOCK_EX)
@@ -158,6 +158,8 @@ class ResearchExperimentController:
             and self._payload(event).get("budget_id") == self.budget_id
         ]
         openings = [self._payload(e) for e in scoped if self._payload(e).get("kind") == "BUDGET_OPENED"]
+        if not openings and scoped:
+            raise ValueError("Research events exist without an opening budget receipt; refusing to reconstruct policy")
         if not openings:
             self.store.append("CHECKPOINT_ISSUED", {
                 "controller": CONTROLLER_ID,
@@ -250,6 +252,8 @@ class ResearchExperimentController:
                 raise ValueError("Evaluation cohort already used by another trial; reserve a new held-out cohort")
             status = self._status_from(scoped)
             requested = cost + risk
+            if not math.isfinite(requested):
+                raise ValueError("combined search and risk cost overflowed")
             if requested > status["remaining_budget"]:
                 return {
                     "decision": "STOP",
