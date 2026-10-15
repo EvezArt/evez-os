@@ -13,3 +13,4 @@ dependencies = ["rfc8785==0.1.4"]
 [project.scripts]
 evez = "evez_file:cli"
 evez-socratious = "evez_adaptive_socratious:cli"
+evez-epie = "evez_epie.cli:main"
