@@ -29,6 +29,9 @@ jobs:
           name: Run EPIE unit tests
           command: python -m unittest discover -s tests -p 'test_evez_epie.py' -v
       - run:
+          name: Run EPIE sequential research-controller tests
+          command: python -m unittest discover -s tests -p 'test_evez_epie_controller.py' -v
+      - run:
           name: Run EPIE store tests
           command: python -m unittest discover -s tests -p 'test_evez_epie_store.py' -v
       - run:
