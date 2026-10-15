@@ -180,6 +180,14 @@ class DecisionValueResearchTests(unittest.TestCase):
         rows = rank_decision_tests(self.prior, [forbidden], self.actions)
         self.assertEqual(rows, [])
 
+    def test_negative_marginal_value_threshold_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "minimum_net_value"):
+            choose_next_test(
+                self.prior, [self.test_b], self.actions,
+                remaining_budget=1.0, steps_completed=0, max_steps=5,
+                minimum_net_value=-1.0,
+            )
+
 class ResearchRewardTests(unittest.TestCase):
     def test_reward_requires_verified_independent_holdout_improvement(self):
         result = realized_research_reward(
