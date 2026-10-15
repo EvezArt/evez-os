@@ -80,7 +80,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m evez_epie")
     parser.add_argument(
         "command",
-        choices=("demo", "append-ledger", "verify-ledger", "sync-spine", "verify-spine",\n                 "research-status", "research-reserve", "research-settle"),
+        choices=("demo", "append-ledger", "verify-ledger", "sync-spine", "verify-spine",
+                 "research-status", "research-reserve", "research-settle"),
     )
     parser.add_argument("--ledger", help="Local append-only JSONL ledger path")
     parser.add_argument("--event-type", choices=sorted(EVENT_TYPES))
