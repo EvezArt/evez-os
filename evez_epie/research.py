@@ -155,8 +155,8 @@ def choose_next_test(
     """Finite research gate: choose a high-value permissible test or stop."""
     if not math.isfinite(remaining_budget) or remaining_budget < 0:
         raise ValueError("remaining_budget must be finite and non-negative")
-    if not math.isfinite(minimum_net_value):
-        raise ValueError("minimum_net_value must be finite")
+    if not math.isfinite(minimum_net_value) or minimum_net_value < 0:
+        raise ValueError("minimum_net_value must be finite and non-negative; research stops at non-positive marginal value")
     if steps_completed < 0 or max_steps < 0:
         raise ValueError("step limits must be non-negative")
     if steps_completed >= max_steps:
