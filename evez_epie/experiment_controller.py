@@ -14,7 +14,6 @@ from __future__ import annotations
 import fcntl
 import math
 import os
-import re
 import stat
 import time
 from contextlib import contextmanager
