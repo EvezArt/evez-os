@@ -18,6 +18,7 @@ on:
       - 'skills/evez-firmament/services/event_spine.py'
       - 'src/services/event_spine.py'
       - 'tests/test_evez_epie.py'
+      - 'tests/test_evez_epie_controller.py'
       - '.github/workflows/epie-kernel-tests.yml'
 permissions:
   contents: read
