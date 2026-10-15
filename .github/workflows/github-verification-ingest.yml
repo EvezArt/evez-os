@@ -1,0 +1,30 @@
+name: github-verification-ingest
+
+on:
+  push:
+    branches:
+      - verification/ci-evidence-ingestion-v1
+    paths:
+      - "mobile/github_verification_ingest.py"
+      - "mobile/test_github_verification_ingest.py"
+      - "mobile/evezctl"
+      - ".github/workflows/github-verification-ingest.yml"
+  pull_request:
+    paths:
+      - "mobile/github_verification_ingest.py"
+      - "mobile/test_github_verification_ingest.py"
+      - "mobile/evezctl"
+      - ".github/workflows/github-verification-ingest.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verification-ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8689f8e4a348a
+      - name: Test GitHub Actions record normalization
+        run: python3 mobile/test_github_verification_ingest.py
+      - name: Compile Python module
+        run: python3 -m py_compile mobile/github_verification_ingest.py
