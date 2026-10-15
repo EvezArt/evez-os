@@ -151,10 +151,23 @@ class ResearchExperimentController:
 
     def _read_scoped(self) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         ledger = self.store.load()
-        scoped = [
-            dict(event) for event in ledger.events
+        controller_events = [
+            event for event in ledger.events
             if self._payload(event).get("controller") == CONTROLLER_ID
-            and self._payload(event).get("budget_id") == self.budget_id
+        ]
+        existing_budget_ids = {
+            self._payload(event).get("budget_id") for event in controller_events
+            if isinstance(self._payload(event).get("budget_id"), str)
+        }
+        other_budget_ids = existing_budget_ids - {self.budget_id}
+        if other_budget_ids:
+            raise ValueError(
+                "Ledger already belongs to another research budget; use a separately "
+                "authorized ledger path rather than resetting the budget identifier"
+            )
+        scoped = [
+            dict(event) for event in controller_events
+            if self._payload(event).get("budget_id") == self.budget_id
         ]
         openings = [self._payload(e) for e in scoped if self._payload(e).get("kind") == "BUDGET_OPENED"]
         if not openings and scoped:
