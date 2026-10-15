@@ -150,6 +150,20 @@ class ResearchExperimentControllerTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "policy mismatch"):
                 changed.status()
 
+    def test_new_budget_id_cannot_reset_the_same_ledger(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "ledger.jsonl"
+            self.make_controller(path).status()
+            other = ResearchExperimentController(
+                JsonlLedgerStore(path),
+                budget_id="different-budget",
+                initial_budget=1000.0,
+                max_total_credit=1000.0,
+                max_credit_per_trial=100.0,
+            )
+            with self.assertRaisesRegex(ValueError, "another research budget"):
+                other.status()
+
     def test_family_alpha_spending_is_summable(self):
         total = sum(.05 / (i * (i + 1)) for i in range(1, 100000))
         self.assertLessEqual(total, .05)
