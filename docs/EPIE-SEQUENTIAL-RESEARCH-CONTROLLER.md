@@ -32,6 +32,30 @@ After those outcomes become available, call settle with those same forecast reco
 
 A retry with the same trial ID and identical inputs is idempotent. Reusing a trial ID with altered inputs fails. Reusing the same cohort for a different trial fails. Abandoned reservations keep their costs debited and their alpha slot consumed.
 
+## CLI
+
+Install the project or run from the repository with Python. The budget policy is required on every command so a caller cannot silently reset it by omitting policy fields.
+
+    python -m evez_epie research-status \
+      --ledger state/epie-research.jsonl --budget-id research-v1 \
+      --initial-budget 20 --max-total-credit 5 --max-credit-per-trial 0.5 \
+      --family-alpha 0.05 --credit-rate 1 --min-cases 100
+
+    python -m evez_epie research-reserve \
+      --ledger state/epie-research.jsonl --budget-id research-v1 \
+      --initial-budget 20 --max-total-credit 5 --max-credit-per-trial 0.5 \
+      --family-alpha 0.05 --credit-rate 1 --min-cases 100 \
+      --trial-id trial-0001 --records-json frozen-forecasts.json \
+      --search-cost 0.25 --risk-cost 0.05
+
+    python -m evez_epie research-settle \
+      --ledger state/epie-research.jsonl --budget-id research-v1 \
+      --initial-budget 20 --max-total-credit 5 --max-credit-per-trial 0.5 \
+      --family-alpha 0.05 --credit-rate 1 --min-cases 100 \
+      --trial-id trial-0001 --samples-json settled-holdout.json
+
+The first research-status/reserve/settle call opens the budget policy receipt if the ledger is empty. Thereafter, policy changes are rejected. A single controller ledger is dedicated to one budget ID; another budget requires a separately authorized ledger path. The initial-budget and credit caps should come from a trusted operator policy, not from an autonomous search agent.
+
 ## The bounds
 
 Trial number t receives:
