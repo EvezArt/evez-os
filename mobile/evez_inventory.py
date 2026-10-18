@@ -66,8 +66,13 @@ def main() -> int:
     endpoint = configured_endpoint()
     parsed = urllib.parse.urlparse(endpoint)
     # Report only the origin, never credentials, query strings, or fragments.
-    safe_origin = (f"{parsed.scheme}://{parsed.netloc}"
-                   if parsed.scheme in ("http", "https") and parsed.netloc
+    host = parsed.hostname
+    try:
+        port = f":{parsed.port}" if parsed.port is not None else ""
+    except ValueError:
+        host, port = None, ""
+    safe_origin = (f"{parsed.scheme}://{host}{port}"
+                   if parsed.scheme in ("http", "https") and host
                    else "INVALID_ENDPOINT")
     result = {
         "schema_version": 1,
