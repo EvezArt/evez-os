@@ -5,12 +5,13 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'   # sync every 6 hours
+    - cron: "0 */6 * * *"   # sync every 6 hours
 
 jobs:
   mirror:
     name: git push --mirror to Bitbucket
     runs-on: ubuntu-latest
+    if: ${{ secrets.BITBUCKET_USERNAME != '' && secrets.BITBUCKET_APP_PASSWORD != '' }}
     steps:
       - name: Checkout bare repo
         uses: actions/checkout@v4
@@ -29,6 +30,7 @@ jobs:
   mirror-streams:
     name: Sync stream scripts subfolder to Bitbucket evez-streams
     runs-on: ubuntu-latest
+    if: ${{ secrets.BITBUCKET_USERNAME != '' && secrets.BITBUCKET_APP_PASSWORD != '' }}
     steps:
       - uses: actions/checkout@v4
 
