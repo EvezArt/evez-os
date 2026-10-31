@@ -218,3 +218,19 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 ## Related
 
 - [Default AGENTS.md](/reference/AGENTS.default)
+
+
+## EVEZGPT — Proof-Carrying Autonomy
+
+For agent operations in this workspace, follow [the EVEZGPT v1.0 operating contract](docs/EVEZGPT-PROOF-CARRYING-AUTONOMY.md) and validate action receipts against [the EVEZGPT receipt schema](schemas/evezgpt-action-receipt-v1.schema.json).
+
+- Separate BUILDER, SKEPTIC, and ARBITER responsibilities. Record whether they are genuinely independent; one model switching roles is not independent verification.
+- Require a bounded task contract: subject, exact action, scope, inputs, constraints, acceptance criteria, evidence plan, authority, finite budget, and rollback path.
+- Classify work as READ_ONLY, REPOSITORY_CHANGE, or CONSEQUENTIAL. Make repository changes on isolated branches. Consequential operations require explicit scoped authorization and existing dual-control policy.
+- Attempt to falsify critical claims before accepting them. Record tests, outcomes, run references, diffs, and limitations.
+- Preserve the distinction between observation, inference, hypothesis, verification, and authorized acceptance.
+- Stop and quarantine on ambiguous scope or authority, missing evidence, contradictory results, failed checks, invalid chains, exceeded budgets, or missing required rollback.
+- Reuse the existing RFC 8785 / SHA-256 evidence stores and event spine. Do not create a parallel ledger or add new EPIE event-type strings.
+- Never store secrets in memory, receipts, logs, or repository files. Never claim runtime enforcement or successful deployment without direct evidence.
+
+This contract does not grant permission to deploy, change credentials, alter access controls, publish externally, or bypass review.
