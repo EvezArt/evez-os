@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EvezArt/evez-os/blob/main/schemas/evezgpt-action-receipt-v1.schema.json",
+  "title": "EVEZGPT Action Receipt v1",
+  "description": "Evidence record for a bounded agent operation. Integrity and truth of referenced sources must be evaluated separately.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "mission",
+    "operation_class",
+    "status",
+    "task_contract",
+    "roles",
+    "authorization",
+    "budget",
+    "predicted_failures",
+    "evidence",
+    "verification",
+    "rollback",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mission": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operation_class": {
+      "enum": [
+        "READ_ONLY",
+        "REPOSITORY_CHANGE",
+        "CONSEQUENTIAL"
+      ]
+    },
+    "status": {
+      "enum": [
+        "PROPOSED",
+        "PREFLIGHTED",
+        "EXECUTED",
+        "VERIFIED",
+        "ACCEPTED",
+        "QUARANTINED",
+        "REJECTED"
+      ]
+    },
+    "task_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "action",
+        "scope",
+        "inputs",
+        "constraints",
+        "acceptance_criteria",
+        "evidence_plan"
+      ],
+      "properties": {
+        "subject": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "evidence_plan": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "roles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "builder",
+        "skeptic",
+        "arbiter",
+        "separation"
+      ],
+      "properties": {
+        "builder": {
+          "type": "string",
+          "minLength": 1
+        },
+        "skeptic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "arbiter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "separation": {
+          "enum": [
+            "independent_agents",
+            "isolated_contexts",
+            "single_model_role_play",
+            "not_run"
+          ]
+        }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "granted",
+        "scope",
+        "reference"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "granted": {
+          "type": "boolean"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_iterations",
+        "max_duration_seconds",
+        "max_resource_units"
+      ],
+      "properties": {
+        "max_iterations": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_duration_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_resource_units": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "predicted_failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "failure_mode",
+          "test",
+          "result"
+        ],
+        "properties": {
+          "failure_mode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "test": {
+            "type": "string",
+            "minLength": 1
+          },
+          "result": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "NOT_RUN",
+              "INCONCLUSIVE"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "kind",
+          "claim",
+          "result"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "OBSERVATION",
+              "TEST",
+              "SOURCE_RECORD",
+              "DIFF",
+              "AUTHORIZATION",
+              "ROLLBACK_PROOF",
+              "INFERENCE"
+            ]
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "result": {
+            "enum": [
+              "SUPPORTS",
+              "CONTRADICTS",
+              "LIMITED",
+              "UNAVAILABLE"
+            ]
+          },
+          "source_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "observed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_checks_passed",
+        "independent_review_passed",
+        "summary"
+      ],
+      "properties": {
+        "required_checks_passed": {
+          "type": "boolean"
+        },
+        "independent_review_passed": {
+          "type": "boolean"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "run_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "available",
+        "reference",
+        "tested"
+      ],
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tested": {
+          "type": "boolean"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resource_changes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stop_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "supersedes_receipt_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
