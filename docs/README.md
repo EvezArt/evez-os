@@ -47,6 +47,7 @@ DESA-S is the domain-emergent SME-adaptive runtime layer for the EVEZ/EVEX proto
 - Integration map: docs/DESA-S-INTEGRATION.md
 - Benchmark: benchmarks/desas-socratious/
 
+
 ## EVEZGPT — Proof-Carrying Autonomy
 
 EVEZGPT defines the operating contract for bounded, evidence-carrying agent actions across Hermes/OpenClaw and EVEZArt workflows.
