@@ -46,3 +46,11 @@ DESA-S is the domain-emergent SME-adaptive runtime layer for the EVEZ/EVEX proto
 - EVEX transition fixture: examples/desas-socratious.evex.json
 - Integration map: docs/DESA-S-INTEGRATION.md
 - Benchmark: benchmarks/desas-socratious/
+
+## EVEZGPT — Proof-Carrying Autonomy
+
+EVEZGPT defines the operating contract for bounded, evidence-carrying agent actions across Hermes/OpenClaw and EVEZArt workflows.
+
+- Protocol: [EVEZGPT v1.0](EVEZGPT-PROOF-CARRYING-AUTONOMY.md)
+- Machine-readable action receipt: [JSON Schema](../schemas/evezgpt-action-receipt-v1.schema.json)
+- Runtime enforcement is a follow-on implementation; documentation alone does not install or deploy an agent adapter.
