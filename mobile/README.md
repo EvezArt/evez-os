@@ -206,3 +206,25 @@ identity-verify verifies the SHA-256 identity contract.
 
 self-witness records an IDENTITY_SELF_WITNESS event only after both the identity
 contract and local evidence chain verify.
+
+
+## Read-only ecosystem inventory
+
+Run the first-pass inventory from the repository root:
+
+    python mobile/evez_inventory.py
+
+The command emits JSON describing whether selected executables and local
+configuration paths exist. It reads only the `EVEZ_ENDPOINT` setting from the
+operator config file; it does not source or execute that file. If no endpoint is
+explicitly configured, it reports `NOT_CONFIGURED` and makes no network request.
+If configured, it permits one unauthenticated GET to the gateway's `/health`
+endpoint, with a three-second timeout, and rejects URLs containing credentials,
+query strings, or fragments. URL credentials, query strings, response bodies,
+and secrets are not included in the report.
+
+This is a local discovery baseline, not a universal connector. Finding the
+`hermes` or `openclaw` executable/config directory does not prove that the
+agent is running, authenticated, or remotely controllable. Agent-specific
+adapters and ChatGPT registration remain separate follow-up work. The health
+probe is read-only and times out after three seconds.
