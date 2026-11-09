@@ -12,7 +12,8 @@ This is a computational instrument, not an etymology oracle. It never promotes s
 - Builds a token-dimensional record with eight independently populated dimensions.
 - Separates attested facts, user-supplied assertions, hypotheses, and unknowns.
 - Supports explicit cross-semantic edges between tokens/concepts.
-- Computes deterministic lexical fingerprints and a reversible round-trip check.
+- Computes deterministic lexical fingerprints, per-token domain vectors, pairwise domain co-activation matrices, and a corpus-level token × domain × domain tensor.
+- Provides a reversible source-span check.
 - Emits JSON suitable for an append-only EVEZ Spine or downstream graph database.
 - Uses only the Python standard library; suitable for Termux and offline operation.
 
