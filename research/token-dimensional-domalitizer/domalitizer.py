@@ -106,6 +106,16 @@ def domain_vector(dimensions: dict[str, Any]) -> dict[str, int]:
     return vector
 
 
+def domain_tensor(vector: dict[str, int]) -> dict[str, Any]:
+    """Pairwise co-activation matrix across dimensions for one token."""
+    names = list(DIMENSIONS)
+    matrix = [
+        [vector[left] * vector[right] for right in names]
+        for left in names
+    ]
+    return {"axes": names, "matrix": matrix}
+
+
 def analyze(text: str, lexicon: dict[str, Any] | None = None) -> dict[str, Any]:
     lexicon = lexicon or {}
     tokens = tokenize(text)
@@ -124,6 +134,7 @@ def analyze(text: str, lexicon: dict[str, Any] | None = None) -> dict[str, Any]:
             apply_lexicon(record, entry)
         record["domain_vector"] = domain_vector(record["dimensions"])
         record["domain_occupancy"] = sum(record["domain_vector"].values())
+        record["domain_tensor"] = domain_tensor(record["domain_vector"])
         records.append(record)
 
     # Preserve exact source text and offsets: this is the prototype's reversible layer.
@@ -131,6 +142,16 @@ def analyze(text: str, lexicon: dict[str, Any] | None = None) -> dict[str, Any]:
     spans_valid = all(
         text[r["span"][0]:r["span"][1]] == r["surface"] for r in records
     )
+    domain_coactivation = {
+        left: {
+            right: sum(
+                r["domain_vector"][left] * r["domain_vector"][right]
+                for r in records
+            )
+            for right in DIMENSIONS
+        }
+        for left in DIMENSIONS
+    }
     return {
         "schema": "evez.token-dimensional-analysis.v1",
         "created_at": datetime.now(timezone.utc).isoformat(),
@@ -140,6 +161,13 @@ def analyze(text: str, lexicon: dict[str, Any] | None = None) -> dict[str, Any]:
         "token_count": len(records),
         "domain_totals": {
             name: sum(r["domain_vector"][name] for r in records) for name in DIMENSIONS
+        },
+        "domain_coactivation": domain_coactivation,
+        "domalitization": {
+            "definition": "token-by-domain occupancy plus pairwise domain co-activation",
+            "axis_order": list(DIMENSIONS),
+            "tensor_shape": [len(records), len(DIMENSIONS), len(DIMENSIONS)],
+            "interpretation": "descriptive feature structure; not causal evidence",
         },
         "round_trip": {
             "token_spans_valid": spans_valid,
