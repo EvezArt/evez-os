@@ -12,6 +12,9 @@ class DomalitizerTests(unittest.TestCase):
         result = analyze(source)
         self.assertTrue(result["round_trip"]["token_spans_valid"])
         self.assertTrue(result["round_trip"]["exact_source_preserved"])
+        self.assertEqual(result["domalitization"]["tensor_shape"], [len(result["tokens"]), 8, 8])
+        self.assertEqual(len(result["domain_coactivation"]), 8)
+        self.assertEqual(len(result["tokens"][0]["domain_tensor"]["matrix"]), 8)
         for token in result["tokens"]:
             start, end = token["span"]
             self.assertEqual(source[start:end], token["surface"])
