@@ -1,0 +1,50 @@
+{
+  "domalitizing": {
+    "semantic": {
+      "glosses": ["mapping one token across multiple analytical domains while preserving its source form"],
+      "concept_ids": ["EVEZ:LEX:DOMALITIZATION"],
+      "status": "USER_SUPPLIED"
+    },
+    "morphological": {
+      "segments": ["domalitiz", "-ing"],
+      "root": "domalitiz",
+      "affixes": ["-ing"],
+      "status": "PROPOSED"
+    },
+    "pragmatic": {
+      "context": "EVEZ lexical research",
+      "register": "coined technical vocabulary",
+      "intended_use": "multidomain token mapping"
+    },
+    "evidence": {
+      "status": "USER_SUPPLIED",
+      "sources": ["conversation:2026-11-08"],
+      "method": "user-coined term; operational gloss supplied for prototype"
+    }
+  },
+  "tokendimensional": {
+    "semantic": {
+      "glosses": ["represented through multiple explicit token-level dimensions"],
+      "concept_ids": ["EVEZ:LEX:TOKEN_DIMENSIONALITY"],
+      "status": "PROPOSED"
+    },
+    "morphological": {
+      "segments": ["token", "dimensional"],
+      "root": null,
+      "affixes": [],
+      "status": "PROPOSED"
+    },
+    "pragmatic": {
+      "context": "EVEZ lexical research",
+      "register": "coined technical compound",
+      "intended_use": "describe a token representation with multiple independent axes"
+    }
+  },
+  "domain": {
+    "semantic": {
+      "glosses": ["a field or area of inquiry; a scope of knowledge or activity"],
+      "concept_ids": ["WORDNET:domain"],
+      "status": "PROPOSED"
+    }
+  }
+}
