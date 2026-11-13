@@ -81,5 +81,5 @@ class EnergyWitness:
           "previous_hash":rows[-1]["record_hash"] if rows else "0"*64}
         record["record_hash"] = hashlib.sha256(canonical_bytes(record)).hexdigest()
         with self.ledger_path.open("a", encoding="utf-8") as stream:
-            stream.write(json.dumps(record, sort_keys=True, separators=(",", ":")) + "\\n")
+            stream.write(json.dumps(record, sort_keys=True, separators=(",", ":")) + "\n")
         return record
