@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="${EVEZ_ROOT:-$HOME/evez-os}"
+if [ ! -f "$ROOT/research/spacetime_breakthrough_lab.py" ]; then
+  printf 'EVEZ spacetime lab not found under %s\n' "$ROOT" >&2
+  exit 2
+fi
+exec python "$ROOT/research/spacetime_breakthrough_lab.py" "$@"

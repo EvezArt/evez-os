@@ -318,6 +318,14 @@ rights_py() {
   printf '%s/legal/license_opportunity.py' "$EVEZ_ROOT"
 }
 
+
+spacetime_lab_py() { printf '%s/research/spacetime_breakthrough_lab.py' "$EVEZ_ROOT"; }
+spacetime_interval_py() { printf '%s/research/spacetime_interval.py' "$EVEZ_ROOT"; }
+spacetime_profile_py() { printf '%s/research/warp_bubble_profile.py' "$EVEZ_ROOT"; }
+
+spacetime_lab_cmd() { python "$(spacetime_lab_py)" "$@"; }
+spacetime_interval_cmd() { python "$(spacetime_interval_py)" "$@"; }
+spacetime_profile_cmd() { python "$(spacetime_profile_py)" "$@"; }
 doctor() {
   local failed=0
   for dependency in python curl jq git openssl; do
@@ -576,6 +584,9 @@ Commands:
   lexile (--text TEXT | --file FILE)
   optimize-intent (--intent TEXT | --file FILE)
   rights-audit [ROOT]
+  spacetime [init|observe|note|review|verify|report] ...
+  spacetime-interval --delta-t-seconds S --delta-x-meters M
+  spacetime-profile --radius-m M --sigma-per-m INV_M [--samples N]
   pull
   deploy
   logs
@@ -627,6 +638,9 @@ case "$cmd" in
   lexile) lexile_cmd "$@" ;;
   optimize-intent) intent_cmd "$@" ;;
   rights-audit) rights_audit_cmd "$@" ;;
+  spacetime) spacetime_lab_cmd "$@" ;;
+  spacetime-interval) spacetime_interval_cmd "$@" ;;
+  spacetime-profile) spacetime_profile_cmd "$@" ;;
   logs) logs_cmd "$@" ;;
   help|-h|--help) usage ;;
   *) usage; exit 2 ;;
