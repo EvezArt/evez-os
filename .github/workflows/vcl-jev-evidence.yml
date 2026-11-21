@@ -1,0 +1,18 @@
+name: vcl-jev-evidence-bridge
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python syntax
+        run: python3 -m py_compile integrations/vcl_jev_evez.py integrations/test_vcl_jev_evez.py
+      - name: Bridge contract
+        run: python3 integrations/test_vcl_jev_evez.py
+      - name: Evidence capsule regression
+        run: python3 evidence/test_evidence_capsule.py
