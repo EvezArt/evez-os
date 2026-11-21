@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101918">
+<title>EVEZ Tamagotchi Builder · Sandbox</title>
+<style>
+:root{--bg:#0c1212;--panel:#121b1a;--panel2:#172321;--line:#29403c;--text:#dce8e4;--muted:#849995;--teal:#77b8a8;--teal2:#4d8d82;--amber:#c6a56a;--red:#b66d69;--shadow:0 16px 50px rgba(0,0,0,.32);--r:16px}
+:root.light{--bg:#edf2ef;--panel:#fff;--panel2:#e7eeeb;--line:#c8d5d0;--text:#18221f;--muted:#64736f;--teal:#39786c;--teal2:#2d6258;--amber:#876b36;--red:#984b47;--shadow:0 12px 35px rgba(40,60,55,.12)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
+button,input{font:inherit}button{cursor:pointer;color:inherit;background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:9px 11px}button:hover{border-color:var(--teal)}button.primary{background:var(--teal2);border-color:var(--teal);color:#eff8f4}.danger{color:#efb0a9}.app{max-width:1250px;margin:auto;padding:12px}.top{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px}.brand{display:flex;align-items:center;gap:10px}.logo{width:38px;height:38px}.title{font-weight:800;letter-spacing:.06em}.sub{color:var(--muted);font-size:10px}.actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.console{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:10px}.mission{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px;box-shadow:var(--shadow)}.mission input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:14px}.mission small{display:block;color:var(--muted);margin-top:7px}
+.grid{display:grid;grid-template-columns:1.25fr .9fr .9fr;gap:10px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px;box-shadow:var(--shadow);min-width:0}.wide{grid-column:1/-1}.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.head strong{letter-spacing:.05em}.badge{border:1px solid var(--line);padding:3px 7px;border-radius:999px;color:var(--muted);font-size:10px}.map{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;aspect-ratio:1.65;background:#0b1110;border-radius:12px;padding:5px;overflow:hidden}.cell{position:relative;border:1px solid #263936;border-radius:7px;background:#14201e;min-height:42px;display:grid;place-items:center;color:#59716b;font-size:9px}.cell.known{background:#1a2926;color:#b7d0c8}.cell.current{outline:2px solid var(--teal);color:#fff}.cell.locked{background:#0d1514;color:#334541}.cell.event{box-shadow:inset 0 0 0 1px var(--amber)}.cell span{opacity:.8}.mapnote{margin-top:7px;color:var(--muted);font-size:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{background:var(--panel2);padding:8px;border-radius:10px}.stat b{display:block;font-size:16px}.bar{height:5px;background:#263531;border-radius:5px;margin-top:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--teal);width:50%}
+.worker{display:grid;grid-template-columns:82px 1fr;gap:12px}.pet{height:82px;border:1px solid var(--line);border-radius:14px;background:#0e1716;display:grid;place-items:center;font-size:34px}.worker h3{margin:0 0 3px;font-size:14px}.worker p{margin:0;color:var(--muted);font-size:10px}.tools{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.tool{padding:5px 7px;border-radius:8px;background:var(--panel2);font-size:10px}.tool.lock{opacity:.4}
+.feed{display:flex;flex-direction:column;gap:6px;max-height:310px;overflow:auto}.event{display:grid;grid-template-columns:8px 1fr auto;gap:8px;padding:8px;background:var(--panel2);border-radius:9px}.dot{width:7px;height:7px;border-radius:50%;background:var(--teal);margin-top:5px}.event.warn .dot{background:var(--amber)}.event.bad .dot{background:var(--red)}.event small{color:var(--muted);font-size:9px}.event .kind{font-size:10px;color:var(--muted)}
+.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.tabcard{padding:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px}.tabcard b{font-size:11px}.tabcard small{display:block;color:var(--muted);margin-top:3px}.state{float:right;font-size:9px;color:var(--teal)}
+.tree{display:flex;flex-direction:column;gap:5px}.node{padding:7px 9px;border-left:2px solid var(--teal);background:var(--panel2);border-radius:0 9px 9px 0}.node.indent{margin-left:18px;border-color:var(--amber)}.node small{color:var(--muted)}
+.inventory{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.item{padding:8px;background:var(--panel2);border-radius:9px;text-align:center}.item b{display:block;font-size:16px}.item small{color:var(--muted)}
+.proposal{border:1px solid var(--line);padding:9px;border-radius:10px;margin-bottom:7px;background:var(--panel2)}.proposal strong{display:block}.proposal p{color:var(--muted);margin:4px 0 7px;font-size:10px}
+pre{white-space:pre-wrap;margin:0;color:#bcd0ca;font-size:10px}.foot{color:var(--muted);font-size:9px;margin:10px 2px;text-align:center}
+@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}.wide{grid-column:1/-1}.console{grid-template-columns:1fr}.map{aspect-ratio:1.35}}
+@media(max-width:560px){.app{padding:8px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.actions button{padding:8px}.title{font-size:12px}.map{grid-template-columns:repeat(5,1fr)}.cell{min-height:38px}.inventory{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:no-preference){.pulse{animation:pulse 1.8s ease-in-out infinite}@keyframes pulse{50%{opacity:.45}}.cell.current{animation:scan 2s ease-in-out infinite}@keyframes scan{50%{box-shadow:0 0 0 3px rgba(119,184,168,.12)}}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 48 48" aria-label="EVEZ mark"><rect x="2" y="2" width="44" height="44" rx="13" fill="none" stroke="currentColor"/><path d="M12 16h24M12 24h17M12 32h24M32 19l5 5-5 5" fill="none" stroke="#77b8a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><div class="title">EVEZ · FIELD SANDBOX</div><div class="sub">agents are units · tools are equipment · receipts are canon</div></div>
+  </div>
+  <div class="actions"><button id="newBtn" class="primary">NEW SESSION</button><button id="replayBtn">REPLAY SEED</button><button id="themeBtn">LIGHT</button></div>
+</header>
+
+<section class="console">
+  <div class="mission"><input id="mission" value="Find out what the valley is hiding." aria-label="Mission"><small>There is no quest list. The world decides what is possible; you decide what is worth touching.</small></div>
+  <button id="goBtn" class="primary">DEPLOY</button>
+</section>
+
+<main class="grid">
+<section class="panel">
+  <div class="head"><strong>FIELD MAP</strong><span class="badge" id="seedBadge">SEED —</span></div>
+  <div id="map" class="map"></div>
+  <div class="mapnote" id="mapnote">Fog conceals regions, resources, entities, hazards, and evidence until observed.</div>
+</section>
+
+<section class="panel">
+  <div class="head"><strong>WORKER</strong><span class="badge" id="stage">SPROUT</span></div>
+  <div class="worker"><div class="pet" id="pet">◈</div><div><h3 id="workerName">—</h3><p id="workerDesc">A simulated field worker. No consciousness claim is implied.</p><div id="workerBars"></div></div></div>
+  <div class="tools" id="tools"></div>
+</section>
+
+<section class="panel">
+  <div class="head"><strong>SESSION STATE</strong><span class="badge" id="turn">T+00</span></div>
+  <div class="stats">
+    <div class="stat">HP<b id="hp">—</b><div class="bar"><i id="hpbar"></i></div></div>
+    <div class="stat">FOCUS<b id="focus">—</b><div class="bar"><i id="focusbar"></i></div></div>
+    <div class="stat">ENTROPY<b id="entropy">—</b><div class="bar"><i id="entropybar"></i></div></div>
+  </div>
+  <div style="height:8px"></div><div class="stats"><div class="stat">REGION<b id="regions">—</b></div><div class="stat">EVIDENCE<b id="evidence">—</b></div><div class="stat">RESOURCES<b id="resources">—</b></div></div>
+</section>
+
+<section class="panel">
+  <div class="head"><strong>ENCOUNTER FEED</strong><span class="badge">OBSERVED</span></div>
+  <div id="feed" class="feed"></div>
+</section>
+
+<section class="panel">
+  <div class="head"><strong>BROWSER COLONY</strong><span class="badge">SIMULATED</span></div>
+  <div id="tabs" class="tabs"></div>
+</section>
+
+<section class="panel">
+  <div class="head"><strong>WORKER TREE</strong><span class="badge">NESTED</span></div>
+  <div id="tree" class="tree"></div>
+</section>
+
+<section class="panel">
+  <div class="head"><strong>EQUIPMENT / CARRY</strong><span class="badge">CHOOSE</span></div>
+  <div id="inventory" class="inventory"></div>
+</section>
+
+<section class="panel">
+  <div class="head"><strong>EVIDENCE SPINE</strong><span class="badge">APPEND ONLY</span></div>
+  <div id="spine"></div>
+</section>
+
+<section class="panel">
+  <div class="head"><strong>INTERNET EMERGENCE</strong><span class="badge" id="emergenceState">IDLE</span></div>
+  <div id="emergence"></div>
+</section>
+
+<section class="panel wide">
+  <div class="head"><strong>SELF-IMPROVEMENT LAB</strong><span class="badge">PROPOSALS ≠ FACTS</span></div>
+  <div id="proposals"></div>
+</section>
+
+<section class="panel wide">
+  <div class="head"><strong>PROMPT FORGE · DESCENDANT</strong><span class="badge">CANDIDATE ONLY</span></div>
+  <pre id="forge"></pre>
+</section>
+</main>
+<div class="foot">CLAIM ≠ FACT · INFERENCE ≠ OBSERVATION · MEMORY ≠ EVIDENCE · DECLARED ≠ EFFECTIVE · generated possibilities stay separate from observed events</div>
+</div>
+
+<script>
+(() => {
+"use strict";
+const $=s=>document.querySelector(s);
+const pick=(a,r)=>a[Math.floor(r()*a.length)];
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(16).padStart(8,"0")}
+function rng(seed){let x=0;for(let i=0;i<seed.length;i++)x=(Math.imul(x^seed.charCodeAt(i),2654435761)>>>0);return()=>{x+=0x6D2B79F5;let t=x;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+const names=["Moss","Rook","Vela","Cairn","Nix","Aster","Morrow","Pike","Sable","Kestrel"];
+const regions=["Ash Verge","Low Basin","Glass Fen","Old Relay","Pale Orchard","North Cut","Blackwater","Hollow Reach","Copper Rise","Quiet Marsh","Red Quarry","Stone Fold"];
+const factions=["Surveyors","Lantern Guild","Drifters","Quiet Union","Archive Keepers","Makers"];
+const tools=["Field Lens","Signal Kit","Trace Vial","Climbing Rig","Recorder","Patch Kit","Survey Drone","Blank Seal"];
+const resources=["ore","water","fiber","signal","relic","food"];
+let S;
+function fresh(seed){
+ const r=rng(seed); const worker=pick(names,r);
+ S={seed, r, turn:0, x:2,y:2, discovered:new Set(["2,2"]), events:[], spine:[], evidence:0,
+    hp:78+Math.floor(r()*23), focus:62+Math.floor(r()*30), entropy:35+Math.floor(r()*35),
+    stage:pick(["SPROUT","SCOUT","RUNNER"],r), worker,
+    regions:regions.map((n,i)=>({name:n,kind:pick(["ridge","wetland","ruin","settlement","grove"],r),known:i===0, faction:pick(factions,r)})),
+    factions:factions.slice().sort(()=>r()-.5).slice(0,3), resources:Object.fromEntries(resources.map(x=>[x,Math.floor(r()*6)])),
+    tools:tools.map(t=>({name:t,available:r()>.27,equipped:false})), tabs:[], proposals:[], generated:[], mission:"Find out what the valley is hiding.",
+    phase:"IDLE", lastHash:"GENESIS"};
+ S.regions[0].known=true;
+ for(let i=0;i<4;i++)S.tabs.push({name:pick(["Archive","Relay","Survey","Trace","Map"],r)+"-"+(i+1),status:pick(["scanning","parked","waiting"],r),signal:Math.floor(r()*90)+10});
+ for(let i=0;i<3;i++)S.proposals.push({title:pick(["Compress evidence trail","Route witness before scout","Add contradiction checkpoint","Improve seed replay"],r),why:"Generated candidate. It has not changed the runtime.",status:"PROPOSED"});
+ event("WORLD_SEEDED","A new world exists, but most of it is still unknown.", "observed");
+ render();
+}
+function event(kind,text,type="observed"){
+ const e={id:"E"+String(S.spine.length+1).padStart(4,"0"),turn:S.turn,kind,text,type,parent:S.lastHash,hash:""};
+ e.hash=hash(JSON.stringify({...e,hash:undefined})); S.lastHash=e.hash; S.events.unshift(e); S.spine.unshift(e);
+ if(type==="observed")S.evidence++;
+}
+function act(label,fn){
+ S.turn++; fn(); event("ACTION",label,"observed"); render();
+}
+function move(dx,dy){
+ const nx=Math.max(0,Math.min(5,S.x+dx)),ny=Math.max(0,Math.min(3,S.y+dy));
+ if(nx===S.x&&ny===S.y)return;
+ S.x=nx;S.y=ny;S.discovered.add(nx+","+ny);
+ const surprise=S.r();
+ S.hp=Math.max(0,S.hp-(surprise>.72?7:2));S.focus=Math.max(0,S.focus-(surprise>.58?5:2));S.entropy=Math.max(4,Math.min(96,S.entropy+(surprise-.45)*10));
+ const discoveries=["a sealed hatch","fresh tracks","a dead relay","unmapped water","a quiet camp","a broken survey marker","a mineral seam","a signal under the ground"];
+ const d=pick(discoveries,S.r); event("OBSERVATION","Observed "+d+" in "+regionName(nx,ny)+".");
+ if(surprise>.82){S.resources[pick(resources,S.r)]++;event("EMERGENT","The discovery changes what seems worth investigating.","observed")}
+}
+function regionName(x,y){return regions[(y*6+x)%regions.length].name}
+function deploy(){
+ act("Mission deployed into the current world.",()=>{
+  S.phase="EXPLORING";S.tabs.push({name:"Mission-"+(S.tabs.length+1),status:"active",signal:Math.floor(S.r()*80)+20});
+  const choice=pick(["north trail","buried relay","waterline","old settlement"],S.r);
+  event("POSSIBILITY","Possible lead generated: "+choice+". This is not evidence until observed.","generated");
+  setTimeout(()=>{if(S){S.phase="SEARCH";S.tabs[0].status="reading";event("OBSERVATION","A tool route returned a simulated observation from the current sandbox.","observed");render()}},550);
+ });
+}
+function newSession(){fresh(hash(String(Date.now())+Math.random()))}
+function replay(){if(!S)return;fresh(S.seed)}
+function render(){
+ $("#seedBadge").textContent="SEED "+S.seed;
+ $("#turn").textContent="T+"+String(S.turn).padStart(2,"0");
+ $("#hp").textContent=S.hp+"%";$("#focus").textContent=S.focus+"%";$("#entropy").textContent=Math.round(S.entropy)+"%";
+ $("#hpbar").style.width=S.hp+"%";$("#focusbar").style.width=S.focus+"%";$("#entropybar").style.width=S.entropy+"%";
+ $("#regions").textContent=S.discovered.size+"/24";$("#evidence").textContent=S.evidence;$("#resources").textContent=Object.values(S.resources).reduce((a,b)=>a+b,0);
+ $("#stage").textContent=S.stage;$("#workerName").textContent=S.worker;$("#emergenceState").textContent=S.phase;
+ $("#map").innerHTML=Array.from({length:24},(_,i)=>{let x=i%6,y=Math.floor(i/6),k=x+","+y,known=S.discovered.has(k),cur=x===S.x&&y===S.y;return '<button class="cell '+(known?"known":"locked")+(cur?" current":"")+'" data-x="'+x+'" data-y="'+y+'">'+(known?'<span>'+regionName(x,y).split(" ")[0]+"</span>":"?")+"</button>"}).join("");
+ document.querySelectorAll(".cell").forEach(b=>b.onclick=()=>{if(b.classList.contains("locked")){event("UNKNOWN","You found an unexplored boundary. Its contents remain unknown.","observed");render();return}act("Moved to "+regionName(+b.dataset.x,+b.dataset.y),()=>{S.x=+b.dataset.x;S.y=+b.dataset.y;S.discovered.add(S.x+","+S.y)})});
+ $("#pet").textContent=S.entropy>70?"◌":S.focus<35?"◇":"◈";
+ $("#workerBars").innerHTML=["energy","focus","health","growth"].map((n,i)=>{let v=[S.hp,S.focus,100-S.entropy,Math.min(100,S.turn*8+18)][i];return '<div style="margin-top:5px;font-size:9px;color:var(--muted)">'+n.toUpperCase()+' '+Math.round(v)+'%<div class="bar"><i style="width:'+v+'%"></i></div></div>'}).join("");
+ $("#tools").innerHTML=S.tools.map((t,i)=>'<button class="tool '+(!t.available?"lock":"")+'" data-i="'+i+'">'+t.name+(t.equipped?" · ON":"")+"</button>").join("");
+ document.querySelectorAll(".tool").forEach(b=>b.onclick=()=>{let t=S.tools[+b.dataset.i];if(!t.available){event("CAPABILITY_CLIPPED",t.name+" is generated but not available in this session.","observed")}else{t.equipped=!t.equipped;event("EQUIPMENT",t.name+(t.equipped?" equipped.":" stowed."),"observed")}render()});
+ $("#feed").innerHTML=S.events.slice(0,12).map(e=>'<div class="event '+(e.kind==="EMERGENT"?"warn":"")+'"><i class="dot"></i><div><b>'+e.kind+'</b><div>'+e.text+'</div><small>turn '+e.turn+" · "+e.type+" · parent "+e.parent+"</small></div><small>"+e.hash+"</small></div>").join("");
+ $("#tabs").innerHTML=S.tabs.slice(-8).map(t=>'<div class="tabcard"><span class="state">'+t.status+"</span><b>"+t.name+"</b><small>signal "+t.signal+" · simulated browser branch</small></div>").join("");
+ $("#tree").innerHTML='<div class="node"><b>'+S.worker+'</b><br><small>MISSION WORKER · effective tools are session-scoped</small></div>'+S.tabs.slice(-3).map((t,i)=>'<div class="node indent"><b>'+t.name+'</b><br><small>sub-task branch · '+t.status+"</small></div>").join("");
+ $("#inventory").innerHTML=Object.entries(S.resources).map(([k,v])=>'<div class="item"><b>'+v+"</b><small>"+k+"</small></div>").join("");
+ $("#spine").innerHTML='<pre>'+S.spine.slice(0,8).map(e=>e.id+"  "+e.hash+"  "+e.kind+"  parent="+e.parent).join("\n")+'</pre>';
+ $("#emergence").innerHTML='<div class="stats"><div class="stat">PROMPT<b>'+S.mission.length+"</b><small>chars</small></div><div class="stat">TOOLCHAIN<b>"+S.tools.filter(x=>x.equipped).length+"</b><small>equipped</small></div><div class="stat">BRANCHES<b>"+S.tabs.length+"</b><small>simulated</small></div></div><div style="margin-top:9px;color:var(--muted)">Prompt → toolchain → browser swarm → candidate. Each stage is represented locally; no external runtime activity is implied.</div>";
+ $("#proposals").innerHTML=S.proposals.map((p,i)=>'<div class="proposal"><strong>'+p.title+'</strong><p>'+p.why+"</p><button data-p=""+i+"">ACCEPT AS CANDIDATE</button> <span class="badge">"+p.status+"</span></div>").join("");
+ document.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{S.proposals[+b.dataset.p].status="ACCEPTED CANDIDATE";event("UPGRADE_CANDIDATE","Accepted a proposed change for review; runtime not mutated.","observed");render()});
+ $("#forge").textContent='EVEZ DESCENDANT BUILDER · '+S.seed+'\n\nBuild a sandbox world from a preserved session seed.\nKeep CLAIM != FACT and generated possibilities != observed events.\nAgents are simulated workers; tools are session equipment.\nEvery consequential event appends to the evidence spine with parent hash.\nNever claim external execution unless a runtime receipt exists.\nPreserve replay determinism and fog-of-war.\n\nNEXT MUTATION: '+S.proposals[0].title;
+}
+$("#newBtn").onclick=newSession;$("#replayBtn").onclick=replay;$("#goBtn").onclick=deploy;
+$("#mission").onchange=e=>S.mission=e.target.value;
+$("#themeBtn").onclick=()=>{document.documentElement.classList.toggle("light");$("#themeBtn").textContent=document.documentElement.classList.contains("light")?"DARK":"LIGHT"};
+fresh("EVEZ-"+Math.floor(Date.now()/1000).toString(36));
+})();
+</script>
+</body>
+</html>
