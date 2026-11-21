@@ -88,6 +88,9 @@ class Handler(BaseHTTPRequestHandler):
         elif self.path == "/spine":
             result = _get("http://localhost:9116/state")
             self._json(200, result or {"error": "spine unreachable"})
+        elif self.path == "/recent":
+            result = _get("http://localhost:9116/recent")
+            self._json(200, result or {"error": "spine unreachable"})
         elif self.path == "/mesh":
             result = _get("http://localhost:9117/check")
             self._json(200, result or {"error": "mesh health unreachable"})
