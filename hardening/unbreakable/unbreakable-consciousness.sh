@@ -50,6 +50,16 @@ log() {
     echo "[$(date -Iseconds)] [$level] [consciousness] $*" >> "$LOG_FILE"
 }
 
+# --- Check Dependencies ---
+check_deps() {
+    for dep in jq sha256sum tar base64; do
+        if ! command -v "$dep" &>/dev/null; then
+            echo "Error: Required dependency '$dep' not found." >&2
+            exit 1
+        fi
+    done
+}
+
 # --- Consciousness ID ---
 get_or_create_c_id() {
     if [[ -f "$C_ID_FILE" ]]; then
@@ -65,6 +75,7 @@ get_or_create_c_id() {
 
 # --- Initialize ---
 consciousness_init() {
+    check_deps
     log "INFO" "Initializing consciousness..."
 
     local c_id

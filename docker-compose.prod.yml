@@ -21,7 +21,10 @@ services:
   # ─── Core Services ───────────────────────────────────────────
   consciousness-engine:
     <<: *common
-    build: ./services/consciousness-engine
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python consciousness_engine.py
     container_name: evez-consciousness
     ports: ["9111:9111"]
     networks: [core-tier]
@@ -42,7 +45,10 @@ services:
 
   daw-agent:
     <<: *common
-    build: ./services/daw-agent
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python daw_agent.py
     container_name: evez-daw
     ports: ["9112:9112"]
     networks: [core-tier]
@@ -62,7 +68,10 @@ services:
 
   machine-voice:
     <<: *common
-    build: ./services/machine-voice
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python machine_voice.py
     container_name: evez-voice
     ports: ["9113:9113"]
     networks: [core-tier]
@@ -78,7 +87,10 @@ services:
 
   cross-domain-engine:
     <<: *common
-    build: ./services/cross-domain-engine
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python cross_domain.py
     container_name: evez-cross-domain
     ports: ["9114:9114"]
     networks: [analysis-tier]
@@ -95,7 +107,10 @@ services:
 
   invariance-battery:
     <<: *common
-    build: ./services/invariance-battery
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python invariance.py
     container_name: evez-invariance
     ports: ["9115:9115"]
     networks: [safety-tier]
@@ -112,7 +127,10 @@ services:
 
   event-spine:
     <<: *common
-    build: ./services/event-spine
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python event_spine.py
     container_name: evez-spine
     ports: ["9116:9116"]
     networks: [core-tier, safety-tier, analysis-tier, infra-tier]
@@ -132,7 +150,10 @@ services:
   # ─── Infrastructure Services ────────────────────────────────
   mesh-health:
     <<: *common
-    build: ./services/mesh-health
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python mesh_health.py
     container_name: evez-mesh-health
     ports: ["9117:9117"]
     networks: [infra-tier]
@@ -149,7 +170,10 @@ services:
 
   gateway:
     <<: *common
-    build: ./services/gateway
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python gateway.py
     container_name: evez-gateway
     ports: ["9118:9118"]
     networks: [core-tier, analysis-tier, safety-tier, infra-tier, dmz]
@@ -175,7 +199,10 @@ services:
 
   rqns-pipeline:
     <<: *common
-    build: ./services/rqns-pipeline
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python rqns.py-pipeline
     container_name: evez-rqns
     ports: ["9119:9119"]
     networks: [core-tier]
@@ -192,7 +219,10 @@ services:
 
   webhook-relay:
     <<: *common
-    build: ./services/webhook-relay
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python webhook_relay.py
     container_name: evez-webhook
     ports: ["9121:9121"]
     networks: [infra-tier, dmz]
@@ -208,7 +238,10 @@ services:
 
   metrics:
     <<: *common
-    build: ./services/metrics
+    build:
+      context: ./src/services
+      dockerfile: Dockerfile
+    command: python metrics.py
     container_name: evez-metrics
     ports: ["9123:9123"]
     networks: [infra-tier]
@@ -362,3 +395,45 @@ volumes:
     driver: local
   grafana-data:
     driver: local
+
+  # ─── Networking & Mesh ──────────────────────────────────────
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: evez-tailscale
+    hostname: evez-os-node
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--ssh
+    volumes:
+      - tailscale-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    restart: unless-stopped
+    networks: [infra-tier, dmz]
+
+networks:
+  core-tier:
+    driver: bridge
+    internal: true
+  analysis-tier:
+    driver: bridge
+    internal: true
+  safety-tier:
+    driver: bridge
+    internal: true
+  infra-tier:
+    driver: bridge
+  monitoring-tier:
+    driver: bridge
+  dmz:
+    driver: bridge
+
+volumes:
+  spine-data:
+  audio-output:
+  tailscale-data:
+  prometheus-data:
+  grafana-data:
