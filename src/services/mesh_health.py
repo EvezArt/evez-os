@@ -138,7 +138,7 @@ def heal_sibling(port, initiator="mesh"):
         else:
             # Fall back to direct python restart
             script_path = f"{SERVICE_DIR}/{info['script']}"
-            subprocess.run(f"fuser -k {port}/tcp 2>/dev/null", shell=True, timeout=5)
+            subprocess.run(["fuser", "-k", f"{port}/tcp"], capture_output=True, text=True, timeout=5)
             time.sleep(0.5)
             proc = subprocess.Popen(
                 ["python3", script_path],
@@ -260,6 +260,10 @@ class Handler(BaseHTTPRequestHandler):
         body = self._read_body()
 
         if self.path == "/heal":
+            client_ip = self.client_address[0] if self.client_address else ""
+            if client_ip not in {"127.0.0.1", "::1"}:
+                self._json(403, {"error": "heal endpoint is local-only"})
+                return
             port = body.get("port")
             initiator = body.get("initiator", "external")
             if port:

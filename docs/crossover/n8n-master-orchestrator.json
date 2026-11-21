@@ -1,0 +1,884 @@
+{
+  "name": "EVEZ Master Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "evez-orchestrator",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1540,
+        -220
+      ],
+      "id": "8e68a208-5e34-4c03-ab5e-80978dda1b75",
+      "name": "Webhook Orchestrator",
+      "webhookId": "evez-orchestrator"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "evez-github",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1540,
+        -40
+      ],
+      "id": "633dff18-d7a3-45be-b7b5-e77524077402",
+      "name": "Webhook GitHub",
+      "webhookId": "evez-github"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "evez-browser",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1540,
+        140
+      ],
+      "id": "77ae968c-d582-4a4e-abfa-730e058a3767",
+      "name": "Webhook Browser",
+      "webhookId": "evez-browser"
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "evez-status",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1540,
+        520
+      ],
+      "id": "be17def1-a1dc-4df6-832e-1e3a415cd901",
+      "name": "Webhook Status",
+      "webhookId": "evez-status"
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "evez-health",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1540,
+        700
+      ],
+      "id": "251e0a25-0d66-42b5-ab3f-3b3d98ab3020",
+      "name": "Webhook Health",
+      "webhookId": "evez-health"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "*/15 * * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1540,
+        320
+      ],
+      "id": "2d5154c3-07a8-410e-80e4-15fb9edc1a28",
+      "name": "Schedule Every 15m"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json ?? {};\nreturn [{ json: { _route: 'orchestrate', _isWebhookExecution: true, source: body.source || 'chatgpt_gpt', ...body } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        -220
+      ],
+      "id": "34351093-2920-4156-a7d8-b38ae600ea84",
+      "name": "Prep Orchestrator Input"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json ?? {};\nreturn [{ json: { _route: 'github', _isWebhookExecution: true, force_github: true, source: body.source || 'chatgpt_gpt', ...body } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        -40
+      ],
+      "id": "10062124-9c41-4d9d-b471-7ce5dd64f0d3",
+      "name": "Prep GitHub Input"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json ?? {};\nreturn [{ json: { _route: 'browser', _isWebhookExecution: true, force_browser: true, source: body.source || 'chatgpt_gpt', ...body } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        140
+      ],
+      "id": "562f1f9a-dbc3-4256-b0c2-b15d8e957f74",
+      "name": "Prep Browser Input"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: {\n  _route: 'orchestrate',\n  _isWebhookExecution: false,\n  source: 'schedule',\n  task: 'Autonomous maintenance sweep',\n  objective: 'Review system health, browser backlog, and repository automation state',\n  github_repo: '{{GITHUB_REPO}}',\n  github: { workflow: { required: true, workflow_id: 'evez-agent.yml', ref: 'main', inputs: { reason: 'scheduled_sweep' } } },\n  browser: { required: false, task: 'No browser task unless planner decides otherwise', llm: 'gpt-4o', maxSteps: 20 },\n  context: { scheduled: true }\n} }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        320
+      ],
+      "id": "fc604e64-d00a-4ce9-b35f-fdfba41c9a6c",
+      "name": "Prep Scheduled Sweep"
+    },
+    {
+      "parameters": {
+        "jsCode": "const store = $getWorkflowStaticData('global');\nstore.runs = store.runs || {};\nconst q = $json.query ?? {};\nconst runId = q.run_id || $json.run_id || '';\nconst found = runId ? store.runs[runId] : null;\nif (found) {\n  return [{ json: { ok: true, ...found } }];\n}\nreturn [{ json: {\n  ok: false,\n  run_id: runId,\n  status: 'not_found',\n  summary: runId ? `No run found for ${runId}` : 'run_id query parameter is required',\n  tool_actions: [],\n  errors: runId ? [`run_id ${runId} not found`] : ['run_id query parameter is required'],\n  updated_at: new Date().toISOString()\n} }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        520
+      ],
+      "id": "61ba78a5-5d77-401e-93af-b6aa8c22005f",
+      "name": "Read Run Status"
+    },
+    {
+      "parameters": {
+        "jsCode": "const store = $getWorkflowStaticData('global');\nstore.runs = store.runs || {};\nstore.system = store.system || {\n  service: 'evez-orchestrator',\n  status: 'ok',\n  lastRunId: null,\n  lastSuccessAt: null,\n  lastFailureAt: null,\n  lastUpdatedAt: null,\n  consecutiveFailures: 0\n};\nconst openRuns = Object.values(store.runs).filter(r => r.status === 'running').length;\nreturn [{ json: {\n  ok: true,\n  ...store.system,\n  open_runs: openRuns,\n  tracked_runs: Object.keys(store.runs).length,\n  updated_at: new Date().toISOString()\n} }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        700
+      ],
+      "id": "fbbd95c8-bf3f-4b58-a8e2-501d11ac2eec",
+      "name": "Read System Health"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $json || {};\nconst repoRaw = String(input.github_repo || input.repo || '{{GITHUB_REPO}}');\nconst repoParts = repoRaw.includes('/') ? repoRaw.split('/') : ['owner', repoRaw];\nconst runId = input.run_id || ('run_' + Date.now());\nconst attempt = Number(input.attempt || 0);\nconst route = input._route || 'orchestrate';\nreturn [{ json: {\n  route,\n  isWebhookExecution: Boolean(input._isWebhookExecution),\n  run_id: runId,\n  source: input.source || route,\n  attempt,\n  task: input.task || input.objective || 'Autonomous maintenance sweep',\n  objective: input.objective || input.task || 'Autonomous maintenance sweep',\n  context: input.context || {},\n  browser: {\n    required: route === 'browser' || Boolean(input.force_browser || input.browser?.required || input.requires_browser),\n    task: input.browser?.task || input.browser_task || input.task || 'Autonomous browser task',\n    llm: input.browser?.llm || 'gpt-4o',\n    maxSteps: Number(input.browser?.maxSteps || input.browser_maxSteps || 20)\n  },\n  github: {\n    owner: input.github?.owner || repoParts[0],\n    repoName: input.github?.repoName || repoParts[1],\n    issue: input.github?.issue || {},\n    commit: input.github?.commit || {},\n    workflow: input.github?.workflow || {}\n  },\n  force_github: Boolean(input.force_github),\n  raw_input: input\n} }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1020,
+        20
+      ],
+      "id": "f91c0dd2-83c5-47b1-a06b-4d12a83efccf",
+      "name": "Normalize Input"
+    },
+    {
+      "parameters": {
+        "jsCode": "const store = $getWorkflowStaticData('global');\nstore.runs = store.runs || {};\nstore.system = store.system || {\n  service: 'evez-orchestrator',\n  status: 'ok',\n  lastRunId: null,\n  lastSuccessAt: null,\n  lastFailureAt: null,\n  lastUpdatedAt: null,\n  consecutiveFailures: 0\n};\nconst now = new Date().toISOString();\nstore.runs[$json.run_id] = {\n  ...$json,\n  ok: false,\n  status: 'running',\n  summary: 'Execution started',\n  tool_actions: [],\n  errors: [],\n  retry_scheduled: false,\n  next_action: 'planning',\n  updated_at: now,\n  created_at: store.runs[$json.run_id]?.created_at || now\n};\nstore.system.lastRunId = $json.run_id;\nstore.system.lastUpdatedAt = now;\nreturn items;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -760,
+        20
+      ],
+      "id": "cb53b976-a776-4ed0-bdfb-0000917753ab",
+      "name": "Persist Running State"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ 'You are EVEZ, the planner and executor for a continuous automation loop across n8n, Hyperbrowser, and GitHub.\\n\\nInput envelope:\\n' + JSON.stringify($json, null, 2) + '\\n\\nRules:\\n1. Use tools as needed.\\n2. If browser.required is true or the task clearly needs browser automation, call the Hyperbrowser tool.\\n3. If route is github or force_github is true, prefer GitHub tools.\\n4. For GitHub patch commits, default to creating a new artifact file at patches/' + $json.run_id + '.md on branch bot/patches unless the input explicitly provides another safe path.\\n5. For workflow dispatch, default workflow_id to evez-agent.yml and ref to main.\\n6. Use at most one retry internally for a transient tool error, then report the failure exactly.\\n7. Never invent issue numbers, commit SHAs, workflow run IDs, job IDs, or URLs.\\n8. Final answer must conform exactly to the structured output schema and include run_id.' }}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -500,
+        20
+      ],
+      "id": "5b93956c-2ef7-4669-9eef-27ff95918cdb",
+      "name": "AI Agent Planner",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o"
+        },
+        "options": {
+          "responseFormat": "json_object",
+          "useResponsesApi": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -760,
+        300
+      ],
+      "id": "c00b399a-07cf-4a4e-af1b-5a5cf3003ff8",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\"type\": \"object\", \"properties\": {\"run_id\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\", \"enum\": [\"completed\", \"partial_failure\", \"failed\"]}, \"summary\": {\"type\": \"string\"}, \"tool_actions\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"tool\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\", \"enum\": [\"success\", \"skipped\", \"failed\"]}, \"reference\": {\"type\": [\"string\", \"null\"]}, \"details\": {\"type\": \"string\"}}, \"required\": [\"tool\", \"status\", \"details\"]}}, \"errors\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"next_action\": {\"type\": \"string\"}}, \"required\": [\"run_id\", \"status\", \"summary\", \"tool_actions\", \"errors\", \"next_action\"]}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -250,
+        300
+      ],
+      "id": "3112918a-3a5b-476e-ad11-35fb5e58ec42",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Start a Hyperbrowser HyperAgent task. Use for browser-native navigation, extraction, validation, and interaction.",
+        "method": "POST",
+        "url": "https://api.hyperbrowser.ai/api/task/hyper-agent",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "x-api-key",
+              "valueProvider": "fieldValue",
+              "value": "{{HYPERBROWSER_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "rawBody": "={{ JSON.stringify({\n  task: $fromAI('browser_task', $json.browser.task, 'string'),\n  version: '1.1.0',\n  llm: $fromAI('browser_llm', $json.browser.llm || 'gpt-4o', 'string'),\n  maxSteps: $fromAI('browser_max_steps', $json.browser.maxSteps || 20, 'number'),\n  keepBrowserOpen: false,\n  useCustomApiKeys: true,\n  apiKeys: { openai: '{{OPENAI_API_KEY}}' }\n}) }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -40,
+        -220
+      ],
+      "id": "42d66b72-13c7-47be-bcf0-98abe84c898e",
+      "name": "Hyperbrowser Task Tool",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "toolDescription": "Create a GitHub issue in the configured repository.",
+        "method": "POST",
+        "url": "={{ 'https://api.github.com/repos/' + $json.github.owner + '/' + $json.github.repoName + '/issues' }}",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "Authorization",
+              "valueProvider": "fieldValue",
+              "value": "Bearer {{GITHUB_TOKEN}}"
+            },
+            {
+              "name": "Accept",
+              "valueProvider": "fieldValue",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "valueProvider": "fieldValue",
+              "value": "2022-11-28"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "rawBody": "={{ JSON.stringify({\n  title: $fromAI('issue_title', 'EVEZ autonomous issue', 'string'),\n  body: $fromAI('issue_body', 'Autonomous issue created by EVEZ.', 'string'),\n  labels: String($fromAI('issue_labels_csv', 'evez,automation', 'string')).split(',').map(v => v.trim()).filter(Boolean)\n}) }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -40,
+        -20
+      ],
+      "id": "3aad634b-6c49-4218-ae85-62587f4fb1a9",
+      "name": "GitHub Create Issue Tool",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "toolDescription": "Create a new patch artifact file in GitHub on branch bot/patches.",
+        "method": "PUT",
+        "url": "={{ 'https://api.github.com/repos/' + $json.github.owner + '/' + $json.github.repoName + '/contents/' + encodeURIComponent($fromAI('commit_path', 'patches/' + $json.run_id + '.md', 'string')) }}",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "Authorization",
+              "valueProvider": "fieldValue",
+              "value": "Bearer {{GITHUB_TOKEN}}"
+            },
+            {
+              "name": "Accept",
+              "valueProvider": "fieldValue",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "valueProvider": "fieldValue",
+              "value": "2022-11-28"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "rawBody": "={{ JSON.stringify({\n  message: $fromAI('commit_message', 'chore(bot): store EVEZ patch artifact', 'string'),\n  content: Buffer.from($fromAI('commit_content', '# EVEZ patch artifact\\n', 'string')).toString('base64'),\n  branch: $fromAI('commit_branch', 'bot/patches', 'string')\n}) }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -40,
+        180
+      ],
+      "id": "bc1f18d8-6c41-4f10-bcce-199dbafa20cf",
+      "name": "GitHub Commit Patch Tool",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "toolDescription": "Dispatch the GitHub Actions workflow evez-agent.yml.",
+        "method": "POST",
+        "url": "={{ 'https://api.github.com/repos/' + $json.github.owner + '/' + $json.github.repoName + '/actions/workflows/' + $fromAI('workflow_id', 'evez-agent.yml', 'string') + '/dispatches' }}",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "Authorization",
+              "valueProvider": "fieldValue",
+              "value": "Bearer {{GITHUB_TOKEN}}"
+            },
+            {
+              "name": "Accept",
+              "valueProvider": "fieldValue",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "valueProvider": "fieldValue",
+              "value": "2022-11-28"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "rawBody": "={{ JSON.stringify({\n  ref: $fromAI('workflow_ref', 'main', 'string'),\n  inputs: {\n    run_id: $json.run_id,\n    task: $fromAI('workflow_task', $json.task, 'string'),\n    reason: $fromAI('workflow_reason', 'orchestrator_dispatch', 'string')\n  }\n}) }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -40,
+        380
+      ],
+      "id": "bc775826-1f58-475f-993b-2b198fde22c4",
+      "name": "GitHub Dispatch Workflow Tool",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "const store = $getWorkflowStaticData('global');\nstore.runs = store.runs || {};\nstore.system = store.system || {\n  service: 'evez-orchestrator',\n  status: 'ok',\n  lastRunId: null,\n  lastSuccessAt: null,\n  lastFailureAt: null,\n  lastUpdatedAt: null,\n  consecutiveFailures: 0\n};\nconst normalized = $('Normalize Input').first().json;\nconst result = $json.output ?? $json;\nconst ok = result.status === 'completed' || result.status === 'partial_failure';\nconst now = new Date().toISOString();\nconst finalPayload = {\n  ok,\n  run_id: result.run_id || normalized.run_id,\n  status: result.status || 'failed',\n  summary: result.summary || 'No summary returned by planner.',\n  tool_actions: result.tool_actions || [],\n  errors: result.errors || [],\n  retry_scheduled: false,\n  next_action: result.next_action || 'none',\n  updated_at: now,\n  attempt: normalized.attempt,\n  route: normalized.route,\n  isWebhookExecution: normalized.isWebhookExecution,\n  original_request: normalized.raw_input\n};\nstore.runs[finalPayload.run_id] = {\n  ...(store.runs[finalPayload.run_id] || {}),\n  ...finalPayload\n};\nstore.system.lastUpdatedAt = now;\nstore.system.lastRunId = finalPayload.run_id;\nif (ok) {\n  store.system.status = 'ok';\n  store.system.lastSuccessAt = now;\n  store.system.consecutiveFailures = 0;\n} else {\n  store.system.status = 'degraded';\n  store.system.lastFailureAt = now;\n  store.system.consecutiveFailures = Number(store.system.consecutiveFailures || 0) + 1;\n}\nreturn [{ json: finalPayload }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        20
+      ],
+      "id": "1ec2b47c-52ec-4dbc-8b36-6a617bba2be5",
+      "name": "Finalize Result"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "boolean": [
+            {
+              "value1": "={{ !$json.ok }}",
+              "value2": true
+            },
+            {
+              "value1": "={{ $json.attempt < 3 }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        20,
+        20
+      ],
+      "id": "b166170a-4baa-4434-b1be-8fc50eed02a9",
+      "name": "Needs Self-Heal Retry?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "{{N8N_WEBHOOK_URL}}/evez-orchestrator",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "rawBody": "={{ JSON.stringify({\n  ...($json.original_request || {}),\n  run_id: $json.run_id,\n  attempt: Number($json.attempt || 0) + 1,\n  source: 'self_heal_retry',\n  task: ($json.original_request?.task || 'Recover failed orchestrator run'),\n  objective: ($json.original_request?.objective || 'Retry failed run automatically')\n}) }}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        280,
+        -60
+      ],
+      "id": "2550ae56-23d1-4e20-8bfb-4f63eef3e660",
+      "name": "Self-Healing Retry",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "const store = $getWorkflowStaticData('global');\nstore.runs = store.runs || {};\nconst current = store.runs[$json.run_id] || {};\ncurrent.retry_scheduled = true;\ncurrent.next_action = 'retry_dispatched';\ncurrent.updated_at = new Date().toISOString();\nstore.runs[$json.run_id] = current;\nreturn [{ json: { ...$json, retry_scheduled: true, next_action: 'retry_dispatched' } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        -60
+      ],
+      "id": "62ba8aaa-4835-4b8f-a686-2af4b8f0734d",
+      "name": "Mark Retry Scheduled"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isWebhookExecution }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        280,
+        140
+      ],
+      "id": "910fc95e-bef9-4551-aea3-bc13d88d18c1",
+      "name": "Is Webhook Execution?"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        540,
+        140
+      ],
+      "id": "f57ad695-097f-44ad-9bf6-8f1cc9eddcfb",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "connections": {
+    "Webhook Orchestrator": {
+      "main": [
+        [
+          {
+            "node": "Prep Orchestrator Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook GitHub": {
+      "main": [
+        [
+          {
+            "node": "Prep GitHub Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Browser": {
+      "main": [
+        [
+          {
+            "node": "Prep Browser Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Every 15m": {
+      "main": [
+        [
+          {
+            "node": "Prep Scheduled Sweep",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Orchestrator Input": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep GitHub Input": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Browser Input": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Scheduled Sweep": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Input": {
+      "main": [
+        [
+          {
+            "node": "Persist Running State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Persist Running State": {
+      "main": [
+        [
+          {
+            "node": "AI Agent Planner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent Planner",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent Planner",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hyperbrowser Task Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Planner",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Create Issue Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Planner",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Commit Patch Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Planner",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Dispatch Workflow Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Planner",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent Planner": {
+      "main": [
+        [
+          {
+            "node": "Finalize Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Finalize Result": {
+      "main": [
+        [
+          {
+            "node": "Needs Self-Heal Retry?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs Self-Heal Retry?": {
+      "main": [
+        [
+          {
+            "node": "Self-Healing Retry",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is Webhook Execution?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Self-Healing Retry": {
+      "main": [
+        [
+          {
+            "node": "Mark Retry Scheduled",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Retry Scheduled": {
+      "main": [
+        [
+          {
+            "node": "Is Webhook Execution?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Webhook Execution?": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Webhook Status": {
+      "main": [
+        [
+          {
+            "node": "Read Run Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Run Status": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Health": {
+      "main": [
+        [
+          {
+            "node": "Read System Health",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read System Health": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "evez-master-orchestrator"
+  },
+  "active": false,
+  "settings": {
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "executionOrder": "v1"
+  },
+  "versionId": "32a235d3-7d11-4e2b-9104-5bad60c2032e"
+}
