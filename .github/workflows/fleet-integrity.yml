@@ -1,0 +1,46 @@
+name: Fleet Integrity Guard
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/**"
+      - "ZERO_BILLING.md"
+      - "STATUS.md"
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "ZERO_BILLING.md"
+      - "STATUS.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workflow-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject paid or mutable runner selection
+        shell: bash
+        run: |
+          set -euo pipefail
+          files="$(find .github/workflows -type f \( -name '*.yml' -o -name '*.yaml' \) -print)"
+          if grep -nE 'runs-on:.*(large|xlarge|2xlarge|4xlarge|8xlarge|RUNNER_LABEL|self-hosted)' $files; then
+            echo "Forbidden or mutable runner selection found."
+            exit 1
+          fi
+          echo "Runner policy passed."
+
+      - name: Detect swallowed shell failures
+        shell: bash
+        run: |
+          set -euo pipefail
+          files="$(find .github/workflows -type f \( -name '*.yml' -o -name '*.yaml' \) -print)"
+          if grep -nE '\|\|[[:space:]]*true[[:space:]]*$|[[:space:]]2>/dev/null[[:space:]]*\|\|[[:space:]]*true' $files; then
+            echo "Swallowed shell failure found in workflow."
+            exit 1
+          fi
+          echo "Shell failure policy passed."
