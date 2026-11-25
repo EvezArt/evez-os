@@ -77,6 +77,10 @@ jobs:
             --project=evez-firmament \
             --filter="name~evez-stream" \
             --format="table(name,zone,status,networkInterfaces[0].accessConfigs[0].natIP)"
+          gcloud compute instances list \
+            --project=evez-firmament \
+            --filter="name~evez-stream" \
+            --format="csv[no-heading](name,status)" > /tmp/evez_streams.csv
 
       - name: Post status summary
         if: always()
@@ -85,10 +89,15 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Stream | Name | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|--------|------|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| 1 | Mission Control | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
-          echo "| 2 | Cognition Study | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
-          echo "| 3 | Synaptic Cortex | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
-          echo "| 4 | Quantum Evolution | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
-          echo "| 5 | MetaROM Dreams | 🟢 Deployed |" >> $GITHUB_STEP_SUMMARY
+          # Derive status from the live gcloud query; never hard-code green.
+          if [ -s /tmp/evez_streams.csv ]; then
+            while IFS=, read -r vm_name vm_status; do
+              [ -z "$vm_name" ] && continue
+              if [ "$vm_status" = "RUNNING" ]; then icon="🟢"; else icon="🔴"; fi
+              echo "| — | $vm_name | $icon $vm_status |" >> $GITHUB_STEP_SUMMARY
+            done < /tmp/evez_streams.csv
+          else
+            echo "| — | NONE FOUND | 🔴 UNVERIFIED |" >> $GITHUB_STEP_SUMMARY
+          fi
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Architecture:** GCE VMs · systemd auto-restart · 2min watchdog · Secret Manager keys" >> $GITHUB_STEP_SUMMARY
